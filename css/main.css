@@ -1158,14 +1158,16 @@ figure.highlight,
 .codeblock {
     margin: 10px 0;
     line-height: 1.3em;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    overflow: scroll;
+    background-color: #f7f8f8;
+    border-radius: 4px;
+    overflow: hidden;
 }
 figure.highlight table,
 .codeblock table {
     display: block;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 figure.highlight pre,
 figure.highlight .gutter,
@@ -1209,19 +1211,23 @@ figure.highlight .gutter,
 }
 figure.highlight .code,
 .codeblock .code {
-    padding: 0.3em 15px 0.3em 1em;
-    width: 100%;
+    width: auto;
+    padding: 1em;
+    overflow-x: auto;
 }
+
 figure.highlight .code pre,
 .codeblock .code pre {
-    max-width: calc(750px - 50px);
-    overflow-x: auto;
-    overflow-y: hidden;
+    margin: 0;
+    white-space: pre;
+    width: max-content;
 }
+
 figure.highlight .line,
 .codeblock .line {
     height: 1.3em;
     font-size: 15px;
+    white-space: pre;
 }
 
 .codeblock--tabbed figure.highlight,
