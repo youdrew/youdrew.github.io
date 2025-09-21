@@ -2093,3 +2093,155 @@ figure.highlight.yml .number,
 .codeblock.yml .number {
     color: #0086b3;
 }
+
+/* Code Block Expansion Styles */
+.code-block-container {
+    position: relative;
+    margin: 10px 0; /* Match figure.highlight margin */
+}
+
+.code-block-container.collapsed figure.highlight {
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin: 0; /* Remove default margin to prevent double spacing */
+}
+
+.code-block-container.collapsed figure.highlight pre.code {
+    margin: 0;
+    padding: 15px;
+    max-height: 400px;
+    overflow: auto;
+    background-color: #f7f8f8;
+    font-family: Courier New, Courier, monospace;
+    line-height: 1.3em;
+}
+
+/* Ensure code blocks inherit proper indentation from parent elements */
+figure.highlight {
+    margin-left: inherit;
+    margin-right: inherit;
+}
+
+.expand-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 0 0 4px 0; /* Match the container's border radius */
+    font-size: 12px;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+    height: 44px; /* Fixed height for better alignment */
+    box-sizing: border-box;
+}
+
+.expand-button:hover {
+    background: #555;
+}
+
+.expand-button.expanded {
+    background: #333;
+}
+
+/* Fullscreen Modal Styles */
+.code-fullscreen-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.code-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-fullscreen-content {
+    width: 100%;
+    height: 100%;
+    max-width: 95%;
+    max-height: 95%;
+    background: #f7f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-fullscreen-content figure.highlight {
+    margin: 0 !important;
+    flex: 1;
+    max-height: none !important;
+    overflow: hidden !important;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* 重要：允许flex子项收缩 */
+}
+
+.code-fullscreen-content figure.highlight pre.code {
+    flex: 1;
+    max-height: none !important;
+    margin: 0;
+    padding: 20px;
+    overflow-y: scroll !important;
+    overflow-x: auto !important;
+    background-color: #f7f8f8;
+    font-family: Courier New, Courier, monospace;
+    line-height: 1.3em;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-height: 0; /* 允许flex item收缩 */
+}
+
+/* 确保滚动条始终可见且美观 */
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 6px;
+}
+
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.close-fullscreen {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #666;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 10;
+}
+
+.close-fullscreen:hover {
+    background: #555;
+}

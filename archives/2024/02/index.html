@@ -331,159 +331,69 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showFullscreenCode(codeBlock, button) {
-        var preElement = codeBlock.querySelector('pre.code');
-        if (!preElement) return;
+        // Create fullscreen modal
+        const modal = document.createElement('div');
+        modal.className = 'code-fullscreen-modal active';
         
-        var language = 'text';
-        if (codeBlock.className) {
-            var classMatch = codeBlock.className.match(/highlight\s+(\w+)/);
-            if (classMatch) {
-                language = classMatch[1].toLowerCase();
+        const content = document.createElement('div');
+        content.className = 'code-fullscreen-content';
+        
+        // Clone the code block and remove any expansion restrictions
+        const clonedBlock = codeBlock.cloneNode(true);
+        
+        // Remove any size restrictions from cloned block
+        clonedBlock.style.maxHeight = 'none';
+        clonedBlock.style.overflow = 'visible';
+        
+        // Find and update the pre.code element in cloned block
+        const clonedPre = clonedBlock.querySelector('pre.code');
+        if (clonedPre) {
+            clonedPre.style.maxHeight = 'none';
+            clonedPre.style.height = '100%';
+            clonedPre.style.overflowY = 'scroll';
+            clonedPre.style.overflowX = 'auto';
+            clonedPre.style.minHeight = '0';
+            // 确保内容完全可见
+            clonedPre.scrollTop = 0;
+        }
+        
+        content.appendChild(clonedBlock);
+        
+        // Create close button
+        const closeButton = document.createElement('button');
+        closeButton.className = 'close-fullscreen';
+        closeButton.textContent = '关闭';
+        content.appendChild(closeButton);
+        
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+        
+        // Prevent body scrolling
+        document.body.style.overflow = 'hidden';
+        
+        // Close handlers
+        function closeModal() {
+            document.body.removeChild(modal);
+            document.body.style.overflow = '';
+        }
+        
+        closeButton.addEventListener('click', closeModal);
+        
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Close on escape key
+        function handleKeydown(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                document.removeEventListener('keydown', handleKeydown);
             }
         }
-        
-        var codeContent = preElement.textContent || preElement.innerText || '';
-        var newWindow = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
-        
-        if (newWindow) {
-            var htmlContent = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">';
-            htmlContent += '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-            htmlContent += '<title>代码查看器 - ' + language.toUpperCase() + '</title>';
-            htmlContent += '<style>* { margin: 0; padding: 0; box-sizing: border-box; }';
-            htmlContent += 'body { font-family: "raleway-regular", arial, sans-serif; background-color: #fff; color: #4b4848; height: 100vh; display: flex; flex-direction: column; line-height: 1.6; }';
-            htmlContent += '.toolbar { background-color: #f7f8f8; padding: 15px 20px; border-bottom: 2px solid #e8e8e8; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(75, 72, 72, 0.1); }';
-            htmlContent += '.toolbar-left { display: flex; align-items: center; gap: 20px; }';
-            htmlContent += '.toolbar-title { font-family: "raleway-bold", arial, sans-serif; font-size: 18px; color: #454545; }';
-            htmlContent += '.language-badge { background-color: #666; color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }';
-            htmlContent += '.toolbar-right { display: flex; gap: 12px; }';
-            htmlContent += '.btn { padding: 8px 16px; border: 2px solid #969595; border-radius: 4px; cursor: pointer; font-size: 13px; transition: all 0.2s ease; background-color: #fff; color: #454545; }';
-            htmlContent += '.btn:hover { background-color: #454545; color: #fff; border-color: #454545; }';
-            htmlContent += '.btn.copied { background-color: #454545; color: #fff; border-color: #454545; }';
-            htmlContent += '.code-container { flex: 1; overflow: auto; background-color: #fff; }';
-            htmlContent += 'pre { margin: 0; padding: 20px; background-color: #f7f8f8; border-radius: 0; overflow: visible; white-space: pre; font-family: "Courier New", Courier, monospace; font-size: 15px; line-height: 1.7em; color: #4b4848; min-height: calc(100vh - 80px); }';
-            htmlContent += 'code { background: transparent !important; font-family: "Courier New", Courier, monospace; font-size: 15px; line-height: 1.7em; color: #4b4848; font-weight: 400; }';
-            htmlContent += '</style></head><body>';
-            htmlContent += '<div class="toolbar">';
-            htmlContent += '<div class="toolbar-left">';
-            htmlContent += '<div class="toolbar-title">代码查看器</div>';
-            htmlContent += '<div class="language-badge">' + language + '</div>';
-            htmlContent += '</div>';
-            htmlContent += '<div class="toolbar-right">';
-            htmlContent += '<button class="btn" onclick="copyCode()">复制代码</button>';
-            htmlContent += '</div>';
-            htmlContent += '</div>';
-            htmlContent += '<div class="code-container">';
-            htmlContent += '<pre><code id="code-content">' + codeContent.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code></pre>';
-            htmlContent += '</div>';
-            htmlContent += '<script>';
-            htmlContent += 'window.originalCodeContent = ' + JSON.stringify(codeContent) + ';';
-            htmlContent += 'function copyCode() {';
-            htmlContent += 'var text = window.originalCodeContent;';
-            htmlContent += 'navigator.clipboard.writeText(text).then(function() {';
-            htmlContent += 'var btn = document.querySelector(".btn");';
-            htmlContent += 'var originalText = btn.textContent;';
-            htmlContent += 'btn.textContent = "已复制!";';
-            htmlContent += 'btn.classList.add("copied");';
-            htmlContent += 'setTimeout(function() {';
-            htmlContent += 'btn.textContent = originalText;';
-            htmlContent += 'btn.classList.remove("copied");';
-            htmlContent += '}, 2000);';
-            htmlContent += '}).catch(function(err) {';
-            htmlContent += 'var textArea = document.createElement("textarea");';
-            htmlContent += 'textArea.value = text;';
-            htmlContent += 'document.body.appendChild(textArea);';
-            htmlContent += 'textArea.select();';
-            htmlContent += 'document.execCommand("copy");';
-            htmlContent += 'document.body.removeChild(textArea);';
-            htmlContent += 'var btn = document.querySelector(".btn");';
-            htmlContent += 'var originalText = btn.textContent;';
-            htmlContent += 'btn.textContent = "已复制!";';
-            htmlContent += 'btn.classList.add("copied");';
-            htmlContent += 'setTimeout(function() {';
-            htmlContent += 'btn.textContent = originalText;';
-            htmlContent += 'btn.classList.remove("copied");';
-            htmlContent += '}, 2000);';
-            htmlContent += '});';
-            htmlContent += '}';
-            htmlContent += 'document.addEventListener("keydown", function(e) {';
-            htmlContent += 'if ((e.ctrlKey || e.metaKey) && e.key === "c" && window.getSelection().toString() === "") {';
-            htmlContent += 'copyCode();';
-            htmlContent += 'e.preventDefault();';
-            htmlContent += '}';
-            htmlContent += 'if (e.key === "Escape") {';
-            htmlContent += 'window.close();';
-            htmlContent += '}';
-            htmlContent += '});';
-            htmlContent += '</script></body></html>';
-            
-            newWindow.document.write(htmlContent);
-            newWindow.document.close();
-            newWindow.focus();
-        } else {
-            alert('弹窗被阻止，请允许弹窗后重试。');
-        }
-    }
-    
-    // Helper function to get original code content with preserved formatting
-    function getOriginalCodeContent(codeElement) {
-        // Try different methods to preserve original formatting
-        if (codeElement.textContent) {
-            return codeElement.textContent;
-        } else if (codeElement.innerText) {
-            return codeElement.innerText;
-        } else {
-            // Extract from HTML while preserving line breaks
-            var html = codeElement.innerHTML;
-            // Convert <br> tags to newlines
-            html = html.replace(/<br\s*\/?>/gi, '\n');
-            // Remove other HTML tags but keep content
-            var tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-            return tempDiv.textContent || tempDiv.innerText || '';
-        }
-    }
-    
-    // Code formatting function
-    function formatCode(code, language) {
-        if (!code || !code.trim()) return code;
-        
-        var lines = code.split('\n');
-        var formatted = [];
-        var indentLevel = 0;
-        var indentSize = 4;
-        
-        for (var i = 0; i < lines.length; i++) {
-            var line = lines[i].trim();
-            if (!line) {
-                formatted.push('');
-                continue;
-            }
-            
-            // Handle different languages
-            if (language === 'javascript' || language === 'js' || language === 'cpp' || language === 'c' || language === 'glsl' || language === 'hlsl') {
-                // Decrease indent for closing braces
-                if (line.startsWith('}')) {
-                    indentLevel = Math.max(0, indentLevel - 1);
-                }
-                
-                // Add current line with proper indentation
-                var indent = '';
-                for (var j = 0; j < indentLevel * indentSize; j++) {
-                    indent += ' ';
-                }
-                formatted.push(indent + line);
-                
-                // Increase indent after opening braces
-                if (line.endsWith('{')) {
-                    indentLevel++;
-                }
-            } else {
-                // For other languages, just clean up whitespace
-                formatted.push(line);
-            }
-        }
-        
-        return formatted.join('\n');
+        document.addEventListener('keydown', handleKeydown);
     }
     
     // Initialize on page load
