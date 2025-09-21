@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="This is a space where I can share my thoughts and works with freely.">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>Digital Art - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid Support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle">Filmmaker / Developer</div>
+        <div class="description">This is a space where I can share my thoughts and works with freely.</div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/atom.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p>Copyright © 2025 Eugene Hsuan</p>
+            <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p>Modified based on <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> theme</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+
+
+<section class="main clearfix">
+    <section class="wrapper">
+        <div class="content archives">
+            
+                <div class="archive-title">Digital Art</div>
+            
+            
+            
+                <div class="archive-year">
+                    <h2 class="year-title">2023</h2>
+                    <ul class="archive-list">
+                        
+                            <li class="archive-item">
+    <span class="archive-date">2023-11-30</span>
+    <a href="/2023/11/30/digital-art-nft/">Digital Art in the NFT Era</a>
+</li>
+                        
+                    </ul>
+                </div>
+            
+        </div><!-- end content -->
+    </section>
+</section><!-- end main -->
+
+
+
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+
+<script src="/js/jquery.js"></script>
+
+
+<!-- Custom Code -->
+
+<script src="/js/main.js"></script>
+
+
+<script src="/js/article-collapse.js"></script>
+
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<script src="/js/shadertoy-embed.js"></script>
+
+
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Code Block Expansion Script -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize code block expansion
+    function initCodeBlockExpansion() {
+        const codeBlocks = document.querySelectorAll('figure.highlight');
+        
+        codeBlocks.forEach(function(codeBlock) {
+            // Skip if already processed
+            if (codeBlock.closest('.code-block-container')) return;
+            
+            // Remove table structure and keep only code content
+            const table = codeBlock.querySelector('table');
+            if (table) {
+                const codeCell = table.querySelector('td.code');
+                if (codeCell) {
+                    // Create a new pre element with code content
+                    const newPre = document.createElement('pre');
+                    newPre.className = 'code';
+                    newPre.innerHTML = codeCell.innerHTML;
+                    
+                    // Replace table with pre element
+                    codeBlock.innerHTML = '';
+                    codeBlock.appendChild(newPre);
+                }
+            }
+            
+            // Get the code content height
+            const codeContent = codeBlock.querySelector('pre.code');
+            if (!codeContent) return;
+            
+            const actualHeight = codeContent.scrollHeight;
+            const maxHeight = 400; // Same as CSS max-height
+            
+            // Only add expansion if content is taller than max height
+            if (actualHeight > maxHeight) {
+                // Wrap the code block in a container
+                const container = document.createElement('div');
+                container.className = 'code-block-container collapsed';
+                codeBlock.parentNode.insertBefore(container, codeBlock);
+                container.appendChild(codeBlock);
+                
+                // Create expand button
+                const expandButton = document.createElement('button');
+                expandButton.className = 'expand-button';
+                expandButton.textContent = '展开代码';
+                container.appendChild(expandButton);
+                
+                // Add click handler
+                expandButton.addEventListener('click', function() {
+                    if (container.classList.contains('collapsed')) {
+                        // Expand to full screen
+                        showFullscreenCode(codeBlock, expandButton);
+                    }
+                });
+            }
+        });
+    }
+    
+    function showFullscreenCode(codeBlock, button) {
+        var preElement = codeBlock.querySelector('pre.code');
+        if (!preElement) return;
+        
+        var language = 'text';
+        if (codeBlock.className) {
+            var classMatch = codeBlock.className.match(/highlight\s+(\w+)/);
+            if (classMatch) {
+                language = classMatch[1].toLowerCase();
+            }
+        }
+        
+        var codeContent = preElement.textContent || preElement.innerText || '';
+        var newWindow = window.open('', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        
+        if (newWindow) {
+            var htmlContent = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">';
+            htmlContent += '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+            htmlContent += '<title>代码查看器 - ' + language.toUpperCase() + '</title>';
+            htmlContent += '<style>* { margin: 0; padding: 0; box-sizing: border-box; }';
+            htmlContent += 'body { font-family: "raleway-regular", arial, sans-serif; background-color: #fff; color: #4b4848; height: 100vh; display: flex; flex-direction: column; line-height: 1.6; }';
+            htmlContent += '.toolbar { background-color: #f7f8f8; padding: 15px 20px; border-bottom: 2px solid #e8e8e8; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(75, 72, 72, 0.1); }';
+            htmlContent += '.toolbar-left { display: flex; align-items: center; gap: 20px; }';
+            htmlContent += '.toolbar-title { font-family: "raleway-bold", arial, sans-serif; font-size: 18px; color: #454545; }';
+            htmlContent += '.language-badge { background-color: #666; color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }';
+            htmlContent += '.toolbar-right { display: flex; gap: 12px; }';
+            htmlContent += '.btn { padding: 8px 16px; border: 2px solid #969595; border-radius: 4px; cursor: pointer; font-size: 13px; transition: all 0.2s ease; background-color: #fff; color: #454545; }';
+            htmlContent += '.btn:hover { background-color: #454545; color: #fff; border-color: #454545; }';
+            htmlContent += '.btn.copied { background-color: #454545; color: #fff; border-color: #454545; }';
+            htmlContent += '.code-container { flex: 1; overflow: auto; background-color: #fff; }';
+            htmlContent += 'pre { margin: 0; padding: 20px; background-color: #f7f8f8; border-radius: 0; overflow: visible; white-space: pre; font-family: "Courier New", Courier, monospace; font-size: 15px; line-height: 1.7em; color: #4b4848; min-height: calc(100vh - 80px); }';
+            htmlContent += 'code { background: transparent !important; font-family: "Courier New", Courier, monospace; font-size: 15px; line-height: 1.7em; color: #4b4848; font-weight: 400; }';
+            htmlContent += '</style></head><body>';
+            htmlContent += '<div class="toolbar">';
+            htmlContent += '<div class="toolbar-left">';
+            htmlContent += '<div class="toolbar-title">代码查看器</div>';
+            htmlContent += '<div class="language-badge">' + language + '</div>';
+            htmlContent += '</div>';
+            htmlContent += '<div class="toolbar-right">';
+            htmlContent += '<button class="btn" onclick="copyCode()">复制代码</button>';
+            htmlContent += '</div>';
+            htmlContent += '</div>';
+            htmlContent += '<div class="code-container">';
+            htmlContent += '<pre><code id="code-content">' + codeContent.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code></pre>';
+            htmlContent += '</div>';
+            htmlContent += '<script>';
+            htmlContent += 'window.originalCodeContent = ' + JSON.stringify(codeContent) + ';';
+            htmlContent += 'function copyCode() {';
+            htmlContent += 'var text = window.originalCodeContent;';
+            htmlContent += 'navigator.clipboard.writeText(text).then(function() {';
+            htmlContent += 'var btn = document.querySelector(".btn");';
+            htmlContent += 'var originalText = btn.textContent;';
+            htmlContent += 'btn.textContent = "已复制!";';
+            htmlContent += 'btn.classList.add("copied");';
+            htmlContent += 'setTimeout(function() {';
+            htmlContent += 'btn.textContent = originalText;';
+            htmlContent += 'btn.classList.remove("copied");';
+            htmlContent += '}, 2000);';
+            htmlContent += '}).catch(function(err) {';
+            htmlContent += 'var textArea = document.createElement("textarea");';
+            htmlContent += 'textArea.value = text;';
+            htmlContent += 'document.body.appendChild(textArea);';
+            htmlContent += 'textArea.select();';
+            htmlContent += 'document.execCommand("copy");';
+            htmlContent += 'document.body.removeChild(textArea);';
+            htmlContent += 'var btn = document.querySelector(".btn");';
+            htmlContent += 'var originalText = btn.textContent;';
+            htmlContent += 'btn.textContent = "已复制!";';
+            htmlContent += 'btn.classList.add("copied");';
+            htmlContent += 'setTimeout(function() {';
+            htmlContent += 'btn.textContent = originalText;';
+            htmlContent += 'btn.classList.remove("copied");';
+            htmlContent += '}, 2000);';
+            htmlContent += '});';
+            htmlContent += '}';
+            htmlContent += 'document.addEventListener("keydown", function(e) {';
+            htmlContent += 'if ((e.ctrlKey || e.metaKey) && e.key === "c" && window.getSelection().toString() === "") {';
+            htmlContent += 'copyCode();';
+            htmlContent += 'e.preventDefault();';
+            htmlContent += '}';
+            htmlContent += 'if (e.key === "Escape") {';
+            htmlContent += 'window.close();';
+            htmlContent += '}';
+            htmlContent += '});';
+            htmlContent += '</script></body></html>';
+            
+            newWindow.document.write(htmlContent);
+            newWindow.document.close();
+            newWindow.focus();
+        } else {
+            alert('弹窗被阻止，请允许弹窗后重试。');
+        }
+    }
+    
+    // Helper function to get original code content with preserved formatting
+    function getOriginalCodeContent(codeElement) {
+        // Try different methods to preserve original formatting
+        if (codeElement.textContent) {
+            return codeElement.textContent;
+        } else if (codeElement.innerText) {
+            return codeElement.innerText;
+        } else {
+            // Extract from HTML while preserving line breaks
+            var html = codeElement.innerHTML;
+            // Convert <br> tags to newlines
+            html = html.replace(/<br\s*\/?>/gi, '\n');
+            // Remove other HTML tags but keep content
+            var tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            return tempDiv.textContent || tempDiv.innerText || '';
+        }
+    }
+    
+    // Code formatting function
+    function formatCode(code, language) {
+        if (!code || !code.trim()) return code;
+        
+        var lines = code.split('\n');
+        var formatted = [];
+        var indentLevel = 0;
+        var indentSize = 4;
+        
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].trim();
+            if (!line) {
+                formatted.push('');
+                continue;
+            }
+            
+            // Handle different languages
+            if (language === 'javascript' || language === 'js' || language === 'cpp' || language === 'c' || language === 'glsl' || language === 'hlsl') {
+                // Decrease indent for closing braces
+                if (line.startsWith('}')) {
+                    indentLevel = Math.max(0, indentLevel - 1);
+                }
+                
+                // Add current line with proper indentation
+                var indent = '';
+                for (var j = 0; j < indentLevel * indentSize; j++) {
+                    indent += ' ';
+                }
+                formatted.push(indent + line);
+                
+                // Increase indent after opening braces
+                if (line.endsWith('{')) {
+                    indentLevel++;
+                }
+            } else {
+                // For other languages, just clean up whitespace
+                formatted.push(line);
+            }
+        }
+        
+        return formatted.join('\n');
+    }
+    
+    // Initialize on page load
+    initCodeBlockExpansion();
+    
+    // Re-initialize if new content is loaded (for SPA-like behavior)
+    const observer = new MutationObserver(function(mutations) {
+        let needsReinit = false;
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1 && (node.matches('figure.highlight') || node.querySelector('figure.highlight'))) {
+                        needsReinit = true;
+                    }
+                });
+            }
+        });
+        if (needsReinit) {
+            setTimeout(initCodeBlockExpansion, 100);
+        }
+    });
+    
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+});
+</script>
+
+<!-- Mermaid Initialization -->
+<script type="text/javascript">
+    // Wait for document ready
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof mermaid !== 'undefined') {
+            // Initialize with proper configuration
+            mermaid.initialize({ 
+                startOnLoad: false,
+                theme: 'default',
+                securityLevel: 'loose'
+            });
+            
+            // Find and process mermaid code blocks
+            const codeBlocks = document.querySelectorAll('figure.highlight.plaintext .code');
+            
+            codeBlocks.forEach((codeElement, index) => {
+                let code = codeElement.textContent || codeElement.innerText;
+                
+                // Check if it's a mermaid diagram
+                if (code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/)) {
+                    // Critical fix: Remove ALL leading/trailing whitespace and newlines
+                    code = code.trim().replace(/^\s+|\s+$/g, '');
+                    
+                    // Create mermaid div
+                    const mermaidDiv = document.createElement('div');
+                    mermaidDiv.className = 'mermaid';
+                    // Set the cleaned code without any extra whitespace
+                    mermaidDiv.textContent = code;
+                    mermaidDiv.id = 'mermaid-diagram-' + index;
+                    
+                    // Replace the entire figure element
+                    const figureElement = codeElement.closest('figure');
+                    if (figureElement) {
+                        figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+                    }
+                }
+            });
+            
+            // Initialize mermaid diagrams with explicit selector
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 100);
+        }
+    });
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for other scripts to load
+    setTimeout(function() {
+        // Find all elements with shadertoy-placeholder class
+        const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+        
+        console.log('Found shadertoy-placeholder elements:', elements.length);
+
+        elements.forEach(element => {
+            const shaderID = element.getAttribute('data-id');
+            console.log('Processing shadertoy-placeholder element with ID:', shaderID);
+            
+            if (shaderID) {
+                // Create iframe container
+                const container = document.createElement('div');
+                container.style.cssText = `
+                    position: relative;
+                    width: 100%;
+                    height: 400px;
+                    margin: 20px 0;
+                    border: 2px solid #bfbbbb;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    background-color: #f6f6f6;
+                `;
+
+                // Create iframe
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.shadertoy.com/embed/${shaderID}?gui=true&t=10&paused=false&muted=false`;
+                iframe.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                `;
+                iframe.allowFullscreen = true;
+                iframe.loading = 'lazy';
+
+                container.appendChild(iframe);
+                element.parentNode.insertBefore(container, element);
+                element.parentNode.removeChild(element);
+            }
+        });
+    }, 1000); // Wait a full second for everything to load
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+
+</html>
