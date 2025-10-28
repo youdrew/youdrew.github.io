@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="This is a space where I can share my thoughts and works with freely.">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Aximmetry Learning Notes"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>Aximmetry Learning Notes - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid Support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle">Filmmaker / Developer</div>
+        <div class="description">This is a space where I can share my thoughts and works with freely.</div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/atom.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p>Copyright © 2025 Eugene Hsuan</p>
+            <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p>Modified based on <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> theme</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix">
+
+    <section class="top" style="background: url('https://s2.loli.net/2025/10/27/DR1TGPCjvgM3nqu.png');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2025/09/21/UE5%20GAS%20Learning%20Notes/" class="previous" data-title="UE5 GAS Learning Notes"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2025/08/01/Shader%20Learning%20Note/" class="next" data-title="Shader Learning N..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Aximmetry Learning Notes</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <h1 id="Aximmetry-低成本XR方案搭建学习笔记"><a href="#Aximmetry-低成本XR方案搭建学习笔记" class="headerlink" title="Aximmetry 低成本XR方案搭建学习笔记"></a>Aximmetry 低成本XR方案搭建学习笔记</h1><h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>我需要搭建出一套非常低成本的XR方案，调研的时候考虑国内一些自研方案，以及Hecoos等主流方案，测试期暂时使用Aximmetry作为演示方案。以下是Aximmetry在本次测试中所使用到的内容。</p>
+<h3 id="各版本之间的区别"><a href="#各版本之间的区别" class="headerlink" title="各版本之间的区别"></a>各版本之间的区别</h3><ol>
+<li><strong>Studio Edition</strong>（工作室版）：适合非常小的或家庭工作室，如 YouTube 创作者等。该版本可通过 HDMI 或 USB 采集设备在一台 PC 上使用多个摄像头，可通过显卡的 HDMI&#x2F;DP&#x2F;DVI 端口生成一个或多个视频输出，还可直接将输出流式传输到 YouTube、Facebook、Twitch 或任何基于 RTMP 的视频服务。带水印的 Studio 版本可无限期用于非商业用途，也可通过订阅计划去除水印。</li>
+<li><strong>Professional Edition</strong>（专业版）：适用于小型专业工作室，支持在一台 PC 上最多使用 4 个 SDI&#x2F;ndi 输入 &#x2F; 输出端口，如 3 个 SDI 摄像机输入和 1 个 SDI 复合输出，且不需要任何摄像机跟踪解决方案，仅使用固定摄像机与虚拟摄像机运动。</li>
+<li><strong>Broadcast Edition</strong>（广播版）：适用于需要摄像机跟踪功能的专业工作室，可在一台 PC 上设置无限数量的 SDI&#x2F;ndi 输入 &#x2F; 输出端口（仅受硬件性能限制），也可在多 PC 配置中使用。此外，广播版还具备先进的混合现实解决方案，支持多摄像机跟踪、行业标准的色度键控器、高质量实时图形、摄像机偏移和镜头畸变的自动校准等功能。</li>
+</ol>
+<h2 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h2><h3 id="使用环境的基本内容"><a href="#使用环境的基本内容" class="headerlink" title="使用环境的基本内容"></a>使用环境的基本内容</h3><table>
+<thead>
+<tr>
+<th align="center">软件名字</th>
+<th align="center">版本</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Aximmetry Composer</td>
+<td align="center"><div align="center"><img src="https://s2.loli.net/2025/10/10/lEkaSNv1s2z4dqC.png" alt="image-20251009155943445" style="zoom: 20%;" /></div></td>
+<td align="left">这个软件是主要用来做合成和接收跟踪内容的</td>
+</tr>
+<tr>
+<td align="center">Aximmetry UE</td>
+<td align="center"><div align="center"><img src="https://s2.loli.net/2025/10/10/KUfiXBt4mxwEL8Z.png" alt="image-20251009160407488" style="zoom:20%;" /></div></td>
+<td align="left">Aximmetry自己改的UE，他们有修改渲染管线（目测是为了加水印）。他们该版本的引擎是基于UE5.5进行修改的。可以看到在引擎的插件目录里有两个插件。有源码也没有引入外部的库。但是Aximmetry修改了渲染管线，猜测是防止盗版。</td>
+</tr>
+<tr>
+<td align="center">UE工程</td>
+<td align="center">5.5</td>
+<td align="left">一个使用Aximmetry UE制作的场景。建议创建一个5.5的原始的UE工程，方便将插件重新编译及测试插件。</td>
+</tr>
+</tbody></table>
+<h3 id="建立基本的工程"><a href="#建立基本的工程" class="headerlink" title="建立基本的工程"></a>建立基本的工程</h3><h4 id="进入工程的设置"><a href="#进入工程的设置" class="headerlink" title="进入工程的设置"></a>进入工程的设置</h4><div align="center"><img src="https://s2.loli.net/2025/10/10/knatfO9CcYjvASd.png" alt="image-20251009155003718" style="zoom: 20%;" /></div>
+
+<p>在Composer的开始设置中，主要考虑输入的内容（左边的输入设置），这个是实景的拍摄相机。输出视频的大小（右边的输出设置），这个是最终输出画面的设置。以及下面的UE渲染设置。</p>
+<h4 id="节点设置"><a href="#节点设置" class="headerlink" title="节点设置"></a>节点设置</h4><div align="center"><img src="https://s2.loli.net/2025/10/10/T4rdGiu85asXlDe.png" alt="image-20251009161750537" style="zoom: 20%;" /></div>
+
+<ol>
+<li>VirtualCam节点：工程里添加一个镜头，如图连线。</li>
+<li>主节点：里面添加镜头和工程，并使用Live模式。</li>
+<li>Green：添加测试用到视频素材，这里可以使用一个绿幕素材，Aximmetry会自动对其进行抠像。</li>
+<li>Camera Tracking：相机追踪节点，这里面的选项待会儿要<u>填写上AximmetryEye</u></li>
+</ol>
+<p>完成之后点击Composer上面的Play按钮，且让工程在编辑器状态下运行起来，就会有合成的画面了。</p>
+<h4 id="设置UE内容"><a href="#设置UE内容" class="headerlink" title="设置UE内容"></a>设置UE内容</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/7NWYjuvm6zro2ng.png" alt="image-20251011142232445" style="zoom: 20%;" /></div>
+
+<p>在场景中添加相机。</p>
+<h3 id="设置相机运镜"><a href="#设置相机运镜" class="headerlink" title="设置相机运镜"></a>设置相机运镜</h3><h4 id="手动设置"><a href="#手动设置" class="headerlink" title="手动设置"></a>手动设置</h4><div align="center"><img src="https://s2.loli.net/2025/10/10/PUwAjTpJatG6O9s.png" alt="image-20250930144118468" style="zoom: 20%;" /></div>
+
+<p>在这里可以用来设置相机的运动属性等信息。A和B代表着起始点和最终点。点击最左边的按钮可以让相机运动起来。</p>
+<p>点击“摄影机&#x2F;渲染设置”的编辑操作，可以在Aximmetry的渲染出来的窗口画面里，直接拖动相机位置。使用↑↓←→按钮调整相机坐标。</p>
+<h4 id="Iphone相机跟踪"><a href="#Iphone相机跟踪" class="headerlink" title="Iphone相机跟踪"></a>Iphone相机跟踪</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/radVntHOELqgh2b.png" alt="image-20251013114229527" style="zoom: 20%;" /> <img src="https://s2.loli.net/2025/10/27/DR1TGPCjvgM3nqu.png" alt="image-20251013114601929" style="zoom: 20%;" /></div>
+
+<p>在AppStore（IOS）下载Aximmetry Eye这个软件。然后通过网线<strong>有线连接</strong>（重点，无线我测试有问题），最好套上一个散热器（不然，一会儿手机就烫得不行然后断连了，然后数据飘逸了）。然后在连接的时候，选择发送Tracking Data（如图）即可（因为实际上我们只需要摄影机姿态数据）。连接完成之后，就可以在Flow页面Camera Tracking的节点细节面板里面看到手机这个选项了。</p>
+<div align="center"><img src="https://s2.loli.net/2025/10/27/Vc49YvN7KrCqOuP.png" alt="image-20251013203732954" style="zoom: 20%;" /></div>
+
+<p><u>每次初始化的时候Iphone所在的位置以及轴向</u>，就会被当作场景的中心点。</p>
+<ul>
+<li>请参看参考资料，部分有视频。</li>
+</ul>
+<h4 id="相机的FOV设定"><a href="#相机的FOV设定" class="headerlink" title="相机的FOV设定"></a>相机的FOV设定</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/iSkpaB3lJKqGV2f.png" alt="image-20251013202543178" style="zoom: 20%;" /></div>
+
+<p>FOV也可以进行手动标定，一般相机上的镜头标尺不是很准。</p>
+<p>所以需要一些精确的标定。</p>
+<p>可以在合成画面中，左右&#x2F;上下横移：如果虚拟旋转速度比真实的快，那么需要减小Zoom、反之亦然。</p>
+<h4 id="Iphone外参手动标定"><a href="#Iphone外参手动标定" class="headerlink" title="Iphone外参手动标定"></a>Iphone外参手动标定</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/X8FjOHlqyeSdKvx.png" alt="image-20251027113433462" style="zoom: 20%;" /></div>
+
+<p>首先在相机的上方增加增加一个Actor物体，命名为CameraLocation。</p>
+<p>Aximmetry的逻辑是 相机生成在原点 然后+-手机Aximmetry Eye上的偏移值，就是相机在运行时候的位置。</p>
+<p>所以需要在CameraLocation，修改其位置，至实际上物理相机距离中心原点的位置。</p>
+<h3 id="相机的标定（待完善）"><a href="#相机的标定（待完善）" class="headerlink" title="相机的标定（待完善）"></a>相机的标定（待完善）</h3><h4 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h4><p>相机标定的概念包括两部分：镜头标定和跟踪标定。</p>
+<h6 id="镜头校准的概念"><a href="#镜头校准的概念" class="headerlink" title="镜头校准的概念"></a>镜头校准的概念</h6><p><strong>镜头校准</strong>的概念是，演播室摄像机镜头的固有特性（ <em>例如镜头畸变、中心偏移等</em> ）始终会导致图像及其色彩失真，而虚拟摄像机（ <em>演播室摄像机的虚拟对应物</em> ）默认会呈现完美图像（ <em>图像和&#x2F;或色彩均无畸变</em> ）。镜头校准的目标是将二者（演播室摄像机镜头与虚拟摄影机）统一在一起。（畸变校准）</p>
+<h6 id="跟踪校准的概念"><a href="#跟踪校准的概念" class="headerlink" title="跟踪校准的概念"></a>跟踪校准的概念</h6><p>跟踪校准的概念是，跟踪系统只能测量其跟踪设备的位置和旋转，而虚拟制作需要演播室摄像机无视差点（ <em>靠近摄像机传感器</em> ）的位置和旋转。跟踪校准的目标是计算这两个位置和旋转之间的差异。</p>
+<h4 id="工具介绍"><a href="#工具介绍" class="headerlink" title="工具介绍"></a>工具介绍</h4><p><a target="_blank" rel="noopener" href="https://aximmetry.com/learn/virtual-production-workflow/tracking/calibration/about-the-concept-of-camera-calibration/">官网对于标定内容的总结</a>里面提及了Aximmetry有两个标定工具：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Lb2BuzxM4h0">Basic Calibrator</a>和Camera Calibrator，在软件路径下可以看到这两个工具。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aximmetry.com/learn/virtual-production-workflow/tracking/calibration/basic-calibrator/">Basic Calibrator</a> 手动校准相机或调整现有的校准配置文件。</li>
+<li><a target="_blank" rel="noopener" href="https://aximmetry.com/learn/virtual-production-workflow/tracking/calibration/camera-calibrator/">Camera Calibrator</a> 自动校准相机。</li>
+</ul>
+<div align="center"><img src="https://s2.loli.net/2025/10/10/kstDo52JFy1ATgE.png" alt="image-20251009165746851" style="zoom: 20%;" /> <img src="https://s2.loli.net/2025/10/10/gc4PLZmDqfJalM2.png" alt="image-20251009165932446" style="zoom: 20%;" /></div>
+
+
+
+<h5 id="Basic-Calibrator"><a href="#Basic-Calibrator" class="headerlink" title="Basic Calibrator"></a>Basic Calibrator</h5><p>官方视频教程<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Lb2BuzxM4h0">Aximmetry Basic Calibrator Tutorial</a></p>
+<p>Z意味着最小放大值 F代表的对焦点</p>
+<ol>
+<li>设置项目设置</li>
+<li>校准Focal Length</li>
+</ol>
+<p>设置相机的Properties：</p>
+<p>我所使用的主相机索尼FX3的传感器尺寸：35.6 x 23.8 mm</p>
+<p>测量相机的高度</p>
+<p>Pan Virtual：虚拟的地平面的高度</p>
+<p>点击Add添加Calibration Point</p>
+<p>如果虚拟网格和地板标记的旋转速度比f真实的快，那么需要增加focal length、</p>
+<p>反之亦然</p>
+<p>一般正常的标定需要5个点</p>
+<p>不要使用画面边缘部分，因为那儿的畸变比较大</p>
+<h4 id="其他思考"><a href="#其他思考" class="headerlink" title="其他思考"></a>其他思考</h4><h5 id="关于Iphone同步问题"><a href="#关于Iphone同步问题" class="headerlink" title="关于Iphone同步问题"></a>关于Iphone同步问题</h5><p>因为Iphone在之前的版本中并不支持时间吗和Genlock，所以在同步上就会有很多问题。</p>
+<p>论坛里提及了<a target="_blank" rel="noopener" href="https://my.aximmetry.com/post/3885-aximmetry-eye-as-a-tracker-for-a-studio">这个问题</a>。是否可以使用iphone17支持了GenLock是否可以直接拿来使用作为外部跟踪器。</p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jjsrc01caGQ">Youtube里面提到的Blackmgiac为Iphone制作的外部同步设备</a></p>
+<p>支持系统</p>
+<p>Camera Calibrator目前支持两种类型的跟踪系统的校准：</p>
+<div align="center"><img src="https://s2.loli.net/2025/10/10/7eXmrFl6TStBQ8V.png" alt="image-20251009170158715" style="zoom: 20%;" /></div>
+**6DOF** ：6 自由度（Degrees of Freedom）跟踪系统，指的是能够同时获取摄像机在三维空间中的位置（X、Y、Z）和旋转（Pitch俯仰、Yaw偏航、Roll翻滚)数据的系统。常见于高精度虚拟制作和混合现实场景，能实现摄像机的完整空间运动追踪。（来自外部的跟踪系统)
+
+<p><strong>PTZ</strong> ：PTZ是Pan-Tilt-Zoom的缩写，指的是具备云台（水平旋转）、俯仰（垂直旋转）和变焦功能的摄像机。PTZ相机通常用于远程控制拍摄角度和焦距，但不具备完整的空间位置追踪能力，主要用于场景监控或简单虚拟制作。（PTZ相机）</p>
+<p>在设备映射器里面添加Aximmetry Eye</p>
+<div align="center"><img src="https://s2.loli.net/2025/10/10/xMOXDgvkuVticse.png" alt="image-20250930155931126" style="zoom: 20%;" /></div>
+
+
+
+<div align="center"><img src="https://s2.loli.net/2025/10/10/LM2ldp7bxyBaIYR.png" alt="image-20250930164348165" style="zoom: 20%;" /></div>
+
+
+
+<p>一定要连接网线才有用啊</p>
+<h2 id="使用时候的问题"><a href="#使用时候的问题" class="headerlink" title="使用时候的问题"></a>使用时候的问题</h2><h3 id="引擎版本不兼容问题"><a href="#引擎版本不兼容问题" class="headerlink" title="引擎版本不兼容问题"></a>引擎版本不兼容问题</h3><p>官网也提到了这个<a target="_blank" rel="noopener" href="https://aximmetry.com/learn/virtual-production-workflow/obtaining-graphics-and-virtual-assets/creating-content-in-unreal-editor/advanced-information-and-features/how-to-install-third-party-code-plugins-for-unreal-editor-for-aximmetry/">问题</a>，这会涉及到一些别的插件的重新编译、兼容性的问题。</p>
+<p>Aximmetry 的 UE 版本不是官方完整源码版，因此想要重新编译复杂 C++ 插件（特别是依赖私有模块或渲染管线扩展的）往往会失败。</p>
+<p>可以：</p>
+<ol>
+<li>使用蓝图或纯资源插件；</li>
+<li>寻找已为该版本预编译的二进制包；</li>
+<li>如果必须用 C++ 插件，尝试在官方 UE5.5 建工程验证，确认可以跑通，然后再到Aximmetry的引擎中去跑。</li>
+</ol>
+<h3 id="采集卡格式不兼容问题"><a href="#采集卡格式不兼容问题" class="headerlink" title="采集卡格式不兼容问题"></a>采集卡格式不兼容问题</h3><p> 在项目设置上会出现采集卡识别不到型号&#x2F;分辨率等问题，或是采集卡断掉之后，画面呈现黑的。<br>这时候需要拔掉插件卡重新插入，然后重启软件。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17NQVYBEBi/">最基础概览视频</a>:我看着这个视频作为最初的入门</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=vI_b2OO4yZE">Aximmetry Eye Camera Tracking Device</a>：里面还提及了如何解决TimeCode的问题</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=dugtm2TlY44">Virtual Production demo with Aximmetry Eye mobile app</a>：这里面提及了Iphone数据流送回来的方案</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=tm_5o6eRcpM">Aximmetry Eye VIrtual Camera Tracker</a>：里面有提及标定的事情，也有提及（可能）使用WIFI6能够实现无线传输。</li>
+</ol>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/XR/">XR</a> <a href="/tags/Aximmetry/">Aximmetry</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+
+<script src="/js/jquery.js"></script>
+
+
+<!-- Custom Code -->
+
+<script src="/js/main.js"></script>
+
+
+<script src="/js/article-collapse.js"></script>
+
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<script src="/js/shadertoy-embed.js"></script>
+
+
+<script src="/js/image-zoom.js"></script>
+
+
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Code Block Expansion Script -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize code block expansion
+    function initCodeBlockExpansion() {
+        const codeBlocks = document.querySelectorAll('figure.highlight');
+        
+        codeBlocks.forEach(function(codeBlock) {
+            // Skip if already processed
+            if (codeBlock.closest('.code-block-container')) return;
+            
+            // Remove table structure and keep only code content
+            const table = codeBlock.querySelector('table');
+            if (table) {
+                const codeCell = table.querySelector('td.code');
+                if (codeCell) {
+                    // Create a new pre element with code content
+                    const newPre = document.createElement('pre');
+                    newPre.className = 'code';
+                    newPre.innerHTML = codeCell.innerHTML;
+                    
+                    // Replace table with pre element
+                    codeBlock.innerHTML = '';
+                    codeBlock.appendChild(newPre);
+                }
+            }
+            
+            // Get the code content height
+            const codeContent = codeBlock.querySelector('pre.code');
+            if (!codeContent) return;
+            
+            const actualHeight = codeContent.scrollHeight;
+            const maxHeight = 400; // Same as CSS max-height
+            
+            // Only add expansion if content is taller than max height
+            if (actualHeight > maxHeight) {
+                // Wrap the code block in a container
+                const container = document.createElement('div');
+                container.className = 'code-block-container collapsed';
+                codeBlock.parentNode.insertBefore(container, codeBlock);
+                container.appendChild(codeBlock);
+                
+                // Create expand button
+                const expandButton = document.createElement('button');
+                expandButton.className = 'expand-button';
+                expandButton.textContent = '展开代码';
+                container.appendChild(expandButton);
+                
+                // Add click handler
+                expandButton.addEventListener('click', function() {
+                    if (container.classList.contains('collapsed')) {
+                        // Expand to full screen
+                        showFullscreenCode(codeBlock, expandButton);
+                    }
+                });
+            }
+        });
+    }
+    
+    function showFullscreenCode(codeBlock, button) {
+        // Create fullscreen modal
+        const modal = document.createElement('div');
+        modal.className = 'code-fullscreen-modal active';
+        
+        const content = document.createElement('div');
+        content.className = 'code-fullscreen-content';
+        
+        // Clone the code block and remove any expansion restrictions
+        const clonedBlock = codeBlock.cloneNode(true);
+        
+        // Remove any size restrictions from cloned block
+        clonedBlock.style.maxHeight = 'none';
+        clonedBlock.style.overflow = 'visible';
+        
+        // Find and update the pre.code element in cloned block
+        const clonedPre = clonedBlock.querySelector('pre.code');
+        if (clonedPre) {
+            clonedPre.style.maxHeight = 'none';
+            clonedPre.style.height = '100%';
+            clonedPre.style.overflowY = 'scroll';
+            clonedPre.style.overflowX = 'auto';
+            clonedPre.style.minHeight = '0';
+            // 确保内容完全可见
+            clonedPre.scrollTop = 0;
+        }
+        
+        content.appendChild(clonedBlock);
+        
+        // Create close button
+        const closeButton = document.createElement('button');
+        closeButton.className = 'close-fullscreen';
+        closeButton.textContent = '关闭';
+        content.appendChild(closeButton);
+        
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+        
+        // Prevent body scrolling
+        document.body.style.overflow = 'hidden';
+        
+        // Close handlers
+        function closeModal() {
+            document.body.removeChild(modal);
+            document.body.style.overflow = '';
+        }
+        
+        closeButton.addEventListener('click', closeModal);
+        
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Close on escape key
+        function handleKeydown(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                document.removeEventListener('keydown', handleKeydown);
+            }
+        }
+        document.addEventListener('keydown', handleKeydown);
+    }
+    
+    // Initialize on page load
+    initCodeBlockExpansion();
+    
+    // Re-initialize if new content is loaded (for SPA-like behavior)
+    const observer = new MutationObserver(function(mutations) {
+        let needsReinit = false;
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1 && (node.matches('figure.highlight') || node.querySelector('figure.highlight'))) {
+                        needsReinit = true;
+                    }
+                });
+            }
+        });
+        if (needsReinit) {
+            setTimeout(initCodeBlockExpansion, 100);
+        }
+    });
+    
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+});
+</script>
+
+<!-- Mermaid Initialization -->
+<script type="text/javascript">
+    // Wait for document ready
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof mermaid !== 'undefined') {
+            // Initialize with proper configuration
+            mermaid.initialize({ 
+                startOnLoad: false,
+                theme: 'default',
+                securityLevel: 'loose'
+            });
+            
+            // Find and process mermaid code blocks
+            const codeBlocks = document.querySelectorAll('figure.highlight.plaintext .code');
+            
+            codeBlocks.forEach((codeElement, index) => {
+                let code = codeElement.textContent || codeElement.innerText;
+                
+                // Check if it's a mermaid diagram
+                if (code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/)) {
+                    // Critical fix: Remove ALL leading/trailing whitespace and newlines
+                    code = code.trim().replace(/^\s+|\s+$/g, '');
+                    
+                    // Create mermaid div
+                    const mermaidDiv = document.createElement('div');
+                    mermaidDiv.className = 'mermaid';
+                    // Set the cleaned code without any extra whitespace
+                    mermaidDiv.textContent = code;
+                    mermaidDiv.id = 'mermaid-diagram-' + index;
+                    
+                    // Replace the entire figure element
+                    const figureElement = codeElement.closest('figure');
+                    if (figureElement) {
+                        figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+                    }
+                }
+            });
+            
+            // Initialize mermaid diagrams with explicit selector
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 100);
+        }
+    });
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for other scripts to load
+    setTimeout(function() {
+        // Find all elements with shadertoy-placeholder class
+        const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+        
+        console.log('Found shadertoy-placeholder elements:', elements.length);
+
+        elements.forEach(element => {
+            const shaderID = element.getAttribute('data-id');
+            console.log('Processing shadertoy-placeholder element with ID:', shaderID);
+            
+            if (shaderID) {
+                // Create iframe container
+                const container = document.createElement('div');
+                container.style.cssText = `
+                    position: relative;
+                    width: 100%;
+                    height: 400px;
+                    margin: 20px 0;
+                    border: 2px solid #bfbbbb;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    background-color: #f6f6f6;
+                `;
+
+                // Create iframe
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.shadertoy.com/embed/${shaderID}?gui=true&t=10&paused=false&muted=false`;
+                iframe.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                `;
+                iframe.allowFullscreen = true;
+                iframe.loading = 'lazy';
+
+                container.appendChild(iframe);
+                element.parentNode.insertBefore(container, element);
+                element.parentNode.removeChild(element);
+            }
+        });
+    }, 1000); // Wait a full second for everything to load
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+</body>
+
+</html>

@@ -358,7 +358,8 @@ h5, h6          { font-weight: bolder }
 .main{
     width: 100%;
     height: 100%;
-    padding-left: 300px;
+    /* 使用 CSS 变量控制侧边栏占位，便于在折叠/展开时统一影响子元素 */
+    padding-left: var(--sidebar-offset, 300px);
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -370,19 +371,12 @@ h5, h6          { font-weight: bolder }
     transition: padding-left 0.3s ease-in-out;
 }
 
-/* 当侧边栏隐藏时调整主内容区域 */
+/* 当侧边栏隐藏时调整主内容区域：通过设置 --sidebar-offset 让所有依赖它的规则同步生效 */
 header:not(.show_menu) ~ .main {
-    padding-left: 50px;
+    --sidebar-offset: 50px;
 }
 
 /*  Home/portfolio  */
-.main .work{
-    display: block;
-    width: 25%;
-    float: left;
-    position: relative;
-    overflow: hidden;
-}
 
 .main .work::before {
     content: "";
@@ -390,16 +384,15 @@ header:not(.show_menu) ~ .main {
     padding-top: 100%; /* 1:1 宽高比 */
 }
 
-.main .work a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.main .work{
+    display: block;
+    /* Grid 布局下由容器控制尺寸，去除 float/固定宽度 */
+    width: auto;
+    float: none;
+    position: relative;
     overflow: hidden;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .main .work .media {
@@ -447,7 +440,6 @@ header:not(.show_menu) ~ .main {
 
 .main .work .media{
     width: 100%;
-    vertical-align: middle;
 }
 
 .main .work .caption{
@@ -490,6 +482,12 @@ header:not(.show_menu) ~ .main {
 
 .main .gallery-container{
     width: 100%;
+    /* 使用 CSS Grid 管理首页缩略图网格，间距由 gap 控制 */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+    align-items: start;
+    box-sizing: border-box;
 }
 
 /* Clearfix */
@@ -502,9 +500,10 @@ header:not(.show_menu) ~ .main {
 }
 
 .main .gallery-container .picture-container{
-    width: 150px;
-    float: left;
-    margin-right: 30px;
+    /* Grid 下每个容器占满单元格宽度 */
+    width: 100%;
+    float: none;
+    margin: 0;
 }
 
 .main .gallery-container .picture-container .img-thumbnail{
@@ -513,6 +512,14 @@ header:not(.show_menu) ~ .main {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+.main .tags {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 10;
 }
 
 .main .tags a, .main .tags a:visited, .main .tags a:active{
@@ -935,18 +942,26 @@ header:not(.show_menu) ~ .main {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 260px;
+    width: 280px;
+    min-width: 200px;
+    max-width: 600px;
+    min-height: 150px;
+    max-height: 80vh;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     overflow: hidden;
+    border: 1px solid #e0e0e0;
+    resize: both;
 }
 
 .toc-header {
     padding: 12px 16px;
     background: #f8f8f8;
     border-bottom: 1px solid #eee;
+    cursor: move;
+    user-select: none;
 }
 
 .toc-title {
@@ -957,8 +972,9 @@ header:not(.show_menu) ~ .main {
 }
 
 .toc-content {
-    max-height: 300px;
+    height: calc(100% - 45px);
     overflow-y: auto;
+    overflow-x: auto;
     padding: 12px 0;
 }
 
@@ -966,7 +982,15 @@ header:not(.show_menu) ~ .main {
     margin: 0;
     padding: 0;
     list-style: none;
+    min-width: max-content;
 }
+
+/* 标题层级缩进 */
+.toc-item[data-level="2"] { padding-left: 32px; }
+.toc-item[data-level="3"] { padding-left: 48px; }
+.toc-item[data-level="4"] { padding-left: 64px; }
+.toc-item[data-level="5"] { padding-left: 80px; }
+.toc-item[data-level="6"] { padding-left: 96px; }
 
 .toc-item {
     padding: 4px 16px 4px 16px;
@@ -975,11 +999,105 @@ header:not(.show_menu) ~ .main {
     color: #666;
     cursor: pointer;
     transition: all 0.2s ease;
+    position: relative;
+    white-space: nowrap;
+    overflow: visible;
+    display: block;
 }
 
 .toc-item:hover {
     color: #349ef3;
     background: #f5f5f5;
+}
+
+/* 移除单个项目的滚动条样式，改为整体滚动条 */
+.toc-content::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.toc-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.toc-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.toc-content::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.toc-content::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+}
+
+/* 标题层级颜色变化 - 增强对比度 */
+.toc-item[data-level="1"] { color: #222; font-weight: 600; }
+.toc-item[data-level="2"] { color: #444; font-weight: 500; }
+.toc-item[data-level="3"] { color: #666; font-weight: normal; }
+.toc-item[data-level="4"] { color: #888; font-weight: normal; }
+.toc-item[data-level="5"] { color: #aaa; font-weight: normal; }
+.toc-item[data-level="6"] { color: #ccc; font-weight: normal; }
+
+/* TOC 折叠按钮 - 每个标题都有，但按层级缩进 */
+.toc-item .toc-collapse-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+
+/* 按层级设置按钮位置，增加与标题的间距 */
+.toc-item[data-level="1"] .toc-collapse-btn { left: 4px; }
+.toc-item[data-level="2"] .toc-collapse-btn { left: 20px; }
+.toc-item[data-level="3"] .toc-collapse-btn { left: 36px; }
+.toc-item[data-level="4"] .toc-collapse-btn { left: 52px; }
+.toc-item[data-level="5"] .toc-collapse-btn { left: 68px; }
+.toc-item[data-level="6"] .toc-collapse-btn { left: 84px; }
+
+/* 标题文本与按钮保持间距，防止换行 */
+.toc-item[data-level="1"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="2"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="3"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="4"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="5"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="6"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
+
+.toc-collapse-btn::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    width: 6px;
+    height: 2px;
+    background-color: #666;
+    transition: transform 0.3s ease;
+}
+
+.toc-collapse-btn::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    width: 2px;
+    height: 6px;
+    background-color: #666;
+    transition: transform 0.3s ease;
+}
+
+/* 折叠状态 */
+.toc-item.collapsed .toc-collapse-btn::after {
+    transform: scaleY(0);
+}
+
+/* 隐藏被折叠的子项 */
+.toc-item.toc-hidden {
+    display: none !important;
 }
 
 /* 标题层级缩进 */
@@ -994,6 +1112,40 @@ header:not(.show_menu) ~ .main {
     .toc-container {
         display: none;
     }
+}
+
+/* Mermaid 图表样式 */
+.mermaid {
+    text-align: center;
+    margin: 20px 0;
+    background-color: #ffffff;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 在不同标题层级下的 Mermaid 图表缩进 */
+.content h1 ~ .mermaid { margin-left: 24px; max-width: calc(100% - 24px); }
+.content h2 ~ .mermaid { margin-left: 48px; max-width: calc(100% - 48px); }
+.content h3 ~ .mermaid { margin-left: 72px; max-width: calc(100% - 72px); }
+.content h4 ~ .mermaid { margin-left: 96px; max-width: calc(100% - 96px); }
+.content h5 ~ .mermaid { margin-left: 120px; max-width: calc(100% - 120px); }
+.content h6 ~ .mermaid { margin-left: 144px; max-width: calc(100% - 144px); }
+
+/* 响应式 Mermaid */
+@media (max-width: 768px) {
+    .content h1 ~ .mermaid { margin-left: 12px; max-width: calc(100% - 12px); }
+    .content h2 ~ .mermaid { margin-left: 24px; max-width: calc(100% - 24px); }
+    .content h3 ~ .mermaid { margin-left: 36px; max-width: calc(100% - 36px); }
+    .content h4 ~ .mermaid { margin-left: 48px; max-width: calc(100% - 48px); }
+    .content h5 ~ .mermaid { margin-left: 60px; max-width: calc(100% - 60px); }
+    .content h6 ~ .mermaid { margin-left: 72px; max-width: calc(100% - 72px); }
 }
 
 /*  Responsive code  */
@@ -1071,8 +1223,9 @@ header:not(.show_menu) ~ .main {
         display: block;
     }
 
-    .main .work{
-        width: 33.33333333333333%; /* 在平板上显示3列 */
+    /* 使用 Grid 在平板上显示 3 列 */
+    .main .gallery-container{
+        grid-template-columns: repeat(3, 1fr);
     }
     .main{
         width: 100%;
@@ -1082,14 +1235,17 @@ header:not(.show_menu) ~ .main {
 }
 
 @media (max-width:768px){
-    .main .work{
-        width: 50%; /* 在较小屏幕上显示2列 */
+    /* 平板以下显示 2 列 */
+    .main .gallery-container{
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width:550px){
-     .main .work{
-        width: 100%; /* 在手机上显示1列 */
+     /* 手机端单列 */
+     .main .gallery-container{
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 
@@ -1939,4 +2095,156 @@ figure.highlight.yml .meta,
 figure.highlight.yml .number,
 .codeblock.yml .number {
     color: #0086b3;
+}
+
+/* Code Block Expansion Styles */
+.code-block-container {
+    position: relative;
+    margin: 10px 0; /* Match figure.highlight margin */
+}
+
+.code-block-container.collapsed figure.highlight {
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin: 0; /* Remove default margin to prevent double spacing */
+}
+
+.code-block-container.collapsed figure.highlight pre.code {
+    margin: 0;
+    padding: 15px;
+    max-height: 400px;
+    overflow: auto;
+    background-color: #f7f8f8;
+    font-family: Courier New, Courier, monospace;
+    line-height: 1.3em;
+}
+
+/* Ensure code blocks inherit proper indentation from parent elements */
+figure.highlight {
+    margin-left: inherit;
+    margin-right: inherit;
+}
+
+.expand-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 0 0 4px 0; /* Match the container's border radius */
+    font-size: 12px;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+    height: 44px; /* Fixed height for better alignment */
+    box-sizing: border-box;
+}
+
+.expand-button:hover {
+    background: #555;
+}
+
+.expand-button.expanded {
+    background: #333;
+}
+
+/* Fullscreen Modal Styles */
+.code-fullscreen-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.code-fullscreen-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-fullscreen-content {
+    width: 100%;
+    height: 100%;
+    max-width: 95%;
+    max-height: 95%;
+    background: #f7f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-fullscreen-content figure.highlight {
+    margin: 0 !important;
+    flex: 1;
+    max-height: none !important;
+    overflow: hidden !important;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* 重要：允许flex子项收缩 */
+}
+
+.code-fullscreen-content figure.highlight pre.code {
+    flex: 1;
+    max-height: none !important;
+    margin: 0;
+    padding: 20px;
+    overflow-y: scroll !important;
+    overflow-x: auto !important;
+    background-color: #f7f8f8;
+    font-family: Courier New, Courier, monospace;
+    line-height: 1.3em;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    min-height: 0; /* 允许flex item收缩 */
+}
+
+/* 确保滚动条始终可见且美观 */
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 6px;
+}
+
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+.code-fullscreen-content figure.highlight pre.code::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.close-fullscreen {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #666;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    z-index: 10;
+}
+
+.close-fullscreen:hover {
+    background: #555;
 }

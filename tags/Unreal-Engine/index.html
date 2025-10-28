@@ -40,6 +40,12 @@
     
 <link rel="stylesheet" href="/css/main.css">
 
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,6 +56,9 @@
 
     <!-- Gallery -->
     <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid Support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
 
     <!-- Google Analytics -->
     
@@ -133,8 +142,13 @@
                     <ul class="archive-list">
                         
                             <li class="archive-item">
-    <span class="archive-date">2025-09-13</span>
-    <a href="/2025/09/13/Shader001/">Shader 001</a>
+    <span class="archive-date">2025-09-21</span>
+    <a href="/2025/09/21/UE5 GAS Learning Notes/">UE5 GAS Learning Notes</a>
+</li>
+                        
+                            <li class="archive-item">
+    <span class="archive-date">2025-08-01</span>
+    <a href="/2025/08/01/Shader Learning Note/">Shader Learning Notes</a>
 </li>
                         
                     </ul>
@@ -162,8 +176,266 @@
 <script src="/js/article-collapse.js"></script>
 
 
+<script src="/js/toc-collapse.js"></script>
+
+
+<script src="/js/shadertoy-embed.js"></script>
+
+
+<script src="/js/image-zoom.js"></script>
+
+
 <!-- Gallery -->
 <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Code Block Expansion Script -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize code block expansion
+    function initCodeBlockExpansion() {
+        const codeBlocks = document.querySelectorAll('figure.highlight');
+        
+        codeBlocks.forEach(function(codeBlock) {
+            // Skip if already processed
+            if (codeBlock.closest('.code-block-container')) return;
+            
+            // Remove table structure and keep only code content
+            const table = codeBlock.querySelector('table');
+            if (table) {
+                const codeCell = table.querySelector('td.code');
+                if (codeCell) {
+                    // Create a new pre element with code content
+                    const newPre = document.createElement('pre');
+                    newPre.className = 'code';
+                    newPre.innerHTML = codeCell.innerHTML;
+                    
+                    // Replace table with pre element
+                    codeBlock.innerHTML = '';
+                    codeBlock.appendChild(newPre);
+                }
+            }
+            
+            // Get the code content height
+            const codeContent = codeBlock.querySelector('pre.code');
+            if (!codeContent) return;
+            
+            const actualHeight = codeContent.scrollHeight;
+            const maxHeight = 400; // Same as CSS max-height
+            
+            // Only add expansion if content is taller than max height
+            if (actualHeight > maxHeight) {
+                // Wrap the code block in a container
+                const container = document.createElement('div');
+                container.className = 'code-block-container collapsed';
+                codeBlock.parentNode.insertBefore(container, codeBlock);
+                container.appendChild(codeBlock);
+                
+                // Create expand button
+                const expandButton = document.createElement('button');
+                expandButton.className = 'expand-button';
+                expandButton.textContent = '展开代码';
+                container.appendChild(expandButton);
+                
+                // Add click handler
+                expandButton.addEventListener('click', function() {
+                    if (container.classList.contains('collapsed')) {
+                        // Expand to full screen
+                        showFullscreenCode(codeBlock, expandButton);
+                    }
+                });
+            }
+        });
+    }
+    
+    function showFullscreenCode(codeBlock, button) {
+        // Create fullscreen modal
+        const modal = document.createElement('div');
+        modal.className = 'code-fullscreen-modal active';
+        
+        const content = document.createElement('div');
+        content.className = 'code-fullscreen-content';
+        
+        // Clone the code block and remove any expansion restrictions
+        const clonedBlock = codeBlock.cloneNode(true);
+        
+        // Remove any size restrictions from cloned block
+        clonedBlock.style.maxHeight = 'none';
+        clonedBlock.style.overflow = 'visible';
+        
+        // Find and update the pre.code element in cloned block
+        const clonedPre = clonedBlock.querySelector('pre.code');
+        if (clonedPre) {
+            clonedPre.style.maxHeight = 'none';
+            clonedPre.style.height = '100%';
+            clonedPre.style.overflowY = 'scroll';
+            clonedPre.style.overflowX = 'auto';
+            clonedPre.style.minHeight = '0';
+            // 确保内容完全可见
+            clonedPre.scrollTop = 0;
+        }
+        
+        content.appendChild(clonedBlock);
+        
+        // Create close button
+        const closeButton = document.createElement('button');
+        closeButton.className = 'close-fullscreen';
+        closeButton.textContent = '关闭';
+        content.appendChild(closeButton);
+        
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+        
+        // Prevent body scrolling
+        document.body.style.overflow = 'hidden';
+        
+        // Close handlers
+        function closeModal() {
+            document.body.removeChild(modal);
+            document.body.style.overflow = '';
+        }
+        
+        closeButton.addEventListener('click', closeModal);
+        
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Close on escape key
+        function handleKeydown(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                document.removeEventListener('keydown', handleKeydown);
+            }
+        }
+        document.addEventListener('keydown', handleKeydown);
+    }
+    
+    // Initialize on page load
+    initCodeBlockExpansion();
+    
+    // Re-initialize if new content is loaded (for SPA-like behavior)
+    const observer = new MutationObserver(function(mutations) {
+        let needsReinit = false;
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1 && (node.matches('figure.highlight') || node.querySelector('figure.highlight'))) {
+                        needsReinit = true;
+                    }
+                });
+            }
+        });
+        if (needsReinit) {
+            setTimeout(initCodeBlockExpansion, 100);
+        }
+    });
+    
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+});
+</script>
+
+<!-- Mermaid Initialization -->
+<script type="text/javascript">
+    // Wait for document ready
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof mermaid !== 'undefined') {
+            // Initialize with proper configuration
+            mermaid.initialize({ 
+                startOnLoad: false,
+                theme: 'default',
+                securityLevel: 'loose'
+            });
+            
+            // Find and process mermaid code blocks
+            const codeBlocks = document.querySelectorAll('figure.highlight.plaintext .code');
+            
+            codeBlocks.forEach((codeElement, index) => {
+                let code = codeElement.textContent || codeElement.innerText;
+                
+                // Check if it's a mermaid diagram
+                if (code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/)) {
+                    // Critical fix: Remove ALL leading/trailing whitespace and newlines
+                    code = code.trim().replace(/^\s+|\s+$/g, '');
+                    
+                    // Create mermaid div
+                    const mermaidDiv = document.createElement('div');
+                    mermaidDiv.className = 'mermaid';
+                    // Set the cleaned code without any extra whitespace
+                    mermaidDiv.textContent = code;
+                    mermaidDiv.id = 'mermaid-diagram-' + index;
+                    
+                    // Replace the entire figure element
+                    const figureElement = codeElement.closest('figure');
+                    if (figureElement) {
+                        figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+                    }
+                }
+            });
+            
+            // Initialize mermaid diagrams with explicit selector
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 100);
+        }
+    });
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for other scripts to load
+    setTimeout(function() {
+        // Find all elements with shadertoy-placeholder class
+        const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+        
+        console.log('Found shadertoy-placeholder elements:', elements.length);
+
+        elements.forEach(element => {
+            const shaderID = element.getAttribute('data-id');
+            console.log('Processing shadertoy-placeholder element with ID:', shaderID);
+            
+            if (shaderID) {
+                // Create iframe container
+                const container = document.createElement('div');
+                container.style.cssText = `
+                    position: relative;
+                    width: 100%;
+                    height: 400px;
+                    margin: 20px 0;
+                    border: 2px solid #bfbbbb;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    background-color: #f6f6f6;
+                `;
+
+                // Create iframe
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.shadertoy.com/embed/${shaderID}?gui=true&t=10&paused=false&muted=false`;
+                iframe.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                `;
+                iframe.allowFullscreen = true;
+                iframe.loading = 'lazy';
+
+                container.appendChild(iframe);
+                element.parentNode.insertBefore(container, element);
+                element.parentNode.removeChild(element);
+            }
+        });
+    }, 1000); // Wait a full second for everything to load
+});
+</script>
 
 <!-- Disqus Comments -->
 

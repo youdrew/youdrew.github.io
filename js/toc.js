@@ -4,9 +4,12 @@ class TableOfContents {
     }
 
     init() {
-        // 确保在文章页面上
+        // 确保在文章页面上，但不在Archives页面上
         const content = document.querySelector('.content');
         if (!content) return;
+        
+        // 如果是Archives页面，不显示TOC
+        if (content.classList.contains('archives')) return;
 
         this.createTocContainer();
         this.generateToc();

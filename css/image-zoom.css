@@ -1,0 +1,16 @@
+/* image-zoom.css in theme source */
+#image-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+.image-zoom-content { position: relative; max-width: 90vw; max-height: 90vh; display:flex; align-items:center; justify-content:center; }
+.image-zoom-img { max-width:100vw; max-height:100vh; box-shadow:0 0 24px #000; border-radius:8px; user-select:none; cursor:grab; will-change:transform; position:relative; z-index:1; }
+#image-zoom-overlay.fade-in { animation: zoomOverlayFade .18s ease-out; }
+@keyframes zoomOverlayFade { from { opacity:0; } to { opacity:1; } }
+.image-zoom-hint { position: absolute; bottom:12px; left:50%; transform:translateX(-50%); color:#ddd; font-size:12px; background:rgba(0,0,0,.55); padding:6px 10px; border-radius:4px; pointer-events:none; z-index:3; opacity:1; transition:opacity .5s ease; }

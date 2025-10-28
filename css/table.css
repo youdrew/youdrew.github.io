@@ -1,0 +1,160 @@
+/* Markdown Table Styles */
+
+/* 基础表格样式 */
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: table;
+    table-layout: auto;
+}
+
+/* 表头样式 */
+.content table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.content table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+    border-right: 1px solid #dee2e6;
+    position: relative;
+}
+
+.content table th:last-child {
+    border-right: none;
+}
+
+/* 表格主体样式 */
+.content table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s ease;
+}
+
+.content table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.content table tbody tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+
+.content table td {
+    padding: 10px 15px;
+    border-right: 1px solid #dee2e6;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+.content table td:last-child {
+    border-right: none;
+}
+
+/* 表格在不同标题层级下的缩进 - 使用!important确保优先级 */
+.content h1 ~ table { 
+    margin-left: 24px !important; 
+    max-width: calc(100% - 24px) !important; 
+    width: calc(100% - 24px) !important;
+}
+.content h2 ~ table { 
+    margin-left: 48px !important; 
+    max-width: calc(100% - 48px) !important; 
+    width: calc(100% - 48px) !important;
+}
+.content h3 ~ table { 
+    margin-left: 72px !important; 
+    max-width: calc(100% - 72px) !important; 
+    width: calc(100% - 72px) !important;
+}
+.content h4 ~ table { 
+    margin-left: 96px !important; 
+    max-width: calc(100% - 96px) !important; 
+    width: calc(100% - 96px) !important;
+}
+.content h5 ~ table { 
+    margin-left: 120px !important; 
+    max-width: calc(100% - 120px) !important; 
+    width: calc(100% - 120px) !important;
+}
+.content h6 ~ table { 
+    margin-left: 144px !important; 
+    max-width: calc(100% - 144px) !important; 
+    width: calc(100% - 144px) !important;
+}
+
+/* 表格内的代码样式 */
+.content table code {
+    background-color: #f1f3f4;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: #d63384;
+}
+
+/* 表格内的链接样式 */
+.content table a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.content table a:hover {
+    text-decoration: underline;
+}
+
+/* 响应式表格 */
+@media (max-width: 768px) {
+    .content table {
+        font-size: 12px;
+        margin: 15px 0;
+    }
+    
+    .content table th,
+    .content table td {
+        padding: 8px 10px;
+    }
+    
+    /* 在小屏幕上减少缩进 */
+    .content h1 ~ table { margin-left: 12px; max-width: calc(100% - 12px); }
+    .content h2 ~ table { margin-left: 24px; max-width: calc(100% - 24px); }
+    .content h3 ~ table { margin-left: 36px; max-width: calc(100% - 36px); }
+    .content h4 ~ table { margin-left: 48px; max-width: calc(100% - 48px); }
+    .content h5 ~ table { margin-left: 60px; max-width: calc(100% - 60px); }
+    .content h6 ~ table { margin-left: 72px; max-width: calc(100% - 72px); }
+}
+
+@media (max-width: 480px) {
+    .content table {
+        font-size: 11px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .content table th,
+    .content table td {
+        padding: 6px 8px;
+        min-width: 100px;
+    }
+}
+
+/* 表格内容对齐 */
+.content table .text-left { text-align: left; }
+.content table .text-center { text-align: center; }
+.content table .text-right { text-align: right; }
+
+/* 表格高亮行样式 */
+.content table .highlight {
+    background-color: #fff3cd;
+}
+
+.content table .highlight:hover {
+    background-color: #ffeeba;
+}
