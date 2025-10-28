@@ -358,8 +358,7 @@ h5, h6          { font-weight: bolder }
 .main{
     width: 100%;
     height: 100%;
-    /* 使用 CSS 变量控制侧边栏占位，便于在折叠/展开时统一影响子元素 */
-    padding-left: var(--sidebar-offset, 300px);
+    padding-left: 300px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -371,12 +370,23 @@ h5, h6          { font-weight: bolder }
     transition: padding-left 0.3s ease-in-out;
 }
 
-/* 当侧边栏隐藏时调整主内容区域：通过设置 --sidebar-offset 让所有依赖它的规则同步生效 */
+/* 当侧边栏隐藏时调整主内容区域 */
 header:not(.show_menu) ~ .main {
-    --sidebar-offset: 50px;
+    padding-left: 50px;
 }
 
 /*  Home/portfolio  */
+.main .work{
+    display: block;
+    /* 留出右侧与下方的间隔（30px）并防止换行溢出 */
+    width: calc(25% - 30px);
+    float: left;
+    position: relative;
+    overflow: hidden;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    box-sizing: border-box; /* 确保内外距按预期计算 */
+}
 
 .main .work::before {
     content: "";
@@ -384,15 +394,16 @@ header:not(.show_menu) ~ .main {
     padding-top: 100%; /* 1:1 宽高比 */
 }
 
-.main .work{
-    display: block;
-    /* Grid 布局下由容器控制尺寸，去除 float/固定宽度 */
-    width: auto;
-    float: none;
-    position: relative;
+.main .work a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    margin: 0;
-    box-sizing: border-box;
 }
 
 .main .work .media {
@@ -440,6 +451,7 @@ header:not(.show_menu) ~ .main {
 
 .main .work .media{
     width: 100%;
+    vertical-align: middle;
 }
 
 .main .work .caption{
@@ -482,12 +494,6 @@ header:not(.show_menu) ~ .main {
 
 .main .gallery-container{
     width: 100%;
-    /* 使用 CSS Grid 管理首页缩略图网格，间距由 gap 控制 */
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 30px;
-    align-items: start;
-    box-sizing: border-box;
 }
 
 /* Clearfix */
@@ -500,10 +506,9 @@ header:not(.show_menu) ~ .main {
 }
 
 .main .gallery-container .picture-container{
-    /* Grid 下每个容器占满单元格宽度 */
-    width: 100%;
-    float: none;
-    margin: 0;
+    width: 150px;
+    float: left;
+    margin-right: 30px;
 }
 
 .main .gallery-container .picture-container .img-thumbnail{
@@ -1223,9 +1228,8 @@ header:not(.show_menu) ~ .main {
         display: block;
     }
 
-    /* 使用 Grid 在平板上显示 3 列 */
-    .main .gallery-container{
-        grid-template-columns: repeat(3, 1fr);
+    .main .work{
+        width: calc(33.33333333333333% - 30px); /* 在平板上显示3列并保留间隔 */
     }
     .main{
         width: 100%;
@@ -1235,17 +1239,15 @@ header:not(.show_menu) ~ .main {
 }
 
 @media (max-width:768px){
-    /* 平板以下显示 2 列 */
-    .main .gallery-container{
-        grid-template-columns: repeat(2, 1fr);
+    .main .work{
+        width: calc(50% - 30px); /* 在较小屏幕上显示2列并保留间隔 */
     }
 }
 
 @media (max-width:550px){
-     /* 手机端单列 */
-     .main .gallery-container{
-        grid-template-columns: 1fr;
-        gap: 20px;
+     .main .work{
+        width: calc(100% - 30px); /* 在手机上显示1列并保留左右内边距 */
+        margin-right: 0; /* 单列时取消右侧间距以居中 */
     }
 }
 

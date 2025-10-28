@@ -161,10 +161,18 @@
             <!-- Content -->
             <h1 id="Unreal-GAS系统使用学习"><a href="#Unreal-GAS系统使用学习" class="headerlink" title="Unreal GAS系统使用学习"></a>Unreal GAS系统使用学习</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Gameplay Ability System，简称(GAS)是一个健壮的、高度可扩展的、gameplay框架,通常用于构建RPG、MOBA等游戏的完整战斗逻辑框架。通过GAS,可以快速地制作游戏中的主动&#x2F;被动技能、各种效果buff、计算属性伤害、处理玩家各种战斗状态逻辑。</p>
 <h3 id="GAS提供了哪些功能"><a href="#GAS提供了哪些功能" class="headerlink" title="GAS提供了哪些功能?"></a>GAS提供了哪些功能?</h3><p>1、实现了带有消耗和冷却功能的角色技能<br>2、处理数值属性(生命、魔法、攻击力、防御力)<br>3、应用状态效果(击飞、着火、眩晕)<br>4、应用游戏标签(GameplayTags)<br>5、生成特效和音效<br>6、完整的网络复制、预测功能</p>
-<h3 id="适合使用GAS的项目"><a href="#适合使用GAS的项目" class="headerlink" title="适合使用GAS的项目"></a>适合使用GAS的项目</h3><p>1、C++项目,开发人员有充足的C++开发经验<br>2、使用Dedicated Server的联机游戏（单纯的游戏逻辑服务端，与Dedicated Server相对的是Listen Server，其中一位玩家充当服务器，容易出现“主机优势”）<br>3、项目有大量且复杂的技能逻辑设计需求</p>
-<h2 id="GAS的组件"><a href="#GAS的组件" class="headerlink" title="GAS的组件"></a>GAS的组件</h2><h3 id="Ability-System-Component"><a href="#Ability-System-Component" class="headerlink" title="Ability System Component"></a><strong>Ability System Component</strong></h3><p>  （ASC）是整个 GAS 的基础组件。ASC 本质上是一个 UActorComponent，用于处理整个框架下的交互逻辑，包括使用技能（GameplayAbility）、包含属性（AttributeSet）、处理各种效果（GameplayEffect）。所有需要应用 GAS 的对象（Actor），都必须拥有 GAS 组件。（即所有有技能交互的角色都是ASC）。<br>拥有 ASC 的 Actor 被称为 ASC 的 OwnerActor，ASC 实际作用的 Actor 叫做 AvatarActor。</p>
-<h3 id="Gameplay-Tags"><a href="#Gameplay-Tags" class="headerlink" title="Gameplay Tags"></a><strong>Gameplay Tags</strong></h3><p>FGameplayTags是一种层级标签，如Parent.Child.GrandChild。通过GameplayTagManager进行注册。替代了原来的Bool，或Enum的结构，可以在玩法设计中更高效的标记对象的行为或状态。<br>我理解是一个在Actor下的Json。方便执行一些复杂的状态。</p>
-<h3 id="Gameplay-Ability"><a href="#Gameplay-Ability" class="headerlink" title="Gameplay Ability"></a><strong>Gameplay Ability</strong></h3><p>（GA）标识了游戏中一个对象（Actor）可以做的行为或技能。<br>能力（Ability）可以是普通攻击或者吟唱技能，可以是角色被击飞倒地，还可以是使用某种道具，交互某个物件，甚至跳跃、飞行等角色行为也可以是Ability。<br>Ability可以被赋予对象或从对象的ASC中移除，对象同时可以激活多个GameplayAbility。<br>*基本的移动输入、UI交互行为则不能或不建议通过GA来实现。</p>
+<h3 id="适合使用GAS的项目"><a href="#适合使用GAS的项目" class="headerlink" title="适合使用GAS的项目"></a>适合使用GAS的项目</h3><p>1、C++项目,开发人员有充足的C++开发经验<br>2、使用Dedicated Server专用服务器的联机游戏（单纯的游戏逻辑服务端，与Dedicated Server相对的是Listen Server，其中一位玩家充当服务器，容易出现“主机优势”）<br>3、项目有大量且复杂的技能逻辑设计需求</p>
+<h2 id="GAS的组件"><a href="#GAS的组件" class="headerlink" title="GAS的组件"></a>GAS的组件</h2><h3 id="Ability-System-Component：who谁能放技能？"><a href="#Ability-System-Component：who谁能放技能？" class="headerlink" title="Ability System Component：who谁能放技能？"></a><strong>Ability System Component</strong>：who谁能放技能？</h3><p>（ASC）是整个 GAS 的基础组件。ASC 本质上是一个 UActorComponent，用于处理整个框架下的交互逻辑，包括使用技能（GameplayAbility）、包含属性（AttributeSet）、处理各种效果（GameplayEffect）。所有需要应用 GAS 的对象（Actor），都必须拥有 GAS 组件。（即所有有技能交互的角色都是ASC）。</p>
+<ul>
+<li>ASC是一种角色组件，负责和GA、GE、AS打交道。</li>
+<li>一般只放在Character or PlayerState上。</li>
+<li>拥有 ASC 的 Actor 被称为 ASC 的 OwnerActor，ASC 实际作用的 Actor 叫做 AvatarActor。</li>
+</ul>
+<h3 id="Gameplay-Tags：if技能改变的条件？"><a href="#Gameplay-Tags：if技能改变的条件？" class="headerlink" title="Gameplay Tags：if技能改变的条件？"></a><strong>Gameplay Tags：if技能改变的条件？</strong></h3><p>FGameplayTags是一种层级标签，如Parent.Child.GrandChild。通过GameplayTagManager进行注册。替代了原来的Bool，或Enum的结构，可以在玩法设计中更高效的标记对象的行为或状态。<br>我理解是一个在Actor下的Json。方便执行一些复杂的状态。</p>
+<ul>
+<li>Tag的<strong>层级关系</strong>也需要合理设计，到了后期修改成本比较大。</li>
+</ul>
+<h3 id="Gameplay-Ability：How-技能的逻辑？"><a href="#Gameplay-Ability：How-技能的逻辑？" class="headerlink" title="Gameplay Ability：How:技能的逻辑？"></a><strong>Gameplay Ability</strong>：How:技能的逻辑？</h3><p>（GA）标识了游戏中一个对象（Actor）可以做的行为或技能。<br>能力（Ability）可以是普通攻击或者吟唱技能，可以是角色被击飞倒地，还可以是使用某种道具，交互某个物件，甚至跳跃、飞行等角色行为也可以是Ability。<br>Ability可以被赋予对象或从对象的ASC中移除，对象同时可以激活多个GameplayAbility。<br>*基本的移动输入、UI交互行为则不能或不建议通过GA来实现。</p>
 <div class="mermaid" style="background: white; border: 1px solid #e1e1e1; border-radius: 4px; padding: 20px;">
 graph TD
     A[TryActivateAbility] --> B{CanActivateAbility}
@@ -189,16 +197,55 @@ graph TD
 <li><span style="color: #9C27B0;">CommitAbility</span>：技能释放了成功了，要扣蓝。</li>
 <li><span style="color: #ffeb3b;">Start AbilityTask</span> * 2:技能执行中…技能执行结束。然后应用对应效果。</li>
 </ol>
-<h3 id="Gameplay-Effect"><a href="#Gameplay-Effect" class="headerlink" title="Gameplay Effect"></a>Gameplay Effect</h3><p>（GE）是Ability对<strong>自己或他人产生影响的途径</strong>。<br>GE通常可以被理解为我们游戏中的buff。比如增益&#x2F;减益效果（修改属性）。<br>但是GAS中的GE也更加广义，释放技能时候的伤害结算，施加特殊效果的控制、霸体效果（修改GameplayTag）都是通过GE来实现的。</p>
+<h3 id="Gameplay-Effect：Change技能的效果？"><a href="#Gameplay-Effect：Change技能的效果？" class="headerlink" title="Gameplay Effect：Change技能的效果？"></a>Gameplay Effect：Change技能的效果？</h3><p>（GE）是Ability对<strong>自己或他人产生影响的途径</strong>。<br>GE通常可以被理解为我们游戏中的buff。比如增益&#x2F;减益效果（修改属性）。<br>但是GAS中的GE也更加广义，释放技能时候的伤害结算，施加特殊效果的控制、霸体效果（修改GameplayTag）都是通过GE来实现的。</p>
 <ul>
 <li><u>GE相当于一个可配置的数据表</u>，不可以添加逻辑。开发者创建一个UGameplayEffect的派生蓝图，就可以根据需求制作想要的效果。</li>
+<li>GE是纯蓝图</li>
 </ul>
 <h3 id="Attribute-Set"><a href="#Attribute-Set" class="headerlink" title="Attribute Set"></a>Attribute Set</h3><p>负责定义和持有属性，并且管理属性的<u>变化</u>，包括<u>网络同步</u>。<br>需要在Actor中被添加为成员变量，并注册到ASC（C++）。<br>一个ASC可以拥有一个或多个（不同的）AttributeSet，因此可以角色共享一个很大的Attribute Set，也可以每个角色按需添加Attribute Set。<br>可以在属性变化前（PreAttributeChange）后（PostGameplayEffectExecute）处理相关逻辑，可以通过委托的方式绑定属性变化。</p>
-<h2 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h2><ol>
+<h3 id="组件总结"><a href="#组件总结" class="headerlink" title="组件总结"></a>组件总结</h3><p>What：技能改变的属性？GameplayEffect</p>
+<p>Visual：技能的视觉效果？GameplayCue<br>Async：技能的长时行动？(异步)GameplayTask<br>Send：技能的消息事件？GamePplayEvent<br>What：技能改变的属性？GameplayEffect<br>这俩是同一个东西</p>
+<h2 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h2><h3 id="开启插件"><a href="#开启插件" class="headerlink" title="开启插件"></a>开启插件</h3><p><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251027203033649.png" alt="image-20251027203033649" style="zoom: 50%;" /><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251027203540226.png" alt="image-20251027203540226" style="zoom: 25%;" /></p>
+<ol>
 <li><u>C++项目</u>，安装Gameplay Ability插件。</li>
-<li>在Windows下面有GameplayCue Editor有了。</li>
+<li>在Tools菜单下面有GameplayCue Editor有了，就说明开启成功了。</li>
+<li>在新建的蓝图的页面可以看到GamePlay相关的东西</li>
 </ol>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<h3 id="ASC组件架构"><a href="#ASC组件架构" class="headerlink" title="ASC组件架构"></a>ASC组件架构</h3><div class="mermaid" style="background: white; border: 1px solid #e1e1e1; border-radius: 4px; padding: 20px;">
+classDiagram
+  class ACharacter
+  class ARPGCharacterBase {
+    +AbilitySystemComponent
+  }
+  class BP_Character {
+    +公共逻辑
+  }
+  class BP_PlayerCharacter {
+    -组装Camera等组件
+    -输入绑定
+  }
+  class BP_NPCCharacter
+  ACharacter <|-- ARPGCharacterBase
+  ARPGCharacterBase <|-- BP_Character
+  BP_Character <|-- BP_PlayerCharacter
+  BP_Character <|-- BP_NPCCharacter
+</div>
+
+<p>你需要自己创建一个继承自ACharacter的C++类。</p>
+<p>之后想用蓝图，就从这个自定义的C++Character类派生就可以了。</p>
+<h3 id="写一个基础GAS-ACharacter文件"><a href="#写一个基础GAS-ACharacter文件" class="headerlink" title="写一个基础GAS ACharacter文件"></a>写一个基础GAS ACharacter文件</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PublicDependencyModuleNames.AddRange(<span class="keyword">new</span> <span class="built_in">string</span>[]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;Core&quot;</span>, <span class="string">&quot;CoreUObject&quot;</span>, <span class="string">&quot;Engine&quot;</span>, <span class="string">&quot;InputCore&quot;</span>, <span class="string">&quot;EnhancedInput&quot;</span>,</span><br><span class="line">    <span class="string">&quot;GameplayAbilities&quot;</span>,<span class="string">&quot;GameplayTags&quot;</span>,<span class="string">&quot;GameplayTasks&quot;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在Build文件里添加如下的内容GameplayAbilities、GameplayTags、GameplayTasks。</p>
+<p>在.cpp中构造函数部分实例化ASC</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例化ASC</span></span><br><span class="line">AbilitySystemComponent = <span class="built_in">CreateDefaultSubobject</span>&lt;UAbilitySystemComponent&gt;(<span class="built_in">TEXT</span>(<span class="string">&quot;AbilitySystem&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>角色类继承IAbilitySystemInterface接口，并实现GetASC函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;AbilitySystemInterface.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ARPG_UNREAL_API</span> ACharacterBase : <span class="keyword">public</span> ACharacter, <span class="keyword">public</span> IAbilitySystemInterface</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"><span class="function">UAbilitySystemComponent* <span class="title">GetAbilitySystemComponent</span><span class="params">()</span><span class="type">const</span> <span class="keyword">override</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>在CPP中实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">UAbilitySystemComponent* <span class="title">ACharacterBase::GetAbilitySystemComponent</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> AbilitySystemComponent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整的GAS-ACharacter代码"><a href="#完整的GAS-ACharacter代码" class="headerlink" title="完整的GAS ACharacter代码"></a>完整的GAS ACharacter代码</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X5411V7jh/">官方教学视频</a>:我看着这个视频作为最初的入门</li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486808688">知乎GAS系统快速入门</a></li>
 <li><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/gameplay-ability-system-for-unreal-engine">Unreal官方的GAS讲解</a></li>
