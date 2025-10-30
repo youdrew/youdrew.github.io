@@ -1156,87 +1156,76 @@ header:not(.show_menu) ~ .main {
 /* 移动端与桌面端使用相同的缩进规则 */
 
 /*  Responsive code  */
+/* 移除移动端的特殊布局，所有设备都使用左侧固定侧边栏 */
 @media (max-width:1099px){
-
+    /* 保持侧边栏在左侧，与桌面端一致 */
     header{
         display: block;
-        width: 100%;
-        min-height: 100px;
-        padding: 0;
-        position: relative;
-    }
-    header .logo{
-        margin: 40px 0 0 30px;
-        float: left;
-    }
-
-    header .logo a, header .logo a:active, header .logo a:visited {
-        text-decoration: none;
-        text-transform: uppercase;
-        font-family: 'raleway-regular';
-        color: #454545;
-        font-size: 1.5em;
-    }
-
-    header .logo a:hover {
-        text-decoration: none;
-        color: #969595;
-        font-size: 1.5em;
-    }
-
-    header .footer{
-        display: none;
-    }
-    header #menu_icon,
-    header .close_menu{
-        float: right;
-        margin: 30px 30px 0 0;
-    }
-
-    header nav{
-        width: 100%;
-        position: absolute;
-        top: 100px;
+        position: fixed;
+        top: 0;
         left: 0;
+        width: 250px;
+        min-height: 100%;
+        padding: 0 0 0 50px;
+        background: #ffffff;
+        float: left;
+        overflow: hidden;
         z-index: 9999;
+        transform: translateX(-200px);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    /* 侧边栏文字透明度 */
+    header .logo,
+    header nav,
+    header .footer,
+    header .social,
+    header a,
+    header p {
+        transition: opacity 0.4s ease;
+        opacity: 0.02;
+    }
+    
+    header:hover,
+    header.show_menu {
+        transform: translateX(0);
+    }
+    
+    header:hover .logo,
+    header:hover nav,
+    header:hover .footer,
+    header:hover .social,
+    header:hover a,
+    header:hover p,
+    header.show_menu .logo,
+    header.show_menu nav,
+    header.show_menu .footer,
+    header.show_menu .social,
+    header.show_menu a,
+    header.show_menu p {
+        opacity: 1;
     }
 
-    header nav ul{
-        list-style: none;
-        display: none;
-        position: relative;
-    }
-    header nav ul li a{
-        display: block;
-        width: 100%;
-        padding: 30px 0;
-        text-align: center;
-        color: #454545;
-        font-family: "raleway-regular", arial;
-        font-size: 14px;
-        text-decoration: none;
-        border-top: 1px solid #f7f5f5;
-        background: #fff;
-    }
-    header nav ul li a:active{
-        background: #f7f5f5;
-    }
+    /* 隐藏移动端菜单图标，使用hover效果 */
     #menu_icon,
-    .close_menu,
-    .show_menu{
-        display: block;
-    }
-    .show_menu{
-        display: block;
+    .close_menu{
+        display: none;
     }
 
     .main .work{
         width: calc(33.33333333333333% - 30px); /* 在平板上显示3列并保留间隔 */
     }
+    
+    /* 主内容区域保持左侧padding */
     .main{
         width: 100%;
         position: relative;
-        padding-left: 0;
+        padding-left: 50px; /* 为侧边栏留出空间 */
+        transition: padding-left 0.3s ease-in-out;
+    }
+    
+    header:hover ~ .main {
+        padding-left: 300px;
     }
 }
 
