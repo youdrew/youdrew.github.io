@@ -23,40 +23,21 @@
 
 
 /*  Fonts  */
+/* 思源黑体 Noto Sans SC - 免费商用，支持中日韩及Emoji */
 @font-face {
-    font-family: 'raleway-regular';
-    src: url('../fonts/raleway-regular.woff2') format('woff2'),
-         url('../fonts/raleway-regular.woff') format('woff'),
-         url('../fonts/raleway-regular.ttf') format('truetype');
-    font-weight: normal;
+    font-family: 'noto-sans-sc';
+    src: url('../fonts/NotoSansSC-Regular.woff2') format('woff2');
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
-
 @font-face {
-    font-family: 'raleway-bold';
-    src: url('../fonts/raleway-bold.eot');
-    src: url('../fonts/raleway-bold.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/raleway-bold.woff') format('woff'),
-         url('../fonts/raleway-bold.ttf') format('truetype'),
-         url('../fonts/raleway-bold.svg#ralewaybold') format('svg');
-    font-weight: normal;
+    font-family: 'noto-sans-sc';
+    src: url('../fonts/NotoSansSC-Bold.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
-
-}
-
-
-@font-face {
-    font-family: 'raleway-semibold';
-    src: url('../fonts/raleway-semibold.eot');
-    src: url('../fonts/raleway-semibold.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/raleway-semibold.woff') format('woff'),
-         url('../fonts/raleway-semibold.ttf') format('truetype'),
-         url('../fonts/raleway-semibold.svg#ralewaysemibold') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
+    font-display: swap;
 }
 
 
@@ -82,17 +63,17 @@ header nav ul li a{
 
 h1, h2, h3, h4, h5 ,h6{
     color: #4b4848;
-    font-family: "raleway-regular", arial;
+    font-family: 'noto-sans-sc', -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "微软雅黑", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
     letter-spacing: 1px;
 }
 
 h1              { font-size: 2em; margin: .67em 0 }
 h2              { font-size: 1.5em; margin: .75em 0 }
 h3              { font-size: 1.17em; margin: .83em 0 }
-h5              { font-size: .83em; margin: 1.5em 0 }
-h6              { font-size: .75em; margin: 1.67em 0 }
-h1, h2, h3, h4,
-h5, h6          { font-weight: bolder }
+h4              { font-size: 1.4em; margin: 1em 0 }
+h5              { font-size: 1.3em; margin: 1.2em 0 }
+h6              { font-size: 1.25em; margin: 1.4em 0 }
+h1, h2, h3, h4, h5, h6          { font-weight: bolder }
 
 .clearfix:before,
 .clearfix:after {
@@ -660,8 +641,8 @@ header:not(.show_menu) ~ .main {
     color: #4b4848;
     font-family: "raleway-regular", arial;
     font-size: 20px;
-    line-height: 24px;
-    margin-bottom: 18px;
+    line-height: 30px;
+    margin-bottom: 30px; /* 从18px提高到22px，增加段落间距 */
 }
 
 .content h1,
@@ -694,25 +675,25 @@ header:not(.show_menu) ~ .main {
 .content h3 {
     margin-top: 30px;
     margin-bottom: 15px;
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
 
 .content h4 {
     margin-top: 25px;
     margin-bottom: 12px;
-    font-size: 1.2em;
+    font-size: 1.35em;
 }
 
 .content h5 {
     margin-top: 20px;
     margin-bottom: 10px;
-    font-size: 1.1em;
+    font-size: 1.3em;
 }
 
 .content h6 {
     margin-top: 15px;
     margin-bottom: 10px;
-    font-size: 1em;
+    font-size: 1.25em;
 }
 
 /* 标题缩进 */
@@ -828,33 +809,61 @@ header:not(.show_menu) ~ .main {
     display: block;
 }
 
+/* 列表样式 - 统一有序和无序列表的样式 */
 .content ol, .content ul{
-    margin-left: 15px;
-    line-height: 1.5;
+    margin-left: 0; /* 移除固定缩进，继承父级 */
+    margin-top: 0;
+    margin-bottom: 0; /* 减小下间距，与上间距一致 */
+    padding-left: 1.5em; /* 给标记符号留出空间 */
+    list-style-position: outside; /* 标记符号在外部，避免长文本换行问题 */
+    line-height: 1.6;
+    font-family: 'noto-sans-sc', -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "微软雅黑", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+    font-size: 18px;
+    color: #4b4848;
 }
 
 .content ol li, .content ul li {
-    margin-bottom: 8px;
+    margin-bottom: 4px; /* 减小列表项之间的间距 */
+    line-height: 1.6;
+    padding-left: 0.3em; /* 标记和文本之间的小间距 */
 }
 
 .content ol li:last-child, .content ul li:last-child {
     margin-bottom: 0;
 }
 
-/* 嵌套列表的间距调整 */
+/* 嵌套列表的间距调整 - 保持一致 */
 .content ol ol,
 .content ul ul,
 .content ol ul,
 .content ul ol {
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 8px; /* 嵌套列表上间距与列表项间距一致 */
+    margin-bottom: 0; /* 嵌套列表下间距由父li控制 */
+    margin-left: 0; /* 嵌套列表不额外缩进，靠padding-left控制 */
+    font-size: 17px; /* 嵌套列表稍小 */
+}
+
+/* 二级嵌套列表 */
+.content ol ol ol,
+.content ul ul ul,
+.content ol ul ul,
+.content ul ol ol {
+    font-size: 16px;
+    color: #5a5757;
+}
+
+/* 三级嵌套列表 */
+.content ol ol ol ol,
+.content ul ul ul ul {
+    font-size: 15px;
+    color: #6a6767;
 }
 
 .content div.archive-title{
     margin-left: 45px;
     text-decoration: none;
     text-transform: uppercase;
-    font-family: 'raleway-regular';
+    font-family: 'noto-sans-sc', -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "微软雅黑", sans-serif;
     color: #454545;
     font-size: 1.5em;
     margin-bottom: 50px;
@@ -1143,15 +1152,8 @@ header:not(.show_menu) ~ .main {
 .content h5 ~ .mermaid { margin-left: 120px; max-width: calc(100% - 120px); }
 .content h6 ~ .mermaid { margin-left: 144px; max-width: calc(100% - 144px); }
 
-/* 响应式 Mermaid */
-@media (max-width: 768px) {
-    .content h1 ~ .mermaid { margin-left: 12px; max-width: calc(100% - 12px); }
-    .content h2 ~ .mermaid { margin-left: 24px; max-width: calc(100% - 24px); }
-    .content h3 ~ .mermaid { margin-left: 36px; max-width: calc(100% - 36px); }
-    .content h4 ~ .mermaid { margin-left: 48px; max-width: calc(100% - 48px); }
-    .content h5 ~ .mermaid { margin-left: 60px; max-width: calc(100% - 60px); }
-    .content h6 ~ .mermaid { margin-left: 72px; max-width: calc(100% - 72px); }
-}
+/* 响应式 Mermaid - 移除差异，与桌面版保持一致 */
+/* 移动端与桌面端使用相同的缩进规则 */
 
 /*  Responsive code  */
 @media (max-width:1099px){
@@ -1248,6 +1250,61 @@ header:not(.show_menu) ~ .main {
      .main .work{
         width: calc(100% - 30px); /* 在手机上显示1列并保留左右内边距 */
         margin-right: 0; /* 单列时取消右侧间距以居中 */
+    }
+}
+
+/* 移动端内容样式统一 - 与桌面端保持一致 */
+@media (max-width:768px){
+    /* 确保内容区域的所有样式与桌面端一致 */
+    .content {
+        font-size: 15px; /* 与桌面端相同 */
+        line-height: 22px; /* 与桌面端相同 */
+        padding: 60px 30px; /* 与桌面端相同 */
+    }
+    
+    .content p {
+        font-size: 20px; /* 与桌面端相同 */
+        line-height: 30px; /* 与桌面端相同 */
+        margin-bottom: 30px; /* 与桌面端相同 */
+    }
+    
+    /* 标题缩进与桌面端保持一致 */
+    .content h1 { margin-left: 0; }
+    .content h2 { margin-left: 24px; }
+    .content h3 { margin-left: 48px; }
+    .content h4 { margin-left: 72px; }
+    .content h5 { margin-left: 96px; }
+    .content h6 { margin-left: 120px; }
+    
+    /* 标题后内容缩进与桌面端保持一致 */
+    .content h1 ~ p,
+    .content h1 ~ ul,
+    .content h1 ~ ol { margin-left: 24px; }
+    
+    .content h2 ~ p,
+    .content h2 ~ ul,
+    .content h2 ~ ol { margin-left: 48px; }
+    
+    .content h3 ~ p,
+    .content h3 ~ ul,
+    .content h3 ~ ol { margin-left: 72px; }
+    
+    .content h4 ~ p,
+    .content h4 ~ ul,
+    .content h4 ~ ol { margin-left: 96px; }
+    
+    .content h5 ~ p,
+    .content h5 ~ ul,
+    .content h5 ~ ol { margin-left: 120px; }
+    
+    .content h6 ~ p,
+    .content h6 ~ ul,
+    .content h6 ~ ol { margin-left: 144px; }
+    
+    /* 列表样式与桌面端保持一致 */
+    .content ol, .content ul {
+        padding-left: 1.5em;
+        font-size: 18px;
     }
 }
 
