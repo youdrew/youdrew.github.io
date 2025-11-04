@@ -339,7 +339,7 @@
 
 
 <div class="tags">
-    <a href="/tags/Shader/">Shader</a> <a href="/tags/GLSL/">GLSL</a> <a href="/tags/HLSL/">HLSL</a> <a href="/tags/Unreal-Engine/">Unreal Engine</a> <a href="/tags/Graphics-Programming/">Graphics Programming</a> <a href="/tags/Computer-Graphics/">Computer Graphics</a> <a href="/tags/Game-Development-Shader-001/">Game Development Shader 001</a>
+    <a href="/tags/Unreal-Engine/">Unreal Engine</a> <a href="/tags/Shader/">Shader</a> <a href="/tags/GLSL/">GLSL</a> <a href="/tags/HLSL/">HLSL</a> <a href="/tags/Graphics-Programming/">Graphics Programming</a> <a href="/tags/Computer-Graphics/">Computer Graphics</a> <a href="/tags/Game-Development-Shader-001/">Game Development Shader 001</a>
 </div>
 
 
@@ -420,6 +420,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const actualHeight = codeContent.scrollHeight;
             const maxHeight = 400; // Same as CSS max-height
             
+            // Create button container and copy button for all code blocks
+            const buttonsContainer = document.createElement('div');
+            buttonsContainer.className = 'code-buttons';
+            
+            // Create copy button (for all code blocks)
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-code-button';
+            copyButton.textContent = '复制代码';
+            copyButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                copyCodeToClipboard(codeContent, copyButton);
+            });
+            buttonsContainer.appendChild(copyButton);
+
             // Only add expansion if content is taller than max height
             if (actualHeight > maxHeight) {
                 // Wrap the code block in a container
@@ -427,13 +442,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.className = 'code-block-container collapsed';
                 codeBlock.parentNode.insertBefore(container, codeBlock);
                 container.appendChild(codeBlock);
-                
+
                 // Create expand button
                 const expandButton = document.createElement('button');
                 expandButton.className = 'expand-button';
                 expandButton.textContent = '展开代码';
-                container.appendChild(expandButton);
-                
+                buttonsContainer.appendChild(expandButton);
+
+                // Add buttons container to the wrapper
+                container.appendChild(buttonsContainer);
+
                 // Add click handler
                 expandButton.addEventListener('click', function() {
                     if (container.classList.contains('collapsed')) {
@@ -441,6 +459,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         showFullscreenCode(codeBlock, expandButton);
                     }
                 });
+            } else {
+                // For code blocks that don't need expansion, just add copy button
+                const container = document.createElement('div');
+                container.className = 'code-block-container';
+                codeBlock.parentNode.insertBefore(container, codeBlock);
+                container.appendChild(codeBlock);
+                container.appendChild(buttonsContainer);
             }
         });
     }

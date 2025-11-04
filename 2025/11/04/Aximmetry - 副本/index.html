@@ -31,7 +31,7 @@
 
     <!-- Title -->
     
-    <title>Shader - Eugene&#39;s Page</title>
+    <title>Eugene&#39;s Page</title>
 
     <!-- Custom CSS -->
     
@@ -127,34 +127,140 @@
 
 
 <!-- Main Content -->
-
-
 <section class="main clearfix">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2025/11/04/XR%E8%BD%AF%E4%BB%B6%E4%BB%A3%E7%A0%81/" class="previous" data-title="Untitled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2025/09/21/UE5%20GAS%20Learning%20Notes/" class="next" data-title="UE5 GAS Learning ..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Untitled</h1>
+        </div>
+    </section><!-- end top -->
+
     <section class="wrapper">
-        <div class="content archives">
+        <div class="content">
+
+            <!-- Gallery -->
             
-                <div class="archive-title">Shader</div>
+
+            <!-- Content -->
+            <h3 id="建立基本的工程"><a href="#建立基本的工程" class="headerlink" title="建立基本的工程"></a>建立基本的工程</h3><h4 id="进入工程的设置"><a href="#进入工程的设置" class="headerlink" title="进入工程的设置"></a>进入工程的设置</h4><div align="center"><img src="https://s2.loli.net/2025/10/10/knatfO9CcYjvASd.png" alt="image-20251009155003718" style="zoom: 20%;" /></div>
+
+<p>在Composer的开始设置中，主要考虑输入的内容（左边的输入设置），这个是实景的拍摄相机。输出视频的大小（右边的输出设置），这个是最终输出画面的设置。以及下面的UE渲染设置。</p>
+<h4 id="节点设置"><a href="#节点设置" class="headerlink" title="节点设置"></a>节点设置</h4><div align="center"><img src="https://s2.loli.net/2025/10/10/T4rdGiu85asXlDe.png" alt="image-20251009161750537" style="zoom: 20%;" /></div>
+
+<ol>
+<li>VirtualCam节点：工程里添加一个镜头，如图连线。</li>
+<li>主节点：里面添加镜头和工程，并使用Live模式。</li>
+<li>Green：添加测试用到视频素材，这里可以使用一个绿幕素材，Aximmetry会自动对其进行抠像。</li>
+<li>Camera Tracking：相机追踪节点，这里面的选项待会儿要<u>填写上AximmetryEye</u></li>
+</ol>
+<p>完成之后点击Composer上面的Play按钮，且让工程在编辑器状态下运行起来，就会有合成的画面了。</p>
+<h4 id="设置UE内容Aximmetry（方案1）"><a href="#设置UE内容Aximmetry（方案1）" class="headerlink" title="设置UE内容Aximmetry（方案1）"></a>设置UE内容Aximmetry（方案1）</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/7NWYjuvm6zro2ng.png" alt="image-20251011142232445" style="zoom: 20%;" /></div>
+
+<p>在场景中添加相机。</p>
+<h4 id="预览画面设置UE（方案2）"><a href="#预览画面设置UE（方案2）" class="headerlink" title="预览画面设置UE（方案2）"></a>预览画面设置UE（方案2）</h4><p>本插件主要实现：</p>
+<ol>
+<li>接入绿幕图像</li>
+<li>绿幕一直朝向摄影机</li>
+<li>相机的多机位切换及多机位运动</li>
+<li>控制对应的屏幕全屏显示</li>
+</ol>
+<h5 id="接入绿幕图像"><a href="#接入绿幕图像" class="headerlink" title="接入绿幕图像"></a>接入绿幕图像</h5><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104155838931.png" alt="image-20251104155838931" style="zoom: 25%;" />
+
+<p>新建一个场景，并新建MediaPlate到场景中。</p>
+<p>导入绿幕视频（可以直接把UE支持的格式的视频拖拽到UE的编辑器面板里）并连接MediaPlate。</p>
+<img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104160039501.png" alt="image-20251104160039501" style="zoom:25%;" />
+
+<p>修改绿幕材质（直接把MediaPlate的材质复制出来一份到本地），并新增一个MF_ChromKeyer，并按照如图所示进行修改材质的节点，然后将复制出来的材质赋予MediaPlate。</p>
+<img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104160012519.png" alt="image-20251104160012519" style="zoom:25%;" />
+
+<p>修改子材质，对抠像的内容选择绿色的部分。保存，即可完成抠像，这里暂时使用一个临时的视频素材，正式使用的时候，这里可以使用一个采集卡接入的视频流。</p>
+<img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104160147691.png" alt="image-20251104160147691" style="zoom:25%;" />
+
+<p>截止到这里，我们已经可以在场景中显示一个抠像的Plate了。</p>
+<p>但是这样的Level无法保存下来。离开场景之后MediaPlate里面的素材会丢。</p>
+<p>所以我们还要完善一下材质：<br><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104165145468.png" alt="image-20251104165145468" style="zoom:25%;" /></p>
+<p>新建一个MediaPlayer，将里面播放的内容添加为刚刚导入的绿幕视频文件。</p>
+<img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104165246306.png" alt="image-20251104165246306" style="zoom:25%;" />
+
+<p>新建一个MediaTexture，里面的媒体指定为刚刚新建的MediaPlayer。</p>
+<img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104165327820.png" alt="image-20251104165327820" style="zoom:25%;" />
+
+<p>然后把MediaTexture拖动到MediaPlate的材质里面，并修改输入源。保存之后，MediaPlate就正常了。<br>至此，我们已经完成了绿幕接入这一项。</p>
+<h5 id="绿幕一直朝向摄影机"><a href="#绿幕一直朝向摄影机" class="headerlink" title="绿幕一直朝向摄影机"></a>绿幕一直朝向摄影机</h5><p>但是我们会发现一个问题，当我们切换不同相机的视角的时候，所以需要设置相机的摄影机朝向。</p>
+<img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104171602887.png" alt="image-20251104171602887" style="zoom:15%;" />
+
+<img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104172150884.png" alt="image-20251104172150884" style="zoom:25%;" />
+
+<p>否则就会出现这种明显的片的形式。</p>
+<h5 id="相机的多机位切换及多机位运动"><a href="#相机的多机位切换及多机位运动" class="headerlink" title="相机的多机位切换及多机位运动"></a>相机的多机位切换及多机位运动</h5><p>因为我们是直接控制UE里的摄影机器，所以不管是在Play状态下还是在Editor状态下，都可以直接依靠UE的Sequence功能实现镜头的运动。但是切换并不能很好的实现。所以可以用我的软件实现快速的镜头切换。<br><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104174529386.png" alt="image-20251104174529386" style="zoom:33%;" /></p>
+<p>在运行时，可以点击这个控制台，来操作相机进行切换。</p>
+<h5 id="控制对应的屏幕全屏显示"><a href="#控制对应的屏幕全屏显示" class="headerlink" title="控制对应的屏幕全屏显示"></a>控制对应的屏幕全屏显示</h5><p><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251104174853388.png" alt="image-20251104174853388"></p>
+<p>选择需要把画面渲染到的屏幕，然后选择渲染分辨率，对画面进行全屏渲染。然后直播的时候，可以用OBS采集对应的窗口画面，进行直播。</p>
+<p>于是我们就绕开了Aximmetry及其引擎，在UE中进行合成和渲染，并且也方便使用开源的UE及其周边子插件，而不是被Aximmetry的特殊版本引擎所限制。</p>
+<h3 id="项目扩展设置"><a href="#项目扩展设置" class="headerlink" title="项目扩展设置"></a>项目扩展设置</h3><h4 id="手动设置"><a href="#手动设置" class="headerlink" title="手动设置"></a>手动设置</h4><div align="center"><img src="https://s2.loli.net/2025/10/10/PUwAjTpJatG6O9s.png" alt="image-20250930144118468" style="zoom: 20%;" /></div>
+
+<p>在这里可以用来设置相机的运动属性等信息。A和B代表着起始点和最终点。点击最左边的按钮可以让相机运动起来。</p>
+<p>点击“摄影机&#x2F;渲染设置”的编辑操作，可以在Aximmetry的渲染出来的窗口画面里，直接拖动相机位置。使用↑↓←→按钮调整相机坐标。</p>
+<h4 id="Iphone相机跟踪"><a href="#Iphone相机跟踪" class="headerlink" title="Iphone相机跟踪"></a>Iphone相机跟踪</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/radVntHOELqgh2b.png" alt="image-20251013114229527" style="zoom: 20%;" /> <img src="https://s2.loli.net/2025/10/27/DR1TGPCjvgM3nqu.png" alt="image-20251013114601929" style="zoom: 20%;" /></div>
+
+<p>在AppStore（IOS）下载Aximmetry Eye这个软件。然后通过网线<strong>有线连接</strong>（重点，无线我测试有问题），最好套上一个散热器（不然，一会儿手机就烫得不行然后断连了，然后数据飘逸了）。然后在连接的时候，选择发送Tracking Data（如图）即可（因为实际上我们只需要摄影机姿态数据）。连接完成之后，就可以在Flow页面Camera Tracking的节点细节面板里面看到手机这个选项了。</p>
+<div align="center"><img src="https://s2.loli.net/2025/10/27/Vc49YvN7KrCqOuP.png" alt="image-20251013203732954" style="zoom: 20%;" /></div>
+
+<p><u>每次初始化的时候Iphone所在的位置以及轴向</u>，就会被当作场景的中心点。</p>
+<ul>
+<li>请参看参考资料，部分有视频。</li>
+</ul>
+<h4 id="相机的FOV设定"><a href="#相机的FOV设定" class="headerlink" title="相机的FOV设定"></a>相机的FOV设定</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/iSkpaB3lJKqGV2f.png" alt="image-20251013202543178" style="zoom: 20%;" /></div>
+
+<p>FOV也可以进行手动标定，一般相机上的镜头标尺不是很准。</p>
+<p>所以需要一些精确的标定。</p>
+<p>可以在合成画面中，左右&#x2F;上下横移：如果虚拟旋转速度比真实的快，那么需要减小Zoom、反之亦然。</p>
+<h4 id="Iphone外参动标定"><a href="#Iphone外参动标定" class="headerlink" title="Iphone外参动标定"></a>Iphone外参动标定</h4><div align="center"><img src="https://s2.loli.net/2025/10/27/X8FjOHlqyeSdKvx.png" alt="image-20251027113433462" style="zoom: 20%;" /></div>
+
+<p>首先在相机的上方增加增加一个Actor物体，命名为CameraLocation。</p>
+<p>Aximmetry的逻辑是 相机生成在原点 然后+-手机Aximmetry Eye上的偏移值，就是相机在运行时候的位置。</p>
+<p>所以需要在CameraLocation，修改其位置，至实际上物理相机距离中心原点的位置。</p>
+
+
+            <!-- Tags -->
             
-            
-            
-                <div class="archive-year">
-                    <h2 class="year-title">2025</h2>
-                    <ul class="archive-list">
-                        
-                            <li class="archive-item">
-    <span class="archive-date">2025-08-01</span>
-    <a href="/2025/08/01/Shader Learning Note/">Shader Learning Notes</a>
-</li>
-                        
-                    </ul>
-                </div>
-            
+
+
+<div class="tags">
+    
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
         </div><!-- end content -->
     </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
 </section><!-- end main -->
-
-
-
 
 <!-- After footer scripts -->
 

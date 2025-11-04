@@ -130,6 +130,28 @@
 <section class="main clearfix">
     
         <div class="work">
+    <a href="/2025/11/04/XR软件代码/">
+        <img src="/img/default_cover_index.jpg" class="media" alt=""/>
+        <div class="caption">
+            <div class="work_title">
+                <h1>Untitled</h1>
+            </div>
+        </div>
+    </a>
+</div>
+    
+        <div class="work">
+    <a href="/2025/11/04/Aximmetry - 副本/">
+        <img src="/img/default_cover_index.jpg" class="media" alt=""/>
+        <div class="caption">
+            <div class="work_title">
+                <h1>Untitled</h1>
+            </div>
+        </div>
+    </a>
+</div>
+    
+        <div class="work">
     <a href="/2025/09/21/UE5 GAS Learning Notes/">
         <img src="https://s2.loli.net/2025/09/13/vlTKo196wnDypC2.png" class="media" alt=""/>
         <div class="caption">
@@ -226,6 +248,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const actualHeight = codeContent.scrollHeight;
             const maxHeight = 400; // Same as CSS max-height
             
+            // Create button container and copy button for all code blocks
+            const buttonsContainer = document.createElement('div');
+            buttonsContainer.className = 'code-buttons';
+            
+            // Create copy button (for all code blocks)
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-code-button';
+            copyButton.textContent = '复制代码';
+            copyButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                copyCodeToClipboard(codeContent, copyButton);
+            });
+            buttonsContainer.appendChild(copyButton);
+
             // Only add expansion if content is taller than max height
             if (actualHeight > maxHeight) {
                 // Wrap the code block in a container
@@ -233,13 +270,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.className = 'code-block-container collapsed';
                 codeBlock.parentNode.insertBefore(container, codeBlock);
                 container.appendChild(codeBlock);
-                
+
                 // Create expand button
                 const expandButton = document.createElement('button');
                 expandButton.className = 'expand-button';
                 expandButton.textContent = '展开代码';
-                container.appendChild(expandButton);
-                
+                buttonsContainer.appendChild(expandButton);
+
+                // Add buttons container to the wrapper
+                container.appendChild(buttonsContainer);
+
                 // Add click handler
                 expandButton.addEventListener('click', function() {
                     if (container.classList.contains('collapsed')) {
@@ -247,6 +287,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         showFullscreenCode(codeBlock, expandButton);
                     }
                 });
+            } else {
+                // For code blocks that don't need expansion, just add copy button
+                const container = document.createElement('div');
+                container.className = 'code-block-container';
+                codeBlock.parentNode.insertBefore(container, codeBlock);
+                container.appendChild(codeBlock);
+                container.appendChild(buttonsContainer);
             }
         });
     }

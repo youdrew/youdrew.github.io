@@ -139,7 +139,7 @@
 
     <ul class="btn clearfix">
         
-        <li><a class="previous disabled"></a></li>
+        <li><a href="/2025/11/04/Aximmetry%20-%20%E5%89%AF%E6%9C%AC/" class="previous" data-title="Untitled"></a></li>
         
         <li><a href="/" class="grid" data-title="Portfolio"></a></li>
         
@@ -269,15 +269,15 @@ graph TD
 </div>
 
 <p>byClass一次只能Activate一个GA，byTag可以Activate任意多个GA，配合Tag容器使用。</p>
-<p>如果使用EnhancedInputAction插件来管理输入，要注意在某些设置下trigger会每帧都进行输出（本人测试环境为4.27，UE5似乎有一些改动。古代山谷项目就使用了新版输入插件和GAS系统，可以看一看实现方法）。</p>
+<p>如果使用EnhancedInputAction插件来管理输入，要注意在某些设置下trigger会每帧都进行输出（本人测试环境为4.27，UE5似乎有一些改动。<br>1.62GB<br>古代山谷项目就使用了新版输入插件和GAS系统，可以看一看实现方法）。</p>
 <p>只要能获取ASC，就可以在任何地方调用GA，比如行为树Task蓝图，甚至在GA蓝图中调用其他GA。</p>
 <h5 id="被动调用"><a href="#被动调用" class="headerlink" title="被动调用"></a>被动调用</h5><p>Trigger可以理解为一个Tag，当ASC组件收到一个Trigger时，就会自动调用所有拥有该Trigger的GA。</p>
 <p>Trigger的Tag在GA的details面板中设置。</p>
 <div style="text-align: center;">
   <img src="https://pic2.zhimg.com/v2-9fdb393dae4753b3539245b335c3a531_1440w.jpg" alt="img" width="50%" />
 </div>
-Trigger的触发方式有三种，分别是：
 
+<p>Trigger的触发方式有三种，分别是：</p>
 <ul>
 <li>Gameplay Event: 当Owner收到一个带有Tag的Gameplay Event（<strong>不是Gameplay Effect的GE！</strong>）时<strong>调用一次</strong>GA，此时Owner<strong>不会拥有对应的Tag</strong>。</li>
 <li>Owner Tag Added: 当Owner<strong>获取对应Tag</strong>的时候<strong>调用一次</strong>GA。</li>
@@ -294,11 +294,28 @@ Trigger的触发方式有三种，分别是：
 <li><u>GE相当于一个可配置的数据表</u>，不可以添加逻辑。开发者创建一个UGameplayEffect的派生蓝图，就可以根据需求制作想要的效果。</li>
 <li>GE是纯蓝图</li>
 </ul>
-<h3 id="GT：if技能改变的条件？"><a href="#GT：if技能改变的条件？" class="headerlink" title="GT：if技能改变的条件？"></a>GT：if技能改变的条件？</h3><p>FGameplayTags是一种<u>层级标签</u>，如Parent.Child.GrandChild。<br>通过GameplayTagManager进行注册。<br>替代了原来的Bool，或Enum的结构，可以在玩法设计中更高效的标记对象的行为或状态。<br>我理解是一个在Actor下的Json。方便执行一些复杂的状态。</p>
+<h3 id="GT：if技能改变的条件？"><a href="#GT：if技能改变的条件？" class="headerlink" title="GT：if技能改变的条件？"></a>GT：if技能改变的条件？</h3><p>FGameplayTags是一种层级标签，如Parent.Child.GrandChild。<br>通过GameplayTagManager进行注册。<br>替代了原来的Bool，或Enum的结构，可以在玩法设计中更高效的<strong>标记对象的行为或状态</strong>（比如一个灼烧效果，GE完成之后，便可以取消标签）。<br>我理解是一个在Actor下的Json。</p>
 <ul>
 <li>Tag的<strong>层级关系</strong>也需要合理设计，到了后期修改成本比较大。</li>
 </ul>
 <h3 id="Attribute-Set"><a href="#Attribute-Set" class="headerlink" title="Attribute Set"></a>Attribute Set</h3><p>负责定义和持有属性，并且管理属性的<u>变化</u>，包括<u>网络同步</u>。<br>需要在Actor中被添加为成员变量，并注册到ASC（C++）。<br>一个ASC可以拥有一个或多个（不同的）AttributeSet，因此可以角色共享一个很大的Attribute Set，也可以每个角色按需添加Attribute Set。<br>可以在属性变化前（PreAttributeChange）后（PostGameplayEffectExecute）处理相关逻辑，可以通过委托的方式绑定属性变化。</p>
+<h3 id="Player-State"><a href="#Player-State" class="headerlink" title="Player State"></a>Player State</h3><div style="text-align: center;">
+  <img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251103112836791.png" alt="Player State 架构示意图" width="50%" />
+</div>
+PlayerState 是 Unreal Engine 中用于存储玩家相关信息的特殊 Actor 类。在多人游戏中，PlayerState 会自动在服务器和所有客户端之间复制，非常适合存储需要跨网络同步的玩家数据。
+
+<p>在 GAS 系统中，<u>ASC 可以选择挂载在 PlayerState 上而不是 Character 上</u>。这样做的好处是：</p>
+<ul>
+<li><strong>持久性</strong>：当角色死亡或重生时，PlayerState 依然存在，技能和属性数据不会丢失</li>
+<li><strong>网络复制</strong>：PlayerState 天然支持网络复制，适合多人游戏场景</li>
+<li><strong>UI 访问</strong>：UI 可以更方便地访问玩家的技能和属性信息，无需依赖具体的 Character 实例</li>
+<li><strong>观察者模式</strong>：即使玩家处于观察者状态（没有 Character），也能保持技能系统的状态</li>
+</ul>
+<p>常见的做法是：</p>
+<ul>
+<li><strong>玩家控制的角色</strong>：ASC 放在 PlayerState 上</li>
+<li><strong>AI 控制的角色</strong>：ASC 直接放在 Character 上</li>
+</ul>
 <h3 id="组件总结"><a href="#组件总结" class="headerlink" title="组件总结"></a>组件总结</h3><p>Visual：技能的视觉效果？GameplayCue<br>Async：技能的长时行动？(异步)GameplayTask<br>Send：技能的消息事件？GamePplayEvent<br>这俩是同一个东西</p>
 <h2 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h2><h3 id="开启插件"><a href="#开启插件" class="headerlink" title="开启插件"></a>开启插件</h3><div style="text-align: center;">
   <img src="https://s2.loli.net/2025/10/29/PxXeVshqdbliFYQ.png" alt="image-20251027203033649" width="50%" />
@@ -371,10 +388,16 @@ classDiagram
 
 <p>赋予GA的方式有很多，比如在需要的蓝图中调用<u>Give Ability</u>节点。还可以使用GE赋予GA。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X5411V7jh/">官方教学视频</a>:我看着这个视频作为最初的入门</li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486808688">知乎GAS系统快速入门</a></li>
-<li><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/gameplay-ability-system-for-unreal-engine">Unreal官方的GAS讲解</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vj4vzkELp?spm_id_from=333.788.player.switch&vd_source=60b376a57ab956cf81ad81ef20747a92&p=14">关于GA的讲解</a>：别忘了可以点开B站的AI翻译</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1X5411V7jh/">官方教学视频</a>:我看着这个视频作为最初的入门</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486808688">知乎GAS系统快速入门</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/gameplay-ability-system-for-unreal-engine">Unreal官方的GAS讲解</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vj4vzkELp?spm_id_from=333.788.player.switch&vd_source=60b376a57ab956cf81ad81ef20747a92&p=14">关于GA的讲解</a>：别忘了可以点开B站的AI翻译</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Nv42127HS">一个很不错的关于</a>GAS系统实操讲解</p>
+</li>
 </ol>
 
 
@@ -464,6 +487,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const actualHeight = codeContent.scrollHeight;
             const maxHeight = 400; // Same as CSS max-height
             
+            // Create button container and copy button for all code blocks
+            const buttonsContainer = document.createElement('div');
+            buttonsContainer.className = 'code-buttons';
+            
+            // Create copy button (for all code blocks)
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-code-button';
+            copyButton.textContent = '复制代码';
+            copyButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                copyCodeToClipboard(codeContent, copyButton);
+            });
+            buttonsContainer.appendChild(copyButton);
+
             // Only add expansion if content is taller than max height
             if (actualHeight > maxHeight) {
                 // Wrap the code block in a container
@@ -471,13 +509,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.className = 'code-block-container collapsed';
                 codeBlock.parentNode.insertBefore(container, codeBlock);
                 container.appendChild(codeBlock);
-                
+
                 // Create expand button
                 const expandButton = document.createElement('button');
                 expandButton.className = 'expand-button';
                 expandButton.textContent = '展开代码';
-                container.appendChild(expandButton);
-                
+                buttonsContainer.appendChild(expandButton);
+
+                // Add buttons container to the wrapper
+                container.appendChild(buttonsContainer);
+
                 // Add click handler
                 expandButton.addEventListener('click', function() {
                     if (container.classList.contains('collapsed')) {
@@ -485,6 +526,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         showFullscreenCode(codeBlock, expandButton);
                     }
                 });
+            } else {
+                // For code blocks that don't need expansion, just add copy button
+                const container = document.createElement('div');
+                container.className = 'code-block-container';
+                codeBlock.parentNode.insertBefore(container, codeBlock);
+                container.appendChild(codeBlock);
+                container.appendChild(buttonsContainer);
             }
         });
     }
