@@ -55,10 +55,13 @@ body{
 header ul.social li a,
 .main .work a .caption,
 header nav ul li a{
+    transition: padding-left 0.3s ease-in-out;
     transition:all .1s linear;
     -webkit-transition:all .1s linear;
-    -moz-transition:all .1s linear;
-    -o-transition:all .1s linear;
+/* 当侧边栏隐藏时调整主内容区域 */
+header:not(.show_menu) ~ .main {
+    padding-left: 50px;
+}
 }
 
 h1, h2, h3, h4, h5 ,h6{
@@ -188,6 +191,9 @@ h1, h2, h3, h4, h5, h6          { font-weight: bolder }
         font-family: 'raleway-regular', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         color: #454545;
         font-size: 1.5em;
+        letter-spacing: 0.20em;
+        white-space: nowrap;
+        display: inline-block;
         font-weight: normal;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -243,59 +249,83 @@ h1, h2, h3, h4, h5, h6          { font-weight: bolder }
 
 
     header ul.social li a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
+        color: #565656;
+        background: transparent;
+        position: relative;
+    }
+
+    header ul.social li a::before{
+        content: "";
         display: block;
-        width: 30px;
-        height: 30px;
-        background: url('../img/sm.png') no-repeat;
-        background-position: 0 0;
+        width: 22px;
+        height: 22px;
+        background-color: currentColor;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        -webkit-mask-size: contain;
+        transition: transform 0.2s ease;
     }
 
 
-    header ul.social li a:hover{
-        background: url('../img/sm_hover.png') no-repeat;
+    header ul.social li a:hover,
+    header ul.social li a:focus{
+        color: #0a84ff;
+        border-color: #0a84ff;
     }
 
 
-
-    header ul.social li a.fb,
-    header ul.social li a.fb:hover{
-        background-position: 0 0;
+    header ul.social li a:hover::before,
+    header ul.social li a:focus::before{
+        transform: scale(1.1);
     }
 
 
-    header ul.social li a.google,
-    header ul.social li a.google:hover{
-        background-position: -31px 0;
+    header ul.social li a.behance::before{
+        mask-image: url('../img/social/icon-bilibili.svg');
+        -webkit-mask-image: url('../img/social/icon-bilibili.svg');
+    }
+
+
+    header ul.social li a.google::before{
+        mask-image: url('../img/social/icon-email.svg');
+        -webkit-mask-image: url('../img/social/icon-email.svg');
     }
 
     header ul.social li a.behance,
-    header ul.social li a.behance:hover{
-        background-position: -62px 0;
-    }
-
-    header ul.social li a.twitter,
-    header ul.social li a.twitter:hover{
-        background-position: -93px 0;
-    }
-
+    header ul.social li a.google,
     header ul.social li a.dribble,
-    header ul.social li a.dribble:hover{
-        background-position: -124px 0;
-    }
-
     header ul.social li a.rss,
-    header ul.social li a.rss:hover{
-        background-position: -155px 0;
+    header ul.social li a.instagram{
+        background: transparent;
     }
 
-    header ul.social li a.instagram,
-    header ul.social li a.instagram:hover{
-        background-position: -186px 0;
+    header ul.social li a.dribble::before{
+        mask-image: url('../img/social/icon-douban.svg');
+        -webkit-mask-image: url('../img/social/icon-douban.svg');
     }
 
-    header ul.social li a.youtube,
-    header ul.social li a.youtube:hover{
-        background-position: -217px 0;
+    header ul.social li a.rss::before{
+        mask-image: url('../img/social/icon-rss.svg');
+        -webkit-mask-image: url('../img/social/icon-rss.svg');
+    }
+
+    header ul.social li a.instagram::before{
+        mask-image: url('../img/social/icon-instagram.svg');
+        -webkit-mask-image: url('../img/social/icon-instagram.svg');
+    }
+
+    header ul.social li a.youtube::before{
+        mask-image: none;
     }
 
     header .rights p{
@@ -359,14 +389,17 @@ header:not(.show_menu) ~ .main {
 /*  Home/portfolio  */
 .main .work{
     display: block;
-    /* 留出右侧与下方的间隔（30px）并防止换行溢出 */
-    width: calc(25% - 30px);
+    width: calc(25% - 0.75px);
     float: left;
     position: relative;
     overflow: hidden;
     margin-right: 1px;
     margin-bottom: 1px;
-    box-sizing: border-box; /* 确保内外距按预期计算 */
+    box-sizing: border-box;
+}
+
+.main .work:nth-of-type(4n){
+    margin-right: 0;
 }
 
 .main .work::before {
@@ -399,7 +432,6 @@ header:not(.show_menu) ~ .main {
     width: 100%;
     height: 60px;
     text-align: center;
-    vertical-align: middle;
     overflow: hidden;
     float: left;
     position: relative;
@@ -965,6 +997,7 @@ header:not(.show_menu) ~ .main {
     width: 280px;
     min-width: 200px;
     max-width: 600px;
+    height: 360px;
     min-height: 150px;
     max-height: 80vh;
     background: #fff;
@@ -2122,15 +2155,15 @@ figure.highlight.yml .number,
 }
 
 .code-block-container.collapsed figure.highlight {
-    max-height: 400px;
-    overflow: hidden;
+    max-height: none;
+    overflow: visible;
     position: relative;
     margin: 0; /* Remove default margin to prevent double spacing */
 }
 
 .code-block-container.collapsed figure.highlight pre.code {
     margin: 0;
-    padding: 15px;
+    padding: 15px 15px 60px 15px;
     max-height: 400px;
     overflow: auto;
     background-color: #f7f8f8;
@@ -2240,29 +2273,40 @@ figure.highlight {
 
 .code-fullscreen-content figure.highlight {
     margin: 0 !important;
-    flex: 1;
-    max-height: none !important;
-    overflow: hidden !important;
+    flex: 1 1 auto;
+    height: 100%;
+    max-height: 100% !important;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    min-height: 0; /* 重要：允许flex子项收缩 */
+    min-height: 0; /* 允许flex子项收缩 */
 }
 
 .code-fullscreen-content figure.highlight pre.code {
+    display: block;
     flex: 1;
-    max-height: none !important;
+    height: 100%;
+    max-height: 100%;
     margin: 0;
     padding: 20px;
-    overflow-y: scroll !important;
-    overflow-x: auto !important;
+    overflow-y: auto;
+    overflow-x: auto;
     background-color: #f7f8f8;
     font-family: Courier New, Courier, monospace;
     line-height: 1.3em;
     border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* 处理嵌套pre的情况 - 让内层pre根据内容撑开 */
+.code-fullscreen-content figure.highlight pre.code > pre {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: transparent;
     white-space: pre-wrap;
-    word-break: break-all;
-    min-height: 0; /* 允许flex item收缩 */
+    word-break: break-word;
+    min-width: 100%;
 }
 
 /* 确保滚动条始终可见且美观 */

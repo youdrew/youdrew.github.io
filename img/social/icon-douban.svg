@@ -1,0 +1,18 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Douban '豆' glyph: top strokes, enclosure, mid bar, bottom bar, two legs -->
+  <g stroke="#2E963D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top horizontal strokes -->
+    <path d="M8 10h32" />
+    <path d="M16 16h16" />
+    <!-- Vertical enclosure (stops above bottom bar) -->
+    <path d="M16 16v12" />
+    <path d="M32 16v12" />
+    <!-- Middle horizontal -->
+    <path d="M16 28h16" />
+    <!-- Bottom horizontal at true base -->
+    <path d="M8 38h32" />
+    <!-- Two short legs descending below bottom bar -->
+    <path d="M20 32v4" />
+    <path d="M28 32v4" />
+  </g>
+</svg>

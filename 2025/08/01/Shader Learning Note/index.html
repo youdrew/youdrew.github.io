@@ -10,7 +10,9 @@
 
     <!--Description-->
     
-        <meta name="description" content="This is a space where I can share my thoughts and works with freely.">
+        <meta name="description" content="Unreal Shader学习安装及基础概念知乎 《Shader从入门到放弃》 在VS中可以安装ShaderToy来观测GLSL👆这个文字教程也是很不错的
+Unreal 5.0 材质中添加自定义 Shader 代码  在UE中需要设置Shder文件的位置
+&amp;lt;img src&amp;#x3D;”htt">
     
 
     <!--Author-->
@@ -72,17 +74,24 @@
         <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     
 
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-<body>
+
+<body class="layout-post path-2025-08-01-Shader-Learning-Note-">
 
 <!-- Menu -->
 <!-- Navigation -->
 <header>
     <div class="logo">
         <a href="/">Eugene's Page</a>
-        <div class="subtitle">Filmmaker / Developer</div>
-        <div class="description">This is a space where I can share my thoughts and works with freely.</div>
+        <div class="subtitle"></div>
+        <div class="description"></div>
     </div><!-- end logo -->
 
     <div id="menu_icon"></div>
@@ -95,6 +104,10 @@
             
             <li>
                 <a href="/archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
             </li>
             
         </ul>
@@ -115,7 +128,7 @@
                 <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
             
             
-                <li><a href="/atom.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
             
         </ul><!-- end social -->
 
@@ -480,21 +493,33 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Clone the code block and remove any expansion restrictions
         const clonedBlock = codeBlock.cloneNode(true);
-        
-        // Remove any size restrictions from cloned block
-        clonedBlock.style.maxHeight = 'none';
-        clonedBlock.style.overflow = 'visible';
+        clonedBlock.style.height = '100%';
+        clonedBlock.style.maxHeight = '100%';
+        clonedBlock.style.flex = '1 1 auto';
+
+        // Remove any buttons that don't make sense inside the modal
+        const extraneousControls = clonedBlock.querySelectorAll('.code-buttons, .copy-code-button, .expand-button');
+        extraneousControls.forEach(function(el) {
+            el.parentNode && el.parentNode.removeChild(el);
+        });
         
         // Find and update the pre.code element in cloned block
         const clonedPre = clonedBlock.querySelector('pre.code');
         if (clonedPre) {
-            clonedPre.style.maxHeight = 'none';
             clonedPre.style.height = '100%';
-            clonedPre.style.overflowY = 'scroll';
+            clonedPre.style.maxHeight = '100%';
+            clonedPre.style.overflowY = 'auto';
             clonedPre.style.overflowX = 'auto';
-            clonedPre.style.minHeight = '0';
-            // 确保内容完全可见
+            clonedPre.style.boxSizing = 'border-box';
             clonedPre.scrollTop = 0;
+
+            const innerPre = clonedPre.querySelector('pre');
+            if (innerPre) {
+                innerPre.style.display = 'block';
+                innerPre.style.margin = '0';
+                innerPre.style.padding = '0';
+                innerPre.style.minWidth = '100%';
+            }
         }
         
         content.appendChild(clonedBlock);

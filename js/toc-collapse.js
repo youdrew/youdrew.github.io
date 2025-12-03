@@ -6,8 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = document.querySelector('.content');
         if (!content) return;
         
-        // 如果是Archives页面，不显示TOC
-        if (content.classList.contains('archives')) return;
+        const body = document.body;
+        const isArchivesPage = content.classList.contains('archives');
+        const isAboutPage = body.classList.contains('path-about-index-html') || body.classList.contains('layout-about');
+
+        // 如果是Archives页面或About页面，不显示TOC
+        if (isArchivesPage || isAboutPage) return;
         
         // 创建 TOC 容器
         const tocContainer = createTOCContainer();

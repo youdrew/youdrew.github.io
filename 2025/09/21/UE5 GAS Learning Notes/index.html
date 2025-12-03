@@ -10,7 +10,8 @@
 
     <!--Description-->
     
-        <meta name="description" content="This is a space where I can share my thoughts and works with freely.">
+        <meta name="description" content="Unreal GAS系统使用学习前置知识UE网络架构
+简介Gameplay Ability System，简称(GAS)是一个健壮的、高度可扩展的、gameplay框架,通常用于构建RPG、MOBA等游戏的完整战斗逻辑框架。通过GAS,可以快速地制作游戏中的主动&amp;#x2F;被动技能、各种效果buff">
     
 
     <!--Author-->
@@ -72,17 +73,24 @@
         <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     
 
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-<body>
+
+<body class="layout-post path-2025-09-21-UE5-GAS-Learning-Notes-">
 
 <!-- Menu -->
 <!-- Navigation -->
 <header>
     <div class="logo">
         <a href="/">Eugene's Page</a>
-        <div class="subtitle">Filmmaker / Developer</div>
-        <div class="description">This is a space where I can share my thoughts and works with freely.</div>
+        <div class="subtitle"></div>
+        <div class="description"></div>
     </div><!-- end logo -->
 
     <div id="menu_icon"></div>
@@ -95,6 +103,10 @@
             
             <li>
                 <a href="/archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
             </li>
             
         </ul>
@@ -115,7 +127,7 @@
                 <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
             
             
-                <li><a href="/atom.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
             
         </ul><!-- end social -->
 
@@ -296,7 +308,9 @@ graph TD
 <li>Owner Tag Present: 当Owner<strong>拥有Tag</strong>时调用GA，失去Tag时移除。</li>
 </ul>
 <p>一般使用第一种方法，并配合SendGameplayEventToActor节点使用，如下图所示。（这张图是很久以前截的，Tag建议以Event开头）</p>
-<img src="https://pica.zhimg.com/v2-0759f3f09591c5a808113d8841733b38_1440w.jpg" alt="img" style="zoom: 50%;" />
+<div style="text-align: center;">
+<img src="https://pica.zhimg.com/v2-0759f3f09591c5a808113d8841733b38_1440w.jpg" alt="img" style="zoom: 50%;" / width="50%" />
+</div>
 
 <p>受击效果的例子，发送一个Tag为Hit的Event给碰撞检测到的Actor</p>
 <p>使用Gameplay Event调用的好处是，可以传入数据（Payload），是除了Get Actor Info外的另一种信息传递方法。</p>
@@ -401,7 +415,10 @@ classDiagram
 
 <p>在官方的Lyra案例里面使用AbilitySet来储存一类Ability，通过加载来实现赋予。参看下文Unreal官方案例“赋予GA”部分。</p>
 <h2 id="Unreal官方案例"><a href="#Unreal官方案例" class="headerlink" title="Unreal官方案例"></a>Unreal官方案例</h2><p>UE中有一个非常不错的官方示例<a target="_blank" rel="noopener" href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/lyra-sample-game-in-unreal-engine?application_version=5.0">Lyra</a>里面展示了一个完整的GAS系统。</p>
-<h3 id="项目里的设置"><a href="#项目里的设置" class="headerlink" title="项目里的设置"></a>项目里的设置</h3><p><img src="https://s2.loli.net/2025/11/21/zWIduBsAxTriGkX.png" alt="image-20251111183652281"></p>
+<h3 id="项目里的设置"><a href="#项目里的设置" class="headerlink" title="项目里的设置"></a>项目里的设置</h3><div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/zWIduBsAxTriGkX.png" alt="image-20251111183652281" width="50%" />
+</div>
+
 <p>这个项目里开发者设置了一些调整选项，可以设定一些debug的参数。</p>
 <p>比如子弹射击停留时间，生成的bot的数量。</p>
 <h3 id="项目蓝图常见前缀标识"><a href="#项目蓝图常见前缀标识" class="headerlink" title="项目蓝图常见前缀标识"></a>项目蓝图常见前缀标识</h3><p><strong>WID_</strong><br>全称可理解为 Weapon Item Definition。<br>用途：武器类的“物品定义”蓝图资产，继承自 ULyraInventoryItemDefinition（你在代码里看到的基类）。<br><strong>ID_</strong><br>可理解为（Generic）Item Definition。<br>用途：非武器的一般物品定义（比如消耗品、弹药、包裹、可堆叠资源等）也继承 ULyraInventoryItemDefinition，用 ID_ 前缀区分与 WID_（武器专用）资产。<br><strong>B</strong>_<br>B_ 前缀在 Lyra 中通常代表一个 Blueprint 类资产（等同很多团队常用的 BP_，Lyra 项目里取了更短的 B_）。</p>
@@ -443,26 +460,45 @@ classDiagram
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UCLASS</span>(BlueprintType, Const)</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ULyraExperienceDefinition</span> : <span class="keyword">public</span> UPrimaryDataAsset</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditDefaultsOnly, Category = Gameplay)</span><br><span class="line">    TArray&lt;FString&gt; GameFeaturesToEnable;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditDefaultsOnly, Category=Gameplay)</span><br><span class="line">    TObjectPtr&lt;<span class="type">const</span> ULyraPawnData&gt; DefaultPawnData;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditDefaultsOnly, Instanced, Category=<span class="string">&quot;Actions&quot;</span>)</span><br><span class="line">    TArray&lt;TObjectPtr&lt;UGameFeatureAction&gt;&gt; Actions;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UPROPERTY</span>(EditDefaultsOnly, Category=Gameplay)</span><br><span class="line">    TArray&lt;TObjectPtr&lt;ULyraExperienceActionSet&gt;&gt; ActionSets;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>如图Lyra的结构。</p>
-<p><img src="https://s2.loli.net/2025/11/21/jlbEy7vf4z2D6xF.png" alt="image-20251111172739503"></p>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/jlbEy7vf4z2D6xF.png" alt="image-20251111172739503" width="50%" />
+</div>
+
 <p>继承自ULyraExperienceDefinition的：B_BasicShooterTestB_BasicShooterTest这个数据类里的Action分组里面，有需要授予的GA的DA表。</p>
 <p>比如：**AbilitySet_<strong>Elimination（下面那个） 和 HeroData_ShooterGame里面的</strong>AbilitySet_**ShooterHero。</p>
 <ul>
-<li><p>首先看AbilitySet_Elimination  DA表（它继承自LyraAbilitySet）。<br><img src="https://s2.loli.net/2025/11/21/khSfJeNB3I5Fvcq.png" alt="image-20251111171556976"></p>
-<p>打开这个AbilitySet_Elimination，里面包含两个GA。<br>GA_ShowLeaderboard_TDM用于按Tab显示计分板。<br>GA_AutoRespawn用于死亡复活，这两个GA与Character战斗无关，在没用Character时也能执行。</p>
-</li>
-<li><p>然后看AbilitySet_ShooterPistol DA表（储存在总表的HeroData_ShooterGame里面 它继承自ULyraPawnData）</p>
-<p><img src="https://s2.loli.net/2025/11/21/abXfUKiehOG3lHs.png" alt="image-20251111174500121"></p>
-<p><img src="https://s2.loli.net/2025/11/21/4Zt68goQNHmdsOk.png" alt="AbilitySet_ShooterHero"></p>
-<p>包含Character相关的GA，数量较多。比如GA_Hero_Jump实现了跳跃，GA_Emote实现了跳舞。</p>
-</li>
-<li><p>然后还有一个AbilitySet_ShooterPisto</p>
-<p><img src="https://s2.loli.net/2025/11/21/ls8hrwJVOjfkMZF.png" alt="image-20251111181356512"></p>
-<p>它不是定义在B_BasicShooterTestB_BasicShooterTest这张大表里面的。</p>
-<p>而是通过WID_Pistol被具体的蓝图调用。</p>
-</li>
+<li>首先看AbilitySet_Elimination  DA表（它继承自LyraAbilitySet）。</li>
 </ul>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/khSfJeNB3I5Fvcq.png" alt="image-20251111171556976" width="50%" />
+</div>
+
+<p>  打开这个AbilitySet_Elimination，里面包含两个GA。<br>  GA_ShowLeaderboard_TDM用于按Tab显示计分板。<br>  GA_AutoRespawn用于死亡复活，这两个GA与Character战斗无关，在没用Character时也能执行。</p>
+<ul>
+<li>然后看AbilitySet_ShooterPistol DA表（储存在总表的HeroData_ShooterGame里面 它继承自ULyraPawnData）</li>
+</ul>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/abXfUKiehOG3lHs.png" alt="image-20251111174500121" width="50%" />
+</div>
+
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/4Zt68goQNHmdsOk.png" alt="AbilitySet_ShooterHero" width="50%" />
+</div>
+
+<p>  包含Character相关的GA，数量较多。比如GA_Hero_Jump实现了跳跃，GA_Emote实现了跳舞。</p>
+<ul>
+<li>然后还有一个AbilitySet_ShooterPisto</li>
+</ul>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/ls8hrwJVOjfkMZF.png" alt="image-20251111181356512" width="50%" />
+</div>
+
+<p>  它不是定义在B_BasicShooterTestB_BasicShooterTest这张大表里面的。</p>
+<p>  而是通过WID_Pistol被具体的蓝图调用。</p>
 <p>然后对每个GA，调用UAbilitySystemComponent::GiveAbility函数进行赋予。</p>
-<img src="https://s2.loli.net/2025/11/21/Je2w7BSxbQEapTV.png" alt="image-20251111185235151" style="zoom:25%;" />
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/Je2w7BSxbQEapTV.png" alt="image-20251111185235151" style="zoom:25%;" / width="50%" />
+</div>
 
 <p>会在很多地方调用。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FGameplayAbilitySpecHandle <span class="title">UAbilitySystemComponent::GiveAbility</span><span class="params">(<span class="type">const</span> FGameplayAbilitySpec&amp; Spec)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">ABILITYLIST_SCOPE_LOCK</span>();</span><br><span class="line">    FGameplayAbilitySpec&amp; OwnedSpec = ActivatableAbilities.Items[ActivatableAbilities.Items.<span class="built_in">Add</span>(Spec)];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (OwnedSpec.Ability-&gt;<span class="built_in">GetInstancingPolicy</span>() == EGameplayAbilityInstancingPolicy::InstancedPerActor)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="comment">// Create the instance at creation time</span></span><br><span class="line">       <span class="built_in">CreateNewInstanceOfAbility</span>(OwnedSpec, Spec.Ability);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">OnGiveAbility</span>(OwnedSpec);</span><br><span class="line">    <span class="built_in">MarkAbilitySpecDirty</span>(OwnedSpec, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">UE_LOG</span>(LogAbilitySystem, Log, <span class="built_in">TEXT</span>(<span class="string">&quot;%s: GiveAbility %s [%s] Level: %d Source: %s&quot;</span>), *<span class="built_in">GetNameSafe</span>(<span class="built_in">GetOwner</span>()), *<span class="built_in">GetNameSafe</span>(Spec.Ability), *Spec.Handle.<span class="built_in">ToString</span>(), Spec.Level, *<span class="built_in">GetNameSafe</span>(Spec.SourceObject.<span class="built_in">Get</span>()));</span><br><span class="line">    <span class="built_in">UE_VLOG</span>(<span class="built_in">GetOwner</span>(), VLogAbilitySystem, Log, <span class="built_in">TEXT</span>(<span class="string">&quot;GiveAbility %s [%s] Level: %d Source: %s&quot;</span>), *<span class="built_in">GetNameSafe</span>(Spec.Ability), *Spec.Handle.<span class="built_in">ToString</span>(), Spec.Level, *<span class="built_in">GetNameSafe</span>(Spec.SourceObject.<span class="built_in">Get</span>()));</span><br><span class="line">    <span class="keyword">return</span> OwnedSpec.Handle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -479,18 +515,32 @@ classDiagram
 <li>首先是InputTag，它本身非GAS框架内的，是Lyra自己做的一套输入和GA的映射。InputTag在AbilitySet中指定</li>
 </ul>
 <p><img src="https://s2.loli.net/2025/11/21/DQgqibLETr14JHR.png" alt="image-20251111191635777">AbilitySet_ShooterPisto</p>
-<p><img src="https://s2.loli.net/2025/11/21/FAmWtpUSy94lQez.png" alt="image-20251111191708052"></p>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/FAmWtpUSy94lQez.png" alt="image-20251111191708052" width="50%" />
+</div>
+
 <p>AbilitySet_ShooterPistol </p>
-<p><img src="https://s2.loli.net/2025/11/21/1yWC6gVZHb38UPz.png" alt="image-20251111191718509"></p>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/1yWC6gVZHb38UPz.png" alt="image-20251111191718509" width="50%" />
+</div>
+
 <p>AbilitySet_ShooterPisto</p>
 <p>创建Spec时会把InputTag添加到其DynamicSpecSourceTags，DynamicSpecSourceTags是一个通用Tag容器。<br>该Tags在结构体FGameplayAbilitySpec里面，<u>也就是说，一个FGameplayAbilitySpec代表的是传递的一个Ability的能力，然后里面有很多DynamicAbilityTags</u>。</p>
 <p>注册的路径如下：</p>
-<p><img src="https://s2.loli.net/2025/11/21/AzSXP7UNWFsfot1.png" alt="image-20251111205815528"></p>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/AzSXP7UNWFsfot1.png" alt="image-20251111205815528" width="50%" />
+</div>
+
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">ULyraAbilitySet::GiveToAbilitySystem</span><span class="params">(ULyraAbilitySystemComponent* LyraASC, FLyraAbilitySet_GrantedHandles* OutGrantedHandles, UObject* SourceObject)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// Grant the attribute sets.</span></span><br><span class="line">    <span class="keyword">for</span> (int32 SetIndex = <span class="number">0</span>; SetIndex &lt; GrantedAttributes.<span class="built_in">Num</span>(); ++SetIndex)</span><br><span class="line">    &#123;</span><br><span class="line">		...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Grant the gameplay abilities.</span></span><br><span class="line">    <span class="keyword">for</span> (int32 AbilityIndex = <span class="number">0</span>; AbilityIndex &lt; GrantedGameplayAbilities.<span class="built_in">Num</span>(); ++AbilityIndex)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="type">const</span> FLyraAbilitySet_GameplayAbility&amp; AbilityToGrant = GrantedGameplayAbilities[AbilityIndex];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (!<span class="built_in">IsValid</span>(AbilityToGrant.Ability))</span><br><span class="line">       &#123;</span><br><span class="line">          <span class="built_in">UE_LOG</span>(LogLyraAbilitySystem, Error, <span class="built_in">TEXT</span>(<span class="string">&quot;GrantedGameplayAbilities[%d] on ability set [%s] is not valid.&quot;</span>), AbilityIndex, *<span class="built_in">GetNameSafe</span>(<span class="keyword">this</span>));</span><br><span class="line">          <span class="keyword">continue</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       ULyraGameplayAbility* AbilityCDO = AbilityToGrant.Ability-&gt;<span class="built_in">GetDefaultObject</span>&lt;ULyraGameplayAbility&gt;();</span><br><span class="line"></span><br><span class="line">       <span class="function">FGameplayAbilitySpec <span class="title">AbilitySpec</span><span class="params">(AbilityCDO, AbilityToGrant.AbilityLevel)</span></span>;</span><br><span class="line">       AbilitySpec.SourceObject = SourceObject;</span><br><span class="line">       AbilitySpec.<span class="built_in">GetDynamicSpecSourceTags</span>().<span class="built_in">AddTag</span>(AbilityToGrant.InputTag);</span><br><span class="line"></span><br><span class="line">       <span class="type">const</span> FGameplayAbilitySpecHandle AbilitySpecHandle = LyraASC-&gt;<span class="built_in">GiveAbility</span>(AbilitySpec);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (OutGrantedHandles)</span><br><span class="line">       &#123;</span><br><span class="line">          OutGrantedHandles-&gt;<span class="built_in">AddAbilitySpecHandle</span>(AbilitySpecHandle);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Grant the gameplay effects.</span></span><br><span class="line">    <span class="keyword">for</span> (int32 EffectIndex = <span class="number">0</span>; EffectIndex &lt; GrantedGameplayEffects.<span class="built_in">Num</span>(); ++EffectIndex)</span><br><span class="line">    &#123;</span><br><span class="line">		...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在授予ASC Ability的时候，将Tags Effect等信息一并传入。</p>
 <p>授予GA的逻辑，以上就是服务器初始化ASC并赋予GA的全部过程。</p>
-<p><img src="https://s2.loli.net/2025/11/21/4H9xKOcQBbezAFY.png" alt="image-20251111210326498"></p>
+<div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/4H9xKOcQBbezAFY.png" alt="image-20251111210326498" width="50%" />
+</div>
+
+
+
 <h4 id="同步客户端"><a href="#同步客户端" class="headerlink" title="同步客户端"></a>同步客户端</h4><h5 id="ASC"><a href="#ASC" class="headerlink" title="ASC"></a>ASC</h5><p>首先，ASC作为一个Component挂在PlayerState上，是可以同步的。</p>
 <p>由于AvatarActor是Character，因此OwnerActor和AvatarActor的最终设置，需要客户端的Character创建后才能执行。</p>
 <p>具体为Character创建后，触发LyraHeroComponent的加载资源流程，当加载完成并且客户端获取到PlayerState后，就把当前阶段设置为DataAvailabe，并最终设置OwnerActor和AvatarActor。</p>
@@ -506,12 +556,20 @@ classDiagram
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同步GA</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UAbilitySystemComponent::AddReplicatedInstancedAbility</span><span class="params">(UGameplayAbility* GameplayAbility)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="type">const</span> ELifetimeCondition LifetimeCondition = bReplicateAbilitiesToSimulatedProxies ? COND_None : COND_ReplayOrOwner;</span><br><span class="line">    <span class="built_in">AddReplicatedSubObject</span>(GameplayAbility, LifetimeCondition);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//SubObject同步</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">UActorComponent::AddReplicatedSubObject</span><span class="params">(UObject* SubObject, ELifetimeCondition NetCondition)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (AActor* MyOwner=<span class="built_in">GetOwner</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        MyOwner-&gt;<span class="built_in">AddActorComponentReplicatedSubObject</span>(<span class="keyword">this</span>, SubObject, NetCondition);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>同步到客户端后表现如下：</p>
-<p><img src="https://pic2.zhimg.com/v2-64548e8ebc3b26b89cb095f2c552d39d_1440w.jpg" alt="img"></p>
+<div style="text-align: center;">
+<img src="https://pic2.zhimg.com/v2-64548e8ebc3b26b89cb095f2c552d39d_1440w.jpg" alt="img" width="50%" />
+</div>
+
+
+
 <h2 id="常用调整命令行"><a href="#常用调整命令行" class="headerlink" title="常用调整命令行"></a>常用调整命令行</h2><p>ShowDebug AbilitySystem 展示Ability相关的内容</p>
 <h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><h3 id="GAS网络生成的BP需要考虑所有者"><a href="#GAS网络生成的BP需要考虑所有者" class="headerlink" title="GAS网络生成的BP需要考虑所有者"></a>GAS网络生成的BP需要考虑所有者</h3><p><img src="https://s2.loli.net/2025/11/21/YdyXqrBw7hKoGuT.png" alt="image-20251114160307855" style="zoom:25%;" /><img src="https://s2.loli.net/2025/11/21/KmIpqniL5s7ESuj.png" alt="image-20251114160401410" style="zoom: 33%;" /></p>
 <p>如果是在Server端生成的BP，一定要指定“Owner”，它意味着是这个生成的东西在各网络设备之间指定的所有者。<br>当这个所有者内部需要执行一个网络的Event的时候，它需要通知一个客户端，如果没有Owner，这个Event会被拒绝执行。</p>
 <h3 id="随机数问题"><a href="#随机数问题" class="headerlink" title="随机数问题"></a>随机数问题</h3><p>注意网络端和服务端生成随机数会不一样。</p>
-<h3 id="在GE里拿到“事件触发者”和“事件被影响者”"><a href="#在GE里拿到“事件触发者”和“事件被影响者”" class="headerlink" title="在GE里拿到“事件触发者”和“事件被影响者”"></a>在GE里拿到“事件触发者”和“事件被影响者”</h3><p><img src="https://s2.loli.net/2025/11/21/D9VA2s5EpevFXxL.png" alt="image-20251120172105945"></p>
+<h3 id="在GE里拿到“事件触发者”和“事件被影响者”"><a href="#在GE里拿到“事件触发者”和“事件被影响者”" class="headerlink" title="在GE里拿到“事件触发者”和“事件被影响者”"></a>在GE里拿到“事件触发者”和“事件被影响者”</h3><div style="text-align: center;">
+<img src="https://s2.loli.net/2025/11/21/D9VA2s5EpevFXxL.png" alt="image-20251120172105945" width="50%" />
+</div>
+
 <p>如上图，我有一个需求，投掷物。<br>需要给GE传递“投掷物这个物体”和“被撞的人”。<br>其中，在我这里，“被撞的人”是要执行的ASC的所有者（即这里的Instigator），在应用GE的时候必须提供。</p>
 <p>调用 BP_ApplyGameplayEffectToTarget 时，它内部会：</p>
 <ul>
@@ -696,21 +754,33 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Clone the code block and remove any expansion restrictions
         const clonedBlock = codeBlock.cloneNode(true);
-        
-        // Remove any size restrictions from cloned block
-        clonedBlock.style.maxHeight = 'none';
-        clonedBlock.style.overflow = 'visible';
+        clonedBlock.style.height = '100%';
+        clonedBlock.style.maxHeight = '100%';
+        clonedBlock.style.flex = '1 1 auto';
+
+        // Remove any buttons that don't make sense inside the modal
+        const extraneousControls = clonedBlock.querySelectorAll('.code-buttons, .copy-code-button, .expand-button');
+        extraneousControls.forEach(function(el) {
+            el.parentNode && el.parentNode.removeChild(el);
+        });
         
         // Find and update the pre.code element in cloned block
         const clonedPre = clonedBlock.querySelector('pre.code');
         if (clonedPre) {
-            clonedPre.style.maxHeight = 'none';
             clonedPre.style.height = '100%';
-            clonedPre.style.overflowY = 'scroll';
+            clonedPre.style.maxHeight = '100%';
+            clonedPre.style.overflowY = 'auto';
             clonedPre.style.overflowX = 'auto';
-            clonedPre.style.minHeight = '0';
-            // 确保内容完全可见
+            clonedPre.style.boxSizing = 'border-box';
             clonedPre.scrollTop = 0;
+
+            const innerPre = clonedPre.querySelector('pre');
+            if (innerPre) {
+                innerPre.style.display = 'block';
+                innerPre.style.margin = '0';
+                innerPre.style.padding = '0';
+                innerPre.style.minWidth = '100%';
+            }
         }
         
         content.appendChild(clonedBlock);
