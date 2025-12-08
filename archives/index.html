@@ -150,22 +150,22 @@
                         
                             <li class="archive-item">
     <span class="archive-date">2025-11-21</span>
-    <a href="/2025/11/21/Unreal RemoteControl Note/">Unreal RemoteControl Note</a>
+    <a href="/2025/11/21/Notes/Unreal RemoteControl Note/">Unreal RemoteControl Note</a>
 </li>
                         
                             <li class="archive-item">
     <span class="archive-date">2025-09-21</span>
-    <a href="/2025/09/21/UE5 GAS Learning Notes/">UE5 GAS Learning Notes</a>
+    <a href="/2025/09/21/Notes/UE5 GAS Learning Notes/">UE5 GAS Learning Notes</a>
 </li>
                         
                             <li class="archive-item">
     <span class="archive-date">2025-09-13</span>
-    <a href="/2025/09/13/Aximmetry/">Aximmetry Learning Notes</a>
+    <a href="/2025/09/13/Notes/Aximmetry/">Aximmetry Learning Notes</a>
 </li>
                         
                             <li class="archive-item">
     <span class="archive-date">2025-08-01</span>
-    <a href="/2025/08/01/Shader Learning Note/">Shader Learning Notes</a>
+    <a href="/2025/08/01/Notes/Shader Learning Note/">Shader Learning Notes</a>
 </li>
                         
                     </ul>
@@ -177,6 +177,11 @@
 
 
 
+
+<script>
+	window.UI_LANG = {"en":{"menu":{"home":"Home","archives":"Archives","about":"About"},"footer":{"copyright":"Copyright © %year% %author%","powered":"Powered by %hexo%","modified":"Modified based on %theme%"},"buttons":{"language":"EN / 中"}},"zh":{"menu":{"home":"首页","archives":"归档","about":"关于"},"footer":{"copyright":"版权 © %year% %author%","powered":"由 %hexo% 驱动","modified":"基于 %theme% 主题定制"},"buttons":{"language":"中 / EN"}}};
+	window.UI_DEFAULT_LANG = 'en';
+</script>
 
 <!-- After footer scripts -->
 
@@ -200,6 +205,9 @@
 
 
 <script src="/js/image-zoom.js"></script>
+
+
+<script src="/js/lang-toggle.js"></script>
 
 
 <!-- Gallery -->
@@ -297,11 +305,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = document.createElement('div');
         content.className = 'code-fullscreen-content';
         
-        // Clone the code block and remove any expansion restrictions
-        const clonedBlock = codeBlock.cloneNode(true);
-        clonedBlock.style.height = '100%';
-        clonedBlock.style.maxHeight = '100%';
-        clonedBlock.style.flex = '1 1 auto';
+        // Clone the closest code container (includes wrapper if present)
+        const sourceContainer = codeBlock.closest('.code-block-container');
+        const clonedBlock = (sourceContainer || codeBlock).cloneNode(true);
 
         // Remove any buttons that don't make sense inside the modal
         const extraneousControls = clonedBlock.querySelectorAll('.code-buttons, .copy-code-button, .expand-button');
@@ -309,25 +315,21 @@ document.addEventListener('DOMContentLoaded', function() {
             el.parentNode && el.parentNode.removeChild(el);
         });
         
-        // Find and update the pre.code element in cloned block
-        const clonedPre = clonedBlock.querySelector('pre.code');
-        if (clonedPre) {
-            clonedPre.style.height = '100%';
-            clonedPre.style.maxHeight = '100%';
-            clonedPre.style.overflowY = 'auto';
-            clonedPre.style.overflowX = 'auto';
-            clonedPre.style.boxSizing = 'border-box';
-            clonedPre.scrollTop = 0;
-
-            const innerPre = clonedPre.querySelector('pre');
-            if (innerPre) {
-                innerPre.style.display = 'block';
-                innerPre.style.margin = '0';
-                innerPre.style.padding = '0';
-                innerPre.style.minWidth = '100%';
-            }
+        // Ensure wrapper/container fills the modal and isn't marked as collapsed
+        const wrapper = clonedBlock.classList.contains('code-block-container')
+            ? clonedBlock
+            : clonedBlock.querySelector('.code-block-container');
+        if (wrapper) {
+            wrapper.classList.remove('collapsed');
+            wrapper.style.margin = '0';
         }
         
+        // Find and update the pre.code element in cloned block
+        const clonedPre = (wrapper || clonedBlock).querySelector('pre.code');
+        if (clonedPre) {
+            clonedPre.scrollTop = 0;
+        }
+
         content.appendChild(clonedBlock);
         
         // Create close button

@@ -10,19 +10,24 @@
 
     <!--Description-->
     
-        <meta name="description" content="虚幻5远程控制（RemoteControl）笔记基础介绍什么是？
-
-
-WebControl.StartServer
-启动网页服务器并开始在端口 30010 上聆听传入请求。
+        <meta name="description" content="蓝图代码质量检测
 
 
 
-WebControl.StopServer
-停止网页服务器，禁止再处理任何对虚幻编辑器实例的请求。
+工具类型
+代表工具 &amp;#x2F; 方案
+核心能力
+适用场景
 
 
-WebContr">
+
+UE 官方内置工具
+Blueprint Analyzer（UE4.26+）
+统计蓝图圈复杂度、节点数量、分支深度，检测冗余节点 &amp;#x2F; 无效连线，支持导出分析报告
+基础复杂度检测，无需额外安装
+
+
+UE ">
     
 
     <!--Author-->
@@ -31,8 +36,6 @@ WebContr">
     
 
     <!--Open Graph Title-->
-    
-        <meta property="og:title" content="Unreal RemoteControl Note"/>
     
 
     <!--Open Graph Site Name-->
@@ -45,7 +48,7 @@ WebContr">
 
     <!-- Title -->
     
-    <title>Unreal RemoteControl Note - Eugene&#39;s Page</title>
+    <title>Eugene&#39;s Page</title>
 
     <!-- Custom CSS -->
     
@@ -93,7 +96,7 @@ WebContr">
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
-<body class="layout-post path-2025-11-21-Unreal-RemoteControl-Note-">
+<body class="layout-post path-2025-11-24-Learning-CodeReview-">
 
 <!-- Menu -->
 <!-- Navigation -->
@@ -154,7 +157,7 @@ WebContr">
 <!-- Main Content -->
 <section class="main clearfix">
 
-    <section class="top" style="background: url('https://s2.loli.net/2025/11/11/5G9HF8xIluUj7Nt.jpg');">
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
         <div class="wrapper content_header clearfix">
             
 
@@ -162,16 +165,16 @@ WebContr">
 
     <ul class="btn clearfix">
         
-        <li><a href="/2025/11/24/Capturymarkerless/" class="previous" data-title="Untitled"></a></li>
+        <li><a href="/2025/12/04/Learning/UnrealDebug/" class="previous" data-title="Untitled"></a></li>
         
         <li><a href="/" class="grid" data-title="Portfolio"></a></li>
         
-        <li><a href="/2025/09/21/UE5%20GAS%20Learning%20Notes/" class="next" data-title="UE5 GAS Learning ..."></a></li>
+        <li><a href="/2025/11/24/Learning/Capturymarkerless/" class="next" data-title="Untitled"></a></li>
         
     </ul>
 
 </div><!-- end work_nav -->
-            <h1 class="title">Unreal RemoteControl Note</h1>
+            <h1 class="title">Untitled</h1>
         </div>
     </section><!-- end top -->
 
@@ -182,27 +185,55 @@ WebContr">
             
 
             <!-- Content -->
-            <h1 id="虚幻5远程控制（RemoteControl）笔记"><a href="#虚幻5远程控制（RemoteControl）笔记" class="headerlink" title="虚幻5远程控制（RemoteControl）笔记"></a>虚幻5远程控制（RemoteControl）笔记</h1><h2 id="基础介绍"><a href="#基础介绍" class="headerlink" title="基础介绍"></a>基础介绍</h2><h3 id="什么是？"><a href="#什么是？" class="headerlink" title="什么是？"></a>什么是？</h3><table>
+            <p>蓝图代码质量检测</p>
+<table>
 <thead>
 <tr>
-<th><code>WebControl.StartServer</code></th>
-<th>启动网页服务器并开始在端口 <code>30010</code> 上聆听传入请求。</th>
+<th>工具类型</th>
+<th>代表工具 &#x2F; 方案</th>
+<th>核心能力</th>
+<th>适用场景</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>WebControl.StopServer</code></td>
-<td>停止网页服务器，禁止再处理任何对虚幻编辑器实例的请求。</td>
+<td>UE 官方内置工具</td>
+<td>Blueprint Analyzer（UE4.26+）</td>
+<td>统计蓝图圈复杂度、节点数量、分支深度，检测冗余节点 &#x2F; 无效连线，支持导出分析报告</td>
+<td>基础复杂度检测，无需额外安装</td>
 </tr>
 <tr>
-<td><code>WebControl.EnableServerOnStartup</code></td>
-<td>每当此项目在虚幻引擎中以任何支持的模式打开（在虚幻编辑器主窗口中、在编辑器中运行（PIE）会话中、或在虚幻编辑器的 <code>-游戏</code> 模式下）时，便自动启动Web服务器。</td>
+<td>UE 社区开源工具</td>
+<td>Blueprint Metrics（GitHub）</td>
+<td>专门针对 UE4&#x2F;5 的蓝图圈复杂度计算工具，可自定义阈值、生成可视化报表，支持批量扫描</td>
+<td>中小型团队，可二次开发集成 CR 流程</td>
+</tr>
+<tr>
+<td>UE 插件市场工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.fab.com/zh-cn/listings/10850cb2-be1d-43d2-971d-922c73d218f3">Linter</a> &#x2F; UE Blueprint Quality Checker</td>
+<td>Linter能实现代码规则检测<br /><br />配置圈复杂度 &#x2F; 代码规范阈值，提交蓝图前自动检测，违规则拦截</td>
+<td>快速集成到 UE 编辑器工作流</td>
+</tr>
+<tr>
+<td>企业级工业化工具链</td>
+<td>Epic Industrial Framework &#x2F; Autodesk ShotGrid + UE 集成</td>
+<td>内置蓝图 CR 流程，结合圈复杂度、性能、合规性检测，适配大型团队协作</td>
+<td>3A 游戏、大型商用 UE 项目</td>
+</tr>
+<tr>
+<td>通用代码质量工具适配</td>
+<td>SonarQube + 社区蓝图转译插件</td>
+<td>将蓝图转译为抽象语法树（AST），复用 SonarQube 的圈复杂度分析和 CR 流程</td>
+<td>已有 SonarQube 质量体系的团队</td>
+</tr>
+<tr>
+<td>自定义脚本 &#x2F; 工具</td>
+<td>基于 UE 的 Editor Utility Widget（EUW）开发</td>
+<td>按需定制圈复杂度计算规则、CR 审批流程，适配团队个性化需求</td>
+<td>有 UE 二次开发能力的团队</td>
 </tr>
 </tbody></table>
-<p>如果要在打包后使用，需要把预设拖到场景中。关于打包后使用可以参考这个<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1G84y167Vs/">视频</a></p>
-<p><img src="https://s2.loli.net/2025/11/21/q9QmgrIvkUp3Y2M.png" alt="image-20251121150628085"></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>UnrealFest2022介绍RemoteControl带中文的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Cv4y1L7gH/?spm_id_from=333.337.search-card.all.click&vd_source=60b376a57ab956cf81ad81ef20747a92">搬运视频</a></li>
-</ul>
+<p><a target="_blank" rel="noopener" href="https://www.fab.com/zh-cn/listings/14d7ba87-a587-406d-9369-ed75fa0a55ed">蓝图助手</a>:一个很不错的代码整理工具，<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MQ70ASNunPQ">演示视频</a></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/dhvoksdw-the-encoder/pen/EaKbeVe">https://codepen.io/dhvoksdw-the-encoder/pen/EaKbeVe</a></p>
 
 
             <!-- Tags -->
@@ -210,7 +241,7 @@ WebContr">
 
 
 <div class="tags">
-    <a href="/tags/Unreal-Engine/">Unreal Engine</a> <a href="/tags/Game-Development/">Game Development</a>
+    
 </div>
 
 
@@ -229,6 +260,11 @@ WebContr">
     <!-- Table of Contents will be generated by toc-collapse.js -->
 
 </section><!-- end main -->
+
+<script>
+	window.UI_LANG = {"en":{"menu":{"home":"Home","archives":"Archives","about":"About"},"footer":{"copyright":"Copyright © %year% %author%","powered":"Powered by %hexo%","modified":"Modified based on %theme%"},"buttons":{"language":"EN / 中"}},"zh":{"menu":{"home":"首页","archives":"归档","about":"关于"},"footer":{"copyright":"版权 © %year% %author%","powered":"由 %hexo% 驱动","modified":"基于 %theme% 主题定制"},"buttons":{"language":"中 / EN"}}};
+	window.UI_DEFAULT_LANG = 'en';
+</script>
 
 <!-- After footer scripts -->
 
@@ -252,6 +288,9 @@ WebContr">
 
 
 <script src="/js/image-zoom.js"></script>
+
+
+<script src="/js/lang-toggle.js"></script>
 
 
 <!-- Gallery -->
@@ -349,11 +388,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = document.createElement('div');
         content.className = 'code-fullscreen-content';
         
-        // Clone the code block and remove any expansion restrictions
-        const clonedBlock = codeBlock.cloneNode(true);
-        clonedBlock.style.height = '100%';
-        clonedBlock.style.maxHeight = '100%';
-        clonedBlock.style.flex = '1 1 auto';
+        // Clone the closest code container (includes wrapper if present)
+        const sourceContainer = codeBlock.closest('.code-block-container');
+        const clonedBlock = (sourceContainer || codeBlock).cloneNode(true);
 
         // Remove any buttons that don't make sense inside the modal
         const extraneousControls = clonedBlock.querySelectorAll('.code-buttons, .copy-code-button, .expand-button');
@@ -361,25 +398,21 @@ document.addEventListener('DOMContentLoaded', function() {
             el.parentNode && el.parentNode.removeChild(el);
         });
         
-        // Find and update the pre.code element in cloned block
-        const clonedPre = clonedBlock.querySelector('pre.code');
-        if (clonedPre) {
-            clonedPre.style.height = '100%';
-            clonedPre.style.maxHeight = '100%';
-            clonedPre.style.overflowY = 'auto';
-            clonedPre.style.overflowX = 'auto';
-            clonedPre.style.boxSizing = 'border-box';
-            clonedPre.scrollTop = 0;
-
-            const innerPre = clonedPre.querySelector('pre');
-            if (innerPre) {
-                innerPre.style.display = 'block';
-                innerPre.style.margin = '0';
-                innerPre.style.padding = '0';
-                innerPre.style.minWidth = '100%';
-            }
+        // Ensure wrapper/container fills the modal and isn't marked as collapsed
+        const wrapper = clonedBlock.classList.contains('code-block-container')
+            ? clonedBlock
+            : clonedBlock.querySelector('.code-block-container');
+        if (wrapper) {
+            wrapper.classList.remove('collapsed');
+            wrapper.style.margin = '0';
         }
         
+        // Find and update the pre.code element in cloned block
+        const clonedPre = (wrapper || clonedBlock).querySelector('pre.code');
+        if (clonedPre) {
+            clonedPre.scrollTop = 0;
+        }
+
         content.appendChild(clonedBlock);
         
         // Create close button

@@ -10,6 +10,10 @@
 
     <!--Description-->
     
+        <meta name="description" content="Debug方法和问题记录不常见写法DWORD12345#ifdef WIN32DWORD RemoteCaptury::receiveLoop()#elsevoid* RemoteCaptury::receiveLoop()#endif
+
+因为跨平台和线程 API 要求不同，所以代码用了条件编译把线">
+    
 
     <!--Author-->
     
@@ -29,7 +33,7 @@
 
     <!-- Title -->
     
-    <title>Game Framework - Eugene&#39;s Page</title>
+    <title>Eugene&#39;s Page</title>
 
     <!-- Custom CSS -->
     
@@ -77,7 +81,7 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
-<body class="path-tags-Game-Framework-index-html">
+<body class="layout-post path-2025-12-04-Learning-UnrealDebug-">
 
 <!-- Menu -->
 <!-- Navigation -->
@@ -136,34 +140,68 @@
 
 
 <!-- Main Content -->
-
-
 <section class="main clearfix">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2025/12/05/Learning/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="previous" data-title="Untitled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2025/11/24/Learning/CodeReview/" class="next" data-title="Untitled"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Untitled</h1>
+        </div>
+    </section><!-- end top -->
+
     <section class="wrapper">
-        <div class="content archives">
+        <div class="content">
+
+            <!-- Gallery -->
             
-                <div class="archive-title">Game Framework</div>
+
+            <!-- Content -->
+            <h1 id="Debug方法和问题记录"><a href="#Debug方法和问题记录" class="headerlink" title="Debug方法和问题记录"></a>Debug方法和问题记录</h1><h2 id="不常见写法"><a href="#不常见写法" class="headerlink" title="不常见写法"></a>不常见写法</h2><h3 id="DWORD"><a href="#DWORD" class="headerlink" title="DWORD"></a>DWORD</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> WIN32</span></span><br><span class="line"><span class="function">DWORD <span class="title">RemoteCaptury::receiveLoop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="keyword">else</span></span></span></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="title">RemoteCaptury::receiveLoop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="keyword">endif</span></span></span></span><br></pre></td></tr></table></figure>
+
+<p>因为跨平台和线程 API 要求不同，所以代码用了条件编译把线程入口和成员函数的返回&#x2F;参数类型对齐。<br><u>DWORD 是 Windows API 常用的整型别名（通常为 32-bit 无符号整型）</u>，在 Windows 线程入口函数中作为返回类型表示线程返回码。<br>void* 表示“指向任意类型的指针”，常用作通用参数和返回值（例如 pthread 线程入口用 void* arg 传递实例指针，返回 void* 表示线程返回值）。</p>
+<h2 id="debug方法"><a href="#debug方法" class="headerlink" title="debug方法"></a>debug方法</h2><h3 id="Log标记用时"><a href="#Log标记用时" class="headerlink" title="Log标记用时"></a>Log标记用时</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 统计时间</span></span><br><span class="line"><span class="built_in">UE_LOG</span>(LogCapturyRemote, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;RemoteCaptury::disconnect(): waiting for receiveThread %s&quot;</span>),*(FDateTime::<span class="built_in">Now</span>().<span class="built_in">ToString</span>()));</span><br><span class="line"><span class="built_in">QUICK_SCOPE_CYCLE_COUNTER</span>(STAT_RemoteCapturyWaitReceive);</span><br><span class="line"><span class="built_in">WaitForSingleObject</span>(receiveThread, INFINITE);</span><br><span class="line"><span class="built_in">UE_LOG</span>(LogCapturyRemote, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;RemoteCaptury::disconnect(): receiveThread finished %s&quot;</span>),*(FDateTime::<span class="built_in">Now</span>().<span class="built_in">ToString</span>()));</span><br></pre></td></tr></table></figure>
+
+<p><u>Warning      LogCapturyRemote          RemoteCaptury::disconnect(): waiting for receiveThread 2025.12.04-16.48.31</u><br>Warning      LogCapturyRemote          RemoteCaptury::receiveLoop() - Reconnect failed, retrying… 2025.12.04-16.48.46<br>Warning      LogCapturyRemote          RemoteCaptury::receiveLoop() - Retrying reconnect… 2025.12.04-16.48.46<br>Warning      LogCapturyRemote          stopping receive loop<br><u>Warning      LogCapturyRemote          RemoteCaptury::disconnect(): receiveThread finished 2025.12.04-16.48.46</u></p>
+
+
+            <!-- Tags -->
             
-            
-            
-                <div class="archive-year">
-                    <h2 class="year-title">2025</h2>
-                    <ul class="archive-list">
-                        
-                            <li class="archive-item">
-    <span class="archive-date">2025-09-21</span>
-    <a href="/2025/09/21/Notes/UE5 GAS Learning Notes/">UE5 GAS Learning Notes</a>
-</li>
-                        
-                    </ul>
-                </div>
-            
+
+
+<div class="tags">
+    
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
         </div><!-- end content -->
     </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
 </section><!-- end main -->
-
-
-
 
 <script>
 	window.UI_LANG = {"en":{"menu":{"home":"Home","archives":"Archives","about":"About"},"footer":{"copyright":"Copyright © %year% %author%","powered":"Powered by %hexo%","modified":"Modified based on %theme%"},"buttons":{"language":"EN / 中"}},"zh":{"menu":{"home":"首页","archives":"归档","about":"关于"},"footer":{"copyright":"版权 © %year% %author%","powered":"由 %hexo% 驱动","modified":"基于 %theme% 主题定制"},"buttons":{"language":"中 / EN"}}};

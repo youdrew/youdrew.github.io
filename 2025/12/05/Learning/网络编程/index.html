@@ -10,6 +10,8 @@
 
     <!--Description-->
     
+        <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970SOCKET RemoteCaptur">
+    
 
     <!--Author-->
     
@@ -29,7 +31,7 @@
 
     <!-- Title -->
     
-    <title>Game Framework - Eugene&#39;s Page</title>
+    <title>Eugene&#39;s Page</title>
 
     <!-- Custom CSS -->
     
@@ -77,7 +79,7 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
-<body class="path-tags-Game-Framework-index-html">
+<body class="layout-post path-2025-12-05-Learning-">
 
 <!-- Menu -->
 <!-- Navigation -->
@@ -136,34 +138,105 @@
 
 
 <!-- Main Content -->
-
-
 <section class="main clearfix">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a class="previous disabled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2025/12/04/Learning/UnrealDebug/" class="next" data-title="Untitled"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Untitled</h1>
+        </div>
+    </section><!-- end top -->
+
     <section class="wrapper">
-        <div class="content archives">
+        <div class="content">
+
+            <!-- Gallery -->
             
-                <div class="archive-title">Game Framework</div>
-            
-            
-            
-                <div class="archive-year">
-                    <h2 class="year-title">2025</h2>
-                    <ul class="archive-list">
-                        
-                            <li class="archive-item">
-    <span class="archive-date">2025-09-21</span>
-    <a href="/2025/09/21/Notes/UE5 GAS Learning Notes/">UE5 GAS Learning Notes</a>
+
+            <!-- Content -->
+            <p><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251205123239125.png" alt="image-20251205123239125"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SOCKET <span class="title">RemoteCaptury::openTcpSocket</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// UE_LOG(LogCapturyRemote , Warning, TEXT(&quot;openTcpSocket() 01 %s&quot;), *(FDateTime::Now().ToString()));</span></span><br><span class="line">    <span class="comment">// 函数通过调用 socket 创建一个套接字。如果创建失败（返回 INVALID_SOCKET），函数直接返回错误状态</span></span><br><span class="line">    SOCKET sok = <span class="built_in">socket</span>(AF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line">    <span class="keyword">if</span> (sok == INVALID_SOCKET)</span><br><span class="line">        <span class="keyword">return</span> INVALID_SOCKET;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// UE_LOG(LogCapturyRemote , Warning, TEXT(&quot;openTcpSocket() 02 %s&quot;), *(FDateTime::Now().ToString()));</span></span><br><span class="line">    <span class="comment">// 如果 localAddress 的端口号不为 0，函数会尝试将套接字绑定到指定的本地地址。如果绑定失败，同样关闭套接字并返回错误</span></span><br><span class="line">    <span class="keyword">if</span> (localAddress.sin_port != <span class="number">0</span> &amp;&amp; <span class="built_in">bind</span>(sok, (sockaddr*)&amp;localAddress, <span class="built_in">sizeof</span>(localAddress)) != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">closesocket</span>(sok);</span><br><span class="line">        <span class="keyword">return</span> INVALID_SOCKET;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// UE_LOG(LogCapturyRemote , Warning, TEXT(&quot;openTcpSocket() 03 %s&quot;), *(FDateTime::Now().ToString()));</span></span><br><span class="line">    <span class="comment">// 1. 先设成非阻塞</span></span><br><span class="line">    u_long NonBlocking = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">ioctlsocket</span>(sok, FIONBIO, &amp;NonBlocking) == SOCKET_ERROR) &#123;</span><br><span class="line">        <span class="built_in">closesocket</span>(sok);</span><br><span class="line">        <span class="keyword">return</span> INVALID_SOCKET;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 尝试发起 connect</span></span><br><span class="line">    <span class="type">int</span> ConnectResult = ::<span class="built_in">connect</span>(sok, (sockaddr*)&amp;remoteAddress, <span class="built_in">sizeof</span>(remoteAddress));</span><br><span class="line">    <span class="keyword">if</span> (ConnectResult == SOCKET_ERROR) &#123;</span><br><span class="line">        <span class="type">int</span> Err = <span class="built_in">WSAGetLastError</span>();</span><br><span class="line">        <span class="keyword">if</span> (Err != WSAEWOULDBLOCK &amp;&amp; Err != WSAEINPROGRESS &amp;&amp; Err != WSAEALREADY) &#123;</span><br><span class="line">            <span class="comment">// 真错误，直接失败</span></span><br><span class="line">            <span class="built_in">closesocket</span>(sok);</span><br><span class="line">            <span class="keyword">return</span> INVALID_SOCKET;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 连接正在进行中，用 select 等待一小段时间</span></span><br><span class="line">        <span class="type">const</span> <span class="type">int</span> MaxWaitMillis = <span class="number">1000</span>; <span class="comment">// 1 秒上限</span></span><br><span class="line">        fd_set WriteSet;</span><br><span class="line">        <span class="built_in">FD_ZERO</span>(&amp;WriteSet);</span><br><span class="line">        <span class="built_in">FD_SET</span>(sok, &amp;WriteSet);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">struct</span> <span class="title class_">timeval</span> Tv;</span><br><span class="line">        Tv.tv_sec = MaxWaitMillis / <span class="number">1000</span>;</span><br><span class="line">        Tv.tv_usec = (MaxWaitMillis % <span class="number">1000</span>) * <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> Sel = <span class="built_in">select</span>((<span class="type">int</span>)(sok + <span class="number">1</span>), <span class="literal">nullptr</span>, &amp;WriteSet, <span class="literal">nullptr</span>, &amp;Tv);</span><br><span class="line">        <span class="keyword">if</span> (Sel &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 超时或 select 出错，都当失败</span></span><br><span class="line">            <span class="built_in">closesocket</span>(sok);</span><br><span class="line">            <span class="keyword">return</span> INVALID_SOCKET;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. select 说 socket 可写了，用 SO_ERROR 再确认一次</span></span><br><span class="line">        <span class="type">int</span> so_error = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> optLen = <span class="built_in">sizeof</span>(so_error);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">getsockopt</span>(sok, SOL_SOCKET, SO_ERROR, (<span class="type">char</span>*)&amp;so_error, &amp;optLen) == SOCKET_ERROR || so_error != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">closesocket</span>(sok);</span><br><span class="line">            <span class="keyword">return</span> INVALID_SOCKET;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 走到这说明 connect 已经完成了，可以恢复成阻塞模式</span></span><br><span class="line">    u_long Blocking = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">ioctlsocket</span>(sok, FIONBIO, &amp;Blocking);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// UE_LOG(LogCapturyRemote , Warning, TEXT(&quot;openTcpSocket() 04 %s&quot;), *(FDateTime::Now().ToString()));</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">setSocketTimeout</span>(sok, <span class="number">500</span>);</span><br><span class="line">    <span class="comment">// UE_LOG(LogCapturyRemote , Warning, TEXT(&quot;openTcpSocket() 05 %s&quot;), *(FDateTime::Now().ToString()));</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sok;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数实现了客户端创建socket，且用非阻塞模式connect。</p>
+<p>非阻塞是“通过修改套接字模式”实现的——代码在 socket() 之后、connect() 之前把套接字设为非阻塞，因此 connect() 就是在非阻塞模式下执行的；连接完成后再把套接字恢复成阻塞。</p>
+<ul>
+<li><p>服务端也会作为客户端的角色去连接别的服务（第三服务），比如<strong>MySQL</strong></p>
 </li>
-                        
-                    </ul>
-                </div>
+<li><p>FD：这里的 fd 就是「文件描述符」（Unix 上）或「socket handle &#x2F; SOCKET」（Windows 上），本质是操作系统给套接字分配的一个句柄&#x2F;索引，用来在用户态代码和内核 TCP 实现之间标识该连接。</p>
+</li>
+</ul>
+<h1 id="网络编程关注的问题"><a href="#网络编程关注的问题" class="headerlink" title="网络编程关注的问题"></a>网络编程关注的问题</h1><ul>
+<li>连接的建立<ol>
+<li>接收客户端的连接</li>
+<li>作为客户端连接第三方服务</li>
+</ol>
+</li>
+<li>连接的断开<ol>
+<li>主动断开连接</li>
+<li>被动断开连接</li>
+</ol>
+</li>
+<li>消息的到达<ol>
+<li>read 直接去检测消息是否到达</li>
+<li><strong>io 多路复用</strong>去检测消息是否到达，read 函数</li>
+</ol>
+</li>
+<li>消息发送完毕<ol>
+<li>write 直接去检测是否可以将数据发送</li>
+<li><strong>io 多路复用</strong>去检测，write 函数将数据发送出去</li>
+</ol>
+</li>
+</ul>
+<p>主要卡的说就是这个read和write</p>
+<p>这里多路复用就是是否阻塞。阻塞就是卡网络线程。</p>
+<p><code>ioctlsocket(sok, FIONBIO, &amp;NonBlocking)</code>这个就是设置是否在阻塞。</p>
+<p><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251205142827661.png" alt="image-20251205142827661"></p>
+<p>这张图是前面大图的绿色部分。需要读取一个临时的传输buffer。</p>
+<p>其中buffer的部分是否包含东西，如果不包含东西（读的时候）&#x2F;或者buffer满了（写的时候），就会<strong>阻塞读取</strong>。这个线程就卡在这里。</p>
+<p><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251205144248299.png" alt="image-20251205144248299"></p>
+<p>在阻塞模型中（原来的代码）。</p>
+<p><img src="C:\Users\Eugene\AppData\Roaming\Typora\typora-user-images\image-20251205144319439.png" alt="image-20251205144319439"></p>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Av41187M8/">https://www.bilibili.com/video/BV1Av41187M8/</a></p>
+
+
+            <!-- Tags -->
             
+
+
+<div class="tags">
+    
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
         </div><!-- end content -->
     </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
 </section><!-- end main -->
-
-
-
 
 <script>
 	window.UI_LANG = {"en":{"menu":{"home":"Home","archives":"Archives","about":"About"},"footer":{"copyright":"Copyright © %year% %author%","powered":"Powered by %hexo%","modified":"Modified based on %theme%"},"buttons":{"language":"EN / 中"}},"zh":{"menu":{"home":"首页","archives":"归档","about":"关于"},"footer":{"copyright":"版权 © %year% %author%","powered":"由 %hexo% 驱动","modified":"基于 %theme% 主题定制"},"buttons":{"language":"中 / EN"}}};
