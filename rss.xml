@@ -9,13 +9,13 @@
     <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 16 Feb 2026 19:34:11 GMT</pubDate>
+    <pubDate>Mon, 16 Feb 2026 19:42:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>Captury无标记动作捕捉</title>
-      <link>http://example.com/2025/12/01/Notes/Capturymarkerless/</link>
-      <guid>http://example.com/2025/12/01/Notes/Capturymarkerless/</guid>
+      <link>http://example.com/2025/12/01/Capturymarkerless/</link>
+      <guid>http://example.com/2025/12/01/Capturymarkerless/</guid>
       <pubDate>Mon, 01 Dec 2025 04:34:56 GMT</pubDate>
       
         
@@ -34,14 +34,14 @@
       <category domain="http://example.com/tags/%E5%8A%A8%E4%BD%9C%E6%8D%95%E6%8D%89/">动作捕捉</category>
       
       
-      <comments>http://example.com/2025/12/01/Notes/Capturymarkerless/#disqus_thread</comments>
+      <comments>http://example.com/2025/12/01/Capturymarkerless/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Unreal RemoteControl Note</title>
-      <link>http://example.com/2025/11/21/Notes/Unreal%20RemoteControl%20Note/</link>
-      <guid>http://example.com/2025/11/21/Notes/Unreal%20RemoteControl%20Note/</guid>
+      <link>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/</link>
+      <guid>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/</guid>
       <pubDate>Fri, 21 Nov 2025 03:21:56 GMT</pubDate>
       
         
@@ -60,14 +60,14 @@
       <category domain="http://example.com/tags/Game-Development/">Game Development</category>
       
       
-      <comments>http://example.com/2025/11/21/Notes/Unreal%20RemoteControl%20Note/#disqus_thread</comments>
+      <comments>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>UE5 GAS Learning Notes</title>
-      <link>http://example.com/2025/09/21/Notes/UE5%20GAS%20Learning%20Notes/</link>
-      <guid>http://example.com/2025/09/21/Notes/UE5%20GAS%20Learning%20Notes/</guid>
+      <link>http://example.com/2025/09/21/UE5%20GAS%20Learning%20Notes/</link>
+      <guid>http://example.com/2025/09/21/UE5%20GAS%20Learning%20Notes/</guid>
       <pubDate>Sun, 21 Sep 2025 04:34:56 GMT</pubDate>
       
         
@@ -98,14 +98,14 @@
       <category domain="http://example.com/tags/Game-Framework/">Game Framework</category>
       
       
-      <comments>http://example.com/2025/09/21/Notes/UE5%20GAS%20Learning%20Notes/#disqus_thread</comments>
+      <comments>http://example.com/2025/09/21/UE5%20GAS%20Learning%20Notes/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Aximmetry Learning Notes</title>
-      <link>http://example.com/2025/09/13/Notes/Aximmetry/</link>
-      <guid>http://example.com/2025/09/13/Notes/Aximmetry/</guid>
+      <link>http://example.com/2025/09/13/Aximmetry/</link>
+      <guid>http://example.com/2025/09/13/Aximmetry/</guid>
       <pubDate>Sat, 13 Sep 2025 04:34:56 GMT</pubDate>
       
         
@@ -124,14 +124,14 @@
       <category domain="http://example.com/tags/Aximmetry/">Aximmetry</category>
       
       
-      <comments>http://example.com/2025/09/13/Notes/Aximmetry/#disqus_thread</comments>
+      <comments>http://example.com/2025/09/13/Aximmetry/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Shader Learning Notes</title>
-      <link>http://example.com/2025/08/01/Notes/Shader%20Learning%20Note/</link>
-      <guid>http://example.com/2025/08/01/Notes/Shader%20Learning%20Note/</guid>
+      <link>http://example.com/2025/08/01/Shader%20Learning%20Note/</link>
+      <guid>http://example.com/2025/08/01/Shader%20Learning%20Note/</guid>
       <pubDate>Fri, 01 Aug 2025 04:34:56 GMT</pubDate>
       
         
@@ -160,7 +160,7 @@
       <category domain="http://example.com/tags/Game-Development-Shader-001/">Game Development Shader 001</category>
       
       
-      <comments>http://example.com/2025/08/01/Notes/Shader%20Learning%20Note/#disqus_thread</comments>
+      <comments>http://example.com/2025/08/01/Shader%20Learning%20Note/#disqus_thread</comments>
       
     </item>
     
