@@ -24,6 +24,7 @@ const i18nData = {
         'Powered by': 'Powered by',
         'Modified based on': 'Modified based on',
         'theme': 'theme',
+        'Mainly maintained using AI': 'Mainly maintained using AI',
         
         // Pagination
         'Older Posts': 'Older Posts',
@@ -63,6 +64,7 @@ const i18nData = {
         'Powered by': '技术支持',
         'Modified based on': '基于',
         'theme': '主题',
+        'Mainly maintained using AI': '主要使用AI来维护',
         
         // Pagination
         'Older Posts': '上一页',
