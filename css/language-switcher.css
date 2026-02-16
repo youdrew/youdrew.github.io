@@ -1,0 +1,54 @@
+/**
+ * Language Switcher Styles
+ * 语言切换图标样式
+ */
+
+/* ========================================
+   Language Icon in Social Area
+   ======================================== */
+
+header ul.social li a.language::before {
+    mask-image: url('../img/social/icon-language.svg');
+    -webkit-mask-image: url('../img/social/icon-language.svg');
+}
+
+/* ========================================
+   Language Notification
+   ======================================== */
+
+.lang-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 300px;
+}
+
+.lang-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   Responsive Styles
+   ======================================== */
+
+@media (max-width: 768px) {
+    .lang-notification {
+        right: 10px;
+        left: 10px;
+        text-align: center;
+        max-width: none;
+    }
+}

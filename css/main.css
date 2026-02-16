@@ -327,6 +327,11 @@ h1, h2, h3, h4, h5, h6          { font-weight: bolder }
         -webkit-mask-image: url('../img/social/icon-instagram.svg');
     }
 
+    header ul.social li a.language::before{
+        mask-image: url('../img/social/icon-language.svg');
+        -webkit-mask-image: url('../img/social/icon-language.svg');
+    }
+
     header ul.social li a.youtube::before{
         mask-image: none;
     }

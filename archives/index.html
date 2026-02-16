@@ -44,6 +44,9 @@
     
 <link rel="stylesheet" href="/css/image-zoom.css">
 
+    
+<link rel="stylesheet" href="/css/language-switcher.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,15 +96,15 @@
         <ul>
             
             <li>
-                <a href="/">Home</a>
+                <a href="/" data-i18n-key="Home">Home</a>
             </li>
             
             <li>
-                <a href="/archives">Archives</a>
+                <a href="/archives" data-i18n-key="Archives">Archives</a>
             </li>
             
             <li>
-                <a href="/about">About</a>
+                <a href="/about" data-i18n-key="About">About</a>
             </li>
             
         </ul>
@@ -124,6 +127,7 @@
             
                 <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
             
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
         </ul><!-- end social -->
 
         <div class="rights">
@@ -193,6 +197,14 @@
 <!-- 保留原有的 toc-collapse.js 直到完全重构 -->
 
 <script src="/js/toc-collapse.js"></script>
+
+
+<!-- Language Switcher -->
+
+<script src="/js/i18n-data.js"></script>
+
+
+<script src="/js/language-switcher.js"></script>
 
 
 <!-- 第三方库 (CDN) -->
