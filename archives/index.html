@@ -74,7 +74,7 @@
         <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
     
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <body class="path-archives-index-html">
@@ -127,7 +127,7 @@
         </ul><!-- end social -->
 
         <div class="rights">
-            <p>Copyright © 2025 Eugene Hsuan</p>
+            <p>Copyright © 2026 Eugene Hsuan</p>
             <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></p>
             <p>Modified based on <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> theme</p>
         </div><!-- end rights -->
@@ -147,6 +147,11 @@
                 <div class="archive-year">
                     <h2 class="year-title">2025</h2>
                     <ul class="archive-list">
+                        
+                            <li class="archive-item">
+    <span class="archive-date">2025-12-01</span>
+    <a href="/2025/12/01/Notes/Capturymarkerless/">Captury无标记动作捕捉</a>
+</li>
                         
                             <li class="archive-item">
     <span class="archive-date">2025-11-21</span>
@@ -178,382 +183,113 @@
 
 
 
-<script>
-	window.UI_LANG = {"en":{"menu":{"home":"Home","archives":"Archives","about":"About"},"footer":{"copyright":"Copyright © %year% %author%","powered":"Powered by %hexo%","modified":"Modified based on %theme%"},"buttons":{"language":"EN / 中"}},"zh":{"menu":{"home":"首页","archives":"归档","about":"关于"},"footer":{"copyright":"版权 © %year% %author%","powered":"由 %hexo% 驱动","modified":"基于 %theme% 主题定制"},"buttons":{"language":"中 / EN"}}};
-	window.UI_DEFAULT_LANG = 'en';
-</script>
-
 <!-- After footer scripts -->
 
-<!-- jQuery -->
+<!-- 加载打包后的模块化代码 -->
 
-<script src="/js/jquery.js"></script>
-
-
-<!-- Custom Code -->
-
-<script src="/js/main.js"></script>
+<script src="/dist/js/main.js"></script>
 
 
-<script src="/js/article-collapse.js"></script>
-
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
 
 <script src="/js/toc-collapse.js"></script>
 
 
-<script src="/js/shadertoy-embed.js"></script>
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 
-
-<script src="/js/image-zoom.js"></script>
-
-
-<script src="/js/lang-toggle.js"></script>
-
-
-<!-- Gallery -->
+<!-- Featherlight (图库) -->
 <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
-<!-- Code Block Expansion Script -->
+<!-- Mermaid 初始化 -->
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize code block expansion
-    function initCodeBlockExpansion() {
-        const codeBlocks = document.querySelectorAll('figure.highlight');
-        
-        codeBlocks.forEach(function(codeBlock) {
-            // Skip if already processed
-            if (codeBlock.closest('.code-block-container')) return;
-            
-            // Remove table structure and keep only code content
-            const table = codeBlock.querySelector('table');
-            if (table) {
-                const codeCell = table.querySelector('td.code');
-                if (codeCell) {
-                    // Create a new pre element with code content
-                    const newPre = document.createElement('pre');
-                    newPre.className = 'code';
-                    newPre.innerHTML = codeCell.innerHTML;
-                    
-                    // Replace table with pre element
-                    codeBlock.innerHTML = '';
-                    codeBlock.appendChild(newPre);
-                }
-            }
-            
-            // Get the code content height
-            const codeContent = codeBlock.querySelector('pre.code');
-            if (!codeContent) return;
-            
-            const actualHeight = codeContent.scrollHeight;
-            const maxHeight = 400; // Same as CSS max-height
-            
-            // Create button container and copy button for all code blocks
-            const buttonsContainer = document.createElement('div');
-            buttonsContainer.className = 'code-buttons';
-            
-            // Create copy button (for all code blocks)
-            const copyButton = document.createElement('button');
-            copyButton.className = 'copy-code-button';
-            copyButton.textContent = '复制代码';
-            copyButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                copyCodeToClipboard(codeContent, copyButton);
-            });
-            buttonsContainer.appendChild(copyButton);
-
-            // Only add expansion if content is taller than max height
-            if (actualHeight > maxHeight) {
-                // Wrap the code block in a container
-                const container = document.createElement('div');
-                container.className = 'code-block-container collapsed';
-                codeBlock.parentNode.insertBefore(container, codeBlock);
-                container.appendChild(codeBlock);
-
-                // Create expand button
-                const expandButton = document.createElement('button');
-                expandButton.className = 'expand-button';
-                expandButton.textContent = '展开代码';
-                buttonsContainer.appendChild(expandButton);
-
-                // Add buttons container to the wrapper
-                container.appendChild(buttonsContainer);
-
-                // Add click handler
-                expandButton.addEventListener('click', function() {
-                    if (container.classList.contains('collapsed')) {
-                        // Expand to full screen
-                        showFullscreenCode(codeBlock, expandButton);
-                    }
-                });
-            } else {
-                // For code blocks that don't need expansion, just add copy button
-                const container = document.createElement('div');
-                container.className = 'code-block-container';
-                codeBlock.parentNode.insertBefore(container, codeBlock);
-                container.appendChild(codeBlock);
-                container.appendChild(buttonsContainer);
-            }
-        });
-    }
-    
-    function showFullscreenCode(codeBlock, button) {
-        // Create fullscreen modal
-        const modal = document.createElement('div');
-        modal.className = 'code-fullscreen-modal active';
-        
-        const content = document.createElement('div');
-        content.className = 'code-fullscreen-content';
-        
-        // Clone the closest code container (includes wrapper if present)
-        const sourceContainer = codeBlock.closest('.code-block-container');
-        const clonedBlock = (sourceContainer || codeBlock).cloneNode(true);
-
-        // Remove any buttons that don't make sense inside the modal
-        const extraneousControls = clonedBlock.querySelectorAll('.code-buttons, .copy-code-button, .expand-button');
-        extraneousControls.forEach(function(el) {
-            el.parentNode && el.parentNode.removeChild(el);
-        });
-        
-        // Ensure wrapper/container fills the modal and isn't marked as collapsed
-        const wrapper = clonedBlock.classList.contains('code-block-container')
-            ? clonedBlock
-            : clonedBlock.querySelector('.code-block-container');
-        if (wrapper) {
-            wrapper.classList.remove('collapsed');
-            wrapper.style.margin = '0';
-        }
-        
-        // Find and update the pre.code element in cloned block
-        const clonedPre = (wrapper || clonedBlock).querySelector('pre.code');
-        if (clonedPre) {
-            clonedPre.scrollTop = 0;
-        }
-
-        content.appendChild(clonedBlock);
-        
-        // Create close button
-        const closeButton = document.createElement('button');
-        closeButton.className = 'close-fullscreen';
-        closeButton.textContent = '关闭';
-        content.appendChild(closeButton);
-        
-        modal.appendChild(content);
-        document.body.appendChild(modal);
-        
-        // Prevent body scrolling
-        document.body.style.overflow = 'hidden';
-        
-        // Close handlers
-        function closeModal() {
-            document.body.removeChild(modal);
-            document.body.style.overflow = '';
-        }
-        
-        closeButton.addEventListener('click', closeModal);
-        
-        // Close on backdrop click
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-        
-        // Close on escape key
-        function handleKeydown(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-                document.removeEventListener('keydown', handleKeydown);
-            }
-        }
-        document.addEventListener('keydown', handleKeydown);
-    }
-    
-    // Function to copy code to clipboard
-    function copyCodeToClipboard(codeElement, button) {
-        let code = codeElement.textContent || codeElement.innerText;
-        
-        // Use modern Clipboard API if available
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(code).then(function() {
-                showCopySuccess(button);
-            }).catch(function(err) {
-                console.error('复制失败:', err);
-                fallbackCopy(code, button);
-            });
-        } else {
-            fallbackCopy(code, button);
-        }
-    }
-
-    // Fallback copy method for older browsers
-    function fallbackCopy(text, button) {
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.position = 'fixed';
-        textArea.style.top = '0';
-        textArea.style.left = '0';
-        textArea.style.width = '2em';
-        textArea.style.height = '2em';
-        textArea.style.padding = '0';
-        textArea.style.border = 'none';
-        textArea.style.outline = 'none';
-        textArea.style.boxShadow = 'none';
-        textArea.style.background = 'transparent';
-        
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        
-        try {
-            const successful = document.execCommand('copy');
-            if (successful) {
-                showCopySuccess(button);
-            }
-        } catch (err) {
-            console.error('复制失败:', err);
-        }
-        
-        document.body.removeChild(textArea);
-    }
-
-    // Show copy success feedback
-    function showCopySuccess(button) {
-        const originalText = button.textContent;
-        button.classList.add('copied');
-        button.textContent = '已复制 ✓';
-        
-        setTimeout(function() {
-            button.classList.remove('copied');
-            button.textContent = originalText;
-        }, 2000);
-    }
-
-    // Initialize on page load
-    initCodeBlockExpansion();
-    
-    // Re-initialize if new content is loaded (for SPA-like behavior)
-    const observer = new MutationObserver(function(mutations) {
-        let needsReinit = false;
-        mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length > 0) {
-                mutation.addedNodes.forEach(function(node) {
-                    if (node.nodeType === 1 && (node.matches('figure.highlight') || node.querySelector('figure.highlight'))) {
-                        needsReinit = true;
-                    }
-                });
-            }
-        });
-        if (needsReinit) {
-            setTimeout(initCodeBlockExpansion, 100);
-        }
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
     });
-    
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
+
+    // Find and process mermaid code blocks
+    const codeBlocks = document.querySelectorAll('figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      let code = codeElement.textContent || codeElement.innerText;
+
+      // Check if it's a mermaid diagram
+      if (code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/)) {
+        code = code.trim().replace(/^\s+|\s+$/g, '');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        const figureElement = codeElement.closest('figure');
+        if (figureElement) {
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
     });
+
+    setTimeout(() => {
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    }, 100);
+  }
 });
-</script>
-
-<!-- Mermaid Initialization -->
-<script type="text/javascript">
-    // Wait for document ready
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof mermaid !== 'undefined') {
-            // Initialize with proper configuration
-            mermaid.initialize({ 
-                startOnLoad: false,
-                theme: 'default',
-                securityLevel: 'loose'
-            });
-            
-            // Find and process mermaid code blocks
-            const codeBlocks = document.querySelectorAll('figure.highlight.plaintext .code');
-            
-            codeBlocks.forEach((codeElement, index) => {
-                let code = codeElement.textContent || codeElement.innerText;
-                
-                // Check if it's a mermaid diagram
-                if (code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/)) {
-                    // Critical fix: Remove ALL leading/trailing whitespace and newlines
-                    code = code.trim().replace(/^\s+|\s+$/g, '');
-                    
-                    // Create mermaid div
-                    const mermaidDiv = document.createElement('div');
-                    mermaidDiv.className = 'mermaid';
-                    // Set the cleaned code without any extra whitespace
-                    mermaidDiv.textContent = code;
-                    mermaidDiv.id = 'mermaid-diagram-' + index;
-                    
-                    // Replace the entire figure element
-                    const figureElement = codeElement.closest('figure');
-                    if (figureElement) {
-                        figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
-                    }
-                }
-            });
-            
-            // Initialize mermaid diagrams with explicit selector
-            setTimeout(() => {
-                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-            }, 100);
-        }
-    });
 </script>
 
 <!-- ShaderToy Placeholder Processing -->
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
-    // Wait a bit for other scripts to load
-    setTimeout(function() {
-        // Find all elements with shadertoy-placeholder class
-        const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
-        
-        console.log('Found shadertoy-placeholder elements:', elements.length);
+  setTimeout(function() {
+    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
 
-        elements.forEach(element => {
-            const shaderID = element.getAttribute('data-id');
-            console.log('Processing shadertoy-placeholder element with ID:', shaderID);
-            
-            if (shaderID) {
-                // Create iframe container
-                const container = document.createElement('div');
-                container.style.cssText = `
-                    position: relative;
-                    width: 100%;
-                    height: 400px;
-                    margin: 20px 0;
-                    border: 2px solid #bfbbbb;
-                    border-radius: 8px;
-                    overflow: hidden;
-                    background-color: #f6f6f6;
-                `;
+    elements.forEach(element => {
+      const shaderID = element.getAttribute('data-id');
 
-                // Create iframe
-                const iframe = document.createElement('iframe');
-                iframe.src = `https://www.shadertoy.com/embed/${shaderID}?gui=true&t=10&paused=false&muted=false`;
-                iframe.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                `;
-                iframe.allowFullscreen = true;
-                iframe.loading = 'lazy';
+      if (shaderID) {
+        const container = document.createElement('div');
+        container.style.cssText = `
+          position: relative;
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+          border: 2px solid #bfbbbb;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #f6f6f6;
+        `;
 
-                container.appendChild(iframe);
-                element.parentNode.insertBefore(container, element);
-                element.parentNode.removeChild(element);
-            }
-        });
-    }, 1000); // Wait a full second for everything to load
+        const iframe = document.createElement('iframe');
+        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        `;
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        element.parentNode.insertBefore(container, element);
+        element.parentNode.removeChild(element);
+      }
+    });
+  }, 1000);
 });
 </script>
 
 <!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
 
 
 </body>

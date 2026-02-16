@@ -1,0 +1,84 @@
+/**
+ * 主样式文件 - 模块化入口
+ * 使用 @import 导入所有样式模块
+ */
+
+/* ===== 基础样式 ===== */
+@import './base/variables.css';
+@import './base/fonts.css';
+@import './base/global.css';
+@import './reset.css';
+
+/* ===== 组件样式 ===== */
+/* 注意：完整的样式重构将在后续阶段完成 */
+/* 当前保留原有的 main.css.backup 中的所有样式 */
+
+/* 临时方案：直接导入原有样式（已去除字体和全局样式） */
+/* TODO: 在下一阶段将 main.css.backup 拆分为独立的组件文件 */
+
+/* ===== 临时：原有样式（待重构） ===== */
+
+/*  Header  */
+@media (min-width:1099px){
+    header{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--nav-width);
+        min-height: 100%;
+        padding: 0 0 0 var(--nav-padding);
+        background: var(--color-bg);
+        float: left;
+        overflow: hidden;
+        z-index: var(--z-header);
+        -webkit-transition: transform var(--nav-transition-duration) ease;
+        -moz-transition: transform var(--nav-transition-duration) ease;
+        -o-transition: transform var(--nav-transition-duration) ease;
+        transition: transform var(--nav-transition-duration) ease, opacity var(--nav-transition-duration) ease;
+        transform: translateX(-200px);
+        will-change: transform;
+    }
+
+    /* 当侧边栏收起时的文字透明度 */
+    header .logo,
+    header nav,
+    header .footer,
+    header .social,
+    header a,
+    header p,
+    header .subtitle,
+    header .description {
+        transition: opacity 0.4s ease;
+        opacity: 0.02;
+    }
+
+    header:hover,
+    header.show_menu {
+        transform: translateX(0);
+        box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+    }
+
+    /* 当侧边栏展开时恢复文字透明度 */
+    header:hover .logo,
+    header:hover nav,
+    header:hover .footer,
+    header:hover .social,
+    header:hover a,
+    header:hover p,
+    header:hover .subtitle,
+    header:hover .description,
+    header.show_menu .logo,
+    header.show_menu nav,
+    header.show_menu .footer,
+    header.show_menu .social,
+    header.show_menu a,
+    header.show_menu p,
+    header.show_menu .subtitle,
+    header.show_menu .description {
+        opacity: 1;
+    }
+}
+
+/* 为了保持网站正常运行，继续使用原有的完整样式 */
+/* 从 main.css.backup 复制其余样式 */

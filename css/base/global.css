@@ -1,0 +1,78 @@
+/**
+ * 全局基础样式
+ * 包含 body、标题、通用工具类等
+ */
+
+body {
+  background: var(--color-bg);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+}
+
+.wrapper {
+  width: var(--wrapper-width);
+  margin: 0 auto;
+}
+
+/* 标题样式 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  letter-spacing: var(--letter-spacing);
+  font-weight: var(--font-weight-bold);
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+h2 {
+  font-size: 1.5em;
+  margin: 0.75em 0;
+}
+h3 {
+  font-size: 1.17em;
+  margin: 0.83em 0;
+}
+h4 {
+  font-size: 1.4em;
+  margin: 1em 0;
+}
+h5 {
+  font-size: 1.3em;
+  margin: 1.2em 0;
+}
+h6 {
+  font-size: 1.25em;
+  margin: 1.4em 0;
+}
+
+/* Clearfix 工具类 */
+.clearfix:before,
+.clearfix:after {
+  content: ' ';
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+/* 过渡动画 */
+header ul.social li a,
+.main .work a .caption,
+header nav ul li a {
+  transition: all var(--transition-fast) linear;
+  -webkit-transition: all var(--transition-fast) linear;
+}

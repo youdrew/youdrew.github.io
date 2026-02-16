@@ -1,82 +1,54 @@
-// 这个是页面的主要逻辑代码
+/**
+ * 主入口文件
+ * 统一初始化所有功能模块
+ */
+import { Navigation } from './modules/navigation.js';
+import { Tooltip } from './modules/tooltip.js';
+import { MapPage } from './modules/map.js';
+import { TOC } from './modules/toc.js';
+import { ImageZoom } from './modules/image-zoom.js';
+import { ShaderToyEmbedManager } from './modules/shadertoy.js';
+import { ArticleCollapse } from './modules/article-collapse.js';
+import { CodeBlock } from './modules/code-block.js';
 
+/**
+ * 初始化所有模块
+ */
+function initializeModules() {
+  // 导航功能
+  new Navigation();
 
-// 确保在DOM完全加载后才执行代码
-$(document).ready(function(){
-    
+  // 工具提示
+  new Tooltip();
 
-    // 当点击菜单图标时：
-    // - 切换导航菜单的显示/隐藏（通过 show_menu 类）
-    // - 切换菜单图标的状态（通过 close_menu 类）
-    // - 阻止默认点击事件
-    $("#menu_icon").click(function(){
-        $("header nav ul").toggleClass("show_menu");
-        $("#menu_icon").toggleClass("close_menu");
-        return false;
-    });
-    
-    //Contact Page Map Centering
-var hw = $('header').width() + 50;  // 头部宽度 + 50px边距
-var mw = $('#map').width();         // 地图容器宽度
-var wh = $(window).height();        // 窗口高度
-var ww = $(window).width();         // 窗口宽度
+  // 地图页面（如果存在）
+  if (document.getElementById('map')) {
+    new MapPage();
+  }
 
-// 设置地图尺寸
-$('#map').css({
-    "max-width" : mw,
-    "height" : wh
-});
+  // 目录功能（文章页面）
+  const toc = new TOC();
+  toc.init();
 
-// 在大屏幕下调整位置
-if(ww>1100){
-     $('#map').css({
-        "margin-left" : hw
-    });
+  // 图片缩放
+  new ImageZoom();
+
+  // ShaderToy 嵌入（延迟初始化以确保内容加载完成）
+  setTimeout(() => {
+    new ShaderToyEmbedManager();
+  }, 500);
+
+  // 文章标题折叠
+  new ArticleCollapse();
+
+  // 代码块功能
+  new CodeBlock();
 }
 
-    //Tooltip
-    $("a").mouseover(function(){
-
-        var attr_title = $(this).attr("data-title");
-
-        if( attr_title == undefined || attr_title == "") return false;
-        
-        $(this).after('<span class="tooltip"></span>');
-
-        var tooltip = $(".tooltip");
-        tooltip.append($(this).data('title'));
-
-         
-        var tipwidth = tooltip.outerWidth();
-        var a_width = $(this).width();
-        var a_hegiht = $(this).height() + 3 + 4;
-
-        //if the tooltip width is smaller than the a/link/parent width
-        if(tipwidth < a_width){
-            tipwidth = a_width;
-            $('.tooltip').outerWidth(tipwidth);
-        }
-
-        var tipwidth = '-' + (tipwidth - a_width)/2;
-        $('.tooltip').css({
-            'left' : tipwidth + 'px',
-            'bottom' : a_hegiht + 'px'
-        }).stop().animate({
-            opacity : 1
-        }, 200);
-      
-
-    });
-
-    $("a").mouseout(function(){
-        var tooltip = $(".tooltip");       
-        tooltip.remove();
-    });
-
-
-});
-
-
-
-
-
+// 在 DOM 加载完成后初始化所有模块
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeModules);
+} else {
+  // DOMContentLoaded 已经触发
+  initializeModules();
+}

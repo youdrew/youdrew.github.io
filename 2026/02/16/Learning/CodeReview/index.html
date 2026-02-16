@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="蓝图代码质量检测
+
+
+
+工具类型
+代表工具 &amp;#x2F; 方案
+核心能力
+适用场景
+
+
+
+UE 官方内置工具
+Blueprint Analyzer（UE4.26+）
+统计蓝图圈复杂度、节点数量、分支深度，检测冗余节点 &amp;#x2F; 无效连线，支持导出分析报告
+基础复杂度检测，无需额外安装
+
+
+UE ">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid Support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body class="layout-post path-2026-02-16-Learning-CodeReview-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p>Copyright © 2026 Eugene Hsuan</p>
+            <p>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p>Modified based on <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> theme</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a class="previous disabled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/02/16/Learning/UnrealDebug/" class="next" data-title="Untitled"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Untitled</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <p>蓝图代码质量检测</p>
+<table>
+<thead>
+<tr>
+<th>工具类型</th>
+<th>代表工具 &#x2F; 方案</th>
+<th>核心能力</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UE 官方内置工具</td>
+<td>Blueprint Analyzer（UE4.26+）</td>
+<td>统计蓝图圈复杂度、节点数量、分支深度，检测冗余节点 &#x2F; 无效连线，支持导出分析报告</td>
+<td>基础复杂度检测，无需额外安装</td>
+</tr>
+<tr>
+<td>UE 社区开源工具</td>
+<td>Blueprint Metrics（GitHub）</td>
+<td>专门针对 UE4&#x2F;5 的蓝图圈复杂度计算工具，可自定义阈值、生成可视化报表，支持批量扫描</td>
+<td>中小型团队，可二次开发集成 CR 流程</td>
+</tr>
+<tr>
+<td>UE 插件市场工具</td>
+<td><a target="_blank" rel="noopener" href="https://www.fab.com/zh-cn/listings/10850cb2-be1d-43d2-971d-922c73d218f3">Linter</a> &#x2F; UE Blueprint Quality Checker</td>
+<td>Linter能实现代码规则检测<br /><br />配置圈复杂度 &#x2F; 代码规范阈值，提交蓝图前自动检测，违规则拦截</td>
+<td>快速集成到 UE 编辑器工作流</td>
+</tr>
+<tr>
+<td>企业级工业化工具链</td>
+<td>Epic Industrial Framework &#x2F; Autodesk ShotGrid + UE 集成</td>
+<td>内置蓝图 CR 流程，结合圈复杂度、性能、合规性检测，适配大型团队协作</td>
+<td>3A 游戏、大型商用 UE 项目</td>
+</tr>
+<tr>
+<td>通用代码质量工具适配</td>
+<td>SonarQube + 社区蓝图转译插件</td>
+<td>将蓝图转译为抽象语法树（AST），复用 SonarQube 的圈复杂度分析和 CR 流程</td>
+<td>已有 SonarQube 质量体系的团队</td>
+</tr>
+<tr>
+<td>自定义脚本 &#x2F; 工具</td>
+<td>基于 UE 的 Editor Utility Widget（EUW）开发</td>
+<td>按需定制圈复杂度计算规则、CR 审批流程，适配团队个性化需求</td>
+<td>有 UE 二次开发能力的团队</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://www.fab.com/zh-cn/listings/14d7ba87-a587-406d-9369-ed75fa0a55ed">蓝图助手</a>:一个很不错的代码整理工具，<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MQ70ASNunPQ">演示视频</a></p>
+<p><a target="_blank" rel="noopener" href="https://codepen.io/dhvoksdw-the-encoder/pen/EaKbeVe">https://codepen.io/dhvoksdw-the-encoder/pen/EaKbeVe</a></p>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- 加载打包后的模块化代码 -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<!-- Featherlight (图库) -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks
+    const codeBlocks = document.querySelectorAll('figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      let code = codeElement.textContent || codeElement.innerText;
+
+      // Check if it's a mermaid diagram
+      if (code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/)) {
+        code = code.trim().replace(/^\s+|\s+$/g, '');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        const figureElement = codeElement.closest('figure');
+        if (figureElement) {
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    }, 100);
+  }
+});
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+
+    elements.forEach(element => {
+      const shaderID = element.getAttribute('data-id');
+
+      if (shaderID) {
+        const container = document.createElement('div');
+        container.style.cssText = `
+          position: relative;
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+          border: 2px solid #bfbbbb;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #f6f6f6;
+        `;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        `;
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        element.parentNode.insertBefore(container, element);
+        element.parentNode.removeChild(element);
+      }
+    });
+  }, 1000);
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
