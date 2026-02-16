@@ -1,6 +1,6 @@
 /**
  * Language Switcher
- * Dynamically switches interface language between Chinese and English
+ * Dynamically switches interface language and article version
  */
 
 (function() {
@@ -20,6 +20,66 @@
         return localStorage.getItem('siteLanguage') || getBrowserLanguage();
     };
 
+    // Get current page language from URL and meta tag
+    const getCurrentPageLanguage = () => {
+        const path = window.location.pathname;
+        
+        // Check if URL contains .zh-CN
+        if (path.includes('.zh-CN')) {
+            return 'zh-CN';
+        }
+        
+        // Check meta tag
+        const langMeta = document.querySelector('meta[name="article:lang"]');
+        if (langMeta) {
+            return langMeta.content;
+        }
+        
+        // Default to en
+        return 'en';
+    };
+
+    // Generate alternate language URL
+    const getAlternateLanguageUrl = (currentPageLang, targetLang) => {
+        const path = window.location.pathname;
+        
+        if (targetLang === 'zh-CN' && currentPageLang === 'en') {
+            // Switch from English to Chinese: add .zh-CN
+            // /about/ -> /about/index.zh-CN.html
+            // /2025/01/01/my-post/ -> /2025/01/01/my-post/index.zh-CN.html
+            if (path.endsWith('/')) {
+                return path + 'index.zh-CN.html';
+            } else if (path.endsWith('.html')) {
+                return path.replace(/\.html$/, '.zh-CN.html');
+            } else {
+                return path + '/index.zh-CN.html';
+            }
+        } else if (targetLang === 'en' && currentPageLang === 'zh-CN') {
+            // Switch from Chinese to English: remove .zh-CN
+            // /about/index.zh-CN.html -> /about/
+            // Handle both /index.zh-CN.html and .zh-CN.html patterns
+            if (path.includes('/index.zh-CN.html')) {
+                return path.replace('/index.zh-CN.html', '/');
+            } else if (path.includes('.zh-CN.html')) {
+                return path.replace('.zh-CN.html', '.html');
+            } else if (path.includes('.zh-CN')) {
+                return path.replace('.zh-CN', '');
+            }
+        }
+        
+        return null;
+    };
+
+    // Check if alternate version exists
+    const checkAlternateVersionExists = async (url) => {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    };
+
     // Update page language
     const applyLanguage = (lang) => {
         const i18n = getI18nData();
@@ -36,13 +96,9 @@
         // Update navigation menu items
         const navLinks = document.querySelectorAll('nav ul li a');
         navLinks.forEach(link => {
-            const text = link.textContent.trim();
-            // Match both English and Chinese text
-            if (translations[text] || translations[link.getAttribute('data-i18n-key')]) {
-                const key = link.getAttribute('data-i18n-key') || text;
-                if (translations[key]) {
-                    link.textContent = translations[key];
-                }
+            const key = link.getAttribute('data-i18n-key');
+            if (key && translations[key]) {
+                link.textContent = translations[key];
             }
         });
 
@@ -59,6 +115,7 @@
         const tooltipElements = document.querySelectorAll('[data-title]');
         tooltipElements.forEach(element => {
             const key = element.getAttribute('data-title');
+            // Only update if it's a known translation key
             if (translations[key]) {
                 element.setAttribute('data-title', translations[key]);
             }
@@ -76,20 +133,34 @@
 
         // Save language preference
         localStorage.setItem('siteLanguage', lang);
-
-        // Update HTML lang attribute for screen readers and SEO
-        document.documentElement.setAttribute('lang', lang);
     };
 
-    // Switch language
-    const switchLanguage = () => {
-        const currentLang = getCurrentLanguage();
-        const newLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+    // Switch language and navigate to alternate version if exists
+    const switchLanguage = async () => {
+        const currentInterfaceLang = getCurrentLanguage();
+        const currentPageLang = getCurrentPageLanguage();
+        const targetLang = currentInterfaceLang === 'zh-CN' ? 'en' : 'zh-CN';
         
-        applyLanguage(newLang);
+        // Try to find alternate language version
+        const alternateUrl = getAlternateLanguageUrl(currentPageLang, targetLang);
+        
+        if (alternateUrl) {
+            // Check if alternate version exists
+            const exists = await checkAlternateVersionExists(alternateUrl);
+            
+            if (exists) {
+                // Apply language and redirect
+                localStorage.setItem('siteLanguage', targetLang);
+                window.location.href = alternateUrl;
+                return;
+            }
+        }
+        
+        // If no alternate version exists, just switch interface language
+        applyLanguage(targetLang);
         
         const i18n = getI18nData();
-        const message = i18n[newLang] ? i18n[newLang]['languageSwitched'] : 'Language switched';
+        const message = i18n[targetLang] ? i18n[targetLang]['languageSwitched'] : 'Language switched';
         showNotification(message);
     };
 
@@ -122,8 +193,25 @@
 
     // Initialize language on page load
     const initLanguage = () => {
-        const currentLang = getCurrentLanguage();
-        applyLanguage(currentLang);
+        const preferredLang = getCurrentLanguage();
+        const currentPageLang = getCurrentPageLanguage();
+        
+        // Apply interface language
+        applyLanguage(preferredLang);
+        
+        // If interface language doesn't match page language, check if we should redirect
+        if (preferredLang !== currentPageLang) {
+            const alternateUrl = getAlternateLanguageUrl(currentPageLang, preferredLang);
+            
+            if (alternateUrl) {
+                checkAlternateVersionExists(alternateUrl).then(exists => {
+                    if (exists) {
+                        // Silently redirect to preferred language version
+                        window.location.replace(alternateUrl);
+                    }
+                });
+            }
+        }
     };
 
     // Initialize on DOM ready
