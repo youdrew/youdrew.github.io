@@ -9,11 +9,11 @@
     <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 18 Feb 2026 06:49:59 GMT</pubDate>
+    <pubDate>Thu, 19 Feb 2026 08:41:50 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>Captury无标记动作捕捉</title>
+      <title>Captury无标记动作捕捉使用及插件接入问题</title>
       <link>http://example.com/2025/12/01/Capturymarkerless/</link>
       <guid>http://example.com/2025/12/01/Capturymarkerless/</guid>
       <pubDate>Mon, 01 Dec 2025 04:34:56 GMT</pubDate>
@@ -39,7 +39,7 @@
     </item>
     
     <item>
-      <title>Unreal RemoteControl Note</title>
+      <title>虚幻5远程控制（RemoteControl）笔记</title>
       <link>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/</link>
       <guid>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/</guid>
       <pubDate>Fri, 21 Nov 2025 03:21:56 GMT</pubDate>
@@ -103,7 +103,7 @@
     </item>
     
     <item>
-      <title>Aximmetry Learning Notes</title>
+      <title>Aximmetry及低成本XR方案折腾笔记</title>
       <link>http://example.com/2025/09/13/Aximmetry/</link>
       <guid>http://example.com/2025/09/13/Aximmetry/</guid>
       <pubDate>Sat, 13 Sep 2025 04:34:56 GMT</pubDate>
@@ -129,7 +129,7 @@
     </item>
     
     <item>
-      <title>Shader Learning Notes</title>
+      <title>Shader学习笔记</title>
       <link>http://example.com/2025/08/01/Shader%20Learning%20Note/</link>
       <guid>http://example.com/2025/08/01/Shader%20Learning%20Note/</guid>
       <pubDate>Fri, 01 Aug 2025 04:34:56 GMT</pubDate>
