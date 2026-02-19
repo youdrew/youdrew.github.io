@@ -197,13 +197,14 @@ AI模型
 <li><a href="#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86">项目管理</a></li>
 </ul>
 </li>
+<li><a href="#%E8%A7%82%E7%82%B9%E8%A7%A3%E9%87%8A">观点解释</a></li>
 <li><a href="#%E5%B8%B8%E8%A7%81%E9%99%B7%E9%98%B1">常见陷阱</a></li>
 <li><a href="#%E8%BF%9B%E9%98%B6%E6%8A%80%E5%B7%A7">进阶技巧</a></li>
 <li><a href="#%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95">学习记录</a></li>
 </ul>
 <hr>
 <h1 id="AI模型"><a href="#AI模型" class="headerlink" title="AI模型"></a>AI模型</h1><blockquote>
-<p>💡 待补充：主流模型对比和选择建议</p>
+<p><a target="_blank" rel="noopener" href="https://arena.ai/zh/leaderboard/code">AI编程能力盲测</a><br><a target="_blank" rel="noopener" href="https://bigmodel.cn/usercenter/glm-coding/usage">GLM(智谱)</a>：目前是我的口粮模型，购买了他的编程套餐。很便宜，同时同时供给给龙虾机器人用。</p>
 </blockquote>
 <h1 id="测试和使用的AI编程工具（游戏客户端视角）"><a href="#测试和使用的AI编程工具（游戏客户端视角）" class="headerlink" title="测试和使用的AI编程工具（游戏客户端视角）"></a>测试和使用的AI编程工具（游戏客户端视角）</h1><h2 id="Cursor"><a href="#Cursor" class="headerlink" title="Cursor"></a>Cursor</h2><ul>
 <li><strong>特点</strong>: 独立运行的AI编程IDE（基于VS Code）</li>
@@ -420,6 +421,44 @@ AI模型
 <li>及时调整计划</li>
 </ul>
 <hr>
+<h1 id="观点解释"><a href="#观点解释" class="headerlink" title="观点解释"></a>观点解释</h1><h2 id="Orchestration（蜂群模式）"><a href="#Orchestration（蜂群模式）" class="headerlink" title="Orchestration（蜂群模式）"></a>Orchestration（蜂群模式）</h2><p>复杂编排+主控+蜂群<br>谁能做好编排，谁就能统领蜂群。</p>
+<p><strong>说明</strong>: 在AI编程中，Orchestration指的是通过一个主控程序来协调和管理多个AI模型或工具的工作。就像蜂群中有一个”女王”发出指令，多个”工蜂”分工协作完成任务。这种方式可以实现：</p>
+<ul>
+<li>不同模型各司其职（如一个负责代码生成，一个负责调试，一个负责测试）</li>
+<li>工作流自动化编排</li>
+<li>并发处理多个子任务</li>
+<li>统一的结果整合</li>
+</ul>
+<h2 id="MCP框架"><a href="#MCP框架" class="headerlink" title="MCP框架"></a>MCP框架</h2><p><strong>说明</strong>: MCP (Model Context Protocol) 是一个开放的协议标准，用于AI模型与外部工具、数据源之间的通信。它定义了一套统一的接口，让AI能够安全、规范地访问外部资源。核心价值包括：</p>
+<ul>
+<li>标准化的工具调用接口</li>
+<li>安全的权限控制机制</li>
+<li>跨平台的兼容性</li>
+<li>插件式的扩展能力</li>
+</ul>
+<h2 id="Token（令牌）"><a href="#Token（令牌）" class="headerlink" title="Token（令牌）"></a>Token（令牌）</h2><p>AI模型处理文本的基本单位。约等于3&#x2F;4个英文单词或1个中文字符。上下文窗口的token数量限制直接影响AI能理解的信息量。</p>
+<h3 id="Token计算参考"><a href="#Token计算参考" class="headerlink" title="Token计算参考"></a>Token计算参考</h3><ul>
+<li><strong>中文</strong>: 约1字符 &#x3D; 1 token</li>
+<li><strong>英文</strong>: 约4字符 &#x3D; 1 token</li>
+<li><strong>代码</strong>: 约4-6字符 &#x3D; 1 token（受代码复杂度影响）</li>
+<li><strong>换行符&#x2F;空格</strong>: 通常不计或占少量token</li>
+</ul>
+<h3 id="消耗估算方法"><a href="#消耗估算方法" class="headerlink" title="消耗估算方法"></a>消耗估算方法</h3><ol>
+<li><strong>粗略估算</strong>: 字符数 ÷ 4 ≈ token数</li>
+<li><strong>准确计算</strong>: 使用模型提供的token计数工具</li>
+<li><strong>上下文消耗</strong>:<ul>
+<li>输入Prompt：按上述规则计算</li>
+<li>输出内容：通常按输入的50%-200%消耗</li>
+<li>历史对话：会累积计入上下文</li>
+</ul>
+</li>
+</ol>
+<h3 id="实用建议"><a href="#实用建议" class="headerlink" title="实用建议"></a>实用建议</h3><ul>
+<li>长代码文件可用摘要代替全文</li>
+<li>删除无用的注释和空行</li>
+<li>定期清理对话历史</li>
+<li>关注各模型的上下文窗口限制（如4K&#x2F;8K&#x2F;32K&#x2F;128K）</li>
+</ul>
 <h1 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h1><h2 id="❌-避免这些错误"><a href="#❌-避免这些错误" class="headerlink" title="❌ 避免这些错误"></a>❌ 避免这些错误</h2><h3 id="1-过度依赖AI"><a href="#1-过度依赖AI" class="headerlink" title="1. 过度依赖AI"></a>1. 过度依赖AI</h3><ul>
 <li>不要完全放弃思考</li>
 <li>保持对代码的理解</li>
