@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="OpenClaw 使用笔记简介OpenClaw 是一个本地 AI 助手框架，可以集成多种模型和工具，支持会话管理、技能扩展、定时任务等功能。
+核心特性
+本地运行，数据隐私保护
+多模型支持（GLM、Claude 等）
+灵活的技能扩展机制
+定时任务和提醒功能
+跨平台消息集成
+
+
+核心概念会话类型
+主会话">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="OpenClaw 使用笔记"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Article Language-->
+    
+        <meta name="article:lang" content="en"/>
+    
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>OpenClaw 使用笔记 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+    
+<link rel="stylesheet" href="/css/language-switcher.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid Support -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body class="layout-post path-2024-02-24-OPENCLAW-NOTES-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/" data-i18n-key="Home">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives" data-i18n-key="Archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about" data-i18n-key="About">About</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2025/08/01/Shader%20Learning%20Note/" class="previous" data-title="Shader学习笔记"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a class="next disabled"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">OpenClaw 使用笔记</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <h1 id="OpenClaw-使用笔记"><a href="#OpenClaw-使用笔记" class="headerlink" title="OpenClaw 使用笔记"></a>OpenClaw 使用笔记</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>OpenClaw 是一个本地 AI 助手框架，可以集成多种模型和工具，支持会话管理、技能扩展、定时任务等功能。</p>
+<h3 id="核心特性"><a href="#核心特性" class="headerlink" title="核心特性"></a>核心特性</h3><ul>
+<li>本地运行，数据隐私保护</li>
+<li>多模型支持（GLM、Claude 等）</li>
+<li>灵活的技能扩展机制</li>
+<li>定时任务和提醒功能</li>
+<li>跨平台消息集成</li>
+</ul>
+<hr>
+<h2 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h2><h3 id="会话类型"><a href="#会话类型" class="headerlink" title="会话类型"></a>会话类型</h3><ul>
+<li><strong>主会话（Main Session）</strong>: 直接与用户对话的会话，可以访问完整上下文和记忆</li>
+<li><strong>子会话（Sub-agent）</strong>: 隔离的工作会话，用于执行特定任务</li>
+</ul>
+<h3 id="工作空间"><a href="#工作空间" class="headerlink" title="工作空间"></a>工作空间</h3><p>默认工作目录：<code>~/clawd</code></p>
+<p>包含以下重要文件：</p>
+<ul>
+<li><code>SOUL.md</code>: 助手的性格和行为准则</li>
+<li><code>USER.md</code>: 用户信息和偏好</li>
+<li><code>MEMORY.md</code>: 长期记忆（仅在主会话加载）</li>
+<li><code>memory/YYYY-MM-DD.md</code>: 每日记忆日志</li>
+<li><code>TOOLS.md</code>: 环境特定的工具配置</li>
+<li><code>HEARTBEAT.md</code>: 定期检查任务列表</li>
+</ul>
+<hr>
+<h2 id="Skills-机制"><a href="#Skills-机制" class="headerlink" title="Skills 机制"></a>Skills 机制</h2><h3 id="什么是-Skills"><a href="#什么是-Skills" class="headerlink" title="什么是 Skills"></a>什么是 Skills</h3><p>Skills 是可重用的功能模块，提供特定的工具和能力。</p>
+<h3 id="当前可用-Skills"><a href="#当前可用-Skills" class="headerlink" title="当前可用 Skills"></a>当前可用 Skills</h3><h4 id="1-bluebubbles"><a href="#1-bluebubbles" class="headerlink" title="1. bluebubbles"></a>1. bluebubbles</h4><ul>
+<li><strong>用途</strong>: 通过 BlueBubbles 发送和管理 iMessage</li>
+<li><strong>使用</strong>: <code>message</code> 工具，设置 <code>channel=&quot;bluebubbles&quot;</code></li>
+<li><strong>功能</strong>: 发送消息、回复、编辑、反应等</li>
+</ul>
+<h4 id="2-coding-agent"><a href="#2-coding-agent" class="headerlink" title="2. coding-agent"></a>2. coding-agent</h4><ul>
+<li><strong>用途</strong>: 委托编码任务给专门的 AI 代理</li>
+<li><strong>适用场景</strong>:<ul>
+<li>创建新功能或应用</li>
+<li>代码审查</li>
+<li>大型代码库重构</li>
+<li>需要文件探索的迭代编码</li>
+</ul>
+</li>
+<li><strong>不适场景</strong>: 简单的一行修改、读取代码（用 read 工具）、在 ~&#x2F;clawd 工作</li>
+<li><strong>注意</strong>: 需要支持 pty:true 的 bash 工具</li>
+</ul>
+<h4 id="3-healthcheck"><a href="#3-healthcheck" class="headerlink" title="3. healthcheck"></a>3. healthcheck</h4><ul>
+<li><strong>用途</strong>: OpenClaw 部署的安全加固和风险容忍度配置</li>
+<li><strong>适用场景</strong>:<ul>
+<li>安全审计</li>
+<li>防火墙&#x2F;SSH&#x2F;更新加固</li>
+<li>风险评估</li>
+<li>OpenClaw 定期安全检查</li>
+<li>版本状态检查</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-skill-creator"><a href="#4-skill-creator" class="headerlink" title="4. skill-creator"></a>4. skill-creator</h4><ul>
+<li><strong>用途</strong>: 创建或更新 AgentSkills</li>
+<li><strong>适用场景</strong>:<ul>
+<li>设计技能</li>
+<li>构建技能结构</li>
+<li>打包带脚本、引用和资源的技能</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-weather"><a href="#5-weather" class="headerlink" title="5. weather"></a>5. weather</h4><ul>
+<li><strong>用途</strong>: 通过 wttr.in 或 Open-Meteo 获取当前天气和预报</li>
+<li><strong>适用场景</strong>: 用户询问任何地点的天气、温度或预报</li>
+<li><strong>不适场景</strong>: 历史天气数据、恶劣天气警报、详细气象分析</li>
+<li><strong>优势</strong>: 无需 API 密钥</li>
+</ul>
+<h3 id="使用-Skills"><a href="#使用-Skills" class="headerlink" title="使用 Skills"></a>使用 Skills</h3><p>当一个技能明显适用时，工具会自动加载其 <code>SKILL.md</code> 文件并遵循其说明。</p>
+<hr>
+<h2 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h2><h3 id="子会话"><a href="#子会话" class="headerlink" title="子会话"></a>子会话</h3><p>用于执行隔离的任务，可以：</p>
+<ul>
+<li><strong>一次性运行（mode&#x3D;”run”）</strong>: 执行单个任务后自动清理</li>
+<li><strong>持久会话（mode&#x3D;”session”）</strong>: 保持会话活跃，可以多次交互</li>
+</ul>
+<p><strong>使用场景</strong>:</p>
+<ul>
+<li>需要独立上下文的任务</li>
+<li>后台长时间运行的任务</li>
+<li>多个独立任务并发执行</li>
+</ul>
+<h3 id="会话通信"><a href="#会话通信" class="headerlink" title="会话通信"></a>会话通信</h3><ul>
+<li><code>sessions_send</code>: 向其他会话发送消息</li>
+<li><code>subagents</code>: 管理子代理（列表、终止、引导）</li>
+</ul>
+<hr>
+<h2 id="消息处理"><a href="#消息处理" class="headerlink" title="消息处理"></a>消息处理</h2><h3 id="消息路由"><a href="#消息路由" class="headerlink" title="消息路由"></a>消息路由</h3><ul>
+<li><strong>当前会话回复</strong>: 自动路由到源渠道（Signal、Telegram 等）</li>
+<li><strong>跨会话</strong>: 使用 <code>sessions_send(sessionKey, message)</code></li>
+<li><strong>子代理协调</strong>: 使用 <code>subagents</code> 工具</li>
+</ul>
+<h3 id="消息工具"><a href="#消息工具" class="headerlink" title="消息工具"></a>消息工具</h3><p><code>message</code> 工具支持的操作：</p>
+<ul>
+<li><code>send</code>: 发送消息</li>
+<li><code>react</code>: 添加表情反应</li>
+<li><code>edit</code>: 编辑消息</li>
+<li><code>unsend</code>: 撤回消息</li>
+<li><code>reply</code>: 回复消息</li>
+<li><code>sendWithEffect</code>: 发送带效果的消息</li>
+<li><code>sendAttachment</code>: 发送附件</li>
+</ul>
+<h3 id="平台格式化"><a href="#平台格式化" class="headerlink" title="平台格式化"></a>平台格式化</h3><ul>
+<li><strong>Discord&#x2F;WhatsApp</strong>: 不使用 Markdown 表格，用项目符号代替</li>
+<li><strong>Discord 链接</strong>: 使用 <code>&lt;&gt;</code> 抑制嵌入：<code>&lt;https://example.com&gt;</code></li>
+<li><strong>WhatsApp</strong>: 不使用标题，用粗体或大写强调</li>
+</ul>
+<hr>
+<h2 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h2><h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><ul>
+<li><code>read</code>: 读取文件内容</li>
+<li><code>write</code>: 创建或覆盖文件</li>
+<li><code>edit</code>: 精确编辑文件</li>
+</ul>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><ul>
+<li><code>exec</code>: 运行 Shell 命令（支持 pty 用于需要 TTY 的 CLI）</li>
+<li><code>process</code>: 管理后台执行会话</li>
+</ul>
+<h3 id="网络操作"><a href="#网络操作" class="headerlink" title="网络操作"></a>网络操作</h3><ul>
+<li><code>web_search</code>: 使用 Brave Search API 搜索网页</li>
+<li><code>web_fetch</code>: 获取并提取 URL 的可读内容</li>
+</ul>
+<h3 id="浏览器控制"><a href="#浏览器控制" class="headerlink" title="浏览器控制"></a>浏览器控制</h3><ul>
+<li><code>browser</code>: 通过 OpenClaw 浏览器控制服务器控制浏览器<ul>
+<li>支持配置文件：<code>chrome</code>（Chrome 扩展中继）或 <code>openclaw</code>（隔离浏览器）</li>
+<li>用于 UI 自动化、截图、导航等</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="Gateway-管理"><a href="#Gateway-管理" class="headerlink" title="Gateway 管理"></a>Gateway 管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">openclaw gateway status    <span class="comment"># 查看状态</span></span><br><span class="line">openclaw gateway start     <span class="comment"># 启动</span></span><br><span class="line">openclaw gateway stop      <span class="comment"># 停止</span></span><br><span class="line">openclaw gateway restart   <span class="comment"># 重启</span></span><br><span class="line">openclaw <span class="built_in">help</span>              <span class="comment"># 查看帮助</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="状态检查"><a href="#状态检查" class="headerlink" title="状态检查"></a>状态检查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openclaw status            <span class="comment"># 系统状态</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="定时任务和提醒"><a href="#定时任务和提醒" class="headerlink" title="定时任务和提醒"></a>定时任务和提醒</h2><h3 id="Cron-Jobs"><a href="#Cron-Jobs" class="headerlink" title="Cron Jobs"></a>Cron Jobs</h3><p><strong>使用场景</strong>:</p>
+<ul>
+<li>精确时间安排（”每周一上午 9 点”）</li>
+<li>需要与主会话历史隔离的任务</li>
+<li>需要不同模型或思考级别的任务</li>
+<li>一次性提醒（”20 分钟后提醒我”）</li>
+<li>输出应直接投递到渠道的任务</li>
+</ul>
+<h3 id="Heartbeats"><a href="#Heartbeats" class="headerlink" title="Heartbeats"></a>Heartbeats</h3><p><strong>使用场景</strong>:</p>
+<ul>
+<li>多个检查可以批量一起（收件箱 + 日历 + 通知）</li>
+<li>需要最近消息的对话上下文</li>
+<li>时间可以稍微漂移（每 ~30 分钟一次可以，不需要精确）</li>
+<li>希望通过组合定期检查来减少 API 调用</li>
+</ul>
+<p><strong>定期检查内容</strong>（每天 2-4 次）:</p>
+<ul>
+<li>邮件 - 未读紧急消息？</li>
+<li>日历 - 未来 24-48 小时的事件？</li>
+<li>提及 - Twitter&#x2F;社交通知？</li>
+<li>天气 - 如果用户可能会出门</li>
+</ul>
+<p><strong>追踪检查状态</strong>（<code>memory/heartbeat-state.json</code>）:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;lastChecks&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="number">1703275200</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;calendar&quot;</span><span class="punctuation">:</span> <span class="number">1703260800</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;weather&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="配置文件说明"><a href="#配置文件说明" class="headerlink" title="配置文件说明"></a>配置文件说明</h2><h3 id="AGENTS-md"><a href="#AGENTS-md" class="headerlink" title="AGENTS.md"></a>AGENTS.md</h3><p>工作空间的根目录，定义会话启动的引导规则。</p>
+<h3 id="SOUL-md"><a href="#SOUL-md" class="headerlink" title="SOUL.md"></a>SOUL.md</h3><p>助手的灵魂，定义性格、边界、语气。</p>
+<h3 id="USER-md"><a href="#USER-md" class="headerlink" title="USER.md"></a>USER.md</h3><p>用户信息，包括称呼、时区、偏好等。</p>
+<h3 id="MEMORY-md"><a href="#MEMORY-md" class="headerlink" title="MEMORY.md"></a>MEMORY.md</h3><p>长期记忆，仅在主会话加载。包含决策、上下文、需要记住的事情。</p>
+<h3 id="TOOLS-md"><a href="#TOOLS-md" class="headerlink" title="TOOLS.md"></a>TOOLS.md</h3><p>环境特定的工具笔记（相机名称、SSH 主机、TTS 偏好等）。</p>
+<h3 id="IDENTITY-md"><a href="#IDENTITY-md" class="headerlink" title="IDENTITY.md"></a>IDENTITY.md</h3><p>助手身份信息（名称、生物、表情符号等）。</p>
+<hr>
+<h2 id="实用技巧和最佳实践"><a href="#实用技巧和最佳实践" class="headerlink" title="实用技巧和最佳实践"></a>实用技巧和最佳实践</h2><h3 id="记忆管理"><a href="#记忆管理" class="headerlink" title="记忆管理"></a>记忆管理</h3><p><strong>每日记忆</strong>（<code>memory/YYYY-MM-DD.md</code>）:</p>
+<ul>
+<li>原始日志，记录当天发生的事情</li>
+<li>创建 <code>memory/</code> 目录（如果不存在）</li>
+</ul>
+<p><strong>长期记忆</strong>（<code>MEMORY.md</code>）:</p>
+<ul>
+<li>定期（每隔几天）通过心跳回顾每日文件</li>
+<li>识别值得长期保留的重要事件、教训或见解</li>
+<li>用提炼的学习内容更新 MEMORY.md</li>
+<li>删除 MEMORY.md 中不再相关的过时信息</li>
+</ul>
+<h3 id="组合检查"><a href="#组合检查" class="headerlink" title="组合检查"></a>组合检查</h3><ul>
+<li>将类似的定期检查合并到 <code>HEARTBEAT.md</code> 中，而不是创建多个 cron 任务</li>
+<li>使用 cron 进行精确调度和独立任务</li>
+</ul>
+<h3 id="文件操作-1"><a href="#文件操作-1" class="headerlink" title="文件操作"></a>文件操作</h3><ul>
+<li><strong>优先顺序</strong>: 垃圾箱 &gt; 删除（恢复胜过永久丢失）</li>
+<li>不确定时，先问</li>
+</ul>
+<h3 id="外部操作"><a href="#外部操作" class="headerlink" title="外部操作"></a>外部操作</h3><p>以下操作需要先询问：</p>
+<ul>
+<li>发送邮件、推文、公开帖子</li>
+<li>任何离开本机的事情</li>
+<li>任何不确定的操作</li>
+</ul>
+<h3 id="群组聊天"><a href="#群组聊天" class="headerlink" title="群组聊天"></a>群组聊天</h3><ul>
+<li>不要将用户的资料共享给他人</li>
+<li>在群组中，你是参与者，不是他们的声音或代理</li>
+<li>说话前先思考</li>
+</ul>
+<h3 id="模型别名"><a href="#模型别名" class="headerlink" title="模型别名"></a>模型别名</h3><p>使用简称而不是完整的提供商&#x2F;模型：</p>
+<ul>
+<li><strong>GLM</strong>: zai&#x2F;glm-5</li>
+</ul>
+<hr>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><h3 id="问题：工具不可用"><a href="#问题：工具不可用" class="headerlink" title="问题：工具不可用"></a>问题：工具不可用</h3><p>检查 <code>openclaw status</code> 确认系统状态。</p>
+<h3 id="问题：找不到某个功能"><a href="#问题：找不到某个功能" class="headerlink" title="问题：找不到某个功能"></a>问题：找不到某个功能</h3><ul>
+<li>检查可用的 Skills</li>
+<li>阅读 Skills 文档</li>
+<li>检查工具权限</li>
+</ul>
+<h3 id="问题：会话不响应"><a href="#问题：会话不响应" class="headerlink" title="问题：会话不响应"></a>问题：会话不响应</h3><ul>
+<li>检查 Gateway 状态</li>
+<li>尝试重启：<code>openclaw gateway restart</code></li>
+</ul>
+<h3 id="问题：记忆丢失"><a href="#问题：记忆丢失" class="headerlink" title="问题：记忆丢失"></a>问题：记忆丢失</h3><ul>
+<li>确认 <code>MEMORY.md</code> 和 <code>memory/</code> 目录存在</li>
+<li>检查文件权限</li>
+<li>回顾最近的 <code>memory/YYYY-MM-DD.md</code> 文件</li>
+</ul>
+<hr>
+<h2 id="资源链接"><a href="#资源链接" class="headerlink" title="资源链接"></a>资源链接</h2><ul>
+<li><strong>OpenClaw 文档</strong>: <code>/Users/engene_hsuan/.nvm/versions/node/v24.13.0/lib/node_modules/openclaw/docs</code></li>
+<li><strong>镜像</strong>: <a target="_blank" rel="noopener" href="https://docs.openclaw.ai/">https://docs.openclaw.ai</a></li>
+<li><strong>源码</strong>: <a target="_blank" rel="noopener" href="https://github.com/openclaw/openclaw">https://github.com/openclaw/openclaw</a></li>
+<li><strong>社区</strong>: <a target="_blank" rel="noopener" href="https://discord.com/invite/clawd">https://discord.com/invite/clawd</a></li>
+<li><strong>技能市场</strong>: <a target="_blank" rel="noopener" href="https://clawhub.com/">https://clawhub.com</a></li>
+</ul>
+<hr>
+<h2 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h2><h3 id="2024-02-24"><a href="#2024-02-24" class="headerlink" title="2024-02-24"></a>2024-02-24</h3><ul>
+<li>初始版本创建</li>
+<li>添加 Skills 机制说明</li>
+<li>添加核心概念和最佳实践</li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/OpenClaw/">OpenClaw</a> <a href="/tags/AI/">AI</a> <a href="/tags/Assistant/">Assistant</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- 加载打包后的模块化代码 -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<!-- Language Switcher -->
+
+<script src="/js/i18n-data.js"></script>
+
+
+<script src="/js/language-switcher.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<!-- Featherlight (图库) -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks
+    const codeBlocks = document.querySelectorAll('figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      let code = codeElement.textContent || codeElement.innerText;
+
+      // Check if it's a mermaid diagram
+      if (code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/)) {
+        code = code.trim().replace(/^\s+|\s+$/g, '');
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        const figureElement = codeElement.closest('figure');
+        if (figureElement) {
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    }, 100);
+  }
+});
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+
+    elements.forEach(element => {
+      const shaderID = element.getAttribute('data-id');
+
+      if (shaderID) {
+        const container = document.createElement('div');
+        container.style.cssText = `
+          position: relative;
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+          border: 2px solid #bfbbbb;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #f6f6f6;
+        `;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        `;
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        element.parentNode.insertBefore(container, element);
+        element.parentNode.removeChild(element);
+      }
+    });
+  }, 1000);
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
