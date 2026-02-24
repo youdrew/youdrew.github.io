@@ -321,19 +321,46 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateTOC(tocList) {
         const content = document.querySelector('.content');
         const headers = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        
+
+        // 用于追踪每级的计数
+        const counters = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+        const parentStack = []; // 存储父级编号
+
         headers.forEach((header, index) => {
             // 为每个标题创建唯一ID
             const id = `header-${index}`;
             header.id = id;
-            
-            // 创建目录项
+
+            // 获取标题级别
             const level = parseInt(header.tagName[1]);
+
+            // 更新计数器
+            counters[level]++;
+            // 清除更低级别的计数
+            for (let l = level + 1; l <= 6; l++) {
+                counters[l] = 0;
+            }
+
+            // 更新父级栈 - 使用 slice 而不是设置 length 来避免 undefined 元素
+            while (parentStack.length > level - 1) {
+                parentStack.pop();
+            }
+            parentStack.push(counters[level]);
+
+            // 生成编号（如 1, 1.1, 1.2.1 等）
+            const number = parentStack.join('.');
+
+            // 创建目录项
             const item = document.createElement('div');
             item.className = 'toc-item';
             item.setAttribute('data-level', level);
-            item.textContent = header.textContent;
-            
+
+            // 创建编号和标题的容器
+            const textSpan = document.createElement('span');
+            textSpan.className = 'toc-item-text';
+            textSpan.innerHTML = `<span class="toc-number">${number}.</span> ${header.textContent}`;
+            item.appendChild(textSpan);
+
             tocList.appendChild(item);
         });
     }

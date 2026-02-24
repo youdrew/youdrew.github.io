@@ -1103,6 +1103,19 @@ header:not(.show_menu) ~ .main {
 .toc-item[data-level="5"] { color: #aaa; font-weight: normal; }
 .toc-item[data-level="6"] { color: #ccc; font-weight: normal; }
 
+/* 标题编号样式 */
+.toc-number {
+    display: inline-block;
+    margin-right: 16px;
+    font-weight: inherit;
+    color: inherit;
+}
+
+/* 标题文本样式 */
+.toc-title {
+    display: inline;
+}
+
 /* TOC 折叠按钮 - 每个标题都有，但按层级缩进 */
 .toc-item .toc-collapse-btn {
     position: absolute;
@@ -1113,21 +1126,21 @@ header:not(.show_menu) ~ .main {
     cursor: pointer;
 }
 
-/* 按层级设置按钮位置，增加与标题的间距 */
-.toc-item[data-level="1"] .toc-collapse-btn { left: 4px; }
-.toc-item[data-level="2"] .toc-collapse-btn { left: 20px; }
-.toc-item[data-level="3"] .toc-collapse-btn { left: 36px; }
-.toc-item[data-level="4"] .toc-collapse-btn { left: 52px; }
-.toc-item[data-level="5"] .toc-collapse-btn { left: 68px; }
-.toc-item[data-level="6"] .toc-collapse-btn { left: 84px; }
+/* 按层级设置按钮位置，更靠近编号 */
+.toc-item[data-level="1"] .toc-collapse-btn { left: 0px; }
+.toc-item[data-level="2"] .toc-collapse-btn { left: 16px; }
+.toc-item[data-level="3"] .toc-collapse-btn { left: 32px; }
+.toc-item[data-level="4"] .toc-collapse-btn { left: 48px; }
+.toc-item[data-level="5"] .toc-collapse-btn { left: 64px; }
+.toc-item[data-level="6"] .toc-collapse-btn { left: 80px; }
 
-/* 标题文本与按钮保持间距，防止换行 */
-.toc-item[data-level="1"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
-.toc-item[data-level="2"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
-.toc-item[data-level="3"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
-.toc-item[data-level="4"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
-.toc-item[data-level="5"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
-.toc-item[data-level="6"] .toc-item-text { margin-left: 24px; white-space: nowrap; display: inline-block; }
+/* 标题文本整体靠近按钮，但编号和标题内容之间保持较大距离 */
+.toc-item[data-level="1"] .toc-item-text { margin-left: 8px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="2"] .toc-item-text { margin-left: 8px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="3"] .toc-item-text { margin-left: 8px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="4"] .toc-item-text { margin-left: 8px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="5"] .toc-item-text { margin-left: 8px; white-space: nowrap; display: inline-block; }
+.toc-item[data-level="6"] .toc-item-text { margin-left: 8px; white-space: nowrap; display: inline-block; }
 
 .toc-collapse-btn::before {
     content: "";
