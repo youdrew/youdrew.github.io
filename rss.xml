@@ -9,13 +9,13 @@
     <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 05 Mar 2026 07:54:03 GMT</pubDate>
+    <pubDate>Sat, 07 Mar 2026 18:26:28 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>UnrealMCP - AI控制Unreal Engine的MCP项目汇总</title>
-      <link>http://example.com/2026/03/04/UnrealMCP/</link>
-      <guid>http://example.com/2026/03/04/UnrealMCP/</guid>
+      <link>http://example.com/2026/03/04/20260304.UnrealMCP/</link>
+      <guid>http://example.com/2026/03/04/20260304.UnrealMCP/</guid>
       <pubDate>Wed, 04 Mar 2026 11:05:00 GMT</pubDate>
       
         
@@ -29,23 +29,23 @@
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
-      
       <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      
+      <category domain="http://example.com/tags/AI/">AI</category>
       
       <category domain="http://example.com/tags/Vibe-Coding/">Vibe Coding</category>
       
       <category domain="http://example.com/tags/MCP/">MCP</category>
       
       
-      <comments>http://example.com/2026/03/04/UnrealMCP/#disqus_thread</comments>
+      <comments>http://example.com/2026/03/04/20260304.UnrealMCP/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Vibe Coding（结对编程）系统性学习</title>
-      <link>http://example.com/2026/02/19/VibeCoding/</link>
-      <guid>http://example.com/2026/02/19/VibeCoding/</guid>
+      <link>http://example.com/2026/02/19/20260219.VibeCoding/</link>
+      <guid>http://example.com/2026/02/19/20260219.VibeCoding/</guid>
       <pubDate>Thu, 19 Feb 2026 04:34:56 GMT</pubDate>
       
         
@@ -64,14 +64,14 @@
       <category domain="http://example.com/tags/Vibe-Coding/">Vibe Coding</category>
       
       
-      <comments>http://example.com/2026/02/19/VibeCoding/#disqus_thread</comments>
+      <comments>http://example.com/2026/02/19/20260219.VibeCoding/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>OpenClaw 使用笔记</title>
-      <link>http://example.com/2026/02/16/OPENCLAW_NOTES/</link>
-      <guid>http://example.com/2026/02/16/OPENCLAW_NOTES/</guid>
+      <link>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/</link>
+      <guid>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/</guid>
       <pubDate>Mon, 16 Feb 2026 03:48:00 GMT</pubDate>
       
         
@@ -92,14 +92,14 @@
       <category domain="http://example.com/tags/Assistant/">Assistant</category>
       
       
-      <comments>http://example.com/2026/02/16/OPENCLAW_NOTES/#disqus_thread</comments>
+      <comments>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Captury无标记动作捕捉使用及插件接入问题</title>
-      <link>http://example.com/2025/12/01/Capturymarkerless/</link>
-      <guid>http://example.com/2025/12/01/Capturymarkerless/</guid>
+      <link>http://example.com/2025/12/01/20251201.Capturymarkerless/</link>
+      <guid>http://example.com/2025/12/01/20251201.Capturymarkerless/</guid>
       <pubDate>Mon, 01 Dec 2025 04:34:56 GMT</pubDate>
       
         
@@ -118,14 +118,14 @@
       <category domain="http://example.com/tags/%E5%8A%A8%E4%BD%9C%E6%8D%95%E6%8D%89/">动作捕捉</category>
       
       
-      <comments>http://example.com/2025/12/01/Capturymarkerless/#disqus_thread</comments>
+      <comments>http://example.com/2025/12/01/20251201.Capturymarkerless/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>虚幻5远程控制（RemoteControl）笔记</title>
-      <link>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/</link>
-      <guid>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/</guid>
+      <link>http://example.com/2025/11/21/20251121.Unreal%20RemoteControl%20Note/</link>
+      <guid>http://example.com/2025/11/21/20251121.Unreal%20RemoteControl%20Note/</guid>
       <pubDate>Fri, 21 Nov 2025 03:21:56 GMT</pubDate>
       
         
@@ -144,14 +144,14 @@
       <category domain="http://example.com/tags/Game-Development/">Game Development</category>
       
       
-      <comments>http://example.com/2025/11/21/Unreal%20RemoteControl%20Note/#disqus_thread</comments>
+      <comments>http://example.com/2025/11/21/20251121.Unreal%20RemoteControl%20Note/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>UE5 GAS 学习笔记</title>
-      <link>http://example.com/2025/09/21/UE5%20GAS%20Learning%20Notes/</link>
-      <guid>http://example.com/2025/09/21/UE5%20GAS%20Learning%20Notes/</guid>
+      <link>http://example.com/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/</link>
+      <guid>http://example.com/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/</guid>
       <pubDate>Sun, 21 Sep 2025 04:34:56 GMT</pubDate>
       
         
@@ -182,14 +182,14 @@
       <category domain="http://example.com/tags/Game-Framework/">Game Framework</category>
       
       
-      <comments>http://example.com/2025/09/21/UE5%20GAS%20Learning%20Notes/#disqus_thread</comments>
+      <comments>http://example.com/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Aximmetry及低成本XR方案折腾笔记</title>
-      <link>http://example.com/2025/09/13/Aximmetry/</link>
-      <guid>http://example.com/2025/09/13/Aximmetry/</guid>
+      <link>http://example.com/2025/09/13/20250913.Aximmetry/</link>
+      <guid>http://example.com/2025/09/13/20250913.Aximmetry/</guid>
       <pubDate>Sat, 13 Sep 2025 04:34:56 GMT</pubDate>
       
         
@@ -208,14 +208,14 @@
       <category domain="http://example.com/tags/Aximmetry/">Aximmetry</category>
       
       
-      <comments>http://example.com/2025/09/13/Aximmetry/#disqus_thread</comments>
+      <comments>http://example.com/2025/09/13/20250913.Aximmetry/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Shader学习笔记</title>
-      <link>http://example.com/2025/08/01/Shader%20Learning%20Note/</link>
-      <guid>http://example.com/2025/08/01/Shader%20Learning%20Note/</guid>
+      <link>http://example.com/2025/08/01/20250801.Shader%20Learning%20Note/</link>
+      <guid>http://example.com/2025/08/01/20250801.Shader%20Learning%20Note/</guid>
       <pubDate>Fri, 01 Aug 2025 04:34:56 GMT</pubDate>
       
         
@@ -229,13 +229,13 @@
       
       
       
-      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
-      
       <category domain="http://example.com/tags/Shader/">Shader</category>
       
       <category domain="http://example.com/tags/GLSL/">GLSL</category>
       
       <category domain="http://example.com/tags/HLSL/">HLSL</category>
+      
+      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
       
       <category domain="http://example.com/tags/Graphics-Programming/">Graphics Programming</category>
       
@@ -244,7 +244,7 @@
       <category domain="http://example.com/tags/Game-Development-Shader-001/">Game Development Shader 001</category>
       
       
-      <comments>http://example.com/2025/08/01/Shader%20Learning%20Note/#disqus_thread</comments>
+      <comments>http://example.com/2025/08/01/20250801.Shader%20Learning%20Note/#disqus_thread</comments>
       
     </item>
     
