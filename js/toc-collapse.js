@@ -12,13 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 如果是Archives页面或About页面，不显示TOC
         if (isArchivesPage || isAboutPage) return;
-
-        // 读取页面配置：toc 默认为 true
-        const showTOC =
-            window.pageConfig && typeof window.pageConfig.toc !== 'undefined'
-                ? window.pageConfig.toc
-                : true;
-        if (!showTOC) return;
         
         // 创建 TOC 容器
         const tocContainer = createTOCContainer();
