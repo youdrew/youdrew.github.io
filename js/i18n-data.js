@@ -13,6 +13,7 @@ const i18nData = {
         
         // Tooltips
         'Bilibili': 'Bilibili',
+        'GitHub': 'GitHub',
         'Instagram': 'Instagram',
         'Douban': 'Douban',
         'Email': 'Email',
@@ -53,6 +54,7 @@ const i18nData = {
         
         // Tooltips
         'Bilibili': '哔哩哔哩',
+        'GitHub': 'GitHub',
         'Instagram': 'Instagram',
         'Douban': '豆瓣',
         'Email': '邮箱',

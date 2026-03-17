@@ -304,7 +304,13 @@ h1, h2, h3, h4, h5, h6          { font-weight: bolder }
         -webkit-mask-image: url('../img/social/icon-email.svg');
     }
 
+    header ul.social li a.github::before{
+        mask-image: url('../img/social/icon-github.svg');
+        -webkit-mask-image: url('../img/social/icon-github.svg');
+    }
+
     header ul.social li a.behance,
+    header ul.social li a.github,
     header ul.social li a.google,
     header ul.social li a.dribble,
     header ul.social li a.rss,
