@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 如果是Archives页面或About页面，不显示TOC
         if (isArchivesPage || isAboutPage) return;
+
+        // 如果文章 front matter 中 IsToc 设为 false，不显示TOC
+        const mainSection = document.querySelector('section.main[data-toc]');
+        if (mainSection && mainSection.getAttribute('data-toc') === 'false') return;
         
         // 创建 TOC 容器
         const tocContainer = createTOCContainer();
