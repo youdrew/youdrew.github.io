@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="Claude Code 使用技巧整理这篇文档主要记录我在使用 Claude Code 过程中的一些稳定工作流、提问方式和插件使用经验。目标不是把所有功能列一遍，而是整理出真正能提高交付效率的做法。
+
+Claude Code 适合做什么如果从游戏开发、工具链开发和内容工程的视角来看，Claude Co">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Claude Code 使用技巧整理"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Article Language-->
+    
+        <meta name="article:lang" content="en"/>
+    
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>Claude Code 使用技巧整理 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+    
+<link rel="stylesheet" href="/css/language-switcher.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body class="layout-post path-2026-03-22-20260322-Claude-Code-Tips-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/" data-i18n-key="Home">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives" data-i18n-key="Archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about" data-i18n-key="About">About</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('https://upload.cc/i1/2026/02/19/e6cPmM.png');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a class="previous disabled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/03/13/20260314.AI%20Services/" class="next" data-title="主流 AI 订阅方案调研笔记"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Claude Code 使用技巧整理</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <h1 id="Claude-Code-使用技巧整理"><a href="#Claude-Code-使用技巧整理" class="headerlink" title="Claude Code 使用技巧整理"></a>Claude Code 使用技巧整理</h1><p>这篇文档主要记录我在使用 Claude Code 过程中的一些稳定工作流、提问方式和插件使用经验。目标不是把所有功能列一遍，而是整理出真正能提高交付效率的做法。</p>
+<hr>
+<h2 id="Claude-Code-适合做什么"><a href="#Claude-Code-适合做什么" class="headerlink" title="Claude Code 适合做什么"></a>Claude Code 适合做什么</h2><p>如果从游戏开发、工具链开发和内容工程的视角来看，Claude Code 更适合以下几类任务：</p>
+<ul>
+<li>理解已有工程结构</li>
+<li>批量重构脚本或工具代码</li>
+<li>补测试、补文档、补脚手架</li>
+<li>对接第三方 SDK、服务接口或命令行工具</li>
+<li>做中等复杂度的多文件改动</li>
+</ul>
+<p>它的优势不是“直接无脑一把梭”，而是：</p>
+<ul>
+<li>长上下文理解能力比较稳定</li>
+<li>对代码解释、重构、归纳总结表现较好</li>
+<li>适合先分析、再执行的工作流</li>
+</ul>
+<p>如果任务非常碎、非常即时，比如一边写一边需要行级补全，那还是 IDE 内补全工具更直接。</p>
+<hr>
+<h2 id="我比较稳定的使用流程"><a href="#我比较稳定的使用流程" class="headerlink" title="我比较稳定的使用流程"></a>我比较稳定的使用流程</h2><h3 id="先要求它说明影响面"><a href="#先要求它说明影响面" class="headerlink" title="先要求它说明影响面"></a>先要求它说明影响面</h3><p>在改公共模块、基础类库、构建脚本之前，可以先问：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果修改这个函数签名，会影响哪些调用方？</span><br><span class="line">请按文件列出来，并说明高风险点。</span><br></pre></td></tr></table></figure>
+
+<p>这一步对避免误改很有价值。</p>
+<h3 id="让它顺手补验证步骤"><a href="#让它顺手补验证步骤" class="headerlink" title="让它顺手补验证步骤"></a>让它顺手补验证步骤</h3><p>除了改代码，我还会顺带要求：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改完成后，请补充：</span><br><span class="line"><span class="bullet">1.</span> 如何验证</span><br><span class="line"><span class="bullet">2.</span> 建议执行的命令</span><br><span class="line"><span class="bullet">3.</span> 可能失败的边界情况</span><br></pre></td></tr></table></figure>
+
+<p>这样最后产出更接近可交付状态。</p>
+<h3 id="把“不要做什么”写明"><a href="#把“不要做什么”写明" class="headerlink" title="把“不要做什么”写明"></a>把“不要做什么”写明</h3><p>例如：</p>
+<ul>
+<li>不要改 public API</li>
+<li>不要引入新依赖</li>
+<li>不要动 UI 样式</li>
+<li>不要修改数据库结构</li>
+</ul>
+<p>这类负向约束非常重要，尤其是在已有项目里。</p>
+<hr>
+<h2 id="Plugin-使用总结"><a href="#Plugin-使用总结" class="headerlink" title="Plugin 使用总结"></a>Plugin 使用总结</h2><p>插件或者外部工具接入，真正的价值不是“功能变多”，而是让 Claude Code 可以从“只会说”变成“能查、能跑、能验证”。</p>
+<p>我的判断标准通常是三条：</p>
+<ol>
+<li>能不能减少手动切换上下文</li>
+<li>能不能把分析结果落到真实工程上</li>
+<li>能不能形成稳定工作流，而不是偶尔演示一次</li>
+</ol>
+<h3 id="ralph-loop"><a href="#ralph-loop" class="headerlink" title="ralph-loop"></a>ralph-loop</h3><p>ralph-loop 这类插件我更倾向把它看成“循环执行框架”或者“任务闭环增强器”。它比较适合下面这些场景：</p>
+<ul>
+<li>一个任务需要多轮分析、执行、检查</li>
+<li>需要让 AI 按固定节奏反复迭代</li>
+<li>需要把大任务拆成可观察的小回合</li>
+</ul>
+<p>我认为它最有价值的点有三个：</p>
+<ol>
+<li>让任务结构更清晰</li>
+<li>降低一次性生成过多内容导致跑偏的概率</li>
+<li>更适合做“先计划，再执行，再复盘”的链路</li>
+</ol>
+<p>一个比较适合 ralph-loop 的用法是：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第 1 轮：先分析工程并列出修改计划</span><br><span class="line">第 2 轮：只实现第一阶段改动</span><br><span class="line">第 3 轮：检查风险和遗漏</span><br><span class="line">第 4 轮：补测试或补文档</span><br></pre></td></tr></table></figure>
+
+<p>适合任务：</p>
+<ul>
+<li>重构旧脚本</li>
+<li>梳理调用链</li>
+<li>做分阶段迁移</li>
+<li>处理容易反复回滚的复杂修改</li>
+</ul>
+<p>注意点：</p>
+<ul>
+<li>不要把每一轮目标写得太大</li>
+<li>每轮都要有可验证输出</li>
+<li>如果上下文已经明显偏了，要及时人工打断并重置方向</li>
+</ul>
+<p>简单说，ralph-loop 不是让 Claude Code “更聪明”，而是让你的任务编排更稳定。</p>
+<h3 id="文档检索类插件"><a href="#文档检索类插件" class="headerlink" title="文档检索类插件"></a>文档检索类插件</h3><p>如果插件可以帮助 Claude Code 直接读取官方文档、接口说明或者本地知识库，那么它在接第三方 SDK、引擎 API、云服务时非常有用。</p>
+<p>适合场景：</p>
+<ul>
+<li>查 API 参数</li>
+<li>对照版本差异</li>
+<li>核对配置项含义</li>
+<li>减少“模型凭印象回答”</li>
+</ul>
+<p>这类插件的核心价值是降低幻觉率。</p>
+<h3 id="仓库与-Issue-协同类插件"><a href="#仓库与-Issue-协同类插件" class="headerlink" title="仓库与 Issue 协同类插件"></a>仓库与 Issue 协同类插件</h3><p>如果你的工作流经常围绕 Git、Issue、PR 进行，那么能直接读仓库状态、变更记录、评审意见的插件会非常实用。</p>
+<p>适合场景：</p>
+<ul>
+<li>根据 Issue 修 bug</li>
+<li>结合 PR review comment 改代码</li>
+<li>总结当前分支改动</li>
+<li>生成提交说明或变更摘要</li>
+</ul>
+<p>这类插件最适合团队协作环境，而不是单人写 demo。</p>
+<h3 id="浏览器自动化或页面验证类插件"><a href="#浏览器自动化或页面验证类插件" class="headerlink" title="浏览器自动化或页面验证类插件"></a>浏览器自动化或页面验证类插件</h3><p>做前端、后台管理系统或者文档站点时，能操作页面、检查 DOM、截图、回归验证的插件也很有价值。</p>
+<p>适合场景：</p>
+<ul>
+<li>检查页面是否正常渲染</li>
+<li>验证按钮点击流程</li>
+<li>截图留档</li>
+<li>复现前端交互 bug</li>
+</ul>
+<p>如果你的任务需要“改完后马上验证页面结果”，这类插件会比纯文本分析更有效。</p>
+<hr>
+<p>Claude Code 真正好用的地方，不是一次生成很多代码，而是它可以参与完整的软件交付链路：</p>
+<ul>
+<li>先读工程</li>
+<li>再理解约束</li>
+<li>然后分步实施</li>
+<li>最后补验证和总结</li>
+</ul>
+<p>如果再配合合适的插件，尤其是像 ralph-loop 这种帮助任务闭环和节奏控制的工具，整体体验会比“只聊天、不落地”的 AI 协作模式更强。</p>
+<p>后续可以继续补充的方向：</p>
+<ul>
+<li>Claude Code 在 Unreal 工程中的使用案例</li>
+<li>Claude Code 和 Copilot &#x2F; Cursor 的分工方式</li>
+<li>Claude Code + MCP 的实际工作流示例</li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/AI/">AI</a> <a href="/tags/Assistant/">Assistant</a> <a href="/tags/MCP/">MCP</a> <a href="/tags/Claude/">Claude</a> <a href="/tags/Vibe-Coding/">Vibe-Coding</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- 加载打包后的模块化代码 -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<!-- Language Switcher -->
+
+<script src="/js/i18n-data.js"></script>
+
+
+<script src="/js/language-switcher.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+
+<!-- Featherlight (图库) -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+
+    elements.forEach(element => {
+      const shaderID = element.getAttribute('data-id');
+
+      if (shaderID) {
+        const container = document.createElement('div');
+        container.style.cssText = `
+          position: relative;
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+          border: 2px solid #bfbbbb;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #f6f6f6;
+        `;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        `;
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        element.parentNode.insertBefore(container, element);
+        element.parentNode.removeChild(element);
+      }
+    });
+  }, 1000);
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
