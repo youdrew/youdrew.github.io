@@ -133,6 +133,22 @@
 
         // Save language preference
         localStorage.setItem('siteLanguage', lang);
+
+        // Translate tag names
+        const tagElements = document.querySelectorAll('[data-i18n-tag]');
+        tagElements.forEach(element => {
+            const originalTag = element.getAttribute('data-i18n-tag');
+            if (lang === 'zh-CN') {
+                // English -> Chinese: look up in tagTranslations
+                const zhName = window.tagTranslations && window.tagTranslations[originalTag];
+                if (zhName) {
+                    element.textContent = zhName;
+                }
+            } else {
+                // Show original English tag name
+                element.textContent = originalTag;
+            }
+        });
     };
 
     // Switch language and navigate to alternate version if exists

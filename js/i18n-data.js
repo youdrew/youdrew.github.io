@@ -88,7 +88,35 @@ const i18nData = {
     }
 };
 
+// Tag name translations (English -> Chinese)
+// Tags not listed here will keep their original name
+const tagTranslations = {
+    'Software Projects': '软件项目',
+    'Learning Notes': '学习笔记',
+    'Peresonal Essays': '个人随笔',
+    'Art Pieces': '艺术作品',
+    'Game-Development': '游戏开发',
+    'Game-Framework': '游戏框架',
+    'Gameplay-Ability-System': '游戏能力系统',
+    'Graphics-Programming': '图形编程',
+    'Computer-Graphics': '计算机图形学',
+    'Network-Programming': '网络编程',
+    'Unreal-Engine': '虚幻引擎',
+    'Vibe-Coding': '氛围编程',
+    'Game-Development-Shader-001': '游戏开发着色器-001',
+    'Subscription': '订阅',
+    'Shader': '着色器'
+};
+
+// Build reverse mapping (Chinese -> English) automatically
+const tagTranslationsReverse = {};
+for (const [en, zh] of Object.entries(tagTranslations)) {
+    tagTranslationsReverse[zh] = en;
+}
+
 // Export for use in other scripts
 if (typeof window !== 'undefined') {
     window.i18nData = i18nData;
+    window.tagTranslations = tagTranslations;
+    window.tagTranslationsReverse = tagTranslationsReverse;
 }
