@@ -204,7 +204,7 @@ Captury测试和使用方法打开 CapturyReplay
 <h2 id="Captury原始插件底层sock阻塞问题"><a href="#Captury原始插件底层sock阻塞问题" class="headerlink" title="Captury原始插件底层sock阻塞问题"></a>Captury原始插件底层sock阻塞问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在插件接入的时候（插件已经完成了接入，数据已经连通），但遇到一个问题：</p>
 <p>用户反馈，如果要从Captury信号源切换到别的信号源的时候，会发生卡顿的现象。</p>
 <p>卡顿时间在固定的20s左右。</p>
-<p><img src="https://s2.loli.net/2025/12/12/BadAWXIFlsDhqo4.png" alt="image-20251205150209762"><img src="https://s2.loli.net/2025/12/12/iJ5ZWet3KbP4r2v.png" alt="image-20251205150637519"></p>
+<p><img src="/../images/1774286919704_6ba8a5f1.png" alt="image-20251205150209762"><img src="/../images/1774286921869_5c9e305e.png" alt="image-20251205150637519"></p>
 <p>且这个问题仅仅发生在<u>Captury信号源没连接上的状态</u>中。如果信号连接上了，切换这个操作不会发生卡顿。</p>
 <h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>这个操作背后的逻辑是，用户切到别的信号源，我会销毁掉已经生成的CapturyLivelink，确保Livelink信号池子干净。</p>
 <p>同时，刷新信号的按钮也会出现这个问题，因为刷新的时候，我背后做的操作是：先删除掉老的CapturyLivelink，然后在创建新的连接数据。</p>
@@ -235,7 +235,7 @@ Captury测试和使用方法打开 CapturyReplay
 <p>经过加Log发现，函数卡在了。</p>
 <p><code>if (::connect(sok, (sockaddr*) &amp;remoteAddress, sizeof(remoteAddress)) != 0) </code></p>
 <p>这个if判断里面，而这个接口是windows的sock接口。ok，至此，已经找到罪魁祸首了。</p>
-<h3 id="底层逻辑阐述"><a href="#底层逻辑阐述" class="headerlink" title="底层逻辑阐述"></a>底层逻辑阐述</h3><p><img src="https://s2.loli.net/2025/12/12/TKXsv3z1uHMeBgn.png" alt="image-20251205123239125"></p>
+<h3 id="底层逻辑阐述"><a href="#底层逻辑阐述" class="headerlink" title="底层逻辑阐述"></a>底层逻辑阐述</h3><p><img src="/../images/1774286924233_0273aa75.png" alt="image-20251205123239125"></p>
 <p>这一节想解释清楚两件事：</p>
 <ol>
 <li><strong>为什么阻塞式 <code>connect</code> 会在「没连上」的时候卡住几十秒</strong>；</li>
@@ -269,22 +269,22 @@ Captury测试和使用方法打开 CapturyReplay
 </li>
 </ul>
 <p>这几张图，其实就是描述：应用线程在访问一个<strong>内核缓冲区</strong>——</p>
-<img src="https://s2.loli.net/2025/12/12/nQBb1Okzg4DRplY.png" alt="image-20251205142827661" style="zoom:25%;" />
+<img src="../images/1774286926091_3f32cbe8.png" alt="image-20251205142827661" style="zoom:25%;" />
 
 <ul>
 <li>读的时候：如果缓冲区里<strong>暂时没数据</strong>，阻塞 <code>read/recv</code> 会卡住线程；</li>
 <li>写的时候：如果缓冲区已经<strong>写满</strong>，阻塞 <code>write/send</code> 会卡在那儿等内核把旧数据发走。</li>
 </ul>
-<img src="https://s2.loli.net/2025/12/12/LDI2tulmi7FC3e8.png" alt="image-20251205144248299" style="zoom:25%;" />
+<img src="../images/1774286928028_45531e5f.png" alt="image-20251205144248299" style="zoom:25%;" />
 
-<img src="https://s2.loli.net/2025/12/12/LkBPTgxOGZEC6Nc.png" alt="image-20251205144319439" style="zoom:25%;" />
+<img src="../images/1774286929937_d823804d.png" alt="image-20251205144319439" style="zoom:25%;" />
 
 <p>在“阻塞模型”下（原来的代码），如果网络线程直接在这些调用上阻塞：</p>
 <ul>
 <li><p>它就<strong>没法及时响应退出信号</strong>（<code>stopReceiving</code> &#x2F; <code>bExternalShutdownRequested</code> 等）；</p>
 </li>
 <li><p>像 <code>disconnect()</code> 这种需要“等待线程正常退出”的逻辑，也都会被一起拖住。比如下下面这张图片，多线程的阻塞模式，会在有大量连接调用的时候，开辟多个线程，去做连接，一个服务一个连接，这个服务断掉了这个，这个线程占用才结束，这是一个很古早的调用方式，因为线程其实也是很珍贵的资源，一台电脑总共也没几个线程。（回到我的项目里，因为我只允许运行一个Captury线程，而且Game线程会等这个线程，所以整个游戏卡着。当然我这么做也有别的考量）</p>
-<img src="https://s2.loli.net/2025/12/12/aqvzLWVgDebHmps.png" alt="image-20251205191914919" style="zoom:25%;" /></li>
+<img src="../images/1774286932681_9af04201.png" alt="image-20251205191914919" style="zoom:25%;" /></li>
 </ul>
 <p> <strong>IO 多路复用（<code>select</code> &#x2F; <code>poll</code> &#x2F; <code>epoll</code> &#x2F; <code>WSAPoll</code>）</strong>，本质上是在做一件事：</p>
 <ul>
@@ -311,7 +311,7 @@ Captury测试和使用方法打开 CapturyReplay
 <li><strong>放大器</strong>：你的 <code>receiveLoop</code> 在重连路径里频繁调用 <code>openTcpSocket()</code>，而 <code>disconnect()</code> 又必须等线程退出；</li>
 <li><strong>改成非阻塞的目的</strong>：用 <code>ioctlsocket(FIONBIO)</code> + <code>select</code> 自己控制等待时长和退出时机，把“不可控的 20s 超时”变成“可控的 1s 以内失败”，从而让 <code>disconnect()</code> 快速返回。</li>
 </ul>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="https://s2.loli.net/2025/12/12/TKXsv3z1uHMeBgn.png" alt="image-20251205123239125"></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="/../images/1774286924233_0273aa75.png" alt="image-20251205123239125"></p>
 <p>非阻塞是“通过修改套接字模式”实现的——代码在 socket() 之后、connect() 之前把套接字设为非阻塞，因此 connect() 就是在非阻塞模式下执行的；连接完成后再把套接字恢复成阻塞。</p>
 <ul>
 <li>所以其实我这个修改后的代码，并不是完全非阻塞的。</li>
