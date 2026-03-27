@@ -121,6 +121,19 @@
   // Non-filter tags: weighted color blending from all reachable filter tags
   // Using inverse-square weighting for perceptual distance attenuation
   var nonFilterNodes = data.nodes.filter(function (n) { return !archiveFilterSet[n.name]; });
+
+  // Find global max BFS distance for normalization
+  var globalMaxDist = 1;
+  nonFilterNodes.forEach(function (node) {
+    var closest = Infinity;
+    archiveFilterTags.forEach(function (ft) {
+      if (!distFromFilter[ft]) return;
+      var d = distFromFilter[ft][node.name];
+      if (d !== undefined && d < closest) closest = d;
+    });
+    if (closest < Infinity && closest > globalMaxDist) globalMaxDist = closest;
+  });
+
   nonFilterNodes.forEach(function (node) {
     var weights = [];
     var totalWeight = 0;
@@ -137,7 +150,7 @@
 
     if (totalWeight === 0) {
       // Disconnected from all filter tags → neutral gray
-      colorMap[node.name] = 'hsl(0, 0%, 78%)';
+      colorMap[node.name] = 'hsl(0, 0%, 82%)';
       return;
     }
 
@@ -157,17 +170,22 @@
     var blendS = sSum;
     var blendL = lSum;
 
-    // Attenuate saturation by overall proximity: closer = more vivid
+    // Perceptual fade: normalize closest distance to [0, 1] based on actual graph diameter
     var closestDist = Infinity;
     weights.forEach(function (wt) {
       var d = distFromFilter[wt.ft][node.name];
       if (d < closestDist) closestDist = d;
     });
-    // Fade saturation: at dist=1 keep ~70% sat, at dist=5+ fade to ~15%
-    var satFade = Math.max(0.15, Math.min(0.75, 1.0 / (1 + (closestDist - 1) * 0.4)));
-    blendS = blendS * satFade;
-    // Lighten distant nodes
-    blendL = blendL + (1 - satFade) * (85 - blendL) * 0.6;
+    // t=0 means directly adjacent to filter, t=1 means farthest node
+    var t = (closestDist - 1) / Math.max(globalMaxDist - 1, 1);
+    t = Math.max(0, Math.min(1, t));
+    // Apply power curve (γ=0.6) so early hops already show visible fade
+    var tPerceptual = Math.pow(t, 0.6);
+    // Saturation: from 80% (adjacent) down to 8% (farthest)
+    var satScale = 0.80 - tPerceptual * 0.72;
+    blendS = blendS * satScale;
+    // Lightness: shift toward 85% for distant nodes
+    blendL = blendL + tPerceptual * (85 - blendL) * 0.85;
 
     colorMap[node.name] = hslToStr(blendH, blendS, blendL);
   });
@@ -228,6 +246,29 @@
           allNodes[nj].y += ny * push;
         }
       }
+    }
+  }
+
+  // Pre-calculate zoom and center to fit all filter nodes based on initial positions
+  var initialZoom = 1;
+  var initialCenter = [cw / 2, ch / 2];
+  if (filterNodes.length > 0) {
+    var fMinX = Infinity, fMaxX = -Infinity, fMinY = Infinity, fMaxY = -Infinity;
+    filterNodes.forEach(function (node) {
+      var r = (node.symbolSize || 20) / 2 + 50; // extra padding for label
+      if (node.x - r < fMinX) fMinX = node.x - r;
+      if (node.x + r > fMaxX) fMaxX = node.x + r;
+      if (node.y - r < fMinY) fMinY = node.y - r;
+      if (node.y + r > fMaxY) fMaxY = node.y + r;
+    });
+    var fbw = fMaxX - fMinX;
+    var fbh = fMaxY - fMinY;
+    if (fbw > 0 && fbh > 0) {
+      var zx = cw / fbw;
+      var zy = ch / fbh;
+      initialZoom = Math.min(zx, zy, 1.5) * 0.8;
+      if (initialZoom < 0.3) initialZoom = 0.3;
+      initialCenter = [(fMinX + fMaxX) / 2, (fMinY + fMaxY) / 2];
     }
   }
 
@@ -329,10 +370,23 @@
             return html;
           }
           if (params.dataType === 'edge') {
-            return '<span style="font-weight:600">' + getDisplayName(params.data.source) + '</span>' +
+            var srcName = params.data.source;
+            var tgtName = params.data.target;
+            var html = '<span style="font-weight:600">' + getDisplayName(srcName) + '</span>' +
               ' <span style="color:#bbb">↔</span> ' +
-              '<span style="font-weight:600">' + getDisplayName(params.data.target) + '</span>' +
-              '<br/><span style="color:#999;font-size:12px">Co-occurrence: ' + params.data.value + '</span>';
+              '<span style="font-weight:600">' + getDisplayName(tgtName) + '</span>';
+            html += '<br/><span style="color:#999;font-size:12px">📄 ' + params.data.value + ' article' + (params.data.value > 1 ? 's' : '') + '</span>';
+            var edgeKey = [srcName, tgtName].sort().join('\t');
+            var sharedPosts = data.linkPosts && data.linkPosts[edgeKey];
+            if (sharedPosts && sharedPosts.length > 0) {
+              html += '<div style="max-height:160px;overflow-y:auto;border-top:1px solid #eee;padding-top:5px;margin-top:5px;">';
+              sharedPosts.forEach(function (p) {
+                var safeTitle = p.title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                html += '<div style="color:#666;font-size:11px;line-height:1.6;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;">• ' + safeTitle + '</div>';
+              });
+              html += '</div>';
+            }
+            return html;
           }
         }
       },
@@ -382,59 +436,129 @@
           opacity: 0.35
         },
         scaleLimit: {
-          min: 0.4,
+          min: 0.3,
           max: 4
-        }
+        },
+        zoom: initialZoom,
+        center: initialCenter
       }]
     };
 
     chart.setOption(option);
 
-    // Zoom to fit all filter nodes after layout starts
+    // After force layout stabilizes, re-fit to ensure all filter nodes are visible
     if (filterNodes.length > 0) {
-      setTimeout(function () {
+      var fitAttempts = 0;
+      var fitInterval = setInterval(function () {
+        fitAttempts++;
+        // Sample current positions from the chart's internal model
+        var model = chart.getModel();
+        var series0 = model && model.getSeriesByIndex && model.getSeriesByIndex(0);
+        var graph = series0 && series0.getGraph && series0.getGraph();
         var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+        var validCount = 0;
         filterNodes.forEach(function (node) {
-          var x = node.x || 0;
-          var y = node.y || 0;
-          var r = (node.symbolSize || 20) / 2 + 30;
+          var gNode = graph && graph.getNodeByName && graph.getNodeByName(node.name);
+          var layout = gNode && gNode.getLayout && gNode.getLayout();
+          var x, y;
+          if (layout && layout.length >= 2) {
+            x = layout[0]; y = layout[1];
+          } else {
+            x = node.x || 0; y = node.y || 0;
+          }
+          var r = (node.symbolSize || 20) / 2 + 50;
           if (x - r < minX) minX = x - r;
           if (x + r > maxX) maxX = x + r;
           if (y - r < minY) minY = y - r;
           if (y + r > maxY) maxY = y + r;
+          validCount++;
         });
-        var bw = maxX - minX;
-        var bh = maxY - minY;
-        if (bw > 0 && bh > 0) {
-          var zoomX = cw / bw;
-          var zoomY = ch / bh;
-          var zoom = Math.min(zoomX, zoomY, 1.2) * 0.85;
-          if (zoom < 0.4) zoom = 0.4;
-          chart.setOption({
-            series: [{
-              zoom: zoom,
-              center: [(minX + maxX) / 2, (minY + maxY) / 2]
-            }]
-          });
+        if (validCount > 0) {
+          var bw = maxX - minX;
+          var bh = maxY - minY;
+          if (bw > 0 && bh > 0) {
+            var zoomX = cw / bw;
+            var zoomY = ch / bh;
+            var zoom = Math.min(zoomX, zoomY, 1.5) * 0.8;
+            if (zoom < 0.3) zoom = 0.3;
+            chart.setOption({
+              series: [{
+                zoom: zoom,
+                center: [(minX + maxX) / 2, (minY + maxY) / 2]
+              }]
+            });
+          }
         }
-      }, 300);
+        // Stop after a few attempts (layout should be stable by then)
+        if (fitAttempts >= 4) {
+          clearInterval(fitInterval);
+        }
+      }, 800);
     }
 
-    // Click node → navigate to tag page
+    // Click node → navigate to tag page; Click edge → navigate to first shared post
     chart.on('click', function (params) {
       if (params.dataType === 'node' && data.tagPaths && data.tagPaths[params.name]) {
         window.location.href = data.tagPaths[params.name];
+      }
+      if (params.dataType === 'edge' && data.linkPosts) {
+        var edgeKey = [params.data.source, params.data.target].sort().join('\t');
+        var sharedPosts = data.linkPosts[edgeKey];
+        if (sharedPosts && sharedPosts.length === 1) {
+          window.location.href = sharedPosts[0].path;
+        } else if (sharedPosts && sharedPosts.length > 1) {
+          // Navigate to the tag page of the source tag (smaller tag by article count)
+          var srcCount = 0, tgtCount = 0;
+          data.nodes.forEach(function (n) {
+            if (n.name === params.data.source) srcCount = n.value || 0;
+            if (n.name === params.data.target) tgtCount = n.value || 0;
+          });
+          var navTag = srcCount <= tgtCount ? params.data.source : params.data.target;
+          if (data.tagPaths[navTag]) {
+            window.location.href = data.tagPaths[navTag];
+          }
+        }
       }
     });
 
     // Cursor feedback
     chart.on('mouseover', function (params) {
-      if (params.dataType === 'node') {
+      if (params.dataType === 'node' || params.dataType === 'edge') {
         container.style.cursor = 'pointer';
       }
     });
     chart.on('mouseout', function () {
       container.style.cursor = 'default';
+    });
+
+    // Prevent page scroll/zoom and enable full-canvas zooming
+    var graphEl = graphContainer || container;
+    graphEl.addEventListener('wheel', function (e) {
+      e.preventDefault();
+    }, { passive: false });
+    graphEl.addEventListener('touchmove', function (e) {
+      if (e.touches.length >= 2) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Use ZRender-level event to ensure zoom works anywhere on the canvas
+    var zr = chart.getZr();
+    var currentZoom = initialZoom || 1;
+    chart.on('graphroam', function (params) {
+      if (params.zoom != null) {
+        currentZoom *= params.zoom;
+      }
+    });
+    zr.on('mousewheel', function (e) {
+      e.event.preventDefault();
+      e.event.stopPropagation();
+      var delta = e.wheelDelta > 0 ? 1.1 : (1 / 1.1);
+      var newZoom = currentZoom * delta;
+      if (newZoom < 0.3) newZoom = 0.3;
+      if (newZoom > 4) newZoom = 4;
+      currentZoom = newZoom;
+      chart.setOption({ series: [{ zoom: newZoom }] });
     });
 
     // Responsive resize
