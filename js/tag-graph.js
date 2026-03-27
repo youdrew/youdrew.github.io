@@ -22,6 +22,14 @@
   var archiveFilterSet = {};
   archiveFilterTags.forEach(function (t) { archiveFilterSet[t] = true; });
 
+  function normalizeTagKey(name) {
+    return String(name || '')
+      .replace(/-/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+  }
+
   // === Node size: determined by edge count (connections) ===
   var edgeCount = {};
   data.links.forEach(function (link) {
@@ -40,9 +48,32 @@
   // === BFS distance from archive_filter_tags ===
   var adj = {};
   data.nodes.forEach(function (n) { adj[n.name] = []; });
+  function addAdjacency(a, b) {
+    if (!adj[a] || !adj[b] || a === b) return;
+    if (adj[a].indexOf(b) === -1) adj[a].push(b);
+    if (adj[b].indexOf(a) === -1) adj[b].push(a);
+  }
   data.links.forEach(function (link) {
-    if (adj[link.source]) adj[link.source].push(link.target);
-    if (adj[link.target]) adj[link.target].push(link.source);
+    addAdjacency(link.source, link.target);
+  });
+
+  // Treat tags that differ only by hyphen vs space as the same semantic neighborhood
+  // for coloring purposes, so aliases like Color-Management / Color Management
+  // don't break the distance gradient.
+  var aliasGroups = {};
+  data.nodes.forEach(function (node) {
+    var key = normalizeTagKey(node.name);
+    if (!aliasGroups[key]) aliasGroups[key] = [];
+    aliasGroups[key].push(node.name);
+  });
+  Object.keys(aliasGroups).forEach(function (key) {
+    var group = aliasGroups[key];
+    if (group.length < 2) return;
+    for (var i = 0; i < group.length; i++) {
+      for (var j = i + 1; j < group.length; j++) {
+        addAdjacency(group[i], group[j]);
+      }
+    }
   });
   var dist = {};
   var bfsQueue = [];
@@ -179,13 +210,13 @@
     // t=0 means directly adjacent to filter, t=1 means farthest node
     var t = (closestDist - 1) / Math.max(globalMaxDist - 1, 1);
     t = Math.max(0, Math.min(1, t));
-    // Apply power curve (γ=0.6) so early hops already show visible fade
-    var tPerceptual = Math.pow(t, 0.6);
-    // Saturation: from 80% (adjacent) down to 8% (farthest)
-    var satScale = 0.80 - tPerceptual * 0.72;
-    blendS = blendS * satScale;
-    // Lightness: shift toward 85% for distant nodes
-    blendL = blendL + tPerceptual * (85 - blendL) * 0.85;
+    // Fade by moving toward a lighter pastel, not toward grayscale.
+    var tPerceptual = Math.pow(t, 0.85);
+    var minSaturation = 32;
+    var satScale = 1 - tPerceptual * 0.35;
+    blendS = Math.max(minSaturation, blendS * satScale);
+    // Lightness: shift toward a soft pastel range for distant nodes.
+    blendL = blendL + tPerceptual * (82 - blendL) * 0.78;
 
     colorMap[node.name] = hslToStr(blendH, blendS, blendL);
   });
@@ -397,7 +428,7 @@
         layout: 'force',
         data: data.nodes,
         links: data.links,
-        roam: true,
+        roam: false,
         draggable: true,
         force: {
           repulsion: calcRepulsion(data.nodes.length),
@@ -481,10 +512,12 @@
             var zoomY = ch / bh;
             var zoom = Math.min(zoomX, zoomY, 1.5) * 0.8;
             if (zoom < 0.3) zoom = 0.3;
+            currentZoom = zoom;
+            currentCenter = [(minX + maxX) / 2, (minY + maxY) / 2];
             chart.setOption({
               series: [{
                 zoom: zoom,
-                center: [(minX + maxX) / 2, (minY + maxY) / 2]
+                center: currentCenter.slice()
               }]
             });
           }
@@ -531,7 +564,7 @@
       container.style.cursor = 'default';
     });
 
-    // Prevent page scroll/zoom and enable full-canvas zooming
+    // Prevent page scroll/zoom when interacting inside the graph container
     var graphEl = graphContainer || container;
     graphEl.addEventListener('wheel', function (e) {
       e.preventDefault();
@@ -542,23 +575,61 @@
       }
     }, { passive: false });
 
-    // Use ZRender-level event to ensure zoom works anywhere on the canvas
+    // Unified zoom & pan via ZRender (roam is disabled to avoid dual-layer conflicts)
     var zr = chart.getZr();
     var currentZoom = initialZoom || 1;
-    chart.on('graphroam', function (params) {
-      if (params.zoom != null) {
-        currentZoom *= params.zoom;
-      }
-    });
+    var currentCenter = initialCenter ? [initialCenter[0], initialCenter[1]] : [0, 0];
+
+    // Zoom: mousewheel anywhere on canvas
     zr.on('mousewheel', function (e) {
       e.event.preventDefault();
       e.event.stopPropagation();
-      var delta = e.wheelDelta > 0 ? 1.04 : (1 / 1.01);
+      var delta = e.wheelDelta > 0 ? 1.08 : (1 / 1.08);
       var newZoom = currentZoom * delta;
       if (newZoom < 0.3) newZoom = 0.3;
       if (newZoom > 4) newZoom = 4;
       currentZoom = newZoom;
-      chart.setOption({ series: [{ zoom: newZoom }] });
+      chart.setOption({ series: [{ zoom: currentZoom }] });
+    });
+
+    // Pan: drag anywhere on canvas (not on a node)
+    var isPanning = false;
+    var panStart = [0, 0];
+    var centerAtPanStart = [0, 0];
+    zr.on('mousedown', function (e) {
+      // Only pan when not clicking on a graph element
+      if (!e.target) {
+        isPanning = true;
+        panStart = [e.event.clientX, e.event.clientY];
+        centerAtPanStart = [currentCenter[0], currentCenter[1]];
+        container.style.cursor = 'grabbing';
+      }
+    });
+    zr.on('mousemove', function (e) {
+      if (isPanning) {
+        var dx = e.event.clientX - panStart[0];
+        var dy = e.event.clientY - panStart[1];
+        // Convert pixel offset to graph coordinate offset (account for zoom & device pixel ratio)
+        var cw = container.clientWidth;
+        var ch = container.clientHeight;
+        var graphW = cw / currentZoom;
+        var graphH = ch / currentZoom;
+        currentCenter[0] = centerAtPanStart[0] - dx * (graphW / cw);
+        currentCenter[1] = centerAtPanStart[1] - dy * (graphH / ch);
+        chart.setOption({ series: [{ center: [currentCenter[0], currentCenter[1]] }] });
+      }
+    });
+    zr.on('mouseup', function () {
+      if (isPanning) {
+        isPanning = false;
+        container.style.cursor = 'default';
+      }
+    });
+    zr.on('globalout', function () {
+      if (isPanning) {
+        isPanning = false;
+        container.style.cursor = 'default';
+      }
     });
 
     // Responsive resize
