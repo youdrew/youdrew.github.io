@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 27 Mar 2026 17:06:40 GMT</pubDate>
+    <pubDate>Fri, 27 Mar 2026 17:07:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -64,6 +64,8 @@
       
       <category domain="http://example.com/tags/AI/">AI</category>
       
+      <category domain="http://example.com/tags/Claude/">Claude</category>
+      
       <category domain="http://example.com/tags/API/">API</category>
       
       <category domain="http://example.com/tags/Subscription/">Subscription</category>
@@ -73,8 +75,6 @@
       <category domain="http://example.com/tags/OpenAI/">OpenAI</category>
       
       <category domain="http://example.com/tags/Google/">Google</category>
-      
-      <category domain="http://example.com/tags/Claude/">Claude</category>
       
       
       <comments>http://example.com/2026/03/13/20260314.AI%20Services/#disqus_thread</comments>
