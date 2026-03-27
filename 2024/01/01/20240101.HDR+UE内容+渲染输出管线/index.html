@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="HDR 与 UE 内容渲染输出管线实践引言在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：
+
+引擎可以渲染出颜色过渡更细腻、更饱和的画面。
+虚幻正在朝着更专业的电影制作流程迈进。
+游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="HDR 与 UE 内容渲染输出管线实践"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Article Language-->
+    
+        <meta name="article:lang" content="en"/>
+    
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>HDR 与 UE 内容渲染输出管线实践 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+    
+<link rel="stylesheet" href="/css/tag-graph.css">
+
+    
+<link rel="stylesheet" href="/css/language-switcher.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body class="layout-post path-2024-01-01-20240101-HDR-UE-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/" data-i18n-key="Home">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives" data-i18n-key="Archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about" data-i18n-key="About">About</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2024/09/01/20240901.OpenColorIO-%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="previous" data-title="OpenColorIO 色彩管理系统学习笔记"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a class="next disabled"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">HDR 与 UE 内容渲染输出管线实践</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <h1 id="HDR-与-UE-内容渲染输出管线实践"><a href="#HDR-与-UE-内容渲染输出管线实践" class="headerlink" title="HDR 与 UE 内容渲染输出管线实践"></a>HDR 与 UE 内容渲染输出管线实践</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：</p>
+<ol>
+<li>引擎可以渲染出颜色过渡更细腻、更饱和的画面。</li>
+<li>虚幻正在朝着更专业的电影制作流程迈进。</li>
+<li>游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开始采用 UE 作为影片制作工具。</li>
+</ol>
+<p>以下内容是自己做的一个实验：使用 UE5.2 输出广色域物料，并制作杜比 8.4 内容。</p>
+<p>这次实验的目标是：</p>
+<ol>
+<li>尽量在全流程中保留素材的高动态范围信息。</li>
+<li>完成一次电影工业流程中的 HDR 内容制作。</li>
+<li>在输出后对 HDR 与 SDR 模板内容进行一次模拟对比。</li>
+</ol>
+<h2 id="物料准备"><a href="#物料准备" class="headerlink" title="物料准备"></a>物料准备</h2><p>需要先下载 ACES 的 OCIO 配置文件。这里面包含很多电影工业流程里常用的转换，本质上就是色域映射和 Gamma 变换。</p>
+<p>我当时使用的是较新的 1.2 配置文件。</p>
+<p>关于 OCIO 配置文件的结构，我之前也单独写过一份文档，可以结合阅读。</p>
+<h2 id="UE5-中的输出设置"><a href="#UE5-中的输出设置" class="headerlink" title="UE5 中的输出设置"></a>UE5 中的输出设置</h2><h3 id="1-修改工作空间"><a href="#1-修改工作空间" class="headerlink" title="1. 修改工作空间"></a>1. 修改工作空间</h3><p>打开 UE，进入设置，先修改软件的工作空间。</p>
+<p>这里将工作空间改为 ACES AP0（ACES 2065-1）。这是 ACES 中最大的转换色域，理论上覆盖了所有人眼可见光范围。在这个空间里进行渲染，可以理解为：尽量以更高的颜色范围去模拟现实世界。</p>
+<p>修改完成后，画面颜色可能会有一些变化，这是正常现象。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003819_e210058f.png"></p>
+<h3 id="2-配置-OCIO-资源"><a href="#2-配置-OCIO-资源" class="headerlink" title="2. 配置 OCIO 资源"></a>2. 配置 OCIO 资源</h3><p>创建一个 UE 内的 OCIO Configuration 资源，并在其中设置需要调用的转换值。</p>
+<p>这里我使用：</p>
+<ul>
+<li>ACEScg</li>
+<li>ACES 2065-1</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003819_8992d80f.png"></p>
+<h3 id="3-设置-Movie-Render-Queue"><a href="#3-设置-Movie-Render-Queue" class="headerlink" title="3. 设置 Movie Render Queue"></a>3. 设置 Movie Render Queue</h3><p>打开 Movie Render Queue 插件，选择需要导出的内容，然后重点调整以下配置：</p>
+<ol>
+<li>删除原本的导出格式，改为 EXR。因为 EXR 位深更高，能够承载高动态范围信息。</li>
+<li>增加抗锯齿选项，将 Temporal Sample Count 调整到 16，并勾选 Override。</li>
+<li>增加 Color Output 选项，选择刚刚新建的 OCIO 配置。</li>
+<li>将 Source 设置为当前工作空间 ACES 2065-1。</li>
+<li>将 Destination 设置为需要导出的空间，这里是 ACEScg。</li>
+<li>勾选 Disable Tone Curve。</li>
+</ol>
+<p>其中，Disable Tone Curve 这个选项非常关键。它的意义是：不让 UE 在输出时自动做 Gamma 变换，而是保留完整的线性高动态范围信息。</p>
+<p>如果不勾选这个选项，UE 会默认使用 ACES 的 Filmic Tone Curve 进行 Tonemapping，把原本场景中的大量动态范围压缩到标准动态范围中。这样一来，HDR 所需的动态信息在导出阶段就已经丢失，后续流程也就无法真正做 HDR。</p>
+<p>最后再根据需求修改分辨率和输出位置即可。</p>
+<h2 id="达芬奇中的后处理与导出"><a href="#达芬奇中的后处理与导出" class="headerlink" title="达芬奇中的后处理与导出"></a>达芬奇中的后处理与导出</h2><p>在 DaVinci Resolve 中，我习惯把工作空间设置为 ACEScct。不过达芬奇自己的 DaVinci YRGB Color Managed 其实也可以用于这一流程，而且我个人觉得它的整体体验也很好。</p>
+<p>这里的设置思路大致如下：</p>
+<ol>
+<li>Input Transform 可以选择 ACEScg - CsC。</li>
+<li>如果项目中输入素材类型很多，不建议在项目级统一设置 Input Transform，而是针对每个素材单独设置。</li>
+<li>Output Transform 设置为杜比 8.4 标准对应的 Rec.2020 HLG。</li>
+</ol>
+<p>另外还有一个容易漏掉的选项：记得在 Dolby Vision 相关设置里启用 Enable Dolby Vision。</p>
+<p>如果素材类型很多，可以逐个素材指定 Input Transform。这里我设置为和 UE 导出选项一致的 ACEScg。</p>
+<p>调色完成之后，也可以使用杜比的自动分析工具，对素材逐一分析并生成相应元数据。</p>
+<p>导出视频时，如果不是输出母版，可以选择：</p>
+<ol>
+<li>MP4</li>
+<li>H.265 编码</li>
+<li>Main10</li>
+<li>高级选项中选择 Profile 8.4<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003817_b9fb06bf.png"></li>
+</ol>
+<h2 id="流程总结"><a href="#流程总结" class="headerlink" title="流程总结"></a>流程总结</h2><p>整个流程可以概括为：</p>
+<blockquote>
+<p>Unreal 工作空间（ACES 2065-1 Linear） -&gt; Unreal 输出素材（ACEScg Linear） -&gt; 达芬奇调色与输出（Rec.2020 HLG &#x2F; Dolby Vision Profile 8.4）</p>
+</blockquote>
+<h2 id="一些补充思考"><a href="#一些补充思考" class="headerlink" title="一些补充思考"></a>一些补充思考</h2><p>这个工作流程仍然有不少可以优化的地方。</p>
+<p>例如，工作空间也可以直接使用 ACEScg。按照 ACES 官方的说法，ACEScg 会更适合贴图等内容的渲染。</p>
+<p>另外，如果最终内容是广色域和 HDR，那么制作阶段所使用的图片物料，是否也应该采用更高位深和更高精度的格式，这也是一个值得继续验证的问题。</p>
+<p>本文没有详细展开监看设置，但实际配置并不复杂：只需要在 OCIO 配置中添加 sRGB 作为输出，然后在 Lit -&gt; OCIO Display 中选择 ACES 2065-1 与 sRGB 即可。</p>
+<h2 id="成品对比"><a href="#成品对比" class="headerlink" title="成品对比"></a>成品对比</h2><p>左边是 HDR，右边是 SDR。需要下载到本地后，用 Mac 设备进行播放对比。</p>
+<ul>
+<li>文件：YN_Italy_HDRvsSDR_MiniMoblie.mp4</li>
+<li>HDR 与 SDR 母版下载地址：<a target="_blank" rel="noopener" href="https://share.weiyun.com/xIkQd9ym">https://share.weiyun.com/xIkQd9ym</a></li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/534357694">https://zhuanlan.zhihu.com/p/534357694</a></li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/Unreal/" data-i18n-tag="Unreal">Unreal</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/HDR/" data-i18n-tag="HDR">HDR</a> <a href="/tags/Color-Management/" data-i18n-tag="Color-Management">Color-Management</a> <a href="/tags/Film-Production/" data-i18n-tag="Film-Production">Film-Production</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- 加载打包后的模块化代码 -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<!-- Tag Knowledge Graph -->
+
+<script src="/js/tag-graph.js"></script>
+
+
+<!-- Language Switcher -->
+
+<script src="/js/i18n-data.js"></script>
+
+
+<script src="/js/language-switcher.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+
+<!-- Featherlight (图库) -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+
+    elements.forEach(element => {
+      const shaderID = element.getAttribute('data-id');
+
+      if (shaderID) {
+        const container = document.createElement('div');
+        container.style.cssText = `
+          position: relative;
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+          border: 2px solid #bfbbbb;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #f6f6f6;
+        `;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        `;
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        element.parentNode.insertBefore(container, element);
+        element.parentNode.removeChild(element);
+      }
+    });
+  }, 1000);
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
