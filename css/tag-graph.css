@@ -1,0 +1,101 @@
+/* ========================================
+   Tag Knowledge Graph - Styles
+   ======================================== */
+
+#tag-graph-section {
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+}
+
+#tag-graph-container {
+  width: 100%;
+  height: 480px;
+  position: relative;
+  background: #fafbfd;
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+#tag-graph-container:hover {
+  box-shadow: 0 4px 24px rgba(121, 93, 163, 0.1);
+}
+
+#tag-graph {
+  width: 100%;
+  height: 100%;
+}
+
+/* Hint overlay inside the graph container */
+.tag-graph-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: 'noto-sans-sc', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 0.3px;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+  background: rgba(250, 251, 253, 0.85);
+  padding: 4px 16px;
+  border-radius: 6px;
+}
+
+.tag-graph-hint.visible {
+  opacity: 1;
+}
+
+/* Loading state */
+#tag-graph-container .graph-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'raleway-regular', arial;
+  font-size: 14px;
+  color: #bbb;
+  letter-spacing: 1px;
+}
+
+#tag-graph-container .graph-loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid #ddd;
+  border-top-color: #795da3;
+  border-radius: 50%;
+  animation: tag-graph-spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes tag-graph-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #tag-graph-container {
+    height: 360px;
+    border-radius: 8px;
+  }
+
+  .tag-graph-hint {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  #tag-graph-container {
+    height: 300px;
+    border-radius: 6px;
+  }
+}

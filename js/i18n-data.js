@@ -43,7 +43,10 @@ const i18nData = {
         
         // Notification
         'languageSwitched': 'Switched to English',
-        'articleLanguageSwitched': 'Switched to English version'
+        'articleLanguageSwitched': 'Switched to English version',
+
+        // Tag graph
+        'tag-graph-hint': 'Click tag to explore · Scroll to zoom · Drag to rearrange'
     },
     'zh-CN': {
         // Navigation menu
@@ -84,7 +87,10 @@ const i18nData = {
         
         // Notification
         'languageSwitched': '已切换至中文',
-        'articleLanguageSwitched': '已切换至中文版本'
+        'articleLanguageSwitched': '已切换至中文版本',
+
+        // Tag graph
+        'tag-graph-hint': '点击标签探索 · 滚轮缩放 · 拖拽移动'
     }
 };
 
