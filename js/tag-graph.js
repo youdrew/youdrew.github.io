@@ -553,7 +553,7 @@
     zr.on('mousewheel', function (e) {
       e.event.preventDefault();
       e.event.stopPropagation();
-      var delta = e.wheelDelta > 0 ? 1.1 : (1 / 1.1);
+      var delta = e.wheelDelta > 0 ? 1.04 : (1 / 1.01);
       var newZoom = currentZoom * delta;
       if (newZoom < 0.3) newZoom = 0.3;
       if (newZoom > 4) newZoom = 4;
