@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 28 Mar 2026 10:11:27 GMT</pubDate>
+    <pubDate>Sat, 28 Mar 2026 18:52:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -25,17 +25,17 @@
       
       
       
-      <content:encoded><![CDATA[<h1 id="Claude-Code-使用技巧整理"><a href="#Claude-Code-使用技巧整理" class="headerlink" title="Claude Code 使用技巧整理"></a>Claude Code 使用技巧整理</h1><p>这篇文档主要记录我在使用 Claude Code 过程中的一些稳定工作流、提问方式和插件使用经验。目标不是把所有功能列一遍，而是整理出真正能提高交付效率的做法。</p><hr><h2 id="Claude-Code-适合做什么"><a href="#Claude-Code-适合做什么" class="headerlink" title="Claude Code 适合做什么"></a>Claude Code 适合做什么</h2><p>如果从游戏开发、工具链开发和内容工程的视角来看，Claude Code 更适合以下几类任务：</p><ul><li>理解已有工程结构</li><li>批量重构脚本或工具代码</li><li>补测试、补文档、补脚手架</li><li>对接第三方 SDK、服务接口或命令行工具</li><li>做中等复杂度的多文件改动</li></ul><p>它的优势不是“直接无脑一把梭”，而是：</p><ul><li>长上下文理解能力比较稳定</li><li>对代码解释、重构、归纳总结表现较好</li><li>适合先分析、再执行的工作流</li></ul><p>如果任务非常碎、非常即时，比如一边写一边需要行级补全，那还是 IDE 内补全工具更直接。</p><hr><h2 id="我比较稳定的使用流程"><a href="#我比较稳定的使用流程" class="headerlink" title="我比较稳定的使用流程"></a>我比较稳定的使用流程</h2><h3 id="先要求它说明影响面"><a href="#先要求它说明影响面" class="headerlink" title="先要求它说明影响面"></a>先要求它说明影响面</h3><p>在改公共模块、基础类库、构建脚本之前，可以先问：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果修改这个函数签名，会影响哪些调用方？</span><br><span class="line">请按文件列出来，并说明高风险点。</span><br></pre></td></tr></table></figure><p>这一步对避免误改很有价值。</p><h3 id="让它顺手补验证步骤"><a href="#让它顺手补验证步骤" class="headerlink" title="让它顺手补验证步骤"></a>让它顺手补验证步骤</h3><p>除了改代码，我还会顺带要求：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改完成后，请补充：</span><br><span class="line"><span class="bullet">1.</span> 如何验证</span><br><span class="line"><span class="bullet">2.</span> 建议执行的命令</span><br><span class="line"><span class="bullet">3.</span> 可能失败的边界情况</span><br></pre></td></tr></table></figure><p>这样最后产出更接近可交付状态。</p><h3 id="把“不要做什么”写明"><a href="#把“不要做什么”写明" class="headerlink" title="把“不要做什么”写明"></a>把“不要做什么”写明</h3><p>例如：</p><ul><li>不要改 public API</li><li>不要引入新依赖</li><li>不要动 UI 样式</li><li>不要修改数据库结构</li></ul><p>这类负向约束非常重要，尤其是在已有项目里。</p><hr><h2 id="Plugin-使用总结"><a href="#Plugin-使用总结" class="headerlink" title="Plugin 使用总结"></a>Plugin 使用总结</h2><p>插件或者外部工具接入，真正的价值不是“功能变多”，而是让 Claude Code 可以从“只会说”变成“能查、能跑、能验证”。</p><p>我的判断标准通常是三条：</p><ol><li>能不能减少手动切换上下文</li><li>能不能把分析结果落到真实工程上</li><li>能不能形成稳定工作流，而不是偶尔演示一次</li></ol><h3 id="ralph-loop"><a href="#ralph-loop" class="headerlink" title="ralph-loop"></a><a href="https://awesomeclaude.ai/ralph-wiggum">ralph-loop</a></h3><p>ralph-loop 这类插件我更倾向把它看成“循环执行框架”或者“任务闭环增强器”。</p><p>它比较适合下面这些场景：</p><ul><li>一个任务需要多轮分析、执行、检查</li><li>需要让 AI 按固定节奏反复迭代</li><li>需要把大任务拆成可观察的小回合</li></ul><h4 id="自动化同意问题"><a href="#自动化同意问题" class="headerlink" title="自动化同意问题"></a>自动化同意问题</h4><p>如果你的目标只是“允许它直接修改当前工作区里的文件，不要每次都弹确认”，优先用 Claude Code 自带的权限模式，而不是指望插件本身绕过确认。</p><p>我建议分两档理解：</p><h3 id="方案-1：只自动同意编辑文件"><a href="#方案-1：只自动同意编辑文件" class="headerlink" title="方案 1：只自动同意编辑文件"></a>方案 1：只自动同意编辑文件</h3><p>这是更稳的做法。</p><p>Claude Code 有一个 <code>acceptEdits</code> 模式，核心效果是：</p><ul><li>工作区内的文件编辑可以批量接受</li><li>但执行命令、联网请求、其他有副作用的操作，仍然会继续询问</li></ul><p>如果你主要烦的是“改这个文件能不能同意”这种提示，那应该优先用这一档。</p><p>可以通过 <code>/config</code> 或 <code>/permissions</code> 检查当前模式，也可以在设置文件里显式写上：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://json.schemastore.org/claude-code-settings.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;defaultMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;acceptEdits&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure><p>常见放置位置：</p><ul><li>全局生效：<code>~/.claude/settings.json</code></li><li>当前仓库本地生效：<code>.claude/settings.local.json</code></li><li>团队共享配置：<code>.claude/settings.json</code></li></ul><p>如果你只是想在自己机器上对当前项目放开，最适合放到 <code>.claude/settings.local.json</code>。这样不会提交进仓库，也不会影响别的项目。</p><h3 id="方案-2：连命令确认也一起跳过"><a href="#方案-2：连命令确认也一起跳过" class="headerlink" title="方案 2：连命令确认也一起跳过"></a>方案 2：连命令确认也一起跳过</h3><p>如果你希望 Claude Code 连命令执行、工具调用这些确认也尽量别问，可以直接用启动参数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude --dangerously-skip-permissions</span><br></pre></td></tr></table></figure><p>这个模式相当于直接跳过权限确认，适合你完全信任当前仓库、并且明确知道它可能会自动执行改文件、跑命令、调用工具等操作的场景。</p><p>但这一档风险明显更高，不建议默认长期打开。更适合：</p><ul><li>自己的个人仓库</li><li>隔离良好的测试环境</li><li>临时做高频迭代任务</li></ul><p>不太建议直接用于：</p><ul><li>来路不明的仓库</li><li>混有敏感配置的工程</li><li>会执行部署、发布、数据库操作的项目</li></ul><h3 id="实战建议"><a href="#实战建议" class="headerlink" title="实战建议"></a>实战建议</h3><p>如果你的诉求只是“ralph-loop 在多轮执行时别一直问我能不能改文件”，那优先级应该是：</p><ol><li>先把默认权限模式切到 <code>acceptEdits</code></li><li>用 <code>.claude/settings.local.json</code> 只对当前仓库生效</li><li>只有在你连命令确认都嫌打断流程时，才改用 <code>--dangerously-skip-permissions</code></li></ol><p>简单说：</p><ul><li>只想免掉文件编辑确认，用 <code>acceptEdits</code></li><li>想把所有确认基本都跳过，用 <code>--dangerously-skip-permissions</code></li></ul><p>前者适合日常主力使用，后者适合你明确接受风险时再开。</p><p>简单说，ralph-loop 不是让 Claude Code “更聪明”，而是让你的任务编排更稳定。</p><h3 id="文档检索类插件"><a href="#文档检索类插件" class="headerlink" title="文档检索类插件"></a>文档检索类插件</h3><p>如果插件可以帮助 Claude Code 直接读取官方文档、接口说明或者本地知识库，那么它在接第三方 SDK、引擎 API、云服务时非常有用。</p><p>适合场景：</p><ul><li>查 API 参数</li><li>对照版本差异</li><li>核对配置项含义</li><li>减少“模型凭印象回答”</li></ul><p>这类插件的核心价值是降低幻觉率。</p><h3 id="仓库与-Issue-协同类插件"><a href="#仓库与-Issue-协同类插件" class="headerlink" title="仓库与 Issue 协同类插件"></a>仓库与 Issue 协同类插件</h3><p>如果你的工作流经常围绕 Git、Issue、PR 进行，那么能直接读仓库状态、变更记录、评审意见的插件会非常实用。</p><p>适合场景：</p><ul><li>根据 Issue 修 bug</li><li>结合 PR review comment 改代码</li><li>总结当前分支改动</li><li>生成提交说明或变更摘要</li></ul><p>这类插件最适合团队协作环境，而不是单人写 demo。</p><h3 id="浏览器自动化或页面验证类插件"><a href="#浏览器自动化或页面验证类插件" class="headerlink" title="浏览器自动化或页面验证类插件"></a>浏览器自动化或页面验证类插件</h3><p>做前端、后台管理系统或者文档站点时，能操作页面、检查 DOM、截图、回归验证的插件也很有价值。</p><p>适合场景：</p><ul><li>检查页面是否正常渲染</li><li>验证按钮点击流程</li><li>截图留档</li><li>复现前端交互 bug</li></ul><p>如果你的任务需要“改完后马上验证页面结果”，这类插件会比纯文本分析更有效。</p><hr><p>Claude Code 真正好用的地方，不是一次生成很多代码，而是它可以参与完整的软件交付链路：</p><ul><li>先读工程</li><li>再理解约束</li><li>然后分步实施</li><li>最后补验证和总结</li></ul><p>如果再配合合适的插件，尤其是像 ralph-loop 这种帮助任务闭环和节奏控制的工具，整体体验会比“只聊天、不落地”的 AI 协作模式更强。</p><p>后续可以继续补充的方向：</p><ul><li>Claude Code 在 Unreal 工程中的使用案例</li><li>Claude Code 和 Copilot &#x2F; Cursor 的分工方式</li><li>Claude Code + MCP 的实际工作流示例</li></ul>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="Claude-Code-使用技巧整理"><a href="#Claude-Code-使用技巧整理" class="headerlink" title="Claude Code 使用技巧整理"></a>Claude Code 使用技巧整理</h1><p>这篇文档主要记录我在使用 Claude Code 过程中的一些稳定工作流、提问方式和插件使用经验。目标不是把所有功能列一遍，而是整理出真正能提高交付效率的做法。</p><hr><h2 id="Claude-Code-适合做什么"><a href="#Claude-Code-适合做什么" class="headerlink" title="Claude Code 适合做什么"></a>Claude Code 适合做什么</h2><p>如果从游戏开发、工具链开发和内容工程的视角来看，Claude Code 更适合以下几类任务：</p><ul><li>理解已有工程结构</li><li>批量重构脚本或工具代码</li><li>补测试、补文档、补脚手架</li><li>对接第三方 SDK、服务接口或命令行工具</li><li>做中等复杂度的多文件改动</li></ul><p>它的优势不是“直接无脑一把梭”，而是：</p><ul><li>长上下文理解能力比较稳定</li><li>对代码解释、重构、归纳总结表现较好</li><li>适合先分析、再执行的工作流</li></ul><p>如果任务非常碎、非常即时，比如一边写一边需要行级补全，那还是 IDE 内补全工具更直接。</p><hr><h2 id="我比较稳定的使用流程"><a href="#我比较稳定的使用流程" class="headerlink" title="我比较稳定的使用流程"></a>我比较稳定的使用流程</h2><h3 id="先要求它说明影响面"><a href="#先要求它说明影响面" class="headerlink" title="先要求它说明影响面"></a>先要求它说明影响面</h3><p>在改公共模块、基础类库、构建脚本之前，可以先问：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果修改这个函数签名，会影响哪些调用方？</span><br><span class="line">请按文件列出来，并说明高风险点。</span><br></pre></td></tr></table></figure><p>这一步对避免误改很有价值。</p><h3 id="让它顺手补验证步骤"><a href="#让它顺手补验证步骤" class="headerlink" title="让它顺手补验证步骤"></a>让它顺手补验证步骤</h3><p>除了改代码，我还会顺带要求：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改完成后，请补充：</span><br><span class="line"><span class="bullet">1.</span> 如何验证</span><br><span class="line"><span class="bullet">2.</span> 建议执行的命令</span><br><span class="line"><span class="bullet">3.</span> 可能失败的边界情况</span><br></pre></td></tr></table></figure><p>这样最后产出更接近可交付状态。</p><h3 id="把“不要做什么”写明"><a href="#把“不要做什么”写明" class="headerlink" title="把“不要做什么”写明"></a>把“不要做什么”写明</h3><p>例如：</p><ul><li>不要改 public API</li><li>不要引入新依赖</li><li>不要动 UI 样式</li><li>不要修改数据库结构</li></ul><p>这类负向约束非常重要，尤其是在已有项目里。</p><hr><h2 id="Plugin-使用总结"><a href="#Plugin-使用总结" class="headerlink" title="Plugin 使用总结"></a>Plugin 使用总结</h2><p>插件或者外部工具接入，真正的价值不是“功能变多”，而是让 Claude Code 可以从“只会说”变成“能查、能跑、能验证”。</p><p>我的判断标准通常是三条：</p><ol><li>能不能减少手动切换上下文</li><li>能不能把分析结果落到真实工程上</li><li>能不能形成稳定工作流，而不是偶尔演示一次</li></ol><h3 id="ralph-loop-（循环插件）"><a href="#ralph-loop-（循环插件）" class="headerlink" title="ralph-loop （循环插件）"></a><a href="https://awesomeclaude.ai/ralph-wiggum">ralph-loop</a> （循环插件）</h3><p>ralph-loop 这类插件我更倾向把它看成“循环执行框架”或者“任务闭环增强器”。</p><p>它比较适合下面这些场景：</p><ul><li>一个任务需要多轮分析、执行、检查</li><li>需要让 AI 按固定节奏反复迭代</li><li>需要把大任务拆成可观察的小回合</li></ul><h4 id="自动化同意问题"><a href="#自动化同意问题" class="headerlink" title="自动化同意问题"></a>自动化同意问题</h4><p>如果你的目标只是“允许它直接修改当前工作区里的文件，不要每次都弹确认”，优先用 Claude Code 自带的权限模式，而不是指望插件本身绕过确认。</p><p>我建议分两档理解：</p><h4 id="方案-1：只自动同意编辑文件"><a href="#方案-1：只自动同意编辑文件" class="headerlink" title="方案 1：只自动同意编辑文件"></a>方案 1：只自动同意编辑文件</h4><p>这是更稳的做法。</p><p>Claude Code 有一个 <code>acceptEdits</code> 模式，核心效果是：</p><ul><li>工作区内的文件编辑可以批量接受</li><li>但执行命令、联网请求、其他有副作用的操作，仍然会继续询问</li></ul><p>如果你主要烦的是“改这个文件能不能同意”这种提示，那应该优先用这一档。</p><p>可以通过 <code>/config</code> 或 <code>/permissions</code> 检查当前模式，也可以在设置文件里显式写上：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://json.schemastore.org/claude-code-settings.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;defaultMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;acceptEdits&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure><p>常见放置位置：</p><ul><li>全局生效：<code>~/.claude/settings.json</code></li><li>当前仓库本地生效：<code>.claude/settings.local.json</code></li><li>团队共享配置：<code>.claude/settings.json</code></li></ul><p>如果你只是想在自己机器上对当前项目放开，最适合放到 <code>.claude/settings.local.json</code>。这样不会提交进仓库，也不会影响别的项目。</p><h4 id="方案-2：连命令确认也一起跳过"><a href="#方案-2：连命令确认也一起跳过" class="headerlink" title="方案 2：连命令确认也一起跳过"></a>方案 2：连命令确认也一起跳过</h4><p>如果你希望 Claude Code 连命令执行、工具调用这些确认也尽量别问，可以直接用启动参数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude --dangerously-skip-permissions</span><br></pre></td></tr></table></figure><p>这个模式相当于直接跳过权限确认，适合你完全信任当前仓库、并且明确知道它可能会自动执行改文件、跑命令、调用工具等操作的场景。</p><p>但这一档风险明显更高，不建议默认长期打开。更适合：</p><ul><li>自己的个人仓库</li><li>隔离良好的测试环境</li><li>临时做高频迭代任务</li></ul><p>不太建议直接用于：</p><ul><li>来路不明的仓库</li><li>混有敏感配置的工程</li><li>会执行部署、发布、数据库操作的项目</li></ul><h4 id="实战建议"><a href="#实战建议" class="headerlink" title="实战建议"></a>实战建议</h4><p>如果你的诉求只是“ralph-loop 在多轮执行时别一直问我能不能改文件”，那优先级应该是：</p><ol><li>先把默认权限模式切到 <code>acceptEdits</code></li><li>用 <code>.claude/settings.local.json</code> 只对当前仓库生效</li><li>只有在你连命令确认都嫌打断流程时，才改用 <code>--dangerously-skip-permissions</code></li></ol><p>简单说：</p><ul><li>只想免掉文件编辑确认，用 <code>acceptEdits</code></li><li>想把所有确认基本都跳过，用 <code>--dangerously-skip-permissions</code></li></ul><p>前者适合日常主力使用，后者适合你明确接受风险时再开。</p><p>简单说，ralph-loop 不是让 Claude Code “更聪明”，而是让你的任务编排更稳定。</p><h3 id="Oh-My-Claude-Code（OMC，Claude智能体集合）"><a href="#Oh-My-Claude-Code（OMC，Claude智能体集合）" class="headerlink" title="Oh My Claude Code（OMC，Claude智能体集合）"></a>Oh My Claude Code（OMC，Claude智能体集合）</h3><p>主打一个零成本学习Claude的一个工具。</p><p>提供了5种模式：<br><strong>autopilot</strong>：全自动模式，整合了ralph（持久性），ultrawork（并行），plan（战略思维）整合在了一起。</p><p><code>autopilot: 做一点什么。</code></p><p><strong>ultrapilot</strong>：更激进的自动化（autopilot的升级版本，最多5个并行的autopilot）</p><p>🔸 Autopilot（完全自主） - 从规划、实施到测试的全流程自动化 </p><p>🔸 Ultra Pilot（并行加速） - 最多5个并行工作者同时处理，速度提升5倍 </p><p>🔸 Swarm（协作团队） - 多个智能体像开发团队一样协作，从共享任务池领取工作 </p><p>🔸 Pipeline（流水线） - 按固定顺序串联智能体，适合必须按步骤推进的工作流 </p><p>🔸 EcoCode（经济模式） - 在保持效率的前提下最大化节省 token 消耗</p><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a href="https://www.bilibili.com/video/BV12hf2B9E29/">一个B站博主的学习视频</a></p><h3 id="文档检索类插件"><a href="#文档检索类插件" class="headerlink" title="文档检索类插件"></a>文档检索类插件</h3><p>如果插件可以帮助 Claude Code 直接读取官方文档、接口说明或者本地知识库，那么它在接第三方 SDK、引擎 API、云服务时非常有用。</p><p>适合场景：</p><ul><li>查 API 参数</li><li>对照版本差异</li><li>核对配置项含义</li><li>减少“模型凭印象回答”</li></ul><p>这类插件的核心价值是降低幻觉率。</p><h3 id="仓库与-Issue-协同类插件"><a href="#仓库与-Issue-协同类插件" class="headerlink" title="仓库与 Issue 协同类插件"></a>仓库与 Issue 协同类插件</h3><p>如果你的工作流经常围绕 Git、Issue、PR 进行，那么能直接读仓库状态、变更记录、评审意见的插件会非常实用。</p><p>适合场景：</p><ul><li>根据 Issue 修 bug</li><li>结合 PR review comment 改代码</li><li>总结当前分支改动</li><li>生成提交说明或变更摘要</li></ul><p>这类插件最适合团队协作环境，而不是单人写 demo。</p><h3 id="浏览器自动化或页面验证类插件"><a href="#浏览器自动化或页面验证类插件" class="headerlink" title="浏览器自动化或页面验证类插件"></a>浏览器自动化或页面验证类插件</h3><p>做前端、后台管理系统或者文档站点时，能操作页面、检查 DOM、截图、回归验证的插件也很有价值。</p><p>适合场景：</p><ul><li>检查页面是否正常渲染</li><li>验证按钮点击流程</li><li>截图留档</li><li>复现前端交互 bug</li></ul><p>如果你的任务需要“改完后马上验证页面结果”，这类插件会比纯文本分析更有效。</p><hr><p>Claude Code 真正好用的地方，不是一次生成很多代码，而是它可以参与完整的软件交付链路：</p><ul><li>先读工程</li><li>再理解约束</li><li>然后分步实施</li><li>最后补验证和总结</li></ul><p>如果再配合合适的插件，尤其是像 ralph-loop 这种帮助任务闭环和节奏控制的工具，整体体验会比“只聊天、不落地”的 AI 协作模式更强。</p><p>后续可以继续补充的方向：</p><ul><li>Claude Code 在 Unreal 工程中的使用案例</li><li>Claude Code 和 Copilot &#x2F; Cursor 的分工方式</li><li>Claude Code + MCP 的实际工作流示例</li></ul>]]></content:encoded>
       
       
       
       <category domain="http://example.com/tags/AI/">AI</category>
       
+      <category domain="http://example.com/tags/Assistant/">Assistant</category>
+      
       <category domain="http://example.com/tags/MCP/">MCP</category>
       
       <category domain="http://example.com/tags/Claude/">Claude</category>
-      
-      <category domain="http://example.com/tags/Assistant/">Assistant</category>
       
       <category domain="http://example.com/tags/Vibe-Coding/">Vibe-Coding</category>
       
@@ -185,11 +185,11 @@
       
       
       
+      <category domain="http://example.com/tags/OpenClaw/">OpenClaw</category>
+      
       <category domain="http://example.com/tags/AI/">AI</category>
       
       <category domain="http://example.com/tags/Assistant/">Assistant</category>
-      
-      <category domain="http://example.com/tags/OpenClaw/">OpenClaw</category>
       
       
       <comments>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/#disqus_thread</comments>
@@ -373,6 +373,37 @@
     </item>
     
     <item>
+      <title>虚实融合自动化工具 (软件作品)</title>
+      <link>http://example.com/2025/05/01/20250501.%E8%99%9A%E5%AE%9E%E8%9E%8D%E5%90%88%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/</link>
+      <guid>http://example.com/2025/05/01/20250501.%E8%99%9A%E5%AE%9E%E8%9E%8D%E5%90%88%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/</guid>
+      <pubDate>Thu, 01 May 2025 04:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;在基于LED的虚拟制作中，常常会遇到前景物品和背景难以融合的问题，这是由多种因素造成的（包括灯光、美术效果、摄像机设置、LED显示器的色彩校准等）。&lt;/p&gt;
+&lt;p&gt;为了解决这个问题，我设计了一套基于图像码值的解决方案。该方案通过对前景物品和背景进行图像分析，提取出它们的色彩</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>在基于LED的虚拟制作中，常常会遇到前景物品和背景难以融合的问题，这是由多种因素造成的（包括灯光、美术效果、摄像机设置、LED显示器的色彩校准等）。</p><p>为了解决这个问题，我设计了一套基于图像码值的解决方案。该方案通过对前景物品和背景进行图像分析，提取出它们的色彩信息，并根据这些信息自动调整前、后景物品的色彩，使其更好地融合。</p><p>该方案融合了CV、色彩算法、以及机器学习等技术栈。通过分析前后景别的码值差异，将差异数据化后，通过机器学习迭代，将数据转换为具体的Unreal Engine的调整参数，来实现前后景的自动化色彩调整。</p><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_030100.gif" alt="自动化计算数据结果并应用到UE" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">自动化计算数据结果并应用到UE</figcaption>  </figure>  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_030101.gif" alt="把Texture转换成Compute shader实时显示图像示波器" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">把Texture转换成Compute shader实时显示图像示波器</figcaption>  </figure></div><p>它可以实现：</p><ul><li>自动分析前后景物品的色彩信息，并计算出它们之间的色彩偏差值，然后将这些数据转换为Unreal Engine的调整参数，自动调整前后景物品的色彩，使其更好地融合。</li><li>实时显示前后景物品的色彩信息和调整结果，帮助用户更好地理解和控制色彩调整过程。让这个过程感性化。</li></ul>]]></content:encoded>
+      
+      
+      
+      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      
+      <category domain="http://example.com/tags/Software-Projects/">Software Projects</category>
+      
+      <category domain="http://example.com/tags/Machine-Learning/">Machine Learning</category>
+      
+      <category domain="http://example.com/tags/Computer-Vision/">Computer Vision</category>
+      
+      
+      <comments>http://example.com/2025/05/01/20250501.%E8%99%9A%E5%AE%9E%E8%9E%8D%E5%90%88%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
       <title>OpenVPCal流程文档</title>
       <link>http://example.com/2024/12/21/20241221.OpenVPCal%E6%B5%81%E7%A8%8B%E6%96%87%E6%A1%A3/</link>
       <guid>http://example.com/2024/12/21/20241221.OpenVPCal%E6%B5%81%E7%A8%8B%E6%96%87%E6%A1%A3/</guid>
@@ -399,6 +430,38 @@
       
       
       <comments>http://example.com/2024/12/21/20241221.OpenVPCal%E6%B5%81%E7%A8%8B%E6%96%87%E6%A1%A3/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>虚拟制作色彩校准及HDR制作工作流 (软件作品)</title>
+      <link>http://example.com/2024/09/02/20240902.%E8%99%9A%E6%8B%9F%E5%88%B6%E4%BD%9C%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</link>
+      <guid>http://example.com/2024/09/02/20240902.%E8%99%9A%E6%8B%9F%E5%88%B6%E4%BD%9C%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</guid>
+      <pubDate>Mon, 02 Sep 2024 04:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;在基于LED的虚拟制作中，色彩管理是确保最终输出图像质量和一致性的关键环节。但是由于制作标准（资产生产环节的SDR）、显示设备（LED显示器、美术监视器、摄影机、现场监视器）的显示效果的差异，以及不同DCC软件工具（如Unreal Engine、Nuke、Maya、Davi</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>在基于LED的虚拟制作中，色彩管理是确保最终输出图像质量和一致性的关键环节。但是由于制作标准（资产生产环节的SDR）、显示设备（LED显示器、美术监视器、摄影机、现场监视器）的显示效果的差异，以及不同DCC软件工具（如Unreal Engine、Nuke、Maya、Davinci Resolve）之间的色彩空间和色彩管理系统的不同，虚拟制作中的色彩管理面临着诸多挑战。</p><div style="display: flex; justify-content: center; margin: 24px 0;">  <figure style="width: min(100%, 960px); margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_004432.png" alt="" style="width: 100%; height: auto; display: block; border-radius: 8px;" />  </figure></div><p>所以我设计了一套基于ACES色彩管理体系、OCIO（OpenColorIO）色彩管理系统、OVC（OpenVPCal）、Unreal Engine的虚拟制作色彩校准及HDR制作工作流，里面涉及到了大量的色彩算法方案、软硬件配合的解决方案及工作流程内容优化，旨在解决上述挑战，并提供一个高效、可靠的色彩管理解决方案，同时以HDR呈现更高的图像质量。</p><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010101.gif" alt="资产HDR监看" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">资产HDR监看</figcaption>  </figure>  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010102.gif" alt="编辑器python虚拟环境自动部署" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">编辑器python虚拟环境自动部署</figcaption>  </figure>  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010103.gif" alt="HDR资产规范编辑器工具" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR资产规范编辑器工具</figcaption>  </figure></div><p>这个工作流包含2个软件（校准软件、美术监看软件），以及一套硬件配合的工业化工作流。该方案相较于SONY、ARRI等厂商的方案，具有更高的性价比、更好的用户体验、更强的适配能力，并且已经在多个虚拟制作项目中成功应用。</p><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010105.gif" alt="自动化校准验证" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">自动化校准验证</figcaption>  </figure>  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010104.gif" alt="多屏幕统一效果" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">多屏幕统一效果</figcaption>  </figure>  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010100.gif" alt="校准后比对校准结果" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">校准后比对校准结果</figcaption>  </figure></div><p><strong>该方案实现了全流程的HDR制作：</strong><br>1.制作期的HDR监看（Unreal Engine、美术监视器）或自动的贴图上转换；<br>2.拍摄期的HDR监看（摄影机、现场监视器） + LED HDR大屏显示 + 多屏统一的显示器HDR色彩校准；<br>3.后期素材的HDR监看。</p><ul><li><strong>该HDR方案是国内虚拟制作领域首个跑通上线的全流程HDR解决方案。</strong></li></ul>]]></content:encoded>
+      
+      
+      
+      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      
+      <category domain="http://example.com/tags/ACES/">ACES</category>
+      
+      <category domain="http://example.com/tags/OCIO/">OCIO</category>
+      
+      <category domain="http://example.com/tags/Color-Management/">Color Management</category>
+      
+      <category domain="http://example.com/tags/Software-Projects/">Software Projects</category>
+      
+      
+      <comments>http://example.com/2024/09/02/20240902.%E8%99%9A%E6%8B%9F%E5%88%B6%E4%BD%9C%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#disqus_thread</comments>
       
     </item>
     
@@ -433,7 +496,7 @@
     </item>
     
     <item>
-      <title>在VisionPro中实现一个可交互的虚拟人</title>
+      <title>在VisionPro中实现一个可交互的虚拟人 (软件作品)</title>
       <link>http://example.com/2024/06/01/20240601.VirtualActorUnityInVisionPro/</link>
       <guid>http://example.com/2024/06/01/20240601.VirtualActorUnityInVisionPro/</guid>
       <pubDate>Sat, 01 Jun 2024 04:00:00 GMT</pubDate>
