@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="OpenVPCal 校准流程与操作指南1. 流程简介
+
+
+流程
+OVC官方备注内容
+内容备注
+
+
+
+创建项目
+打开 OpenVPCal 并创建一个新项目，选择一个用于保存项目文件及其附属文件和导出文件的文件夹。
+
+
+
+设置LED墙
+使用 “添加 LED 墙” 功能，根据需要为每个要校准的相机创建相应">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="OpenVPCal流程文档"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Article Language-->
+    
+        <meta name="article:lang" content="en"/>
+    
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>OpenVPCal流程文档 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+    
+<link rel="stylesheet" href="/css/tag-graph.css">
+
+    
+<link rel="stylesheet" href="/css/language-switcher.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body class="layout-post path-2024-12-21-20241221-OpenVPCal-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/" data-i18n-key="Home">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives" data-i18n-key="Archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about" data-i18n-key="About">About</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980534_305313e0.png');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2025/08/01/20250801.Shader%20Learning%20Note/" class="previous" data-title="Shader学习笔记"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2024/09/01/20240901.OpenColorIO-%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="next" data-title="OpenColorIO 色彩管理系..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">OpenVPCal流程文档</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <h1 id="OpenVPCal-校准流程与操作指南"><a href="#OpenVPCal-校准流程与操作指南" class="headerlink" title="OpenVPCal 校准流程与操作指南"></a>OpenVPCal 校准流程与操作指南</h1><h2 id="1-流程简介"><a href="#1-流程简介" class="headerlink" title="1. 流程简介"></a>1. 流程简介</h2><table>
+<thead>
+<tr>
+<th align="left">流程</th>
+<th align="left">OVC官方备注内容</th>
+<th align="left">内容备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>创建项目</strong></td>
+<td align="left">打开 OpenVPCal 并创建一个新项目，选择一个用于保存项目文件及其附属文件和导出文件的文件夹。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>设置LED墙</strong></td>
+<td align="left">使用 “添加 LED 墙” 功能，根据需要为每个要校准的相机创建相应数量的 LED 墙，并使用易于识别的命名约定。在 “LED 设置” 小部件中，根据 LED 墙的规格设置目标墙的参数。</td>
+<td align="left">另外，这里支持设置自定义色域。</td>
+</tr>
+<tr>
+<td align="left"><strong>导出校准补丁</strong></td>
+<td align="left">您可以在”项目设置”小部件中的”补丁生成”部分更改默认设置。</td>
+<td align="left">如果导出的是线性的，则导出的就是线性的。但如果导出的是dpx或是tiff（导出EXR的图片格式，EXR是线性的，假设选择BT.2020，所以上屏的OCIO输入选择”Linear ITU-R BT.2020”，输出选择”ITU-R BT.2020 - ST 2084”，这是在ColorSpace里面的，所以它的ST 2084是OETF，会和屏幕上的EOTF抵消，呈现线性的状态；如果导出的是TIFF或是DPX的话，它是自带这个OETF的，所以应该将其不通过OCIO直接上屏）。</td>
+</tr>
+<tr>
+<td align="left"><strong>校准色块加载到媒体播放器</strong></td>
+<td align="left">将校准色块加载到媒体播放器上，并绕过任何颜色变换，因为校准色块已处于目标颜色空间。如果您已导出 EXR，请确保仅应用所需的 EOTF 变换。确保色块播放正确，没有帧混合或循环播放。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>设置相机</strong></td>
+<td align="left">将摄像机设置在墙前，确保墙和摄像机都预热（30min）并达到工作温度。关闭会影响LED墙的外部光源。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>拍摄色块</strong></td>
+<td align="left">按照开始补丁（序列的第一个补丁）上的说明进行操作。每个补丁拍摄超过 1 帧。检查相机是否曝光良好并与墙壁对齐。尽可能拍摄 RAW。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>校准预处理</strong></td>
+<td align="left">OpenVpCal 仅接受 Linear EXR 作为输入：将相机板预处理为 Linear&#x2F;AP0 (ACES 2065-1) 或 Linear&#x2F;Camera Native。我们建议使用 Linear&#x2F;AP0（该工具的默认设置）。</td>
+<td align="left">这意味需要在外部软件上进行处理。</td>
+</tr>
+<tr>
+<td align="left"><strong>加载 EXR 序列</strong></td>
+<td align="left">在 OpenVpCal 中，右键单击 LED WALL，然后选择”加载板序列”。选择预处理的相机板所在的文件夹。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>检查 ROI 和色块分离</strong></td>
+<td align="left">OpenVpCal 自动检测帧之间的间隔并自动检测板中的 ROI。检查 ROI 是否正确，并使用帧导航按钮查看帧间隔是否准确。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>测试板设置</strong></td>
+<td align="left">在”Plate Settings”小部件中，设置”Plate Settings”并选择您可能需要的校准附加选项。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>分析</strong></td>
+<td align="left">单击”分析”可让该工具对您的补丁进行精确分析并得出墙壁的状态。该工具将建议墙壁是否需要校准，并推荐校准设置。您可以同时分析多面LED墙。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>检查状态和校准设置</strong></td>
+<td align="left">如果分析成功，请检查查看器中的色块样本，以确保每个帧都对齐（外部为参考，内部为板）。分析绘图以确定建议的校准建议是否符合您的预期。如果分析不成功，请按照建议的更正重新拍摄板。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>校准</strong></td>
+<td align="left">如果愿意继续，请点击”校准”。您可以随时更改校准设置并再次点击”校准”。您可以同时校准多面墙。</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>检查校准</strong></td>
+<td align="left">通过在查看器中启用”预览校准”来检查校准结果。您应该会看到一个很好的改进！</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>导出</strong></td>
+<td align="left">如果您满意，请点击”导出”按钮导出您的校准变换。</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h2 id="2-页面上UI内容解析"><a href="#2-页面上UI内容解析" class="headerlink" title="2. 页面上UI内容解析"></a>2. 页面上UI内容解析</h2><h3 id="2-1-LED设置区域"><a href="#2-1-LED设置区域" class="headerlink" title="2.1. LED设置区域"></a>2.1. LED设置区域</h3><p>用于设置此时LED的状态，包含色域、EOTF、以及屏幕最大亮度。</p>
+<h4 id="2-1-1-LED目标设置"><a href="#2-1-1-LED目标设置" class="headerlink" title="2.1.1. LED目标设置"></a>2.1.1. LED目标设置</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980534_305313e0.png" alt="图片"></p>
+<ul>
+<li><strong>目标色域（TARGET GAMUT）</strong>：选择校准的目标色域，可以从预定义的标准色域（如 sRGB、P3、Rec2020）中选择。</li>
+<li><strong>添加自定义色域（ADD CUSTOM GAMUT）</strong>：点击此按钮会弹出一个窗口，可通过输入自定义色域名称及其 CIE 1931 x,y 基色和白点坐标来添加新的自定义色域，用于校准。</li>
+<li><strong>目标 EOTF（TARGET EOTF）</strong>：选择 LED 面板的目标 EOTF。</li>
+<li><strong>目标最大亮度（TARGET MaxLum (nits)）</strong>：仅在 EOTF 为 ST2084 时可设置内容的峰值亮度。</li>
+<li><strong>（在添加自定义色域中）自定义名称（CUSTOM NAME）</strong>：定义自定义目标颜色空间的名称。</li>
+<li><strong>（在添加自定义色域中）目标色域色度坐标（TARGET GAMUT CHROMATICITY COORDINATES）</strong>：查看或修改 xy 色域基色和白点坐标。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_f76b2829.png" alt="图片"></li>
+</ul>
+<h4 id="2-1-2-工具设置（TOOL-SETTINGS）"><a href="#2-1-2-工具设置（TOOL-SETTINGS）" class="headerlink" title="2.1.2. 工具设置（TOOL SETTINGS）"></a>2.1.2. 工具设置（TOOL SETTINGS）</h4><ul>
+<li><strong>灰色色块数量（NUMBER OF GREY PATCHES）</strong>：设置要生成 &#x2F; 分析的灰色阶数，默认值为 33。</li>
+<li><strong>原色饱和度（PRIMARIES SATURATION）</strong>：设置颜色原色的饱和度强度，默认值为 0.7。</li>
+</ul>
+<h3 id="2-2-测试图设置"><a href="#2-2-测试图设置" class="headerlink" title="2.2. 测试图设置"></a>2.2. 测试图设置</h3><p>这个区域用于设置测试图的一些信息。在拍摄完成、导入图片之后这个界面才会Enable。</p>
+<h3 id="2-3-测试板设置"><a href="#2-3-测试板设置" class="headerlink" title="2.3. 测试板设置"></a>2.3. 测试板设置</h3><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_55e7ae7e.png" alt="图片"></p>
+<h4 id="2-3-1-测试板（Plate-Settings）"><a href="#2-3-1-测试板（Plate-Settings）" class="headerlink" title="2.3.1. 测试板（Plate Settings）"></a>2.3.1. 测试板（Plate Settings）</h4><ul>
+<li><strong>输入板块色域（INPUT PLATE GAMUT）</strong>：外部后的相机板块序列的输入颜色空间，默认设置为 ACES 2065 - 1。这里指的是图片自身的色域。</li>
+<li><strong>相机原生色域（NATIVE CAMERA GAMUT）</strong>：用于校准的相机的原生颜色空间。拍摄时候相机的色域。虽然已经经过了转换，但是OVC还是想知道。</li>
+<li><strong>自动白平衡源（AUTO WB SOURCE）</strong>：如果启用此选项，输入板块在进行分析和校准之前将进行自动白平衡处理。<strong>强烈不建议开启！</strong><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_7df3d9d9.png" alt="图片"></li>
+</ul>
+<h4 id="2-3-2-参考设置（Reference）"><a href="#2-3-2-参考设置（Reference）" class="headerlink" title="2.3.2. 参考设置（Reference）"></a>2.3.2. 参考设置（Reference）</h4><p>（在一个复杂的拍摄场景中，有不同型号或批次的 LED 墙，但为了保证视觉效果的一致性，需要将某一面墙的校准效果向已经校准好的或作为标准的参考墙看齐。通过在 “参考设置” 中勾选 “匹配参考墙”，并从下拉菜单中选择对应的参考墙，OpenVPCal 会在后续的校准过程中调整正在校准墙的相关参数，使得其在颜色呈现、亮度等方面尽可能与参考墙一致，从而实现多墙之间的协调匹配，确保整个拍摄场景中不同 LED 墙的视觉效果统一。）</p>
+<ul>
+<li><strong>匹配参考墙（MATCH REFERENCE WALL）</strong>：如果勾选此选项，所选的 LED 墙将与所选的参考墙进行匹配。</li>
+<li><strong>参考墙（REFERENCE WALL）</strong>：列出了可用于匹配的参考墙选项。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_2edfca08.png" alt="图片"></li>
+</ul>
+<h4 id="2-3-3-白点偏移（White-Point-Offset）"><a href="#2-3-3-白点偏移（White-Point-Offset）" class="headerlink" title="2.3.3. 白点偏移（White Point Offset）"></a>2.3.3. 白点偏移（White Point Offset）</h4><p>上载一个EXR图，让OpenVPCal针对这张白点图进行校准。</p>
+<ul>
+<li><strong>使用白点偏移（USE WHITE POINT OFFSET）</strong>：如果勾选此选项，在进行分析和校准之前，板块的原始白点将朝着指定文件的测量白点进行偏移。</li>
+<li><strong>白点偏移源文件（WHITE POINT OFFSET SOURCE FILE）</strong>：指向包含白点偏移源的文件路径。</li>
+</ul>
+<h2 id="3-详细流程（按照简介的顺序）"><a href="#3-详细流程（按照简介的顺序）" class="headerlink" title="3. 详细流程（按照简介的顺序）"></a>3. 详细流程（按照简介的顺序）</h2><h3 id="3-1-设置测试内容"><a href="#3-1-设置测试内容" class="headerlink" title="3.1. 设置测试内容"></a>3.1. 设置测试内容</h3><h4 id="3-1-1-创建项目"><a href="#3-1-1-创建项目" class="headerlink" title="3.1.1. 创建项目"></a>3.1.1. 创建项目</h4><p>打开软件的时候就会有自动弹窗提示你是否创建或是加载旧项目。在打开了项目之后也可以点击“新建项目”。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965880_576f673d.png" alt="图片"></p>
+<h4 id="3-1-2-设置LED墙面"><a href="#3-1-2-设置LED墙面" class="headerlink" title="3.1.2. 设置LED墙面"></a>3.1.2. 设置LED墙面</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965880_e3a774a1.png" alt="图片"></p>
+<p>您需要根据校准需求添加相应数量的墙体。“墙” 这一概念取决于具体的使用场景，它可能代表不同相机与同一物理 LED 面板的组合，也可能代表不同的校准过程。</p>
+<p>我建议您使用命名方式为“LED名字_相机的名字”，这意味着针对不同的 LED-相机 组合做的校准。当存在多个相机的使用场景的时候，可以用复制的方式来创建多个LED墙+相机的组合。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980536_aea5d545.png" alt="图片"></p>
+<h4 id="3-1-3-导出校准补丁"><a href="#3-1-3-导出校准补丁" class="headerlink" title="3.1.3. 导出校准补丁"></a>3.1.3. 导出校准补丁</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965880_83bfc65c.png" alt="图片"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_66e0c9ff.png" alt="图片"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_224f2f34.png" alt="图片"><br>在导出之前，务必确保 OpenVPCal 中的 LED 设置正确，因为校准色卡的颜色值需要正确编码。用户可以在项目设置小部件的 “色卡生成” 选项卡中设置色卡文件格式、分辨率以及每个色卡的帧数。例如，对于虚幻引擎媒体播放器，导出线性 EXR 格式可能更方便；而对于 Disguise 或 Plate Performer 等系统，导出 DPX 格式的显示相关色卡可能更合适。</p>
+<p>如果选择 EXR 作为文件格式，生成的色卡将忽略电光转换函数（EOTF,以线性方式导出）,缩放比例为 1 &#x3D; 100 尼特(即图片上1的码值代表100nits的亮度)，并编码到目标颜色空间中。</p>
+<h4 id="3-1-4-校准色块加载到媒体播放器"><a href="#3-1-4-校准色块加载到媒体播放器" class="headerlink" title="3.1.4. 校准色块加载到媒体播放器"></a>3.1.4. 校准色块加载到媒体播放器</h4><p>导出时，OpenVPCal 还会生成一个 <code>Pre_Calibration_OpenVPCal.ocio</code> 配置文件，该文件提供了应用于色卡的必要转换，在导出 EXR 时尤为重要。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_c8d0c378.png" alt="图片"></p>
+<p>在<code>Pre_Calibration_OpenVPCal.ocio</code> 配置文件里面提供了三种转换（用于作为输出的转换）：</p>
+<ol>
+<li><strong>第一种</strong>： 只有EOTF转换</li>
+<li><strong>第二种</strong>：EOTF+色域转换</li>
+<li><strong>第三种</strong>：只有色域转换（在EXR UE播放流程中选这种）</li>
+</ol>
+<p>请在上屏的Ndisplay里按照如下设置： 输入为<code>WorkingColorSpace</code>（UE），这代表着不对UE内部的颜色进行颜色转换。（但是建议UE的工作色域改成BT.2020这意味着内部处理按照更丰富的颜色进行处理，如果你选择了Rec.2020作为色彩空间，那么你的输入也可以选择为：Linear ITU-R2020，最理想的情况是，这里选择ACES AP1&#x2F;ACES CG，但这可能会让原本…）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980527_b7a470e9.png" alt="图片"><br>这是一个标准的OCIO拍测试板的设置。</p>
+<p><strong>Unreal后处理设置：</strong><br>（参考文档导出Word，不支持展示高级宏腾讯文档）</p>
+<h4 id="3-1-5-设置相机"><a href="#3-1-5-设置相机" class="headerlink" title="3.1.5. 设置相机"></a>3.1.5. 设置相机</h4><p>相机设置内容（待补充）</p>
+<h3 id="3-2-校准部分"><a href="#3-2-校准部分" class="headerlink" title="3.2. 校准部分"></a>3.2. 校准部分</h3><h4 id="3-2-1-预处理测试图"><a href="#3-2-1-预处理测试图" class="headerlink" title="3.2.1. 预处理测试图"></a>3.2.1. 预处理测试图</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980529_808ac3bd.png" alt="图片"><br>通过达芬奇的方式预处理。</p>
+<h4 id="3-2-2-加载EXR序列"><a href="#3-2-2-加载EXR序列" class="headerlink" title="3.2.2. 加载EXR序列"></a>3.2.2. 加载EXR序列</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_4a0efb32.png" alt="图片"></p>
+<p>在 OpenVPCal 的 “Stage View（舞台视图）”&gt;“LED 墙” 面板中，右键单击要加载板块的 LED 墙，选择 “加载测试图序列”，或者通过 “文件”&gt;“加载测试图序列”，来加载与该墙对应的校准测试图。</p>
+<p>OpenVPCal 会自动识别测试图，并尝试确定用于分析的感兴趣区域（ROI）以及色块之间的间隔。如果自动识别失败，用户可以使用第一个色块的中心正方形作为参考，将查看器中的红色 ROI 矩形对齐。</p>
+<h4 id="3-2-3-测试板设置"><a href="#3-2-3-测试板设置" class="headerlink" title="3.2.3. 测试板设置"></a>3.2.3. 测试板设置</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_35e7e718.png" alt="图片"></p>
+<ul>
+<li><strong>Input Plate Gamut（输入的测试板色域）</strong>： 这个一定是一个线性的空间（比如 ACES 2065-1）</li>
+<li><strong>Native Camera Gamut（相机本地色域）</strong>： 比如Arri广色域、索尼SGC</li>
+<li><strong>自动白平衡设置</strong>：不建议开启，开启之后会对图形进行自动白平衡，就没有白平衡校准了。（如果你的工作流程需要对板块进行自动白平衡，且在相机中无法执行此操作，或者你需要更精确的白平衡，那么请选择自动白平衡源。）</li>
+</ul>
+<h4 id="3-2-4-分析"><a href="#3-2-4-分析" class="headerlink" title="3.2.4. 分析"></a>3.2.4. 分析</h4><p>在为每个你打算分析和校准的 LED 墙加载并设置好板块后，你可以在执行选项卡中点击“分析”。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980528_4992f961.png" alt="图片"><br>分析操作将从板块中提取必要信息，并将软件切换到 “分析布局”。你可以同时选择多个墙并同时运行分析。（注意：任何以另一墙作为参考的墙必须同时进行分析和校准。）</p>
+<p>分析完成后，工具会弹出一个窗口，展示对每面被分析墙体的结果描述。分析可能会给出一些严重错误提示、警告，或者表明墙体无需校准（因为其处于可接受的公差范围内）。</p>
+<h5 id="3-2-4-1-样本分析查看器"><a href="#3-2-4-1-样本分析查看器" class="headerlink" title="3.2.4.1. 样本分析查看器"></a>3.2.4.1. 样本分析查看器</h5><p>在分析布局中，将出现一个色板分析查看器，方便用户了解墙面的状态及其校准。该查看器由 OpenColor IO (OCIO) 运行，因此可以将色板映射到工具附带的默认 OCIO 配置 ACES 1.3 Studio Config 中可用的任何颜色空间。</p>
+<p>查看器将校准序列的每个色块绘制为方形色板，其中外部显示目标颜色，内部显示相机观察到的实际色块。</p>
+<ul>
+<li><strong>正确示例</strong>：<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_ff1e51d3.png" alt="图片"></li>
+<li><strong>采集错误的示例</strong>：<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_d13e95f7.png" alt="图片"></li>
+<li>注意红绿蓝的位置反了</li>
+</ul>
+<p><strong>几个部件的作用：</strong></p>
+<ul>
+<li><strong>Exposure slider</strong>：曝光滑块。用于调整色样分析查看器中图像的曝光程度。</li>
+<li><strong>Display and view drop-down menus</strong>：显示和视图下拉菜单。“显示” 显示在什么屏幕上。“视图”显示什么样的数据 。</li>
+<li><strong>Auto white balance preview</strong>：自动白平衡预览。可以让用户提前看到自动白平衡算法对色样颜色的调整效果。</li>
+<li><strong>Calibration preview</strong>：校准预览。用于展示对色样进行校准操作后的预期效果。</li>
+</ul>
+<h5 id="3-2-4-2-分析部件"><a href="#3-2-4-2-分析部件" class="headerlink" title="3.2.4.2. 分析部件"></a>3.2.4.2. 分析部件</h5><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_b7cf71a0.png" alt="图片"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_b1a81fa0.png" alt="图片"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_71fc31cf.png" alt="图片"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_5118f844.png" alt="图片"></p>
+<ul>
+<li><strong>最大距离分析</strong>：显示与校准目标颜色空间相关的超出色域颜色的程度，同时展示校准前后的情况。</li>
+<li><strong>EOTF 分析</strong>：跟踪 LED 墙的线性响应，展示校准前后以及红、绿、蓝各通道的数据。</li>
+<li><strong>白点分析</strong>：呈现相机所观测到的 LED 墙的白点情况，包括目标白点、校准前的白点、校准后的白点，以及麦克白样本的白点信息。</li>
+<li><strong>颜色空间分析</strong>：展示相机所观测到的 LED 墙的颜色空间和白点范围，涵盖目标颜色空间、校准前的颜色空间、校准后的颜色空间，以及麦克白样本的相关信息。</li>
+</ul>
+<blockquote>
+<p><em>Macbeth 色卡是由 X-Rite（爱色丽）旗下品牌 Gretag Macbeth 推出的用于色彩校准和色彩管理的标准色卡。它包含了一系列具有特定颜色和反射率的色块，这些色块的颜色经过精确测量和定义，可作为色彩校准的参考标准，帮助确保在不同设备和环境下的色彩准确性和一致性。</em></p>
+</blockquote>
+<h5 id="3-2-4-3-IPT-色差分析小部件"><a href="#3-2-4-3-IPT-色差分析小部件" class="headerlink" title="3.2.4.3. IPT - 色差分析小部件"></a>3.2.4.3. IPT - 色差分析小部件</h5><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_e15d7d80.png" alt="图片"></p>
+<p>该小部件使用 DeltaE 度量来评估校准的准确性。DeltaE 是一种用于量化两种颜色之间感知差异的指标。在这种情况下，它衡量校准前后相机观测到的颜色与目标颜色之间的差异。 通过此分析，用户可以直观地了解校准过程在减小颜色误差方面的效果。较小的 DeltaE 值表示相机观测到的颜色与目标颜色更为接近，表明校准更为精确。 该小部件可能会以图形或数值形式展示这些 DeltaE 值，帮助用户快速评估不同颜色区域或整个色彩空间在校准前后的变化情况。例如，它可能会显示每个色块在校准前后的 DeltaE 值，或者提供整个色卡的平均 DeltaE 值，以全面评估校准的质量。</p>
+<h4 id="3-2-5-校准设置"><a href="#3-2-5-校准设置" class="headerlink" title="3.2.5. 校准设置"></a>3.2.5. 校准设置</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_5b845e84.png" alt="图片"></p>
+<h5 id="3-2-5-1-校准设置"><a href="#3-2-5-1-校准设置" class="headerlink" title="3.2.5.1. 校准设置"></a>3.2.5.1. 校准设置</h5><p>校准设置提供了一系列选项，支持不同的校准路径与功能。分析过程通常会依据 LED 墙的状况设定最佳参数，但用户也可自行选择启用 &#x2F; 禁用某些选项，或选用不同的路径。具体选项如下：</p>
+<ul>
+<li><strong>参考到目标 CAT（REFERENCE TO TARGET CAT）</strong>：从标准的色度适应变换列表中挑选。</li>
+<li><strong>计算顺序（CALCULATIONS ORDER）</strong>：编辑校准变换的操作顺序。先Gamma校准还是先ColorSpace校准。</li>
+<li><strong>启用 EOTF 校正（ENABLE EOTF CORRECTION）</strong>：勾选此选项可启用 EOTF 校正。</li>
+<li><strong>目标到屏幕 CAT（TARGET TO SCREEN CAT）</strong>：从标准列表中选择色度适应变换，或选择 “无（NONE）” 作为校准矩阵，默认选项为 “无（NONE）”。</li>
+<li><strong>启用色域压缩（ENABLE GAMUT COMPRESSION）</strong>：勾选此选项可启用色域压缩。</li>
+<li><strong>避免裁剪（AVOID CLIPPING）</strong>：勾选此选项，可对整个校准变换进行缩放，以避免高光裁剪（默认处于启用状态）。</li>
+</ul>
+<blockquote>
+<p>如果（注意截止到2025.2.5日OpenVPCal的界面上有bug，不能完全相信当时勾选的那几个选项）OCIO配置文件里显示，开启了Gamut Compression，那么在转换中会多这么几行内容：<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_502ebe68.png" alt="图片"></p>
+</blockquote>
+<h5 id="3-2-5-2-校准顺序（计算顺序）"><a href="#3-2-5-2-校准顺序（计算顺序）" class="headerlink" title="3.2.5.2. 校准顺序（计算顺序）"></a>3.2.5.2. 校准顺序（计算顺序）</h5><ol>
+<li><strong>EOTF 校正禁用（EOTF CORRECTION DISABLED）</strong>：<ul>
+<li><strong>校准方式</strong>：此路径下，校准仅通过一个直接应用于转换为目标色彩空间的输入 RGB 数据的 3x3 矩阵来执行。</li>
+<li><strong>假设条件</strong>：这种方法假定 LED 墙呈线性表现。也就是说，在这种情况下，认为 LED 墙在整个图像处理过程中，其亮度和颜色输出与输入的信号之间存在简单的线性关系，不需要对电光转换函数（EOTF）进行校正。</li>
+</ul>
+</li>
+<li><strong>1D → 3x3</strong>：<ul>
+<li><strong>校准方式</strong>：在校准过程中，先测量 EOTF 校正和 RGB 平衡，然后再应用 3x3 校准矩阵。</li>
+<li><strong>假设条件</strong>：该路径假定 LED 墙并非线性表现，且非线性发生在图像处理链的末端。这意味着在颜色映射之后，由于 LED 墙本身的特性，导致了非线性的亮度或颜色输出，所以需要先对这种非线性进行 EOTF 校正和 RGB 平衡调整，再进行 3x3 矩阵的校准。</li>
+</ul>
+</li>
+<li><strong>3x3 → 1D</strong>：<ul>
+<li><strong>校准方式</strong>：与 1D → 3x3 相反，先应用 3x3 校准矩阵，然后再测量 EOTF 校正和 RGB 平衡。</li>
+<li><strong>假设条件</strong>：同样假定 LED 墙是非线性的，但这里认为非线性发生在图像处理链的起始阶段（在流水线颜色映射之前或期间，在 EOTF 之前）。即非线性问题在早期颜色映射阶段就已出现（UE渲染阶段），所以先通过 3x3 矩阵对颜色空间进行初步校准，之后再进行 EOTF 校正和 RGB 平衡。</li>
+</ul>
+</li>
+<li><strong>选择依据</strong>：<ul>
+<li>关于选择哪种路径正确，取决于不同的图像处理流水线可能存在不同的问题。不同的 LED 墙设备、图像处理软件和硬件设置等，可能导致非线性问题出现在不同阶段。</li>
+<li>当分析过程确定 LED 墙不是线性时，OpenVPCal 软件的默认选择是 1D &gt; 3x3 顺序。这是因为在许多常见情况下，LED 墙的非线性更可能出现在图像处理链的末端，所以这种顺序相对更常用。</li>
+</ul>
+</li>
+</ol>
+<h5 id="3-2-5-3-色度变换"><a href="#3-2-5-3-色度变换" class="headerlink" title="3.2.5.3. 色度变换"></a>3.2.5.3. 色度变换</h5><p>色度适应变换是一种数学变换，用于模拟人类视觉系统对不同光照条件下颜色感知的调整。在色彩管理和校准过程中，当我们需要在不同的照明条件或颜色空间之间转换颜色时，色度适应变换就显得尤为重要。</p>
+<p>例如，当我们从一个具有特定白点（比如日光照明下的白点）的颜色空间，转换到另一个具有不同白点（如钨丝灯照明下的白点）的颜色空间时，CAT 可确保颜色在视觉上保持相对一致。这意味着，尽管照明条件发生了变化，但人类观察者感知到的颜色应大致相同。</p>
+<p>在 OpenVPCal 中，色度适应变换被用于校准流程，以帮助调整颜色，使其在不同的参考标准和目标颜色空间之间实现准确映射。在校准设置小部件中，用户可以从标准的色度适应变换列表中选择合适的变换方式，例如 “布拉德福德” 变换，这是一种常用的色度适应变换算法。不同的 CAT 算法在不同的应用场景下可能会有更好的表现，选择合适的算法有助于提高色彩校准的准确性。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_f1f773a7.png" alt="图片"></p>
+<ul>
+<li><strong>Reference to Target</strong>：这里的Reference指的是测试图图片的2065-1，而Target指的是我们屏幕的目标色域。</li>
+<li><strong>Target to Screen</strong>： </li>
+<li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_ab40da37.png" alt="图片"></li>
+<li>通过调整测试图原始的白点来匹配目标屏幕的白点。所以校准结果不会改变屏幕的白点。</li>
+</ul>
+<h5 id="3-2-5-4-避免裁切"><a href="#3-2-5-4-避免裁切" class="headerlink" title="3.2.5.4. 避免裁切"></a>3.2.5.4. 避免裁切</h5><p>校准过程可能会使一两个 RGB 通道的亮度高于预期的峰值亮度。当以 ST2084 电光转换函数（EOTF）为目标时，如果任何一个通道的亮度超过该值，显示器就会对其进行限幅处理，这将影响 LED 墙的白点。“避免裁剪” 功能会将这些通道的亮度调整到峰值亮度以下。这可能会影响 LED 墙的整体亮度，但影响应该相当轻微。</p>
+<h5 id="3-2-5-5-校准矩阵"><a href="#3-2-5-5-校准矩阵" class="headerlink" title="3.2.5.5. 校准矩阵"></a>3.2.5.5. 校准矩阵</h5><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_58f15858.png" alt="图片"><br>校准完成后，此小部件提供以多种实用格式复制校准变换中使用的每个 3x3 矩阵的选项。</p>
+<h3 id="3-3-转换详解"><a href="#3-3-转换详解" class="headerlink" title="3.3. 转换详解"></a>3.3. 转换详解</h3><h4 id="3-3-1-OCIO中转换内容详解"><a href="#3-3-1-OCIO中转换内容详解" class="headerlink" title="3.3.1. OCIO中转换内容详解"></a>3.3.1. OCIO中转换内容详解</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="bullet">-</span> <span class="type">!&lt;ColorSpace&gt;</span></span><br><span class="line"><span class="attr">2 name:</span> <span class="string">Calibration</span> <span class="string">CSC</span> <span class="bullet">-</span> <span class="string">UP</span> <span class="bullet">-</span> <span class="string">S-Gamut3.Cine</span> <span class="bullet">-</span> <span class="string">EOTF_CS</span></span><br><span class="line"><span class="attr">3 family:</span> <span class="string">OpenVPCal/Utility</span></span><br><span class="line"><span class="attr">4 equalitygroup:</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="attr">5 bitdepth:</span> <span class="string">32f</span></span><br><span class="line"><span class="attr">6 description:</span> <span class="string">|</span></span><br><span class="line"><span class="number">7</span> <span class="string">Colourspace</span> <span class="string">for</span> <span class="string">OpenVPCal.</span></span><br><span class="line"><span class="number">8</span> <span class="string">EOTF</span> <span class="string">correction</span> <span class="string">assumes</span> <span class="string">signal</span> <span class="number">1.0</span> <span class="string">represents</span> <span class="number">100</span> <span class="string">nits</span></span><br><span class="line"><span class="number">9</span> <span class="string">Configuration---</span></span><br><span class="line"><span class="number">10</span> <span class="string">target_EOTF--ST</span> <span class="number">2084</span></span><br><span class="line"><span class="number">11</span> <span class="string">target_gamut--ITU-R</span> <span class="string">BT.2020</span></span><br><span class="line"><span class="number">12</span> <span class="string">calculation_order--EOTF</span> <span class="string">&gt;</span> <span class="string">CS</span></span><br><span class="line"><span class="number">13</span> <span class="string">enable_plate_white_balance--False</span></span><br><span class="line"><span class="number">14</span> <span class="string">enable_gamut_compression--True</span></span><br><span class="line"><span class="number">15</span> <span class="string">enable_EOTF_correction--True</span></span><br><span class="line"><span class="attr">16 isdata:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">17 encoding:</span> <span class="string">scene-linear</span></span><br><span class="line"><span class="attr">18 allocation:</span> <span class="string">uniform</span></span><br></pre></td></tr></table></figure>
+<p>描述和信息，各种设置最终确认以这里为准，而不是UI。大概位置在1150行左右。其中<code>calculation_order</code>会改变下面两个主要转换的顺序。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">1from_scene_reference:</span> <span class="type">!&lt;GroupTransform&gt;</span></span><br><span class="line"><span class="attr">2 children:</span></span><br><span class="line"><span class="number">3</span> <span class="bullet">-</span> <span class="type">!&lt;MatrixTransform&gt;</span> &#123;<span class="attr">matrix:</span> [<span class="number">1.49040952046417</span>, <span class="number">-0.2661709192612</span>, <span class="number">-0.224238601333507</span>, <span class="number">0</span>, <span class="number">-0.080167499789956</span>, <span class="number">1.18216712107567</span>, <span class="number">-0.101999621238164</span>, <span class="number">0</span>, <span class="number">0.00322763118916624</span>, <span class="number">-0.0347764757444135</span>, <span class="number">1.03154884460315</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]&#125;</span><br><span class="line"><span class="number">4</span> <span class="bullet">-</span> <span class="type">!&lt;MatrixTransform&gt;</span> &#123;<span class="attr">matrix:</span> [<span class="number">1.15939307498367</span>, <span class="number">-0.0669171977606114</span>, <span class="number">0.121386208480261</span>, <span class="number">0</span>, <span class="number">0.0937843467518664</span>, <span class="number">0.750274773384815</span>, <span class="number">0.0937843467736498</span>, <span class="number">0</span>, <span class="number">-0.0460361329355286</span>, <span class="number">0.0651114229039448</span>, <span class="number">0.627884921201905</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]&#125;</span><br><span class="line"><span class="number">5</span> <span class="bullet">-</span> <span class="type">!&lt;GroupTransform&gt;</span></span><br><span class="line"><span class="attr">6 children:</span></span><br><span class="line"><span class="number">7</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">CURVE</span> <span class="bullet">-</span> <span class="string">LINEAR_to_ST-2084</span>&#125;</span><br><span class="line"><span class="number">8</span> <span class="bullet">-</span> <span class="type">!&lt;FileTransform&gt;</span> &#123;<span class="attr">src:</span> <span class="string">EOTF</span> <span class="string">Correction</span> <span class="string">1D</span> <span class="bullet">-</span> <span class="string">UP</span> <span class="bullet">-</span> <span class="string">S-Gamut3.Cine</span> <span class="bullet">-</span> <span class="string">EOTF_CS.clf</span>, <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br><span class="line"><span class="number">9</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">CURVE</span> <span class="bullet">-</span> <span class="string">ST-2084_to_LINEAR</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>最主要的两个转换<code>MatrixTransform</code>是色域转换，<code>GroupTransform</code>里面是Gamma校准。</p>
+<ul>
+<li>其中第一个转换：<code>!&lt;MatrixTransform&gt; {matrix: [1.49040952046417, -0.2661709192612, -0.224238601333507, 0, -0.080167499789956, 1.18216712107567, -0.101999621238164, 0, 0.00322763118916624, -0.0347764757444135, 1.03154884460315, 0, 0, 0, 0, 1]}</code> 是<strong>ACES AP0 -&gt; BT2020</strong>的色域转换。PS：之所以这么肯定是因为我计算了<img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_ca5abb97.png" alt="图片">。在OpenVPCal的UI上面，它是<img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_2a65e420.png" alt="图片"> <strong>Reference To Target Matrix</strong> 这个转换矩阵。所以Reference指的应该就是ACES AP0，而Target指的就是“目标色域（在这里即BT2020）”。</li>
+<li>而第二条转换：是 <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_e33a40c6.png" alt="图片"><strong>Target To Screen Matrix</strong> 这个转换。猜测是校准到屏幕的偏色转换。也就是 X * 矩阵 &#x3D; BT2020的偏色转换。</li>
+<li>下面的Children转换：是EOTF校准。1D LUT，分别校准R、G、B三根线。</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="string">//</span> <span class="string">下面是新增的内容</span> <span class="string">如果勾选了Gamut</span> <span class="string">Compression</span></span><br><span class="line"><span class="number">2</span> <span class="bullet">-</span> <span class="type">!&lt;GroupTransform&gt;</span></span><br><span class="line"><span class="attr">3 children:</span></span><br><span class="line"><span class="number">4</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>&#125;</span><br><span class="line"><span class="number">5</span> <span class="bullet">-</span> <span class="type">!&lt;FixedFunctionTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACES_GamutComp13</span>, <span class="attr">params:</span> [<span class="number">1.08919025420343</span>, <span class="number">1.001</span>, <span class="number">1.03970709669469</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">4</span>]&#125;</span><br><span class="line"><span class="number">6</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>, <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br><span class="line"><span class="number">7</span> <span class="string">//</span> <span class="string">上面是新增的内容</span></span><br></pre></td></tr></table></figure>
+<p>色域压缩。详见 ACES色域压缩及其用户指导。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="type">!&lt;MatrixTransform&gt;</span> &#123;<span class="attr">matrix:</span> [<span class="number">1.49040952046417</span>, <span class="number">-0.2661709192612</span>, <span class="number">-0.224238601333507</span>, <span class="number">0</span>, <span class="number">-0.080167499789956</span>, <span class="number">1.18216712107567</span>, <span class="number">-0.101999621238164</span>, <span class="number">0</span>, <span class="number">0.00322763118916624</span>, <span class="number">-0.0347764757444135</span>, <span class="number">1.03154884460315</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>], <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>上面最主要的两个转换中色域转换的第一个转换的逆矩阵。</p>
+<h4 id="3-3-2-如果不能使用OCIO的替代性方案"><a href="#3-3-2-如果不能使用OCIO的替代性方案" class="headerlink" title="3.3.2. 如果不能使用OCIO的替代性方案"></a>3.3.2. 如果不能使用OCIO的替代性方案</h4><p>在输出的ocio的同级文件下有一个LUT CUBE文件。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_7bd1f053.png" alt="图片"><br>这个文件混合了矩阵转换和1D LUT。可以用在别的不支持OCIO的环境下比如Disguise。所有图像处理管线的最后，送到LED（上屏）之前。</p>
+<h4 id="3-3-3-校准完成之后的两个转换"><a href="#3-3-3-校准完成之后的两个转换" class="headerlink" title="3.3.3. 校准完成之后的两个转换"></a>3.3.3. 校准完成之后的两个转换</h4><p>在校准完成之后，分别在<code>Desired Color Spaces</code>里面以及在<code>Desired Display-Views</code>里面存在两个校准后的转换：</p>
+<p><strong>Desired Color Spaces</strong>：<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_0cfa102a.png" alt="图片"><br>使用<code>WorkingColorSpace</code>+这个上屏：<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965886_dd05f365.png" alt="图片"></p>
+<p><strong>Desired Display-Views</strong>：<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965886_edd9340f.png" alt="图片"><br>使用<code>WorkingColorSpace</code>+这个上屏：<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965887_a76e777c.png" alt="图片"></p>
+<p>明显下面这个是对的。观察代码发现，Color Spaces这个选项实际上比 Display-Views多了一个转换。原本的转换做完ColorSpace和Linear的校准之后，是会转换回AP0的。而这个转换还加了一步是转换到CIE-XYZ。可能是用于做色度图用。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965887_2aa2db33.png" alt="图片"></p>
+<h4 id="3-3-4-色域压缩参数的计算方法"><a href="#3-3-4-色域压缩参数的计算方法" class="headerlink" title="3.3.4. 色域压缩参数的计算方法"></a>3.3.4. 色域压缩参数的计算方法</h4><p>这部分代码在<code>src/open_vp_cal/core/calibrate.py</code>这个文件里的<code>colourspace_max_distances</code>函数中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="keyword">def</span> colourspace_max_distances(source_cs, destination_cs, cat, shadow_rolloff):</span><br><span class="line"><span class="number">2</span> <span class="comment">#输入参数 source_cs：源色彩空间（目标色彩空间）</span></span><br><span class="line"><span class="number">3</span> <span class="comment">#输入参数 destination_cs：目标色彩空间（屏幕色彩空间）</span></span><br><span class="line"><span class="number">4</span> <span class="comment">#输入参数 cat：色彩适应转换方法（如 CAT02、Bradford 等）</span></span><br><span class="line"><span class="number">5</span> <span class="comment">#输入参数 shadow_rolloff：rolloff过渡参数</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span> <span class="comment"># 1. 创建RGB原色矩阵并进行色彩空间转换</span></span><br><span class="line"><span class="number">9</span> primaries = colour.RGB_to_RGB(</span><br><span class="line"><span class="number">10</span> <span class="comment"># 创建单位RGB原色矩阵：红[1,0,0]、绿[0,1,0]、蓝[0,0,1]</span></span><br><span class="line"><span class="number">11</span> RGB=np.asarray([[<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>], <span class="comment"># 红色原色</span></span><br><span class="line"><span class="number">12</span> [<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>], <span class="comment"># 绿色原色</span></span><br><span class="line"><span class="number">13</span> [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>]]), <span class="comment"># 蓝色原色</span></span><br><span class="line"><span class="number">14</span> input_colourspace=source_cs, <span class="comment"># 源色彩空间（如BT.2020）</span></span><br><span class="line"><span class="number">15</span> output_colourspace=destination_cs, <span class="comment"># 目标色彩空间（如显示器色彩空间）</span></span><br><span class="line"><span class="number">16</span> chromatic_adaptation_transform=cat <span class="comment"># 色彩适应转换方法</span></span><br><span class="line"><span class="number">17</span> )</span><br><span class="line"><span class="number">18</span></span><br><span class="line"><span class="number">19</span> <span class="comment"># 2. 计算无色（灰度）值 ！！！！ 就是这里会产生数据的不一样</span></span><br><span class="line"><span class="number">20</span> achromatic_values = np.apply_along_axis(</span><br><span class="line"><span class="number">21</span> <span class="keyword">lambda</span> rgb: achromatic(rgb, shadow_rolloff), <span class="comment"># 对每个RGB值计算其无色值</span></span><br><span class="line"><span class="number">22</span> <span class="number">1</span>, <span class="comment"># 沿着第1轴（行）应用函数</span></span><br><span class="line"><span class="number">23</span> primaries <span class="comment"># 输入数据</span></span><br><span class="line"><span class="number">24</span> )</span><br><span class="line"><span class="number">25</span> <span class="comment"># achromatic函数的处理过程：</span></span><br><span class="line"><span class="number">26</span> <span class="comment"># - 取RGB中的最大值</span></span><br><span class="line"><span class="number">27</span> <span class="comment"># - 如果值小于shadow_rolloff，应用阴影过渡</span></span><br><span class="line"><span class="number">28</span> <span class="comment"># - 返回[value, value, value]形式的灰度值</span></span><br><span class="line"><span class="number">29</span></span><br><span class="line"><span class="number">30</span> <span class="comment"># 3. 计算距离</span></span><br><span class="line"><span class="number">31</span> distances = (achromatic_values - primaries) / achromatic_values</span><br><span class="line"><span class="number">32</span> <span class="comment"># 这个计算表示：</span></span><br><span class="line"><span class="number">33</span> <span class="comment"># - 无色值与原色值的差异</span></span><br><span class="line"><span class="number">34</span> <span class="comment"># - 归一化到无色值范围内</span></span><br><span class="line"><span class="number">35</span></span><br><span class="line"><span class="number">36</span> <span class="comment"># 4. 返回每个通道的最大距离</span></span><br><span class="line"><span class="number">37</span> <span class="keyword">return</span> np.amax(distances, axis=<span class="number">0</span>)</span><br><span class="line"><span class="number">38</span> <span class="comment"># 返回每个颜色通道（R,G,B）的最大距离值</span></span><br></pre></td></tr></table></figure>
+<p>关于这个数值的影响，在视频的13：54左右提及，是ACES标准的色彩转换中的内容 <strong>ACES Parametric Gamut</strong>。</p>
+<p>为了避免出现色域转换后的的色彩溢出（造成裁切）。即“超出了LED墙的显示能力”，但是却没有超过相机的显色能力，所以相机会发现有色彩溢出（色彩裁切）。通过压缩10%左右的色彩空间。</p>
+<p>参数例子：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>&#125;</span><br><span class="line"><span class="number">2</span><span class="bullet">-</span> <span class="type">!&lt;FixedFunctionTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACES_GamutComp13</span>, <span class="attr">params:</span> [<span class="number">1.10245316504887</span>, <span class="number">1.001</span>, <span class="number">1.001</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">4</span>]&#125;</span><br><span class="line"><span class="number">3</span><span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>, <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/Color-Management/" data-i18n-tag="Color Management">Color Management</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- 加载打包后的模块化代码 -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<!-- Tag Knowledge Graph -->
+
+<script src="/js/tag-graph.js"></script>
+
+
+<!-- Language Switcher -->
+
+<script src="/js/i18n-data.js"></script>
+
+
+<script src="/js/language-switcher.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+
+<!-- Featherlight (图库) -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+
+    elements.forEach(element => {
+      const shaderID = element.getAttribute('data-id');
+
+      if (shaderID) {
+        const container = document.createElement('div');
+        container.style.cssText = `
+          position: relative;
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+          border: 2px solid #bfbbbb;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #f6f6f6;
+        `;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        `;
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        element.parentNode.insertBefore(container, element);
+        element.parentNode.removeChild(element);
+      }
+    });
+  }, 1000);
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
