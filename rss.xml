@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 28 Mar 2026 09:25:41 GMT</pubDate>
+    <pubDate>Sat, 28 Mar 2026 10:11:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -31,11 +31,11 @@
       
       <category domain="http://example.com/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/Assistant/">Assistant</category>
-      
       <category domain="http://example.com/tags/MCP/">MCP</category>
       
       <category domain="http://example.com/tags/Claude/">Claude</category>
+      
+      <category domain="http://example.com/tags/Assistant/">Assistant</category>
       
       <category domain="http://example.com/tags/Vibe-Coding/">Vibe-Coding</category>
       
@@ -185,11 +185,11 @@
       
       
       
-      <category domain="http://example.com/tags/OpenClaw/">OpenClaw</category>
-      
       <category domain="http://example.com/tags/AI/">AI</category>
       
       <category domain="http://example.com/tags/Assistant/">Assistant</category>
+      
+      <category domain="http://example.com/tags/OpenClaw/">OpenClaw</category>
       
       
       <comments>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/#disqus_thread</comments>
@@ -429,6 +429,36 @@
       
       
       <comments>http://example.com/2024/09/01/20240901.OpenColorIO-%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>在VisionPro中实现一个可交互的虚拟人</title>
+      <link>http://example.com/2024/06/01/20240601.VirtualActorUnityInVisionPro/</link>
+      <guid>http://example.com/2024/06/01/20240601.VirtualActorUnityInVisionPro/</guid>
+      <pubDate>Sat, 01 Jun 2024 04:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)&lt;br&gt;该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在Vision</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)<br>该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在VisionPro平台上的强大功能和灵活性，探索了下一代虚拟人交互体验的可能性。</p><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175617.gif" alt="召唤虚拟人出现" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">召唤虚拟人出现</figcaption>  </figure>  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175618.gif" alt="跟随、寻路及避障" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">跟随、寻路及避障</figcaption>  </figure>  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175619.gif" alt="实时反馈外界物理变化" style="width: 100%; height: auto; display: block; border-radius: 8px;" />    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">实时反馈外界物理变化</figcaption>  </figure></div><p>它可以实现：</p><ul><li>简单地手势交互，虚拟人会做出对应的反馈。</li><li>虚拟人可以跟随用户移动（去到任何地方），并保持在用户的视野范围内。</li><li>虚拟人可以感受到环境变化，会自己去找可以坐到地方。</li><li>感知用户眼神朝向，并做出对应的反应。</li><li>VisionPro应用环境持续化，用户离开后虚拟人会继续存在，不影响别的VP应用运行。</li><li>等等。</li></ul>]]></content:encoded>
+      
+      
+      
+      <category domain="http://example.com/tags/Software-Projects/">Software Projects</category>
+      
+      <category domain="http://example.com/tags/Unity/">Unity</category>
+      
+      <category domain="http://example.com/tags/VisionPro/">VisionPro</category>
+      
+      <category domain="http://example.com/tags/Virtual-Human/">Virtual Human</category>
+      
+      
+      <comments>http://example.com/2024/06/01/20240601.VirtualActorUnityInVisionPro/#disqus_thread</comments>
       
     </item>
     

@@ -10,11 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="HDR 与 UE 内容渲染输出管线实践引言在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：
-
-引擎可以渲染出颜色过渡更细腻、更饱和的画面。
-虚幻正在朝着更专业的电影制作流程迈进。
-游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开">
+        <meta name="description" content="这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在VisionPro平台上的强大功能和灵活性，探">
     
 
     <!--Author-->
@@ -24,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="HDR 与 UE 内容渲染输出管线实践"/>
+        <meta property="og:title" content="在VisionPro中实现一个可交互的虚拟人"/>
     
 
     <!--Open Graph Site Name-->
@@ -42,7 +38,7 @@
 
     <!-- Title -->
     
-    <title>HDR 与 UE 内容渲染输出管线实践 - Eugene&#39;s Page</title>
+    <title>在VisionPro中实现一个可交互的虚拟人 - Eugene&#39;s Page</title>
 
     <!-- Custom CSS -->
     
@@ -95,7 +91,7 @@
 <meta name="generator" content="Hexo 8.1.1"></head>
 
 
-<body class="layout-post path-2024-01-01-20240101-HDR-UE-">
+<body class="layout-post path-2024-06-01-20240601-VirtualActorUnityInVisionPro-">
 
 <!-- Menu -->
 <!-- Navigation -->
@@ -169,16 +165,16 @@
 
     <ul class="btn clearfix">
         
-        <li><a href="/2024/06/01/20240601.VirtualActorUnityInVisionPro/" class="previous" data-title="在VisionPro中实现一个可交互的虚拟人"></a></li>
+        <li><a href="/2024/09/01/20240901.OpenColorIO-%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="previous" data-title="OpenColorIO 色彩管理系统学习笔记"></a></li>
         
         <li><a href="/" class="grid" data-title="Portfolio"></a></li>
         
-        <li><a class="next disabled"></a></li>
+        <li><a href="/2024/01/01/20240101.HDR+UE%E5%86%85%E5%AE%B9+%E6%B8%B2%E6%9F%93%E8%BE%93%E5%87%BA%E7%AE%A1%E7%BA%BF/" class="next" data-title="HDR 与 UE 内容渲染输出管线..."></a></li>
         
     </ul>
 
 </div><!-- end work_nav -->
-            <h1 class="title">HDR 与 UE 内容渲染输出管线实践</h1>
+            <h1 class="title">在VisionPro中实现一个可交互的虚拟人</h1>
         </div>
     </section><!-- end top -->
 
@@ -189,76 +185,30 @@
             
 
             <!-- Content -->
-            <h1 id="HDR-与-UE-内容渲染输出管线实践"><a href="#HDR-与-UE-内容渲染输出管线实践" class="headerlink" title="HDR 与 UE 内容渲染输出管线实践"></a>HDR 与 UE 内容渲染输出管线实践</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：</p>
-<ol>
-<li>引擎可以渲染出颜色过渡更细腻、更饱和的画面。</li>
-<li>虚幻正在朝着更专业的电影制作流程迈进。</li>
-<li>游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开始采用 UE 作为影片制作工具。</li>
-</ol>
-<p>以下内容是自己做的一个实验：使用 UE5.2 输出广色域物料，并制作杜比 8.4 内容。</p>
-<p>这次实验的目标是：</p>
-<ol>
-<li>尽量在全流程中保留素材的高动态范围信息。</li>
-<li>完成一次电影工业流程中的 HDR 内容制作。</li>
-<li>在输出后对 HDR 与 SDR 模板内容进行一次模拟对比。</li>
-</ol>
-<h2 id="物料准备"><a href="#物料准备" class="headerlink" title="物料准备"></a>物料准备</h2><p>需要先下载 ACES 的 OCIO 配置文件。这里面包含很多电影工业流程里常用的转换，本质上就是色域映射和 Gamma 变换。</p>
-<p>我当时使用的是较新的 1.2 配置文件。</p>
-<p>关于 OCIO 配置文件的结构，我之前也单独写过一份文档，可以结合阅读。</p>
-<h2 id="UE5-中的输出设置"><a href="#UE5-中的输出设置" class="headerlink" title="UE5 中的输出设置"></a>UE5 中的输出设置</h2><h3 id="1-修改工作空间"><a href="#1-修改工作空间" class="headerlink" title="1. 修改工作空间"></a>1. 修改工作空间</h3><p>打开 UE，进入设置，先修改软件的工作空间。</p>
-<p>这里将工作空间改为 ACES AP0（ACES 2065-1）。这是 ACES 中最大的转换色域，理论上覆盖了所有人眼可见光范围。在这个空间里进行渲染，可以理解为：尽量以更高的颜色范围去模拟现实世界。</p>
-<p>修改完成后，画面颜色可能会有一些变化，这是正常现象。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003819_e210058f.png"></p>
-<h3 id="2-配置-OCIO-资源"><a href="#2-配置-OCIO-资源" class="headerlink" title="2. 配置 OCIO 资源"></a>2. 配置 OCIO 资源</h3><p>创建一个 UE 内的 OCIO Configuration 资源，并在其中设置需要调用的转换值。</p>
-<p>这里我使用：</p>
+            <p>这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)<br>该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在VisionPro平台上的强大功能和灵活性，探索了下一代虚拟人交互体验的可能性。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175617.gif" alt="召唤虚拟人出现" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">召唤虚拟人出现</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175618.gif" alt="跟随、寻路及避障" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">跟随、寻路及避障</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175619.gif" alt="实时反馈外界物理变化" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">实时反馈外界物理变化</figcaption>
+  </figure>
+</div>
+
+<p>它可以实现：</p>
 <ul>
-<li>ACEScg</li>
-<li>ACES 2065-1</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003819_8992d80f.png"></p>
-<h3 id="3-设置-Movie-Render-Queue"><a href="#3-设置-Movie-Render-Queue" class="headerlink" title="3. 设置 Movie Render Queue"></a>3. 设置 Movie Render Queue</h3><p>打开 Movie Render Queue 插件，选择需要导出的内容，然后重点调整以下配置：</p>
-<ol>
-<li>删除原本的导出格式，改为 EXR。因为 EXR 位深更高，能够承载高动态范围信息。</li>
-<li>增加抗锯齿选项，将 Temporal Sample Count 调整到 16，并勾选 Override。</li>
-<li>增加 Color Output 选项，选择刚刚新建的 OCIO 配置。</li>
-<li>将 Source 设置为当前工作空间 ACES 2065-1。</li>
-<li>将 Destination 设置为需要导出的空间，这里是 ACEScg。</li>
-<li>勾选 Disable Tone Curve。</li>
-</ol>
-<p>其中，Disable Tone Curve 这个选项非常关键。它的意义是：不让 UE 在输出时自动做 Gamma 变换，而是保留完整的线性高动态范围信息。</p>
-<p>如果不勾选这个选项，UE 会默认使用 ACES 的 Filmic Tone Curve 进行 Tonemapping，把原本场景中的大量动态范围压缩到标准动态范围中。这样一来，HDR 所需的动态信息在导出阶段就已经丢失，后续流程也就无法真正做 HDR。</p>
-<p>最后再根据需求修改分辨率和输出位置即可。</p>
-<h2 id="达芬奇中的后处理与导出"><a href="#达芬奇中的后处理与导出" class="headerlink" title="达芬奇中的后处理与导出"></a>达芬奇中的后处理与导出</h2><p>在 DaVinci Resolve 中，我习惯把工作空间设置为 ACEScct。不过达芬奇自己的 DaVinci YRGB Color Managed 其实也可以用于这一流程，而且我个人觉得它的整体体验也很好。</p>
-<p>这里的设置思路大致如下：</p>
-<ol>
-<li>Input Transform 可以选择 ACEScg - CsC。</li>
-<li>如果项目中输入素材类型很多，不建议在项目级统一设置 Input Transform，而是针对每个素材单独设置。</li>
-<li>Output Transform 设置为杜比 8.4 标准对应的 Rec.2020 HLG。</li>
-</ol>
-<p>另外还有一个容易漏掉的选项：记得在 Dolby Vision 相关设置里启用 Enable Dolby Vision。</p>
-<p>如果素材类型很多，可以逐个素材指定 Input Transform。这里我设置为和 UE 导出选项一致的 ACEScg。</p>
-<p>调色完成之后，也可以使用杜比的自动分析工具，对素材逐一分析并生成相应元数据。</p>
-<p>导出视频时，如果不是输出母版，可以选择：</p>
-<ol>
-<li>MP4</li>
-<li>H.265 编码</li>
-<li>Main10</li>
-<li>高级选项中选择 Profile 8.4<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003817_b9fb06bf.png"></li>
-</ol>
-<h2 id="流程总结"><a href="#流程总结" class="headerlink" title="流程总结"></a>流程总结</h2><p>整个流程可以概括为：</p>
-<blockquote>
-<p>Unreal 工作空间（ACES 2065-1 Linear） -&gt; Unreal 输出素材（ACEScg Linear） -&gt; 达芬奇调色与输出（Rec.2020 HLG &#x2F; Dolby Vision Profile 8.4）</p>
-</blockquote>
-<h2 id="一些补充思考"><a href="#一些补充思考" class="headerlink" title="一些补充思考"></a>一些补充思考</h2><p>这个工作流程仍然有不少可以优化的地方。</p>
-<p>例如，工作空间也可以直接使用 ACEScg。按照 ACES 官方的说法，ACEScg 会更适合贴图等内容的渲染。</p>
-<p>另外，如果最终内容是广色域和 HDR，那么制作阶段所使用的图片物料，是否也应该采用更高位深和更高精度的格式，这也是一个值得继续验证的问题。</p>
-<p>本文没有详细展开监看设置，但实际配置并不复杂：只需要在 OCIO 配置中添加 sRGB 作为输出，然后在 Lit -&gt; OCIO Display 中选择 ACES 2065-1 与 sRGB 即可。</p>
-<h2 id="成品对比"><a href="#成品对比" class="headerlink" title="成品对比"></a>成品对比</h2><p>左边是 HDR，右边是 SDR。需要下载到本地后，用 Mac 设备进行播放对比。</p>
-<ul>
-<li>文件：YN_Italy_HDRvsSDR_MiniMoblie.mp4</li>
-<li>HDR 与 SDR 母版下载地址：<a target="_blank" rel="noopener" href="https://share.weiyun.com/xIkQd9ym">https://share.weiyun.com/xIkQd9ym</a></li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/534357694">https://zhuanlan.zhihu.com/p/534357694</a></li>
+<li>简单地手势交互，虚拟人会做出对应的反馈。</li>
+<li>虚拟人可以跟随用户移动（去到任何地方），并保持在用户的视野范围内。</li>
+<li>虚拟人可以感受到环境变化，会自己去找可以坐到地方。</li>
+<li>感知用户眼神朝向，并做出对应的反应。</li>
+<li>VisionPro应用环境持续化，用户离开后虚拟人会继续存在，不影响别的VP应用运行。</li>
+<li>等等。</li>
 </ul>
 
 
@@ -267,7 +217,7 @@
 
 
 <div class="tags">
-    <a href="/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/HDR/" data-i18n-tag="HDR">HDR</a> <a href="/tags/Color-Management/" data-i18n-tag="Color-Management">Color-Management</a> <a href="/tags/Film-Production/" data-i18n-tag="Film-Production">Film-Production</a>
+    <a href="/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/tags/Unity/" data-i18n-tag="Unity">Unity</a> <a href="/tags/VisionPro/" data-i18n-tag="VisionPro">VisionPro</a> <a href="/tags/Virtual-Human/" data-i18n-tag="Virtual Human">Virtual Human</a>
 </div>
 
 
