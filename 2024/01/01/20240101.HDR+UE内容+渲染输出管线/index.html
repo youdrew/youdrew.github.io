@@ -12,9 +12,9 @@
     
         <meta name="description" content="HDR 与 UE 内容渲染输出管线实践引言在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：
 
-引擎可以渲染出颜色过渡更细腻、更饱和的画面。
+引擎可以渲染出颜色过渡更细腻、更饱和的画面（更广色域的贴图）。
 虚幻正在朝着更专业的电影制作流程迈进。
-游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开">
+游戏引擎和传统 DCC 软件的界限正在变得更模">
     
 
     <!--Author-->
@@ -24,7 +24,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="HDR 与 UE 内容渲染输出管线实践"/>
+        <meta property="og:title" content="HDR 与 UE 内容渲染输出管线实践（流程设计）"/>
     
 
     <!--Open Graph Site Name-->
@@ -42,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>HDR 与 UE 内容渲染输出管线实践 - Eugene&#39;s Page</title>
+    <title>HDR 与 UE 内容渲染输出管线实践（流程设计） - Eugene&#39;s Page</title>
 
     <!-- Custom CSS -->
     
@@ -178,7 +178,7 @@
     </ul>
 
 </div><!-- end work_nav -->
-            <h1 class="title">HDR 与 UE 内容渲染输出管线实践</h1>
+            <h1 class="title">HDR 与 UE 内容渲染输出管线实践（流程设计）</h1>
         </div>
     </section><!-- end top -->
 
@@ -191,7 +191,7 @@
             <!-- Content -->
             <h1 id="HDR-与-UE-内容渲染输出管线实践"><a href="#HDR-与-UE-内容渲染输出管线实践" class="headerlink" title="HDR 与 UE 内容渲染输出管线实践"></a>HDR 与 UE 内容渲染输出管线实践</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：</p>
 <ol>
-<li>引擎可以渲染出颜色过渡更细腻、更饱和的画面。</li>
+<li>引擎可以渲染出颜色过渡更细腻、更饱和的画面（更广色域的贴图）。</li>
 <li>虚幻正在朝着更专业的电影制作流程迈进。</li>
 <li>游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开始采用 UE 作为影片制作工具。</li>
 </ol>
@@ -207,14 +207,27 @@
 <p>关于 OCIO 配置文件的结构，我之前也单独写过一份文档，可以结合阅读。</p>
 <h2 id="UE5-中的输出设置"><a href="#UE5-中的输出设置" class="headerlink" title="UE5 中的输出设置"></a>UE5 中的输出设置</h2><h3 id="1-修改工作空间"><a href="#1-修改工作空间" class="headerlink" title="1. 修改工作空间"></a>1. 修改工作空间</h3><p>打开 UE，进入设置，先修改软件的工作空间。</p>
 <p>这里将工作空间改为 ACES AP0（ACES 2065-1）。这是 ACES 中最大的转换色域，理论上覆盖了所有人眼可见光范围。在这个空间里进行渲染，可以理解为：尽量以更高的颜色范围去模拟现实世界。</p>
-<p>修改完成后，画面颜色可能会有一些变化，这是正常现象。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003819_e210058f.png"></p>
+<p>修改完成后，画面颜色可能会有一些变化，这是正常现象。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/Pasted%20Graphic.jpg" alt="UE5 工作空间设置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">UE5 工作空间设置为 ACES AP0（ACES 2065-1）</figcaption>
+  </figure>
+</div>
+
 <h3 id="2-配置-OCIO-资源"><a href="#2-配置-OCIO-资源" class="headerlink" title="2. 配置 OCIO 资源"></a>2. 配置 OCIO 资源</h3><p>创建一个 UE 内的 OCIO Configuration 资源，并在其中设置需要调用的转换值。</p>
 <p>这里我使用：</p>
 <ul>
 <li>ACEScg</li>
 <li>ACES 2065-1</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003819_8992d80f.png"></p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/Pasted%20Graphic%201.jpg" alt="OCIO Configuration 资源配置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">UE5 中的 OCIO Configuration 资源配置</figcaption>
+  </figure>
+</div>
+
 <h3 id="3-设置-Movie-Render-Queue"><a href="#3-设置-Movie-Render-Queue" class="headerlink" title="3. 设置 Movie Render Queue"></a>3. 设置 Movie Render Queue</h3><p>打开 Movie Render Queue 插件，选择需要导出的内容，然后重点调整以下配置：</p>
 <ol>
 <li>删除原本的导出格式，改为 EXR。因为 EXR 位深更高，能够承载高动态范围信息。</li>
@@ -242,9 +255,17 @@
 <li>MP4</li>
 <li>H.265 编码</li>
 <li>Main10</li>
-<li>高级选项中选择 Profile 8.4<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/1774631003817_b9fb06bf.png"></li>
+<li>高级选项中选择 Profile 8.4</li>
 </ol>
-<h2 id="流程总结"><a href="#流程总结" class="headerlink" title="流程总结"></a>流程总结</h2><p>整个流程可以概括为：</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/Dolby%20Vision%20Profile.jpg" alt="达芬奇导出设置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">达芬奇中 HDR 视频导出设置</figcaption>
+  </figure>
+</div>
+## 流程总结
+
+<p>整个流程可以概括为：</p>
 <blockquote>
 <p>Unreal 工作空间（ACES 2065-1 Linear） -&gt; Unreal 输出素材（ACEScg Linear） -&gt; 达芬奇调色与输出（Rec.2020 HLG &#x2F; Dolby Vision Profile 8.4）</p>
 </blockquote>
@@ -252,7 +273,29 @@
 <p>例如，工作空间也可以直接使用 ACEScg。按照 ACES 官方的说法，ACEScg 会更适合贴图等内容的渲染。</p>
 <p>另外，如果最终内容是广色域和 HDR，那么制作阶段所使用的图片物料，是否也应该采用更高位深和更高精度的格式，这也是一个值得继续验证的问题。</p>
 <p>本文没有详细展开监看设置，但实际配置并不复杂：只需要在 OCIO 配置中添加 sRGB 作为输出，然后在 Lit -&gt; OCIO Display 中选择 ACES 2065-1 与 sRGB 即可。</p>
-<h2 id="成品对比"><a href="#成品对比" class="headerlink" title="成品对比"></a>成品对比</h2><p>左边是 HDR，右边是 SDR。需要下载到本地后，用 Mac 设备进行播放对比。</p>
+<h2 id="成品对比"><a href="#成品对比" class="headerlink" title="成品对比"></a>成品对比</h2><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF.gif" alt="HDR vs SDR 对比 1" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 1</figcaption>
+  </figure>
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF1.gif" alt="HDR vs SDR 对比 2" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 2</figcaption>
+  </figure>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF3.gif" alt="HDR vs SDR 对比 3" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 3</figcaption>
+  </figure>
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF4.gif" alt="HDR vs SDR 对比 4" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 4</figcaption>
+  </figure>
+</div>
+左边是 HDR，右边是 SDR。需要下载到本地后，用 Mac 设备进行播放对比。
+
 <ul>
 <li>文件：YN_Italy_HDRvsSDR_MiniMoblie.mp4</li>
 <li>HDR 与 SDR 母版下载地址：<a target="_blank" rel="noopener" href="https://share.weiyun.com/xIkQd9ym">https://share.weiyun.com/xIkQd9ym</a></li>
@@ -267,7 +310,7 @@
 
 
 <div class="tags">
-    <a href="/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/HDR/" data-i18n-tag="HDR">HDR</a> <a href="/tags/Color-Management/" data-i18n-tag="Color-Management">Color-Management</a> <a href="/tags/Film-Production/" data-i18n-tag="Film-Production">Film-Production</a>
+    <a href="/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/HDR/" data-i18n-tag="HDR">HDR</a> <a href="/tags/Color-Management/" data-i18n-tag="Color-Management">Color-Management</a> <a href="/tags/Film-Production/" data-i18n-tag="Film-Production">Film-Production</a>
 </div>
 
 
