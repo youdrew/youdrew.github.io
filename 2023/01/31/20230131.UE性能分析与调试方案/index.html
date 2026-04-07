@@ -467,6 +467,9 @@
 <li><strong>PIX (Windows)</strong>：微软 GPU 分析工具，对 Xbox&#x2F;DirectX 项目友好。</li>
 <li><strong>Xcode GPU Profiler (macOS&#x2F;iOS)</strong>：Metal 平台 GPU 分析。</li>
 </ul>
+<ul>
+<li>这个功能（原本是UE4的）被整合进了 UE5 Unreal Insights 的 GPU 视图中。</li>
+</ul>
 <hr>
 <h3 id="五、内存分析"><a href="#五、内存分析" class="headerlink" title="五、内存分析"></a>五、内存分析</h3><table>
 <thead>
@@ -521,6 +524,9 @@
 
 <hr>
 <h3 id="八、性能分析流程建议"><a href="#八、性能分析流程建议" class="headerlink" title="八、性能分析流程建议"></a>八、性能分析流程建议</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">1. 定位瓶颈</span><br><span class="line">   stat fps + stat unit → 确认是 CPU 还是 GPU 瓶颈</span><br><span class="line"></span><br><span class="line">2. CPU 瓶颈</span><br><span class="line">   ├─ stat unitgraph → 确认哪个线程慢</span><br><span class="line">   ├─ Unreal Insights Timing → 找到具体函数</span><br><span class="line">   ├─ 检查 Tick、蓝图、GC、物理</span><br><span class="line">   └─ 用 SCOPE_CYCLE_COUNTER 细化测量</span><br><span class="line"></span><br><span class="line">3. GPU 瓶颈</span><br><span class="line">   ├─ ProfileGPU → 看 Pass 分布</span><br><span class="line">   ├─ stat scenerendering → Draw Call / 三角形数</span><br><span class="line">   ├─ GPU Visualizer → 可视化分析</span><br><span class="line">   └─ RenderDoc → 深入单个 Draw Call</span><br><span class="line"></span><br><span class="line">4. 内存问题</span><br><span class="line">   ├─ stat memory → 概览</span><br><span class="line">   ├─ memreport -full → 详细报告</span><br><span class="line">   └─ Unreal Insights Memory Insights → 内存泄漏追踪</span><br><span class="line"></span><br><span class="line">5. 快速调试</span><br><span class="line">   ├─ UE_LOG + 时间戳 → 快速定位耗时</span><br><span class="line">   └─ #pragma optimize(&quot;&quot;, off) → 关闭优化方便断点调试</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/273608458">https://zhuanlan.zhihu.com/p/273608458</a> </p>
 
 
             <!-- Tags -->
