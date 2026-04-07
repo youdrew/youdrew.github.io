@@ -10,8 +10,6 @@
 
     <!--Description-->
     
-        <meta name="description" content="在基于LED的虚拟制作中，色彩管理是确保最终输出图像质量和一致性的关键环节。但是由于制作标准（资产生产环节的SDR）、显示设备（LED显示器、美术监视器、摄影机、现场监视器）的显示效果的差异，以及不同DCC软件工具（如Unreal Engine、Nuke、Maya、Davinci Resolve）之">
-    
 
     <!--Author-->
     
@@ -19,8 +17,6 @@
     
 
     <!--Open Graph Title-->
-    
-        <meta property="og:title" content="虚拟制作色彩校准及HDR制作工作流 (软件作品)"/>
     
 
     <!--Open Graph Site Name-->
@@ -38,7 +34,7 @@
 
     <!-- Title -->
     
-    <title>虚拟制作色彩校准及HDR制作工作流 (软件作品) - Eugene&#39;s Page</title>
+    <title>Debug - Eugene&#39;s Page</title>
 
     <!-- Custom CSS -->
     
@@ -91,7 +87,7 @@
 <meta name="generator" content="Hexo 8.1.1"></head>
 
 
-<body class="layout-post path-2024-09-02-20240902-">
+<body class="path-tags-Debug-index-html">
 
 <!-- Menu -->
 <!-- Navigation -->
@@ -155,106 +151,35 @@
 
 
 <!-- Main Content -->
-<section class="main clearfix" data-toc="false">
 
-    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
-        <div class="wrapper content_header clearfix">
-            
 
-<div class="work_nav">
-
-    <ul class="btn clearfix">
-        
-        <li><a href="/2024/12/21/20241221.OpenVPCal%E6%B5%81%E7%A8%8B%E6%96%87%E6%A1%A3/" class="previous" data-title="OpenVPCal流程文档"></a></li>
-        
-        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
-        
-        <li><a href="/2024/09/01/20240901.OpenColorIO-%E8%89%B2%E5%BD%A9%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="next" data-title="OpenColorIO 色彩管理系..."></a></li>
-        
-    </ul>
-
-</div><!-- end work_nav -->
-            <h1 class="title">虚拟制作色彩校准及HDR制作工作流 (软件作品)</h1>
-        </div>
-    </section><!-- end top -->
-
+<section class="main clearfix">
     <section class="wrapper">
-        <div class="content">
-
-            <!-- Gallery -->
+        <div class="content archives">
             
-
-            <!-- Content -->
-            <p>在基于LED的虚拟制作中，色彩管理是确保最终输出图像质量和一致性的关键环节。但是由于制作标准（资产生产环节的SDR）、显示设备（LED显示器、美术监视器、摄影机、现场监视器）的显示效果的差异，以及不同DCC软件工具（如Unreal Engine、Nuke、Maya、Davinci Resolve）之间的色彩空间和色彩管理系统的不同，虚拟制作中的色彩管理面临着诸多挑战。</p>
-<div style="display: flex; justify-content: center; margin: 24px 0;">
-  <figure style="width: min(100%, 960px); margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_004432.png" alt="" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-  </figure>
-</div>
-
-<p>所以我设计了一套基于ACES色彩管理体系、OCIO（OpenColorIO）色彩管理系统、OVC（OpenVPCal）、Unreal Engine的虚拟制作色彩校准及HDR制作工作流，里面涉及到了大量的色彩算法方案、软硬件配合的解决方案及工作流程内容优化，旨在解决上述挑战，并提供一个高效、可靠的色彩管理解决方案，同时以HDR呈现更高的图像质量。</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010101.gif" alt="资产HDR监看" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">资产HDR监看</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010102.gif" alt="编辑器python虚拟环境自动部署" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">编辑器python虚拟环境自动部署</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010103.gif" alt="HDR资产规范编辑器工具" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR资产规范编辑器工具</figcaption>
-  </figure>
-</div>
-
-
-<p>这个工作流包含2个软件（校准软件、美术监看软件），以及一套硬件配合的工业化工作流。该方案相较于SONY、ARRI等厂商的方案，具有更高的性价比、更好的用户体验、更强的适配能力，并且已经在多个虚拟制作项目中成功应用。</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010105.gif" alt="自动化校准验证" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">自动化校准验证</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010104.gif" alt="多屏幕统一效果" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">多屏幕统一效果</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010100.gif" alt="校准后比对校准结果" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">校准后比对校准结果</figcaption>
-  </figure>
-</div>
-
-<p><strong>该方案实现了全流程的HDR制作：</strong><br>1.制作期的HDR监看（Unreal Engine、美术监视器）或自动的贴图上转换；<br>2.拍摄期的HDR监看（摄影机、现场监视器） + LED HDR大屏显示 + 多屏统一的显示器HDR色彩校准；<br>3.后期素材的HDR监看。</p>
-<ul>
-<li><strong>该HDR方案是国内虚拟制作领域首个跑通上线的全流程HDR解决方案。</strong></li>
-</ul>
-
-
-            <!-- Tags -->
+                <div class="archive-title" data-i18n-tag="Debug">Debug</div>
             
-
-
-<div class="tags">
-    <a href="/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/Color-Management/" data-i18n-tag="Color Management">Color Management</a>
-</div>
-
-
-
-            <!-- Comments -->
-            <div>
-                
-
-
-
-
-            </div>
+            
+            
+            
+                <div class="archive-year">
+                    <h2 class="year-title">2023</h2>
+                    <ul class="archive-list">
+                        
+                            <li class="archive-item">
+    <span class="archive-date">2023-01-31</span>
+    <a href="/2023/01/31/20230131.UE性能分析与调试方案/">UE 性能分析与调试方案</a>
+</li>
+                        
+                    </ul>
+                </div>
+            
         </div><!-- end content -->
     </section>
-
-    <!-- Table of Contents will be generated by toc-collapse.js -->
-
 </section><!-- end main -->
+
+
+
 
 <!-- After footer scripts -->
 
