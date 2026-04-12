@@ -160,7 +160,7 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
 <!-- Main Content -->
 <section class="main clearfix" data-toc="true">
 
-    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+    <section class="top" style="background: url('https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/agenticAI.jpg');">
         <div class="wrapper content_header clearfix">
             
 
@@ -280,11 +280,12 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
 <li><strong>Multi-Agent 多智能体</strong>：Team 模式（<code>/team</code>）可以同时启动多个专项 Agent（explorer 负责搜索、executor 负责写代码、reviewer 负责审查、designer 负责 UI…），它们共享 TaskList，通过 SendMessage 通信协作。</li>
 </ul>
 <hr>
-<h1 id="二、反思设计模式（Reflection）"><a href="#二、反思设计模式（Reflection）" class="headerlink" title="二、反思设计模式（Reflection）"></a>二、反思设计模式（Reflection）</h1><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.19.57.png" alt="使用反射模式真的是能提升效果的" style="zoom:33%;" />
+<h1 id="二、反思设计模式（Reflection）"><a href="#二、反思设计模式（Reflection）" class="headerlink" title="二、反思设计模式（Reflection）"></a>二、反思设计模式（Reflection）</h1><figure style="text-align: center; margin: 24px 0;">
+  <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.19.57.png" alt="使用反射模式真的是能提升效果的" style="max-width: 66%; height: auto; display: inline-block; border-radius: 8px;" />
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">使用反射模式真的是能提升效果的。所以人有多时候多反思一下自己，可能真的就能进步。🐶</figcaption>
+</figure>
 
-<blockquote>
-<p>所以人有多时候多反思一下自己，可能真的就能进步。🐶</p>
-</blockquote>
+
 <h2 id="2-1-反思提升任务输出"><a href="#2-1-反思提升任务输出" class="headerlink" title="2.1 反思提升任务输出"></a>2.1 反思提升任务输出</h2><p>核心类比：人类会审查和修改草稿，AI也可以。</p>
 <p><strong>邮件写作案例</strong>：</p>
 <ul>
@@ -314,7 +315,11 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
 <blockquote>
 <p>外部反馈打破模型信息孤岛，解决固有弱点（精确计数、事实核实），实现闭环优化。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.33.25.png" alt="截屏2026-04-09 03.33.25"></p>
+<figure style="text-align: center; margin: 24px 0;">
+  <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.33.25.png" alt="截屏2026-04-09 03.33.25" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">反思与外部反馈的性能曲线对比</figcaption>
+</figure>
+
 <hr>
 <h1 id="三、工具使用（Tool-Use）"><a href="#三、工具使用（Tool-Use）" class="headerlink" title="三、工具使用（Tool Use）"></a>三、工具使用（Tool Use）</h1><h2 id="3-1-工具的本质"><a href="#3-1-工具的本质" class="headerlink" title="3.1 工具的本质"></a>3.1 工具的本质</h2><p><strong>工具就是函数</strong>，模型自主决定何时使用。</p>
 <p>关键能力——<strong>条件调用</strong>：模型智能判断何时需要工具。</p>
@@ -458,7 +463,11 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
 <h2 id="5-2-结构化计划"><a href="#5-2-结构化计划" class="headerlink" title="5.2 结构化计划"></a>5.2 结构化计划</h2><p>自然语言计划有歧义 → 要求LLM输出<strong>结构化计划</strong>（JSON&#x2F;XML）：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;查找圆墨镜&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;get_item_descriptions&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="string">&quot;round sunglasses&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;检查库存&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;check_inventory&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$step1_result&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="5-3-代码即计划-Code-As-Action"><a href="#5-3-代码即计划-Code-As-Action" class="headerlink" title="5.3 代码即计划 Code As Action"></a>5.3 代码即计划 Code As Action</h2><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-12%2003.48.14.png" alt="截屏2026-04-12 03.48.14"></p>
+<h2 id="5-3-代码即计划-Code-As-Action"><a href="#5-3-代码即计划-Code-As-Action" class="headerlink" title="5.3 代码即计划 Code As Action"></a>5.3 代码即计划 Code As Action</h2><figure style="text-align: center; margin: 24px 0;">
+  <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-12%2003.48.14.png" alt="截屏2026-04-12 03.48.14" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Code As Action — HuggingFace smolagents</figcaption>
+</figure>
+
 <p>参考HuggingFace smolagents的CodeAgent概念——让LLM直接写代码表达多步计划。</p>
 <p>优势：可调用大型库（Pandas数百函数）、表达力强、研究显示性能优于JSON&#x2F;文本计划。<br>风险：明确要求LLM编写的代码并需要沙箱执行。</p>
 <h2 id="5-4-多智能体工作流"><a href="#5-4-多智能体工作流" class="headerlink" title="5.4 多智能体工作流"></a>5.4 多智能体工作流</h2><p>即使所有Agent用同一个LLM，拆分复杂任务为独立角色也更有效。</p>
