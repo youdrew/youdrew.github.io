@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 12 Apr 2026 11:07:35 GMT</pubDate>
+    <pubDate>Sun, 12 Apr 2026 11:27:01 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -61,11 +61,11 @@
       
       <category domain="http://example.com/tags/Assistant/">Assistant</category>
       
+      <category domain="http://example.com/tags/MCP/">MCP</category>
+      
       <category domain="http://example.com/tags/Claude/">Claude</category>
       
       <category domain="http://example.com/tags/Vibe-Coding/">Vibe-Coding</category>
-      
-      <category domain="http://example.com/tags/MCP/">MCP</category>
       
       
       <comments>http://example.com/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>

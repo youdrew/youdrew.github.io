@@ -7,9 +7,8 @@ import { ShaderToyEmbedManager } from './modules/shadertoy.js';
 import { ArticleCollapse } from './modules/article-collapse.js';
 import { CodeBlock } from './modules/code-block.js';
 
-import './toc-collapse.js';
-import './language-switcher.js';
-import './tag-graph.js';
+// toc-collapse.js, language-switcher.js, i18n-data.js, tag-graph.js
+// are loaded separately in after-footer.ejs — do NOT import here
 
 function init() {
   new Navigation();
