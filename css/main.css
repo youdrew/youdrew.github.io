@@ -58,10 +58,6 @@ header nav ul li a{
     transition: padding-left 0.3s ease-in-out;
     transition:all .1s linear;
     -webkit-transition:all .1s linear;
-/* 当侧边栏隐藏时调整主内容区域 */
-header:not(.show_menu) ~ .main {
-    padding-left: 50px;
-}
 }
 
 h1, h2, h3, h4, h5 ,h6{
