@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="RAG（Retrieval-Augmented Generation）学习笔记一、什么是 RAGRAG（检索增强生成） 是一种将信息检索与大语言模型生成相结合的技术范式。核心思路很简单：在让 LLM 回答问题之前，先从外部知识库中检索相关内容，把检索到的内容作为上下文喂给模型，再让模型基于这些真实数">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="RAG（检索增强生成）学习笔记"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Article Language-->
+    
+        <meta name="article:lang" content="en"/>
+    
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>RAG（检索增强生成）学习笔记 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+    
+<link rel="stylesheet" href="/css/tag-graph.css">
+
+    
+<link rel="stylesheet" href="/css/language-switcher.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body class="layout-post path-2025-08-25-20250825-RAG-Learning-Note-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/" data-i18n-key="Home">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives" data-i18n-key="Archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about" data-i18n-key="About">About</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2025/09/13/20250913.Aximmetry/" class="previous" data-title="Aximmetry及低成本XR方案折腾笔记"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2025/08/01/20250801.Shader%20Learning%20Note/" class="next" data-title="Shader学习笔记"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">RAG（检索增强生成）学习笔记</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Gallery -->
+            
+
+            <!-- Content -->
+            <h1 id="RAG（Retrieval-Augmented-Generation）学习笔记"><a href="#RAG（Retrieval-Augmented-Generation）学习笔记" class="headerlink" title="RAG（Retrieval-Augmented Generation）学习笔记"></a>RAG（Retrieval-Augmented Generation）学习笔记</h1><h2 id="一、什么是-RAG"><a href="#一、什么是-RAG" class="headerlink" title="一、什么是 RAG"></a>一、什么是 RAG</h2><p><strong>RAG（检索增强生成）</strong> 是一种将<strong>信息检索</strong>与<strong>大语言模型生成</strong>相结合的技术范式。核心思路很简单：在让 LLM 回答问题之前，先从外部知识库中检索相关内容，把检索到的内容作为上下文喂给模型，再让模型基于这些真实数据生成回答。</p>
+<h3 id="1-1-为什么需要-RAG"><a href="#1-1-为什么需要-RAG" class="headerlink" title="1.1 为什么需要 RAG"></a>1.1 为什么需要 RAG</h3><p>LLM 存在几个固有缺陷：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>知识截止</td>
+<td>训练数据有时效性，无法回答最新信息</td>
+</tr>
+<tr>
+<td>幻觉</td>
+<td>模型会”编造”看似合理但错误的内容</td>
+</tr>
+<tr>
+<td>私有数据缺失</td>
+<td>企业内部文档、专有知识模型完全不知道</td>
+</tr>
+<tr>
+<td>可溯源性差</td>
+<td>无法告诉用户回答来自哪里</td>
+</tr>
+</tbody></table>
+<p>RAG 通过外部检索来弥补这些问题，让 LLM 的回答<strong>有据可查、实时更新</strong>。</p>
+<h3 id="1-2-RAG-vs-Fine-tuning-vs-Prompt-Engineering"><a href="#1-2-RAG-vs-Fine-tuning-vs-Prompt-Engineering" class="headerlink" title="1.2 RAG vs Fine-tuning vs Prompt Engineering"></a>1.2 RAG vs Fine-tuning vs Prompt Engineering</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>RAG</th>
+<th>Fine-tuning</th>
+<th>Prompt Engineering</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>知识更新</td>
+<td>实时更新知识库即可</td>
+<td>需要重新训练</td>
+<td>依赖上下文窗口</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>中等（检索系统+推理）</td>
+<td>高（训练算力）</td>
+<td>低</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>知识密集型问答</td>
+<td>风格&#x2F;格式适配</td>
+<td>简单任务引导</td>
+</tr>
+<tr>
+<td>可解释性</td>
+<td>高（可追溯来源）</td>
+<td>低</td>
+<td>中</td>
+</tr>
+<tr>
+<td>数据隐私</td>
+<td>私有数据不出库</td>
+<td>数据进入模型权重</td>
+<td>取决于实现</td>
+</tr>
+</tbody></table>
+<p>实际项目中，这三者经常组合使用。</p>
+<h2 id="二、RAG-基本架构"><a href="#二、RAG-基本架构" class="headerlink" title="二、RAG 基本架构"></a>二、RAG 基本架构</h2><h3 id="2-1-标准流程"><a href="#2-1-标准流程" class="headerlink" title="2.1 标准流程"></a>2.1 标准流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">用户提问</span><br><span class="line">  ↓</span><br><span class="line">Query 处理（改写、扩展）</span><br><span class="line">  ↓</span><br><span class="line">检索（Retrieval）—— 从知识库中找到相关文档片段</span><br><span class="line">  ↓</span><br><span class="line">上下文组装 —— 将检索结果拼入 Prompt</span><br><span class="line">  ↓</span><br><span class="line">LLM 生成回答</span><br><span class="line">  ↓</span><br><span class="line">输出（附带来源引用）</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-两大阶段"><a href="#2-2-两大阶段" class="headerlink" title="2.2 两大阶段"></a>2.2 两大阶段</h3><h4 id="离线阶段（Indexing）"><a href="#离线阶段（Indexing）" class="headerlink" title="离线阶段（Indexing）"></a>离线阶段（Indexing）</h4><p>把原始数据变成可检索的知识库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原始文档 → 文档切分（Chunking） → 向量化（Embedding） → 存入向量数据库</span><br></pre></td></tr></table></figure>
+
+<h4 id="在线阶段（Querying）"><a href="#在线阶段（Querying）" class="headerlink" title="在线阶段（Querying）"></a>在线阶段（Querying）</h4><p>用户提问时的实时流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户问题 → 问题向量化 → 向量相似度检索 → 上下文拼装 → LLM 生成</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、核心组件详解"><a href="#三、核心组件详解" class="headerlink" title="三、核心组件详解"></a>三、核心组件详解</h2><h3 id="3-1-文档切分（Chunking）"><a href="#3-1-文档切分（Chunking）" class="headerlink" title="3.1 文档切分（Chunking）"></a>3.1 文档切分（Chunking）</h3><p>切分策略直接影响检索质量。</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>说明</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>固定长度切分</td>
+<td>按字符&#x2F;token数切割，带重叠</td>
+<td>通用场景</td>
+</tr>
+<tr>
+<td>按段落&#x2F;章节切分</td>
+<td>利用文档结构（标题、换行）</td>
+<td>结构化文档</td>
+</tr>
+<tr>
+<td>语义切分</td>
+<td>根据语义相似度动态决定切分点</td>
+<td>长文本、混合内容</td>
+</tr>
+<tr>
+<td>递归切分</td>
+<td>按分隔符层级递归切分</td>
+<td>通用，LangChain 默认策略</td>
+</tr>
+</tbody></table>
+<p>关键参数：</p>
+<ul>
+<li><strong>chunk_size</strong>：每个片段的大小，通常 256～1024 tokens</li>
+<li><strong>chunk_overlap</strong>：相邻片段重叠区域，通常为 chunk_size 的 10%～20%</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LangChain 递归字符切分示例</span></span><br><span class="line"><span class="keyword">from</span> langchain.text_splitter <span class="keyword">import</span> RecursiveCharacterTextSplitter</span><br><span class="line"></span><br><span class="line">splitter = RecursiveCharacterTextSplitter(</span><br><span class="line">    chunk_size=<span class="number">500</span>,</span><br><span class="line">    chunk_overlap=<span class="number">50</span>,</span><br><span class="line">    separators=[<span class="string">&quot;\n\n&quot;</span>, <span class="string">&quot;\n&quot;</span>, <span class="string">&quot;。&quot;</span>, <span class="string">&quot;.&quot;</span>, <span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>]</span><br><span class="line">)</span><br><span class="line">chunks = splitter.split_text(document)</span><br></pre></td></tr></table></figure>
+
+<p><strong>经验法则</strong>：chunk 太大→检索不精准，带入太多噪声；chunk 太小→丢失上下文，回答不完整。需要根据实际数据调优。</p>
+<h3 id="3-2-向量化（Embedding）"><a href="#3-2-向量化（Embedding）" class="headerlink" title="3.2 向量化（Embedding）"></a>3.2 向量化（Embedding）</h3><p>将文本转为固定维度的稠密向量，用于相似度计算。</p>
+<p>常见 Embedding 模型：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>提供方</th>
+<th>维度</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>text-embedding-3-small&#x2F;large</td>
+<td>OpenAI</td>
+<td>1536&#x2F;3072</td>
+<td>通用性强</td>
+</tr>
+<tr>
+<td>bge-large-zh</td>
+<td>BAAI</td>
+<td>1024</td>
+<td>中文表现优秀</td>
+</tr>
+<tr>
+<td>GTE (General Text Embedding)</td>
+<td>Alibaba</td>
+<td>768&#x2F;1024</td>
+<td>多语言</td>
+</tr>
+<tr>
+<td>E5-mistral-7b</td>
+<td>Microsoft</td>
+<td>4096</td>
+<td>高质量，推理成本高</td>
+</tr>
+<tr>
+<td>Cohere Embed v3</td>
+<td>Cohere</td>
+<td>1024</td>
+<td>多语言，支持压缩</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OpenAI Embedding 示例</span></span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">client = OpenAI()</span><br><span class="line">response = client.embeddings.create(</span><br><span class="line">    model=<span class="string">&quot;text-embedding-3-small&quot;</span>,</span><br><span class="line">    <span class="built_in">input</span>=<span class="string">&quot;RAG 是检索增强生成技术&quot;</span></span><br><span class="line">)</span><br><span class="line">embedding = response.data[<span class="number">0</span>].embedding  <span class="comment"># 1536维向量</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-向量数据库"><a href="#3-3-向量数据库" class="headerlink" title="3.3 向量数据库"></a>3.3 向量数据库</h3><p>存储和检索向量的专用数据库。</p>
+<table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>类型</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chroma</td>
+<td>嵌入式</td>
+<td>轻量，适合原型开发</td>
+</tr>
+<tr>
+<td>FAISS</td>
+<td>库（Meta）</td>
+<td>高性能，纯内存，适合中小规模</td>
+</tr>
+<tr>
+<td>Milvus</td>
+<td>分布式</td>
+<td>生产级，支持亿级向量</td>
+</tr>
+<tr>
+<td>Pinecone</td>
+<td>云服务</td>
+<td>全托管，零运维</td>
+</tr>
+<tr>
+<td>Weaviate</td>
+<td>独立服务</td>
+<td>支持混合搜索（向量+关键词）</td>
+</tr>
+<tr>
+<td>Qdrant</td>
+<td>独立服务</td>
+<td>Rust 实现，高性能</td>
+</tr>
+<tr>
+<td>pgvector</td>
+<td>PG 扩展</td>
+<td>复用 PostgreSQL 生态</td>
+</tr>
+</tbody></table>
+<p>相似度度量方法：</p>
+<ul>
+<li><strong>余弦相似度（Cosine Similarity）</strong>：最常用，衡量方向相似性</li>
+<li><strong>欧氏距离（L2）</strong>：衡量绝对距离</li>
+<li><strong>内积（Inner Product）</strong>：与余弦类似，向量需归一化</li>
+</ul>
+<h3 id="3-4-检索策略"><a href="#3-4-检索策略" class="headerlink" title="3.4 检索策略"></a>3.4 检索策略</h3><h4 id="基础检索"><a href="#基础检索" class="headerlink" title="基础检索"></a>基础检索</h4><p><strong>向量检索（Dense Retrieval）</strong>：将 query 向量化，在向量数据库中找最近邻。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪代码：基础向量检索</span></span><br><span class="line">query_embedding = embed(user_query)</span><br><span class="line">results = vector_db.search(query_embedding, top_k=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="进阶检索"><a href="#进阶检索" class="headerlink" title="进阶检索"></a>进阶检索</h4><p><strong>混合检索（Hybrid Search）</strong>：结合向量检索和关键词检索（BM25），取长补短。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query ──→ 向量检索 → 结果A</span><br><span class="line">     └──→ BM25检索 → 结果B</span><br><span class="line">                  → 融合排序（RRF/加权） → 最终结果</span><br></pre></td></tr></table></figure>
+
+<p><strong>多路召回 + 重排序（Retrieve &amp; Re-rank）</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query → 多种检索策略 → 粗排候选集 → Cross-Encoder重排序 → 精排结果</span><br></pre></td></tr></table></figure>
+
+<p>重排序模型（如 bge-reranker、Cohere Rerank）对 query-document 对进行深度相关性打分，显著提升精度。</p>
+<h3 id="3-5-上下文组装与生成"><a href="#3-5-上下文组装与生成" class="headerlink" title="3.5 上下文组装与生成"></a>3.5 上下文组装与生成</h3><p>将检索到的内容组装进 Prompt，交给 LLM 生成。</p>
+<p>常见 Prompt 模板：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">你是一个知识问答助手。请根据以下参考资料回答用户的问题。</span><br><span class="line">如果参考资料中没有相关信息，请如实说明，不要编造。</span><br><span class="line"></span><br><span class="line">## 参考资料</span><br><span class="line">&#123;retrieved_contexts&#125;</span><br><span class="line"></span><br><span class="line">## 用户问题</span><br><span class="line">&#123;user_query&#125;</span><br><span class="line"></span><br><span class="line">## 回答</span><br></pre></td></tr></table></figure>
+
+<p>关键点：</p>
+<ul>
+<li>明确告知模型”基于参考资料回答”，减少幻觉</li>
+<li>添加”不知道就说不知道”的指令</li>
+<li>控制注入上下文的总量，避免超过模型窗口限制</li>
+</ul>
+<h2 id="四、RAG-进阶技术"><a href="#四、RAG-进阶技术" class="headerlink" title="四、RAG 进阶技术"></a>四、RAG 进阶技术</h2><h3 id="4-1-Query-改写与扩展"><a href="#4-1-Query-改写与扩展" class="headerlink" title="4.1 Query 改写与扩展"></a>4.1 Query 改写与扩展</h3><p>用户原始提问往往不是最优的检索 query。</p>
+<table>
+<thead>
+<tr>
+<th>技术</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Query Rewriting</td>
+<td>让 LLM 重写问题，使其更适合检索</td>
+</tr>
+<tr>
+<td>HyDE（Hypothetical Document Embedding）</td>
+<td>让 LLM 先生成假设性回答，用回答的向量去检索</td>
+</tr>
+<tr>
+<td>Multi-Query</td>
+<td>将一个问题拆解为多个子问题，分别检索后合并</td>
+</tr>
+<tr>
+<td>Step-back Prompting</td>
+<td>让模型先提出一个更宏观的问题，获取背景知识</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HyDE 示例</span></span><br><span class="line">hypothetical_answer = llm.generate(<span class="string">f&quot;请回答: <span class="subst">&#123;user_query&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># 用假设回答的 embedding 去检索，而不是用原始问题</span></span><br><span class="line">results = vector_db.search(embed(hypothetical_answer), top_k=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-图谱-RAG（GraphRAG）"><a href="#4-2-图谱-RAG（GraphRAG）" class="headerlink" title="4.2 图谱 RAG（GraphRAG）"></a>4.2 图谱 RAG（GraphRAG）</h3><p>微软提出的 GraphRAG 方法，用知识图谱增强检索。</p>
+<p>流程：</p>
+<ol>
+<li>从文档中抽取实体和关系，构建知识图谱</li>
+<li>对图谱进行社区检测，生成不同层级的摘要</li>
+<li>查询时同时利用向量检索和图谱结构进行推理</li>
+</ol>
+<p>优势：擅长回答需要跨文档推理的全局性问题（如”总结所有文档的主要观点”）。</p>
+<h3 id="4-3-自适应-RAG（Adaptive-Self-RAG）"><a href="#4-3-自适应-RAG（Adaptive-Self-RAG）" class="headerlink" title="4.3 自适应 RAG（Adaptive &#x2F; Self-RAG）"></a>4.3 自适应 RAG（Adaptive &#x2F; Self-RAG）</h3><p>让模型自主判断是否需要检索：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">用户问题 → LLM 判断是否需要检索</span><br><span class="line">              ├── 不需要 → 直接回答</span><br><span class="line">              └── 需要 → 检索 → 评估检索结果相关性</span><br><span class="line">                            ├── 相关 → 生成回答</span><br><span class="line">                            └── 不相关 → 换策略重新检索</span><br></pre></td></tr></table></figure>
+
+<p>Self-RAG 论文引入了<strong>反思令牌（Reflection Tokens）</strong>，让模型在生成过程中自评检索质量和回答可靠性。</p>
+<h3 id="4-4-嵌套-多跳-RAG（Multi-hop-RAG）"><a href="#4-4-嵌套-多跳-RAG（Multi-hop-RAG）" class="headerlink" title="4.4 嵌套&#x2F;多跳 RAG（Multi-hop RAG）"></a>4.4 嵌套&#x2F;多跳 RAG（Multi-hop RAG）</h3><p>处理需要多步推理的复杂问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">问题：&quot;A公司的创始人还在B公司任职吗？&quot;</span><br><span class="line">  → 第1跳：检索 A公司创始人是谁 → 得到&quot;张三&quot;</span><br><span class="line">  → 第2跳：检索 张三是否在B公司任职 → 得到答案</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-5-Agentic-RAG"><a href="#4-5-Agentic-RAG" class="headerlink" title="4.5 Agentic RAG"></a>4.5 Agentic RAG</h3><p>将 RAG 作为 Agent 的工具之一，由 Agent 自主规划检索策略。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">用户问题 → Agent 思考</span><br><span class="line">           → 决定调用哪个检索工具（向量库/搜索引擎/数据库）</span><br><span class="line">           → 分析结果，决定是否需要再次检索</span><br><span class="line">           → 综合所有信息生成最终回答</span><br></pre></td></tr></table></figure>
+
+<p>工具定义示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">tools = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;search_internal_docs&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;搜索公司内部文档库&quot;</span>,</span><br><span class="line">        <span class="string">&quot;parameters&quot;</span>: &#123;<span class="string">&quot;query&quot;</span>: <span class="string">&quot;str&quot;</span>, <span class="string">&quot;top_k&quot;</span>: <span class="string">&quot;int&quot;</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;search_web&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;搜索互联网获取最新信息&quot;</span>,</span><br><span class="line">        <span class="string">&quot;parameters&quot;</span>: &#123;<span class="string">&quot;query&quot;</span>: <span class="string">&quot;str&quot;</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;query_database&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;查询结构化数据库&quot;</span>,</span><br><span class="line">        <span class="string">&quot;parameters&quot;</span>: &#123;<span class="string">&quot;sql&quot;</span>: <span class="string">&quot;str&quot;</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、评估体系"><a href="#五、评估体系" class="headerlink" title="五、评估体系"></a>五、评估体系</h2><h3 id="5-1-检索质量评估"><a href="#5-1-检索质量评估" class="headerlink" title="5.1 检索质量评估"></a>5.1 检索质量评估</h3><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Precision@K</td>
+<td>前 K 个结果中相关的比例</td>
+</tr>
+<tr>
+<td>Recall@K</td>
+<td>相关文档被召回的比例</td>
+</tr>
+<tr>
+<td>MRR</td>
+<td>第一个相关结果的排名倒数</td>
+</tr>
+<tr>
+<td>nDCG</td>
+<td>考虑排序位置的增益指标</td>
+</tr>
+</tbody></table>
+<h3 id="5-2-生成质量评估"><a href="#5-2-生成质量评估" class="headerlink" title="5.2 生成质量评估"></a>5.2 生成质量评估</h3><p><strong>RAGAS 框架</strong>是 RAG 评估的主流方案：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>评估维度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Faithfulness</td>
+<td>忠实度</td>
+<td>回答是否与检索内容一致（不幻觉）</td>
+</tr>
+<tr>
+<td>Answer Relevance</td>
+<td>答案相关性</td>
+<td>回答是否切题</td>
+</tr>
+<tr>
+<td>Context Precision</td>
+<td>上下文精确率</td>
+<td>检索内容中有用信息的比例</td>
+</tr>
+<tr>
+<td>Context Recall</td>
+<td>上下文召回率</td>
+<td>回答所需信息是否都被检索到了</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RAGAS 评估示例</span></span><br><span class="line"><span class="keyword">from</span> ragas <span class="keyword">import</span> evaluate</span><br><span class="line"><span class="keyword">from</span> ragas.metrics <span class="keyword">import</span> faithfulness, answer_relevancy, context_precision</span><br><span class="line"></span><br><span class="line">results = evaluate(</span><br><span class="line">    dataset=eval_dataset,</span><br><span class="line">    metrics=[faithfulness, answer_relevancy, context_precision]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-端到端评估"><a href="#5-3-端到端评估" class="headerlink" title="5.3 端到端评估"></a>5.3 端到端评估</h3><p>最终的评估还是要回归业务场景：</p>
+<ul>
+<li>人工评估：抽样打分，准确率、完整性、流畅度</li>
+<li>LLM-as-Judge：用强模型评估弱模型的输出</li>
+<li>A&#x2F;B 测试：线上对比不同 RAG 方案的用户满意度</li>
+</ul>
+<h2 id="六、工程实践要点"><a href="#六、工程实践要点" class="headerlink" title="六、工程实践要点"></a>六、工程实践要点</h2><h3 id="6-1-数据处理"><a href="#6-1-数据处理" class="headerlink" title="6.1 数据处理"></a>6.1 数据处理</h3><ul>
+<li><strong>数据清洗</strong>：去除乱码、重复内容、格式噪声</li>
+<li><strong>元数据标注</strong>：为每个 chunk 添加来源、时间、分类等元数据，支持过滤检索</li>
+<li><strong>多格式解析</strong>：PDF、Word、HTML、Markdown、表格、图片（OCR）各有解析方案</li>
+</ul>
+<h3 id="6-2-性能优化"><a href="#6-2-性能优化" class="headerlink" title="6.2 性能优化"></a>6.2 性能优化</h3><table>
+<thead>
+<tr>
+<th>优化方向</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>检索延迟</td>
+<td>向量索引优化（HNSW、IVF）、缓存热门 query</td>
+</tr>
+<tr>
+<td>召回率</td>
+<td>多路召回、query 扩展、调大 top_k</td>
+</tr>
+<tr>
+<td>精度</td>
+<td>重排序、增加元数据过滤</td>
+</tr>
+<tr>
+<td>上下文利用</td>
+<td>压缩无关内容、只注入关键段落</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>Embedding 缓存、小模型粗排 + 大模型精排</td>
+</tr>
+</tbody></table>
+<h3 id="6-3-常见问题与对策"><a href="#6-3-常见问题与对策" class="headerlink" title="6.3 常见问题与对策"></a>6.3 常见问题与对策</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>原因</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>检索不到相关内容</td>
+<td>切分太碎 &#x2F; embedding 不准</td>
+<td>调整 chunk 策略、换 embedding 模型</td>
+</tr>
+<tr>
+<td>检索到了但回答不对</td>
+<td>上下文太多噪声</td>
+<td>减少注入量、加重排序</td>
+</tr>
+<tr>
+<td>回答幻觉</td>
+<td>模型无视上下文自行编造</td>
+<td>强化 Prompt 指令、降低 temperature</td>
+</tr>
+<tr>
+<td>回答不完整</td>
+<td>信息分散在多个 chunk</td>
+<td>多跳检索、增大 chunk_size</td>
+</tr>
+<tr>
+<td>延迟高</td>
+<td>检索 + LLM 双重耗时</td>
+<td>异步检索、流式输出、缓存</td>
+</tr>
+</tbody></table>
+<h3 id="6-4-技术选型参考"><a href="#6-4-技术选型参考" class="headerlink" title="6.4 技术选型参考"></a>6.4 技术选型参考</h3><p><strong>原型验证（快速起步）</strong>：</p>
+<ul>
+<li>Embedding: OpenAI text-embedding-3-small</li>
+<li>向量库: Chroma &#x2F; FAISS</li>
+<li>框架: LangChain &#x2F; LlamaIndex</li>
+</ul>
+<p><strong>生产部署</strong>：</p>
+<ul>
+<li>Embedding: BGE &#x2F; GTE（可自部署，数据不出域）</li>
+<li>向量库: Milvus &#x2F; Weaviate &#x2F; pgvector</li>
+<li>框架: LlamaIndex（更灵活）或自建 Pipeline</li>
+<li>重排序: bge-reranker-v2-m3 &#x2F; Cohere Rerank</li>
+</ul>
+<h2 id="七、主流框架对比"><a href="#七、主流框架对比" class="headerlink" title="七、主流框架对比"></a>七、主流框架对比</h2><table>
+<thead>
+<tr>
+<th>框架</th>
+<th>语言</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LangChain</td>
+<td>Python&#x2F;JS</td>
+<td>生态最全，模块丰富，上手快</td>
+<td>快速原型、通用 RAG</td>
+</tr>
+<tr>
+<td>LlamaIndex</td>
+<td>Python</td>
+<td>专注于 RAG，数据连接器丰富</td>
+<td>数据密集型应用</td>
+</tr>
+<tr>
+<td>Haystack</td>
+<td>Python</td>
+<td>生产导向，Pipeline 设计清晰</td>
+<td>企业级搜索问答</td>
+</tr>
+<tr>
+<td>Semantic Kernel</td>
+<td>C#&#x2F;Python&#x2F;Java</td>
+<td>微软出品，与 Azure 生态集成</td>
+<td>.NET 技术栈项目</td>
+</tr>
+<tr>
+<td>DSPy</td>
+<td>Python</td>
+<td>编程式 Prompt 优化，自动调参</td>
+<td>学术研究、Prompt 工程</td>
+</tr>
+</tbody></table>
+<h2 id="八、学习资源"><a href="#八、学习资源" class="headerlink" title="八、学习资源"></a>八、学习资源</h2><h3 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.11401">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a>（RAG 原始论文，Facebook AI，2020）</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2310.11511">Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection</a></li>
+<li><a target="_blank" rel="noopener" href="https://microsoft.github.io/graphrag/">GraphRAG: Unlocking LLM Discovery on Complex Data</a>（Microsoft，2024）</li>
+</ul>
+<h3 id="实践项目"><a href="#实践项目" class="headerlink" title="实践项目"></a>实践项目</h3><ul>
+<li>LangChain RAG 模板：官方提供了多种 RAG 架构的参考实现</li>
+<li>LlamaIndex 官方示例：覆盖从基础到进阶的各类 RAG 模式</li>
+<li>RAGAS：RAG 评估框架，附带完整评估示例</li>
+</ul>
+<hr>
+<blockquote>
+<p>这篇笔记梳理了 RAG 从基础概念到进阶实践的知识体系。RAG 的本质就是”让 LLM 先查资料再回答”，看似简单，但每个环节（切分、向量化、检索、生成、评估）都有大量工程细节。建议从最简单的向量检索 RAG 起步，遇到具体问题再逐步引入进阶技术——不要一上来就搞 GraphRAG + Agent + Multi-hop，过度的复杂度往往是 RAG 项目失败的原因。</p>
+</blockquote>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/RAG/" data-i18n-tag="RAG">RAG</a> <a href="/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/tags/NLP/" data-i18n-tag="NLP">NLP</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- 加载打包后的模块化代码 -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<!-- Tag Knowledge Graph -->
+
+<script src="/js/tag-graph.js"></script>
+
+
+<!-- Language Switcher -->
+
+<script src="/js/i18n-data.js"></script>
+
+
+<script src="/js/language-switcher.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+
+<!-- Featherlight (图库) -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- ShaderToy Placeholder Processing -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
+
+    elements.forEach(element => {
+      const shaderID = element.getAttribute('data-id');
+
+      if (shaderID) {
+        const container = document.createElement('div');
+        container.style.cssText = `
+          position: relative;
+          width: 100%;
+          height: 400px;
+          margin: 20px 0;
+          border: 2px solid #bfbbbb;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #f6f6f6;
+        `;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        `;
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        element.parentNode.insertBefore(container, element);
+        element.parentNode.removeChild(element);
+      }
+    });
+  }, 1000);
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
