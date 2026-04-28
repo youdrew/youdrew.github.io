@@ -462,6 +462,71 @@ Clu">
 </tr>
 </tbody></table>
 <hr>
+<h2 id="🔧-MCP-工具链优化方案"><a href="#🔧-MCP-工具链优化方案" class="headerlink" title="🔧 MCP 工具链优化方案"></a>🔧 MCP 工具链优化方案</h2><blockquote>
+<p>核心原则：<strong>让 LLM 像一个读过文档的开发者一样能正确使用工具。</strong> 以下六条优化方案来自 UE MCP 项目的实践经验。</p>
+</blockquote>
+<h3 id="优化一：Description-即接口——描述是最重要的设计"><a href="#优化一：Description-即接口——描述是最重要的设计" class="headerlink" title="优化一：Description 即接口——描述是最重要的设计"></a>优化一：Description 即接口——描述是最重要的设计</h3><p>MCP 工具和普通 API 最大的区别：<strong>调用方是 LLM 而非人类</strong>。LLM 靠 <code>description</code> 字段判断”什么时候该调用、怎么调用”，描述写得烂，工具就是死的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ❌ 烂的描述 —— LLM不知道什么时候用</span></span><br><span class="line"><span class="meta">@mcp.tool()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_property</span>(<span class="params">name: <span class="built_in">str</span>, value: <span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;设置属性&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ✅ 好的描述 —— LLM能自主决策</span></span><br><span class="line"><span class="meta">@mcp.tool()</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_blueprint_variable</span>(<span class="params">blueprint_path: <span class="built_in">str</span>, var_name: <span class="built_in">str</span>, value: <span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    修改蓝图中某个变量的默认值。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    适用场景：当你需要调整蓝图的初始配置（如移速、血量上限）时使用。</span></span><br><span class="line"><span class="string">    注意：只修改默认值，不影响运行时已创建的实例。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        blueprint_path: 蓝图资产路径，如 &#x27;/Game/Characters/BP_Hero&#x27;</span></span><br><span class="line"><span class="string">        var_name: 变量名，大小写敏感</span></span><br><span class="line"><span class="string">        value: 新的默认值（统一用字符串，工具内部做类型转换）</span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        &#123;&quot;success&quot;: bool, &quot;previous_value&quot;: str, &quot;message&quot;: str&#125;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>描述要包含</strong>：做什么、什么时候用、边界限制、参数语义、返回值含义。</p>
+<h3 id="优化二：粒度控制——以子系统为边界"><a href="#优化二：粒度控制——以子系统为边界" class="headerlink" title="优化二：粒度控制——以子系统为边界"></a>优化二：粒度控制——以子系统为边界</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">太细（❌）：</span><br><span class="line">  create_blueprint_node_position_x()</span><br><span class="line">  create_blueprint_node_position_y()</span><br><span class="line">  → LLM要调几十次才完成一件事，中间容易出错累积</span><br><span class="line"></span><br><span class="line">太粗（❌）：</span><br><span class="line">  create_entire_character_blueprint(description: str)</span><br><span class="line">  → 黑盒操作，出错了LLM无法定位是哪一步</span><br><span class="line"></span><br><span class="line">合适（✅）：按UE子系统边界，每个工具做一件完整的事</span><br><span class="line">  create_blueprint()            # 创建蓝图文件</span><br><span class="line">  add_variable_to_blueprint()   # 添加变量</span><br><span class="line">  compile_blueprint()           # 编译</span><br></pre></td></tr></table></figure>
+
+<p>以引擎子系统（Animation &#x2F; Material &#x2F; Blueprint 等）为边界划分服务器，每个服务器内部再分高&#x2F;低两层抽象：高层提供常用工作流，低层提供灵活控制。</p>
+<h3 id="优化三：返回值要”对-LLM-友好”"><a href="#优化三：返回值要”对-LLM-友好”" class="headerlink" title="优化三：返回值要”对 LLM 友好”"></a>优化三：返回值要”对 LLM 友好”</h3><p>LLM 看到返回值后要决定下一步做什么，返回值必须包含足够的决策上下文：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ❌ 对LLM无用</span></span><br><span class="line"><span class="keyword">return</span> &#123;<span class="string">&quot;result&quot;</span>: <span class="string">&quot;ok&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># ✅ LLM能据此决策下一步</span></span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="string">&quot;success&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">    <span class="string">&quot;asset_path&quot;</span>: <span class="string">&quot;/Game/Blueprints/BP_Enemy&quot;</span>,</span><br><span class="line">    <span class="string">&quot;next_steps&quot;</span>: <span class="string">&quot;可以用 add_variable_to_blueprint 添加变量，或 compile_blueprint 直接编译&quot;</span>,</span><br><span class="line">    <span class="string">&quot;warnings&quot;</span>: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># ❌ 失败时只返回 False —— LLM不知道为什么，只能重试或放弃</span></span><br><span class="line"><span class="keyword">return</span> &#123;<span class="string">&quot;success&quot;</span>: <span class="literal">False</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># ✅ 失败时告诉LLM原因，让它能自我纠正</span></span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="string">&quot;success&quot;</span>: <span class="literal">False</span>,</span><br><span class="line">    <span class="string">&quot;error_type&quot;</span>: <span class="string">&quot;PATH_NOT_FOUND&quot;</span>,</span><br><span class="line">    <span class="string">&quot;error_message&quot;</span>: <span class="string">&quot;路径 &#x27;/Game/Blueprints/BP_Enemy&#x27; 不存在&quot;</span>,</span><br><span class="line">    <span class="string">&quot;suggestion&quot;</span>: <span class="string">&quot;请先用 list_blueprints() 查询现有蓝图路径&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化四：读写分离，副作用透明"><a href="#优化四：读写分离，副作用透明" class="headerlink" title="优化四：读写分离，副作用透明"></a>优化四：读写分离，副作用透明</h3><p>LLM 在不确定时倾向于调用”看起来安全”的工具。读写要明确分类，写操作在描述里标注副作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">只读工具（LLM可放心调用）：</span><br><span class="line">  list_blueprints()          → 查询项目中所有蓝图</span><br><span class="line">  get_blueprint_variables()  → 查看蓝图变量列表</span><br><span class="line"></span><br><span class="line">写操作工具（描述中标注副作用）：</span><br><span class="line">  create_blueprint()   → &quot;注意：会在磁盘上创建新文件&quot;</span><br><span class="line">  delete_asset()       → &quot;注意：不可逆操作，请确认路径正确&quot;</span><br><span class="line">  compile_blueprint()  → &quot;注意：会触发UE编译，耗时约1-3秒&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化五：幂等性设计，让-LLM-敢于重试"><a href="#优化五：幂等性设计，让-LLM-敢于重试" class="headerlink" title="优化五：幂等性设计，让 LLM 敢于重试"></a>优化五：幂等性设计，让 LLM 敢于重试</h3><p>LLM 可能因超时或误判而重复调用同一工具，应当设计为重复调用安全：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">create_blueprint</span>(<span class="params">name: <span class="built_in">str</span>, path: <span class="built_in">str</span></span>) -&gt; <span class="built_in">dict</span>:</span><br><span class="line">    existing = ue_api.find_asset(<span class="string">f&quot;<span class="subst">&#123;path&#125;</span>/<span class="subst">&#123;name&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> existing:</span><br><span class="line">        <span class="comment"># 不报错，返回现有资产路径</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&quot;success&quot;</span>: <span class="literal">True</span>, <span class="string">&quot;asset_path&quot;</span>: existing.path,</span><br><span class="line">                <span class="string">&quot;note&quot;</span>: <span class="string">&quot;蓝图已存在，返回现有资产&quot;</span>&#125;</span><br><span class="line">    <span class="comment"># 正常创建流程...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="优化六：分层工具结构"><a href="#优化六：分层工具结构" class="headerlink" title="优化六：分层工具结构"></a>优化六：分层工具结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">高层工具（面向任务）：               ← 描述引导LLM优先使用</span><br><span class="line">  setup_character_blueprint()       # 创建角色蓝图完整流程</span><br><span class="line">  batch_import_textures()           # 批量导入贴图并自动设置材质</span><br><span class="line"></span><br><span class="line">  ↓ 内部调用</span><br><span class="line"></span><br><span class="line">中层工具（面向单步操作）：           ← LLM在需要精细控制时使用</span><br><span class="line">  create_blueprint()</span><br><span class="line">  add_component_to_blueprint()</span><br><span class="line">  set_material_parameter()</span><br><span class="line"></span><br><span class="line">  ↓ 内部调用</span><br><span class="line"></span><br><span class="line">底层（直接 UE Python API）：        ← 一般不直接暴露给LLM</span><br><span class="line">  unreal.EditorAssetLibrary.*</span><br></pre></td></tr></table></figure>
+
+<p>高层工具减少 LLM 调用次数，低层工具保证灵活性。描述里引导 LLM 优先走高层路径。</p>
+<h3 id="优化方案总结"><a href="#优化方案总结" class="headerlink" title="优化方案总结"></a>优化方案总结</h3><table>
+<thead>
+<tr>
+<th>优化方向</th>
+<th>核心思路</th>
+<th>实际收益</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Description 设计</td>
+<td>描述即接口，写清使用场景和边界</td>
+<td>LLM 工具选择准确率提升</td>
+</tr>
+<tr>
+<td>粒度控制</td>
+<td>以子系统为边界，能组合但不爆炸</td>
+<td>减少调用链长度，降低出错率</td>
+</tr>
+<tr>
+<td>友好返回值</td>
+<td>成功提示下一步，失败给自我纠正线索</td>
+<td>Agent 能自我恢复，减少人工干预</td>
+</tr>
+<tr>
+<td>读写分离</td>
+<td>标注副作用，LLM 敢于调用只读工具</td>
+<td>减少误操作风险</td>
+</tr>
+<tr>
+<td>幂等性设计</td>
+<td>重复调用安全</td>
+<td>LLM 敢于重试，提高鲁棒性</td>
+</tr>
+<tr>
+<td>分层结构</td>
+<td>高层工作流 + 低层精细控制</td>
+<td>兼顾效率与灵活性</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>在实际 UE MCP 项目中，按 14 个引擎子系统划分服务器，每个服务器内分只读查询和写操作两类工具，写操作描述里都标注了副作用，实践下来 LLM 的工具选择准确率明显提升。</p>
+</blockquote>
+<hr>
 <h2 id="📚-学习资源"><a href="#📚-学习资源" class="headerlink" title="📚 学习资源"></a>📚 学习资源</h2><ul>
 <li><strong>MCP 官方文档</strong>: <a target="_blank" rel="noopener" href="https://modelcontextprotocol.io/">https://modelcontextprotocol.io/</a></li>
 <li><strong>MCP Registry</strong>: <a target="_blank" rel="noopener" href="https://registry.modelcontextprotocol.io/">https://registry.modelcontextprotocol.io/</a></li>

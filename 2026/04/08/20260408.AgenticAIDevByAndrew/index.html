@@ -556,6 +556,16 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
 </li>
 </ul>
 <p>另外，不同的模型可能适用于不同的harness，因为模型的能力不太一样（李宏毅的课程提到了，比如说sonnet 他对于上下文会有焦虑，所以当内容很多的时候，它会出现明显的能力下降)。</p>
+<p>最后，回到 Tool Use 这个设计模式，一个关键的实践洞察是：<strong>MCP 工具的设计质量直接决定了 Agent 的能力上限</strong>。结合我在 UE MCP 项目中的经验，总结出以下六条工具设计原则：</p>
+<ol>
+<li><strong>Description 是最重要的设计——描述即接口</strong>：MCP 工具的调用方是 LLM 而非人类，LLM 靠 <code>description</code> 字段判断”什么时候该调用、怎么调用”。好的描述要包含：做什么、什么时候用、边界限制、参数语义、返回值含义。描述写得烂，工具就是死的。</li>
+<li><strong>粒度控制——以子系统为边界</strong>：工具太细（如按坐标轴拆分节点创建）导致调用链过长、容易出错累积；太粗（如一句话生成整个角色蓝图）变成黑盒，出错了 LLM 无法定位。以引擎子系统为边界划分，每个工具做一件完整的事。</li>
+<li><strong>返回值要”对 LLM 友好”</strong>：返回值必须包含足够的决策上下文——成功时提示下一步可用的操作，失败时给出 <code>error_type</code>、<code>error_message</code> 和 <code>suggestion</code>，让 Agent 能自我纠正而不是盲重试。</li>
+<li><strong>读写分离，副作用透明</strong>：LLM 在不确定时倾向于调用”看起来安全”的工具。只读工具和写操作要明确分类，写操作在描述里标注副作用（如”会在磁盘上创建新文件”、”不可逆操作”）。</li>
+<li><strong>幂等性设计，让 LLM 敢于重试</strong>：LLM 可能因超时或误判而重复调用同一工具，设计为重复调用安全（如：资产已存在则返回现有资产而非报错）。</li>
+<li><strong>分层工具结构</strong>：高层工具（面向任务的完整工作流，如 <code>setup_character_blueprint()</code>）减少调用次数；中层工具（面向单步操作）保证灵活性；底层 API 不直接暴露给 LLM。描述里引导 LLM 优先走高层路径。</li>
+</ol>
+<p>核心一句话：<strong>好用的 MCP 工具设计，本质是”让 LLM 像一个读过文档的开发者一样能正确使用它”。</strong> 这和吴恩达课程中 Tool Use 模式的核心思想完美对应——工具的质量决定了 Agent 自主决策的上限。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
 <li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DfrdByE2H">https://www.bilibili.com/video/BV1DfrdByE2H</a> 课程地址</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/agentic-ai/tree/main">原github笔记</a>:这里面有可以运行的代码，可以通过在VSCode里面的Jupyter Notebook的形式来学习，会很方便。</li>
