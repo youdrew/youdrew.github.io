@@ -30,19 +30,21 @@
       .toLowerCase();
   }
 
-  // === Node size: determined by edge count (connections) ===
+  // === Node size: determined by article count (node.value) ===
+  // Edge count is still tracked separately, only used to scale label font size.
   var edgeCount = {};
   data.links.forEach(function (link) {
     edgeCount[link.source] = (edgeCount[link.source] || 0) + 1;
     edgeCount[link.target] = (edgeCount[link.target] || 0) + 1;
   });
-  var maxEdgeCount = 1;
-  Object.keys(edgeCount).forEach(function (name) {
-    if (edgeCount[name] > maxEdgeCount) maxEdgeCount = edgeCount[name];
+  var maxValue = 1;
+  data.nodes.forEach(function (node) {
+    var v = node.value || 0;
+    if (v > maxValue) maxValue = v;
   });
   data.nodes.forEach(function (node) {
-    var count = edgeCount[node.name] || 0;
-    node.symbolSize = Math.max(12, Math.min(70, 12 + count * (58 / maxEdgeCount)));
+    var v = node.value || 0;
+    node.symbolSize = Math.max(12, Math.min(70, 12 + v * (58 / maxValue)));
   });
 
   // === BFS distance from archive_filter_tags ===
@@ -369,7 +371,7 @@
       backgroundColor: 'transparent',
       tooltip: {
         show: true,
-        enterable: false,
+        enterable: true,
         confine: true,
         backgroundColor: 'rgba(255, 255, 255, 0.97)',
         borderColor: '#e8e8e8',
@@ -382,19 +384,38 @@
         },
         extraCssText: 'border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); max-height: 260px; overflow-y: auto;',
         formatter: function (params) {
+          function escHtml(s) {
+            return String(s == null ? '' : s)
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;');
+          }
+          function postRow(title, path) {
+            var safeTitle = escHtml(title);
+            var safePath = escHtml(path);
+            var common = 'style="display:block;color:#666;font-size:11px;line-height:1.6;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;text-decoration:none;"';
+            if (safePath) {
+              return '<a href="' + safePath + '" ' + common + '>• ' + safeTitle + '</a>';
+            }
+            return '<div ' + common + '>• ' + safeTitle + '</div>';
+          }
           if (params.dataType === 'node') {
             var displayName = getDisplayName(params.name);
             var html = '<div style="font-weight:600;font-size:14px;margin-bottom:5px;color:' +
               (colorMap[params.name] || '#795da3') + '">' +
-              displayName + '</div>';
+              escHtml(displayName) + '</div>';
             html += '<div style="color:#777;font-size:12px;margin-bottom:6px;">📄 ' + params.value + ' article' + (params.value > 1 ? 's' : '') + '</div>';
-            // Show article titles
             var titles = data.postTitles && data.postTitles[params.name];
             if (titles && titles.length > 0) {
               html += '<div style="max-height:160px;overflow-y:auto;border-top:1px solid #eee;padding-top:5px;">';
-              titles.forEach(function (title) {
-                var safeTitle = title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                html += '<div style="color:#666;font-size:11px;line-height:1.6;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;">• ' + safeTitle + '</div>';
+              titles.forEach(function (item) {
+                // Backwards-compatible: item may be a string or { title, path }
+                if (typeof item === 'string') {
+                  html += postRow(item, '');
+                } else {
+                  html += postRow(item.title, item.path);
+                }
               });
               html += '</div>';
             }
@@ -403,17 +424,16 @@
           if (params.dataType === 'edge') {
             var srcName = params.data.source;
             var tgtName = params.data.target;
-            var html = '<span style="font-weight:600">' + getDisplayName(srcName) + '</span>' +
+            var html = '<span style="font-weight:600">' + escHtml(getDisplayName(srcName)) + '</span>' +
               ' <span style="color:#bbb">↔</span> ' +
-              '<span style="font-weight:600">' + getDisplayName(tgtName) + '</span>';
+              '<span style="font-weight:600">' + escHtml(getDisplayName(tgtName)) + '</span>';
             html += '<br/><span style="color:#999;font-size:12px">📄 ' + params.data.value + ' article' + (params.data.value > 1 ? 's' : '') + '</span>';
             var edgeKey = [srcName, tgtName].sort().join('\t');
             var sharedPosts = data.linkPosts && data.linkPosts[edgeKey];
             if (sharedPosts && sharedPosts.length > 0) {
               html += '<div style="max-height:160px;overflow-y:auto;border-top:1px solid #eee;padding-top:5px;margin-top:5px;">';
               sharedPosts.forEach(function (p) {
-                var safeTitle = p.title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                html += '<div style="color:#666;font-size:11px;line-height:1.6;padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;">• ' + safeTitle + '</div>';
+                html += postRow(p.title, p.path);
               });
               html += '</div>';
             }
@@ -463,6 +483,7 @@
         },
         lineStyle: {
           color: '#d0d0d0',
+          width: 1.5,
           curveness: 0,
           opacity: 0.35
         },
@@ -529,28 +550,13 @@
       }, 800);
     }
 
-    // Click node → navigate to tag page; Click edge → navigate to first shared post
+    // Click node → navigate to tag page.
+    // Click edge → no-op; the tooltip exposes clickable article links instead,
+    // letting the user pick a specific article rather than guessing where the
+    // edge will take them.
     chart.on('click', function (params) {
       if (params.dataType === 'node' && data.tagPaths && data.tagPaths[params.name]) {
         window.location.href = data.tagPaths[params.name];
-      }
-      if (params.dataType === 'edge' && data.linkPosts) {
-        var edgeKey = [params.data.source, params.data.target].sort().join('\t');
-        var sharedPosts = data.linkPosts[edgeKey];
-        if (sharedPosts && sharedPosts.length === 1) {
-          window.location.href = sharedPosts[0].path;
-        } else if (sharedPosts && sharedPosts.length > 1) {
-          // Navigate to the tag page of the source tag (smaller tag by article count)
-          var srcCount = 0, tgtCount = 0;
-          data.nodes.forEach(function (n) {
-            if (n.name === params.data.source) srcCount = n.value || 0;
-            if (n.name === params.data.target) tgtCount = n.value || 0;
-          });
-          var navTag = srcCount <= tgtCount ? params.data.source : params.data.target;
-          if (data.tagPaths[navTag]) {
-            window.location.href = data.tagPaths[navTag];
-          }
-        }
       }
     });
 
