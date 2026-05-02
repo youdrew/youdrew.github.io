@@ -63,16 +63,6 @@ RDBMS：Relational Database Management System，关系型数据库管理系统
 <link rel="stylesheet" href="/css/language-switcher.css">
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-
     <!-- Mermaid is loaded in after-footer.ejs -->
 
     <!-- Google Analytics -->
@@ -91,7 +81,7 @@ RDBMS：Relational Database Management System，关系型数据库管理系统
         <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
     
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body class="layout-post path-2026-04-12-20260412-SQL-">
@@ -183,9 +173,6 @@ RDBMS：Relational Database Management System，关系型数据库管理系统
 
     <section class="wrapper">
         <div class="content">
-
-            <!-- Gallery -->
-            
 
             <!-- Content -->
             <h1 id="一、SQL-简介"><a href="#一、SQL-简介" class="headerlink" title="一、SQL 简介"></a>一、SQL 简介</h1><h2 id="1-1-什么是-SQL"><a href="#1-1-什么是-SQL" class="headerlink" title="1.1 什么是 SQL"></a>1.1 什么是 SQL</h2><p><strong>SQL（Structured Query Language）</strong>：用于管理关系型数据库的标准编程语言。</p>
@@ -620,10 +607,9 @@ RDBMS：Relational Database Management System，关系型数据库管理系统
 
 <!-- 第三方库 (CDN) -->
 <!-- Mermaid -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
-
-<!-- Featherlight (图库) -->
-<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
 
 <!-- Mermaid 初始化 -->
 <script type="text/javascript">
@@ -673,50 +659,6 @@ document.addEventListener('DOMContentLoaded', function() {
       mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
     }, 100);
   }
-});
-</script>
-
-<!-- ShaderToy Placeholder Processing -->
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
-
-    elements.forEach(element => {
-      const shaderID = element.getAttribute('data-id');
-
-      if (shaderID) {
-        const container = document.createElement('div');
-        container.style.cssText = `
-          position: relative;
-          width: 100%;
-          height: 400px;
-          margin: 20px 0;
-          border: 2px solid #bfbbbb;
-          border-radius: 8px;
-          overflow: hidden;
-          background-color: #f6f6f6;
-        `;
-
-        const iframe = document.createElement('iframe');
-        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
-        iframe.style.cssText = `
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border: none;
-        `;
-        iframe.allowFullscreen = true;
-        iframe.loading = 'lazy';
-
-        container.appendChild(iframe);
-        element.parentNode.insertBefore(container, element);
-        element.parentNode.removeChild(element);
-      }
-    });
-  }, 1000);
 });
 </script>
 

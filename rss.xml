@@ -4,19 +4,19 @@
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Eugene&#39;s Page</title>
-    <link>http://example.com/</link>
+    <link>https://youdrew.github.io/</link>
     
-    <atom:link href="http://example.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://youdrew.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 02 May 2026 13:35:31 GMT</pubDate>
+    <pubDate>Sat, 02 May 2026 16:16:02 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
-      <link>http://example.com/2026/05/02/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/</link>
-      <guid>http://example.com/2026/05/02/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/</guid>
-      <pubDate>Sat, 02 May 2026 13:35:31 GMT</pubDate>
+      <link>https://youdrew.github.io/2026/05/02/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/</link>
+      <guid>https://youdrew.github.io/2026/05/02/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/</guid>
+      <pubDate>Sat, 02 May 2026 16:16:02 GMT</pubDate>
       
         
         
@@ -31,14 +31,14 @@
       
       
       
-      <comments>http://example.com/2026/05/02/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/05/02/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>AI Agent 框架调研笔记</title>
-      <link>http://example.com/2026/04/30/20260430.AI%20Agent%20%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94%E7%AC%94%E8%AE%B0/</link>
-      <guid>http://example.com/2026/04/30/20260430.AI%20Agent%20%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94%E7%AC%94%E8%AE%B0/</guid>
+      <link>https://youdrew.github.io/2026/04/30/20260430.AI%20Agent%20%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94%E7%AC%94%E8%AE%B0/</link>
+      <guid>https://youdrew.github.io/2026/04/30/20260430.AI%20Agent%20%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94%E7%AC%94%E8%AE%B0/</guid>
       <pubDate>Thu, 30 Apr 2026 04:00:00 GMT</pubDate>
       
         
@@ -53,33 +53,33 @@
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/OpenAI/">OpenAI</category>
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
-      <category domain="http://example.com/tags/Framework/">Framework</category>
+      <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
       
-      <category domain="http://example.com/tags/Agent/">Agent</category>
+      <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
       
-      <category domain="http://example.com/tags/LangGraph/">LangGraph</category>
+      <category domain="https://youdrew.github.io/tags/LangGraph/">LangGraph</category>
       
-      <category domain="http://example.com/tags/CrewAI/">CrewAI</category>
+      <category domain="https://youdrew.github.io/tags/CrewAI/">CrewAI</category>
       
-      <category domain="http://example.com/tags/LlamaIndex/">LlamaIndex</category>
+      <category domain="https://youdrew.github.io/tags/LlamaIndex/">LlamaIndex</category>
       
-      <category domain="http://example.com/tags/Dify/">Dify</category>
+      <category domain="https://youdrew.github.io/tags/Dify/">Dify</category>
       
-      <category domain="http://example.com/tags/Google-ADK/">Google ADK</category>
+      <category domain="https://youdrew.github.io/tags/Google-ADK/">Google ADK</category>
       
       
-      <comments>http://example.com/2026/04/30/20260430.AI%20Agent%20%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/04/30/20260430.AI%20Agent%20%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Tile Explorer Web — 24h AI GameDev 马拉松作品 (软件作品)</title>
-      <link>http://example.com/2026/04/28/20260428.Tile%20Explorer%20Web%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</link>
-      <guid>http://example.com/2026/04/28/20260428.Tile%20Explorer%20Web%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</guid>
+      <link>https://youdrew.github.io/2026/04/28/20260428.Tile%20Explorer%20Web%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</link>
+      <guid>https://youdrew.github.io/2026/04/28/20260428.Tile%20Explorer%20Web%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</guid>
       <pubDate>Tue, 28 Apr 2026 04:00:00 GMT</pubDate>
       
         
@@ -93,21 +93,21 @@
       
       
       
-      <category domain="http://example.com/tags/Software-Projects/">Software Projects</category>
+      <category domain="https://youdrew.github.io/tags/Software-Projects/">Software Projects</category>
       
-      <category domain="http://example.com/tags/Web-Development/">Web Development</category>
+      <category domain="https://youdrew.github.io/tags/Web-Development/">Web Development</category>
       
-      <category domain="http://example.com/tags/Game-Dev/">Game Dev</category>
+      <category domain="https://youdrew.github.io/tags/Game-Dev/">Game Dev</category>
       
       
-      <comments>http://example.com/2026/04/28/20260428.Tile%20Explorer%20Web%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/04/28/20260428.Tile%20Explorer%20Web%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Veil Lingo — 在线英语教育平台 (软件作品)</title>
-      <link>http://example.com/2026/04/18/20260428.Veil%20Lingo%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</link>
-      <guid>http://example.com/2026/04/18/20260428.Veil%20Lingo%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</guid>
+      <link>https://youdrew.github.io/2026/04/18/20260428.Veil%20Lingo%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</link>
+      <guid>https://youdrew.github.io/2026/04/18/20260428.Veil%20Lingo%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</guid>
       <pubDate>Sat, 18 Apr 2026 04:00:00 GMT</pubDate>
       
         
@@ -121,21 +121,21 @@
       
       
       
-      <category domain="http://example.com/tags/Software-Projects/">Software Projects</category>
+      <category domain="https://youdrew.github.io/tags/Software-Projects/">Software Projects</category>
       
-      <category domain="http://example.com/tags/Web-Development/">Web Development</category>
+      <category domain="https://youdrew.github.io/tags/Web-Development/">Web Development</category>
       
-      <category domain="http://example.com/tags/Full-Stack/">Full Stack</category>
+      <category domain="https://youdrew.github.io/tags/Full-Stack/">Full Stack</category>
       
       
-      <comments>http://example.com/2026/04/18/20260428.Veil%20Lingo%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/04/18/20260428.Veil%20Lingo%20(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Hermes Agent 调研笔记</title>
-      <link>http://example.com/2026/04/16/20260416.Hermes%20Agent/</link>
-      <guid>http://example.com/2026/04/16/20260416.Hermes%20Agent/</guid>
+      <link>https://youdrew.github.io/2026/04/16/20260416.Hermes%20Agent/</link>
+      <guid>https://youdrew.github.io/2026/04/16/20260416.Hermes%20Agent/</guid>
       <pubDate>Thu, 16 Apr 2026 02:00:00 GMT</pubDate>
       
         
@@ -149,23 +149,23 @@
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/Agent/">Agent</category>
+      <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
       
-      <category domain="http://example.com/tags/OpenSource/">OpenSource</category>
+      <category domain="https://youdrew.github.io/tags/OpenSource/">OpenSource</category>
       
-      <category domain="http://example.com/tags/NousResearch/">NousResearch</category>
+      <category domain="https://youdrew.github.io/tags/NousResearch/">NousResearch</category>
       
       
-      <comments>http://example.com/2026/04/16/20260416.Hermes%20Agent/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/04/16/20260416.Hermes%20Agent/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>SQL 基础笔记</title>
-      <link>http://example.com/2026/04/12/20260412.SQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/</link>
-      <guid>http://example.com/2026/04/12/20260412.SQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/</guid>
+      <link>https://youdrew.github.io/2026/04/12/20260412.SQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/</link>
+      <guid>https://youdrew.github.io/2026/04/12/20260412.SQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/</guid>
       <pubDate>Sun, 12 Apr 2026 02:00:00 GMT</pubDate>
       
         
@@ -179,19 +179,19 @@
       
       
       
-      <category domain="http://example.com/tags/SQL/">SQL</category>
+      <category domain="https://youdrew.github.io/tags/SQL/">SQL</category>
       
-      <category domain="http://example.com/tags/Database/">Database</category>
+      <category domain="https://youdrew.github.io/tags/Database/">Database</category>
       
       
-      <comments>http://example.com/2026/04/12/20260412.SQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/04/12/20260412.SQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Agentic工作流搭建教程笔记（吴恩达）</title>
-      <link>http://example.com/2026/04/08/20260408.AgenticAIDevByAndrew/</link>
-      <guid>http://example.com/2026/04/08/20260408.AgenticAIDevByAndrew/</guid>
+      <link>https://youdrew.github.io/2026/04/08/20260408.AgenticAIDevByAndrew/</link>
+      <guid>https://youdrew.github.io/2026/04/08/20260408.AgenticAIDevByAndrew/</guid>
       <pubDate>Wed, 08 Apr 2026 09:45:00 GMT</pubDate>
       
         
@@ -205,21 +205,21 @@
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/Agentic-AI/">Agentic AI</category>
+      <category domain="https://youdrew.github.io/tags/Agentic-AI/">Agentic AI</category>
       
-      <category domain="http://example.com/tags/Framework/">Framework</category>
+      <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
       
       
-      <comments>http://example.com/2026/04/08/20260408.AgenticAIDevByAndrew/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/04/08/20260408.AgenticAIDevByAndrew/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Claude Code 使用技巧整理</title>
-      <link>http://example.com/2026/03/22/20260322.Claude%20Code%20Tips/</link>
-      <guid>http://example.com/2026/03/22/20260322.Claude%20Code%20Tips/</guid>
+      <link>https://youdrew.github.io/2026/03/22/20260322.Claude%20Code%20Tips/</link>
+      <guid>https://youdrew.github.io/2026/03/22/20260322.Claude%20Code%20Tips/</guid>
       <pubDate>Sun, 22 Mar 2026 02:00:00 GMT</pubDate>
       
         
@@ -229,29 +229,29 @@
       
       
       
-      <content:encoded><![CDATA[<h1 id="Claude-Code-使用技巧整理"><a href="#Claude-Code-使用技巧整理" class="headerlink" title="Claude Code 使用技巧整理"></a>Claude Code 使用技巧整理</h1><p>这篇文档主要记录我在使用 Claude Code 过程中的一些稳定工作流、提问方式和插件使用经验。目标不是把所有功能列一遍，而是整理出真正能提高交付效率的做法。</p><hr><h2 id="Claude-Code-适合做什么"><a href="#Claude-Code-适合做什么" class="headerlink" title="Claude Code 适合做什么"></a>Claude Code 适合做什么</h2><p>如果从游戏开发、工具链开发和内容工程的视角来看，Claude Code 更适合以下几类任务：</p><ul><li>理解已有工程结构</li><li>批量重构脚本或工具代码</li><li>补测试、补文档、补脚手架</li><li>对接第三方 SDK、服务接口或命令行工具</li><li>做中等复杂度的多文件改动</li></ul><p>它的优势不是“直接无脑一把梭”，而是：</p><ul><li>长上下文理解能力比较稳定</li><li>对代码解释、重构、归纳总结表现较好</li><li>适合先分析、再执行的工作流</li></ul><p>如果任务非常碎、非常即时，比如一边写一边需要行级补全，那还是 IDE 内补全工具更直接。</p><hr><h2 id="Claude配置文件位置"><a href="#Claude配置文件位置" class="headerlink" title="Claude配置文件位置"></a>Claude配置文件位置</h2><table><thead><tr><th></th><th><code>项目根/CLAUDE.md</code></th><th><code>~/.claude/settings.json</code></th><th><code>~/.claude.json</code></th></tr></thead><tbody><tr><td><strong>语义</strong></td><td>给 Claude 的指令</td><td>用户配置</td><td>系统内部状态</td></tr><tr><td><strong>谁写</strong></td><td>用户手写</td><td>用户手动编辑</td><td>Claude Code 自动维护</td></tr><tr><td><strong>内容</strong></td><td>项目规范、编码风格、工作流约定</td><td>API 密钥、模型配置、权限规则、MCP 服务器</td><td>启动次数、工具使用统计、项目级会话记录</td></tr><tr><td><strong>类比</strong></td><td><code>.editorconfig</code> &#x2F; <code>.eslintrc</code></td><td>VS Code 的 <code>settings.json</code></td><td>VS Code 的 <code>state.vscdb</code></td></tr><tr><td><strong>版本控制</strong></td><td>应提交到 git</td><td>不提交（含密钥）</td><td>不提交（含用户 ID）</td></tr><tr><td><strong><code>env</code></strong></td><td>—</td><td>API 地址、模型名</td><td>—</td></tr><tr><td><strong><code>permissions</code></strong></td><td>—</td><td>工具白名单</td><td>—</td></tr><tr><td><strong><code>mcpServers</code></strong></td><td>—</td><td>全局 MCP 服务器</td><td>—</td></tr><tr><td><strong><code>enabledPlugins</code></strong></td><td>—</td><td>插件开关</td><td>—</td></tr><tr><td><strong><code>numStartups</code></strong></td><td>—</td><td>—</td><td>启动总次数</td></tr><tr><td><strong><code>projects</code></strong></td><td>—</td><td>—</td><td>每个项目的 MCP、信任状态、会话统计</td></tr><tr><td><strong><code>toolUsage</code></strong></td><td>—</td><td>—</td><td>每个工具的调用次数和最后使用时间</td></tr><tr><td><strong><code>tipsHistory</code></strong></td><td>—</td><td>—</td><td>已展示过的提示信息</td></tr><tr><td>备注</td><td>这个文件一直存在于上下文中。</td><td></td><td></td></tr></tbody></table><hr><h2 id="我比较稳定的使用流程"><a href="#我比较稳定的使用流程" class="headerlink" title="我比较稳定的使用流程"></a>我比较稳定的使用流程</h2><h3 id="先要求它说明影响面"><a href="#先要求它说明影响面" class="headerlink" title="先要求它说明影响面"></a>先要求它说明影响面</h3><p>在改公共模块、基础类库、构建脚本之前，可以先问：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果修改这个函数签名，会影响哪些调用方？</span><br><span class="line">请按文件列出来，并说明高风险点。</span><br></pre></td></tr></table></figure><p>这一步对避免误改很有价值。</p><h3 id="让它顺手补验证步骤"><a href="#让它顺手补验证步骤" class="headerlink" title="让它顺手补验证步骤"></a>让它顺手补验证步骤</h3><p>除了改代码，我还会顺带要求：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改完成后，请补充：</span><br><span class="line"><span class="bullet">1.</span> 如何验证</span><br><span class="line"><span class="bullet">2.</span> 建议执行的命令</span><br><span class="line"><span class="bullet">3.</span> 可能失败的边界情况</span><br></pre></td></tr></table></figure><p>这样最后产出更接近可交付状态。</p><h3 id="把“不要做什么”写明"><a href="#把“不要做什么”写明" class="headerlink" title="把“不要做什么”写明"></a>把“不要做什么”写明</h3><p>例如：</p><ul><li>不要改 public API</li><li>不要引入新依赖</li><li>不要动 UI 样式</li><li>不要修改数据库结构</li></ul><p>这类负向约束非常重要，尤其是在已有项目里。</p><ul><li>另外，Claude Sonnot会有比较严重的上下文焦虑。所以它只适合用于来做短暂的快速完成的小功能。</li></ul><hr><h2 id="Plugin-使用总结"><a href="#Plugin-使用总结" class="headerlink" title="Plugin 使用总结"></a>Plugin 使用总结</h2><p>插件或者外部工具接入，真正的价值不是“功能变多”，而是让 Claude Code 可以从“只会说”变成“能查、能跑、能验证”。</p><p>我的判断标准通常是三条：</p><ol><li>能不能减少手动切换上下文</li><li>能不能把分析结果落到真实工程上</li><li>能不能形成稳定工作流，而不是偶尔演示一次</li></ol><h3 id="ralph-loop-（循环插件）"><a href="#ralph-loop-（循环插件）" class="headerlink" title="ralph-loop （循环插件）"></a><a href="https://awesomeclaude.ai/ralph-wiggum">ralph-loop</a> （循环插件）</h3><p>ralph-loop 这类插件我更倾向把它看成“循环执行框架”或者“任务闭环增强器”。</p><p>它比较适合下面这些场景：</p><ul><li>一个任务需要多轮分析、执行、检查</li><li>需要让 AI 按固定节奏反复迭代</li><li>需要把大任务拆成可观察的小回合</li></ul><h4 id="自动化同意问题"><a href="#自动化同意问题" class="headerlink" title="自动化同意问题"></a>自动化同意问题</h4><p>如果你的目标只是“允许它直接修改当前工作区里的文件，不要每次都弹确认”，优先用 Claude Code 自带的权限模式，而不是指望插件本身绕过确认。</p><p>我建议分两档理解：</p><h4 id="方案-1：只自动同意编辑文件"><a href="#方案-1：只自动同意编辑文件" class="headerlink" title="方案 1：只自动同意编辑文件"></a>方案 1：只自动同意编辑文件</h4><p>这是更稳的做法。</p><p>Claude Code 有一个 <code>acceptEdits</code> 模式，核心效果是：</p><ul><li>工作区内的文件编辑可以批量接受</li><li>但执行命令、联网请求、其他有副作用的操作，仍然会继续询问</li></ul><p>如果你主要烦的是“改这个文件能不能同意”这种提示，那应该优先用这一档。</p><p>可以通过 <code>/config</code> 或 <code>/permissions</code> 检查当前模式，也可以在设置文件里显式写上：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://json.schemastore.org/claude-code-settings.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;defaultMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;acceptEdits&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure><p>常见放置位置：</p><ul><li>全局生效：<code>~/.claude/settings.json</code></li><li>当前仓库本地生效：<code>.claude/settings.local.json</code></li><li>团队共享配置：<code>.claude/settings.json</code></li></ul><p>如果你只是想在自己机器上对当前项目放开，最适合放到 <code>.claude/settings.local.json</code>。这样不会提交进仓库，也不会影响别的项目。</p><h4 id="方案-2：连命令确认也一起跳过"><a href="#方案-2：连命令确认也一起跳过" class="headerlink" title="方案 2：连命令确认也一起跳过"></a>方案 2：连命令确认也一起跳过</h4><p>如果你希望 Claude Code 连命令执行、工具调用这些确认也尽量别问，可以直接用启动参数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude --dangerously-skip-permissions</span><br></pre></td></tr></table></figure><p>这个模式相当于直接跳过权限确认，适合你完全信任当前仓库、并且明确知道它可能会自动执行改文件、跑命令、调用工具等操作的场景。</p><p>但这一档风险明显更高，不建议默认长期打开。更适合：</p><ul><li>自己的个人仓库</li><li>隔离良好的测试环境</li><li>临时做高频迭代任务</li></ul><p>不太建议直接用于：</p><ul><li>来路不明的仓库</li><li>混有敏感配置的工程</li><li>会执行部署、发布、数据库操作的项目</li></ul><h4 id="实战建议"><a href="#实战建议" class="headerlink" title="实战建议"></a>实战建议</h4><p>如果你的诉求只是“ralph-loop 在多轮执行时别一直问我能不能改文件”，那优先级应该是：</p><ol><li>先把默认权限模式切到 <code>acceptEdits</code></li><li>用 <code>.claude/settings.local.json</code> 只对当前仓库生效</li><li>只有在你连命令确认都嫌打断流程时，才改用 <code>--dangerously-skip-permissions</code></li></ol><p>简单说：</p><ul><li>只想免掉文件编辑确认，用 <code>acceptEdits</code></li><li>想把所有确认基本都跳过，用 <code>--dangerously-skip-permissions</code></li></ul><p>前者适合日常主力使用，后者适合你明确接受风险时再开。</p><p>简单说，ralph-loop 不是让 Claude Code “更聪明”，而是让你的任务编排更稳定。</p><h3 id="Oh-My-Claude-Code（OMC，Claude智能体集合）"><a href="#Oh-My-Claude-Code（OMC，Claude智能体集合）" class="headerlink" title="Oh My Claude Code（OMC，Claude智能体集合）"></a>Oh My Claude Code（OMC，Claude智能体集合）</h3><p>主打一个零成本学习Claude的一个工具。提供一个预设好的agent合集。</p><h4 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h4><p>我使用npm包管理。在terminal里执行：<br><code>npm i -g oh-my-claude-sisyphus@latest</code><br>然后<code>omc setup</code>,完成设置。<br><a href="https://github.com/Yeachan-Heo/oh-my-claudecode/blob/main/README.md">项目网站</a></p><h4 id="提供了5种模式"><a href="#提供了5种模式" class="headerlink" title="提供了5种模式"></a>提供了5种模式</h4><p>🔸 Autopilot（完全自主） - 从规划、实施到测试的全流程自动化<br>🔸 Ultra Pilot（并行加速） - 最多5个并行工作者同时处理，速度提升5倍<br>🔸 Swarm（协作团队） - 多个智能体像开发团队一样协作，从共享任务池领取工作<br>🔸 Pipeline（流水线） - 按固定顺序串联智能体，适合必须按步骤推进的工作流<br>🔸 EcoCode（经济模式） - 在保持效率的前提下最大化节省 token 消耗</p><h4 id="新版本claude命令行下的标识"><a href="#新版本claude命令行下的标识" class="headerlink" title="新版本claude命令行下的标识"></a>新版本claude命令行下的标识</h4><p>[OMC#4.11.2] | session:33m | ctx:32% | T:17 A:1<br>● 这是 OMC 状态栏的显示，各项含义：</p><ul><li>[OMC#4.11.2] — OMC 插件版本号</li><li>session:33m — 当前会话已持续 33 分钟</li><li>ctx:32% — 上下文窗口已使用 32%</li><li>T:17 — Tool calls，本次会话已执行的工具新调用次数（17 次）</li><li>A:1 — Agents，当前活跃的子代理数量（1 个）</li></ul><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a href="https://www.bilibili.com/video/BV12hf2B9E29/">一个B站博主的学习视频</a></p><h3 id="文档检索类插件"><a href="#文档检索类插件" class="headerlink" title="文档检索类插件"></a>文档检索类插件</h3><p>如果插件可以帮助 Claude Code 直接读取官方文档、接口说明或者本地知识库，那么它在接第三方 SDK、引擎 API、云服务时非常有用。</p><p>适合场景：</p><ul><li>查 API 参数</li><li>对照版本差异</li><li>核对配置项含义</li><li>减少“模型凭印象回答”</li></ul><p>这类插件的核心价值是降低幻觉率。</p><h3 id="仓库与-Issue-协同类插件"><a href="#仓库与-Issue-协同类插件" class="headerlink" title="仓库与 Issue 协同类插件"></a>仓库与 Issue 协同类插件</h3><p>如果你的工作流经常围绕 Git、Issue、PR 进行，那么能直接读仓库状态、变更记录、评审意见的插件会非常实用。</p><p>适合场景：</p><ul><li>根据 Issue 修 bug</li><li>结合 PR review comment 改代码</li><li>总结当前分支改动</li><li>生成提交说明或变更摘要</li></ul><p>这类插件最适合团队协作环境，而不是单人写 demo。</p><h3 id="浏览器自动化或页面验证类插件"><a href="#浏览器自动化或页面验证类插件" class="headerlink" title="浏览器自动化或页面验证类插件"></a>浏览器自动化或页面验证类插件</h3><p>做前端、后台管理系统或者文档站点时，能操作页面、检查 DOM、截图、回归验证的插件也很有价值。</p><p>适合场景：</p><ul><li>检查页面是否正常渲染</li><li>验证按钮点击流程</li><li>截图留档</li><li>复现前端交互 bug</li></ul><p>如果你的任务需要“改完后马上验证页面结果”，这类插件会比纯文本分析更有效。</p><hr><p>Claude Code 真正好用的地方，不是一次生成很多代码，而是它可以参与完整的软件交付链路：</p><ul><li>先读工程</li><li>再理解约束</li><li>然后分步实施</li><li>最后补验证和总结</li></ul><p>如果再配合合适的插件，尤其是像 ralph-loop 这种帮助任务闭环和节奏控制的工具，整体体验会比“只聊天、不落地”的 AI 协作模式更强。</p><p>后续可以继续补充的方向：</p><ul><li>Claude Code 在 Unreal 工程中的使用案例</li><li>Claude Code 和 Copilot &#x2F; Cursor 的分工方式</li><li>Claude Code + MCP 的实际工作流示例</li></ul>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="Claude-Code-使用技巧整理"><a href="#Claude-Code-使用技巧整理" class="headerlink" title="Claude Code 使用技巧整理"></a>Claude Code 使用技巧整理</h1><p>这篇文档主要记录我在使用 Claude Code 过程中的一些稳定工作流、提问方式和插件使用经验。目标不是把所有功能列一遍，而是整理出真正能提高交付效率的做法。</p><hr><h2 id="Claude-Code-适合做什么"><a href="#Claude-Code-适合做什么" class="headerlink" title="Claude Code 适合做什么"></a>Claude Code 适合做什么</h2><p>如果从游戏开发、工具链开发和内容工程的视角来看，Claude Code 更适合以下几类任务：</p><ul><li>理解已有工程结构</li><li>批量重构脚本或工具代码</li><li>补测试、补文档、补脚手架</li><li>对接第三方 SDK、服务接口或命令行工具</li><li>做中等复杂度的多文件改动</li></ul><p>它的优势不是“直接无脑一把梭”，而是：</p><ul><li>长上下文理解能力比较稳定</li><li>对代码解释、重构、归纳总结表现较好</li><li>适合先分析、再执行的工作流</li></ul><p>如果任务非常碎、非常即时，比如一边写一边需要行级补全，那还是 IDE 内补全工具更直接。</p><hr><h2 id="Claude配置文件位置"><a href="#Claude配置文件位置" class="headerlink" title="Claude配置文件位置"></a>Claude配置文件位置</h2><table><thead><tr><th></th><th><code>项目根/CLAUDE.md</code></th><th><code>~/.claude/settings.json</code></th><th><code>~/.claude.json</code></th></tr></thead><tbody><tr><td><strong>语义</strong></td><td>给 Claude 的指令</td><td>用户配置</td><td>系统内部状态</td></tr><tr><td><strong>谁写</strong></td><td>用户手写</td><td>用户手动编辑</td><td>Claude Code 自动维护</td></tr><tr><td><strong>内容</strong></td><td>项目规范、编码风格、工作流约定</td><td>API 密钥、模型配置、权限规则、MCP 服务器</td><td>启动次数、工具使用统计、项目级会话记录</td></tr><tr><td><strong>类比</strong></td><td><code>.editorconfig</code> &#x2F; <code>.eslintrc</code></td><td>VS Code 的 <code>settings.json</code></td><td>VS Code 的 <code>state.vscdb</code></td></tr><tr><td><strong>版本控制</strong></td><td>应提交到 git</td><td>不提交（含密钥）</td><td>不提交（含用户 ID）</td></tr><tr><td><strong><code>env</code></strong></td><td>—</td><td>API 地址、模型名</td><td>—</td></tr><tr><td><strong><code>permissions</code></strong></td><td>—</td><td>工具白名单</td><td>—</td></tr><tr><td><strong><code>mcpServers</code></strong></td><td>—</td><td>全局 MCP 服务器</td><td>—</td></tr><tr><td><strong><code>enabledPlugins</code></strong></td><td>—</td><td>插件开关</td><td>—</td></tr><tr><td><strong><code>numStartups</code></strong></td><td>—</td><td>—</td><td>启动总次数</td></tr><tr><td><strong><code>projects</code></strong></td><td>—</td><td>—</td><td>每个项目的 MCP、信任状态、会话统计</td></tr><tr><td><strong><code>toolUsage</code></strong></td><td>—</td><td>—</td><td>每个工具的调用次数和最后使用时间</td></tr><tr><td><strong><code>tipsHistory</code></strong></td><td>—</td><td>—</td><td>已展示过的提示信息</td></tr><tr><td>备注</td><td>这个文件一直存在于上下文中。</td><td></td><td></td></tr></tbody></table><hr><h2 id="我比较稳定的使用流程"><a href="#我比较稳定的使用流程" class="headerlink" title="我比较稳定的使用流程"></a>我比较稳定的使用流程</h2><h3 id="先要求它说明影响面"><a href="#先要求它说明影响面" class="headerlink" title="先要求它说明影响面"></a>先要求它说明影响面</h3><p>在改公共模块、基础类库、构建脚本之前，可以先问：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果修改这个函数签名，会影响哪些调用方？</span><br><span class="line">请按文件列出来，并说明高风险点。</span><br></pre></td></tr></table></figure><p>这一步对避免误改很有价值。</p><h3 id="让它顺手补验证步骤"><a href="#让它顺手补验证步骤" class="headerlink" title="让它顺手补验证步骤"></a>让它顺手补验证步骤</h3><p>除了改代码，我还会顺带要求：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修改完成后，请补充：</span><br><span class="line"><span class="bullet">1.</span> 如何验证</span><br><span class="line"><span class="bullet">2.</span> 建议执行的命令</span><br><span class="line"><span class="bullet">3.</span> 可能失败的边界情况</span><br></pre></td></tr></table></figure><p>这样最后产出更接近可交付状态。</p><h3 id="把“不要做什么”写明"><a href="#把“不要做什么”写明" class="headerlink" title="把“不要做什么”写明"></a>把“不要做什么”写明</h3><p>例如：</p><ul><li>不要改 public API</li><li>不要引入新依赖</li><li>不要动 UI 样式</li><li>不要修改数据库结构</li></ul><p>这类负向约束非常重要，尤其是在已有项目里。</p><ul><li>另外，Claude Sonnot会有比较严重的上下文焦虑。所以它只适合用于来做短暂的快速完成的小功能。</li></ul><hr><h2 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h2><p>插件或者外部工具接入，真正的价值不是“功能变多”，而是让 Claude Code 可以从“只会说”变成“能查、能跑、能验证”。</p><p>我的判断标准通常是三条：</p><ol><li>能不能减少手动切换上下文</li><li>能不能把分析结果落到真实工程上</li><li>能不能形成稳定工作流，而不是偶尔演示一次</li></ol><h3 id="ralph-loop-（循环插件）"><a href="#ralph-loop-（循环插件）" class="headerlink" title="ralph-loop （循环插件）"></a><a href="https://awesomeclaude.ai/ralph-wiggum">ralph-loop</a> （循环插件）</h3><p>ralph-loop 这类插件我更倾向把它看成“循环执行框架”或者“任务闭环增强器”。</p><p>它比较适合下面这些场景：</p><ul><li>一个任务需要多轮分析、执行、检查</li><li>需要让 AI 按固定节奏反复迭代</li><li>需要把大任务拆成可观察的小回合</li></ul><h4 id="自动化同意问题"><a href="#自动化同意问题" class="headerlink" title="自动化同意问题"></a>自动化同意问题</h4><p>如果你的目标只是“允许它直接修改当前工作区里的文件，不要每次都弹确认”，优先用 Claude Code 自带的权限模式，而不是指望插件本身绕过确认。</p><p>我建议分两档理解：</p><h4 id="方案-1：只自动同意编辑文件"><a href="#方案-1：只自动同意编辑文件" class="headerlink" title="方案 1：只自动同意编辑文件"></a>方案 1：只自动同意编辑文件</h4><p>这是更稳的做法。</p><p>Claude Code 有一个 <code>acceptEdits</code> 模式，核心效果是：</p><ul><li>工作区内的文件编辑可以批量接受</li><li>但执行命令、联网请求、其他有副作用的操作，仍然会继续询问</li></ul><p>如果你主要烦的是“改这个文件能不能同意”这种提示，那应该优先用这一档。</p><p>可以通过 <code>/config</code> 或 <code>/permissions</code> 检查当前模式，也可以在设置文件里显式写上：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://json.schemastore.org/claude-code-settings.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;defaultMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;acceptEdits&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure><p>常见放置位置：</p><ul><li>全局生效：<code>~/.claude/settings.json</code></li><li>当前仓库本地生效：<code>.claude/settings.local.json</code></li><li>团队共享配置：<code>.claude/settings.json</code></li></ul><p>如果你只是想在自己机器上对当前项目放开，最适合放到 <code>.claude/settings.local.json</code>。这样不会提交进仓库，也不会影响别的项目。</p><h4 id="方案-2：连命令确认也一起跳过"><a href="#方案-2：连命令确认也一起跳过" class="headerlink" title="方案 2：连命令确认也一起跳过"></a>方案 2：连命令确认也一起跳过</h4><p>如果你希望 Claude Code 连命令执行、工具调用这些确认也尽量别问，可以直接用启动参数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude --dangerously-skip-permissions</span><br></pre></td></tr></table></figure><p>这个模式相当于直接跳过权限确认，适合你完全信任当前仓库、并且明确知道它可能会自动执行改文件、跑命令、调用工具等操作的场景。</p><p>但这一档风险明显更高，不建议默认长期打开。更适合：</p><ul><li>自己的个人仓库</li><li>隔离良好的测试环境</li><li>临时做高频迭代任务</li></ul><p>不太建议直接用于：</p><ul><li>来路不明的仓库</li><li>混有敏感配置的工程</li><li>会执行部署、发布、数据库操作的项目</li></ul><h4 id="实战建议"><a href="#实战建议" class="headerlink" title="实战建议"></a>实战建议</h4><p>如果你的诉求只是“ralph-loop 在多轮执行时别一直问我能不能改文件”，那优先级应该是：</p><ol><li>先把默认权限模式切到 <code>acceptEdits</code></li><li>用 <code>.claude/settings.local.json</code> 只对当前仓库生效</li><li>只有在你连命令确认都嫌打断流程时，才改用 <code>--dangerously-skip-permissions</code></li></ol><p>简单说：</p><ul><li>只想免掉文件编辑确认，用 <code>acceptEdits</code></li><li>想把所有确认基本都跳过，用 <code>--dangerously-skip-permissions</code></li></ul><p>前者适合日常主力使用，后者适合你明确接受风险时再开。</p><p>简单说，ralph-loop 不是让 Claude Code “更聪明”，而是让你的任务编排更稳定。</p><h3 id="Oh-My-Claude-Code（OMC，Claude智能体集合）"><a href="#Oh-My-Claude-Code（OMC，Claude智能体集合）" class="headerlink" title="Oh My Claude Code（OMC，Claude智能体集合）"></a>Oh My Claude Code（OMC，Claude智能体集合）</h3><p>主打一个零成本学习Claude的一个工具。提供一个预设好的agent合集。</p><h4 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h4><p>我使用npm包管理。在terminal里执行：<br><code>npm i -g oh-my-claude-sisyphus@latest</code><br>然后<code>omc setup</code>,完成设置。<br><a href="https://github.com/Yeachan-Heo/oh-my-claudecode/blob/main/README.md">项目网站</a></p><h4 id="提供了5种模式"><a href="#提供了5种模式" class="headerlink" title="提供了5种模式"></a>提供了5种模式</h4><p>🔸 Autopilot（完全自主） - 从规划、实施到测试的全流程自动化<br>🔸 Ultra Pilot（并行加速） - 最多5个并行工作者同时处理，速度提升5倍<br>🔸 Swarm（协作团队） - 多个智能体像开发团队一样协作，从共享任务池领取工作<br>🔸 Pipeline（流水线） - 按固定顺序串联智能体，适合必须按步骤推进的工作流<br>🔸 EcoCode（经济模式） - 在保持效率的前提下最大化节省 token 消耗</p><h4 id="新版本claude命令行下的标识"><a href="#新版本claude命令行下的标识" class="headerlink" title="新版本claude命令行下的标识"></a>新版本claude命令行下的标识</h4><p>[OMC#4.11.2] | session:33m | ctx:32% | T:17 A:1<br>● 这是 OMC 状态栏的显示，各项含义：</p><ul><li>[OMC#4.11.2] — OMC 插件版本号</li><li>session:33m — 当前会话已持续 33 分钟</li><li>ctx:32% — 上下文窗口已使用 32%</li><li>T:17 — Tool calls，本次会话已执行的工具新调用次数（17 次）</li><li>A:1 — Agents，当前活跃的子代理数量（1 个）</li></ul><h2 id="常规的命令"><a href="#常规的命令" class="headerlink" title="常规的命令"></a>常规的命令</h2><h3 id="claude-–resume"><a href="#claude-–resume" class="headerlink" title="claude –resume"></a>claude –resume</h3><p>如果中断了某次聊天，可以用这个来恢复当时的聊天记录。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.bilibili.com/video/BV12hf2B9E29/">一个B站博主的学习视频</a></p>]]></content:encoded>
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/Assistant/">Assistant</category>
+      <category domain="https://youdrew.github.io/tags/Assistant/">Assistant</category>
       
-      <category domain="http://example.com/tags/Vibe-Coding/">Vibe Coding</category>
+      <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
-      <category domain="http://example.com/tags/MCP/">MCP</category>
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
-      <category domain="http://example.com/tags/Claude/">Claude</category>
+      <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
       
       
-      <comments>http://example.com/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>主流 AI 订阅方案调研笔记</title>
-      <link>http://example.com/2026/03/13/20260314.AI%20Services/</link>
-      <guid>http://example.com/2026/03/13/20260314.AI%20Services/</guid>
+      <link>https://youdrew.github.io/2026/03/13/20260314.AI%20Services/</link>
+      <guid>https://youdrew.github.io/2026/03/13/20260314.AI%20Services/</guid>
       <pubDate>Fri, 13 Mar 2026 19:10:00 GMT</pubDate>
       
         
@@ -266,29 +266,29 @@
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/LLM/">LLM</category>
+      <category domain="https://youdrew.github.io/tags/LLM/">LLM</category>
       
-      <category domain="http://example.com/tags/API/">API</category>
+      <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
       
-      <category domain="http://example.com/tags/Subscription/">Subscription</category>
+      <category domain="https://youdrew.github.io/tags/API/">API</category>
       
-      <category domain="http://example.com/tags/OpenAI/">OpenAI</category>
+      <category domain="https://youdrew.github.io/tags/Subscription/">Subscription</category>
       
-      <category domain="http://example.com/tags/Google/">Google</category>
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
-      <category domain="http://example.com/tags/Claude/">Claude</category>
+      <category domain="https://youdrew.github.io/tags/Google/">Google</category>
       
       
-      <comments>http://example.com/2026/03/13/20260314.AI%20Services/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/03/13/20260314.AI%20Services/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>SVN多分支与Tags管理笔记</title>
-      <link>http://example.com/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/</link>
-      <guid>http://example.com/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/</guid>
+      <link>https://youdrew.github.io/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/</link>
+      <guid>https://youdrew.github.io/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/</guid>
       <pubDate>Mon, 09 Mar 2026 04:00:00 GMT</pubDate>
       
         
@@ -303,23 +303,49 @@
       
       
       
-      <category domain="http://example.com/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</category>
+      <category domain="https://youdrew.github.io/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</category>
       
-      <category domain="http://example.com/tags/SVN/">SVN</category>
+      <category domain="https://youdrew.github.io/tags/SVN/">SVN</category>
       
-      <category domain="http://example.com/tags/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</category>
+      <category domain="https://youdrew.github.io/tags/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</category>
       
-      <category domain="http://example.com/tags/Tags/">Tags</category>
+      <category domain="https://youdrew.github.io/tags/Tags/">Tags</category>
       
       
-      <comments>http://example.com/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Claude Skills 配置学习笔记</title>
+      <link>https://youdrew.github.io/2026/03/07/20260308.SkillsBuilderNotes/</link>
+      <guid>https://youdrew.github.io/2026/03/07/20260308.SkillsBuilderNotes/</guid>
+      <pubDate>Sat, 07 Mar 2026 16:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;Claude-Skills配置学习笔记&quot;&gt;&lt;a href=&quot;#Claude-Skills配置学习笔记&quot; class=&quot;headerlink&quot; title=&quot;Claude Skills配置学习笔记&quot;&gt;&lt;/a&gt;Claude Skills配置学习笔记&lt;/h1&gt;&lt;h2 i</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="Claude-Skills配置学习笔记"><a href="#Claude-Skills配置学习笔记" class="headerlink" title="Claude Skills配置学习笔记"></a>Claude Skills配置学习笔记</h1><h2 id="什么是？"><a href="#什么是？" class="headerlink" title="什么是？"></a>什么是？</h2><ul><li>Agent Skills are a lightweight, open format for <strong>extending Al agent capabilities</strong>.</li><li>A skill is <strong>a folder of organized files</strong> consisting of instructions, scripts, assets and resources that agents can discover to perform a specific task accurately.它的本质是一堆提示词和一些脚本文件，Claude会根据提示词的指令来调用这些脚本文件来完成任务。</li></ul><h2 id="什么时候用建立一个skills"><a href="#什么时候用建立一个skills" class="headerlink" title="什么时候用建立一个skills"></a>什么时候用建立一个skills</h2><ul><li>如果在一个使用场景中，<strong>需要跨会话来实现</strong>，比如在一个对话中，用户说了一个指令，系统需要在后续的对话中持续地执行这个指令，那么就可以考虑建立一个skills来实现。</li></ul><h2 id="Skill的设计思想"><a href="#Skill的设计思想" class="headerlink" title="Skill的设计思想"></a>Skill的设计思想</h2><ul><li><strong>模块化</strong>：将功能拆分成独立的模块，每个模块负责一个特定的任务，便于维护和复用。</li><li><strong>渐进披露</strong>：Progressive disclosure，指的是在用户需要的时候才展示相关信息或功能，避免信息过载。</li><li><strong>需要时加载</strong>： On-demand loading，指的是在用户需要使用某个功能时才加载相关的资源或代码，提升性能和响应速度。</li></ul><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/2026-03-29%2022.02.08.png"></p><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-03-29%2022.34.39.png"></p><ul><li>MCP主要用来获取数据。</li><li>Tools（像一些sh、py脚本）主要用来处理数据或执行特定任务。</li><li>Skills则是一个更高层次的概念，它可以包含多个MCP和Tools，来实现一个完整的功能。</li><li>SubAgent，负责处理特定的任务，并将结果汇报给主agent。SubAgent可以调用自己的MCP和Tools来完成任务，但它的输出最终会被主agent使用。</li></ul><h2 id="Skill的文件结构"><a href="#Skill的文件结构" class="headerlink" title="Skill的文件结构"></a>Skill的文件结构</h2><p>Claude Code 的 Skill 本质上是一个 <strong>Markdown 文件</strong>，存放在 <code>~/.claude/skills/</code> 目录下。当用户通过 <code>/skill-name</code> 调用时，Claude 会读取该文件的内容作为指令执行。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.claude/skills/</span><br><span class="line">├── my-skill.md              # 单文件 Skill（最简形式,建议全部小写，不要使用Claude的关键字）</span><br><span class="line">├── my-skill/                 # 目录形式 Skill（支持附带脚本）</span><br><span class="line">    └── SKILL.md              # 必须存在，Skill 的入口文件</span><br><span class="line">    └── Reference/            # 可选的脚本目录，存放被 Skill 调用的脚本文件</span><br><span class="line">        └── helper.sh         # 示例脚本文件  </span><br></pre></td></tr></table></figure><ul><li>它不仅可以包含md文件，还可以包含sh、py、Icon、Images等其他资产文件</li></ul><h3 id="SKILL-md-的格式"><a href="#SKILL-md-的格式" class="headerlink" title="SKILL.md 的格式"></a>SKILL.md 的格式</h3><p>每个 Skill 文件由两部分组成：<strong>Front Matter</strong>（元数据，文件头）和 <strong>正文</strong>（指令内容）。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-135139.png" alt="外部参考文件夹"></p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">name: knowledge-importer</span><br><span class="line">description: 将PDF知识库文档转换为Hexo Markdown格式，使用AI智能格式化</span><br><span class="line"><span class="section">user-invocable: true          # 是否可通过 /name 手动调用，默认 true</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 预设Skills</span></span><br><span class="line">[<span class="string">Anthropics Skills</span>](<span class="link">https://github.com/anthropics/skills</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">## 工具标题</span></span><br><span class="line"></span><br><span class="line">这里写 Claude 需要执行的详细指令...</span><br><span class="line"></span><br><span class="line"><span class="section">### 使用方法</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure><p><strong>Front Matter（文件头）字段说明：</strong></p><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-133134.png" alt="文件头要求"></p><table><thead><tr><th align="left">字段</th><th align="left">必填</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><code>name</code></td><td align="left">是</td><td align="left">Skill 名称，用于 <code>/name</code> 调用，支持 kebab-case</td></tr><tr><td align="left"><code>description</code></td><td align="left">是</td><td align="left">一句话描述，Claude 用它判断何时自动触发</td></tr><tr><td align="left"><code>user-invocable</code></td><td align="left">否</td><td align="left"><code>true</code>（默认）用户可手动调用；<code>false</code> 仅由系统内部引用</td></tr></tbody></table><h3 id="存放位置与作用域"><a href="#存放位置与作用域" class="headerlink" title="存放位置与作用域"></a>存放位置与作用域</h3><table><thead><tr><th align="left">路径</th><th align="left">作用域</th></tr></thead><tbody><tr><td align="left"><code>~/.claude/skills/</code></td><td align="left">全局，所有项目可用</td></tr><tr><td align="left"><code>&lt;project&gt;/.claude/skills/</code></td><td align="left">项目级，仅当前项目可用</td></tr></tbody></table><p>两种位置可以共存，项目级 Skill 会与全局 Skill 合并。<br>Skill 的正文中可以引用这些脚本，Claude 在执行时会通过 Bash 工具调用它们。</p><h3 id="Skill安装相关"><a href="#Skill安装相关" class="headerlink" title="Skill安装相关"></a>Skill安装相关</h3><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-143319.png"></p><p>对于我的Skills来说，我发现我之前安装的一些MCP也在这个Skill里面。</p><h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Use the skill-creator to evaluate how well my skills in @../custom_skills/ have followed the best practices. Use subagents in parallel,each subagent evaluates one.</span><br></pre></td></tr></table></figure><p>直接使用Claude内置的skill-creator来审核某一个Skill是否符合规范。</p><h2 id="其他问题："><a href="#其他问题：" class="headerlink" title="其他问题："></a>其他问题：</h2><h3 id="claudecode的skill和openClaw的Skill有什么区别？"><a href="#claudecode的skill和openClaw的Skill有什么区别？" class="headerlink" title="claudecode的skill和openClaw的Skill有什么区别？"></a>claudecode的skill和openClaw的Skill有什么区别？</h3><table><thead><tr><th>维度</th><th>Claude Code Skills</th><th>OpenClaw Skills</th></tr></thead><tbody><tr><td>本质</td><td>预定义 prompt 模板，<code>/command</code> 触发</td><td>含 <code>SKILL.md</code> 的文件夹，模块化插件</td></tr><tr><td>场景</td><td>软件工程（代码、Git 等）</td><td>通用自动化（浏览器、邮件、Shell 等）</td></tr><tr><td>交互</td><td>终端 <code>/skill-name</code></td><td>自然语言对话管理</td></tr><tr><td>生态</td><td>官方 + 少量插件</td><td>ClawHub 市场 13,000+ 社区技能</td></tr><tr><td>扩展</td><td>插件机制</td><td>安装社区 Skill 或自定义编写 <code>SKILL.md</code></td></tr><tr><td>标准</td><td>Claude Code 自有格式</td><td>基于 Anthropic Agent Skills 开放标准</td></tr></tbody></table><blockquote><p>简言之：Claude Code Skills 是<strong>开发工具的快捷命令</strong>；OpenClaw Skills 是<strong>通用 AI Agent 的插件系统</strong>，覆盖面更广。后者是前者的理念进化。</p></blockquote><h3 id="Claude生态间的Skill传递"><a href="#Claude生态间的Skill传递" class="headerlink" title="Claude生态间的Skill传递"></a>Claude生态间的Skill传递</h3><p>这个讨论来自于B站吴恩达的课程，视频的翻译还不如直接看英文版本，所以可以直接看<a href="https://github.com/datawhalechina/agent-skills-with-anthropic/blob/main/7.Skill%20with%20the%20Claude%20API%EF%BC%88%E5%9C%A8Claude%20API%E4%BD%BF%E7%94%A8skills%EF%BC%89.md">笔记</a>。</p><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-154900.png" alt="20260331-154900"></p><p>这里面提到的4中Claude生态产品，分别对应着：</p><table><thead><tr><th>产品</th><th>是什么</th><th>面向</th><th>特点</th></tr></thead><tbody><tr><td><strong>claude.ai</strong>（网页端）</td><td>浏览器中访问的网页聊天界面</td><td>普通用户、日常使用</td><td>无需安装，注册即可用；支持文件上传、图片分析、联网搜索等；有免费额度和订阅制（Pro）</td></tr><tr><td><strong>Claude Desktop</strong>（桌面应用）</td><td>安装在本地的独立桌面客户端（Windows&#x2F;macOS）</td><td>普通用户、日常使用</td><td>功能类似网页端，但多了本地 MCP（Model Context Protocol）集成——可以连接本地文件系统、数据库、API 等外部工具，实现更丰富的工作流</td></tr><tr><td><strong>Claude API</strong>（API 接口）</td><td>面向开发者的 HTTP&#x2F;SDK 编程接口（api.anthropic.com）</td><td>开发者、企业</td><td>按用量计费（token 计费）；可编程调用，嵌入到自己的产品中；支持 Tool Use（函数调用）、流式输出等；通过 Python SDK（anthropic）或 TypeScript SDK（@anthropic-ai&#x2F;sdk）调用</td></tr><tr><td><strong>Claude Code</strong>（CLI 工具）</td><td>终端命令行工具（claude 命令），专为软件工程设计</td><td>开发者、程序员</td><td>运行在终端中，可以直接读写文件、执行 shell 命令、搜索代码；理解整个项目上下文，能跨文件完成复杂开发任务；支持子 Agent 并行处理、MCP Server 扩展；底层调用的是 Claude API，但封装了开发者友好的工作流</td></tr><tr><td><strong>Agent built with Claude Agent SDK</strong>（自定义 Agent）</td><td>开发者用 Claude Agent SDK 构建的自定义 AI Agent 应用</td><td>开发者构建自己的产品</td><td>Agent SDK 是一个框架，让你构建具有自主能力的 Agent（可以规划、执行多步骤任务、调用工具）；Agent 拥有”思考-行动-观察”循环（agentic loop）；可以自定义工具集、系统提示、安全边界等；最终产物是你自己的应用，Claude 是其中的”大脑”</td></tr></tbody></table><p>其实挺合理的，不让不同环境相互干涉。</p><p>从 Claude AI 的图形界面转到纯 API 编程，确实需要一点适应时间。一旦理解了代码执行工具和 Files API 的协作方式，会发现这种编程方式给了你前所未有的控制力。图形界面适合快速验证想法，而 API 则适合构建可扩展的生产级应用。</p><p>无互联网访问的沙箱环境初看是个限制，但从安全角度看这是明智的设计。如果你需要联网功能，可以在容器外预先下载数据，或者使用其他 API 配合。记住：限制往往能激发更优雅的解决方案。</p><h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ol><li><a href="https://b23.tv/QYCmA6H">吴恩达Skill的课程</a></li><li><a href="https://github.com/datawhalechina/agent-skills-with-anthropic?tab=readme-ov-file">参考笔记</a></li></ol>]]></content:encoded>
+      
+      
+      
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
+      
+      <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
+      
+      <comments>https://youdrew.github.io/2026/03/07/20260308.SkillsBuilderNotes/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>UnrealMCP - AI控制Unreal Engine的MCP项目汇总</title>
-      <link>http://example.com/2026/03/04/20260304.UnrealMCP/</link>
-      <guid>http://example.com/2026/03/04/20260304.UnrealMCP/</guid>
+      <link>https://youdrew.github.io/2026/03/04/20260304.UnrealMCP/</link>
+      <guid>https://youdrew.github.io/2026/03/04/20260304.UnrealMCP/</guid>
       <pubDate>Wed, 04 Mar 2026 11:05:00 GMT</pubDate>
       
         
@@ -333,23 +359,23 @@
       
       
       
-      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      <category domain="https://youdrew.github.io/tags/Unreal-Engine/">Unreal Engine</category>
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/Vibe-Coding/">Vibe Coding</category>
+      <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
-      <category domain="http://example.com/tags/MCP/">MCP</category>
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       
-      <comments>http://example.com/2026/03/04/20260304.UnrealMCP/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/03/04/20260304.UnrealMCP/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Vibe Coding（结对编程）系统性学习</title>
-      <link>http://example.com/2026/02/19/20260219.VibeCoding/</link>
-      <guid>http://example.com/2026/02/19/20260219.VibeCoding/</guid>
+      <link>https://youdrew.github.io/2026/02/19/20260219.VibeCoding/</link>
+      <guid>https://youdrew.github.io/2026/02/19/20260219.VibeCoding/</guid>
       <pubDate>Thu, 19 Feb 2026 04:34:56 GMT</pubDate>
       
         
@@ -363,19 +389,19 @@
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/Vibe-Coding/">Vibe Coding</category>
+      <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
       
-      <comments>http://example.com/2026/02/19/20260219.VibeCoding/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/02/19/20260219.VibeCoding/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>新灯光系统及美术协同工具LookDevHelper (软件作品)</title>
-      <link>http://example.com/2026/02/18/20260218.%E7%81%AF%E5%85%89%E5%AE%A1%E6%A0%B8%E5%8F%8A%E7%81%AF%E5%85%89%E6%8F%92%E4%BB%B6(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</link>
-      <guid>http://example.com/2026/02/18/20260218.%E7%81%AF%E5%85%89%E5%AE%A1%E6%A0%B8%E5%8F%8A%E7%81%AF%E5%85%89%E6%8F%92%E4%BB%B6(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</guid>
+      <link>https://youdrew.github.io/2026/02/18/20260218.%E7%81%AF%E5%85%89%E5%AE%A1%E6%A0%B8%E5%8F%8A%E7%81%AF%E5%85%89%E6%8F%92%E4%BB%B6(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</link>
+      <guid>https://youdrew.github.io/2026/02/18/20260218.%E7%81%AF%E5%85%89%E5%AE%A1%E6%A0%B8%E5%8F%8A%E7%81%AF%E5%85%89%E6%8F%92%E4%BB%B6(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/</guid>
       <pubDate>Wed, 18 Feb 2026 04:00:00 GMT</pubDate>
       
         
@@ -389,19 +415,19 @@
       
       
       
-      <category domain="http://example.com/tags/Software-Projects/">Software Projects</category>
+      <category domain="https://youdrew.github.io/tags/Software-Projects/">Software Projects</category>
       
-      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      <category domain="https://youdrew.github.io/tags/Unreal-Engine/">Unreal Engine</category>
       
       
-      <comments>http://example.com/2026/02/18/20260218.%E7%81%AF%E5%85%89%E5%AE%A1%E6%A0%B8%E5%8F%8A%E7%81%AF%E5%85%89%E6%8F%92%E4%BB%B6(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/02/18/20260218.%E7%81%AF%E5%85%89%E5%AE%A1%E6%A0%B8%E5%8F%8A%E7%81%AF%E5%85%89%E6%8F%92%E4%BB%B6(%E8%BD%AF%E4%BB%B6%E4%BD%9C%E5%93%81)/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>OpenClaw 使用笔记</title>
-      <link>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/</link>
-      <guid>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/</guid>
+      <link>https://youdrew.github.io/2026/02/16/20260216.OPENCLAW_NOTES/</link>
+      <guid>https://youdrew.github.io/2026/02/16/20260216.OPENCLAW_NOTES/</guid>
       <pubDate>Mon, 16 Feb 2026 03:48:00 GMT</pubDate>
       
         
@@ -415,21 +441,21 @@
       
       
       
-      <category domain="http://example.com/tags/AI/">AI</category>
+      <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="http://example.com/tags/OpenClaw/">OpenClaw</category>
+      <category domain="https://youdrew.github.io/tags/OpenClaw/">OpenClaw</category>
       
-      <category domain="http://example.com/tags/Assistant/">Assistant</category>
+      <category domain="https://youdrew.github.io/tags/Assistant/">Assistant</category>
       
       
-      <comments>http://example.com/2026/02/16/20260216.OPENCLAW_NOTES/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/02/16/20260216.OPENCLAW_NOTES/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Captury无标记动作捕捉使用及插件接入问题</title>
-      <link>http://example.com/2025/12/01/20251201.Capturymarkerless/</link>
-      <guid>http://example.com/2025/12/01/20251201.Capturymarkerless/</guid>
+      <link>https://youdrew.github.io/2025/12/01/20251201.Capturymarkerless/</link>
+      <guid>https://youdrew.github.io/2025/12/01/20251201.Capturymarkerless/</guid>
       <pubDate>Mon, 01 Dec 2025 04:34:56 GMT</pubDate>
       
         
@@ -443,19 +469,19 @@
       
       
       
-      <category domain="http://example.com/tags/Captury/">Captury</category>
+      <category domain="https://youdrew.github.io/tags/Captury/">Captury</category>
       
-      <category domain="http://example.com/tags/%E5%8A%A8%E4%BD%9C%E6%8D%95%E6%8D%89/">动作捕捉</category>
+      <category domain="https://youdrew.github.io/tags/%E5%8A%A8%E4%BD%9C%E6%8D%95%E6%8D%89/">动作捕捉</category>
       
       
-      <comments>http://example.com/2025/12/01/20251201.Capturymarkerless/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2025/12/01/20251201.Capturymarkerless/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>虚幻5远程控制（RemoteControl）笔记</title>
-      <link>http://example.com/2025/11/21/20251121.Unreal%20RemoteControl%20Note/</link>
-      <guid>http://example.com/2025/11/21/20251121.Unreal%20RemoteControl%20Note/</guid>
+      <link>https://youdrew.github.io/2025/11/21/20251121.Unreal%20RemoteControl%20Note/</link>
+      <guid>https://youdrew.github.io/2025/11/21/20251121.Unreal%20RemoteControl%20Note/</guid>
       <pubDate>Fri, 21 Nov 2025 03:21:56 GMT</pubDate>
       
         
@@ -469,19 +495,19 @@
       
       
       
-      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      <category domain="https://youdrew.github.io/tags/Unreal-Engine/">Unreal Engine</category>
       
-      <category domain="http://example.com/tags/Game-Development/">Game Development</category>
+      <category domain="https://youdrew.github.io/tags/Game-Development/">Game Development</category>
       
       
-      <comments>http://example.com/2025/11/21/20251121.Unreal%20RemoteControl%20Note/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2025/11/21/20251121.Unreal%20RemoteControl%20Note/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>GameFeature功能使用备忘</title>
-      <link>http://example.com/2025/10/18/20251018.GameFeatures/</link>
-      <guid>http://example.com/2025/10/18/20251018.GameFeatures/</guid>
+      <link>https://youdrew.github.io/2025/10/18/20251018.GameFeatures/</link>
+      <guid>https://youdrew.github.io/2025/10/18/20251018.GameFeatures/</guid>
       <pubDate>Sat, 18 Oct 2025 03:48:00 GMT</pubDate>
       
         
@@ -495,19 +521,19 @@
       
       
       
-      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      <category domain="https://youdrew.github.io/tags/Unreal-Engine/">Unreal Engine</category>
       
-      <category domain="http://example.com/tags/GameFeature/">GameFeature</category>
+      <category domain="https://youdrew.github.io/tags/GameFeature/">GameFeature</category>
       
       
-      <comments>http://example.com/2025/10/18/20251018.GameFeatures/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2025/10/18/20251018.GameFeatures/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>UE5 GAS 学习笔记</title>
-      <link>http://example.com/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/</link>
-      <guid>http://example.com/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/</guid>
+      <link>https://youdrew.github.io/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/</link>
+      <guid>https://youdrew.github.io/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/</guid>
       <pubDate>Sun, 21 Sep 2025 04:34:56 GMT</pubDate>
       
         
@@ -521,31 +547,31 @@
       
       
       
-      <category domain="http://example.com/tags/Unreal-Engine/">Unreal Engine</category>
+      <category domain="https://youdrew.github.io/tags/Unreal-Engine/">Unreal Engine</category>
       
-      <category domain="http://example.com/tags/C/">C++</category>
+      <category domain="https://youdrew.github.io/tags/C/">C++</category>
       
-      <category domain="http://example.com/tags/Game-Development/">Game Development</category>
+      <category domain="https://youdrew.github.io/tags/Game-Development/">Game Development</category>
       
-      <category domain="http://example.com/tags/Gameplay-Ability-System/">Gameplay Ability System</category>
+      <category domain="https://youdrew.github.io/tags/Gameplay-Ability-System/">Gameplay Ability System</category>
       
-      <category domain="http://example.com/tags/GAS/">GAS</category>
+      <category domain="https://youdrew.github.io/tags/GAS/">GAS</category>
       
-      <category domain="http://example.com/tags/Network-Programming/">Network Programming</category>
+      <category domain="https://youdrew.github.io/tags/Network-Programming/">Network Programming</category>
       
-      <category domain="http://example.com/tags/RPG/">RPG</category>
+      <category domain="https://youdrew.github.io/tags/RPG/">RPG</category>
       
-      <category domain="http://example.com/tags/Game-Framework/">Game Framework</category>
+      <category domain="https://youdrew.github.io/tags/Game-Framework/">Game Framework</category>
       
       
-      <comments>http://example.com/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Aximmetry及低成本XR方案折腾笔记</title>
-      <link>http://example.com/2025/09/13/20250913.Aximmetry/</link>
-      <guid>http://example.com/2025/09/13/20250913.Aximmetry/</guid>
+      <link>https://youdrew.github.io/2025/09/13/20250913.Aximmetry/</link>
+      <guid>https://youdrew.github.io/2025/09/13/20250913.Aximmetry/</guid>
       <pubDate>Sat, 13 Sep 2025 04:34:56 GMT</pubDate>
       
         
@@ -559,42 +585,12 @@
       
       
       
-      <category domain="http://example.com/tags/XR/">XR</category>
+      <category domain="https://youdrew.github.io/tags/XR/">XR</category>
       
-      <category domain="http://example.com/tags/Aximmetry/">Aximmetry</category>
-      
-      
-      <comments>http://example.com/2025/09/13/20250913.Aximmetry/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>RAG（检索增强生成）学习笔记</title>
-      <link>http://example.com/2025/08/25/20250825.RAG%20Learning%20Note/</link>
-      <guid>http://example.com/2025/08/25/20250825.RAG%20Learning%20Note/</guid>
-      <pubDate>Mon, 25 Aug 2025 02:00:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;RAG（Retrieval-Augmented-Generation）学习笔记&quot;&gt;&lt;a href=&quot;#RAG（Retrieval-Augmented-Generation）学习笔记&quot; class=&quot;headerlink&quot; title=&quot;RAG（Retrieval-</description>
-        
+      <category domain="https://youdrew.github.io/tags/Aximmetry/">Aximmetry</category>
       
       
-      
-      <content:encoded><![CDATA[<h1 id="RAG（Retrieval-Augmented-Generation）学习笔记"><a href="#RAG（Retrieval-Augmented-Generation）学习笔记" class="headerlink" title="RAG（Retrieval-Augmented Generation）学习笔记"></a>RAG（Retrieval-Augmented Generation）学习笔记</h1><h2 id="一、什么是-RAG"><a href="#一、什么是-RAG" class="headerlink" title="一、什么是 RAG"></a>一、什么是 RAG</h2><p><strong>RAG（检索增强生成）</strong> 是一种将<strong>信息检索</strong>与<strong>大语言模型生成</strong>相结合的技术范式。核心思路很简单：在让 LLM 回答问题之前，先从外部知识库中检索相关内容，把检索到的内容作为上下文喂给模型，再让模型基于这些真实数据生成回答。</p><h3 id="1-1-为什么需要-RAG"><a href="#1-1-为什么需要-RAG" class="headerlink" title="1.1 为什么需要 RAG"></a>1.1 为什么需要 RAG</h3><p>LLM 存在几个固有缺陷：</p><table><thead><tr><th>问题</th><th>说明</th></tr></thead><tbody><tr><td>知识截止</td><td>训练数据有时效性，无法回答最新信息</td></tr><tr><td>幻觉</td><td>模型会”编造”看似合理但错误的内容</td></tr><tr><td>私有数据缺失</td><td>企业内部文档、专有知识模型完全不知道</td></tr><tr><td>可溯源性差</td><td>无法告诉用户回答来自哪里</td></tr></tbody></table><p>RAG 通过外部检索来弥补这些问题，让 LLM 的回答<strong>有据可查、实时更新</strong>。</p><h3 id="1-2-RAG-vs-Fine-tuning-vs-Prompt-Engineering"><a href="#1-2-RAG-vs-Fine-tuning-vs-Prompt-Engineering" class="headerlink" title="1.2 RAG vs Fine-tuning vs Prompt Engineering"></a>1.2 RAG vs Fine-tuning vs Prompt Engineering</h3><table><thead><tr><th>维度</th><th>RAG</th><th>Fine-tuning</th><th>Prompt Engineering</th></tr></thead><tbody><tr><td>知识更新</td><td>实时更新知识库即可</td><td>需要重新训练</td><td>依赖上下文窗口</td></tr><tr><td>成本</td><td>中等（检索系统+推理）</td><td>高（训练算力）</td><td>低</td></tr><tr><td>适用场景</td><td>知识密集型问答</td><td>风格&#x2F;格式适配</td><td>简单任务引导</td></tr><tr><td>可解释性</td><td>高（可追溯来源）</td><td>低</td><td>中</td></tr><tr><td>数据隐私</td><td>私有数据不出库</td><td>数据进入模型权重</td><td>取决于实现</td></tr></tbody></table><p>实际项目中，这三者经常组合使用。</p><h2 id="二、RAG-基本架构"><a href="#二、RAG-基本架构" class="headerlink" title="二、RAG 基本架构"></a>二、RAG 基本架构</h2><h3 id="2-1-标准流程"><a href="#2-1-标准流程" class="headerlink" title="2.1 标准流程"></a>2.1 标准流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">用户提问</span><br><span class="line">  ↓</span><br><span class="line">Query 处理（改写、扩展）</span><br><span class="line">  ↓</span><br><span class="line">检索（Retrieval）—— 从知识库中找到相关文档片段</span><br><span class="line">  ↓</span><br><span class="line">上下文组装 —— 将检索结果拼入 Prompt</span><br><span class="line">  ↓</span><br><span class="line">LLM 生成回答</span><br><span class="line">  ↓</span><br><span class="line">输出（附带来源引用）</span><br></pre></td></tr></table></figure><h3 id="2-2-两大阶段"><a href="#2-2-两大阶段" class="headerlink" title="2.2 两大阶段"></a>2.2 两大阶段</h3><h4 id="离线阶段（Indexing）"><a href="#离线阶段（Indexing）" class="headerlink" title="离线阶段（Indexing）"></a>离线阶段（Indexing）</h4><p>把原始数据变成可检索的知识库：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原始文档 → 文档切分（Chunking） → 向量化（Embedding） → 存入向量数据库</span><br></pre></td></tr></table></figure><h4 id="在线阶段（Querying）"><a href="#在线阶段（Querying）" class="headerlink" title="在线阶段（Querying）"></a>在线阶段（Querying）</h4><p>用户提问时的实时流程：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户问题 → 问题向量化 → 向量相似度检索 → 上下文拼装 → LLM 生成</span><br></pre></td></tr></table></figure><h2 id="三、核心组件详解"><a href="#三、核心组件详解" class="headerlink" title="三、核心组件详解"></a>三、核心组件详解</h2><h3 id="3-1-文档切分（Chunking）"><a href="#3-1-文档切分（Chunking）" class="headerlink" title="3.1 文档切分（Chunking）"></a>3.1 文档切分（Chunking）</h3><p>切分策略直接影响检索质量。</p><table><thead><tr><th>策略</th><th>说明</th><th>适用场景</th></tr></thead><tbody><tr><td>固定长度切分</td><td>按字符&#x2F;token数切割，带重叠</td><td>通用场景</td></tr><tr><td>按段落&#x2F;章节切分</td><td>利用文档结构（标题、换行）</td><td>结构化文档</td></tr><tr><td>语义切分</td><td>根据语义相似度动态决定切分点</td><td>长文本、混合内容</td></tr><tr><td>递归切分</td><td>按分隔符层级递归切分</td><td>通用，LangChain 默认策略</td></tr></tbody></table><p>关键参数：</p><ul><li><strong>chunk_size</strong>：每个片段的大小，通常 256～1024 tokens</li><li><strong>chunk_overlap</strong>：相邻片段重叠区域，通常为 chunk_size 的 10%～20%</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LangChain 递归字符切分示例</span></span><br><span class="line"><span class="keyword">from</span> langchain.text_splitter <span class="keyword">import</span> RecursiveCharacterTextSplitter</span><br><span class="line"></span><br><span class="line">splitter = RecursiveCharacterTextSplitter(</span><br><span class="line">    chunk_size=<span class="number">500</span>,</span><br><span class="line">    chunk_overlap=<span class="number">50</span>,</span><br><span class="line">    separators=[<span class="string">&quot;\n\n&quot;</span>, <span class="string">&quot;\n&quot;</span>, <span class="string">&quot;。&quot;</span>, <span class="string">&quot;.&quot;</span>, <span class="string">&quot; &quot;</span>, <span class="string">&quot;&quot;</span>]</span><br><span class="line">)</span><br><span class="line">chunks = splitter.split_text(document)</span><br></pre></td></tr></table></figure><p><strong>经验法则</strong>：chunk 太大→检索不精准，带入太多噪声；chunk 太小→丢失上下文，回答不完整。需要根据实际数据调优。</p><h3 id="3-2-向量化（Embedding）"><a href="#3-2-向量化（Embedding）" class="headerlink" title="3.2 向量化（Embedding）"></a>3.2 向量化（Embedding）</h3><p>将文本转为固定维度的稠密向量，用于相似度计算。</p><p>常见 Embedding 模型：</p><table><thead><tr><th>模型</th><th>提供方</th><th>维度</th><th>特点</th></tr></thead><tbody><tr><td>text-embedding-3-small&#x2F;large</td><td>OpenAI</td><td>1536&#x2F;3072</td><td>通用性强</td></tr><tr><td>bge-large-zh</td><td>BAAI</td><td>1024</td><td>中文表现优秀</td></tr><tr><td>GTE (General Text Embedding)</td><td>Alibaba</td><td>768&#x2F;1024</td><td>多语言</td></tr><tr><td>E5-mistral-7b</td><td>Microsoft</td><td>4096</td><td>高质量，推理成本高</td></tr><tr><td>Cohere Embed v3</td><td>Cohere</td><td>1024</td><td>多语言，支持压缩</td></tr></tbody></table><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OpenAI Embedding 示例</span></span><br><span class="line"><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI</span><br><span class="line"></span><br><span class="line">client = OpenAI()</span><br><span class="line">response = client.embeddings.create(</span><br><span class="line">    model=<span class="string">&quot;text-embedding-3-small&quot;</span>,</span><br><span class="line">    <span class="built_in">input</span>=<span class="string">&quot;RAG 是检索增强生成技术&quot;</span></span><br><span class="line">)</span><br><span class="line">embedding = response.data[<span class="number">0</span>].embedding  <span class="comment"># 1536维向量</span></span><br></pre></td></tr></table></figure><h3 id="3-3-向量数据库"><a href="#3-3-向量数据库" class="headerlink" title="3.3 向量数据库"></a>3.3 向量数据库</h3><p>存储和检索向量的专用数据库。</p><table><thead><tr><th>数据库</th><th>类型</th><th>特点</th></tr></thead><tbody><tr><td>Chroma</td><td>嵌入式</td><td>轻量，适合原型开发</td></tr><tr><td>FAISS</td><td>库（Meta）</td><td>高性能，纯内存，适合中小规模</td></tr><tr><td>Milvus</td><td>分布式</td><td>生产级，支持亿级向量</td></tr><tr><td>Pinecone</td><td>云服务</td><td>全托管，零运维</td></tr><tr><td>Weaviate</td><td>独立服务</td><td>支持混合搜索（向量+关键词）</td></tr><tr><td>Qdrant</td><td>独立服务</td><td>Rust 实现，高性能</td></tr><tr><td>pgvector</td><td>PG 扩展</td><td>复用 PostgreSQL 生态</td></tr></tbody></table><p>相似度度量方法：</p><ul><li><strong>余弦相似度（Cosine Similarity）</strong>：最常用，衡量方向相似性</li><li><strong>欧氏距离（L2）</strong>：衡量绝对距离</li><li><strong>内积（Inner Product）</strong>：与余弦类似，向量需归一化</li></ul><h3 id="3-4-检索策略"><a href="#3-4-检索策略" class="headerlink" title="3.4 检索策略"></a>3.4 检索策略</h3><h4 id="基础检索"><a href="#基础检索" class="headerlink" title="基础检索"></a>基础检索</h4><p><strong>向量检索（Dense Retrieval）</strong>：将 query 向量化，在向量数据库中找最近邻。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪代码：基础向量检索</span></span><br><span class="line">query_embedding = embed(user_query)</span><br><span class="line">results = vector_db.search(query_embedding, top_k=<span class="number">5</span>)</span><br></pre></td></tr></table></figure><h4 id="进阶检索"><a href="#进阶检索" class="headerlink" title="进阶检索"></a>进阶检索</h4><p><strong>混合检索（Hybrid Search）</strong>：结合向量检索和关键词检索（BM25），取长补短。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query ──→ 向量检索 → 结果A</span><br><span class="line">     └──→ BM25检索 → 结果B</span><br><span class="line">                  → 融合排序（RRF/加权） → 最终结果</span><br></pre></td></tr></table></figure><p><strong>多路召回 + 重排序（Retrieve &amp; Re-rank）</strong>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Query → 多种检索策略 → 粗排候选集 → Cross-Encoder重排序 → 精排结果</span><br></pre></td></tr></table></figure><p>重排序模型（如 bge-reranker、Cohere Rerank）对 query-document 对进行深度相关性打分，显著提升精度。</p><h3 id="3-5-上下文组装与生成"><a href="#3-5-上下文组装与生成" class="headerlink" title="3.5 上下文组装与生成"></a>3.5 上下文组装与生成</h3><p>将检索到的内容组装进 Prompt，交给 LLM 生成。</p><p>常见 Prompt 模板：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">你是一个知识问答助手。请根据以下参考资料回答用户的问题。</span><br><span class="line">如果参考资料中没有相关信息，请如实说明，不要编造。</span><br><span class="line"></span><br><span class="line">## 参考资料</span><br><span class="line">&#123;retrieved_contexts&#125;</span><br><span class="line"></span><br><span class="line">## 用户问题</span><br><span class="line">&#123;user_query&#125;</span><br><span class="line"></span><br><span class="line">## 回答</span><br></pre></td></tr></table></figure><p>关键点：</p><ul><li>明确告知模型”基于参考资料回答”，减少幻觉</li><li>添加”不知道就说不知道”的指令</li><li>控制注入上下文的总量，避免超过模型窗口限制</li></ul><h2 id="四、RAG-进阶技术"><a href="#四、RAG-进阶技术" class="headerlink" title="四、RAG 进阶技术"></a>四、RAG 进阶技术</h2><h3 id="4-1-Query-改写与扩展"><a href="#4-1-Query-改写与扩展" class="headerlink" title="4.1 Query 改写与扩展"></a>4.1 Query 改写与扩展</h3><p>用户原始提问往往不是最优的检索 query。</p><table><thead><tr><th>技术</th><th>说明</th></tr></thead><tbody><tr><td>Query Rewriting</td><td>让 LLM 重写问题，使其更适合检索</td></tr><tr><td>HyDE（Hypothetical Document Embedding）</td><td>让 LLM 先生成假设性回答，用回答的向量去检索</td></tr><tr><td>Multi-Query</td><td>将一个问题拆解为多个子问题，分别检索后合并</td></tr><tr><td>Step-back Prompting</td><td>让模型先提出一个更宏观的问题，获取背景知识</td></tr></tbody></table><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HyDE 示例</span></span><br><span class="line">hypothetical_answer = llm.generate(<span class="string">f&quot;请回答: <span class="subst">&#123;user_query&#125;</span>&quot;</span>)</span><br><span class="line"><span class="comment"># 用假设回答的 embedding 去检索，而不是用原始问题</span></span><br><span class="line">results = vector_db.search(embed(hypothetical_answer), top_k=<span class="number">5</span>)</span><br></pre></td></tr></table></figure><h3 id="4-2-图谱-RAG（GraphRAG）"><a href="#4-2-图谱-RAG（GraphRAG）" class="headerlink" title="4.2 图谱 RAG（GraphRAG）"></a>4.2 图谱 RAG（GraphRAG）</h3><p>微软提出的 GraphRAG 方法，用知识图谱增强检索。</p><p>流程：</p><ol><li>从文档中抽取实体和关系，构建知识图谱</li><li>对图谱进行社区检测，生成不同层级的摘要</li><li>查询时同时利用向量检索和图谱结构进行推理</li></ol><p>优势：擅长回答需要跨文档推理的全局性问题（如”总结所有文档的主要观点”）。</p><h3 id="4-3-自适应-RAG（Adaptive-Self-RAG）"><a href="#4-3-自适应-RAG（Adaptive-Self-RAG）" class="headerlink" title="4.3 自适应 RAG（Adaptive &#x2F; Self-RAG）"></a>4.3 自适应 RAG（Adaptive &#x2F; Self-RAG）</h3><p>让模型自主判断是否需要检索：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">用户问题 → LLM 判断是否需要检索</span><br><span class="line">              ├── 不需要 → 直接回答</span><br><span class="line">              └── 需要 → 检索 → 评估检索结果相关性</span><br><span class="line">                            ├── 相关 → 生成回答</span><br><span class="line">                            └── 不相关 → 换策略重新检索</span><br></pre></td></tr></table></figure><p>Self-RAG 论文引入了<strong>反思令牌（Reflection Tokens）</strong>，让模型在生成过程中自评检索质量和回答可靠性。</p><h3 id="4-4-嵌套-多跳-RAG（Multi-hop-RAG）"><a href="#4-4-嵌套-多跳-RAG（Multi-hop-RAG）" class="headerlink" title="4.4 嵌套&#x2F;多跳 RAG（Multi-hop RAG）"></a>4.4 嵌套&#x2F;多跳 RAG（Multi-hop RAG）</h3><p>处理需要多步推理的复杂问题：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">问题：&quot;A公司的创始人还在B公司任职吗？&quot;</span><br><span class="line">  → 第1跳：检索 A公司创始人是谁 → 得到&quot;张三&quot;</span><br><span class="line">  → 第2跳：检索 张三是否在B公司任职 → 得到答案</span><br></pre></td></tr></table></figure><h3 id="4-5-Agentic-RAG"><a href="#4-5-Agentic-RAG" class="headerlink" title="4.5 Agentic RAG"></a>4.5 Agentic RAG</h3><p>将 RAG 作为 Agent 的工具之一，由 Agent 自主规划检索策略。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">用户问题 → Agent 思考</span><br><span class="line">           → 决定调用哪个检索工具（向量库/搜索引擎/数据库）</span><br><span class="line">           → 分析结果，决定是否需要再次检索</span><br><span class="line">           → 综合所有信息生成最终回答</span><br></pre></td></tr></table></figure><p>工具定义示例：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">tools = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;search_internal_docs&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;搜索公司内部文档库&quot;</span>,</span><br><span class="line">        <span class="string">&quot;parameters&quot;</span>: &#123;<span class="string">&quot;query&quot;</span>: <span class="string">&quot;str&quot;</span>, <span class="string">&quot;top_k&quot;</span>: <span class="string">&quot;int&quot;</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;search_web&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;搜索互联网获取最新信息&quot;</span>,</span><br><span class="line">        <span class="string">&quot;parameters&quot;</span>: &#123;<span class="string">&quot;query&quot;</span>: <span class="string">&quot;str&quot;</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;query_database&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;查询结构化数据库&quot;</span>,</span><br><span class="line">        <span class="string">&quot;parameters&quot;</span>: &#123;<span class="string">&quot;sql&quot;</span>: <span class="string">&quot;str&quot;</span>&#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h2 id="五、评估体系"><a href="#五、评估体系" class="headerlink" title="五、评估体系"></a>五、评估体系</h2><h3 id="5-1-检索质量评估"><a href="#5-1-检索质量评估" class="headerlink" title="5.1 检索质量评估"></a>5.1 检索质量评估</h3><table><thead><tr><th>指标</th><th>说明</th></tr></thead><tbody><tr><td>Precision@K</td><td>前 K 个结果中相关的比例</td></tr><tr><td>Recall@K</td><td>相关文档被召回的比例</td></tr><tr><td>MRR</td><td>第一个相关结果的排名倒数</td></tr><tr><td>nDCG</td><td>考虑排序位置的增益指标</td></tr></tbody></table><h3 id="5-2-生成质量评估"><a href="#5-2-生成质量评估" class="headerlink" title="5.2 生成质量评估"></a>5.2 生成质量评估</h3><p><strong>RAGAS 框架</strong>是 RAG 评估的主流方案：</p><table><thead><tr><th>指标</th><th>评估维度</th><th>说明</th></tr></thead><tbody><tr><td>Faithfulness</td><td>忠实度</td><td>回答是否与检索内容一致（不幻觉）</td></tr><tr><td>Answer Relevance</td><td>答案相关性</td><td>回答是否切题</td></tr><tr><td>Context Precision</td><td>上下文精确率</td><td>检索内容中有用信息的比例</td></tr><tr><td>Context Recall</td><td>上下文召回率</td><td>回答所需信息是否都被检索到了</td></tr></tbody></table><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RAGAS 评估示例</span></span><br><span class="line"><span class="keyword">from</span> ragas <span class="keyword">import</span> evaluate</span><br><span class="line"><span class="keyword">from</span> ragas.metrics <span class="keyword">import</span> faithfulness, answer_relevancy, context_precision</span><br><span class="line"></span><br><span class="line">results = evaluate(</span><br><span class="line">    dataset=eval_dataset,</span><br><span class="line">    metrics=[faithfulness, answer_relevancy, context_precision]</span><br><span class="line">)</span><br></pre></td></tr></table></figure><h3 id="5-3-端到端评估"><a href="#5-3-端到端评估" class="headerlink" title="5.3 端到端评估"></a>5.3 端到端评估</h3><p>最终的评估还是要回归业务场景：</p><ul><li>人工评估：抽样打分，准确率、完整性、流畅度</li><li>LLM-as-Judge：用强模型评估弱模型的输出</li><li>A&#x2F;B 测试：线上对比不同 RAG 方案的用户满意度</li></ul><h2 id="六、工程实践要点"><a href="#六、工程实践要点" class="headerlink" title="六、工程实践要点"></a>六、工程实践要点</h2><h3 id="6-1-数据处理"><a href="#6-1-数据处理" class="headerlink" title="6.1 数据处理"></a>6.1 数据处理</h3><ul><li><strong>数据清洗</strong>：去除乱码、重复内容、格式噪声</li><li><strong>元数据标注</strong>：为每个 chunk 添加来源、时间、分类等元数据，支持过滤检索</li><li><strong>多格式解析</strong>：PDF、Word、HTML、Markdown、表格、图片（OCR）各有解析方案</li></ul><h3 id="6-2-性能优化"><a href="#6-2-性能优化" class="headerlink" title="6.2 性能优化"></a>6.2 性能优化</h3><table><thead><tr><th>优化方向</th><th>方法</th></tr></thead><tbody><tr><td>检索延迟</td><td>向量索引优化（HNSW、IVF）、缓存热门 query</td></tr><tr><td>召回率</td><td>多路召回、query 扩展、调大 top_k</td></tr><tr><td>精度</td><td>重排序、增加元数据过滤</td></tr><tr><td>上下文利用</td><td>压缩无关内容、只注入关键段落</td></tr><tr><td>成本</td><td>Embedding 缓存、小模型粗排 + 大模型精排</td></tr></tbody></table><h3 id="6-3-常见问题与对策"><a href="#6-3-常见问题与对策" class="headerlink" title="6.3 常见问题与对策"></a>6.3 常见问题与对策</h3><table><thead><tr><th>问题</th><th>原因</th><th>对策</th></tr></thead><tbody><tr><td>检索不到相关内容</td><td>切分太碎 &#x2F; embedding 不准</td><td>调整 chunk 策略、换 embedding 模型</td></tr><tr><td>检索到了但回答不对</td><td>上下文太多噪声</td><td>减少注入量、加重排序</td></tr><tr><td>回答幻觉</td><td>模型无视上下文自行编造</td><td>强化 Prompt 指令、降低 temperature</td></tr><tr><td>回答不完整</td><td>信息分散在多个 chunk</td><td>多跳检索、增大 chunk_size</td></tr><tr><td>延迟高</td><td>检索 + LLM 双重耗时</td><td>异步检索、流式输出、缓存</td></tr></tbody></table><h3 id="6-4-技术选型参考"><a href="#6-4-技术选型参考" class="headerlink" title="6.4 技术选型参考"></a>6.4 技术选型参考</h3><p><strong>原型验证（快速起步）</strong>：</p><ul><li>Embedding: OpenAI text-embedding-3-small</li><li>向量库: Chroma &#x2F; FAISS</li><li>框架: LangChain &#x2F; LlamaIndex</li></ul><p><strong>生产部署</strong>：</p><ul><li>Embedding: BGE &#x2F; GTE（可自部署，数据不出域）</li><li>向量库: Milvus &#x2F; Weaviate &#x2F; pgvector</li><li>框架: LlamaIndex（更灵活）或自建 Pipeline</li><li>重排序: bge-reranker-v2-m3 &#x2F; Cohere Rerank</li></ul><h2 id="七、主流框架对比"><a href="#七、主流框架对比" class="headerlink" title="七、主流框架对比"></a>七、主流框架对比</h2><table><thead><tr><th>框架</th><th>语言</th><th>特点</th><th>适用场景</th></tr></thead><tbody><tr><td>LangChain</td><td>Python&#x2F;JS</td><td>生态最全，模块丰富，上手快</td><td>快速原型、通用 RAG</td></tr><tr><td>LlamaIndex</td><td>Python</td><td>专注于 RAG，数据连接器丰富</td><td>数据密集型应用</td></tr><tr><td>Haystack</td><td>Python</td><td>生产导向，Pipeline 设计清晰</td><td>企业级搜索问答</td></tr><tr><td>Semantic Kernel</td><td>C#&#x2F;Python&#x2F;Java</td><td>微软出品，与 Azure 生态集成</td><td>.NET 技术栈项目</td></tr><tr><td>DSPy</td><td>Python</td><td>编程式 Prompt 优化，自动调参</td><td>学术研究、Prompt 工程</td></tr></tbody></table><h2 id="八、学习资源"><a href="#八、学习资源" class="headerlink" title="八、学习资源"></a>八、学习资源</h2><h3 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h3><ul><li><a href="https://arxiv.org/abs/2005.11401">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a>（RAG 原始论文，Facebook AI，2020）</li><li><a href="https://arxiv.org/abs/2310.11511">Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection</a></li><li><a href="https://microsoft.github.io/graphrag/">GraphRAG: Unlocking LLM Discovery on Complex Data</a>（Microsoft，2024）</li></ul><h3 id="实践项目"><a href="#实践项目" class="headerlink" title="实践项目"></a>实践项目</h3><ul><li>LangChain RAG 模板：官方提供了多种 RAG 架构的参考实现</li><li>LlamaIndex 官方示例：覆盖从基础到进阶的各类 RAG 模式</li><li>RAGAS：RAG 评估框架，附带完整评估示例</li></ul><hr><blockquote><p>这篇笔记梳理了 RAG 从基础概念到进阶实践的知识体系。RAG 的本质就是”让 LLM 先查资料再回答”，看似简单，但每个环节（切分、向量化、检索、生成、评估）都有大量工程细节。建议从最简单的向量检索 RAG 起步，遇到具体问题再逐步引入进阶技术——不要一上来就搞 GraphRAG + Agent + Multi-hop，过度的复杂度往往是 RAG 项目失败的原因。</p></blockquote>]]></content:encoded>
-      
-      
-      
-      <category domain="http://example.com/tags/AI/">AI</category>
-      
-      <category domain="http://example.com/tags/RAG/">RAG</category>
-      
-      <category domain="http://example.com/tags/LLM/">LLM</category>
-      
-      <category domain="http://example.com/tags/NLP/">NLP</category>
-      
-      
-      <comments>http://example.com/2025/08/25/20250825.RAG%20Learning%20Note/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2025/09/13/20250913.Aximmetry/#disqus_thread</comments>
       
     </item>
     

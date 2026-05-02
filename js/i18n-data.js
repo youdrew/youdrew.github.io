@@ -33,8 +33,7 @@ const i18nData = {
         
         // Other
         'Comments': 'Comments',
-        'Archives': 'Archives',
-        
+
         // Article language switch
         'Switch to Chinese': 'Switch to Chinese',
         'Switch to English': 'Switch to English',
@@ -77,8 +76,7 @@ const i18nData = {
         
         // Other
         'Comments': '留言',
-        'Archives': '归档',
-        
+
         // Article language switch
         'Switch to Chinese': '切换至中文',
         'Switch to English': '切换至英文',

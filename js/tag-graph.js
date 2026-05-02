@@ -347,6 +347,8 @@
   // Dynamically load ECharts
   var script = document.createElement('script');
   script.src = 'https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js';
+  script.integrity = 'sha384-Mx5lkUEQPM1pOJCwFtUICyX45KNojXbkWdYhkKUKsbv391mavbfoAmONbzkgYPzR';
+  script.crossOrigin = 'anonymous';
   script.onload = function () { initChart(); };
   script.onerror = function () {
     loadingEl.textContent = 'Failed to load chart library';

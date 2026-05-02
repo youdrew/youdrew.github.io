@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="Claude Skills配置学习笔记什么是？
+Agent Skills are a lightweight, open format for extending Al agent capabilities.
+A skill is a folder of organized files consis">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Claude Skills 配置学习笔记"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Eugene&#39;s Page"/>
+
+    <!--Article Language-->
+    
+        <meta name="article:lang" content="en"/>
+    
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>Claude Skills 配置学习笔记 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+<link rel="stylesheet" href="/css/table.css">
+
+    
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+    
+<link rel="stylesheet" href="/css/tag-graph.css">
+
+    
+<link rel="stylesheet" href="/css/language-switcher.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body class="layout-post path-2026-03-07-20260308-SkillsBuilderNotes-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            <li>
+                <a href="/" data-i18n-key="Home">Home</a>
+            </li>
+            
+            <li>
+                <a href="/archives" data-i18n-key="Archives">Archives</a>
+            </li>
+            
+            <li>
+                <a href="/about" data-i18n-key="About">About</a>
+            </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/" class="previous" data-title="SVN多分支与Tags管理笔记"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/03/04/20260304.UnrealMCP/" class="next" data-title="UnrealMCP - AI控制U..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Claude Skills 配置学习笔记</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="Claude-Skills配置学习笔记"><a href="#Claude-Skills配置学习笔记" class="headerlink" title="Claude Skills配置学习笔记"></a>Claude Skills配置学习笔记</h1><h2 id="什么是？"><a href="#什么是？" class="headerlink" title="什么是？"></a>什么是？</h2><ul>
+<li>Agent Skills are a lightweight, open format for <strong>extending Al agent capabilities</strong>.</li>
+<li>A skill is <strong>a folder of organized files</strong> consisting of instructions, scripts, assets and resources that agents can discover to perform a specific task accurately.它的本质是一堆提示词和一些脚本文件，Claude会根据提示词的指令来调用这些脚本文件来完成任务。</li>
+</ul>
+<h2 id="什么时候用建立一个skills"><a href="#什么时候用建立一个skills" class="headerlink" title="什么时候用建立一个skills"></a>什么时候用建立一个skills</h2><ul>
+<li>如果在一个使用场景中，<strong>需要跨会话来实现</strong>，比如在一个对话中，用户说了一个指令，系统需要在后续的对话中持续地执行这个指令，那么就可以考虑建立一个skills来实现。</li>
+</ul>
+<h2 id="Skill的设计思想"><a href="#Skill的设计思想" class="headerlink" title="Skill的设计思想"></a>Skill的设计思想</h2><ul>
+<li><strong>模块化</strong>：将功能拆分成独立的模块，每个模块负责一个特定的任务，便于维护和复用。</li>
+<li><strong>渐进披露</strong>：Progressive disclosure，指的是在用户需要的时候才展示相关信息或功能，避免信息过载。</li>
+<li><strong>需要时加载</strong>： On-demand loading，指的是在用户需要使用某个功能时才加载相关的资源或代码，提升性能和响应速度。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/2026-03-29%2022.02.08.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-03-29%2022.34.39.png"></p>
+<ul>
+<li>MCP主要用来获取数据。</li>
+<li>Tools（像一些sh、py脚本）主要用来处理数据或执行特定任务。</li>
+<li>Skills则是一个更高层次的概念，它可以包含多个MCP和Tools，来实现一个完整的功能。</li>
+<li>SubAgent，负责处理特定的任务，并将结果汇报给主agent。SubAgent可以调用自己的MCP和Tools来完成任务，但它的输出最终会被主agent使用。</li>
+</ul>
+<h2 id="Skill的文件结构"><a href="#Skill的文件结构" class="headerlink" title="Skill的文件结构"></a>Skill的文件结构</h2><p>Claude Code 的 Skill 本质上是一个 <strong>Markdown 文件</strong>，存放在 <code>~/.claude/skills/</code> 目录下。当用户通过 <code>/skill-name</code> 调用时，Claude 会读取该文件的内容作为指令执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/.claude/skills/</span><br><span class="line">├── my-skill.md              # 单文件 Skill（最简形式,建议全部小写，不要使用Claude的关键字）</span><br><span class="line">├── my-skill/                 # 目录形式 Skill（支持附带脚本）</span><br><span class="line">    └── SKILL.md              # 必须存在，Skill 的入口文件</span><br><span class="line">    └── Reference/            # 可选的脚本目录，存放被 Skill 调用的脚本文件</span><br><span class="line">        └── helper.sh         # 示例脚本文件  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>它不仅可以包含md文件，还可以包含sh、py、Icon、Images等其他资产文件</li>
+</ul>
+<h3 id="SKILL-md-的格式"><a href="#SKILL-md-的格式" class="headerlink" title="SKILL.md 的格式"></a>SKILL.md 的格式</h3><p>每个 Skill 文件由两部分组成：<strong>Front Matter</strong>（元数据，文件头）和 <strong>正文</strong>（指令内容）。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-135139.png" alt="外部参考文件夹"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">name: knowledge-importer</span><br><span class="line">description: 将PDF知识库文档转换为Hexo Markdown格式，使用AI智能格式化</span><br><span class="line"><span class="section">user-invocable: true          # 是否可通过 /name 手动调用，默认 true</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 预设Skills</span></span><br><span class="line">[<span class="string">Anthropics Skills</span>](<span class="link">https://github.com/anthropics/skills</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">## 工具标题</span></span><br><span class="line"></span><br><span class="line">这里写 Claude 需要执行的详细指令...</span><br><span class="line"></span><br><span class="line"><span class="section">### 使用方法</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><strong>Front Matter（文件头）字段说明：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-133134.png" alt="文件头要求"></p>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">必填</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>name</code></td>
+<td align="left">是</td>
+<td align="left">Skill 名称，用于 <code>/name</code> 调用，支持 kebab-case</td>
+</tr>
+<tr>
+<td align="left"><code>description</code></td>
+<td align="left">是</td>
+<td align="left">一句话描述，Claude 用它判断何时自动触发</td>
+</tr>
+<tr>
+<td align="left"><code>user-invocable</code></td>
+<td align="left">否</td>
+<td align="left"><code>true</code>（默认）用户可手动调用；<code>false</code> 仅由系统内部引用</td>
+</tr>
+</tbody></table>
+<h3 id="存放位置与作用域"><a href="#存放位置与作用域" class="headerlink" title="存放位置与作用域"></a>存放位置与作用域</h3><table>
+<thead>
+<tr>
+<th align="left">路径</th>
+<th align="left">作用域</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>~/.claude/skills/</code></td>
+<td align="left">全局，所有项目可用</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;project&gt;/.claude/skills/</code></td>
+<td align="left">项目级，仅当前项目可用</td>
+</tr>
+</tbody></table>
+<p>两种位置可以共存，项目级 Skill 会与全局 Skill 合并。<br>Skill 的正文中可以引用这些脚本，Claude 在执行时会通过 Bash 工具调用它们。</p>
+<h3 id="Skill安装相关"><a href="#Skill安装相关" class="headerlink" title="Skill安装相关"></a>Skill安装相关</h3><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-143319.png"></p>
+<p>对于我的Skills来说，我发现我之前安装的一些MCP也在这个Skill里面。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Use the skill-creator to evaluate how well my skills in @../custom_skills/ have followed the best practices. Use subagents in parallel,each subagent evaluates one.</span><br></pre></td></tr></table></figure>
+
+<p>直接使用Claude内置的skill-creator来审核某一个Skill是否符合规范。</p>
+<h2 id="其他问题："><a href="#其他问题：" class="headerlink" title="其他问题："></a>其他问题：</h2><h3 id="claudecode的skill和openClaw的Skill有什么区别？"><a href="#claudecode的skill和openClaw的Skill有什么区别？" class="headerlink" title="claudecode的skill和openClaw的Skill有什么区别？"></a>claudecode的skill和openClaw的Skill有什么区别？</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Claude Code Skills</th>
+<th>OpenClaw Skills</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本质</td>
+<td>预定义 prompt 模板，<code>/command</code> 触发</td>
+<td>含 <code>SKILL.md</code> 的文件夹，模块化插件</td>
+</tr>
+<tr>
+<td>场景</td>
+<td>软件工程（代码、Git 等）</td>
+<td>通用自动化（浏览器、邮件、Shell 等）</td>
+</tr>
+<tr>
+<td>交互</td>
+<td>终端 <code>/skill-name</code></td>
+<td>自然语言对话管理</td>
+</tr>
+<tr>
+<td>生态</td>
+<td>官方 + 少量插件</td>
+<td>ClawHub 市场 13,000+ 社区技能</td>
+</tr>
+<tr>
+<td>扩展</td>
+<td>插件机制</td>
+<td>安装社区 Skill 或自定义编写 <code>SKILL.md</code></td>
+</tr>
+<tr>
+<td>标准</td>
+<td>Claude Code 自有格式</td>
+<td>基于 Anthropic Agent Skills 开放标准</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>简言之：Claude Code Skills 是<strong>开发工具的快捷命令</strong>；OpenClaw Skills 是<strong>通用 AI Agent 的插件系统</strong>，覆盖面更广。后者是前者的理念进化。</p>
+</blockquote>
+<h3 id="Claude生态间的Skill传递"><a href="#Claude生态间的Skill传递" class="headerlink" title="Claude生态间的Skill传递"></a>Claude生态间的Skill传递</h3><p>这个讨论来自于B站吴恩达的课程，视频的翻译还不如直接看英文版本，所以可以直接看<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/agent-skills-with-anthropic/blob/main/7.Skill%20with%20the%20Claude%20API%EF%BC%88%E5%9C%A8Claude%20API%E4%BD%BF%E7%94%A8skills%EF%BC%89.md">笔记</a>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260331-154900.png" alt="20260331-154900"></p>
+<p>这里面提到的4中Claude生态产品，分别对应着：</p>
+<table>
+<thead>
+<tr>
+<th>产品</th>
+<th>是什么</th>
+<th>面向</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>claude.ai</strong>（网页端）</td>
+<td>浏览器中访问的网页聊天界面</td>
+<td>普通用户、日常使用</td>
+<td>无需安装，注册即可用；支持文件上传、图片分析、联网搜索等；有免费额度和订阅制（Pro）</td>
+</tr>
+<tr>
+<td><strong>Claude Desktop</strong>（桌面应用）</td>
+<td>安装在本地的独立桌面客户端（Windows&#x2F;macOS）</td>
+<td>普通用户、日常使用</td>
+<td>功能类似网页端，但多了本地 MCP（Model Context Protocol）集成——可以连接本地文件系统、数据库、API 等外部工具，实现更丰富的工作流</td>
+</tr>
+<tr>
+<td><strong>Claude API</strong>（API 接口）</td>
+<td>面向开发者的 HTTP&#x2F;SDK 编程接口（api.anthropic.com）</td>
+<td>开发者、企业</td>
+<td>按用量计费（token 计费）；可编程调用，嵌入到自己的产品中；支持 Tool Use（函数调用）、流式输出等；通过 Python SDK（anthropic）或 TypeScript SDK（@anthropic-ai&#x2F;sdk）调用</td>
+</tr>
+<tr>
+<td><strong>Claude Code</strong>（CLI 工具）</td>
+<td>终端命令行工具（claude 命令），专为软件工程设计</td>
+<td>开发者、程序员</td>
+<td>运行在终端中，可以直接读写文件、执行 shell 命令、搜索代码；理解整个项目上下文，能跨文件完成复杂开发任务；支持子 Agent 并行处理、MCP Server 扩展；底层调用的是 Claude API，但封装了开发者友好的工作流</td>
+</tr>
+<tr>
+<td><strong>Agent built with Claude Agent SDK</strong>（自定义 Agent）</td>
+<td>开发者用 Claude Agent SDK 构建的自定义 AI Agent 应用</td>
+<td>开发者构建自己的产品</td>
+<td>Agent SDK 是一个框架，让你构建具有自主能力的 Agent（可以规划、执行多步骤任务、调用工具）；Agent 拥有”思考-行动-观察”循环（agentic loop）；可以自定义工具集、系统提示、安全边界等；最终产物是你自己的应用，Claude 是其中的”大脑”</td>
+</tr>
+</tbody></table>
+<p>其实挺合理的，不让不同环境相互干涉。</p>
+<p>从 Claude AI 的图形界面转到纯 API 编程，确实需要一点适应时间。一旦理解了代码执行工具和 Files API 的协作方式，会发现这种编程方式给了你前所未有的控制力。图形界面适合快速验证想法，而 API 则适合构建可扩展的生产级应用。</p>
+<p>无互联网访问的沙箱环境初看是个限制，但从安全角度看这是明智的设计。如果你需要联网功能，可以在容器外预先下载数据，或者使用其他 API 配合。记住：限制往往能激发更优雅的解决方案。</p>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://b23.tv/QYCmA6H">吴恩达Skill的课程</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/agent-skills-with-anthropic?tab=readme-ov-file">参考笔记</a></li>
+</ol>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/Claude/" data-i18n-tag="Claude">Claude</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- 加载打包后的模块化代码 -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 保留原有的 toc-collapse.js 直到完全重构 -->
+
+<script src="/js/toc-collapse.js"></script>
+
+
+<!-- Tag Knowledge Graph -->
+
+<script src="/js/tag-graph.js"></script>
+
+
+<!-- Language Switcher -->
+
+<script src="/js/i18n-data.js"></script>
+
+
+<script src="/js/language-switcher.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

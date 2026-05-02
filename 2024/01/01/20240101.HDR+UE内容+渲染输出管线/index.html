@@ -64,16 +64,6 @@
 <link rel="stylesheet" href="/css/language-switcher.css">
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-
     <!-- Mermaid is loaded in after-footer.ejs -->
 
     <!-- Google Analytics -->
@@ -92,7 +82,7 @@
         <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
     
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body class="layout-post path-2024-01-01-20240101-HDR-UE-">
@@ -184,9 +174,6 @@
 
     <section class="wrapper">
         <div class="content">
-
-            <!-- Gallery -->
-            
 
             <!-- Content -->
             <h1 id="HDR-与-UE-内容渲染输出管线实践"><a href="#HDR-与-UE-内容渲染输出管线实践" class="headerlink" title="HDR 与 UE 内容渲染输出管线实践"></a>HDR 与 UE 内容渲染输出管线实践</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：</p>
@@ -357,10 +344,9 @@
 
 <!-- 第三方库 (CDN) -->
 <!-- Mermaid -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
-
-<!-- Featherlight (图库) -->
-<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
 
 <!-- Mermaid 初始化 -->
 <script type="text/javascript">
@@ -410,50 +396,6 @@ document.addEventListener('DOMContentLoaded', function() {
       mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
     }, 100);
   }
-});
-</script>
-
-<!-- ShaderToy Placeholder Processing -->
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    const elements = document.querySelectorAll('.shadertoy-placeholder[data-id]');
-
-    elements.forEach(element => {
-      const shaderID = element.getAttribute('data-id');
-
-      if (shaderID) {
-        const container = document.createElement('div');
-        container.style.cssText = `
-          position: relative;
-          width: 100%;
-          height: 400px;
-          margin: 20px 0;
-          border: 2px solid #bfbbbb;
-          border-radius: 8px;
-          overflow: hidden;
-          background-color: #f6f6f6;
-        `;
-
-        const iframe = document.createElement('iframe');
-        iframe.src = \`https://www.shadertoy.com/embed/\${shaderID}?gui=true&t=10&paused=false&muted=false\`;
-        iframe.style.cssText = `
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          border: none;
-        `;
-        iframe.allowFullscreen = true;
-        iframe.loading = 'lazy';
-
-        container.appendChild(iframe);
-        element.parentNode.insertBefore(container, element);
-        element.parentNode.removeChild(element);
-      }
-    });
-  }, 1000);
 });
 </script>
 
