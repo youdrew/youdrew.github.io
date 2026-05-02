@@ -107,10 +107,6 @@ h6 {
   clear: both;
 }
 
-.clearfix {
-  *zoom: 1;
-}
-
 /*  Header  */
 @media (min-width: 1099px) {
   header {
@@ -526,33 +522,6 @@ header:not(.show_menu) ~ .main {
   letter-spacing: 0.5px;
   border-bottom: 1px solid #bfbbbb;
   border-top: 1px solid #bfbbbb;
-}
-
-.main .gallery-container {
-  width: 100%;
-}
-
-/* Clearfix */
-.main .gallery-container::after {
-  content: ' ';
-  visibility: hidden;
-  display: block;
-  height: 50px;
-  clear: both;
-}
-
-.main .gallery-container .picture-container {
-  width: 150px;
-  float: left;
-  margin-right: 30px;
-}
-
-.main .gallery-container .picture-container .img-thumbnail {
-  padding: 4px;
-  line-height: 1.4286;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
 }
 
 .main .tags {

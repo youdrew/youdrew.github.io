@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // 如果正文标题已经是折叠状态，同步到TOC
         if (isInitiallyCollapsed) {
           item.classList.add('collapsed');
-          console.log(`初始化：TOC项${index}设为折叠状态，同步正文状态`);
         }
 
         // 保存原始文本
@@ -93,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // 使用更长的延迟确保DOM更新完成
             setTimeout(() => {
               const isCollapsed = heading.classList.contains('collapsed');
-              console.log(`同步状态 - 标题${index}: ${isCollapsed ? '已折叠' : '已展开'}`);
               syncTOCFromHeading(index, isCollapsed, tocItems);
             }, 10);
           });
@@ -109,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
               const index = Array.from(headings).indexOf(target);
               if (index !== -1) {
                 const isCollapsed = target.classList.contains('collapsed');
-                console.log(`DOM变化检测 - 标题${index}: ${isCollapsed ? '已折叠' : '已展开'}`);
                 syncTOCFromHeading(index, isCollapsed, tocItems);
               }
             }
@@ -382,8 +379,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!heading) return;
 
-    console.log(`TOC折叠切换 - 索引${index}: ${isCollapsed ? '展开' : '折叠'}`);
-
     if (isCollapsed) {
       // 展开
       tocItem.classList.remove('collapsed');
@@ -393,7 +388,6 @@ document.addEventListener('DOMContentLoaded', function () {
       // 同步正文中的状态 - 移除collapsed类
       if (heading.classList.contains('collapsed')) {
         heading.classList.remove('collapsed');
-        console.log(`同步正文标题${index}为展开状态`);
       }
     } else {
       // 折叠
@@ -404,7 +398,6 @@ document.addEventListener('DOMContentLoaded', function () {
       // 同步正文中的状态 - 添加collapsed类
       if (!heading.classList.contains('collapsed')) {
         heading.classList.add('collapsed');
-        console.log(`同步正文标题${index}为折叠状态`);
       }
     }
   }
@@ -505,22 +498,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!tocItem) return;
 
-    console.log(`同步TOC状态 - 索引${headingIndex}: ${isCollapsed ? '折叠' : '展开'}`);
-
     // 更新TOC项的折叠状态
     if (isCollapsed) {
       if (!tocItem.classList.contains('collapsed')) {
         tocItem.classList.add('collapsed');
         const currentLevel = parseInt(tocItem.getAttribute('data-level') || '1');
         hideTOCChildren(headingIndex, currentLevel, tocItems);
-        console.log(`TOC项${headingIndex}已设为折叠状态`);
       }
     } else {
       if (tocItem.classList.contains('collapsed')) {
         tocItem.classList.remove('collapsed');
         const currentLevel = parseInt(tocItem.getAttribute('data-level') || '1');
         showTOCChildren(headingIndex, currentLevel, tocItems);
-        console.log(`TOC项${headingIndex}已设为展开状态`);
       }
     }
   }

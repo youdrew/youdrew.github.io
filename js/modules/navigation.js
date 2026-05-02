@@ -1,13 +1,30 @@
 /**
  * 导航栏模块
- * 统一处理桌面端和移动端的导航交互
+ * 桌面端：鼠标移到左边缘触发显示；移动端：点击图标切换。
+ *
+ * 本模块通过 matchMedia 的 change 事件在桌面/移动模式间切换，每次切换
+ * 时彻底解绑旧模式的监听再绑定新模式，避免事件累积。mousemove 用
+ * requestAnimationFrame 节流，避免每帧触发多次回调。
  */
 export class Navigation {
   constructor() {
     this.header = document.querySelector('header');
     this.menuIcon = document.getElementById('menu_icon');
-    this.navTriggerZone = 50; // 桌面端触发区域宽度（像素）
+    this.navTriggerZone = 50;
+
     this.showNavTimeout = null;
+    this.lastMouseEvent = null;
+    this.mouseMoveScheduled = false;
+
+    this.mediaQuery = null;
+    this.currentMode = null; // 'desktop' | 'mobile'
+
+    // Bind once so the same function reference can be removed later.
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onHeaderEnter = this.onHeaderEnter.bind(this);
+    this.onHeaderLeave = this.onHeaderLeave.bind(this);
+    this.onMenuIconClick = this.onMenuIconClick.bind(this);
+    this.onBreakpointChange = this.onBreakpointChange.bind(this);
 
     this.init();
   }
@@ -15,94 +32,105 @@ export class Navigation {
   init() {
     if (!this.header) return;
 
-    // 根据屏幕尺寸初始化对应的行为
-    this.handleResize();
-
-    // 监听窗口大小变化
-    window.addEventListener('resize', () => {
-      this.handleResize();
-    });
+    this.mediaQuery = window.matchMedia('(min-width: 1099px)');
+    this.mediaQuery.addEventListener('change', this.onBreakpointChange);
+    this.applyMode(this.mediaQuery.matches ? 'desktop' : 'mobile');
   }
 
-  handleResize() {
-    const isDesktop = window.matchMedia('(min-width: 1099px)').matches;
+  onBreakpointChange(e) {
+    this.applyMode(e.matches ? 'desktop' : 'mobile');
+  }
 
-    if (isDesktop) {
-      this.initDesktopBehavior();
+  applyMode(mode) {
+    if (mode === this.currentMode) return;
+
+    this.teardown();
+    this.currentMode = mode;
+
+    if (mode === 'desktop') {
+      this.bindDesktop();
     } else {
-      this.initMobileBehavior();
+      this.bindMobile();
     }
   }
 
-  /**
-   * 桌面端行为：鼠标悬停触发
-   * 原 nav.js 的逻辑
-   */
-  initDesktopBehavior() {
-    // 移除可能存在的移动端事件监听
+  teardown() {
+    document.removeEventListener('mousemove', this.onMouseMove);
+    this.header.removeEventListener('mouseenter', this.onHeaderEnter);
+    this.header.removeEventListener('mouseleave', this.onHeaderLeave);
     if (this.menuIcon) {
-      this.menuIcon.replaceWith(this.menuIcon.cloneNode(true));
-      this.menuIcon = document.getElementById('menu_icon');
+      this.menuIcon.removeEventListener('click', this.onMenuIconClick);
+      this.menuIcon.classList.remove('close_menu');
     }
 
-    // 监听鼠标移动
-    document.addEventListener('mousemove', (e) => {
-      if (e.pageX <= this.navTriggerZone) {
-        // 鼠标移动到左侧触发区域
-        clearTimeout(this.showNavTimeout);
-        this.header.classList.add('show_menu');
-      } else {
-        // 鼠标移出触发区域
-        this.showNavTimeout = setTimeout(() => {
-          // 检查鼠标是否在导航栏上
-          const headerRect = this.header.getBoundingClientRect();
-          const mouseX = e.clientX;
-          const mouseY = e.clientY;
+    clearTimeout(this.showNavTimeout);
+    this.showNavTimeout = null;
 
-          const isOverHeader =
-            mouseX >= headerRect.left &&
-            mouseX <= headerRect.right &&
-            mouseY >= headerRect.top &&
-            mouseY <= headerRect.bottom;
+    this.header.classList.remove('show_menu');
+    const nav = this.header.querySelector('nav ul');
+    if (nav) nav.classList.remove('show_menu');
+  }
 
-          if (!isOverHeader) {
-            this.header.classList.remove('show_menu');
-          }
-        }, 300);
-      }
-    });
+  bindDesktop() {
+    document.addEventListener('mousemove', this.onMouseMove);
+    this.header.addEventListener('mouseenter', this.onHeaderEnter);
+    this.header.addEventListener('mouseleave', this.onHeaderLeave);
+  }
 
-    // 当鼠标在导航栏上时保持显示
-    this.header.addEventListener('mouseenter', () => {
-      clearTimeout(this.showNavTimeout);
-    });
+  bindMobile() {
+    if (!this.menuIcon) return;
+    this.menuIcon.addEventListener('click', this.onMenuIconClick);
+  }
 
-    this.header.addEventListener('mouseleave', () => {
-      this.showNavTimeout = setTimeout(() => {
-        this.header.classList.remove('show_menu');
-      }, 300);
+  onMouseMove(e) {
+    this.lastMouseEvent = e;
+    if (this.mouseMoveScheduled) return;
+    this.mouseMoveScheduled = true;
+    requestAnimationFrame(() => {
+      this.mouseMoveScheduled = false;
+      this.processMouseMove(this.lastMouseEvent);
     });
   }
 
-  /**
-   * 移动端行为：点击切换
-   * 原 main.js 的逻辑
-   */
-  initMobileBehavior() {
-    if (!this.menuIcon) return;
+  processMouseMove(e) {
+    if (!e) return;
 
-    // 点击菜单图标切换导航
-    this.menuIcon.addEventListener('click', (e) => {
-      e.preventDefault();
+    if (e.pageX <= this.navTriggerZone) {
+      clearTimeout(this.showNavTimeout);
+      this.header.classList.add('show_menu');
+      return;
+    }
 
-      const nav = this.header.querySelector('nav ul');
-      if (nav) {
-        nav.classList.toggle('show_menu');
+    // Defer hiding by 300ms so a quick re-entry into the trigger zone or
+    // onto the header itself can cancel the hide.
+    clearTimeout(this.showNavTimeout);
+    this.showNavTimeout = setTimeout(() => {
+      const rect = this.header.getBoundingClientRect();
+      const overHeader =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+      if (!overHeader) {
+        this.header.classList.remove('show_menu');
       }
+    }, 300);
+  }
 
-      this.menuIcon.classList.toggle('close_menu');
+  onHeaderEnter() {
+    clearTimeout(this.showNavTimeout);
+  }
 
-      return false;
-    });
+  onHeaderLeave() {
+    this.showNavTimeout = setTimeout(() => {
+      this.header.classList.remove('show_menu');
+    }, 300);
+  }
+
+  onMenuIconClick(e) {
+    e.preventDefault();
+    const nav = this.header.querySelector('nav ul');
+    if (nav) nav.classList.toggle('show_menu');
+    this.menuIcon.classList.toggle('close_menu');
   }
 }
