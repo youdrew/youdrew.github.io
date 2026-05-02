@@ -18,8 +18,7 @@ export class CodeBlock {
           mutation.addedNodes.forEach((node) => {
             if (
               node.nodeType === 1 &&
-              (node.matches('figure.highlight') ||
-                node.querySelector('figure.highlight'))
+              (node.matches('figure.highlight') || node.querySelector('figure.highlight'))
             ) {
               needsReinit = true;
             }
@@ -33,7 +32,7 @@ export class CodeBlock {
 
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   }
 

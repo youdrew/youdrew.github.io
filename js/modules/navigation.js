@@ -59,12 +59,11 @@ export class Navigation {
           const mouseX = e.clientX;
           const mouseY = e.clientY;
 
-          const isOverHeader = (
+          const isOverHeader =
             mouseX >= headerRect.left &&
             mouseX <= headerRect.right &&
             mouseY >= headerRect.top &&
-            mouseY <= headerRect.bottom
-          );
+            mouseY <= headerRect.bottom;
 
           if (!isOverHeader) {
             this.header.classList.remove('show_menu');

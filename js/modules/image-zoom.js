@@ -33,7 +33,7 @@ export class ImageZoom {
 
     observer.observe(document.documentElement || document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
   }
 
@@ -94,10 +94,7 @@ export class ImageZoom {
     const cx = e.clientX - rect.left - rect.width / 2;
     const cy = e.clientY - rect.top - rect.height / 2;
     const delta = e.deltaY > 0 ? -0.12 : 0.12;
-    const newScale = Math.max(
-      this.minScale,
-      Math.min(this.maxScale, this.scale + delta)
-    );
+    const newScale = Math.max(this.minScale, Math.min(this.maxScale, this.scale + delta));
     const scaleFactor = newScale / this.scale;
 
     // 以鼠标点为中心缩放平移补偿
@@ -152,18 +149,14 @@ export class ImageZoom {
   }
 
   onKey(e) {
-    if (
-      e.key === 'Escape' &&
-      this.overlay &&
-      this.overlay.style.display === 'flex'
-    ) {
+    if (e.key === 'Escape' && this.overlay && this.overlay.style.display === 'flex') {
       this.closeOverlay();
     }
   }
 
   bindOverlayEvents() {
     this.zoomImg.addEventListener('wheel', (e) => this.onWheel(e), {
-      passive: false
+      passive: false,
     });
     this.zoomImg.addEventListener('mousedown', (e) => this.onMouseDown(e));
     this.zoomImg.addEventListener('dblclick', () => this.onDblClick());
