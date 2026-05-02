@@ -1,6 +1,12 @@
 /**
  * Language Switcher
- * Dynamically switches interface language and article version
+ * Switches the interface language and, when the current page has an alternate
+ * language version, navigates to it.
+ *
+ * Phase 4 change: alternate page URLs are now resolved at build time via
+ * `<link rel="alternate" hreflang="...">` tags in <head>, instead of probing
+ * candidate URLs at runtime with fetch HEAD. One fewer round trip per click,
+ * and no false positives from servers that 200 on missing pages.
  */
 
 (function () {
@@ -20,64 +26,20 @@
     return localStorage.getItem('siteLanguage') || getBrowserLanguage();
   };
 
-  // Get current page language from URL and meta tag
+  // Get current page language from <meta name="article:lang"> or URL fallback.
   const getCurrentPageLanguage = () => {
-    const path = window.location.pathname;
-
-    // Check if URL contains .zh-CN
-    if (path.includes('.zh-CN')) {
-      return 'zh-CN';
-    }
-
-    // Check meta tag
     const langMeta = document.querySelector('meta[name="article:lang"]');
-    if (langMeta) {
-      return langMeta.content;
-    }
+    if (langMeta) return langMeta.content;
 
-    // Default to en
+    if (window.location.pathname.includes('.zh-CN')) return 'zh-CN';
     return 'en';
   };
 
-  // Generate alternate language URL
-  const getAlternateLanguageUrl = (currentPageLang, targetLang) => {
-    const path = window.location.pathname;
-
-    if (targetLang === 'zh-CN' && currentPageLang === 'en') {
-      // Switch from English to Chinese: add .zh-CN
-      // /about/ -> /about/index.zh-CN.html
-      // /2025/01/01/my-post/ -> /2025/01/01/my-post/index.zh-CN.html
-      if (path.endsWith('/')) {
-        return path + 'index.zh-CN.html';
-      } else if (path.endsWith('.html')) {
-        return path.replace(/\.html$/, '.zh-CN.html');
-      } else {
-        return path + '/index.zh-CN.html';
-      }
-    } else if (targetLang === 'en' && currentPageLang === 'zh-CN') {
-      // Switch from Chinese to English: remove .zh-CN
-      // /about/index.zh-CN.html -> /about/
-      // Handle both /index.zh-CN.html and .zh-CN.html patterns
-      if (path.includes('/index.zh-CN.html')) {
-        return path.replace('/index.zh-CN.html', '/');
-      } else if (path.includes('.zh-CN.html')) {
-        return path.replace('.zh-CN.html', '.html');
-      } else if (path.includes('.zh-CN')) {
-        return path.replace('.zh-CN', '');
-      }
-    }
-
-    return null;
-  };
-
-  // Check if alternate version exists
-  const checkAlternateVersionExists = async (url) => {
-    try {
-      const response = await fetch(url, { method: 'HEAD' });
-      return response.ok;
-    } catch (error) {
-      return false;
-    }
+  // Look up the alternate-language URL emitted by the build
+  // (<link rel="alternate" hreflang="..."> in <head>).
+  const getAlternateUrl = (targetLang) => {
+    const link = document.querySelector(`link[rel="alternate"][hreflang="${targetLang}"]`);
+    return link ? link.href : null;
   };
 
   // Update page language
@@ -151,28 +113,19 @@
     });
   };
 
-  // Switch language and navigate to alternate version if exists
-  const switchLanguage = async () => {
+  // Switch language and navigate to alternate version if one exists.
+  const switchLanguage = () => {
     const currentInterfaceLang = getCurrentLanguage();
-    const currentPageLang = getCurrentPageLanguage();
     const targetLang = currentInterfaceLang === 'zh-CN' ? 'en' : 'zh-CN';
 
-    // Try to find alternate language version
-    const alternateUrl = getAlternateLanguageUrl(currentPageLang, targetLang);
-
+    const alternateUrl = getAlternateUrl(targetLang);
     if (alternateUrl) {
-      // Check if alternate version exists
-      const exists = await checkAlternateVersionExists(alternateUrl);
-
-      if (exists) {
-        // Apply language and redirect
-        localStorage.setItem('siteLanguage', targetLang);
-        window.location.href = alternateUrl;
-        return;
-      }
+      localStorage.setItem('siteLanguage', targetLang);
+      window.location.href = alternateUrl;
+      return;
     }
 
-    // If no alternate version exists, just switch interface language
+    // No alternate page available — switch interface language only.
     applyLanguage(targetLang);
 
     const i18n = getI18nData();
@@ -207,25 +160,19 @@
     }, 2000);
   };
 
-  // Initialize language on page load
+  // Initialize language on page load.
   const initLanguage = () => {
     const preferredLang = getCurrentLanguage();
     const currentPageLang = getCurrentPageLanguage();
 
-    // Apply interface language
     applyLanguage(preferredLang);
 
-    // If interface language doesn't match page language, check if we should redirect
+    // If the page we landed on isn't in the preferred language and an
+    // alternate exists, silently redirect to it.
     if (preferredLang !== currentPageLang) {
-      const alternateUrl = getAlternateLanguageUrl(currentPageLang, preferredLang);
-
+      const alternateUrl = getAlternateUrl(preferredLang);
       if (alternateUrl) {
-        checkAlternateVersionExists(alternateUrl).then((exists) => {
-          if (exists) {
-            // Silently redirect to preferred language version
-            window.location.replace(alternateUrl);
-          }
-        });
+        window.location.replace(alternateUrl);
       }
     }
   };
