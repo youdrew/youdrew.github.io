@@ -1,14 +1,13 @@
 import { Navigation } from './modules/navigation.js';
 import { Tooltip } from './modules/tooltip.js';
 import { MapPage } from './modules/map.js';
-import { TOC } from './modules/toc.js';
 import { ImageZoom } from './modules/image-zoom.js';
 import { ShaderToyEmbedManager } from './modules/shadertoy.js';
 import { ArticleCollapse } from './modules/article-collapse.js';
 import { CodeBlock } from './modules/code-block.js';
 import { initLanguageSwitcher } from './language-switcher.js';
 import { initTagGraph } from './tag-graph.js';
-import { initTocCollapse } from './toc-collapse.js';
+import { initToc } from './modules/toc/index.js';
 
 function init() {
   new Navigation();
@@ -16,7 +15,6 @@ function init() {
   if (document.getElementById('map')) {
     new MapPage();
   }
-  new TOC().init();
   new ImageZoom();
   setTimeout(() => {
     new ShaderToyEmbedManager();
@@ -24,7 +22,7 @@ function init() {
   new ArticleCollapse();
   new CodeBlock();
   initLanguageSwitcher();
-  initTocCollapse();
+  initToc();
   if (document.getElementById('tag-graph')) {
     initTagGraph();
   }

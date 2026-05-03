@@ -9,14 +9,14 @@
     <atom:link href="https://youdrew.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 03 May 2026 09:51:49 GMT</pubDate>
+    <pubDate>Sun, 03 May 2026 11:19:35 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
       <link>https://youdrew.github.io/2026/05/03/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/</link>
       <guid>https://youdrew.github.io/2026/05/03/20250801.UE%E6%A6%82%E5%BF%B5%E6%9D%82%E7%89%A9%E7%AE%B1/</guid>
-      <pubDate>Sun, 03 May 2026 09:51:49 GMT</pubDate>
+      <pubDate>Sun, 03 May 2026 11:19:35 GMT</pubDate>
       
         
         
@@ -60,9 +60,9 @@
       
       <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
-      
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       <category domain="https://youdrew.github.io/tags/Model-Context-Protocol/">Model Context Protocol</category>
       
@@ -93,9 +93,9 @@
       
       <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
-      <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
-      
       <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
+      
+      <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
       
       <category domain="https://youdrew.github.io/tags/LangGraph/">LangGraph</category>
       
@@ -275,9 +275,9 @@
       
       <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
-      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
-      
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       
       <comments>https://youdrew.github.io/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
