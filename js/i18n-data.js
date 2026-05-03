@@ -3,7 +3,7 @@
  * 界面元素的中英文对照数据
  */
 
-const i18nData = {
+export const i18nData = {
   en: {
     // Navigation menu
     Home: 'Home',
@@ -95,7 +95,3 @@ const i18nData = {
 // Tag name translations live in themes/.../_config.yml as tag_translations
 // and are injected into window.tagTranslations by after-footer.ejs at build time
 // (single source of truth — see Phase 5 in ROADMAP.md).
-
-if (typeof window !== 'undefined') {
-  window.i18nData = i18nData;
-}

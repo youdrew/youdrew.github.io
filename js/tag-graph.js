@@ -1,11 +1,10 @@
 /**
  * Tag Knowledge Graph - ECharts Force-Directed Graph
  * Dynamically loads ECharts and renders an interactive tag relationship graph.
- * Data is injected via window.__TAG_GRAPH_DATA__ from the Hexo EJS template.
+ * Data is injected via window.__TAG_GRAPH_DATA__ from the Hexo EJS template
+ * (see archive.ejs). ECharts itself stays on the CDN — lazy-loaded on demand.
  */
-(function () {
-  'use strict';
-
+export function initTagGraph() {
   const container = document.getElementById('tag-graph');
   const graphContainer = document.getElementById('tag-graph-container');
   const data = window.__TAG_GRAPH_DATA__;
@@ -727,4 +726,4 @@
       }
     };
   }
-})();
+}

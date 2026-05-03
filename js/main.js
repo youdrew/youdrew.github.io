@@ -6,9 +6,9 @@ import { ImageZoom } from './modules/image-zoom.js';
 import { ShaderToyEmbedManager } from './modules/shadertoy.js';
 import { ArticleCollapse } from './modules/article-collapse.js';
 import { CodeBlock } from './modules/code-block.js';
-
-// toc-collapse.js, language-switcher.js, i18n-data.js, tag-graph.js
-// are loaded separately in after-footer.ejs — do NOT import here
+import { initLanguageSwitcher } from './language-switcher.js';
+import { initTagGraph } from './tag-graph.js';
+import { initTocCollapse } from './toc-collapse.js';
 
 function init() {
   new Navigation();
@@ -23,6 +23,11 @@ function init() {
   }, 500);
   new ArticleCollapse();
   new CodeBlock();
+  initLanguageSwitcher();
+  initTocCollapse();
+  if (document.getElementById('tag-graph')) {
+    initTagGraph();
+  }
 }
 
 if (document.readyState === 'loading') {

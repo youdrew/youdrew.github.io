@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
+// Phase 8: minimal ESM wrap — DOMContentLoaded handling moved to main.js.
+// Phase 9 will refactor this 678-line file into modules under js/modules/toc/.
+export function initTocCollapse() {
   initTOCCollapse();
 
   function initTOCCollapse() {
@@ -675,4 +677,4 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-});
+}
