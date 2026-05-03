@@ -1,0 +1,9 @@
+/*
+ * @font-face declarations — empty placeholder.
+ *
+ * Phase 1 removed the dead NotoSansSC @font-face declarations that
+ * pointed at non-existent files. Phase 12 will reintroduce real
+ * self-hosted fonts (LXGW WenKai + Noto Sans SC subsetted by build
+ * script). Until then, the system fallback chain in typography.css is
+ * what users see.
+ */

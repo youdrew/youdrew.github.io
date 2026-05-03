@@ -8,7 +8,7 @@
    ======================================== */
 
 header ul.social li a.language::before {
-  mask-image: url('../img/social/icon-language.svg');
+  mask-image: url('../../img/social/icon-language.svg');
 }
 
 /* ========================================

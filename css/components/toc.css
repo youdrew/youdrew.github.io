@@ -1,0 +1,264 @@
+/* 文档导航器 */
+.toc-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 280px;
+  min-width: 200px;
+  max-width: 600px;
+  height: 360px;
+  min-height: 150px;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  resize: both;
+}
+
+.toc-header {
+  padding: 12px 16px;
+  background: #f8f8f8;
+  border-bottom: 1px solid #eee;
+  cursor: move;
+  user-select: none;
+}
+
+.toc-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.toc-content {
+  height: calc(100% - 45px);
+  overflow-y: auto;
+  overflow-x: auto;
+  padding: 12px 0;
+}
+
+.toc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: max-content;
+}
+
+/* 标题层级缩进 */
+.toc-item[data-level='2'] {
+  padding-left: 32px;
+}
+.toc-item[data-level='3'] {
+  padding-left: 48px;
+}
+.toc-item[data-level='4'] {
+  padding-left: 64px;
+}
+.toc-item[data-level='5'] {
+  padding-left: 80px;
+}
+.toc-item[data-level='6'] {
+  padding-left: 96px;
+}
+
+.toc-item {
+  padding: 4px 16px 4px 16px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+  overflow: visible;
+  display: block;
+}
+
+.toc-item:hover {
+  color: #349ef3;
+  background: #f5f5f5;
+}
+
+/* 移除单个项目的滚动条样式，改为整体滚动条 */
+.toc-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.toc-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.toc-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.toc-content::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.toc-content::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
+
+/* 标题层级颜色变化 - 增强对比度 */
+.toc-item[data-level='1'] {
+  color: #222;
+  font-weight: 600;
+}
+.toc-item[data-level='2'] {
+  color: #444;
+  font-weight: 500;
+}
+.toc-item[data-level='3'] {
+  color: #666;
+  font-weight: normal;
+}
+.toc-item[data-level='4'] {
+  color: #888;
+  font-weight: normal;
+}
+.toc-item[data-level='5'] {
+  color: #aaa;
+  font-weight: normal;
+}
+.toc-item[data-level='6'] {
+  color: #ccc;
+  font-weight: normal;
+}
+
+/* 标题编号样式 */
+.toc-number {
+  display: inline-block;
+  margin-right: 16px;
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* 标题文本样式 */
+.toc-title {
+  display: inline;
+}
+
+/* TOC 折叠按钮 - 每个标题都有，但按层级缩进 */
+.toc-item .toc-collapse-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* 按层级设置按钮位置，更靠近编号 */
+.toc-item[data-level='1'] .toc-collapse-btn {
+  left: 0;
+}
+.toc-item[data-level='2'] .toc-collapse-btn {
+  left: 16px;
+}
+.toc-item[data-level='3'] .toc-collapse-btn {
+  left: 32px;
+}
+.toc-item[data-level='4'] .toc-collapse-btn {
+  left: 48px;
+}
+.toc-item[data-level='5'] .toc-collapse-btn {
+  left: 64px;
+}
+.toc-item[data-level='6'] .toc-collapse-btn {
+  left: 80px;
+}
+
+/* 标题文本整体靠近按钮，但编号和标题内容之间保持较大距离 */
+.toc-item[data-level='1'] .toc-item-text {
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.toc-item[data-level='2'] .toc-item-text {
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.toc-item[data-level='3'] .toc-item-text {
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.toc-item[data-level='4'] .toc-item-text {
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.toc-item[data-level='5'] .toc-item-text {
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.toc-item[data-level='6'] .toc-item-text {
+  margin-left: 8px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.toc-collapse-btn::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  width: 6px;
+  height: 2px;
+  background-color: #666;
+  transition: transform 0.3s ease;
+}
+
+.toc-collapse-btn::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  width: 2px;
+  height: 6px;
+  background-color: #666;
+  transition: transform 0.3s ease;
+}
+
+/* 折叠状态 */
+.toc-item.collapsed .toc-collapse-btn::after {
+  transform: scaleY(0);
+}
+
+/* 隐藏被折叠的子项 */
+.toc-item.toc-hidden {
+  display: none !important;
+}
+
+/* 标题层级缩进 */
+.toc-item[data-level='2'] {
+  padding-left: 32px;
+}
+.toc-item[data-level='3'] {
+  padding-left: 48px;
+}
+.toc-item[data-level='4'] {
+  padding-left: 64px;
+}
+.toc-item[data-level='5'] {
+  padding-left: 80px;
+}
+.toc-item[data-level='6'] {
+  padding-left: 96px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .toc-container {
+    display: none;
+  }
+}

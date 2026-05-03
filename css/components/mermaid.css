@@ -1,0 +1,69 @@
+/* Mermaid 图表样式 */
+.mermaid {
+  text-align: center;
+  margin: 20px 0;
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 6px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 在不同标题层级下的 Mermaid 图表缩进 */
+.content h1 ~ .mermaid {
+  margin-left: 24px;
+  max-width: calc(100% - 24px);
+}
+.content h2 ~ .mermaid {
+  margin-left: 48px;
+  max-width: calc(100% - 48px);
+}
+.content h3 ~ .mermaid {
+  margin-left: 72px;
+  max-width: calc(100% - 72px);
+}
+.content h4 ~ .mermaid {
+  margin-left: 96px;
+  max-width: calc(100% - 96px);
+}
+.content h5 ~ .mermaid {
+  margin-left: 120px;
+  max-width: calc(100% - 120px);
+}
+.content h6 ~ .mermaid {
+  margin-left: 144px;
+  max-width: calc(100% - 144px);
+}
+
+/* 响应式 Mermaid */
+@media (max-width: 768px) {
+  .content h1 ~ .mermaid {
+    margin-left: 12px;
+    max-width: calc(100% - 12px);
+  }
+  .content h2 ~ .mermaid {
+    margin-left: 24px;
+    max-width: calc(100% - 24px);
+  }
+  .content h3 ~ .mermaid {
+    margin-left: 36px;
+    max-width: calc(100% - 36px);
+  }
+  .content h4 ~ .mermaid {
+    margin-left: 48px;
+    max-width: calc(100% - 48px);
+  }
+  .content h5 ~ .mermaid {
+    margin-left: 60px;
+    max-width: calc(100% - 60px);
+  }
+  .content h6 ~ .mermaid {
+    margin-left: 72px;
+    max-width: calc(100% - 72px);
+  }
+}

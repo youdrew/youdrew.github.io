@@ -1,0 +1,276 @@
+/*  Header  */
+@media (min-width: 1099px) {
+  header {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    min-height: 100%;
+    padding: 0 0 0 50px;
+    background: #fff;
+    float: left;
+    overflow: hidden;
+    z-index: 9999;
+    transition: transform 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+    transform: translateX(-200px);
+    will-change: transform;
+  }
+
+  /* 当侧边栏收起时的文字透明度 */
+  header .logo,
+  header nav,
+  header .footer,
+  header .social,
+  header a,
+  header p,
+  header .subtitle,
+  header .description {
+    transition: opacity 0.4s ease;
+    opacity: 0.02;
+  }
+
+  header:hover,
+  header.show_menu {
+    transform: translateX(0);
+    box-shadow: 2px 0 12px rgb(0, 0, 0, 0.1);
+  }
+
+  /* 当侧边栏展开时恢复文字透明度 */
+  header:hover .logo,
+  header:hover nav,
+  header:hover .footer,
+  header:hover .social,
+  header:hover a,
+  header:hover p,
+  header:hover .subtitle,
+  header:hover .description,
+  header.show_menu .logo,
+  header.show_menu nav,
+  header.show_menu .footer,
+  header.show_menu .social,
+  header.show_menu a,
+  header.show_menu p,
+  header.show_menu .subtitle,
+  header.show_menu .description {
+    opacity: 1;
+  }
+
+  header .logo {
+    margin-top: 100px;
+    text-align: right;
+    padding-right: 20px;
+    width: 180px;
+  }
+
+  header .logo .subtitle {
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.6em;
+    color: #666;
+    margin-top: 10px;
+    line-height: 1;
+    text-align: right;
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  header .logo .description {
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.8em;
+    color: #888;
+    margin-top: 15px;
+    line-height: 1.5;
+    text-align: right;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  header .logo a,
+  header .logo a:active,
+  header .logo a:visited {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #454545;
+    font-size: 1.5em;
+    letter-spacing: 0.2em;
+    white-space: nowrap;
+    display: inline-block;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  header .logo a:hover {
+    text-decoration: none;
+    color: #969595;
+    font-size: 1.5em;
+  }
+
+  header nav ul {
+    display: block;
+    overflow: hidden;
+    margin-top: 100px;
+    list-style: none;
+  }
+
+  header nav ul li {
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  header nav ul li a {
+    color: #454545;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  header nav ul li a:hover,
+  header nav ul li a.selected {
+    color: #969595;
+  }
+
+  header .footer {
+    position: absolute;
+    bottom: 50px;
+  }
+
+  header ul.social {
+    list-style: none;
+    margin-bottom: 5px;
+  }
+
+  header ul.social li {
+    display: block;
+    float: left;
+    position: relative;
+    margin: 0 15px 15px 0;
+  }
+
+  header ul.social li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    color: #565656;
+    background: transparent;
+    position: relative;
+  }
+
+  header ul.social li a::before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 22px;
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    transition: transform 0.2s ease;
+  }
+
+  header ul.social li a:hover,
+  header ul.social li a:focus {
+    color: #0a84ff;
+    border-color: #0a84ff;
+  }
+
+  header ul.social li a:hover::before,
+  header ul.social li a:focus::before {
+    transform: scale(1.1);
+  }
+
+  header ul.social li a.behance::before {
+    mask-image: url('../../img/social/icon-bilibili.svg');
+  }
+
+  header ul.social li a.google::before {
+    mask-image: url('../../img/social/icon-email.svg');
+  }
+
+  header ul.social li a.github::before {
+    mask-image: url('../../img/social/icon-github.svg');
+  }
+
+  header ul.social li a.behance,
+  header ul.social li a.github,
+  header ul.social li a.google,
+  header ul.social li a.dribble,
+  header ul.social li a.rss,
+  header ul.social li a.instagram {
+    background: transparent;
+  }
+
+  header ul.social li a.dribble::before {
+    mask-image: url('../../img/social/icon-douban.svg');
+  }
+
+  header ul.social li a.rss::before {
+    mask-image: url('../../img/social/icon-rss.svg');
+  }
+
+  header ul.social li a.instagram::before {
+    mask-image: url('../../img/social/icon-instagram.svg');
+  }
+
+  header ul.social li a.language::before {
+    mask-image: url('../../img/social/icon-language.svg');
+  }
+
+  header ul.social li a.youtube::before {
+    mask-image: none;
+  }
+
+  header .rights p {
+    color: #454545;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    line-height: 18px;
+  }
+
+  header .rights a {
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  #menu_icon,
+  .close_menu {
+    display: none;
+  }
+}
+
+#menu_icon,
+.close_menu {
+  float: right;
+  margin-right: 40px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: url('../../img/men_icons.png') no-repeat;
+}
+
+#menu_icon {
+  background-position: 0 0;
+}
+.close_menu {
+  background-position: -41px 0 !important;
+}

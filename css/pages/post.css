@@ -1,0 +1,509 @@
+/*  Inner Page  */
+.top {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  -webkit-background-size: cover !important;
+  background-size: cover !important;
+  background-position: 50% 50% !important;
+}
+
+.work_nav {
+  display: block;
+  width: 100%;
+}
+
+.work_nav .btn {
+  float: right;
+}
+
+.work_nav ul {
+  list-style: none;
+}
+
+.work_nav ul li {
+  display: block;
+  float: left;
+  margin: 0 0 1px 1px;
+  position: relative;
+}
+
+.work_nav a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: url('../../img/p_navigation.png') no-repeat;
+  background-position: 0 0;
+}
+
+.work_nav a.previous {
+  background-position: 0 0;
+}
+
+.work_nav a.previous.disabled {
+  cursor: no-drop;
+}
+
+.work_nav a.grid {
+  background-position: -41px 0;
+}
+
+.work_nav a.next {
+  background-position: -82px 0;
+}
+
+.work_nav a.next.disabled {
+  cursor: no-drop;
+}
+
+.top .title {
+  display: block;
+  width: 100%;
+  color: #4b4848;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  background: rgb(255, 255, 255, 0.7);
+  padding: 20px;
+  text-transform: uppercase;
+  line-height: 30px;
+  margin: 0 !important;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.content_header {
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  left: 50%;
+  margin-left: -46.3636%;
+}
+
+.content {
+  color: #4b4848;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 22px;
+  padding: 60px 30px;
+  background: #fff;
+  margin-bottom: 70px;
+  box-sizing: border-box;
+}
+
+.content.archives {
+  margin-top: 90px;
+}
+
+.content p {
+  color: #4b4848;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 30px; /* 从18px提高到22px，增加段落间距 */
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  color: #4b4848;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
+  line-height: 1.4;
+  position: relative;
+  padding-left: 24px; /* 为折叠按钮留出空间 */
+}
+
+/* 随层级调整间距 */
+.content h1 {
+  margin-top: 40px;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+
+.content h2 {
+  margin-top: 35px;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.content h3 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+}
+
+.content h4 {
+  margin-top: 25px;
+  margin-bottom: 12px;
+  font-size: 1.35em;
+}
+
+.content h5 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.3em;
+}
+
+.content h6 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 1.25em;
+}
+
+/* 标题缩进 */
+.content h1 {
+  margin-left: 0;
+}
+.content h2 {
+  margin-left: 24px;
+}
+.content h3 {
+  margin-left: 48px;
+}
+.content h4 {
+  margin-left: 72px;
+}
+.content h5 {
+  margin-left: 96px;
+}
+.content h6 {
+  margin-left: 120px;
+}
+
+/* 标题后的内容缩进 */
+.content h1 ~ p,
+.content h1 ~ ul,
+.content h1 ~ ol,
+.content h1 ~ blockquote,
+.content h1 ~ figure,
+.content h1 ~ table,
+.content h1 ~ .codeblock,
+.content h1 ~ .code-block-container,
+.content h1 ~ img {
+  margin-left: 24px;
+}
+
+.content h2 ~ p,
+.content h2 ~ ul,
+.content h2 ~ ol,
+.content h2 ~ blockquote,
+.content h2 ~ figure,
+.content h2 ~ table,
+.content h2 ~ .codeblock,
+.content h2 ~ .code-block-container,
+.content h2 ~ img {
+  margin-left: 48px;
+}
+
+.content h3 ~ p,
+.content h3 ~ ul,
+.content h3 ~ ol,
+.content h3 ~ blockquote,
+.content h3 ~ figure,
+.content h3 ~ table,
+.content h3 ~ .codeblock,
+.content h3 ~ .code-block-container,
+.content h3 ~ img {
+  margin-left: 72px;
+}
+
+.content h4 ~ p,
+.content h4 ~ ul,
+.content h4 ~ ol,
+.content h4 ~ blockquote,
+.content h4 ~ figure,
+.content h4 ~ table,
+.content h4 ~ .codeblock,
+.content h4 ~ .code-block-container,
+.content h4 ~ img {
+  margin-left: 96px;
+}
+
+.content h5 ~ p,
+.content h5 ~ ul,
+.content h5 ~ ol,
+.content h5 ~ blockquote,
+.content h5 ~ figure,
+.content h5 ~ table,
+.content h5 ~ .codeblock,
+.content h5 ~ .code-block-container,
+.content h5 ~ img {
+  margin-left: 120px;
+}
+
+.content h6 ~ p,
+.content h6 ~ ul,
+.content h6 ~ ol,
+.content h6 ~ blockquote,
+.content h6 ~ figure,
+.content h6 ~ table,
+.content h6 ~ .codeblock,
+.content h6 ~ .code-block-container,
+.content h6 ~ img {
+  margin-left: 144px;
+}
+
+/* 折叠按钮样式 */
+.collapse-button {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.collapse-button::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 7px;
+  width: 8px;
+  height: 2px;
+  background-color: #666;
+  transition: transform 0.3s ease;
+}
+
+.collapse-button::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  width: 2px;
+  height: 8px;
+  background-color: #666;
+  transition: transform 0.3s ease;
+}
+
+/* 折叠状态 */
+.content h1.collapsed .collapse-button::after,
+.content h2.collapsed .collapse-button::after,
+.content h3.collapsed .collapse-button::after,
+.content h4.collapsed .collapse-button::after,
+.content h5.collapsed .collapse-button::after,
+.content h6.collapsed .collapse-button::after {
+  transform: scaleY(0);
+}
+
+.content img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* 列表样式 - 统一有序和无序列表的样式 */
+.content ol,
+.content ul {
+  margin-left: 0; /* 移除固定缩进，继承父级 */
+  margin-top: 0;
+  margin-bottom: 0; /* 减小下间距，与上间距一致 */
+  padding-left: 1.5em; /* 给标记符号留出空间 */
+  list-style-position: outside; /* 标记符号在外部，避免长文本换行问题 */
+  line-height: 1.6;
+  font-family:
+    'noto-sans-sc',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Microsoft YaHei',
+    '微软雅黑',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    sans-serif;
+  font-size: 18px;
+  color: #4b4848;
+}
+
+.content ol li,
+.content ul li {
+  margin-bottom: 4px; /* 减小列表项之间的间距 */
+  line-height: 1.6;
+  padding-left: 0.3em; /* 标记和文本之间的小间距 */
+}
+
+.content ol li:last-child,
+.content ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* 嵌套列表的间距调整 - 保持一致 */
+.content ol ol,
+.content ul ul,
+.content ol ul,
+.content ul ol {
+  margin-top: 4px; /* 减小嵌套列表与父项的间距 */
+  margin-bottom: 0; /* 嵌套列表下间距由父li控制 */
+  margin-left: 0; /* 嵌套列表不额外缩进，靠padding-left控制 */
+  font-size: 17px; /* 嵌套列表稍小 */
+}
+
+/* 二级嵌套列表 */
+.content ol ol ol,
+.content ul ul ul,
+.content ol ul ul,
+.content ul ol ol {
+  font-size: 16px;
+  color: #5a5757;
+}
+
+/* 三级嵌套列表 */
+.content ol ol ol ol,
+.content ul ul ul ul {
+  font-size: 15px;
+  color: #6a6767;
+}
+
+.content .archive-filters {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.content .archive-filters a,
+.content .archive-filters a:visited,
+.content .archive-filters a:active {
+  display: inline-block;
+  background: #fff;
+  border-radius: 3px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  margin: 0 6px 8px 0;
+  color: #454545;
+  border: 1px solid #454545;
+  padding: 7px 15px;
+  text-decoration: none;
+  font-family:
+    'noto-sans-sc',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Microsoft YaHei',
+    '微软雅黑',
+    sans-serif;
+  font-size: 14px;
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.content .archive-filters a:hover {
+  color: #969595;
+  border-color: #969595;
+}
+
+.content div.archive-title {
+  margin-left: 45px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family:
+    'noto-sans-sc',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Microsoft YaHei',
+    '微软雅黑',
+    sans-serif;
+  color: #454545;
+  font-size: 1.5em;
+  margin-bottom: 50px;
+}
+
+.content .archive-year {
+  margin-bottom: 40px;
+}
+
+.content .archive-year .year-title {
+  font-size: 28px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #454545;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.content ul.archive-list {
+  margin: 0 0 20px 45px;
+  list-style-type: none;
+  padding-left: 20px; /* 文章列表的缩进 */
+}
+
+.content ul.archive-list li.archive-item {
+  margin: 15px 0;
+  position: relative;
+  padding-left: 120px;
+}
+
+.content ul.archive-list li.archive-item .archive-date {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+}
+
+.content ul.archive-list li a,
+.content ul.archive-list li a:active,
+.content ul.archive-list li a:visited {
+  text-decoration: none;
+  color: #454545;
+  transition: color 0.3s ease;
+  font-size: 16px;
+}
+
+.content ul.archive-list li a:hover {
+  color: #969595;
+}
+
+.content ul.archive-list li a:hover {
+  color: #969595;
+}
+
+/* Quotes */
+blockquote {
+  border-left: 3px solid #5d686f;
+  padding: 0 15px;
+  font-style: italic;
+  margin: 1.5em 0 0;
+}
+blockquote cite::before {
+  content: ' — ';
+  padding: 0 0.3em;
+}
+blockquote > p:first-child {
+  margin: 0;
+}
+
+.pullquote {
+  text-align: left;
+  font-style: italic;
+  margin: 1.5em 0 0;
+}
+.pullquote.left {
+  width: 45%;
+  float: left;
+  margin: 1.5em 35px 1.5em 0;
+}
+.pullquote.right {
+  width: 45%;
+  float: right;
+  margin: 1.5em 0 1.5em 35px;
+}
+.pullquote.blur {
+  background-color: #eef0f1;
+}
