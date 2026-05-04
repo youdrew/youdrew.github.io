@@ -90,7 +90,7 @@ export function initTagGraph() {
   });
   let bfsHead = 0;
   while (bfsHead < bfsQueue.length) {
-    var curr = bfsQueue[bfsHead++];
+    const curr = bfsQueue[bfsHead++];
     (adj[curr] || []).forEach(function (nb) {
       if (dist[nb] === undefined) {
         dist[nb] = dist[curr] + 1;
@@ -147,7 +147,7 @@ export function initTagGraph() {
     const q = [ft];
     let qi = 0;
     while (qi < q.length) {
-      var c = q[qi++];
+      const c = q[qi++];
       (adj[c] || []).forEach(function (nb) {
         if (d[nb] === undefined) {
           d[nb] = d[c] + 1;
@@ -320,9 +320,6 @@ export function initTagGraph() {
       initialCenter = [(fMinX + fMaxX) / 2, (fMinY + fMaxY) / 2];
     }
   }
-
-  // Calculate the label visibility threshold
-  const showAllLabels = data.nodes.length <= 18;
 
   // Prepare nodes
   data.nodes.forEach(function (node) {
@@ -547,7 +544,7 @@ export function initTagGraph() {
     // After force layout stabilizes, re-fit to ensure all filter nodes are visible
     if (filterNodes.length > 0) {
       let fitAttempts = 0;
-      var fitInterval = setInterval(function () {
+      const fitInterval = setInterval(function () {
         fitAttempts++;
         // Sample current positions from the chart's internal model
         const model = chart.getModel();
@@ -644,8 +641,8 @@ export function initTagGraph() {
 
     // Unified zoom & pan via ZRender (roam is disabled to avoid dual-layer conflicts)
     const zr = chart.getZr();
-    var currentZoom = initialZoom || 1;
-    var currentCenter = initialCenter ? [initialCenter[0], initialCenter[1]] : [0, 0];
+    let currentZoom = initialZoom || 1;
+    let currentCenter = initialCenter ? [initialCenter[0], initialCenter[1]] : [0, 0];
 
     // Zoom: mousewheel anywhere on canvas
     zr.on('mousewheel', function (e) {

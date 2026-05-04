@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2026/04/08/20260408.AgenticAIDevByAndrew/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="一、Agentic工作流简介1.1 什么是Agentic AI核心定义：基于LLM的应用通过多步骤执行来完成任务的流程。
+
+Non-agentic：单次prompt，one-shot完成（类似写作文不许用退格键）
+Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2026/04/08/20260408.AgenticAIDevByAndrew/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="Agentic工作流搭建教程笔记（吴恩达）">
+    
+    
+        <meta property="og:description" content="一、Agentic工作流简介1.1 什么是Agentic AI核心定义：基于LLM的应用通过多步骤执行来完成任务的流程。
+
+Non-agentic：单次prompt，one-shot完成（类似写作文不许用退格键）
+Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最">
+    
+    
+    
+        <meta property="article:published_time" content="2026-04-08T09:45:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.538Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="Agentic工作流搭建教程笔记（吴恩达）">
+    
+    
+        <meta name="twitter:description" content="一、Agentic工作流简介1.1 什么是Agentic AI核心定义：基于LLM的应用通过多步骤执行来完成任务的流程。
+
+Non-agentic：单次prompt，one-shot完成（类似写作文不许用退格键）
+Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/04/08/20260408.AgenticAIDevByAndrew/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/04/08/20260408.AgenticAIDevByAndrew/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/04/08/20260408.AgenticAIDevByAndrew/">
+    
+
+    <!-- Title -->
+    
+    <title>Agentic工作流搭建教程笔记（吴恩达） - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-04-08-20260408-AgenticAIDevByAndrew-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/agenticAI.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/04/08/20260408.AgenticAIDevByAndrew/" class="previous" data-title="Notes on Building Agentic Workflows (And..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/03/22/20260322.Claude%20Code%20Tips/" class="next" data-title="Claude Code Tips ..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Agentic工作流搭建教程笔记（吴恩达）</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="一、Agentic工作流简介"><a href="#一、Agentic工作流简介" class="headerlink" title="一、Agentic工作流简介"></a>一、Agentic工作流简介</h1><h2 id="1-1-什么是Agentic-AI"><a href="#1-1-什么是Agentic-AI" class="headerlink" title="1.1 什么是Agentic AI"></a>1.1 什么是Agentic AI</h2><p><strong>核心定义</strong>：基于LLM的应用通过多步骤执行来完成任务的流程。</p>
+<ul>
+<li><strong>Non-agentic</strong>：单次prompt，one-shot完成（类似写作文不许用退格键）</li>
+<li><strong>Agentic</strong>：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最终定稿</li>
+</ul>
+<blockquote>
+<p>类比：做番茄炒蛋，让多个AI各司其职（备料&#x2F;烹饪&#x2F;摆盘&#x2F;审查）</p>
+</blockquote>
+<img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-19%2016.14.14.png" alt="截屏2026-04-19 16.14.14" style="zoom:50%;" />
+
+<p>蓝色标注的分别是AI的不同发展阶段：从prompt engineer到content engineer再到Hermes engineer（Agent）.</p>
+<h2 id="1-2-自主性等级"><a href="#1-2-自主性等级" class="headerlink" title="1.2 自主性等级"></a>1.2 自主性等级</h2><p>Agentic是一个<strong>形容词</strong>而非名词，避免”什么才算真正的Agent”的争论。</p>
+<table>
+<thead>
+<tr>
+<th>低自主</th>
+<th>高自主</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>所有步骤预定义，工具调用硬编码</td>
+<td>Agent动态决策步骤顺序</td>
+</tr>
+<tr>
+<td>AI只负责生成文本</td>
+<td>Agent可自行创建新工具</td>
+</tr>
+<tr>
+<td>“听话但没脑子的助手”</td>
+<td>“聪明、有责任心的实习生”</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>本质：不只是”能干活”，而是”知道怎么思考如何干活、用什么工具、能自检纠错”。<br>一个合格的Agentic AI应该能<strong>自主规划</strong>（Planning，自己选择工具）和<strong>自主反思</strong>（Reflection，有记忆和反思）。</p>
+</blockquote>
+<h2 id="1-3-三大益处"><a href="#1-3-三大益处" class="headerlink" title="1.3 三大益处"></a>1.3 三大益处</h2><ol>
+<li><strong>性能大幅提升</strong>：HumanEval上，Agentic的GPT-3.5可超越Non-agentic的GPT-4（BTW这些听起来都是上古模型了）</li>
+<li><strong>并行加速</strong>：多个LLM实例同时搜索&#x2F;阅读，汇总后输出</li>
+<li><strong>模块化设计</strong>：自由替换组件（搜索引擎、不同LLM、不同工具）</li>
+</ol>
+<h2 id="1-4-任务分解方法"><a href="#1-4-任务分解方法" class="headerlink" title="1.4 任务分解方法"></a>1.4 任务分解方法</h2><p>核心方法论：</p>
+<ol>
+<li>观察人类行为 → 2. 拆解为子步骤 → 3. 评估LLM&#x2F;工具可行性 → 4. 迭代优化</li>
+</ol>
+<p><strong>案例——写文章的递进分解</strong>：</p>
+<ul>
+<li>1步：直接生成（肤浅）</li>
+<li>3步：大纲 → 搜索 → 写文（较好但可能脱节）</li>
+<li>5步：大纲 → 搜索 → 初稿 → 自我批评 → 修改（最好，模拟人的写-反思-修改循环）</li>
+<li>核心方法论：<strong>“如果某一步骤效果不好，就把它再拆成更小的子步骤。”</strong></li>
+</ul>
+<p>构建模块：<strong>模型</strong>（LLM）+ <strong>工具</strong>（API、信息检索、代码执行）</p>
+<h2 id="1-5-Agentic-AI评估（Evals，在做之前对项目进行思考）"><a href="#1-5-Agentic-AI评估（Evals，在做之前对项目进行思考）" class="headerlink" title="1.5 Agentic AI评估（Evals，在做之前对项目进行思考）"></a>1.5 Agentic AI评估（Evals，在做之前对项目进行思考）</h2><blockquote>
+<p>吴恩达强调：<strong>区分有效和无效实践者的最大预测因子，是围绕评估和错误分析的规范开发流程。</strong></p>
+</blockquote>
+<p>方法论：</p>
+<ol>
+<li>先构建，观察输出，再做评估（不要预先设计所有评估标准）：看看这事情咋弄。</li>
+<li>识别低质量输出，定义错误类型。</li>
+<li>建立评估指标追踪错误：编写脚本自动扫描智能体的所有输出，统计提及错误输出的次数和频率。</li>
+<li>主观标准可用 <strong>LLM as Judge</strong>（1-5分打分，但是不要直接让大模型去打分）。</li>
+</ol>
+<p>两类评估：<strong>端到端评估</strong>（整体输出质量） &#x2F; <strong>组件级评估</strong>（单步质量）（这两种就是一个整体一个局部评估）</p>
+<h2 id="1-6-四大设计模式总览"><a href="#1-6-四大设计模式总览" class="headerlink" title="1.6 四大设计模式总览"></a>1.6 四大设计模式总览</h2><table>
+<thead>
+<tr>
+<th align="center">模式</th>
+<th align="center">核心思想</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Reflection 反思</strong></td>
+<td align="center">多Agent检查、评估、改进自己的输出。</td>
+</tr>
+<tr>
+<td align="center"><strong>Tool Use 工具使用</strong></td>
+<td align="center">给LLM调用外部工具&#x2F;函数的能力</td>
+</tr>
+<tr>
+<td align="center"><strong>Planning 规划</strong></td>
+<td align="center">模型自主决定复杂任务的步骤序列</td>
+</tr>
+<tr>
+<td align="center"><strong>Multi-Agent 多智能体</strong></td>
+<td align="center">多个不同专长的Agent协作</td>
+</tr>
+</tbody></table>
+<h3 id="现实案例：oh-my-claudecode（OMC）"><a href="#现实案例：oh-my-claudecode（OMC）" class="headerlink" title="现实案例：oh-my-claudecode（OMC）"></a>现实案例：oh-my-claudecode（OMC）</h3><p>OMC （oh-My-Claude）是一个真实的 Agent 系统，完美对应了这四大设计模式：</p>
+<ul>
+<li><strong>Reflection 反思</strong>：<code>code-reviewer</code> &#x2F; <code>verifier</code> agent — executor 写完代码后，由独立的 reviewer 审查。这就是笔记 2.1 说的”用不同模型，一个生成一个审查（1+1&gt;2）”。OMC 的规则是 <em>Never self-approve in the same active context</em>，写代码和审代码必须是两个独立的 Agent。</li>
+<li><strong>Tool Use 工具使用</strong>：MCP servers（Context7 查文档、filesystem 操作文件、LSP 做代码分析）、Skill 系统（<code>/commit</code>、<code>/plan</code> 等可调用技能）、Bash 工具 — 对应笔记 3.1 的”工具就是函数，模型自主决定何时使用”。Claude 会根据任务自主判断该用哪个工具。</li>
+<li><strong>Planning 规划</strong>：<code>planner</code> agent、<code>/plan</code> skill、plan mode — 对应笔记 5.2 的”LLM输出结构化计划后再执行”。在 plan mode 下，Claude 会先探索代码库、设计方案，等你批准后才动手写代码。</li>
+<li><strong>Multi-Agent 多智能体</strong>：Team 模式（<code>/team</code>）可以同时启动多个专项 Agent（explorer 负责搜索、executor 负责写代码、reviewer 负责审查、designer 负责 UI…），它们共享 TaskList，通过 SendMessage 通信协作。</li>
+</ul>
+<hr>
+<h1 id="二、反思设计模式（Reflection）"><a href="#二、反思设计模式（Reflection）" class="headerlink" title="二、反思设计模式（Reflection）"></a>二、反思设计模式（Reflection）</h1><figure style="text-align: center; margin: 24px 0;">
+  <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.19.57.png" alt="使用反射模式真的是能提升效果的" style="max-width: 66%; height: auto; display: inline-block; border-radius: 8px;" />
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">使用反射模式真的是能提升效果的。所以人有多时候多反思一下自己，可能真的就能进步。🐶</figcaption>
+</figure>
+
+
+<h2 id="2-1-反思提升任务输出"><a href="#2-1-反思提升任务输出" class="headerlink" title="2.1 反思提升任务输出"></a>2.1 反思提升任务输出</h2><p>核心类比：人类会审查和修改草稿，AI也可以。</p>
+<p><strong>邮件写作案例</strong>：</p>
+<ul>
+<li>AI生成V1 → 将V1反馈给LLM并附上反思prompt → 生成改进的V2</li>
+</ul>
+<p><strong>代码写作进阶路径</strong>：</p>
+<ul>
+<li>基础：LLM写代码V1 → LLM审查生成V2</li>
+<li>进阶：用不同模型——一个生成，一个推理模型审查（1+1&gt;2）</li>
+<li>终极：结合外部反馈——在沙箱执行V1，捕获错误，反馈给LLM生成V2</li>
+</ul>
+<blockquote>
+<p>关键：反思是工程实践而非魔法；<strong>外部反馈是关键区分因素</strong></p>
+</blockquote>
+<h2 id="2-2-Internal——自我-反思的两条黄金法则"><a href="#2-2-Internal——自我-反思的两条黄金法则" class="headerlink" title="2.2 Internal——自我 反思的两条黄金法则"></a>2.2 Internal——自我 反思的两条黄金法则</h2><ol>
+<li><strong>明确指示反思动作</strong>：说”审查””检查””验证”（具体的事情），不只是”改进”。<strong>客观任务</strong>：构建ground truth数据集 + 自动化代码评估（如SQL查询正确性）</li>
+<li><strong>指定具体标准</strong>：列出明确的评估维度（如”专业语气””事实准确”）。<strong>主观任务</strong>：用**评分标准（Rubric）**引导LLM打分，避免直接比较（存在位置偏差）</li>
+</ol>
+<p>论文”Self-refine”表明：在全部7个任务、4个模型上，反思一致地提升了性能。</p>
+<h2 id="2-3-external——外部-突破性能天花板"><a href="#2-3-external——外部-突破性能天花板" class="headerlink" title="2.3 external——外部 突破性能天花板"></a>2.3 external——外部 突破性能天花板</h2><p>三条性能曲线：</p>
+<ul>
+<li>🔴 无反思：prompt工程快速提升后<strong>停滞</strong></li>
+<li>🔵 有反思：突破停滞到更高水平</li>
+<li>🟡 反思+外部反馈：再次突破到最高水平</li>
+</ul>
+<p>三类外部反馈：正则匹配（避免提竞品）→ 搜索验证（事实核查）→ 字数检查（格式约束）</p>
+<blockquote>
+<p>外部反馈打破模型信息孤岛，解决固有弱点（精确计数、事实核实），实现闭环优化。</p>
+</blockquote>
+<figure style="text-align: center; margin: 24px 0;">
+  <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.33.25.png" alt="截屏2026-04-09 03.33.25" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">反思与外部反馈的性能曲线对比</figcaption>
+</figure>
+
+<hr>
+<h1 id="三、工具使用（Tool-Use）"><a href="#三、工具使用（Tool-Use）" class="headerlink" title="三、工具使用（Tool Use）"></a>三、工具使用（Tool Use）</h1><h2 id="3-1-工具的本质"><a href="#3-1-工具的本质" class="headerlink" title="3.1 工具的本质"></a>3.1 工具的本质</h2><p><strong>工具就是函数</strong>，模型自主决定何时使用。</p>
+<p>关键能力——<strong>条件调用</strong>：模型智能判断何时需要工具。</p>
+<ul>
+<li>“绿茶含多少咖啡因？” → 从内部知识回答</li>
+<li>“现在几点？” → 调用get_current_time工具</li>
+</ul>
+<p>多工具协作：日历助手可链式调用 check_calendar → make_appointment</p>
+<h2 id="3-2-LLM-是如何”调用”函数的？"><a href="#3-2-LLM-是如何”调用”函数的？" class="headerlink" title="3.2 LLM 是如何”调用”函数的？"></a>3.2 LLM 是如何”调用”函数的？</h2><blockquote>
+<p>LLM 理论上根本触碰不到函数的执行层——它从头到尾只做一件事：<strong>生成文本</strong>。<br>所谓的”调用函数”，本质是一个<strong>文本中转协议</strong>。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant U as 用户</span><br><span class="line">    participant S as 系统/工程代码</span><br><span class="line">    participant L as LLM</span><br><span class="line"></span><br><span class="line">    U-&gt;&gt;L: &quot;现在几点了？&quot;</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 1: 系统 prompt 告诉 LLM 可用工具</span><br><span class="line">    Note right of L: 系统 prompt 中包含：&lt;br/&gt;函数名: get_current_time&lt;br/&gt;描述: 获取当前时间&lt;br/&gt;参数: 无</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 2: LLM 输出结构化文本（没有执行任何东西！）</span><br><span class="line">    L--&gt;&gt;S: tool_calls: [&#123;&lt;br/&gt;  name: &quot;get_current_time&quot;,&lt;br/&gt;  arguments: &#123;&#125;&lt;br/&gt;&#125;]</span><br><span class="line"></span><br><span class="line">    Note over S: Step 3: 外层代码拦截&lt;br/&gt;真正执行函数&lt;br/&gt;拿到结果 &quot;15:20:45&quot;</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 4: 把结果塞回 LLM 上下文</span><br><span class="line">    S-&gt;&gt;L: &#123; role: &quot;tool&quot;,&lt;br/&gt;  content: &quot;15:20:45&quot; &#125;</span><br><span class="line"></span><br><span class="line">    L--&gt;&gt;S: &quot;现在是下午3点20分。&quot;</span><br><span class="line">    S-&gt;&gt;U: &quot;现在是下午3点20分。&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>三个关键认知</strong>：</p>
+<ol>
+<li><p><strong>LLM 不是在”调用”函数</strong> — 它只是在预测”接下来应该输出一段 JSON 表示我想用这个工具”。这是从大量代码和 API 文档训练中学到的模式。</p>
+</li>
+<li><p><strong>真正执行函数的是外层工程代码</strong> — Claude Code、OpenAI SDK、LangChain 这些框架负责解析 LLM 输出的结构化文本，执行函数，再把结果喂回去。</p>
+</li>
+<li><p><strong>LLM 的核心能力在于”判断”</strong> — 它决定”这个用户问题我该用内部知识回答，还是该调工具”。笔记 3.1 里”绿茶咖啡因”（内部知识）vs “现在几点”（调工具）就是这个判断。</p>
+</li>
+</ol>
+<ul>
+<li>早期需要手写prompt模板触发（如”FUNCTION: get_current_time()”），现代LLM已原生理解工具调用，无需硬编码触发语法。</li>
+</ul>
+<h2 id="3-3-工具语法与AI-SDK（写好函数让LLM调用）"><a href="#3-3-工具语法与AI-SDK（写好函数让LLM调用）" class="headerlink" title="3.3 工具语法与AI SDK（写好函数让LLM调用）"></a>3.3 工具语法与AI SDK（写好函数让LLM调用）</h2><p><a target="_blank" rel="noopener" href="https://github.com/andrewyng/aisuite">AI SDK</a>（Andrew Ng团队出品）统一多家LLM提供商访问：</p>
+<ul>
+<li>函数名 → Python函数名</li>
+<li>描述 → docstring</li>
+<li>参数类型 → 自动提取</li>
+</ul>
+<h2 id="3-4-模型自己写代码（LLM自己写自己调）"><a href="#3-4-模型自己写代码（LLM自己写自己调）" class="headerlink" title="3.4 模型自己写代码（LLM自己写自己调）"></a>3.4 模型自己写代码（LLM自己写自己调）</h2><p>传统方式（预定义add&#x2F;subtract等）vs 代码执行（让模型自己写代码）</p>
+<ul>
+<li>模型输出<code>&lt;execute_python&gt;</code>标签中的代码</li>
+<li>在沙箱中提取执行</li>
+<li>错误信息反馈给模型进行反思修改</li>
+</ul>
+<blockquote>
+<p>⚠️ 安全警告：真实案例——Agentic代码执行器运行<code>rm *.py</code>删除了项目所有文件。必须使用沙箱环境（Docker、E2B）。</p>
+</blockquote>
+<h2 id="3-5-MCP（Model-Context-Protocol）"><a href="#3-5-MCP（Model-Context-Protocol）" class="headerlink" title="3.5 MCP（Model Context Protocol）"></a>3.5 MCP（Model Context Protocol）</h2><p>MCP标准化LLM访问外部工具和数据源的方式。让LLM调用的“工具范围”更大。</p>
+<ul>
+<li><strong>问题</strong>：m个应用 × n个工具 &#x3D; m×n的工作量</li>
+<li><strong>MCP方案</strong>：建n个共享MCP Server，m个应用连接 → 工作量降为 m+n</li>
+<li><strong>Client</strong>：需要工具的应用（Cursor、Claude Desktop等）</li>
+<li><strong>Server</strong>：工具&#x2F;数据提供者（Slack、GitHub、PostgreSQL等）</li>
+</ul>
+<hr>
+<h1 id="四、构建Agentic-AI的实用技巧"><a href="#四、构建Agentic-AI的实用技巧" class="headerlink" title="四、构建Agentic AI的实用技巧"></a>四、构建Agentic AI的实用技巧</h1><h2 id="4-1-评估（Evals）实战"><a href="#4-1-评估（Evals）实战" class="headerlink" title="4.1 评估（Evals）实战"></a>4.1 评估（Evals）实战</h2><p>评估方式可以从两个维度划分，形成一个 2x2 的矩阵，用于指导评估的设计：</p>
+<table>
+<thead>
+<tr>
+<th>评估维度</th>
+<th>客观评估 (Objective Evals) （用代码检查）</th>
+<th>主观评估 (Subjective Evals) （用 LLM 作为评判者）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>每个问题有唯一正确答案 (Per-Example Ground Truth)</td>
+<td>案例一：发票日期提取 (每个发票有不同的正确日期，用代码检查是否匹配)</td>
+<td>案例三：统计黄金标准点 (每个主题有不同的重要观点，用 LLM 检查是否充分提及)</td>
+</tr>
+<tr>
+<td>只有统一规则 &#x2F; 格式 &#x2F; 标准，没有固定答案 (No Per-Example Ground Truth)</td>
+<td>案例二：营销文案长度 (所有标题都要求是 10 个词，用代码检查是否符合统一标准)</td>
+<td>评分标准评估 (Rubric Grading) (例如，根据统一的清晰度评分标准来评估图表)</td>
+</tr>
+</tbody></table>
+<ol>
+<li>从快速而粗糙的评估开始： 不要因为觉得评估是一个大型项目，就不敢轻易建立，或者花漫长的时间去做理论调研。先用 10-20 个例子开始，快速获得一些指标来辅助人工观察。</li>
+<li>迭代改进评估：<ol>
+<li>随着系统和评估的成熟，可以增加评估集的规模。</li>
+<li>如果系统改进了但评估分数没有提高，意味着该改进评估本身了。</li>
+</ol>
+</li>
+<li>以专业人士的行为为灵感： 对于自动化人类任务的系统，观察系统在哪些方面性能不如人类专家，以此作为下一阶段工作的重点。</li>
+</ol>
+<h2 id="4-2-错误分析与优先级"><a href="#4-2-错误分析与优先级" class="headerlink" title="4.2 错误分析与优先级"></a>4.2 错误分析与优先级</h2><p>系统复杂度上升后，<strong>直觉驱动debug不可靠</strong>，需要系统化分析。</p>
+<p>核心方法：</p>
+<ol>
+<li><strong>检查traces和中间输出</strong>：每步输出叫”span”，合在一起叫”trace”</li>
+<li><strong>聚焦错误案例并量化</strong>：建表格追踪各组件失败率<ul>
+<li>例：搜索结果不满意45% vs 搜索关键词生成5% → 优先改搜索组件</li>
+<li>习惯性地多看看LLM和工具的交流过程。</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-3-组件级评估"><a href="#4-3-组件级评估" class="headerlink" title="4.3 组件级评估"></a>4.3 组件级评估</h2><p>类比单元测试 vs 集成测试。优势：更快迭代、信号更清晰、团队可并行。</p>
+<p>工作流：错误分析定位问题组件 → 组件级评估调优 → 端到端评估验证整体改善</p>
+<h2 id="4-4-解决问题的策略"><a href="#4-4-解决问题的策略" class="headerlink" title="4.4 解决问题的策略"></a>4.4 解决问题的策略</h2><p><strong>非LLM组件</strong>：调参数&#x2F;超参数（搜索结果数、RAG相似度阈值）、换供应商</p>
+<p><strong>LLM组件</strong>（按优先级）：</p>
+<ol>
+<li>改进Prompt（明确指令、few-shot示例）</li>
+<li>尝试不同LLM（用eval测试多个模型）</li>
+<li>任务分解（将复杂步骤拆为生成+反思）</li>
+<li>微调（最后手段，成本最高）</li>
+</ol>
+<h2 id="4-5-延迟与成本优化"><a href="#4-5-延迟与成本优化" class="headerlink" title="4.5 延迟与成本优化"></a>4.5 延迟与成本优化</h2><blockquote>
+<p>早期团队，<strong>输出质量远比延迟和成本重要</strong>。先优化质量，再优化延迟，最后优化成本。<br>还是以组建化的思想，先分析哪个组件最慢&#x2F;最贵，再针对性优化（如改prompt、换模型、减少调用频率）。</p>
+</blockquote>
+<h2 id="4-6-开发过程四阶段"><a href="#4-6-开发过程四阶段" class="headerlink" title="4.6 开发过程四阶段"></a>4.6 开发过程四阶段</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>核心</th>
+<th>分析活动</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 快速原型</td>
+<td>端到端先跑通（”先造垃圾”）</td>
+<td>手动检查输出、阅读traces</td>
+</tr>
+<tr>
+<td>2. 初始评估</td>
+<td>超越手动观察</td>
+<td>建10-20例端到端eval</td>
+</tr>
+<tr>
+<td>3. 严格分析</td>
+<td>需要精确改善方向</td>
+<td>错误分析，量化组件失败率</td>
+</tr>
+<tr>
+<td>4. 高效调优</td>
+<td>系统成熟，组件级改善</td>
+<td>组件级eval</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>开发者两大活动：<strong>构建</strong>（写代码）和<strong>分析</strong>（决定聚焦哪里）。团队常花太多时间构建、太少时间分析。</p>
+</blockquote>
+<hr>
+<h1 id="五、高度自治智能体的模式"><a href="#五、高度自治智能体的模式" class="headerlink" title="五、高度自治智能体的模式"></a>五、高度自治智能体的模式</h1><h2 id="5-1-规划工作流（Planning）"><a href="#5-1-规划工作流（Planning）" class="headerlink" title="5.1 规划工作流（Planning）"></a>5.1 规划工作流（Planning）</h2><p>规划模式：Agent<strong>自主决定</strong>工具调用序列，不硬编码。</p>
+<p>案例——客服助手（工具：查描述、查价格、查库存、查订单、处理购买、处理退货）：</p>
+<ul>
+<li>用户问”有100刀以下的圆墨镜吗？”</li>
+<li>LLM规划：查描述 → 查库存 → 查价格 → 输出答案</li>
+</ul>
+<p><strong>优势</strong>：能力丰富，无需预编排。<strong>风险</strong>：无法预测LLM的计划，可能不稳定。</p>
+<h2 id="5-2-结构化计划"><a href="#5-2-结构化计划" class="headerlink" title="5.2 结构化计划"></a>5.2 结构化计划</h2><p>自然语言计划有歧义 → 要求LLM输出<strong>结构化计划</strong>（JSON&#x2F;XML）：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;查找圆墨镜&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;get_item_descriptions&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="string">&quot;round sunglasses&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;检查库存&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;check_inventory&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$step1_result&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-3-代码即计划-Code-As-Action"><a href="#5-3-代码即计划-Code-As-Action" class="headerlink" title="5.3 代码即计划 Code As Action"></a>5.3 代码即计划 Code As Action</h2><figure style="text-align: center; margin: 24px 0;">
+  <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-12%2003.48.14.png" alt="截屏2026-04-12 03.48.14" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Code As Action — HuggingFace smolagents</figcaption>
+</figure>
+
+<p>参考HuggingFace smolagents的CodeAgent概念——让LLM直接写代码表达多步计划。</p>
+<p>优势：可调用大型库（Pandas数百函数）、表达力强、研究显示性能优于JSON&#x2F;文本计划。<br>风险：明确要求LLM编写的代码并需要沙箱执行。</p>
+<h2 id="5-4-多智能体工作流"><a href="#5-4-多智能体工作流" class="headerlink" title="5.4 多智能体工作流"></a>5.4 多智能体工作流</h2><p>即使所有Agent用同一个LLM，拆分复杂任务为独立角色也更有效。</p>
+<blockquote>
+<p>我个人觉得可能是因为提示词&#x2F;上下文不同，导致模型的关注点是不一样的。</p>
+</blockquote>
+<p><strong>优势</strong>：</p>
+<ol>
+<li><strong>任务分解</strong>：按角色&#x2F;技能自然分工</li>
+<li><strong>聚焦</strong>：开发者一次构建一个角色；更简单的任务 &#x3D; 更好的输出</li>
+<li><strong>模块化复用</strong>：通用Agent（如”图表设计师”）可跨应用复用</li>
+<li><strong>突破上下文限制</strong>：每个Agent处理自己的上下文（对128k上下文限制至关重要）</li>
+<li><strong>成本节省</strong>：更短的上下文 &#x3D; 更少的token &#x3D; 更低的成本和更快的响应</li>
+</ol>
+<h2 id="5-5-四种通信模式"><a href="#5-5-四种通信模式" class="headerlink" title="5.5 四种通信模式"></a>5.5 四种通信模式</h2><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>结构</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>**线性 **Linear</td>
+<td>顺序单向传递</td>
+<td>简单</td>
+<td>不灵活</td>
+<td>固定流程任务</td>
+</tr>
+<tr>
+<td>**层级（两层）**Hierarchy</td>
+<td>Manager协调所有下属</td>
+<td>易控制</td>
+<td>Manager瓶颈</td>
+<td>多任务协调</td>
+</tr>
+<tr>
+<td><strong>深层层级</strong> Deep Hierarchy</td>
+<td>子Agent有自己的子Agent</td>
+<td>可扩展、模块化</td>
+<td>复杂难调试</td>
+<td>大型系统</td>
+</tr>
+<tr>
+<td>**全连接（去中心化）**All to all</td>
+<td>所有Agent自由通信</td>
+<td>有创意</td>
+<td>结果不可预测</td>
+<td>探索&#x2F;生成任务</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>当前LLM能力下，线性和层级模式更实用（层级越深信息损失越大）。</p>
+<p>其实在这四种模式外，还有一种对话模式，比较类似去中心模式的降级版。对话模式每次都只有两个Agent互相对话交流，一方执行任务，另一方审查任务，最终交出一份双方都满意的结果。</p>
+</blockquote>
+<h2 id="5-6-框架推荐"><a href="#5-6-框架推荐" class="headerlink" title="5.6 框架推荐"></a>5.6 框架推荐</h2><ul>
+<li><strong>LangChain</strong>：线性工作流</li>
+<li><strong>smolagents</strong>：层级工作流（作者推荐——简单、低抽象、@tool装饰器易开发）</li>
+<li><strong>MetaGPT &#x2F; CamelAI</strong>：去中心化工作流</li>
+</ul>
+<hr>
+<h1 id="总结与个人思考"><a href="#总结与个人思考" class="headerlink" title="总结与个人思考"></a>总结与个人思考</h1><blockquote>
+<p>我之前在公司构建了一个通过ClaudeCode调用MCP去检查UE资产和打包报错Log的Skill（但或许这个Skill其实并不算Agentic AI），如果用Agentic AI的思维来做这个项目的话，它可能能做得更完善一点。而且我非常惊讶，吴恩达课程里面的几个测试项目的稳定性。</p>
+</blockquote>
+<ul>
+<li><ol>
+<li>规划（Planning）：定时器触发后，ClaudeCode先分析报错日志，判断需要调用哪个工具（查文档、查代码、查历史报错记录等），然后再执行工具，甚至自行编写数据库查询代码。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>反思（Reflection）：ClaudeCode在得到工具结果后，先进行自我审查，看看结果是否有用，如果不满意就调整查询参数重新调用工具，直到得到满意的结果。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>多智能体（Multi-Agent）：可以设计多个专门的Agent，比如一个专门分析日志的Agent，一个专门查询文档的Agent，一个专门查询代码的Agent，它们通过共享上下文进行协作。</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>评估（Evals）：可以设计一些自动化的评估脚本，来量化ClaudeCode在解决报错问题上的表现，比如成功率、平均解决时间等指标。（每一个结果执行完成之后，会有一个Json表格自动上传服务器，然后管理员每周看统计效果。并且可以让用户回答该AI解决思路是否解决了你的问题，组建一个问题解决方案数据库，这样AI遇到了类似问题就可以参考之前的解决方案）。</li>
+</ol>
+</li>
+</ul>
+<p>另外，不同的模型可能适用于不同的harness，因为模型的能力不太一样（李宏毅的课程提到了，比如说sonnet 他对于上下文会有焦虑，所以当内容很多的时候，它会出现明显的能力下降)。</p>
+<p>最后，回到 Tool Use 这个设计模式，一个关键的实践洞察是：<strong>MCP 工具的设计质量直接决定了 Agent 的能力上限</strong>。结合我在 UE MCP 项目中的经验，总结出以下六条工具设计原则：</p>
+<ol>
+<li><strong>Description 是最重要的设计——描述即接口</strong>：MCP 工具的调用方是 LLM 而非人类，LLM 靠 <code>description</code> 字段判断”什么时候该调用、怎么调用”。好的描述要包含：做什么、什么时候用、边界限制、参数语义、返回值含义。描述写得烂，工具就是死的。</li>
+<li><strong>粒度控制——以子系统为边界</strong>：工具太细（如按坐标轴拆分节点创建）导致调用链过长、容易出错累积；太粗（如一句话生成整个角色蓝图）变成黑盒，出错了 LLM 无法定位。以引擎子系统为边界划分，每个工具做一件完整的事。</li>
+<li><strong>返回值要”对 LLM 友好”</strong>：返回值必须包含足够的决策上下文——成功时提示下一步可用的操作，失败时给出 <code>error_type</code>、<code>error_message</code> 和 <code>suggestion</code>，让 Agent 能自我纠正而不是盲重试。</li>
+<li><strong>读写分离，副作用透明</strong>：LLM 在不确定时倾向于调用”看起来安全”的工具。只读工具和写操作要明确分类，写操作在描述里标注副作用（如”会在磁盘上创建新文件”、”不可逆操作”）。</li>
+<li><strong>幂等性设计，让 LLM 敢于重试</strong>：LLM 可能因超时或误判而重复调用同一工具，设计为重复调用安全（如：资产已存在则返回现有资产而非报错）。</li>
+<li><strong>分层工具结构</strong>：高层工具（面向任务的完整工作流，如 <code>setup_character_blueprint()</code>）减少调用次数；中层工具（面向单步操作）保证灵活性；底层 API 不直接暴露给 LLM。描述里引导 LLM 优先走高层路径。</li>
+</ol>
+<p>核心一句话：<strong>好用的 MCP 工具设计，本质是”让 LLM 像一个读过文档的开发者一样能正确使用它”。</strong> 这和吴恩达课程中 Tool Use 模式的核心思想完美对应——工具的质量决定了 Agent 自主决策的上限。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DfrdByE2H">https://www.bilibili.com/video/BV1DfrdByE2H</a> 课程地址</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/agentic-ai/tree/main">原github笔记</a>:这里面有可以运行的代码，可以通过在VSCode里面的Jupyter Notebook的形式来学习，会很方便。</li>
+<li>👆视频里面提到后面部分存在的另外一个视频：<a target="_blank" rel="noopener" href="https://www.deeplearning.ai/short-courses/agentic-knowledge-graph-construction/">代理知识图谱构建</a></li>
+<li>原始的视频<a target="_blank" rel="noopener" href="https://www.deeplearning.ai/courses/agentic-ai/">地址</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vrQbBBE6Z/">李宏毅课程</a>：这个课程有点像 Agent</li>
+</ol>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/Agentic-AI/" data-i18n-tag="Agentic AI">Agentic AI</a> <a href="/zh-CN/tags/Framework/" data-i18n-tag="Framework">Framework</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

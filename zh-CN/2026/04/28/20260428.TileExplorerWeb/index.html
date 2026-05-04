@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2026/04/28/20260428.TileExplorerWeb/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="Tile Explorer 是我在 24 小时内完成的一款浏览器三消瓦片解谜游戏。整个项目完全采用 Web 原生技术栈开发，渲染引擎使用 PixiJS（CDN 引入），音效通过 Web Audio API 程序化合成，零构建工具、零 npm 依赖——双击 index.html 即可运行。游戏已部署至 GitHub Pa">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2026/04/28/20260428.TileExplorerWeb/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="Tile Explorer Web — 24h AI GameDev 马拉松作品 (软件作品)">
+    
+    
+        <meta property="og:description" content="Tile Explorer 是我在 24 小时内完成的一款浏览器三消瓦片解谜游戏。整个项目完全采用 Web 原生技术栈开发，渲染引擎使用 PixiJS（CDN 引入），音效通过 Web Audio API 程序化合成，零构建工具、零 npm 依赖——双击 index.html 即可运行。游戏已部署至 GitHub Pa">
+    
+    
+    
+        <meta property="article:published_time" content="2026-04-28T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.538Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="Tile Explorer Web — 24h AI GameDev 马拉松作品 (软件作品)">
+    
+    
+        <meta name="twitter:description" content="Tile Explorer 是我在 24 小时内完成的一款浏览器三消瓦片解谜游戏。整个项目完全采用 Web 原生技术栈开发，渲染引擎使用 PixiJS（CDN 引入），音效通过 Web Audio API 程序化合成，零构建工具、零 npm 依赖——双击 index.html 即可运行。游戏已部署至 GitHub Pa">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/04/28/20260428.TileExplorerWeb/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/04/28/20260428.TileExplorerWeb/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/04/28/20260428.TileExplorerWeb/">
+    
+
+    <!-- Title -->
+    
+    <title>Tile Explorer Web — 24h AI GameDev 马拉松作品 (软件作品) - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-04-28-20260428-TileExplorerWeb-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="false">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/04/28/20260428.TileExplorerWeb/" class="previous" data-title="Tile Explorer Web — 24h AI GameDev Hacka..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/04/18/20260428.VeilLingo/" class="next" data-title="Veil Lingo — Onli..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Tile Explorer Web — 24h AI GameDev 马拉松作品 (软件作品)</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <p>Tile Explorer 是我在 24 小时内完成的一款浏览器三消瓦片解谜游戏。整个项目完全采用 Web 原生技术栈开发，渲染引擎使用 PixiJS（CDN 引入），音效通过 Web Audio API 程序化合成，零构建工具、零 npm 依赖——双击 <code>index.html</code> 即可运行。游戏已部署至 GitHub Pages，后端使用 Supabase 免费层实现在线排行榜，整体运维成本为 0 元&#x2F;月。</p>
+<div style="position: relative; width: 100%; padding-bottom: 75%; margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+  <iframe src="https://youdrew.github.io/24h-AI-GameDevTest/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" loading="lazy" allow="autoplay"></iframe>
+</div>
+<p style="text-align: center; font-size: 13px; color: #888; margin-top: 4px;">↑ 上方可直接游玩（需要联网加载）</p>
+
+<p><strong>核心玩法</strong>：版面上堆叠着带有图案的瓦片，点击可用瓦片将其送入底部 7 格收集槽，凑齐 3 个相同图案自动消除，清空版面上所有瓦片即通关。</p>
+<p>项目的主要亮点：</p>
+<ol>
+<li><strong>数学可解性保证</strong>：关卡布局由难度公式推导生成，瓦片总数 &#x3D; <code>patternTypes × setsPerType × 3</code>，从根本上保证每种图案数量均为 3 的倍数。同时，Web Worker 中运行回溯求解器对每个布局做正向验证，只有确认存在通关路径才会采用，并记录最优步数作为星级评分基准。</li>
+<li><strong>程序化音效合成</strong>：所有交互音效（点击、消除、连击、道具、警告等）均通过 Web Audio API 实时合成，零音频文件、零网络请求。连击音效基于 C 大调和弦递进系统设计，从三角波到锯齿波逐渐变亮，给玩家”蓄力”的感知。BGM 播放时音效自动 Ducking（降 6dB），200ms 后平滑恢复。</li>
+<li><strong>数据驱动架构</strong>：难度曲线、道具属性、主题配置均为可编辑的声明式配置表。策划可直接修改 JS 配置文件调整难度曲线和道具参数，无需触碰游戏逻辑代码。6 套视觉主题各有独立的 32 emoji 图案库、背景图和 BGM，每 3 关自动轮换。</li>
+<li><strong>PWA + 离线支持</strong>：实现了完整的 Progressive Web App 支持——可安装到手机主屏幕、支持完全离线游玩。Service Worker 采用三级缓存策略（静态资源预缓存、CDN 资源缓存优先、主题媒体 Stale-While-Revalidate），双 CDN 容灾自动回退。</li>
+<li><strong>零成本在线排行榜</strong>：使用 Supabase 免费层（PostgreSQL + REST API），首次访问自动生成 UUID 存入 localStorage，无需注册。数据库启用行级安全（RLS），客户端仅持有 anon key，输入经双重正则校验 + XSS 清洗。离线成绩存入本地队列，联网后自动提交。</li>
+</ol>
+<p>工程方面，瓦片覆盖关系使用空间哈希（O(n) 替代 O(n²)），消除特效使用预分配粒子对象池避免 GC 抖动，透明度计算遵循韦伯-费希纳定律的指数衰减模型，槽位采用智能聚类插入算法帮助玩家快速识别匹配机会。</p>
+<p>整个项目在 24 小时内完成，自有代码 14 个 JS 模块 + 3 个 CSS + 1 个 HTML，覆盖 10,000 关、6 种道具、6 套主题。过程中 AI 辅助生成了绝大部分代码与全部音效参数、BGM 资产，我主要负责架构设计、需求梳理、数据结构设计及代码质量把控。</p>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/zh-CN/tags/Web-Development/" data-i18n-tag="Web Development">Web Development</a> <a href="/zh-CN/tags/Game-Dev/" data-i18n-tag="Game Dev">Game Dev</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

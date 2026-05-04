@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/2026/04/12/20260412.SQLBasicsNotes/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="I. Introduction to SQL1.1 What is SQLSQL (Structured Query Language): the standard programming language for managing relational databases.
+
+RDBMS: Relational Da">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/2026/04/12/20260412.SQLBasicsNotes/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+        <meta property="og:title" content="SQL Basics Notes">
+    
+    
+        <meta property="og:description" content="I. Introduction to SQL1.1 What is SQLSQL (Structured Query Language): the standard programming language for managing relational databases.
+
+RDBMS: Relational Da">
+    
+    
+    
+        <meta property="article:published_time" content="2026-04-12T02:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.535Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="SQL Basics Notes">
+    
+    
+        <meta name="twitter:description" content="I. Introduction to SQL1.1 What is SQLSQL (Structured Query Language): the standard programming language for managing relational databases.
+
+RDBMS: Relational Da">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/04/12/20260412.SQLBasicsNotes/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/04/12/20260412.SQLBasicsNotes/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/04/12/20260412.SQLBasicsNotes/">
+    
+
+    <!-- Title -->
+    
+    <title>SQL Basics Notes - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2026-04-12-20260412-SQLBasicsNotes-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2026/04/16/20260416.Hermes%20Agent/" class="previous" data-title="Hermes Agent 调研笔记"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2026/04/12/20260412.SQLBasicsNotes/" class="next" data-title="SQL 基础笔记"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">SQL Basics Notes</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="I-Introduction-to-SQL"><a href="#I-Introduction-to-SQL" class="headerlink" title="I. Introduction to SQL"></a>I. Introduction to SQL</h1><h2 id="1-1-What-is-SQL"><a href="#1-1-What-is-SQL" class="headerlink" title="1.1 What is SQL"></a>1.1 What is SQL</h2><p><strong>SQL (Structured Query Language)</strong>: the standard programming language for managing relational databases.</p>
+<ul>
+<li><strong>RDBMS</strong>: Relational Database Management System</li>
+<li>Common databases (by type): MySQL, PostgreSQL, SQLite, Oracle, SQL Server<ol>
+<li>SQLite: lightweight, embedded — great for mobile apps</li>
+<li>MySQL: open-source, widely used — great for web apps</li>
+<li>PostgreSQL: open-source, feature-rich — great for complex apps</li>
+<li>Oracle: enterprise-grade, fully featured — great for large-scale apps</li>
+<li>SQL Server: developed by Microsoft — great for Windows environments</li>
+</ol>
+</li>
+</ul>
+<h2 id="1-2-Basic-SQL-Categories"><a href="#1-2-Basic-SQL-Categories" class="headerlink" title="1.2 Basic SQL Categories"></a>1.2 Basic SQL Categories</h2><p>Four schools of thought — these are the disciplines you use to communicate with a database. Master them and you’re a data wrangler; give up and you’re just a data janitor. 🐶</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Purpose</th>
+<th>Keywords</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DDL</td>
+<td>Define database structure</td>
+<td>CREATE, ALTER, DROP</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>Manipulate data</td>
+<td>INSERT, UPDATE, DELETE</td>
+</tr>
+<tr>
+<td>DQL</td>
+<td>Query data</td>
+<td>SELECT</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>Control permissions</td>
+<td>GRANT, REVOKE</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="II-Basic-Syntax"><a href="#II-Basic-Syntax" class="headerlink" title="II. Basic Syntax"></a>II. Basic Syntax</h1><h2 id="2-1-Basic-Rules"><a href="#2-1-Basic-Rules" class="headerlink" title="2.1 Basic Rules"></a>2.1 Basic Rules</h2><ul>
+<li>SQL statements end with a semicolon <code>;</code> (some databases allow omitting it)</li>
+<li>Keywords are case-insensitive, but the convention is to write keywords in uppercase and table&#x2F;column names in lowercase</li>
+<li>Strings and dates are wrapped in single quotes <code>&#39; &#39;</code></li>
+<li>Comments: <code>-- single-line comment</code>, <code>/* multi-line comment */</code></li>
+</ul>
+<h2 id="2-2-Writing-Style"><a href="#2-2-Writing-Style" class="headerlink" title="2.2 Writing Style"></a>2.2 Writing Style</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Recommended writing style</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    id,</span><br><span class="line">    name,</span><br><span class="line">    email</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    users				<span class="comment">/* Whether to use double quotes depends on the database type */</span></span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    status <span class="operator">=</span> <span class="string">&#x27;active&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">    create_time <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-Common-Operators"><a href="#2-3-Common-Operators" class="headerlink" title="2.3 Common Operators"></a>2.3 Common Operators</h2><h3 id="Arithmetic-Operators"><a href="#Arithmetic-Operators" class="headerlink" title="Arithmetic Operators"></a>Arithmetic Operators</h3><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+</code></td>
+<td>Addition</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Subtraction</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Multiplication</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Division</td>
+</tr>
+<tr>
+<td><code>%</code> or <code>MOD()</code></td>
+<td>Modulo</td>
+</tr>
+</tbody></table>
+<h3 id="Comparison-Operators"><a href="#Comparison-Operators" class="headerlink" title="Comparison Operators"></a>Comparison Operators</h3><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>=</code></td>
+<td>Equal to</td>
+</tr>
+<tr>
+<td><code>&lt;&gt;</code> or <code>!=</code></td>
+<td>Not equal to</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Less than</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal to</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Less than or equal to</td>
+</tr>
+</tbody></table>
+<h3 id="Logical-Operators"><a href="#Logical-Operators" class="headerlink" title="Logical Operators"></a>Logical Operators</h3><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>AND</code></td>
+<td>Logical AND (higher precedence than OR — use parentheses like in C++)</td>
+</tr>
+<tr>
+<td><code>OR</code></td>
+<td>Logical OR</td>
+</tr>
+<tr>
+<td><code>NOT</code></td>
+<td>Logical NOT</td>
+</tr>
+</tbody></table>
+<h2 id="2-4-Common-Commands-MySQL"><a href="#2-4-Common-Commands-MySQL" class="headerlink" title="2.4 Common Commands (MySQL)"></a>2.4 Common Commands (MySQL)</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Show all databases</span></span><br><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Show all tables in the current database</span></span><br><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- View table structure</span></span><br><span class="line"><span class="keyword">DESC</span> table_name;</span><br><span class="line"><span class="comment">-- or</span></span><br><span class="line"><span class="keyword">DESCRIBE</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- View the CREATE TABLE statement</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE TABLE</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Show full column info for a table</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">FULL</span> COLUMNS <span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-⚠️-Things-to-Watch-Out-For"><a href="#2-5-⚠️-Things-to-Watch-Out-For" class="headerlink" title="2.5 ⚠️ Things to Watch Out For"></a>2.5 ⚠️ Things to Watch Out For</h2><ol>
+<li>Query syntax keywords have a specific ordering relationship.</li>
+<li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-12%2018.51.16.png" alt="Screenshot 2026-04-12 18.51.16"></li>
+</ol>
+<hr>
+<h1 id="III-DDL-—-Data-Definition"><a href="#III-DDL-—-Data-Definition" class="headerlink" title="III. DDL — Data Definition"></a>III. DDL — Data Definition</h1><h2 id="2-1-Creating-a-Database"><a href="#2-1-Creating-a-Database" class="headerlink" title="2.1 Creating a Database"></a>2.1 Creating a Database</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DATABASE database_name;</span><br><span class="line">USE database_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-Creating-a-Table"><a href="#2-2-Creating-a-Table" class="headerlink" title="2.2 Creating a Table"></a>2.2 Creating a Table</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> table_name (</span><br><span class="line">    column1 data_type [<span class="keyword">constraint</span>],</span><br><span class="line">    column2 data_type [<span class="keyword">constraint</span>],</span><br><span class="line">    ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Common data types</strong>:</p>
+<ul>
+<li>Integer: <code>INT</code>, <code>BIGINT</code></li>
+<li>Decimal: <code>DECIMAL(m,n)</code>, <code>FLOAT</code>, <code>DOUBLE</code></li>
+<li>String: <code>VARCHAR(n)</code>, <code>CHAR(n)</code>, <code>TEXT</code></li>
+<li>Date&#x2F;Time: <code>DATE</code>, <code>DATETIME</code>, <code>TIMESTAMP</code></li>
+</ul>
+<h2 id="2-3-Constraints"><a href="#2-3-Constraints" class="headerlink" title="2.3 Constraints"></a>2.3 Constraints</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> users (</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT,</span><br><span class="line">    name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">    email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">UNIQUE</span>,</span><br><span class="line">    age <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">18</span>,</span><br><span class="line">    <span class="keyword">FOREIGN KEY</span> (dept_id) <span class="keyword">REFERENCES</span> departments(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>Common constraints</strong>:</p>
+<ul>
+<li><code>PRIMARY KEY</code>: primary key, uniquely identifies a row</li>
+<li><code>NOT NULL</code>: value cannot be null</li>
+<li><code>UNIQUE</code>: value must be unique</li>
+<li><code>DEFAULT</code>: default value</li>
+<li><code>FOREIGN KEY</code>: foreign key constraint</li>
+<li><code>AUTO_INCREMENT</code>: auto-increment (MySQL)</li>
+</ul>
+<h2 id="2-4-Altering-Table-Structure"><a href="#2-4-Altering-Table-Structure" class="headerlink" title="2.4 Altering Table Structure"></a>2.4 Altering Table Structure</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Add a column</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> table_name <span class="keyword">ADD</span> column_name data_type;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Modify a column</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> table_name MODIFY column_name new_data_type;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Drop a column</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> table_name <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> column_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Rename a table</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> table_name RENAME <span class="keyword">TO</span> new_table_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-Dropping-a-Table"><a href="#2-5-Dropping-a-Table" class="headerlink" title="2.5 Dropping a Table"></a>2.5 Dropping a Table</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> table_name;           <span class="comment">-- Drop the table entirely</span></span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> table_name;       <span class="comment">-- Clear all data (keep the structure)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="III-DML-—-Data-Manipulation"><a href="#III-DML-—-Data-Manipulation" class="headerlink" title="III. DML — Data Manipulation"></a>III. DML — Data Manipulation</h1><h2 id="3-1-Inserting-Data"><a href="#3-1-Inserting-Data" class="headerlink" title="3.1 Inserting Data"></a>3.1 Inserting Data</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Insert a single row</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> table_name (col1, col2) <span class="keyword">VALUES</span> (val1, val2);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Insert multiple rows</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> table_name (col1, col2) <span class="keyword">VALUES</span></span><br><span class="line">(val1, val2),</span><br><span class="line">(val3, val4),</span><br><span class="line">(val5, val6);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Import from another table</span></span><br><span class="line"><span class="keyword">INSERT INTO</span> table_name <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> other_table <span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-Updating-Data"><a href="#3-2-Updating-Data" class="headerlink" title="3.2 Updating Data"></a>3.2 Updating Data</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> table_name</span><br><span class="line"><span class="keyword">SET</span> col1 <span class="operator">=</span> new_val1, col2 <span class="operator">=</span> new_val2</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-Deleting-Data"><a href="#3-3-Deleting-Data" class="headerlink" title="3.3 Deleting Data"></a>3.3 Deleting Data</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="IV-DQL-—-Data-Query-Core"><a href="#IV-DQL-—-Data-Query-Core" class="headerlink" title="IV. DQL — Data Query (Core)"></a>IV. DQL — Data Query (Core)</h1><h2 id="4-1-Basic-Queries"><a href="#4-1-Basic-Queries" class="headerlink" title="4.1 Basic Queries"></a>4.1 Basic Queries</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Query all columns</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Query specific columns</span></span><br><span class="line"><span class="keyword">SELECT</span> col1, col2 <span class="keyword">FROM</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Deduplicate</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> col <span class="keyword">FROM</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Alias</span></span><br><span class="line"><span class="keyword">SELECT</span> col <span class="keyword">AS</span> alias <span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-Conditional-Queries-—-WHERE"><a href="#4-2-Conditional-Queries-—-WHERE" class="headerlink" title="4.2 Conditional Queries — WHERE"></a>4.2 Conditional Queries — WHERE</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Comparison operators</span></span><br><span class="line"><span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">18</span></span><br><span class="line"><span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;Alice&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> age <span class="operator">&gt;=</span> <span class="number">18</span> <span class="keyword">AND</span> age <span class="operator">&lt;=</span> <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Range</span></span><br><span class="line"><span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">18</span> <span class="keyword">AND</span> <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Enumeration</span></span><br><span class="line"><span class="keyword">WHERE</span> status <span class="keyword">IN</span> (<span class="string">&#x27;active&#x27;</span>, <span class="string">&#x27;pending&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Pattern matching</span></span><br><span class="line"><span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;A%&#x27;</span>       <span class="comment">-- starts with A</span></span><br><span class="line"><span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;%son%&#x27;</span>    <span class="comment">-- contains &quot;son&quot;</span></span><br><span class="line"><span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;A_&#x27;</span>       <span class="comment">-- starts with A, exactly 2 characters</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Null checks</span></span><br><span class="line"><span class="keyword">WHERE</span> email <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">WHERE</span> email <span class="keyword">IS</span> <span class="keyword">NOT NULL</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-Sorting-—-ORDER-BY"><a href="#4-3-Sorting-—-ORDER-BY" class="headerlink" title="4.3 Sorting — ORDER BY"></a>4.3 Sorting — ORDER BY</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">ORDER</span> <span class="keyword">BY</span> col1 <span class="keyword">ASC</span>, col2 <span class="keyword">DESC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ASC: ascending (default)</span></span><br><span class="line"><span class="comment">-- DESC: descending</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-4-Limiting-Results-—-LIMIT"><a href="#4-4-Limiting-Results-—-LIMIT" class="headerlink" title="4.4 Limiting Results — LIMIT"></a>4.4 Limiting Results — LIMIT</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- MySQL</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name LIMIT <span class="number">10</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name LIMIT <span class="number">5</span>, <span class="number">10</span>;  <span class="comment">-- Start from row 5, fetch 10 rows</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- SQL Server</span></span><br><span class="line"><span class="keyword">SELECT</span> TOP <span class="number">10</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Oracle</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> ROWNUM <span class="operator">&lt;=</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-5-Aggregate-Functions"><a href="#4-5-Aggregate-Functions" class="headerlink" title="4.5 Aggregate Functions"></a>4.5 Aggregate Functions</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="built_in">COUNT</span>(<span class="operator">*</span>)          <span class="keyword">AS</span> total_rows,</span><br><span class="line">    <span class="built_in">COUNT</span>(col)        <span class="keyword">AS</span> non_null_count,</span><br><span class="line">    <span class="built_in">SUM</span>(col)          <span class="keyword">AS</span> total,</span><br><span class="line">    <span class="built_in">AVG</span>(col)          <span class="keyword">AS</span> average,</span><br><span class="line">    <span class="built_in">MAX</span>(col)          <span class="keyword">AS</span> maximum,</span><br><span class="line">    <span class="built_in">MIN</span>(col)          <span class="keyword">AS</span> minimum</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-6-Grouping-—-GROUP-BY"><a href="#4-6-Grouping-—-GROUP-BY" class="headerlink" title="4.6 Grouping — GROUP BY"></a>4.6 Grouping — GROUP BY</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> col, aggregate_function</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> col</span><br><span class="line"><span class="keyword">HAVING</span> aggregate_condition;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note</strong>: <code>WHERE</code> filters before grouping; <code>HAVING</code> filters after grouping.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Example: average salary per department</span></span><br><span class="line"><span class="keyword">SELECT</span> dept_id, <span class="built_in">AVG</span>(salary) <span class="keyword">AS</span> avg_salary</span><br><span class="line"><span class="keyword">FROM</span> employees</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> dept_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">AVG</span>(salary) <span class="operator">&gt;</span> <span class="number">5000</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-7-Multi-Table-Queries"><a href="#4-7-Multi-Table-Queries" class="headerlink" title="4.7 Multi-Table Queries"></a>4.7 Multi-Table Queries</h2><h3 id="Joins-JOIN"><a href="#Joins-JOIN" class="headerlink" title="Joins (JOIN)"></a>Joins (JOIN)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- INNER JOIN: only keep matching rows</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> table2 <span class="keyword">ON</span> table1.col <span class="operator">=</span> table2.col;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- LEFT JOIN: keep all rows from the left table; NULLs where there&#x27;s no match on the right</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> table2 <span class="keyword">ON</span> table1.col <span class="operator">=</span> table2.col;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- RIGHT JOIN: keep all rows from the right table</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> table2 <span class="keyword">ON</span> table1.col <span class="operator">=</span> table2.col;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- FULL JOIN (MySQL doesn&#x27;t support this natively — simulate with UNION)</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table1 <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> table2 <span class="keyword">ON</span> ...</span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table1 <span class="keyword">RIGHT</span> <span class="keyword">JOIN</span> table2 <span class="keyword">ON</span> ...;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Subqueries"><a href="#Subqueries" class="headerlink" title="Subqueries"></a>Subqueries</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Subquery in WHERE</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> col <span class="operator">=</span> (<span class="keyword">SELECT</span> col <span class="keyword">FROM</span> ...);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- IN subquery</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> col <span class="keyword">IN</span> (<span class="keyword">SELECT</span> col <span class="keyword">FROM</span> ...);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- EXISTS subquery</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> <span class="keyword">condition</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-8-UNION-—-Combined-Queries"><a href="#4-8-UNION-—-Combined-Queries" class="headerlink" title="4.8 UNION — Combined Queries"></a>4.8 UNION — Combined Queries</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> col <span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">UNION</span>                 <span class="comment">-- merge and deduplicate</span></span><br><span class="line"><span class="keyword">SELECT</span> col <span class="keyword">FROM</span> table2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> col <span class="keyword">FROM</span> table1</span><br><span class="line"><span class="keyword">UNION</span> <span class="keyword">ALL</span>            <span class="comment">-- merge and keep duplicates</span></span><br><span class="line"><span class="keyword">SELECT</span> col <span class="keyword">FROM</span> table2;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="V-Common-Functions"><a href="#V-Common-Functions" class="headerlink" title="V. Common Functions"></a>V. Common Functions</h1><h2 id="5-1-String-Functions"><a href="#5-1-String-Functions" class="headerlink" title="5.1 String Functions"></a>5.1 String Functions</h2><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CONCAT(s1, s2)</code></td>
+<td>Concatenate strings</td>
+</tr>
+<tr>
+<td><code>LENGTH(s)</code></td>
+<td>Get string length</td>
+</tr>
+<tr>
+<td><code>UPPER(s)</code> &#x2F; <code>LOWER(s)</code></td>
+<td>Convert case</td>
+</tr>
+<tr>
+<td><code>TRIM(s)</code></td>
+<td>Strip leading&#x2F;trailing spaces</td>
+</tr>
+<tr>
+<td><code>SUBSTRING(s, start, len)</code></td>
+<td>Extract a substring</td>
+</tr>
+<tr>
+<td><code>REPLACE(s, old, new)</code></td>
+<td>Replace substring</td>
+</tr>
+<tr>
+<td><code>IFNULL(s, default)</code></td>
+<td>Replace NULL with a default value</td>
+</tr>
+</tbody></table>
+<h2 id="5-2-Numeric-Functions"><a href="#5-2-Numeric-Functions" class="headerlink" title="5.2 Numeric Functions"></a>5.2 Numeric Functions</h2><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ROUND(n, d)</code></td>
+<td>Round to d decimal places</td>
+</tr>
+<tr>
+<td><code>CEIL(n)</code> &#x2F; <code>FLOOR(n)</code></td>
+<td>Ceiling &#x2F; floor</td>
+</tr>
+<tr>
+<td><code>ABS(n)</code></td>
+<td>Absolute value</td>
+</tr>
+<tr>
+<td><code>MOD(n, m)</code></td>
+<td>Modulo</td>
+</tr>
+<tr>
+<td><code>RAND()</code></td>
+<td>Random number</td>
+</tr>
+</tbody></table>
+<h2 id="5-3-Date-Functions"><a href="#5-3-Date-Functions" class="headerlink" title="5.3 Date Functions"></a>5.3 Date Functions</h2><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>NOW()</code> &#x2F; <code>SYSDATE()</code></td>
+<td>Current date and time</td>
+</tr>
+<tr>
+<td><code>CURDATE()</code></td>
+<td>Current date</td>
+</tr>
+<tr>
+<td><code>YEAR(d)</code> &#x2F; <code>MONTH(d)</code> &#x2F; <code>DAY(d)</code></td>
+<td>Extract year &#x2F; month &#x2F; day</td>
+</tr>
+<tr>
+<td><code>DATE_FORMAT(d, format)</code></td>
+<td>Format a date</td>
+</tr>
+<tr>
+<td><code>DATE_ADD(d, INTERVAL n unit)</code></td>
+<td>Add&#x2F;subtract from a date</td>
+</tr>
+<tr>
+<td><code>DATEDIFF(d1, d2)</code></td>
+<td>Difference between two dates</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DATE_FORMAT(create_time, <span class="string">&#x27;%Y-%m-%d %H:%i:%s&#x27;</span>) <span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-4-Conditional-Logic"><a href="#5-4-Conditional-Logic" class="headerlink" title="5.4 Conditional Logic"></a>5.4 Conditional Logic</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- IF</span></span><br><span class="line"><span class="keyword">SELECT</span> IF(age <span class="operator">&gt;=</span> <span class="number">18</span>, <span class="string">&#x27;adult&#x27;</span>, <span class="string">&#x27;minor&#x27;</span>) <span class="keyword">FROM</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- CASE WHEN</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">CASE</span></span><br><span class="line">        <span class="keyword">WHEN</span> score <span class="operator">&gt;=</span> <span class="number">90</span> <span class="keyword">THEN</span> <span class="string">&#x27;A&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> score <span class="operator">&gt;=</span> <span class="number">80</span> <span class="keyword">THEN</span> <span class="string">&#x27;B&#x27;</span></span><br><span class="line">        <span class="keyword">WHEN</span> score <span class="operator">&gt;=</span> <span class="number">60</span> <span class="keyword">THEN</span> <span class="string">&#x27;C&#x27;</span></span><br><span class="line">        <span class="keyword">ELSE</span> <span class="string">&#x27;D&#x27;</span></span><br><span class="line">    <span class="keyword">END</span> <span class="keyword">AS</span> grade</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="VI-Indexes"><a href="#VI-Indexes" class="headerlink" title="VI. Indexes"></a>VI. Indexes</h1><h2 id="6-1-Index-Types"><a href="#6-1-Index-Types" class="headerlink" title="6.1 Index Types"></a>6.1 Index Types</h2><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Regular index</td>
+<td>Allows duplicate values</td>
+</tr>
+<tr>
+<td>Unique index</td>
+<td>Values must be unique</td>
+</tr>
+<tr>
+<td>Primary key index</td>
+<td>Auto-created with the primary key; unique and not null</td>
+</tr>
+<tr>
+<td>Full-text index</td>
+<td>Full-text search (MyISAM)</td>
+</tr>
+<tr>
+<td>Composite index</td>
+<td>Spans multiple columns</td>
+</tr>
+</tbody></table>
+<h2 id="6-2-Creating-Indexes"><a href="#6-2-Creating-Indexes" class="headerlink" title="6.2 Creating Indexes"></a>6.2 Creating Indexes</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Create an index</span></span><br><span class="line"><span class="keyword">CREATE</span> INDEX index_name <span class="keyword">ON</span> table_name(col);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Create a unique index</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">UNIQUE</span> INDEX index_name <span class="keyword">ON</span> table_name(col);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Create a composite index</span></span><br><span class="line"><span class="keyword">CREATE</span> INDEX index_name <span class="keyword">ON</span> table_name(col1, col2);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- View indexes</span></span><br><span class="line"><span class="keyword">SHOW</span> INDEX <span class="keyword">FROM</span> table_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Drop an index</span></span><br><span class="line"><span class="keyword">DROP</span> INDEX index_name <span class="keyword">ON</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-3-Indexing-Principles"><a href="#6-3-Indexing-Principles" class="headerlink" title="6.3 Indexing Principles"></a>6.3 Indexing Principles</h2><ul>
+<li><strong>Good candidates</strong>: large datasets, frequently queried columns, columns often used in WHERE</li>
+<li><strong>Avoid</strong>: small datasets, frequently updated columns, low-cardinality columns</li>
+<li><strong>Leftmost prefix rule</strong>: composite indexes are used starting from the leftmost column</li>
+</ul>
+<hr>
+<h1 id="VII-Transactions"><a href="#VII-Transactions" class="headerlink" title="VII. Transactions"></a>VII. Transactions</h1><h2 id="7-1-Transaction-Properties-ACID"><a href="#7-1-Transaction-Properties-ACID" class="headerlink" title="7.1 Transaction Properties (ACID)"></a>7.1 Transaction Properties (ACID)</h2><ul>
+<li><strong>Atomicity</strong>: either everything succeeds or everything fails</li>
+<li><strong>Consistency</strong>: data is in a valid state before and after the transaction</li>
+<li><strong>Isolation</strong>: concurrent transactions don’t interfere with each other</li>
+<li><strong>Durability</strong>: once committed, data is permanently saved</li>
+</ul>
+<h2 id="7-2-Transaction-Control"><a href="#7-2-Transaction-Control" class="headerlink" title="7.2 Transaction Control"></a>7.2 Transaction Control</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Start a transaction</span></span><br><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="comment">-- or</span></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Commit</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Rollback</span></span><br><span class="line"><span class="keyword">ROLLBACK</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Set a savepoint</span></span><br><span class="line"><span class="keyword">SAVEPOINT</span> savepoint_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Rollback to a savepoint</span></span><br><span class="line"><span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> savepoint_name;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-3-Isolation-Levels"><a href="#7-3-Isolation-Levels" class="headerlink" title="7.3 Isolation Levels"></a>7.3 Isolation Levels</h2><table>
+<thead>
+<tr>
+<th>Isolation Level</th>
+<th>Dirty Read</th>
+<th>Non-Repeatable Read</th>
+<th>Phantom Read</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>READ UNCOMMITTED</td>
+<td>Possible</td>
+<td>Possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>Not possible</td>
+<td>Possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>REPEATABLE READ (default)</td>
+<td>Not possible</td>
+<td>Not possible</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>Not possible</td>
+<td>Not possible</td>
+<td>Not possible</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL level;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="VIII-Views"><a href="#VIII-Views" class="headerlink" title="VIII. Views"></a>VIII. Views</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Create a view</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_name <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> col1, col2</span><br><span class="line"><span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Use a view</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> view_name;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Drop a view</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">VIEW</span> view_name;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="IX-References"><a href="#IX-References" class="headerlink" title="IX. References"></a>IX. References</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bQxMehETa/">Bilibili Quick-Start Course</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://sqlzoo.net/wiki/SQL_Tutorial">SQL Practice Website</a></p>
+</li>
+</ol>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/SQL/" data-i18n-tag="SQL">SQL</a> <a href="/tags/Database/" data-i18n-tag="Database">Database</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="HDR 与 UE 内容渲染输出管线实践引言在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：
+
+引擎可以渲染出颜色过渡更细腻、更饱和的画面（更广色域的贴图）。
+虚幻正在朝着更专业的电影制作流程迈进。
+游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开始">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="HDR 与 UE 内容渲染输出管线实践（流程设计）">
+    
+    
+        <meta property="og:description" content="HDR 与 UE 内容渲染输出管线实践引言在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：
+
+引擎可以渲染出颜色过渡更细腻、更饱和的画面（更广色域的贴图）。
+虚幻正在朝着更专业的电影制作流程迈进。
+游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开始">
+    
+    
+    
+        <meta property="article:published_time" content="2024-01-01T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.536Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="HDR 与 UE 内容渲染输出管线实践（流程设计）">
+    
+    
+        <meta name="twitter:description" content="HDR 与 UE 内容渲染输出管线实践引言在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：
+
+引擎可以渲染出颜色过渡更细腻、更饱和的画面（更广色域的贴图）。
+虚幻正在朝着更专业的电影制作流程迈进。
+游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开始">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/">
+    
+
+    <!-- Title -->
+    
+    <title>HDR 与 UE 内容渲染输出管线实践（流程设计） - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2024-01-01-20240101-HDRUEContentRenderOutputPipeline-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/" class="previous" data-title="HDR and UE Content Render Output Pipelin..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2023/01/31/20230131.UEPerformanceAnalysisAndDebugging/" class="next" data-title="UE Performance An..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">HDR 与 UE 内容渲染输出管线实践（流程设计）</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="HDR-与-UE-内容渲染输出管线实践"><a href="#HDR-与-UE-内容渲染输出管线实践" class="headerlink" title="HDR 与 UE 内容渲染输出管线实践"></a>HDR 与 UE 内容渲染输出管线实践</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在 UE5.0 预览版阶段，Epic 就引入了和传统 DCC 软件相同的可自定义工作色域。这可能意味着：</p>
+<ol>
+<li>引擎可以渲染出颜色过渡更细腻、更饱和的画面（更广色域的贴图）。</li>
+<li>虚幻正在朝着更专业的电影制作流程迈进。</li>
+<li>游戏引擎和传统 DCC 软件的界限正在变得更模糊，越来越多团队开始采用 UE 作为影片制作工具。</li>
+</ol>
+<p>以下内容是自己做的一个实验：使用 UE5.2 输出广色域物料，并制作杜比 8.4 内容。</p>
+<p>这次实验的目标是：</p>
+<ol>
+<li>尽量在全流程中保留素材的高动态范围信息。</li>
+<li>完成一次电影工业流程中的 HDR 内容制作。</li>
+<li>在输出后对 HDR 与 SDR 模板内容进行一次模拟对比。</li>
+</ol>
+<h2 id="物料准备"><a href="#物料准备" class="headerlink" title="物料准备"></a>物料准备</h2><p>需要先下载 ACES 的 OCIO 配置文件。这里面包含很多电影工业流程里常用的转换，本质上就是色域映射和 Gamma 变换。</p>
+<p>我当时使用的是较新的 1.2 配置文件。</p>
+<p>关于 OCIO 配置文件的结构，我之前也单独写过一份文档，可以结合阅读。</p>
+<h2 id="UE5-中的输出设置"><a href="#UE5-中的输出设置" class="headerlink" title="UE5 中的输出设置"></a>UE5 中的输出设置</h2><h3 id="1-修改工作空间"><a href="#1-修改工作空间" class="headerlink" title="1. 修改工作空间"></a>1. 修改工作空间</h3><p>打开 UE，进入设置，先修改软件的工作空间。</p>
+<p>这里将工作空间改为 ACES AP0（ACES 2065-1）。这是 ACES 中最大的转换色域，理论上覆盖了所有人眼可见光范围。在这个空间里进行渲染，可以理解为：尽量以更高的颜色范围去模拟现实世界。</p>
+<p>修改完成后，画面颜色可能会有一些变化，这是正常现象。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/Pasted%20Graphic.jpg" alt="UE5 工作空间设置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">UE5 工作空间设置为 ACES AP0（ACES 2065-1）</figcaption>
+  </figure>
+</div>
+
+<h3 id="2-配置-OCIO-资源"><a href="#2-配置-OCIO-资源" class="headerlink" title="2. 配置 OCIO 资源"></a>2. 配置 OCIO 资源</h3><p>创建一个 UE 内的 OCIO Configuration 资源，并在其中设置需要调用的转换值。</p>
+<p>这里我使用：</p>
+<ul>
+<li>ACEScg</li>
+<li>ACES 2065-1</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/Pasted%20Graphic%201.jpg" alt="OCIO Configuration 资源配置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">UE5 中的 OCIO Configuration 资源配置</figcaption>
+  </figure>
+</div>
+
+<h3 id="3-设置-Movie-Render-Queue"><a href="#3-设置-Movie-Render-Queue" class="headerlink" title="3. 设置 Movie Render Queue"></a>3. 设置 Movie Render Queue</h3><p>打开 Movie Render Queue 插件，选择需要导出的内容，然后重点调整以下配置：</p>
+<ol>
+<li>删除原本的导出格式，改为 EXR。因为 EXR 位深更高，能够承载高动态范围信息。</li>
+<li>增加抗锯齿选项，将 Temporal Sample Count 调整到 16，并勾选 Override。</li>
+<li>增加 Color Output 选项，选择刚刚新建的 OCIO 配置。</li>
+<li>将 Source 设置为当前工作空间 ACES 2065-1。</li>
+<li>将 Destination 设置为需要导出的空间，这里是 ACEScg。</li>
+<li>勾选 Disable Tone Curve。</li>
+</ol>
+<p>其中，Disable Tone Curve 这个选项非常关键。它的意义是：不让 UE 在输出时自动做 Gamma 变换，而是保留完整的线性高动态范围信息。</p>
+<p>如果不勾选这个选项，UE 会默认使用 ACES 的 Filmic Tone Curve 进行 Tonemapping，把原本场景中的大量动态范围压缩到标准动态范围中。这样一来，HDR 所需的动态信息在导出阶段就已经丢失，后续流程也就无法真正做 HDR。</p>
+<p>最后再根据需求修改分辨率和输出位置即可。</p>
+<h2 id="达芬奇中的后处理与导出"><a href="#达芬奇中的后处理与导出" class="headerlink" title="达芬奇中的后处理与导出"></a>达芬奇中的后处理与导出</h2><p>在 DaVinci Resolve 中，我习惯把工作空间设置为 ACEScct。不过达芬奇自己的 DaVinci YRGB Color Managed 其实也可以用于这一流程，而且我个人觉得它的整体体验也很好。</p>
+<p>这里的设置思路大致如下：</p>
+<ol>
+<li>Input Transform 可以选择 ACEScg - CsC。</li>
+<li>如果项目中输入素材类型很多，不建议在项目级统一设置 Input Transform，而是针对每个素材单独设置。</li>
+<li>Output Transform 设置为杜比 8.4 标准对应的 Rec.2020 HLG。</li>
+</ol>
+<p>另外还有一个容易漏掉的选项：记得在 Dolby Vision 相关设置里启用 Enable Dolby Vision。</p>
+<p>如果素材类型很多，可以逐个素材指定 Input Transform。这里我设置为和 UE 导出选项一致的 ACEScg。</p>
+<p>调色完成之后，也可以使用杜比的自动分析工具，对素材逐一分析并生成相应元数据。</p>
+<p>导出视频时，如果不是输出母版，可以选择：</p>
+<ol>
+<li>MP4</li>
+<li>H.265 编码</li>
+<li>Main10</li>
+<li>高级选项中选择 Profile 8.4</li>
+</ol>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/Dolby%20Vision%20Profile.jpg" alt="达芬奇导出设置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">达芬奇中 HDR 视频导出设置</figcaption>
+  </figure>
+</div>
+## 流程总结
+
+<p>整个流程可以概括为：</p>
+<blockquote>
+<p>Unreal 工作空间（ACES 2065-1 Linear） -&gt; Unreal 输出素材（ACEScg Linear） -&gt; 达芬奇调色与输出（Rec.2020 HLG &#x2F; Dolby Vision Profile 8.4）</p>
+</blockquote>
+<h2 id="一些补充思考"><a href="#一些补充思考" class="headerlink" title="一些补充思考"></a>一些补充思考</h2><p>这个工作流程仍然有不少可以优化的地方。</p>
+<p>例如，工作空间也可以直接使用 ACEScg。按照 ACES 官方的说法，ACEScg 会更适合贴图等内容的渲染。</p>
+<p>另外，如果最终内容是广色域和 HDR，那么制作阶段所使用的图片物料，是否也应该采用更高位深和更高精度的格式，这也是一个值得继续验证的问题。</p>
+<p>本文没有详细展开监看设置，但实际配置并不复杂：只需要在 OCIO 配置中添加 sRGB 作为输出，然后在 Lit -&gt; OCIO Display 中选择 ACES 2065-1 与 sRGB 即可。</p>
+<h2 id="成品对比"><a href="#成品对比" class="headerlink" title="成品对比"></a>成品对比</h2><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF.gif" alt="HDR vs SDR 对比 1" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 1</figcaption>
+  </figure>
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF1.gif" alt="HDR vs SDR 对比 2" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 2</figcaption>
+  </figure>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF3.gif" alt="HDR vs SDR 对比 3" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 3</figcaption>
+  </figure>
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/UE5%E6%90%AD%E5%BB%BA%E7%9A%84%E5%9C%BA%E6%99%AF%2BHDR%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF4.gif" alt="HDR vs SDR 对比 4" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR 与 SDR 对比 — 场景 4</figcaption>
+  </figure>
+</div>
+左边是 HDR，右边是 SDR。需要下载到本地后，用 Mac 设备进行播放对比。
+
+<ul>
+<li>文件：YN_Italy_HDRvsSDR_MiniMoblie.mp4</li>
+<li>HDR 与 SDR 母版下载地址：<a target="_blank" rel="noopener" href="https://share.weiyun.com/xIkQd9ym">https://share.weiyun.com/xIkQd9ym</a></li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/534357694">https://zhuanlan.zhihu.com/p/534357694</a></li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/zh-CN/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/zh-CN/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/zh-CN/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/zh-CN/tags/HDR/" data-i18n-tag="HDR">HDR</a> <a href="/zh-CN/tags/Color-Management/" data-i18n-tag="Color Management">Color Management</a> <a href="/zh-CN/tags/Film-Production/" data-i18n-tag="Film Production">Film Production</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

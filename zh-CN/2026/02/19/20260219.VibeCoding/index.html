@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2026/02/19/20260219.VibeCoding/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="AI编程 &amp;#x2F; Vibe Coding（结对编程）Vibe Coding 是一种与AI协作进行编程的方式，AI作为结对编程伙伴，帮助开发者更高效地完成开发任务。这种方式改变了传统编程的工作流程，让开发者更专注于设计思路和业务逻辑，而将繁琐的实现细节交给AI处理。
+
+AI模型
+AI编程能力盲测GLM(智谱)：目前">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2026/02/19/20260219.VibeCoding/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="Vibe Coding（结对编程）系统性学习">
+    
+    
+        <meta property="og:description" content="AI编程 &amp;#x2F; Vibe Coding（结对编程）Vibe Coding 是一种与AI协作进行编程的方式，AI作为结对编程伙伴，帮助开发者更高效地完成开发任务。这种方式改变了传统编程的工作流程，让开发者更专注于设计思路和业务逻辑，而将繁琐的实现细节交给AI处理。
+
+AI模型
+AI编程能力盲测GLM(智谱)：目前">
+    
+    
+    
+        <meta property="article:published_time" content="2026-02-19T04:34:56.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.537Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="Vibe Coding（结对编程）系统性学习">
+    
+    
+        <meta name="twitter:description" content="AI编程 &amp;#x2F; Vibe Coding（结对编程）Vibe Coding 是一种与AI协作进行编程的方式，AI作为结对编程伙伴，帮助开发者更高效地完成开发任务。这种方式改变了传统编程的工作流程，让开发者更专注于设计思路和业务逻辑，而将繁琐的实现细节交给AI处理。
+
+AI模型
+AI编程能力盲测GLM(智谱)：目前">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/02/19/20260219.VibeCoding/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/02/19/20260219.VibeCoding/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/02/19/20260219.VibeCoding/">
+    
+
+    <!-- Title -->
+    
+    <title>Vibe Coding（结对编程）系统性学习 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-02-19-20260219-VibeCoding-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('https://upload.cc/i1/2026/02/19/e6cPmM.png');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/02/19/20260219.VibeCoding/" class="previous" data-title="Systematic Learning of Vibe Coding (Pair..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/02/18/20260218.LightSystemAndLookDevHelper/" class="next" data-title="New Light System ..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Vibe Coding（结对编程）系统性学习</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="AI编程-Vibe-Coding（结对编程）"><a href="#AI编程-Vibe-Coding（结对编程）" class="headerlink" title="AI编程 &#x2F; Vibe Coding（结对编程）"></a>AI编程 &#x2F; Vibe Coding（结对编程）</h1><p>Vibe Coding 是一种与AI协作进行编程的方式，AI作为结对编程伙伴，帮助开发者更高效地完成开发任务。这种方式改变了传统编程的工作流程，让开发者更专注于设计思路和业务逻辑，而将繁琐的实现细节交给AI处理。</p>
+<hr>
+<h1 id="AI模型"><a href="#AI模型" class="headerlink" title="AI模型"></a>AI模型</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arena.ai/zh/leaderboard/code">AI编程能力盲测</a><br><a target="_blank" rel="noopener" href="https://bigmodel.cn/usercenter/glm-coding/usage">GLM(智谱)</a>：目前是我的口粮模型，购买了他的编程套餐。很便宜，同时同时供给给龙虾机器人用。</p>
+</blockquote>
+<h1 id="测试和使用的AI编程工具（游戏客户端视角）"><a href="#测试和使用的AI编程工具（游戏客户端视角）" class="headerlink" title="测试和使用的AI编程工具（游戏客户端视角）"></a>测试和使用的AI编程工具（游戏客户端视角）</h1><h2 id="Cursor"><a href="#Cursor" class="headerlink" title="Cursor"></a>Cursor</h2><ul>
+<li><strong>特点</strong>: 独立运行的AI编程IDE（基于VS Code）</li>
+<li><strong>优势</strong>: 支持多种模型，界面友好，代码补全功能强大</li>
+<li><strong>适用场景</strong>: 全栈开发、新项目快速搭建</li>
+</ul>
+<h2 id="Claude-Code"><a href="#Claude-Code" class="headerlink" title="Claude Code"></a>Claude Code</h2><ul>
+<li><strong>特点</strong>: 命令行工具 + VSCode插件</li>
+<li><strong>优势</strong>:<ul>
+<li>对第三方模型知识掌握较好</li>
+<li>我自己已完成智谱GLM配置</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>: 需要灵活配置和命令行操作的工程</li>
+<li><strong>游戏开发</strong>: 适合服务器端开发、工具链开发</li>
+</ul>
+<h2 id="GitHub-Copilot"><a href="#GitHub-Copilot" class="headerlink" title="GitHub Copilot"></a>GitHub Copilot</h2><ul>
+<li><strong>特点</strong>: 集成到IDE（VS、Rider）</li>
+<li><strong>优势</strong>:<ul>
+<li>对游戏程序员最友好（支持Rider）</li>
+<li>实时代码补全</li>
+<li>提供多种模型选项</li>
+</ul>
+</li>
+<li><strong>套餐</strong>: 使用Copilot Pro</li>
+<li><strong>适用场景</strong>: 日常开发、代码补全</li>
+<li><strong>限制</strong>: 第三方模型兼容性一般</li>
+</ul>
+<hr>
+<h1 id="TFCDC方法论"><a href="#TFCDC方法论" class="headerlink" title="TFCDC方法论"></a>TFCDC方法论</h1><p>TFCDC是Vibe Coding的核心方法论，帮助开发者有效地与AI协作。</p>
+<h2 id="Think-思考环节"><a href="#Think-思考环节" class="headerlink" title="Think 思考环节"></a>Think 思考环节</h2><p>在开始编程之前，先进行充分的思考和规划。</p>
+<h3 id="核心问题"><a href="#核心问题" class="headerlink" title="核心问题"></a>核心问题</h3><ol>
+<li><p><strong>项目本质</strong></p>
+<ul>
+<li>这是什么项目？</li>
+<li>核心价值是什么？</li>
+<li>目标用户是谁？</li>
+</ul>
+</li>
+<li><p><strong>游戏化思维</strong></p>
+<ul>
+<li>将编程视为一场”游戏”</li>
+<li>明确游戏的规则和目标</li>
+<li>理解胜利条件</li>
+</ul>
+</li>
+<li><p><strong>执行逻辑</strong></p>
+<ul>
+<li>游戏游玩的逻辑？（如何执行）</li>
+<li>游玩策略（战术）？</li>
+<li>关键路径是什么？</li>
+</ul>
+</li>
+</ol>
+<h3 id="思考模板"><a href="#思考模板" class="headerlink" title="思考模板"></a>思考模板</h3><p>```<br>项目名称: ___________<br>核心目标: ___________<br>技术难点: ___________<br>优先级: ___________<br>```</p>
+<h3 id="示例图示"><a href="#示例图示" class="headerlink" title="示例图示"></a>示例图示</h3><p><img src="https://via.placeholder.com/600x300?text=%E6%80%9D%E8%80%83%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%A4%BA%E4%BE%8B" alt="思考流程图示例"></p>
+<hr>
+<h2 id="Framework-框架"><a href="#Framework-框架" class="headerlink" title="Framework 框架"></a>Framework 框架</h2><p>明确技术选型和架构设计。</p>
+<h3 id="技术栈选择"><a href="#技术栈选择" class="headerlink" title="技术栈选择"></a>技术栈选择</h3><ul>
+<li><strong>前端</strong>: React &#x2F; Vue &#x2F; Unity &#x2F; Unreal</li>
+<li><strong>后端</strong>: Node.js &#x2F; Go &#x2F; Python</li>
+<li><strong>数据库</strong>: MySQL &#x2F; MongoDB &#x2F; Redis</li>
+<li><strong>AI集成</strong>: OpenAI &#x2F; Claude &#x2F; 本地模型</li>
+</ul>
+<h3 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h3><ul>
+<li><strong>MVC模式</strong>: 模型-视图-控制器</li>
+<li><strong>微服务</strong>: 服务拆分与通信</li>
+<li><strong>事件驱动</strong>: 基于事件的架构</li>
+<li><strong>组件化</strong>: 可复用的组件设计</li>
+</ul>
+<h3 id="决策流程"><a href="#决策流程" class="headerlink" title="决策流程"></a>决策流程</h3><ol>
+<li>先了解项目需求</li>
+<li>评估技术选项</li>
+<li>权衡优缺点</li>
+<li>做出选择</li>
+<li>告知AI你的决策</li>
+</ol>
+<blockquote>
+<p>💡 <strong>提示</strong>: 如果不确定技术选型，先询问AI的建议</p>
+</blockquote>
+<hr>
+<h2 id="Checkpoints-检查点"><a href="#Checkpoints-检查点" class="headerlink" title="Checkpoints 检查点"></a>Checkpoints 检查点</h2><p>使用版本控制建立关键检查点。</p>
+<h3 id="版本控制最佳实践"><a href="#版本控制最佳实践" class="headerlink" title="版本控制最佳实践"></a>版本控制最佳实践</h3><ul>
+<li>✅ <strong>必须使用Git</strong></li>
+<li>✅ <strong>每个功能完成后提交</strong></li>
+<li>✅ <strong>写清晰的提交信息</strong></li>
+<li>✅ <strong>使用分支管理功能开发</strong></li>
+<li>✅ <strong>定期创建里程碑标签</strong></li>
+</ul>
+<h3 id="提交信息规范"><a href="#提交信息规范" class="headerlink" title="提交信息规范"></a>提交信息规范</h3><p>```<br>feat: 添加新功能<br>fix: 修复bug<br>refactor: 代码重构<br>docs: 文档更新<br>test: 测试相关<br>chore: 构建&#x2F;工具链相关<br>```</p>
+<h3 id="检查点示例"><a href="#检查点示例" class="headerlink" title="检查点示例"></a>检查点示例</h3><ul>
+<li>🚀 <strong>M1</strong>: 基础框架搭建完成</li>
+<li>🚀 <strong>M2</strong>: 核心功能实现</li>
+<li>🚀 <strong>M3</strong>: UI&#x2F;UX完成</li>
+<li>🚀 <strong>M4</strong>: 测试通过</li>
+<li>🚀 <strong>M5</strong>: 发布准备就绪</li>
+</ul>
+<hr>
+<h2 id="Debugging-调试"><a href="#Debugging-调试" class="headerlink" title="Debugging 调试"></a>Debugging 调试</h2><p>有效的调试策略和问题解决方法。</p>
+<h3 id="调试流程"><a href="#调试流程" class="headerlink" title="调试流程"></a>调试流程</h3><ol>
+<li><p><strong>自己发现问题</strong></p>
+<ul>
+<li>复现bug</li>
+<li>收集错误信息</li>
+<li>定位问题代码</li>
+</ul>
+</li>
+<li><p><strong>让AI提出解决方案</strong></p>
+<ul>
+<li>提供完整的错误上下文</li>
+<li>描述期望行为</li>
+<li>提供相关代码片段</li>
+</ul>
+</li>
+<li><p><strong>验证解决方案</strong></p>
+<ul>
+<li>理解AI的建议</li>
+<li>谨慎实施修改</li>
+<li>测试验证结果</li>
+</ul>
+</li>
+</ol>
+<h3 id="掌握项目结构"><a href="#掌握项目结构" class="headerlink" title="掌握项目结构"></a>掌握项目结构</h3><ul>
+<li>📁 <strong>理解目录结构</strong></li>
+<li>📁 <strong>熟悉关键文件</strong></li>
+<li>📁 <strong>了解依赖关系</strong></li>
+<li>📁 <strong>掌握配置文件</strong></li>
+</ul>
+<h3 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h3><ul>
+<li>使用日志记录</li>
+<li>添加断点调试</li>
+<li>单元测试验证</li>
+<li>二分法定位问题</li>
+</ul>
+<hr>
+<h2 id="Context-上下文"><a href="#Context-上下文" class="headerlink" title="Context 上下文"></a>Context 上下文</h2><p>为AI提供充分的上下文信息是获得高质量代码的关键。</p>
+<h3 id="上下文类型"><a href="#上下文类型" class="headerlink" title="上下文类型"></a>上下文类型</h3><h4 id="PRD（产品需求文档）"><a href="#PRD（产品需求文档）" class="headerlink" title="PRD（产品需求文档）"></a>PRD（产品需求文档）</h4><ul>
+<li><strong>定义</strong>: 描述产品功能、用户体验和业务需求的文档</li>
+<li><strong>包含内容</strong>:<ul>
+<li>功能需求</li>
+<li>用户故事</li>
+<li>验收标准</li>
+<li>优先级</li>
+</ul>
+</li>
+<li><strong>示例</strong>:<br>```markdown<h2 id="用户登录功能"><a href="#用户登录功能" class="headerlink" title="用户登录功能"></a>用户登录功能</h2><ul>
+<li>支持邮箱&#x2F;手机号登录</li>
+<li>验证码验证</li>
+<li>记住登录状态（7天）<br>```</li>
+</ul>
+</li>
+</ul>
+<h4 id="MVP（最小可行产品）"><a href="#MVP（最小可行产品）" class="headerlink" title="MVP（最小可行产品）"></a>MVP（最小可行产品）</h4><ul>
+<li><strong>定义</strong>: 用最少功能验证产品假设的版本</li>
+<li><strong>原则</strong>:<ul>
+<li>功能最小化</li>
+<li>快速迭代</li>
+<li>验证假设</li>
+</ul>
+</li>
+<li><strong>示例</strong>:<ul>
+<li>✅ 包含：核心功能</li>
+<li>✅ 包含：基本UI</li>
+<li>❌ 不包含：高级特性</li>
+<li>❌ 不包含：完整优化</li>
+</ul>
+</li>
+</ul>
+<h4 id="技术文档"><a href="#技术文档" class="headerlink" title="技术文档"></a>技术文档</h4><ul>
+<li>API文档</li>
+<li>数据库设计</li>
+<li>系统架构图</li>
+<li>代码注释</li>
+</ul>
+<h4 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h4><ul>
+<li>项目目标</li>
+<li>技术约束</li>
+<li>时间限制</li>
+<li>团队情况</li>
+</ul>
+<h3 id="如何提供有效上下文"><a href="#如何提供有效上下文" class="headerlink" title="如何提供有效上下文"></a>如何提供有效上下文</h3><h4 id="✅-好的上下文"><a href="#✅-好的上下文" class="headerlink" title="✅ 好的上下文"></a>✅ 好的上下文</h4><p>```<br>这是一个Unity游戏项目，使用C#开发。<br>需要实现一个敌人AI，当玩家进入5米范围内时追逐玩家。<br>敌人已经有NavMeshAgent组件，需要使用NavMesh寻路。<br>```</p>
+<h4 id="❌-不好的上下文"><a href="#❌-不好的上下文" class="headerlink" title="❌ 不好的上下文"></a>❌ 不好的上下文</h4><p>```<br>帮我写个AI。<br>```</p>
+<hr>
+<h2 id="与AI协作的技巧"><a href="#与AI协作的技巧" class="headerlink" title="与AI协作的技巧"></a>与AI协作的技巧</h2><h3 id="1-明确的指令"><a href="#1-明确的指令" class="headerlink" title="1. 明确的指令"></a>1. 明确的指令</h3><ul>
+<li>✅ “实现一个支持增删改查的待办事项列表”</li>
+<li>❌ “做一个东西”</li>
+</ul>
+<h3 id="2-分步骤进行"><a href="#2-分步骤进行" class="headerlink" title="2. 分步骤进行"></a>2. 分步骤进行</h3><ul>
+<li>将大任务拆分成小步骤</li>
+<li>逐步实现，逐步验证</li>
+</ul>
+<h3 id="3-代码审查"><a href="#3-代码审查" class="headerlink" title="3. 代码审查"></a>3. 代码审查</h3><ul>
+<li>不要盲目接受AI生成的代码</li>
+<li>理解每一行代码的作用</li>
+<li>必要时要求AI解释</li>
+</ul>
+<h3 id="4-迭代优化"><a href="#4-迭代优化" class="headerlink" title="4. 迭代优化"></a>4. 迭代优化</h3><ul>
+<li>先实现基本功能</li>
+<li>再逐步优化和完善</li>
+</ul>
+<h2 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h2><h3 id="任务规划"><a href="#任务规划" class="headerlink" title="任务规划"></a>任务规划</h3><ol>
+<li>列出所有待办事项</li>
+<li>评估优先级</li>
+<li>估算工作量</li>
+<li>制定时间表</li>
+</ol>
+<h3 id="进度跟踪"><a href="#进度跟踪" class="headerlink" title="进度跟踪"></a>进度跟踪</h3><ul>
+<li>使用TODO列表</li>
+<li>定期回顾进度</li>
+<li>及时调整计划</li>
+</ul>
+<hr>
+<h1 id="观点解释"><a href="#观点解释" class="headerlink" title="观点解释"></a>观点解释</h1><h2 id="Orchestration（蜂群模式）"><a href="#Orchestration（蜂群模式）" class="headerlink" title="Orchestration（蜂群模式）"></a>Orchestration（蜂群模式）</h2><p>复杂编排+主控+蜂群<br>谁能做好编排，谁就能统领蜂群。</p>
+<p><strong>说明</strong>: 在AI编程中，Orchestration指的是通过一个主控程序来协调和管理多个AI模型或工具的工作。就像蜂群中有一个”女王”发出指令，多个”工蜂”分工协作完成任务。这种方式可以实现：</p>
+<ul>
+<li>不同模型各司其职（如一个负责代码生成，一个负责调试，一个负责测试）</li>
+<li>工作流自动化编排</li>
+<li>并发处理多个子任务</li>
+<li>统一的结果整合</li>
+</ul>
+<h2 id="MCP框架"><a href="#MCP框架" class="headerlink" title="MCP框架"></a>MCP框架</h2><p><strong>说明</strong>: MCP (Model Context Protocol) 是一个开放的协议标准，用于AI模型与外部工具、数据源之间的通信。它定义了一套统一的接口，让AI能够安全、规范地访问外部资源。核心价值包括：</p>
+<ul>
+<li>标准化的工具调用接口</li>
+<li>安全的权限控制机制</li>
+<li>跨平台的兼容性</li>
+<li>插件式的扩展能力</li>
+</ul>
+<h2 id="Token（令牌）"><a href="#Token（令牌）" class="headerlink" title="Token（令牌）"></a>Token（令牌）</h2><p>AI模型处理文本的基本单位。约等于3&#x2F;4个英文单词或1个中文字符。上下文窗口的token数量限制直接影响AI能理解的信息量。</p>
+<h3 id="Token计算参考"><a href="#Token计算参考" class="headerlink" title="Token计算参考"></a>Token计算参考</h3><ul>
+<li><strong>中文</strong>: 约1字符 &#x3D; 1 token</li>
+<li><strong>英文</strong>: 约4字符 &#x3D; 1 token</li>
+<li><strong>代码</strong>: 约4-6字符 &#x3D; 1 token（受代码复杂度影响）</li>
+<li><strong>换行符&#x2F;空格</strong>: 通常不计或占少量token</li>
+</ul>
+<h3 id="消耗估算方法"><a href="#消耗估算方法" class="headerlink" title="消耗估算方法"></a>消耗估算方法</h3><ol>
+<li><strong>粗略估算</strong>: 字符数 ÷ 4 ≈ token数</li>
+<li><strong>准确计算</strong>: 使用模型提供的token计数工具</li>
+<li><strong>上下文消耗</strong>:<ul>
+<li>输入Prompt：按上述规则计算</li>
+<li>输出内容：通常按输入的50%-200%消耗</li>
+<li>历史对话：会累积计入上下文</li>
+</ul>
+</li>
+</ol>
+<h3 id="实用建议"><a href="#实用建议" class="headerlink" title="实用建议"></a>实用建议</h3><ul>
+<li>长代码文件可用摘要代替全文</li>
+<li>删除无用的注释和空行</li>
+<li>定期清理对话历史</li>
+<li>关注各模型的上下文窗口限制（如4K&#x2F;8K&#x2F;32K&#x2F;128K）</li>
+</ul>
+<h1 id="常见陷阱"><a href="#常见陷阱" class="headerlink" title="常见陷阱"></a>常见陷阱</h1><h2 id="❌-避免这些错误"><a href="#❌-避免这些错误" class="headerlink" title="❌ 避免这些错误"></a>❌ 避免这些错误</h2><h3 id="1-过度依赖AI"><a href="#1-过度依赖AI" class="headerlink" title="1. 过度依赖AI"></a>1. 过度依赖AI</h3><ul>
+<li>不要完全放弃思考</li>
+<li>保持对代码的理解</li>
+<li>自己做关键决策</li>
+</ul>
+<h3 id="2-上下文不足"><a href="#2-上下文不足" class="headerlink" title="2. 上下文不足"></a>2. 上下文不足</h3><ul>
+<li>不提供足够的信息</li>
+<li>让AI猜测需求</li>
+<li>得到不理想的结果</li>
+</ul>
+<h3 id="3-盲目复制代码"><a href="#3-盲目复制代码" class="headerlink" title="3. 盲目复制代码"></a>3. 盲目复制代码</h3><ul>
+<li>不理解就使用</li>
+<li>引入安全风险</li>
+<li>难以维护</li>
+</ul>
+<h3 id="4-忽略版本控制"><a href="#4-忽略版本控制" class="headerlink" title="4. 忽略版本控制"></a>4. 忽略版本控制</h3><ul>
+<li>不及时提交代码</li>
+<li>缺少备份</li>
+<li>无法回滚</li>
+</ul>
+<hr>
+<h1 id="进阶技巧"><a href="#进阶技巧" class="headerlink" title="进阶技巧"></a>进阶技巧</h1><h2 id="提高AI编程效率"><a href="#提高AI编程效率" class="headerlink" title="提高AI编程效率"></a>提高AI编程效率</h2><h3 id="1-建立代码模板"><a href="#1-建立代码模板" class="headerlink" title="1. 建立代码模板"></a>1. 建立代码模板</h3><ul>
+<li>常用代码片段</li>
+<li>项目结构模板</li>
+<li>配置文件模板</li>
+</ul>
+<h3 id="2-创建提示词库"><a href="#2-创建提示词库" class="headerlink" title="2. 创建提示词库"></a>2. 创建提示词库</h3><ul>
+<li>针对不同场景的提示词</li>
+<li>经过验证的有效指令</li>
+<li>可复用的上下文模板</li>
+</ul>
+<h3 id="3-使用工具集成"><a href="#3-使用工具集成" class="headerlink" title="3. 使用工具集成"></a>3. 使用工具集成</h3><ul>
+<li>Git钩子</li>
+<li>CI&#x2F;CD集成</li>
+<li>自动化测试</li>
+</ul>
+<h3 id="4-团队协作"><a href="#4-团队协作" class="headerlink" title="4. 团队协作"></a>4. 团队协作</h3><ul>
+<li>共享提示词</li>
+<li>统一代码风格</li>
+<li>知识库建设</li>
+</ul>
+<hr>
+<h2 id="🎯-选择建议"><a href="#🎯-选择建议" class="headerlink" title="🎯 选择建议"></a>🎯 选择建议</h2><table>
+<thead>
+<tr>
+<th>需求</th>
+<th>推荐项目</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>最简单上手</strong></td>
+<td>mcp-tool-shop-org&#x2F;game-dev-mcp（无需插件，启用 Remote Control API 即可）</td>
+</tr>
+<tr>
+<td><strong>企业级功能</strong></td>
+<td>ChiR24&#x2F;Unreal_mcp（NPM 包、Docker、GraphQL）</td>
+</tr>
+<tr>
+<td><strong>UE 5.6+ 新特性</strong></td>
+<td>GenOrca&#x2F;unreal-mcp 或 etelyatn&#x2F;UnrealCortex</td>
+</tr>
+<tr>
+<td><strong>Blueprint → C++ 迁移</strong></td>
+<td>etelyatn&#x2F;UnrealCortex</td>
+</tr>
+<tr>
+<td><strong>多客户端集成</strong></td>
+<td>naming-sense&#x2F;ns-unreal-mcp</td>
+</tr>
+<tr>
+<td><strong>API 文档查询</strong></td>
+<td>Codeturion&#x2F;unreal-api-mcp</td>
+</tr>
+</tbody></table>
+<h2 id="📚-学习资源"><a href="#📚-学习资源" class="headerlink" title="📚 学习资源"></a>📚 学习资源</h2><ul>
+<li><strong>MCP 官方文档</strong>: <a target="_blank" rel="noopener" href="https://modelcontextprotocol.io/">https://modelcontextprotocol.io/</a></li>
+<li><strong>MCP Registry</strong>: <a target="_blank" rel="noopener" href="https://registry.modelcontextprotocol.io/">https://registry.modelcontextprotocol.io/</a></li>
+<li><strong>视频教程</strong>: GenOrca 项目包含 YouTube 演示视频</li>
+</ul>
+<h2 id="🔍-搜索关键词"><a href="#🔍-搜索关键词" class="headerlink" title="🔍 搜索关键词"></a>🔍 搜索关键词</h2><ul>
+<li>`unreal mcp`</li>
+<li>`unreal engine mcp server`</li>
+<li>`ue5 model context protocol`</li>
+<li>`unreal ai automation`</li>
+</ul>
+<hr>
+<h1 id="学习记录"><a href="#学习记录" class="headerlink" title="学习记录"></a>学习记录</h1><h3 id="2025-09及之前"><a href="#2025-09及之前" class="headerlink" title="2025-09及之前"></a>2025-09及之前</h3><ul>
+<li>学习Vibe Coding方法论</li>
+<li>使用腾讯内部的编程助手及Copliot、Cursor</li>
+<li>研究TFCDC框架</li>
+</ul>
+<h3 id="2025-01"><a href="#2025-01" class="headerlink" title="2025-01"></a>2025-01</h3><ul>
+<li>尝试使用Claude Code及使用MCP</li>
+</ul>
+<h3 id="2026-02"><a href="#2026-02" class="headerlink" title="2026-02"></a>2026-02</h3><ul>
+<li>研究和整理 UnrealMCP 项目</li>
+</ul>
+<h3 id="待完成"><a href="#待完成" class="headerlink" title="待完成"></a>待完成</h3><ul>
+<li><input disabled="" type="checkbox"> 完善游戏开发场景的AI使用案例</li>
+<li><input disabled="" type="checkbox"> 整理更多代码模板</li>
+<li><input disabled="" type="checkbox"> 收集常用提示词</li>
+</ul>
+<hr>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/Vibe-Coding/" data-i18n-tag="Vibe Coding">Vibe Coding</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

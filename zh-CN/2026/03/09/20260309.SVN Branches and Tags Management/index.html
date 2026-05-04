@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="SVN多分支与Tags管理笔记
+更新时间：2026-03-09
+SVN多分支和Tags管理是版本控制系统中的重要概念，用于支持并行开发、版本发布和代码管理。
+本文档记录SVN分支管理和Tags管理的实践经验和注意事项。
+因为我之前使用的是Git，对于SVN会有一些理解上的歧义，所以特地创建一个文档里研究SVN的分支内容">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="SVN多分支与Tags管理笔记">
+    
+    
+        <meta property="og:description" content="SVN多分支与Tags管理笔记
+更新时间：2026-03-09
+SVN多分支和Tags管理是版本控制系统中的重要概念，用于支持并行开发、版本发布和代码管理。
+本文档记录SVN分支管理和Tags管理的实践经验和注意事项。
+因为我之前使用的是Git，对于SVN会有一些理解上的歧义，所以特地创建一个文档里研究SVN的分支内容">
+    
+    
+    
+        <meta property="article:published_time" content="2026-03-09T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.538Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="SVN多分支与Tags管理笔记">
+    
+    
+        <meta name="twitter:description" content="SVN多分支与Tags管理笔记
+更新时间：2026-03-09
+SVN多分支和Tags管理是版本控制系统中的重要概念，用于支持并行开发、版本发布和代码管理。
+本文档记录SVN分支管理和Tags管理的实践经验和注意事项。
+因为我之前使用的是Git，对于SVN会有一些理解上的歧义，所以特地创建一个文档里研究SVN的分支内容">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/">
+    
+
+    <!-- Title -->
+    
+    <title>SVN多分支与Tags管理笔记 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-03-09-20260309-SVN-Branches-and-Tags-Management-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('https://upload.cc/i1/2026/02/19/e6cPmM.png');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/03/09/20260309.SVN%20Branches%20and%20Tags%20Management/" class="previous" data-title="SVN Multi-Branch and Tags Management Not..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/03/07/20260308.SkillsBuilderNotes/" class="next" data-title="Claude Skills Con..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">SVN多分支与Tags管理笔记</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="SVN多分支与Tags管理笔记"><a href="#SVN多分支与Tags管理笔记" class="headerlink" title="SVN多分支与Tags管理笔记"></a>SVN多分支与Tags管理笔记</h1><blockquote>
+<p>更新时间：2026-03-09</p>
+<p>SVN多分支和Tags管理是版本控制系统中的重要概念，用于支持并行开发、版本发布和代码管理。</p>
+<p>本文档记录SVN分支管理和Tags管理的实践经验和注意事项。</p>
+<p>因为我之前使用的是Git，对于SVN会有一些理解上的歧义，所以特地创建一个文档里研究SVN的分支内容。</p>
+</blockquote>
+<hr>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="分支（Branch）"><a href="#分支（Branch）" class="headerlink" title="分支（Branch）"></a>分支（Branch）</h3><ul>
+<li><strong>目的</strong>: 支持并行开发，隔离不同功能或版本的开发工作</li>
+<li><strong>典型用途</strong>:<ul>
+<li>功能开发分支</li>
+<li>修复分支</li>
+<li>版本发布分支</li>
+<li>实验性开发</li>
+</ul>
+</li>
+</ul>
+<h3 id="标签（Tags）"><a href="#标签（Tags）" class="headerlink" title="标签（Tags）"></a>标签（Tags）</h3><ul>
+<li><strong>目的</strong>: 标记重要版本快照，用于发布、回滚和历史版本管理</li>
+<li><strong>特点</strong>: 理论上不应修改，是特定时间点的静态快照</li>
+<li><strong>典型用途</strong>:<ul>
+<li>版本发布标记（v1.0, v2.0等）</li>
+<li>重要里程碑标记</li>
+<li>回滚基准点</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="与Git的区别"><a href="#与Git的区别" class="headerlink" title="与Git的区别"></a>与Git的区别</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SVN</th>
+<th>Git</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>分支创建</td>
+<td>复制目录</td>
+<td>轻量级指针</td>
+</tr>
+<tr>
+<td>合并操作</td>
+<td>相对复杂</td>
+<td>更灵活高效</td>
+</tr>
+<tr>
+<td>Tags管理</td>
+<td>目录复制</td>
+<td>标签引用</td>
+</tr>
+<tr>
+<td>分布式</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>学习曲线</td>
+<td>相对平缓</td>
+<td>较陡峭</td>
+</tr>
+</tbody></table>
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><h4 id="SVN-分支管理的核心特点"><a href="#SVN-分支管理的核心特点" class="headerlink" title="SVN 分支管理的核心特点"></a>SVN 分支管理的核心特点</h4><p>SVN的分支管理<strong>不适合个人分支</strong>，这与Git的设计哲学完全不同：</p>
+<p><strong>不推荐个人分支的原因：</strong></p>
+<ol>
+<li><p><strong>创建成本太高</strong></p>
+<ul>
+<li>SVN创建分支需要复制整个目录结构，耗时较长</li>
+<li>Git创建分支是轻量级指针，几乎瞬间完成</li>
+<li>小改动（如修错别字）创建SVN分支过于浪费</li>
+</ul>
+</li>
+<li><p><strong>合并成本爆炸</strong></p>
+<ul>
+<li>每个个人分支都需要合并回trunk</li>
+<li>多人多分支会导致大量合并冲突</li>
+<li>团队协调成本急剧上升</li>
+</ul>
+</li>
+<li><p><strong>资源浪费严重</strong></p>
+<ul>
+<li>每个分支都占用服务器存储空间</li>
+<li>大量个人分支会显著增加仓库大小</li>
+</ul>
+</li>
+<li><p><strong>网络依赖性强</strong></p>
+<ul>
+<li>所有分支操作都需要网络连接</li>
+<li>无法像Git那样离线开发</li>
+</ul>
+</li>
+</ol>
+<h4 id="SVN-更适合的开发模式"><a href="#SVN-更适合的开发模式" class="headerlink" title="SVN 更适合的开发模式"></a>SVN 更适合的开发模式</h4><p><strong>✅ 推荐做法：主干开发 + 细粒度提交</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接在trunk上工作</span></span><br><span class="line">svn edit src/utils.js</span><br><span class="line"><span class="comment"># 小改动立即提交</span></span><br><span class="line">svn commit -m <span class="string">&quot;修复工具函数中的数组越界问题&quot;</span></span><br><span class="line">svn commit -m <span class="string">&quot;优化数据库查询性能&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>❌ 不推荐做法：频繁创建个人分支</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不要这样：</span></span><br><span class="line">svn copy ^/trunk ^/branches/feature-small-fix -m <span class="string">&quot;修复小bug&quot;</span></span><br><span class="line"><span class="comment"># 开发几分钟</span></span><br><span class="line">svn merge ...</span><br><span class="line"><span class="comment"># 合并回trunk</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SVN-分支创建策略"><a href="#SVN-分支创建策略" class="headerlink" title="SVN 分支创建策略"></a>SVN 分支创建策略</h4><p><strong>值得创建SVN分支的情况：</strong></p>
+<ol>
+<li><strong>大型重构项目</strong>（预计几周或更长时间）</li>
+<li><strong>重要版本发布准备</strong></li>
+<li><strong>多人协作的重要功能</strong></li>
+<li><strong>需要长期隔离的工作</strong></li>
+<li><strong>实验性但不稳定的功能</strong></li>
+</ol>
+<p><strong>不应该创建SVN分支的情况：</strong></p>
+<ol>
+<li>小bug修复</li>
+<li>简单功能开发（1-2天）</li>
+<li>代码优化</li>
+<li>文档更新</li>
+<li>样式调整</li>
+</ol>
+<h4 id="与Git分支管理的区别"><a href="#与Git分支管理的区别" class="headerlink" title="与Git分支管理的区别"></a>与Git分支管理的区别</h4><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Git分支管理</th>
+<th>SVN分支管理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>核心思想</strong></td>
+<td>分支是主要特性</td>
+<td>主干开发为主</td>
+</tr>
+<tr>
+<td><strong>个人分支</strong></td>
+<td>鼓励大量使用</td>
+<td>不推荐使用</td>
+</tr>
+<tr>
+<td><strong>分支创建</strong></td>
+<td>毫秒级</td>
+<td>分钟级甚至更长</td>
+</tr>
+<tr>
+<td><strong>工作流</strong></td>
+<td>Git Flow等复杂工作流</td>
+<td>简化的线性工作流</td>
+</tr>
+<tr>
+<td><strong>本地操作</strong></td>
+<td>大部分可离线</td>
+<td>需要网络连接</td>
+</tr>
+<tr>
+<td><strong>合并策略</strong></td>
+<td>灵活高效</td>
+<td>相对简单</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>快速迭代、实验开发</td>
+<td>稳定项目、大型团队</td>
+</tr>
+</tbody></table>
+<h4 id="实际对比：Git-vs-SVN-工作流"><a href="#实际对比：Git-vs-SVN-工作流" class="headerlink" title="实际对比：Git vs SVN 工作流"></a>实际对比：Git vs SVN 工作流</h4><p><strong>Git 工作流（推荐）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开发者A</span></span><br><span class="line">git checkout -b feature-login    <span class="comment"># 秒级</span></span><br><span class="line"><span class="comment"># 开发1天</span></span><br><span class="line">git checkout master</span><br><span class="line">git merge feature-login           <span class="comment"># 秒级</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开发者B</span></span><br><span class="line">git checkout -b fix-ui-bug        <span class="comment"># 秒级</span></span><br><span class="line"><span class="comment"># 开发2小时</span></span><br><span class="line">git checkout master</span><br><span class="line">git merge fix-ui-bug             <span class="comment"># 秒级</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>SVN 工作流（不推荐）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开发者A</span></span><br><span class="line">svn copy ^/trunk ^/branches/feature-login -m <span class="string">&quot;&quot;</span>  <span class="comment"># 分钟级</span></span><br><span class="line"><span class="comment"># 开发1天</span></span><br><span class="line">svn switch ^/trunk</span><br><span class="line">svn merge --reintegrate ^/branches/feature-login  <span class="comment"># 分钟级+冲突</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开发者B</span></span><br><span class="line">svn copy ^/trunk ^/branches/fix-ui-bug -m <span class="string">&quot;&quot;</span>  <span class="comment"># 分钟级</span></span><br><span class="line"><span class="comment"># 开发2小时（为了小bug创建分支太浪费）</span></span><br><span class="line">svn switch ^/trunk</span><br><span class="line">svn merge ... <span class="comment"># 冲突！</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>SVN 更好的工作流</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 所有人直接在trunk上工作</span></span><br><span class="line"><span class="comment"># 小改动立即提交</span></span><br><span class="line">svn commit -m <span class="string">&quot;修复登录按钮样式问题&quot;</span></span><br><span class="line">svn commit -m <span class="string">&quot;优化数据库查询性能&quot;</span></span><br><span class="line">svn commit -m <span class="string">&quot;更新用户界面文案&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 只有大项目才创建分支</span></span><br><span class="line">svn copy ^/trunk ^/branches/refactor-payment-system -m <span class="string">&quot;支付系统重构&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SVN分支管理最佳实践"><a href="#SVN分支管理最佳实践" class="headerlink" title="SVN分支管理最佳实践"></a>SVN分支管理最佳实践</h4><ol>
+<li><strong>减少分支数量</strong>：只为核心功能创建分支</li>
+<li><strong>简化合并策略</strong>：避免复杂的合并路径</li>
+<li><strong>专注于线性开发</strong>：主要在trunk上开发</li>
+<li><strong>保持分支生命周期短</strong>：完成后及时合并和删除</li>
+<li><strong>明确分支目的</strong>：每个分支都有清晰的创建和合并计划</li>
+</ol>
+<h3 id="Tag管理"><a href="#Tag管理" class="headerlink" title="Tag管理"></a>Tag管理</h3><hr>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从trunk创建功能分支</span></span><br><span class="line">svn copy ^/trunk ^/branches/feature-new-functionality -m <span class="string">&quot;创建新功能开发分支&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建修复分支</span></span><br><span class="line">svn copy ^/trunk ^/branches/fix-critical-bug -m <span class="string">&quot;创建紧急修复分支&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建版本标签</span></span><br><span class="line">svn copy ^/trunk ^/tags/v1.0.0 -m <span class="string">&quot;发布版本1.0.0&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从特定分支创建标签</span></span><br><span class="line">svn copy ^/branches/release-1.0 ^/tags/v1.0.0 -m <span class="string">&quot;从发布分支创建版本标签&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到功能分支</span></span><br><span class="line">svn switch ^/branches/feature-new-functionality</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换回主分支</span></span><br><span class="line">svn switch ^/trunk</span><br></pre></td></tr></table></figure>
+
+<h3 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将功能分支合并回trunk</span></span><br><span class="line"><span class="comment"># 1. 先切换到trunk</span></span><br><span class="line">svn switch ^/trunk</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 合并功能分支的更改</span></span><br><span class="line">svn merge --reintegrate ^/branches/feature-new-functionality</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 提交合并结果</span></span><br><span class="line">svn commit -m <span class="string">&quot;合并功能分支到trunk&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看分支信息"><a href="#查看分支信息" class="headerlink" title="查看分支信息"></a>查看分支信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">svn <span class="built_in">ls</span> ^/branches/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有标签</span></span><br><span class="line">svn <span class="built_in">ls</span> ^/tags/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看分支日志</span></span><br><span class="line">svn <span class="built_in">log</span> -v ^/branches/feature-new-functionality</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h3 id="分支命名规范"><a href="#分支命名规范" class="headerlink" title="分支命名规范"></a>分支命名规范</h3><ul>
+<li>功能分支: <code>feature-功能描述</code></li>
+<li>修复分支: <code>fix-问题描述</code> 或 <code>hotfix-问题描述</code></li>
+<li>发布分支: <code>release-版本号</code></li>
+<li>实验分支: <code>experimental-描述</code></li>
+</ul>
+<h3 id="Tags命名规范"><a href="#Tags命名规范" class="headerlink" title="Tags命名规范"></a>Tags命名规范</h3><ul>
+<li>使用版本号: <code>v1.0.0</code>, <code>v1.2.3</code></li>
+<li>使用发布日期: <code>release-2026-03-09</code></li>
+<li>使用语义化描述: <code>milestone-first-release</code></li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><ol>
+<li><strong>功能开发</strong>: 从trunk创建feature分支 → 开发完成 → 合并回trunk → 删除feature分支</li>
+<li><strong>版本发布</strong>: 从trunk创建release分支 → 测试修复 → 创建tags → 合并回trunk</li>
+<li><strong>紧急修复</strong>: 从tags创建hotfix分支 → 修复 → 同时合并到trunk和创建新tags</li>
+</ol>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li><strong>Tags应该是只读的</strong>: 避免对已创建的tags进行修改</li>
+<li><strong>及时清理</strong>: 合并完成后删除不再需要的分支</li>
+<li><strong>定期合并</strong>: 长期分支应该定期合并trunk的更改以避免冲突</li>
+<li><strong>文档记录</strong>: 在分支创建和合并时添加清晰的提交信息</li>
+</ul>
+<hr>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><ul>
+<li><strong>SVN官方文档</strong>: <a target="_blank" rel="noopener" href="https://subversion.apache.org/docs/">https://subversion.apache.org/docs/</a></li>
+<li><strong>TortoiseSVN文档</strong>: <a target="_blank" rel="noopener" href="https://tortoisesvn.net/docs.html">https://tortoisesvn.net/docs.html</a></li>
+<li><strong>SVN分支管理最佳实践</strong>: <a target="_blank" rel="noopener" href="https://svn.apache.org/repos/asf/subversion/trunk/doc/user/svn-best-practices.html">Apache SVN分支管理指南</a></li>
+</ul>
+<hr>
+<h2 id="搜索关键词"><a href="#搜索关键词" class="headerlink" title="搜索关键词"></a>搜索关键词</h2><ul>
+<li><code>svn branch management</code></li>
+<li><code>svn tags best practices</code></li>
+<li><code>svn merge workflow</code></li>
+<li><code>subversion branching strategy</code></li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/SVN/" data-i18n-tag="SVN">SVN</a> <a href="/zh-CN/tags/Tags/" data-i18n-tag="Tags">Tags</a> <a href="/zh-CN/tags/版本控制/" data-i18n-tag="版本控制">版本控制</a> <a href="/zh-CN/tags/分支管理/" data-i18n-tag="分支管理">分支管理</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

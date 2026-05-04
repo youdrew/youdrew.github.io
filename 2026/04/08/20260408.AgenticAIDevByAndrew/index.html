@@ -15,10 +15,9 @@
 
     <!-- Description -->
     
-        <meta name="description" content="一、Agentic工作流简介1.1 什么是Agentic AI核心定义：基于LLM的应用通过多步骤执行来完成任务的流程。
+        <meta name="description" content="I. Introduction to Agentic Workflows1.1 What Is Agentic AICore definition: An LLM-based application that completes tasks through multi-step execution flows.
 
-Non-agentic：单次prompt，one-shot完成（类似写作文不许用退格键）
-Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最">
+No">
     
 
     <!-- Author -->
@@ -32,19 +31,18 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
     <meta property="og:site_name" content="Eugene&#39;s Page">
     <meta property="og:locale" content="en_US">
     
-        <meta property="og:title" content="Agentic工作流搭建教程笔记（吴恩达）">
+        <meta property="og:title" content="Notes on Building Agentic Workflows (Andrew Ng)">
     
     
-        <meta property="og:description" content="一、Agentic工作流简介1.1 什么是Agentic AI核心定义：基于LLM的应用通过多步骤执行来完成任务的流程。
+        <meta property="og:description" content="I. Introduction to Agentic Workflows1.1 What Is Agentic AICore definition: An LLM-based application that completes tasks through multi-step execution flows.
 
-Non-agentic：单次prompt，one-shot完成（类似写作文不许用退格键）
-Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最">
+No">
     
     
     
         <meta property="article:published_time" content="2026-04-08T09:45:00.000Z">
         
-            <meta property="article:modified_time" content="2026-05-03T13:17:59.687Z">
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.535Z">
         
     
     
@@ -54,23 +52,26 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     
-        <meta name="twitter:title" content="Agentic工作流搭建教程笔记（吴恩达）">
+        <meta name="twitter:title" content="Notes on Building Agentic Workflows (Andrew Ng)">
     
     
-        <meta name="twitter:description" content="一、Agentic工作流简介1.1 什么是Agentic AI核心定义：基于LLM的应用通过多步骤执行来完成任务的流程。
+        <meta name="twitter:description" content="I. Introduction to Agentic Workflows1.1 What Is Agentic AICore definition: An LLM-based application that completes tasks through multi-step execution flows.
 
-Non-agentic：单次prompt，one-shot完成（类似写作文不许用退格键）
-Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最">
+No">
     
     
 
     <!-- Hreflang (build-time alternate language map).
          x-default always points at the English version per SEO convention. -->
     
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/04/08/20260408.AgenticAIDevByAndrew/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/04/08/20260408.AgenticAIDevByAndrew/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/04/08/20260408.AgenticAIDevByAndrew/">
+    
 
     <!-- Title -->
     
-    <title>Agentic工作流搭建教程笔记（吴恩达） - Eugene&#39;s Page</title>
+    <title>Notes on Building Agentic Workflows (Andrew Ng) - Eugene&#39;s Page</title>
 
     <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
     
@@ -99,7 +100,7 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
 
 
 
-<body class="layout-post path-2026-04-08-20260408-AgenticAIDevByAndrew-">
+<body class="layout-post path--2026-04-08-20260408-AgenticAIDevByAndrew-">
 
 <!-- Menu -->
 <!-- Navigation -->
@@ -114,17 +115,21 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
     <nav>
         <ul>
             
-            <li>
-                <a href="/" data-i18n-key="Home">Home</a>
-            </li>
             
-            <li>
-                <a href="/archives" data-i18n-key="Archives">Archives</a>
-            </li>
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
             
-            <li>
-                <a href="/about" data-i18n-key="About">About</a>
-            </li>
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
             
         </ul>
     </nav><!-- end navigation menu -->
@@ -173,16 +178,16 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
 
     <ul class="btn clearfix">
         
-        <li><a href="/2026/04/12/20260412.SQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" class="previous" data-title="SQL 基础笔记"></a></li>
+        <li><a href="/zh-CN/2026/04/12/20260412.SQLBasicsNotes/" class="previous" data-title="SQL 基础笔记"></a></li>
         
         <li><a href="/" class="grid" data-title="Portfolio"></a></li>
         
-        <li><a href="/2026/03/22/20260322.Claude%20Code%20Tips/" class="next" data-title="Claude Code 使用技巧整..."></a></li>
+        <li><a href="/zh-CN/2026/04/08/20260408.AgenticAIDevByAndrew/" class="next" data-title="Agentic工作流搭建教程笔记（..."></a></li>
         
     </ul>
 
 </div><!-- end work_nav -->
-            <h1 class="title">Agentic工作流搭建教程笔记（吴恩达）</h1>
+            <h1 class="title">Notes on Building Agentic Workflows (Andrew Ng)</h1>
         </div>
     </section><!-- end top -->
 
@@ -190,390 +195,390 @@ Agentic：多步骤流程——列大纲 → 决定是否需要调研 → 执行
         <div class="content">
 
             <!-- Content -->
-            <h1 id="一、Agentic工作流简介"><a href="#一、Agentic工作流简介" class="headerlink" title="一、Agentic工作流简介"></a>一、Agentic工作流简介</h1><h2 id="1-1-什么是Agentic-AI"><a href="#1-1-什么是Agentic-AI" class="headerlink" title="1.1 什么是Agentic AI"></a>1.1 什么是Agentic AI</h2><p><strong>核心定义</strong>：基于LLM的应用通过多步骤执行来完成任务的流程。</p>
+            <h1 id="I-Introduction-to-Agentic-Workflows"><a href="#I-Introduction-to-Agentic-Workflows" class="headerlink" title="I. Introduction to Agentic Workflows"></a>I. Introduction to Agentic Workflows</h1><h2 id="1-1-What-Is-Agentic-AI"><a href="#1-1-What-Is-Agentic-AI" class="headerlink" title="1.1 What Is Agentic AI"></a>1.1 What Is Agentic AI</h2><p><strong>Core definition</strong>: An LLM-based application that completes tasks through multi-step execution flows.</p>
 <ul>
-<li><strong>Non-agentic</strong>：单次prompt，one-shot完成（类似写作文不许用退格键）</li>
-<li><strong>Agentic</strong>：多步骤流程——列大纲 → 决定是否需要调研 → 执行搜索 → 写初稿 → 反思修改 → 最终定稿</li>
+<li><strong>Non-agentic</strong>: Single prompt, one-shot completion (like writing an essay without a backspace key)</li>
+<li><strong>Agentic</strong>: Multi-step flow — outline → decide if research is needed → execute searches → write draft → reflect and revise → final output</li>
 </ul>
 <blockquote>
-<p>类比：做番茄炒蛋，让多个AI各司其职（备料&#x2F;烹饪&#x2F;摆盘&#x2F;审查）</p>
+<p>Analogy: Making a stir-fry dish with multiple AIs each handling a role (prep &#x2F; cooking &#x2F; plating &#x2F; review)</p>
 </blockquote>
 <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-19%2016.14.14.png" alt="截屏2026-04-19 16.14.14" style="zoom:50%;" />
 
-<p>蓝色标注的分别是AI的不同发展阶段：从prompt engineer到content engineer再到Hermes engineer（Agent）.</p>
-<h2 id="1-2-自主性等级"><a href="#1-2-自主性等级" class="headerlink" title="1.2 自主性等级"></a>1.2 自主性等级</h2><p>Agentic是一个<strong>形容词</strong>而非名词，避免”什么才算真正的Agent”的争论。</p>
+<p>The blue labels mark different stages of AI evolution: from prompt engineer to content engineer to Hermes engineer (Agent).</p>
+<h2 id="1-2-Levels-of-Autonomy"><a href="#1-2-Levels-of-Autonomy" class="headerlink" title="1.2 Levels of Autonomy"></a>1.2 Levels of Autonomy</h2><p>Agentic is an <strong>adjective</strong>, not a noun — this sidesteps the debate over “what really counts as an Agent.”</p>
 <table>
 <thead>
 <tr>
-<th>低自主</th>
-<th>高自主</th>
+<th>Low Autonomy</th>
+<th>High Autonomy</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>所有步骤预定义，工具调用硬编码</td>
-<td>Agent动态决策步骤顺序</td>
+<td>All steps predefined, tool calls hardcoded</td>
+<td>Agent dynamically decides the step sequence</td>
 </tr>
 <tr>
-<td>AI只负责生成文本</td>
-<td>Agent可自行创建新工具</td>
+<td>AI only generates text</td>
+<td>Agent can create new tools on its own</td>
 </tr>
 <tr>
-<td>“听话但没脑子的助手”</td>
-<td>“聪明、有责任心的实习生”</td>
+<td>“Obedient but brainless assistant”</td>
+<td>“Smart, accountable intern”</td>
 </tr>
 </tbody></table>
 <blockquote>
-<p>本质：不只是”能干活”，而是”知道怎么思考如何干活、用什么工具、能自检纠错”。<br>一个合格的Agentic AI应该能<strong>自主规划</strong>（Planning，自己选择工具）和<strong>自主反思</strong>（Reflection，有记忆和反思）。</p>
+<p>The essence: not just “can do work,” but “knows how to think about the work, what tools to use, and can self-correct.”<br>A proper Agentic AI should be capable of <strong>autonomous planning</strong> (Planning — selecting tools on its own) and <strong>autonomous reflection</strong> (Reflection — with memory and self-review).</p>
 </blockquote>
-<h2 id="1-3-三大益处"><a href="#1-3-三大益处" class="headerlink" title="1.3 三大益处"></a>1.3 三大益处</h2><ol>
-<li><strong>性能大幅提升</strong>：HumanEval上，Agentic的GPT-3.5可超越Non-agentic的GPT-4（BTW这些听起来都是上古模型了）</li>
-<li><strong>并行加速</strong>：多个LLM实例同时搜索&#x2F;阅读，汇总后输出</li>
-<li><strong>模块化设计</strong>：自由替换组件（搜索引擎、不同LLM、不同工具）</li>
+<h2 id="1-3-Three-Major-Benefits"><a href="#1-3-Three-Major-Benefits" class="headerlink" title="1.3 Three Major Benefits"></a>1.3 Three Major Benefits</h2><ol>
+<li><strong>Significant performance gains</strong>: On HumanEval, an agentic GPT-3.5 can outperform a non-agentic GPT-4 (though both sound like ancient history now)</li>
+<li><strong>Parallel speedup</strong>: Multiple LLM instances search and read simultaneously, then aggregate results</li>
+<li><strong>Modular design</strong>: Freely swap components (search engines, different LLMs, different tools)</li>
 </ol>
-<h2 id="1-4-任务分解方法"><a href="#1-4-任务分解方法" class="headerlink" title="1.4 任务分解方法"></a>1.4 任务分解方法</h2><p>核心方法论：</p>
+<h2 id="1-4-Task-Decomposition-Method"><a href="#1-4-Task-Decomposition-Method" class="headerlink" title="1.4 Task Decomposition Method"></a>1.4 Task Decomposition Method</h2><p>Core methodology:</p>
 <ol>
-<li>观察人类行为 → 2. 拆解为子步骤 → 3. 评估LLM&#x2F;工具可行性 → 4. 迭代优化</li>
+<li>Observe human behavior → 2. Break into sub-steps → 3. Assess LLM&#x2F;tool feasibility → 4. Iterate and improve</li>
 </ol>
-<p><strong>案例——写文章的递进分解</strong>：</p>
+<p><strong>Case study — progressive decomposition of article writing</strong>:</p>
 <ul>
-<li>1步：直接生成（肤浅）</li>
-<li>3步：大纲 → 搜索 → 写文（较好但可能脱节）</li>
-<li>5步：大纲 → 搜索 → 初稿 → 自我批评 → 修改（最好，模拟人的写-反思-修改循环）</li>
-<li>核心方法论：<strong>“如果某一步骤效果不好，就把它再拆成更小的子步骤。”</strong></li>
+<li>1 step: Generate directly (shallow)</li>
+<li>3 steps: Outline → Search → Write (better, but may feel disconnected)</li>
+<li>5 steps: Outline → Search → Draft → Self-critique → Revise (best — simulates the human write-reflect-revise loop)</li>
+<li>Core principle: <strong>“If a step produces poor results, break it down into smaller sub-steps.”</strong></li>
 </ul>
-<p>构建模块：<strong>模型</strong>（LLM）+ <strong>工具</strong>（API、信息检索、代码执行）</p>
-<h2 id="1-5-Agentic-AI评估（Evals，在做之前对项目进行思考）"><a href="#1-5-Agentic-AI评估（Evals，在做之前对项目进行思考）" class="headerlink" title="1.5 Agentic AI评估（Evals，在做之前对项目进行思考）"></a>1.5 Agentic AI评估（Evals，在做之前对项目进行思考）</h2><blockquote>
-<p>吴恩达强调：<strong>区分有效和无效实践者的最大预测因子，是围绕评估和错误分析的规范开发流程。</strong></p>
+<p>Building blocks: <strong>Model</strong> (LLM) + <strong>Tools</strong> (APIs, information retrieval, code execution)</p>
+<h2 id="1-5-Agentic-AI-Evaluation-Evals-—-think-before-you-build"><a href="#1-5-Agentic-AI-Evaluation-Evals-—-think-before-you-build" class="headerlink" title="1.5 Agentic AI Evaluation (Evals — think before you build)"></a>1.5 Agentic AI Evaluation (Evals — think before you build)</h2><blockquote>
+<p>Andrew Ng emphasizes: <strong>The biggest predictor distinguishing effective from ineffective practitioners is a rigorous development process built around evaluation and error analysis.</strong></p>
 </blockquote>
-<p>方法论：</p>
+<p>Methodology:</p>
 <ol>
-<li>先构建，观察输出，再做评估（不要预先设计所有评估标准）：看看这事情咋弄。</li>
-<li>识别低质量输出，定义错误类型。</li>
-<li>建立评估指标追踪错误：编写脚本自动扫描智能体的所有输出，统计提及错误输出的次数和频率。</li>
-<li>主观标准可用 <strong>LLM as Judge</strong>（1-5分打分，但是不要直接让大模型去打分）。</li>
+<li>Build first, observe outputs, then evaluate (don’t design all metrics upfront): just see how things work.</li>
+<li>Identify low-quality outputs and define error types.</li>
+<li>Build evaluation metrics to track errors: write scripts to automatically scan all agent outputs and count how often error outputs appear.</li>
+<li>For subjective criteria, use <strong>LLM as Judge</strong> (1–5 scoring, but don’t let the model score directly without guidance).</li>
 </ol>
-<p>两类评估：<strong>端到端评估</strong>（整体输出质量） &#x2F; <strong>组件级评估</strong>（单步质量）（这两种就是一个整体一个局部评估）</p>
-<h2 id="1-6-四大设计模式总览"><a href="#1-6-四大设计模式总览" class="headerlink" title="1.6 四大设计模式总览"></a>1.6 四大设计模式总览</h2><table>
+<p>Two types of evaluation: <strong>End-to-end evaluation</strong> (overall output quality) &#x2F; <strong>Component-level evaluation</strong> (per-step quality)</p>
+<h2 id="1-6-Overview-of-the-Four-Design-Patterns"><a href="#1-6-Overview-of-the-Four-Design-Patterns" class="headerlink" title="1.6 Overview of the Four Design Patterns"></a>1.6 Overview of the Four Design Patterns</h2><table>
 <thead>
 <tr>
-<th align="center">模式</th>
-<th align="center">核心思想</th>
+<th align="center">Pattern</th>
+<th align="center">Core Idea</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><strong>Reflection 反思</strong></td>
-<td align="center">多Agent检查、评估、改进自己的输出。</td>
+<td align="center"><strong>Reflection</strong></td>
+<td align="center">Multiple agents check, evaluate, and improve their own outputs.</td>
 </tr>
 <tr>
-<td align="center"><strong>Tool Use 工具使用</strong></td>
-<td align="center">给LLM调用外部工具&#x2F;函数的能力</td>
+<td align="center"><strong>Tool Use</strong></td>
+<td align="center">Gives LLMs the ability to call external tools&#x2F;functions</td>
 </tr>
 <tr>
-<td align="center"><strong>Planning 规划</strong></td>
-<td align="center">模型自主决定复杂任务的步骤序列</td>
+<td align="center"><strong>Planning</strong></td>
+<td align="center">The model autonomously decides the sequence of steps for complex tasks</td>
 </tr>
 <tr>
-<td align="center"><strong>Multi-Agent 多智能体</strong></td>
-<td align="center">多个不同专长的Agent协作</td>
+<td align="center"><strong>Multi-Agent</strong></td>
+<td align="center">Multiple agents with different specializations collaborate</td>
 </tr>
 </tbody></table>
-<h3 id="现实案例：oh-my-claudecode（OMC）"><a href="#现实案例：oh-my-claudecode（OMC）" class="headerlink" title="现实案例：oh-my-claudecode（OMC）"></a>现实案例：oh-my-claudecode（OMC）</h3><p>OMC （oh-My-Claude）是一个真实的 Agent 系统，完美对应了这四大设计模式：</p>
+<h3 id="Real-World-Example-oh-my-claudecode-OMC"><a href="#Real-World-Example-oh-my-claudecode-OMC" class="headerlink" title="Real-World Example: oh-my-claudecode (OMC)"></a>Real-World Example: oh-my-claudecode (OMC)</h3><p>OMC (oh-my-claudecode) is a real Agent system that perfectly maps to these four design patterns:</p>
 <ul>
-<li><strong>Reflection 反思</strong>：<code>code-reviewer</code> &#x2F; <code>verifier</code> agent — executor 写完代码后，由独立的 reviewer 审查。这就是笔记 2.1 说的”用不同模型，一个生成一个审查（1+1&gt;2）”。OMC 的规则是 <em>Never self-approve in the same active context</em>，写代码和审代码必须是两个独立的 Agent。</li>
-<li><strong>Tool Use 工具使用</strong>：MCP servers（Context7 查文档、filesystem 操作文件、LSP 做代码分析）、Skill 系统（<code>/commit</code>、<code>/plan</code> 等可调用技能）、Bash 工具 — 对应笔记 3.1 的”工具就是函数，模型自主决定何时使用”。Claude 会根据任务自主判断该用哪个工具。</li>
-<li><strong>Planning 规划</strong>：<code>planner</code> agent、<code>/plan</code> skill、plan mode — 对应笔记 5.2 的”LLM输出结构化计划后再执行”。在 plan mode 下，Claude 会先探索代码库、设计方案，等你批准后才动手写代码。</li>
-<li><strong>Multi-Agent 多智能体</strong>：Team 模式（<code>/team</code>）可以同时启动多个专项 Agent（explorer 负责搜索、executor 负责写代码、reviewer 负责审查、designer 负责 UI…），它们共享 TaskList，通过 SendMessage 通信协作。</li>
+<li><strong>Reflection</strong>: <code>code-reviewer</code> &#x2F; <code>verifier</code> agent — after the executor writes code, an independent reviewer examines it. This is exactly what section 2.1 describes: “use different models, one to generate and one to review (1+1&gt;2).” OMC’s rule is <em>Never self-approve in the same active context</em> — writing code and reviewing code must always be two separate agents.</li>
+<li><strong>Tool Use</strong>: MCP servers (Context7 for docs, filesystem for file ops, LSP for code analysis), the Skill system (<code>/commit</code>, <code>/plan</code>, and other callable skills), Bash tools — matching section 3.1’s “tools are functions, the model autonomously decides when to use them.” Claude independently judges which tool to use for each task.</li>
+<li><strong>Planning</strong>: <code>planner</code> agent, <code>/plan</code> skill, plan mode — matching section 5.2’s “LLM outputs a structured plan before executing.” In plan mode, Claude first explores the codebase and designs an approach, only writing code after you approve.</li>
+<li><strong>Multi-Agent</strong>: Team mode (<code>/team</code>) can launch multiple specialized agents simultaneously (explorer for search, executor for writing code, reviewer for review, designer for UI…), sharing a TaskList and collaborating via SendMessage.</li>
 </ul>
 <hr>
-<h1 id="二、反思设计模式（Reflection）"><a href="#二、反思设计模式（Reflection）" class="headerlink" title="二、反思设计模式（Reflection）"></a>二、反思设计模式（Reflection）</h1><figure style="text-align: center; margin: 24px 0;">
+<h1 id="II-The-Reflection-Design-Pattern"><a href="#II-The-Reflection-Design-Pattern" class="headerlink" title="II. The Reflection Design Pattern"></a>II. The Reflection Design Pattern</h1><figure style="text-align: center; margin: 24px 0;">
   <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.19.57.png" alt="使用反射模式真的是能提升效果的" style="max-width: 66%; height: auto; display: inline-block; border-radius: 8px;" />
-  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">使用反射模式真的是能提升效果的。所以人有多时候多反思一下自己，可能真的就能进步。🐶</figcaption>
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Reflection really does improve output quality. So maybe taking more time to reflect on yourself actually leads to growth. 🐶</figcaption>
 </figure>
 
 
-<h2 id="2-1-反思提升任务输出"><a href="#2-1-反思提升任务输出" class="headerlink" title="2.1 反思提升任务输出"></a>2.1 反思提升任务输出</h2><p>核心类比：人类会审查和修改草稿，AI也可以。</p>
-<p><strong>邮件写作案例</strong>：</p>
+<h2 id="2-1-Reflection-Improves-Task-Output"><a href="#2-1-Reflection-Improves-Task-Output" class="headerlink" title="2.1 Reflection Improves Task Output"></a>2.1 Reflection Improves Task Output</h2><p>Core analogy: Humans review and revise drafts — AI can do the same.</p>
+<p><strong>Email writing example</strong>:</p>
 <ul>
-<li>AI生成V1 → 将V1反馈给LLM并附上反思prompt → 生成改进的V2</li>
+<li>AI generates V1 → Feed V1 back to the LLM with a reflection prompt → Generate improved V2</li>
 </ul>
-<p><strong>代码写作进阶路径</strong>：</p>
+<p><strong>Progressive path for code writing</strong>:</p>
 <ul>
-<li>基础：LLM写代码V1 → LLM审查生成V2</li>
-<li>进阶：用不同模型——一个生成，一个推理模型审查（1+1&gt;2）</li>
-<li>终极：结合外部反馈——在沙箱执行V1，捕获错误，反馈给LLM生成V2</li>
+<li>Basic: LLM writes code V1 → LLM reviews and generates V2</li>
+<li>Advanced: Use different models — one to generate, one reasoning model to review (1+1&gt;2)</li>
+<li>Ultimate: Combine external feedback — execute V1 in a sandbox, capture errors, feed back to LLM to generate V2</li>
 </ul>
 <blockquote>
-<p>关键：反思是工程实践而非魔法；<strong>外部反馈是关键区分因素</strong></p>
+<p>Key insight: Reflection is an engineering practice, not magic; <strong>external feedback is the critical differentiator</strong></p>
 </blockquote>
-<h2 id="2-2-Internal——自我-反思的两条黄金法则"><a href="#2-2-Internal——自我-反思的两条黄金法则" class="headerlink" title="2.2 Internal——自我 反思的两条黄金法则"></a>2.2 Internal——自我 反思的两条黄金法则</h2><ol>
-<li><strong>明确指示反思动作</strong>：说”审查””检查””验证”（具体的事情），不只是”改进”。<strong>客观任务</strong>：构建ground truth数据集 + 自动化代码评估（如SQL查询正确性）</li>
-<li><strong>指定具体标准</strong>：列出明确的评估维度（如”专业语气””事实准确”）。<strong>主观任务</strong>：用**评分标准（Rubric）**引导LLM打分，避免直接比较（存在位置偏差）</li>
+<h2 id="2-2-Internal-—-Two-Golden-Rules-of-Self-Reflection"><a href="#2-2-Internal-—-Two-Golden-Rules-of-Self-Reflection" class="headerlink" title="2.2 Internal — Two Golden Rules of Self-Reflection"></a>2.2 Internal — Two Golden Rules of Self-Reflection</h2><ol>
+<li><strong>Explicitly instruct the reflection action</strong>: Say “review,” “check,” “verify” (specific actions), not just “improve.” For <strong>objective tasks</strong>: build ground-truth datasets + automated code evaluation (e.g., checking SQL query correctness).</li>
+<li><strong>Specify concrete criteria</strong>: List explicit evaluation dimensions (e.g., “professional tone,” “factually accurate”). For <strong>subjective tasks</strong>: use a <strong>Rubric</strong> to guide LLM scoring — avoid direct comparison (which introduces positional bias).</li>
 </ol>
-<p>论文”Self-refine”表明：在全部7个任务、4个模型上，反思一致地提升了性能。</p>
-<h2 id="2-3-external——外部-突破性能天花板"><a href="#2-3-external——外部-突破性能天花板" class="headerlink" title="2.3 external——外部 突破性能天花板"></a>2.3 external——外部 突破性能天花板</h2><p>三条性能曲线：</p>
+<p>The paper “Self-Refine” shows that reflection consistently improved performance across all 7 tasks and 4 models tested.</p>
+<h2 id="2-3-External-—-Breaking-Through-the-Performance-Ceiling"><a href="#2-3-External-—-Breaking-Through-the-Performance-Ceiling" class="headerlink" title="2.3 External — Breaking Through the Performance Ceiling"></a>2.3 External — Breaking Through the Performance Ceiling</h2><p>Three performance curves:</p>
 <ul>
-<li>🔴 无反思：prompt工程快速提升后<strong>停滞</strong></li>
-<li>🔵 有反思：突破停滞到更高水平</li>
-<li>🟡 反思+外部反馈：再次突破到最高水平</li>
+<li>🔴 No reflection: rapid gains from prompt engineering, then <strong>plateaus</strong></li>
+<li>🔵 With reflection: breaks through the plateau to a higher level</li>
+<li>🟡 Reflection + external feedback: breaks through again to the highest level</li>
 </ul>
-<p>三类外部反馈：正则匹配（避免提竞品）→ 搜索验证（事实核查）→ 字数检查（格式约束）</p>
+<p>Three types of external feedback: regex matching (avoid mentioning competitors) → search validation (fact-checking) → word count checks (format constraints)</p>
 <blockquote>
-<p>外部反馈打破模型信息孤岛，解决固有弱点（精确计数、事实核实），实现闭环优化。</p>
+<p>External feedback breaks the model out of its information silo, addressing inherent weaknesses (precise counting, fact verification) and enabling closed-loop optimization.</p>
 </blockquote>
 <figure style="text-align: center; margin: 24px 0;">
   <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-09%2003.33.25.png" alt="截屏2026-04-09 03.33.25" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
-  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">反思与外部反馈的性能曲线对比</figcaption>
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Performance curve comparison: reflection vs. external feedback</figcaption>
 </figure>
 
 <hr>
-<h1 id="三、工具使用（Tool-Use）"><a href="#三、工具使用（Tool-Use）" class="headerlink" title="三、工具使用（Tool Use）"></a>三、工具使用（Tool Use）</h1><h2 id="3-1-工具的本质"><a href="#3-1-工具的本质" class="headerlink" title="3.1 工具的本质"></a>3.1 工具的本质</h2><p><strong>工具就是函数</strong>，模型自主决定何时使用。</p>
-<p>关键能力——<strong>条件调用</strong>：模型智能判断何时需要工具。</p>
+<h1 id="III-Tool-Use"><a href="#III-Tool-Use" class="headerlink" title="III. Tool Use"></a>III. Tool Use</h1><h2 id="3-1-What-Tools-Actually-Are"><a href="#3-1-What-Tools-Actually-Are" class="headerlink" title="3.1 What Tools Actually Are"></a>3.1 What Tools Actually Are</h2><p><strong>Tools are functions</strong> — the model autonomously decides when to use them.</p>
+<p>Key capability — <strong>conditional invocation</strong>: the model intelligently judges when a tool is needed.</p>
 <ul>
-<li>“绿茶含多少咖啡因？” → 从内部知识回答</li>
-<li>“现在几点？” → 调用get_current_time工具</li>
+<li>“How much caffeine is in green tea?” → Answer from internal knowledge</li>
+<li>“What time is it now?” → Call the get_current_time tool</li>
 </ul>
-<p>多工具协作：日历助手可链式调用 check_calendar → make_appointment</p>
-<h2 id="3-2-LLM-是如何”调用”函数的？"><a href="#3-2-LLM-是如何”调用”函数的？" class="headerlink" title="3.2 LLM 是如何”调用”函数的？"></a>3.2 LLM 是如何”调用”函数的？</h2><blockquote>
-<p>LLM 理论上根本触碰不到函数的执行层——它从头到尾只做一件事：<strong>生成文本</strong>。<br>所谓的”调用函数”，本质是一个<strong>文本中转协议</strong>。</p>
+<p>Multi-tool chaining: a calendar assistant can chain check_calendar → make_appointment</p>
+<h2 id="3-2-How-Does-an-LLM-Actually-“Call”-a-Function"><a href="#3-2-How-Does-an-LLM-Actually-“Call”-a-Function" class="headerlink" title="3.2 How Does an LLM Actually “Call” a Function?"></a>3.2 How Does an LLM Actually “Call” a Function?</h2><blockquote>
+<p>In theory, an LLM never touches the execution layer of any function — from start to finish, it does exactly one thing: <strong>generate text</strong>.<br>What we call “calling a function” is fundamentally a <strong>text relay protocol</strong>.</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant U as 用户</span><br><span class="line">    participant S as 系统/工程代码</span><br><span class="line">    participant L as LLM</span><br><span class="line"></span><br><span class="line">    U-&gt;&gt;L: &quot;现在几点了？&quot;</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 1: 系统 prompt 告诉 LLM 可用工具</span><br><span class="line">    Note right of L: 系统 prompt 中包含：&lt;br/&gt;函数名: get_current_time&lt;br/&gt;描述: 获取当前时间&lt;br/&gt;参数: 无</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 2: LLM 输出结构化文本（没有执行任何东西！）</span><br><span class="line">    L--&gt;&gt;S: tool_calls: [&#123;&lt;br/&gt;  name: &quot;get_current_time&quot;,&lt;br/&gt;  arguments: &#123;&#125;&lt;br/&gt;&#125;]</span><br><span class="line"></span><br><span class="line">    Note over S: Step 3: 外层代码拦截&lt;br/&gt;真正执行函数&lt;br/&gt;拿到结果 &quot;15:20:45&quot;</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 4: 把结果塞回 LLM 上下文</span><br><span class="line">    S-&gt;&gt;L: &#123; role: &quot;tool&quot;,&lt;br/&gt;  content: &quot;15:20:45&quot; &#125;</span><br><span class="line"></span><br><span class="line">    L--&gt;&gt;S: &quot;现在是下午3点20分。&quot;</span><br><span class="line">    S-&gt;&gt;U: &quot;现在是下午3点20分。&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    participant U as User</span><br><span class="line">    participant S as System / Engineering Code</span><br><span class="line">    participant L as LLM</span><br><span class="line"></span><br><span class="line">    U-&gt;&gt;L: &quot;What time is it?&quot;</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 1: System prompt tells LLM which tools are available</span><br><span class="line">    Note right of L: System prompt includes:&lt;br/&gt;function name: get_current_time&lt;br/&gt;description: get the current time&lt;br/&gt;parameters: none</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 2: LLM outputs structured text (nothing is executed!)</span><br><span class="line">    L--&gt;&gt;S: tool_calls: [&#123;&lt;br/&gt;  name: &quot;get_current_time&quot;,&lt;br/&gt;  arguments: &#123;&#125;&lt;br/&gt;&#125;]</span><br><span class="line"></span><br><span class="line">    Note over S: Step 3: Outer code intercepts&lt;br/&gt;actually executes the function&lt;br/&gt;gets result &quot;15:20:45&quot;</span><br><span class="line"></span><br><span class="line">    Note over S,L: Step 4: Result is fed back into the LLM context</span><br><span class="line">    S-&gt;&gt;L: &#123; role: &quot;tool&quot;,&lt;br/&gt;  content: &quot;15:20:45&quot; &#125;</span><br><span class="line"></span><br><span class="line">    L--&gt;&gt;S: &quot;It is currently 3:20 PM.&quot;</span><br><span class="line">    S-&gt;&gt;U: &quot;It is currently 3:20 PM.&quot;</span><br></pre></td></tr></table></figure>
 
-<p><strong>三个关键认知</strong>：</p>
+<p><strong>Three key insights</strong>:</p>
 <ol>
-<li><p><strong>LLM 不是在”调用”函数</strong> — 它只是在预测”接下来应该输出一段 JSON 表示我想用这个工具”。这是从大量代码和 API 文档训练中学到的模式。</p>
+<li><p><strong>The LLM is not “calling” a function</strong> — it is predicting “the next output should be a JSON snippet expressing that I want to use this tool.” This is a pattern learned from training on large amounts of code and API documentation.</p>
 </li>
-<li><p><strong>真正执行函数的是外层工程代码</strong> — Claude Code、OpenAI SDK、LangChain 这些框架负责解析 LLM 输出的结构化文本，执行函数，再把结果喂回去。</p>
+<li><p><strong>The outer engineering code is what actually executes the function</strong> — frameworks like Claude Code, the OpenAI SDK, and LangChain parse the LLM’s structured text output, execute the function, and feed the result back.</p>
 </li>
-<li><p><strong>LLM 的核心能力在于”判断”</strong> — 它决定”这个用户问题我该用内部知识回答，还是该调工具”。笔记 3.1 里”绿茶咖啡因”（内部知识）vs “现在几点”（调工具）就是这个判断。</p>
+<li><p><strong>The LLM’s core ability is “judgment”</strong> — it decides “should I answer this user’s question from internal knowledge, or should I call a tool?” The “green tea caffeine” (internal knowledge) vs. “what time is it” (call a tool) example in section 3.1 illustrates exactly this judgment.</p>
 </li>
 </ol>
 <ul>
-<li>早期需要手写prompt模板触发（如”FUNCTION: get_current_time()”），现代LLM已原生理解工具调用，无需硬编码触发语法。</li>
+<li>Early on, hand-written prompt templates were needed to trigger tool calls (e.g., “FUNCTION: get_current_time()”). Modern LLMs natively understand tool calling without hardcoded trigger syntax.</li>
 </ul>
-<h2 id="3-3-工具语法与AI-SDK（写好函数让LLM调用）"><a href="#3-3-工具语法与AI-SDK（写好函数让LLM调用）" class="headerlink" title="3.3 工具语法与AI SDK（写好函数让LLM调用）"></a>3.3 工具语法与AI SDK（写好函数让LLM调用）</h2><p><a target="_blank" rel="noopener" href="https://github.com/andrewyng/aisuite">AI SDK</a>（Andrew Ng团队出品）统一多家LLM提供商访问：</p>
+<h2 id="3-3-Tool-Syntax-and-AI-SDK-Writing-Functions-for-LLMs-to-Call"><a href="#3-3-Tool-Syntax-and-AI-SDK-Writing-Functions-for-LLMs-to-Call" class="headerlink" title="3.3 Tool Syntax and AI SDK (Writing Functions for LLMs to Call)"></a>3.3 Tool Syntax and AI SDK (Writing Functions for LLMs to Call)</h2><p>The <a target="_blank" rel="noopener" href="https://github.com/andrewyng/aisuite">AI SDK</a> (from Andrew Ng’s team) unifies access to multiple LLM providers:</p>
 <ul>
-<li>函数名 → Python函数名</li>
-<li>描述 → docstring</li>
-<li>参数类型 → 自动提取</li>
+<li>Function name → Python function name</li>
+<li>Description → docstring</li>
+<li>Parameter types → automatically extracted</li>
 </ul>
-<h2 id="3-4-模型自己写代码（LLM自己写自己调）"><a href="#3-4-模型自己写代码（LLM自己写自己调）" class="headerlink" title="3.4 模型自己写代码（LLM自己写自己调）"></a>3.4 模型自己写代码（LLM自己写自己调）</h2><p>传统方式（预定义add&#x2F;subtract等）vs 代码执行（让模型自己写代码）</p>
+<h2 id="3-4-Models-That-Write-Their-Own-Code-LLM-Writes-and-Calls-Its-Own-Code"><a href="#3-4-Models-That-Write-Their-Own-Code-LLM-Writes-and-Calls-Its-Own-Code" class="headerlink" title="3.4 Models That Write Their Own Code (LLM Writes and Calls Its Own Code)"></a>3.4 Models That Write Their Own Code (LLM Writes and Calls Its Own Code)</h2><p>Traditional approach (predefined add&#x2F;subtract, etc.) vs. code execution (let the model write code itself):</p>
 <ul>
-<li>模型输出<code>&lt;execute_python&gt;</code>标签中的代码</li>
-<li>在沙箱中提取执行</li>
-<li>错误信息反馈给模型进行反思修改</li>
+<li>Model outputs code inside <code>&lt;execute_python&gt;</code> tags</li>
+<li>Code is extracted and executed in a sandbox</li>
+<li>Error messages are fed back to the model for reflection and revision</li>
 </ul>
 <blockquote>
-<p>⚠️ 安全警告：真实案例——Agentic代码执行器运行<code>rm *.py</code>删除了项目所有文件。必须使用沙箱环境（Docker、E2B）。</p>
+<p>⚠️ Security warning: A real-world case — an agentic code executor ran <code>rm *.py</code> and deleted all project files. Sandbox environments (Docker, E2B) are mandatory.</p>
 </blockquote>
-<h2 id="3-5-MCP（Model-Context-Protocol）"><a href="#3-5-MCP（Model-Context-Protocol）" class="headerlink" title="3.5 MCP（Model Context Protocol）"></a>3.5 MCP（Model Context Protocol）</h2><p>MCP标准化LLM访问外部工具和数据源的方式。让LLM调用的“工具范围”更大。</p>
+<h2 id="3-5-MCP-Model-Context-Protocol"><a href="#3-5-MCP-Model-Context-Protocol" class="headerlink" title="3.5 MCP (Model Context Protocol)"></a>3.5 MCP (Model Context Protocol)</h2><p>MCP standardizes how LLMs access external tools and data sources, expanding the “tool surface” available to the LLM.</p>
 <ul>
-<li><strong>问题</strong>：m个应用 × n个工具 &#x3D; m×n的工作量</li>
-<li><strong>MCP方案</strong>：建n个共享MCP Server，m个应用连接 → 工作量降为 m+n</li>
-<li><strong>Client</strong>：需要工具的应用（Cursor、Claude Desktop等）</li>
-<li><strong>Server</strong>：工具&#x2F;数据提供者（Slack、GitHub、PostgreSQL等）</li>
+<li><strong>Problem</strong>: m applications × n tools &#x3D; m×n amount of work</li>
+<li><strong>MCP solution</strong>: Build n shared MCP Servers, m applications connect → work reduced to m+n</li>
+<li><strong>Client</strong>: The application that needs tools (Cursor, Claude Desktop, etc.)</li>
+<li><strong>Server</strong>: The tool&#x2F;data provider (Slack, GitHub, PostgreSQL, etc.)</li>
 </ul>
 <hr>
-<h1 id="四、构建Agentic-AI的实用技巧"><a href="#四、构建Agentic-AI的实用技巧" class="headerlink" title="四、构建Agentic AI的实用技巧"></a>四、构建Agentic AI的实用技巧</h1><h2 id="4-1-评估（Evals）实战"><a href="#4-1-评估（Evals）实战" class="headerlink" title="4.1 评估（Evals）实战"></a>4.1 评估（Evals）实战</h2><p>评估方式可以从两个维度划分，形成一个 2x2 的矩阵，用于指导评估的设计：</p>
+<h1 id="IV-Practical-Tips-for-Building-Agentic-AI"><a href="#IV-Practical-Tips-for-Building-Agentic-AI" class="headerlink" title="IV. Practical Tips for Building Agentic AI"></a>IV. Practical Tips for Building Agentic AI</h1><h2 id="4-1-Evals-in-Practice"><a href="#4-1-Evals-in-Practice" class="headerlink" title="4.1 Evals in Practice"></a>4.1 Evals in Practice</h2><p>Evaluation approaches can be divided along two dimensions, forming a 2×2 matrix to guide evaluation design:</p>
 <table>
 <thead>
 <tr>
-<th>评估维度</th>
-<th>客观评估 (Objective Evals) （用代码检查）</th>
-<th>主观评估 (Subjective Evals) （用 LLM 作为评判者）</th>
+<th>Evaluation Dimension</th>
+<th>Objective Evals (check with code)</th>
+<th>Subjective Evals (use LLM as judge)</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>每个问题有唯一正确答案 (Per-Example Ground Truth)</td>
-<td>案例一：发票日期提取 (每个发票有不同的正确日期，用代码检查是否匹配)</td>
-<td>案例三：统计黄金标准点 (每个主题有不同的重要观点，用 LLM 检查是否充分提及)</td>
+<td>Each question has a unique correct answer (Per-Example Ground Truth)</td>
+<td>Case 1: Invoice date extraction (each invoice has a different correct date — use code to check for a match)</td>
+<td>Case 3: Counting gold-standard points (each topic has different key ideas — use LLM to check coverage)</td>
 </tr>
 <tr>
-<td>只有统一规则 &#x2F; 格式 &#x2F; 标准，没有固定答案 (No Per-Example Ground Truth)</td>
-<td>案例二：营销文案长度 (所有标题都要求是 10 个词，用代码检查是否符合统一标准)</td>
-<td>评分标准评估 (Rubric Grading) (例如，根据统一的清晰度评分标准来评估图表)</td>
+<td>Only unified rules &#x2F; format &#x2F; standards, no fixed answer (No Per-Example Ground Truth)</td>
+<td>Case 2: Marketing copy length (all headlines must be 10 words — use code to check compliance)</td>
+<td>Rubric Grading (e.g., evaluate charts against a unified clarity rubric)</td>
 </tr>
 </tbody></table>
 <ol>
-<li>从快速而粗糙的评估开始： 不要因为觉得评估是一个大型项目，就不敢轻易建立，或者花漫长的时间去做理论调研。先用 10-20 个例子开始，快速获得一些指标来辅助人工观察。</li>
-<li>迭代改进评估：<ol>
-<li>随着系统和评估的成熟，可以增加评估集的规模。</li>
-<li>如果系统改进了但评估分数没有提高，意味着该改进评估本身了。</li>
+<li><strong>Start fast and rough</strong>: Don’t be intimidated into treating evals as a massive project or spend endless time on theory first. Start with 10–20 examples and get some quick metrics to complement manual observation.</li>
+<li><strong>Iterate on your evals</strong>:<ol>
+<li>As the system and evals mature, scale up the evaluation set.</li>
+<li>If the system improves but eval scores don’t go up, it’s time to improve the evals themselves.</li>
 </ol>
 </li>
-<li>以专业人士的行为为灵感： 对于自动化人类任务的系统，观察系统在哪些方面性能不如人类专家，以此作为下一阶段工作的重点。</li>
+<li><strong>Take inspiration from expert behavior</strong>: For systems automating human tasks, observe where the system underperforms human experts and use that as the focus for the next phase of work.</li>
 </ol>
-<h2 id="4-2-错误分析与优先级"><a href="#4-2-错误分析与优先级" class="headerlink" title="4.2 错误分析与优先级"></a>4.2 错误分析与优先级</h2><p>系统复杂度上升后，<strong>直觉驱动debug不可靠</strong>，需要系统化分析。</p>
-<p>核心方法：</p>
+<h2 id="4-2-Error-Analysis-and-Prioritization"><a href="#4-2-Error-Analysis-and-Prioritization" class="headerlink" title="4.2 Error Analysis and Prioritization"></a>4.2 Error Analysis and Prioritization</h2><p>As system complexity grows, <strong>intuition-driven debugging becomes unreliable</strong> — systematic analysis is required.</p>
+<p>Core method:</p>
 <ol>
-<li><strong>检查traces和中间输出</strong>：每步输出叫”span”，合在一起叫”trace”</li>
-<li><strong>聚焦错误案例并量化</strong>：建表格追踪各组件失败率<ul>
-<li>例：搜索结果不满意45% vs 搜索关键词生成5% → 优先改搜索组件</li>
-<li>习惯性地多看看LLM和工具的交流过程。</li>
+<li><strong>Inspect traces and intermediate outputs</strong>: Each step’s output is called a “span”; combined, they form a “trace.”</li>
+<li><strong>Focus on error cases and quantify them</strong>: Build a table tracking failure rates per component.<ul>
+<li>Example: 45% unsatisfactory search results vs. 5% poor search keyword generation → prioritize improving the search component.</li>
+<li>Make a habit of regularly reading the conversation log between the LLM and its tools.</li>
 </ul>
 </li>
 </ol>
-<h2 id="4-3-组件级评估"><a href="#4-3-组件级评估" class="headerlink" title="4.3 组件级评估"></a>4.3 组件级评估</h2><p>类比单元测试 vs 集成测试。优势：更快迭代、信号更清晰、团队可并行。</p>
-<p>工作流：错误分析定位问题组件 → 组件级评估调优 → 端到端评估验证整体改善</p>
-<h2 id="4-4-解决问题的策略"><a href="#4-4-解决问题的策略" class="headerlink" title="4.4 解决问题的策略"></a>4.4 解决问题的策略</h2><p><strong>非LLM组件</strong>：调参数&#x2F;超参数（搜索结果数、RAG相似度阈值）、换供应商</p>
-<p><strong>LLM组件</strong>（按优先级）：</p>
+<h2 id="4-3-Component-Level-Evaluation"><a href="#4-3-Component-Level-Evaluation" class="headerlink" title="4.3 Component-Level Evaluation"></a>4.3 Component-Level Evaluation</h2><p>Analogous to unit tests vs. integration tests. Advantages: faster iteration, cleaner signal, teams can work in parallel.</p>
+<p>Workflow: Error analysis pinpoints the problem component → Component-level eval for tuning → End-to-end eval to validate overall improvement</p>
+<h2 id="4-4-Strategies-for-Problem-Solving"><a href="#4-4-Strategies-for-Problem-Solving" class="headerlink" title="4.4 Strategies for Problem-Solving"></a>4.4 Strategies for Problem-Solving</h2><p><strong>Non-LLM components</strong>: Tune parameters&#x2F;hyperparameters (number of search results, RAG similarity threshold), switch vendors.</p>
+<p><strong>LLM components</strong> (by priority):</p>
 <ol>
-<li>改进Prompt（明确指令、few-shot示例）</li>
-<li>尝试不同LLM（用eval测试多个模型）</li>
-<li>任务分解（将复杂步骤拆为生成+反思）</li>
-<li>微调（最后手段，成本最高）</li>
+<li>Improve the prompt (clearer instructions, few-shot examples)</li>
+<li>Try different LLMs (use evals to test multiple models)</li>
+<li>Task decomposition (break complex steps into generate + reflect)</li>
+<li>Fine-tuning (last resort — highest cost)</li>
 </ol>
-<h2 id="4-5-延迟与成本优化"><a href="#4-5-延迟与成本优化" class="headerlink" title="4.5 延迟与成本优化"></a>4.5 延迟与成本优化</h2><blockquote>
-<p>早期团队，<strong>输出质量远比延迟和成本重要</strong>。先优化质量，再优化延迟，最后优化成本。<br>还是以组建化的思想，先分析哪个组件最慢&#x2F;最贵，再针对性优化（如改prompt、换模型、减少调用频率）。</p>
+<h2 id="4-5-Latency-and-Cost-Optimization"><a href="#4-5-Latency-and-Cost-Optimization" class="headerlink" title="4.5 Latency and Cost Optimization"></a>4.5 Latency and Cost Optimization</h2><blockquote>
+<p>For early-stage teams, <strong>output quality matters far more than latency and cost</strong>. Optimize quality first, then latency, then cost.<br>Apply the same modular thinking: first identify which component is slowest&#x2F;most expensive, then optimize it specifically (e.g., refine the prompt, switch models, reduce call frequency).</p>
 </blockquote>
-<h2 id="4-6-开发过程四阶段"><a href="#4-6-开发过程四阶段" class="headerlink" title="4.6 开发过程四阶段"></a>4.6 开发过程四阶段</h2><table>
+<h2 id="4-6-Four-Phases-of-the-Development-Process"><a href="#4-6-Four-Phases-of-the-Development-Process" class="headerlink" title="4.6 Four Phases of the Development Process"></a>4.6 Four Phases of the Development Process</h2><table>
 <thead>
 <tr>
-<th>阶段</th>
-<th>核心</th>
-<th>分析活动</th>
+<th>Phase</th>
+<th>Focus</th>
+<th>Analysis Activity</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1. 快速原型</td>
-<td>端到端先跑通（”先造垃圾”）</td>
-<td>手动检查输出、阅读traces</td>
+<td>1. Rapid Prototype</td>
+<td>Get the end-to-end flow working (“build the garbage first”)</td>
+<td>Manually inspect outputs, read traces</td>
 </tr>
 <tr>
-<td>2. 初始评估</td>
-<td>超越手动观察</td>
-<td>建10-20例端到端eval</td>
+<td>2. Initial Evaluation</td>
+<td>Go beyond manual observation</td>
+<td>Build 10–20 example end-to-end evals</td>
 </tr>
 <tr>
-<td>3. 严格分析</td>
-<td>需要精确改善方向</td>
-<td>错误分析，量化组件失败率</td>
+<td>3. Rigorous Analysis</td>
+<td>Need precise improvement direction</td>
+<td>Error analysis, quantify component failure rates</td>
 </tr>
 <tr>
-<td>4. 高效调优</td>
-<td>系统成熟，组件级改善</td>
-<td>组件级eval</td>
+<td>4. Efficient Tuning</td>
+<td>System is mature, improve at component level</td>
+<td>Component-level evals</td>
 </tr>
 </tbody></table>
 <blockquote>
-<p>开发者两大活动：<strong>构建</strong>（写代码）和<strong>分析</strong>（决定聚焦哪里）。团队常花太多时间构建、太少时间分析。</p>
+<p>Two main developer activities: <strong>building</strong> (writing code) and <strong>analyzing</strong> (deciding where to focus). Teams typically spend too much time building and too little time analyzing.</p>
 </blockquote>
 <hr>
-<h1 id="五、高度自治智能体的模式"><a href="#五、高度自治智能体的模式" class="headerlink" title="五、高度自治智能体的模式"></a>五、高度自治智能体的模式</h1><h2 id="5-1-规划工作流（Planning）"><a href="#5-1-规划工作流（Planning）" class="headerlink" title="5.1 规划工作流（Planning）"></a>5.1 规划工作流（Planning）</h2><p>规划模式：Agent<strong>自主决定</strong>工具调用序列，不硬编码。</p>
-<p>案例——客服助手（工具：查描述、查价格、查库存、查订单、处理购买、处理退货）：</p>
+<h1 id="V-Patterns-for-Highly-Autonomous-Agents"><a href="#V-Patterns-for-Highly-Autonomous-Agents" class="headerlink" title="V. Patterns for Highly Autonomous Agents"></a>V. Patterns for Highly Autonomous Agents</h1><h2 id="5-1-Planning-Workflows"><a href="#5-1-Planning-Workflows" class="headerlink" title="5.1 Planning Workflows"></a>5.1 Planning Workflows</h2><p>Planning pattern: The agent <strong>autonomously decides</strong> the tool-call sequence — no hardcoding.</p>
+<p>Case study — customer service assistant (tools: get description, get price, check inventory, check orders, process purchase, process returns):</p>
 <ul>
-<li>用户问”有100刀以下的圆墨镜吗？”</li>
-<li>LLM规划：查描述 → 查库存 → 查价格 → 输出答案</li>
+<li>User asks: “Do you have round sunglasses under $100?”</li>
+<li>LLM plans: get description → check inventory → get price → output answer</li>
 </ul>
-<p><strong>优势</strong>：能力丰富，无需预编排。<strong>风险</strong>：无法预测LLM的计划，可能不稳定。</p>
-<h2 id="5-2-结构化计划"><a href="#5-2-结构化计划" class="headerlink" title="5.2 结构化计划"></a>5.2 结构化计划</h2><p>自然语言计划有歧义 → 要求LLM输出<strong>结构化计划</strong>（JSON&#x2F;XML）：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;查找圆墨镜&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;get_item_descriptions&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="string">&quot;round sunglasses&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;检查库存&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;check_inventory&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$step1_result&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+<p><strong>Advantages</strong>: Rich capabilities, no need to pre-orchestrate. <strong>Risks</strong>: The LLM’s plan is unpredictable and may be unstable.</p>
+<h2 id="5-2-Structured-Plans"><a href="#5-2-Structured-Plans" class="headerlink" title="5.2 Structured Plans"></a>5.2 Structured Plans</h2><p>Natural language plans are ambiguous → require the LLM to output a <strong>structured plan</strong> (JSON&#x2F;XML):</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Find round sunglasses&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;get_item_descriptions&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="string">&quot;round sunglasses&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#123;</span><span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Check inventory&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;tool&quot;</span><span class="punctuation">:</span> <span class="string">&quot;check_inventory&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;arguments&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$step1_result&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="5-3-代码即计划-Code-As-Action"><a href="#5-3-代码即计划-Code-As-Action" class="headerlink" title="5.3 代码即计划 Code As Action"></a>5.3 代码即计划 Code As Action</h2><figure style="text-align: center; margin: 24px 0;">
+<h2 id="5-3-Code-As-Action"><a href="#5-3-Code-As-Action" class="headerlink" title="5.3 Code As Action"></a>5.3 Code As Action</h2><figure style="text-align: center; margin: 24px 0;">
   <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/%E6%88%AA%E5%B1%8F2026-04-12%2003.48.14.png" alt="截屏2026-04-12 03.48.14" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
   <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Code As Action — HuggingFace smolagents</figcaption>
 </figure>
 
-<p>参考HuggingFace smolagents的CodeAgent概念——让LLM直接写代码表达多步计划。</p>
-<p>优势：可调用大型库（Pandas数百函数）、表达力强、研究显示性能优于JSON&#x2F;文本计划。<br>风险：明确要求LLM编写的代码并需要沙箱执行。</p>
-<h2 id="5-4-多智能体工作流"><a href="#5-4-多智能体工作流" class="headerlink" title="5.4 多智能体工作流"></a>5.4 多智能体工作流</h2><p>即使所有Agent用同一个LLM，拆分复杂任务为独立角色也更有效。</p>
+<p>Drawing from the CodeAgent concept in HuggingFace smolagents — letting the LLM write code directly to express multi-step plans.</p>
+<p>Advantages: Can call large libraries (hundreds of Pandas functions), highly expressive, research shows better performance than JSON&#x2F;text plans.<br>Risks: The code the LLM writes must be executed in a sandbox environment.</p>
+<h2 id="5-4-Multi-Agent-Workflows"><a href="#5-4-Multi-Agent-Workflows" class="headerlink" title="5.4 Multi-Agent Workflows"></a>5.4 Multi-Agent Workflows</h2><p>Even when all agents use the same LLM, splitting complex tasks into independent roles is more effective.</p>
 <blockquote>
-<p>我个人觉得可能是因为提示词&#x2F;上下文不同，导致模型的关注点是不一样的。</p>
+<p>My personal intuition is that it works because different prompts&#x2F;contexts cause the model to focus on different things.</p>
 </blockquote>
-<p><strong>优势</strong>：</p>
+<p><strong>Advantages</strong>:</p>
 <ol>
-<li><strong>任务分解</strong>：按角色&#x2F;技能自然分工</li>
-<li><strong>聚焦</strong>：开发者一次构建一个角色；更简单的任务 &#x3D; 更好的输出</li>
-<li><strong>模块化复用</strong>：通用Agent（如”图表设计师”）可跨应用复用</li>
-<li><strong>突破上下文限制</strong>：每个Agent处理自己的上下文（对128k上下文限制至关重要）</li>
-<li><strong>成本节省</strong>：更短的上下文 &#x3D; 更少的token &#x3D; 更低的成本和更快的响应</li>
+<li><strong>Task decomposition</strong>: Natural division of work by role&#x2F;skill</li>
+<li><strong>Focus</strong>: Developers build one role at a time; simpler tasks &#x3D; better output</li>
+<li><strong>Modular reuse</strong>: General-purpose agents (e.g., “chart designer”) can be reused across applications</li>
+<li><strong>Bypasses context limits</strong>: Each agent handles its own context (critical for 128k context constraints)</li>
+<li><strong>Cost savings</strong>: Shorter contexts &#x3D; fewer tokens &#x3D; lower cost and faster response</li>
 </ol>
-<h2 id="5-5-四种通信模式"><a href="#5-5-四种通信模式" class="headerlink" title="5.5 四种通信模式"></a>5.5 四种通信模式</h2><table>
+<h2 id="5-5-Four-Communication-Patterns"><a href="#5-5-Four-Communication-Patterns" class="headerlink" title="5.5 Four Communication Patterns"></a>5.5 Four Communication Patterns</h2><table>
 <thead>
 <tr>
-<th>模式</th>
-<th>结构</th>
-<th>优点</th>
-<th>缺点</th>
-<th>适用场景</th>
+<th>Pattern</th>
+<th>Structure</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Best For</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>**线性 **Linear</td>
-<td>顺序单向传递</td>
-<td>简单</td>
-<td>不灵活</td>
-<td>固定流程任务</td>
+<td><strong>Linear</strong></td>
+<td>Sequential, one-directional</td>
+<td>Simple</td>
+<td>Inflexible</td>
+<td>Fixed-flow tasks</td>
 </tr>
 <tr>
-<td>**层级（两层）**Hierarchy</td>
-<td>Manager协调所有下属</td>
-<td>易控制</td>
-<td>Manager瓶颈</td>
-<td>多任务协调</td>
+<td><strong>Hierarchy (two-tier)</strong></td>
+<td>Manager coordinates all subordinates</td>
+<td>Easy to control</td>
+<td>Manager bottleneck</td>
+<td>Multi-task coordination</td>
 </tr>
 <tr>
-<td><strong>深层层级</strong> Deep Hierarchy</td>
-<td>子Agent有自己的子Agent</td>
-<td>可扩展、模块化</td>
-<td>复杂难调试</td>
-<td>大型系统</td>
+<td><strong>Deep Hierarchy</strong></td>
+<td>Sub-agents have their own sub-agents</td>
+<td>Scalable, modular</td>
+<td>Complex, hard to debug</td>
+<td>Large systems</td>
 </tr>
 <tr>
-<td>**全连接（去中心化）**All to all</td>
-<td>所有Agent自由通信</td>
-<td>有创意</td>
-<td>结果不可预测</td>
-<td>探索&#x2F;生成任务</td>
+<td><strong>All-to-All (Decentralized)</strong></td>
+<td>All agents communicate freely</td>
+<td>Creative</td>
+<td>Unpredictable results</td>
+<td>Exploratory &#x2F; generative tasks</td>
 </tr>
 </tbody></table>
 <blockquote>
-<p>当前LLM能力下，线性和层级模式更实用（层级越深信息损失越大）。</p>
-<p>其实在这四种模式外，还有一种对话模式，比较类似去中心模式的降级版。对话模式每次都只有两个Agent互相对话交流，一方执行任务，另一方审查任务，最终交出一份双方都满意的结果。</p>
+<p>Given current LLM capabilities, linear and hierarchical patterns are more practical (the deeper the hierarchy, the more information is lost in transmission).</p>
+<p>Beyond these four patterns, there is also a <strong>conversation pattern</strong> — a downgraded version of the decentralized model. In conversation mode, only two agents talk to each other at a time: one executes the task, the other reviews it, and together they hand off a result both are satisfied with.</p>
 </blockquote>
-<h2 id="5-6-框架推荐"><a href="#5-6-框架推荐" class="headerlink" title="5.6 框架推荐"></a>5.6 框架推荐</h2><ul>
-<li><strong>LangChain</strong>：线性工作流</li>
-<li><strong>smolagents</strong>：层级工作流（作者推荐——简单、低抽象、@tool装饰器易开发）</li>
-<li><strong>MetaGPT &#x2F; CamelAI</strong>：去中心化工作流</li>
+<h2 id="5-6-Framework-Recommendations"><a href="#5-6-Framework-Recommendations" class="headerlink" title="5.6 Framework Recommendations"></a>5.6 Framework Recommendations</h2><ul>
+<li><strong>LangChain</strong>: Linear workflows</li>
+<li><strong>smolagents</strong>: Hierarchical workflows (author’s recommendation — simple, low abstraction, <code>@tool</code> decorator makes development easy)</li>
+<li><strong>MetaGPT &#x2F; CamelAI</strong>: Decentralized workflows</li>
 </ul>
 <hr>
-<h1 id="总结与个人思考"><a href="#总结与个人思考" class="headerlink" title="总结与个人思考"></a>总结与个人思考</h1><blockquote>
-<p>我之前在公司构建了一个通过ClaudeCode调用MCP去检查UE资产和打包报错Log的Skill（但或许这个Skill其实并不算Agentic AI），如果用Agentic AI的思维来做这个项目的话，它可能能做得更完善一点。而且我非常惊讶，吴恩达课程里面的几个测试项目的稳定性。</p>
+<h1 id="Summary-and-Personal-Reflections"><a href="#Summary-and-Personal-Reflections" class="headerlink" title="Summary and Personal Reflections"></a>Summary and Personal Reflections</h1><blockquote>
+<p>I previously built a Skill at work that used Claude Code to call MCP tools to inspect UE assets and parse build error logs (though maybe that Skill doesn’t quite qualify as Agentic AI). Thinking about it through the lens of Agentic AI, it probably could have been built much more robustly. I was also genuinely surprised by the stability of the test projects in Andrew Ng’s course.</p>
 </blockquote>
 <ul>
 <li><ol>
-<li>规划（Planning）：定时器触发后，ClaudeCode先分析报错日志，判断需要调用哪个工具（查文档、查代码、查历史报错记录等），然后再执行工具，甚至自行编写数据库查询代码。</li>
+<li><strong>Planning</strong>: After a timer fires, Claude Code first analyzes the error log, decides which tool to call (check docs, check code, check historical error records, etc.), then executes the tools — or even writes its own database query code on the fly.</li>
 </ol>
 </li>
 <li><ol start="2">
-<li>反思（Reflection）：ClaudeCode在得到工具结果后，先进行自我审查，看看结果是否有用，如果不满意就调整查询参数重新调用工具，直到得到满意的结果。</li>
+<li><strong>Reflection</strong>: After receiving the tool result, Claude Code performs a self-review to determine if the result is useful. If it isn’t satisfied, it adjusts the query parameters and calls the tool again, repeating until it gets a result it’s happy with.</li>
 </ol>
 </li>
 <li><ol start="3">
-<li>多智能体（Multi-Agent）：可以设计多个专门的Agent，比如一个专门分析日志的Agent，一个专门查询文档的Agent，一个专门查询代码的Agent，它们通过共享上下文进行协作。</li>
+<li><strong>Multi-Agent</strong>: You could design multiple specialized agents — one dedicated to log analysis, one to querying docs, one to querying code — collaborating through a shared context.</li>
 </ol>
 </li>
 <li><ol start="4">
-<li>评估（Evals）：可以设计一些自动化的评估脚本，来量化ClaudeCode在解决报错问题上的表现，比如成功率、平均解决时间等指标。（每一个结果执行完成之后，会有一个Json表格自动上传服务器，然后管理员每周看统计效果。并且可以让用户回答该AI解决思路是否解决了你的问题，组建一个问题解决方案数据库，这样AI遇到了类似问题就可以参考之前的解决方案）。</li>
+<li><strong>Evals</strong>: You could design automated evaluation scripts to quantify Claude Code’s performance on resolving errors — metrics like success rate, average time to resolution, etc. (Each completed result could auto-upload a JSON record to a server for the admin to review weekly. Users could also be asked whether the AI’s suggested solution actually solved their problem, building up a solution database so the AI can reference past resolutions for similar future issues.)</li>
 </ol>
 </li>
 </ul>
-<p>另外，不同的模型可能适用于不同的harness，因为模型的能力不太一样（李宏毅的课程提到了，比如说sonnet 他对于上下文会有焦虑，所以当内容很多的时候，它会出现明显的能力下降)。</p>
-<p>最后，回到 Tool Use 这个设计模式，一个关键的实践洞察是：<strong>MCP 工具的设计质量直接决定了 Agent 的能力上限</strong>。结合我在 UE MCP 项目中的经验，总结出以下六条工具设计原则：</p>
+<p>One more thing: different models may suit different harnesses, since their capabilities vary (as mentioned in Hung-yi Lee’s course — for example, Sonnet has a kind of “context anxiety,” meaning its capabilities noticeably degrade when the context gets very long).</p>
+<p>Finally, returning to the Tool Use design pattern: one key practical insight is that <strong>the design quality of MCP tools directly determines the capability ceiling of the agent</strong>. Drawing from my experience with the UE MCP project, here are six tool design principles I’ve distilled:</p>
 <ol>
-<li><strong>Description 是最重要的设计——描述即接口</strong>：MCP 工具的调用方是 LLM 而非人类，LLM 靠 <code>description</code> 字段判断”什么时候该调用、怎么调用”。好的描述要包含：做什么、什么时候用、边界限制、参数语义、返回值含义。描述写得烂，工具就是死的。</li>
-<li><strong>粒度控制——以子系统为边界</strong>：工具太细（如按坐标轴拆分节点创建）导致调用链过长、容易出错累积；太粗（如一句话生成整个角色蓝图）变成黑盒，出错了 LLM 无法定位。以引擎子系统为边界划分，每个工具做一件完整的事。</li>
-<li><strong>返回值要”对 LLM 友好”</strong>：返回值必须包含足够的决策上下文——成功时提示下一步可用的操作，失败时给出 <code>error_type</code>、<code>error_message</code> 和 <code>suggestion</code>，让 Agent 能自我纠正而不是盲重试。</li>
-<li><strong>读写分离，副作用透明</strong>：LLM 在不确定时倾向于调用”看起来安全”的工具。只读工具和写操作要明确分类，写操作在描述里标注副作用（如”会在磁盘上创建新文件”、”不可逆操作”）。</li>
-<li><strong>幂等性设计，让 LLM 敢于重试</strong>：LLM 可能因超时或误判而重复调用同一工具，设计为重复调用安全（如：资产已存在则返回现有资产而非报错）。</li>
-<li><strong>分层工具结构</strong>：高层工具（面向任务的完整工作流，如 <code>setup_character_blueprint()</code>）减少调用次数；中层工具（面向单步操作）保证灵活性；底层 API 不直接暴露给 LLM。描述里引导 LLM 优先走高层路径。</li>
+<li><strong>Description is the most important design decision — the description is the interface</strong>: The caller of an MCP tool is the LLM, not a human. The LLM relies on the <code>description</code> field to decide “when to call this and how to call it.” A good description includes: what it does, when to use it, boundary constraints, parameter semantics, and what the return value means. A poor description makes the tool dead weight.</li>
+<li><strong>Granularity control — use subsystems as boundaries</strong>: Tools that are too fine-grained (e.g., splitting node creation by coordinate axis) lead to long call chains and compounding errors; tools that are too coarse (e.g., generating an entire character blueprint in one call) become black boxes where the LLM can’t localize failures. Use engine subsystems as boundaries — each tool does one complete thing.</li>
+<li><strong>Return values must be “LLM-friendly”</strong>: Return values must include enough decision context — on success, indicate what operations are available next; on failure, provide <code>error_type</code>, <code>error_message</code>, and <code>suggestion</code> so the agent can self-correct rather than blindly retry.</li>
+<li><strong>Separate reads from writes, make side effects transparent</strong>: When uncertain, LLMs tend to call tools that “look safe.” Read-only tools and write operations should be clearly categorized, with write operations explicitly annotating side effects in the description (e.g., “creates a new file on disk,” “irreversible operation”).</li>
+<li><strong>Idempotent design — make the LLM willing to retry</strong>: The LLM may call the same tool repeatedly due to timeouts or misjudgments. Design tools to be safe to call multiple times (e.g., if the asset already exists, return the existing asset instead of throwing an error).</li>
+<li><strong>Layered tool structure</strong>: High-level tools (task-oriented complete workflows, e.g., <code>setup_character_blueprint()</code>) reduce the number of calls needed; mid-level tools (single-step operations) preserve flexibility; low-level APIs should not be directly exposed to the LLM. Guide the LLM in the description to prefer high-level paths.</li>
 </ol>
-<p>核心一句话：<strong>好用的 MCP 工具设计，本质是”让 LLM 像一个读过文档的开发者一样能正确使用它”。</strong> 这和吴恩达课程中 Tool Use 模式的核心思想完美对应——工具的质量决定了 Agent 自主决策的上限。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DfrdByE2H">https://www.bilibili.com/video/BV1DfrdByE2H</a> 课程地址</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/agentic-ai/tree/main">原github笔记</a>:这里面有可以运行的代码，可以通过在VSCode里面的Jupyter Notebook的形式来学习，会很方便。</li>
-<li>👆视频里面提到后面部分存在的另外一个视频：<a target="_blank" rel="noopener" href="https://www.deeplearning.ai/short-courses/agentic-knowledge-graph-construction/">代理知识图谱构建</a></li>
-<li>原始的视频<a target="_blank" rel="noopener" href="https://www.deeplearning.ai/courses/agentic-ai/">地址</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vrQbBBE6Z/">李宏毅课程</a>：这个课程有点像 Agent</li>
+<p>The one-sentence summary: <strong>Good MCP tool design, at its core, means “designing tools so the LLM can use them correctly, as if it had read the documentation.”</strong> This perfectly aligns with the core idea of the Tool Use pattern in Andrew Ng’s course — the quality of your tools sets the upper bound on your agent’s autonomous decision-making.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1DfrdByE2H">https://www.bilibili.com/video/BV1DfrdByE2H</a> — Course video (Bilibili)</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/datawhalechina/agentic-ai/tree/main">Original GitHub notes</a>: Contains runnable code you can study as Jupyter Notebooks in VSCode — very convenient.</li>
+<li>Another video mentioned later in the course: <a target="_blank" rel="noopener" href="https://www.deeplearning.ai/short-courses/agentic-knowledge-graph-construction/">Agentic Knowledge Graph Construction</a></li>
+<li>Original course <a target="_blank" rel="noopener" href="https://www.deeplearning.ai/courses/agentic-ai/">link</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1vrQbBBE6Z/">Hung-yi Lee’s course</a>: A good companion — feels a bit like an Agent course in its own right</li>
 </ol>
 
 

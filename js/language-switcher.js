@@ -39,6 +39,21 @@ const getAlternateUrl = (targetLang) => {
   return link ? link.href : null;
 };
 
+// Fallback: derive the alternate URL by toggling the `/zh-CN/` path prefix.
+// Used when the build did not emit a hreflang link (e.g. on a route that
+// hasn't been wired into alternate_language_url yet). Returns null if the
+// current URL is already in the target language.
+const getPrefixToggleUrl = (targetLang) => {
+  const path = window.location.pathname;
+  if (targetLang === 'zh-CN') {
+    if (path.startsWith('/zh-CN/') || path === '/zh-CN') return null;
+    return window.location.origin + '/zh-CN' + path + window.location.search + window.location.hash;
+  }
+  if (!path.startsWith('/zh-CN/') && path !== '/zh-CN') return null;
+  const stripped = path.replace(/^\/zh-CN(?=\/|$)/, '') || '/';
+  return window.location.origin + stripped + window.location.search + window.location.hash;
+};
+
 const applyLanguage = (lang) => {
   const translations = i18nData[lang];
 
@@ -132,7 +147,7 @@ const switchLanguage = () => {
   const currentInterfaceLang = getCurrentLanguage();
   const targetLang = currentInterfaceLang === 'zh-CN' ? 'en' : 'zh-CN';
 
-  const alternateUrl = getAlternateUrl(targetLang);
+  const alternateUrl = getAlternateUrl(targetLang) || getPrefixToggleUrl(targetLang);
   if (alternateUrl) {
     localStorage.setItem('siteLanguage', targetLang);
     window.location.href = alternateUrl;
@@ -154,9 +169,10 @@ const initLanguage = () => {
   applyLanguage(preferredLang);
 
   // If the page we landed on isn't in the preferred language and an
-  // alternate exists, silently redirect to it.
+  // alternate exists, silently redirect to it. Fall back to a path-prefix
+  // toggle when no <link rel="alternate"> was emitted.
   if (preferredLang !== currentPageLang) {
-    const alternateUrl = getAlternateUrl(preferredLang);
+    const alternateUrl = getAlternateUrl(preferredLang) || getPrefixToggleUrl(preferredLang);
     if (alternateUrl) {
       window.location.replace(alternateUrl);
     }

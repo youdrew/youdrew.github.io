@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2024/06/01/20240601.VirtualActorUnityInVisionPro/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在VisionPro平台上的强大功能和灵活性，探索了下一代虚拟人交互">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2024/06/01/20240601.VirtualActorUnityInVisionPro/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="在VisionPro中实现一个可交互的虚拟人 (软件作品)">
+    
+    
+        <meta property="og:description" content="这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在VisionPro平台上的强大功能和灵活性，探索了下一代虚拟人交互">
+    
+    
+    
+        <meta property="article:published_time" content="2024-06-01T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.536Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="在VisionPro中实现一个可交互的虚拟人 (软件作品)">
+    
+    
+        <meta name="twitter:description" content="这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在VisionPro平台上的强大功能和灵活性，探索了下一代虚拟人交互">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2024/06/01/20240601.VirtualActorUnityInVisionPro/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2024/06/01/20240601.VirtualActorUnityInVisionPro/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2024/06/01/20240601.VirtualActorUnityInVisionPro/">
+    
+
+    <!-- Title -->
+    
+    <title>在VisionPro中实现一个可交互的虚拟人 (软件作品) - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2024-06-01-20240601-VirtualActorUnityInVisionPro-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="false">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2024/06/01/20240601.VirtualActorUnityInVisionPro/" class="previous" data-title="Building an Interactive Virtual Human in..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/" class="next" data-title="UE External Textu..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">在VisionPro中实现一个可交互的虚拟人 (软件作品)</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <p>这是一个我自己的测试项目，目标是在苹果的 VisionPro 设备上实现一个可交互的虚拟人。(参与这个项目的还有一位我的IOS开发朋友@Forest)<br>该项目用Unity实现VisionPro无边界应用的开发流程，构建一个可交互的虚拟人，展示了Unity在VisionPro平台上的强大功能和灵活性，探索了下一代虚拟人交互体验的可能性。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175617.gif" alt="召唤虚拟人出现" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">召唤虚拟人出现</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175618.gif" alt="跟随、寻路及避障" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">跟随、寻路及避障</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260328_175619.gif" alt="实时反馈外界物理变化" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">实时反馈外界物理变化</figcaption>
+  </figure>
+</div>
+
+<p>它可以实现：</p>
+<ul>
+<li>简单地手势交互，虚拟人会做出对应的反馈。</li>
+<li>虚拟人可以跟随用户移动（去到任何地方），并保持在用户的视野范围内。</li>
+<li>虚拟人可以感受到环境变化，会自己去找可以坐到地方。</li>
+<li>感知用户眼神朝向，并做出对应的反应。</li>
+<li>VisionPro应用环境持续化，用户离开后虚拟人会继续存在，不影响别的VP应用运行。</li>
+<li>等等。</li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/zh-CN/tags/Unity/" data-i18n-tag="Unity">Unity</a> <a href="/zh-CN/tags/VisionPro/" data-i18n-tag="VisionPro">VisionPro</a> <a href="/zh-CN/tags/Virtual-Human/" data-i18n-tag="Virtual Human">Virtual Human</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

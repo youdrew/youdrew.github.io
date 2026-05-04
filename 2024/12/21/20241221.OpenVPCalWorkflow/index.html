@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/2024/12/21/20241221.OpenVPCalWorkflow/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="OpenVPCal Calibration Workflow &amp;amp; Operation Guide1. Workflow Overview
+
+
+Step
+Official OVC Notes
+Additional Notes
+
+
+
+Create Project
+Open OpenVPCal and create ">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/2024/12/21/20241221.OpenVPCalWorkflow/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+        <meta property="og:title" content="OpenVPCal Calibration Workflow Documentation">
+    
+    
+        <meta property="og:description" content="OpenVPCal Calibration Workflow &amp;amp; Operation Guide1. Workflow Overview
+
+
+Step
+Official OVC Notes
+Additional Notes
+
+
+
+Create Project
+Open OpenVPCal and create ">
+    
+    
+    
+        <meta property="article:published_time" content="2024-12-21T05:54:59.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.533Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="OpenVPCal Calibration Workflow Documentation">
+    
+    
+        <meta name="twitter:description" content="OpenVPCal Calibration Workflow &amp;amp; Operation Guide1. Workflow Overview
+
+
+Step
+Official OVC Notes
+Additional Notes
+
+
+
+Create Project
+Open OpenVPCal and create ">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2024/12/21/20241221.OpenVPCalWorkflow/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2024/12/21/20241221.OpenVPCalWorkflow/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2024/12/21/20241221.OpenVPCalWorkflow/">
+    
+
+    <!-- Title -->
+    
+    <title>OpenVPCal Calibration Workflow Documentation - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2024-12-21-20241221-OpenVPCalWorkflow-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980534_305313e0.png');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2025/03/01/20250301.HoudiniPCG/" class="previous" data-title="Houdini 与程序化生成"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2024/12/21/20241221.OpenVPCalWorkflow/" class="next" data-title="OpenVPCal流程文档"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">OpenVPCal Calibration Workflow Documentation</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="OpenVPCal-Calibration-Workflow-Operation-Guide"><a href="#OpenVPCal-Calibration-Workflow-Operation-Guide" class="headerlink" title="OpenVPCal Calibration Workflow &amp; Operation Guide"></a>OpenVPCal Calibration Workflow &amp; Operation Guide</h1><h2 id="1-Workflow-Overview"><a href="#1-Workflow-Overview" class="headerlink" title="1. Workflow Overview"></a>1. Workflow Overview</h2><table>
+<thead>
+<tr>
+<th align="left">Step</th>
+<th align="left">Official OVC Notes</th>
+<th align="left">Additional Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Create Project</strong></td>
+<td align="left">Open OpenVPCal and create a new project. Choose a folder to store the project file along with its associated and exported files.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Set Up LED Wall</strong></td>
+<td align="left">Use the “Add LED Wall” function to create the appropriate number of LED walls for each camera you want to calibrate. Use a clear, recognizable naming convention. In the “LED Settings” widget, configure the target wall parameters according to the LED wall’s specifications.</td>
+<td align="left">Custom gamuts can also be set here.</td>
+</tr>
+<tr>
+<td align="left"><strong>Export Calibration Patches</strong></td>
+<td align="left">You can change the default settings in the “Patch Generation” section of the Project Settings widget.</td>
+<td align="left">If exporting as linear, the output is linear. If exporting as DPX or TIFF (for EXR: EXR is linear — assuming BT.2020 is selected, set the OCIO input to “Linear ITU-R BT.2020” and output to “ITU-R BT.2020 - ST 2084” in the ColorSpace config; the ST 2084 there acts as an OETF that cancels with the display’s EOTF, resulting in a linear signal on screen. If exporting TIFF or DPX, those formats already carry the OETF, so they should be sent to the screen directly without going through OCIO).</td>
+</tr>
+<tr>
+<td align="left"><strong>Load Calibration Patches into Media Player</strong></td>
+<td align="left">Load the calibration patches into your media player and bypass any color transforms, since the patches are already in the target color space. If you’ve exported EXR, make sure to apply only the required EOTF transform. Ensure the patches play back correctly — no frame blending or looping.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Set Up Camera</strong></td>
+<td align="left">Position the camera in front of the wall. Make sure both the wall and the camera are warmed up (30 min) and at operating temperature. Turn off any external light sources that could affect the LED wall.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Shoot the Patches</strong></td>
+<td align="left">Follow the instructions on the first patch (the opening patch of the sequence). Shoot more than 1 frame per patch. Verify the camera is well exposed and aligned with the wall. Shoot RAW whenever possible.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Pre-Process the Plate</strong></td>
+<td align="left">OpenVPCal only accepts Linear EXR as input. Pre-process your camera plate to Linear&#x2F;AP0 (ACES 2065-1) or Linear&#x2F;Camera Native. We recommend Linear&#x2F;AP0 (the tool’s default).</td>
+<td align="left">This means the processing needs to happen in an external application.</td>
+</tr>
+<tr>
+<td align="left"><strong>Load EXR Sequence</strong></td>
+<td align="left">In OpenVPCal, right-click on the LED WALL and select “Load Plate Sequence.” Navigate to the folder containing the pre-processed camera plate.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Check ROI and Patch Separation</strong></td>
+<td align="left">OpenVPCal automatically detects the gaps between frames and the ROI within the plate. Verify that the ROI is correct, and use the frame navigation buttons to confirm that the frame intervals are accurate.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Plate Settings</strong></td>
+<td align="left">In the “Plate Settings” widget, configure the plate settings and select any additional calibration options you need.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Analyze</strong></td>
+<td align="left">Click “Analyze” to let the tool perform a precise analysis of your patches and determine the state of the wall. The tool will recommend whether the wall needs calibration and suggest calibration settings. You can analyze multiple LED walls simultaneously.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Review Status and Calibration Settings</strong></td>
+<td align="left">If the analysis succeeds, check the patch samples in the viewer to ensure each frame is aligned (outer &#x3D; reference, inner &#x3D; plate). Review the analysis plots to confirm the recommended calibration settings match your expectations. If the analysis fails, reshoot the plate following the suggested corrections.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Calibrate</strong></td>
+<td align="left">If you’re happy to proceed, click “Calibrate.” You can change calibration settings at any time and click “Calibrate” again. You can calibrate multiple walls simultaneously.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Check Calibration</strong></td>
+<td align="left">Review the calibration results by enabling “Preview Calibration” in the viewer. You should see a noticeable improvement!</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Export</strong></td>
+<td align="left">If you’re satisfied, click the “Export” button to export your calibration transform.</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h2 id="2-UI-Breakdown"><a href="#2-UI-Breakdown" class="headerlink" title="2. UI Breakdown"></a>2. UI Breakdown</h2><h3 id="2-1-LED-Settings-Panel"><a href="#2-1-LED-Settings-Panel" class="headerlink" title="2.1. LED Settings Panel"></a>2.1. LED Settings Panel</h3><p>This panel is used to configure the current state of the LED wall, including gamut, EOTF, and peak luminance.</p>
+<h4 id="2-1-1-LED-Target-Settings"><a href="#2-1-1-LED-Target-Settings" class="headerlink" title="2.1.1. LED Target Settings"></a>2.1.1. LED Target Settings</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980534_305313e0.png" alt="Image"></p>
+<ul>
+<li><strong>TARGET GAMUT</strong>: Select the target gamut for calibration. You can choose from predefined standard gamuts such as sRGB, P3, and Rec.2020.</li>
+<li><strong>ADD CUSTOM GAMUT</strong>: Clicking this button opens a window where you can define a new custom gamut by entering a name and its CIE 1931 x,y primary and white point coordinates for use in calibration.</li>
+<li><strong>TARGET EOTF</strong>: Select the target EOTF for the LED panel.</li>
+<li><strong>TARGET MaxLum (nits)</strong>: Sets the peak luminance of the content — only available when the EOTF is ST2084.</li>
+<li><strong>(In Add Custom Gamut) CUSTOM NAME</strong>: Defines the name for the custom target color space.</li>
+<li><strong>(In Add Custom Gamut) TARGET GAMUT CHROMATICITY COORDINATES</strong>: View or modify the xy gamut primaries and white point coordinates.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_f76b2829.png" alt="Image"></li>
+</ul>
+<h4 id="2-1-2-Tool-Settings"><a href="#2-1-2-Tool-Settings" class="headerlink" title="2.1.2. Tool Settings"></a>2.1.2. Tool Settings</h4><ul>
+<li><strong>NUMBER OF GREY PATCHES</strong>: Sets the number of grey steps to generate &#x2F; analyze. Default is 33.</li>
+<li><strong>PRIMARIES SATURATION</strong>: Sets the saturation intensity for the color primaries. Default is 0.7.</li>
+</ul>
+<h3 id="2-2-Test-Pattern-Settings"><a href="#2-2-Test-Pattern-Settings" class="headerlink" title="2.2. Test Pattern Settings"></a>2.2. Test Pattern Settings</h3><p>This section is used to configure metadata about the test pattern. It won’t be enabled until after shooting is complete and the images have been imported.</p>
+<h3 id="2-3-Plate-Settings"><a href="#2-3-Plate-Settings" class="headerlink" title="2.3. Plate Settings"></a>2.3. Plate Settings</h3><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_55e7ae7e.png" alt="Image"></p>
+<h4 id="2-3-1-Plate-Settings"><a href="#2-3-1-Plate-Settings" class="headerlink" title="2.3.1. Plate Settings"></a>2.3.1. Plate Settings</h4><ul>
+<li><strong>INPUT PLATE GAMUT</strong>: The input color space for the pre-processed camera plate sequence. Default is ACES 2065-1. This refers to the color space of the image itself.</li>
+<li><strong>NATIVE CAMERA GAMUT</strong>: The native color space of the camera used for the shoot. This is the camera’s original gamut at the time of shooting. Even though the plate has already been converted, OVC still wants to know this.</li>
+<li><strong>AUTO WB SOURCE</strong>: If enabled, the input plate will be auto-white-balanced before analysis and calibration. <strong>Strongly not recommended to enable.</strong><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_7df3d9d9.png" alt="Image"></li>
+</ul>
+<h4 id="2-3-2-Reference-Settings"><a href="#2-3-2-Reference-Settings" class="headerlink" title="2.3.2. Reference Settings"></a>2.3.2. Reference Settings</h4><p>(In a complex shoot scenario with LED walls of different models or batches, you may need to match the calibration of one wall to another that is already calibrated or serves as a reference standard. By checking “Match Reference Wall” in the Reference Settings and selecting the corresponding reference wall from the dropdown, OpenVPCal will adjust the parameters of the wall being calibrated during the process, making its color output, luminance, and so on as consistent as possible with the reference wall. This allows for coordinated matching across multiple walls, ensuring visual consistency throughout the shoot.)</p>
+<ul>
+<li><strong>MATCH REFERENCE WALL</strong>: If checked, the selected LED wall will be matched to the chosen reference wall.</li>
+<li><strong>REFERENCE WALL</strong>: Lists the available reference walls that can be used for matching.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965879_2edfca08.png" alt="Image"></li>
+</ul>
+<h4 id="2-3-3-White-Point-Offset"><a href="#2-3-3-White-Point-Offset" class="headerlink" title="2.3.3. White Point Offset"></a>2.3.3. White Point Offset</h4><p>Upload an EXR image so that OpenVPCal can calibrate against that white point reference.</p>
+<ul>
+<li><strong>USE WHITE POINT OFFSET</strong>: If checked, the plate’s original white point will be shifted toward the measured white point of the specified file before analysis and calibration.</li>
+<li><strong>WHITE POINT OFFSET SOURCE FILE</strong>: Path to the file containing the white point offset source.</li>
+</ul>
+<h2 id="3-Detailed-Workflow-following-the-order-in-the-overview"><a href="#3-Detailed-Workflow-following-the-order-in-the-overview" class="headerlink" title="3. Detailed Workflow (following the order in the overview)"></a>3. Detailed Workflow (following the order in the overview)</h2><h3 id="3-1-Setting-Up-Test-Content"><a href="#3-1-Setting-Up-Test-Content" class="headerlink" title="3.1. Setting Up Test Content"></a>3.1. Setting Up Test Content</h3><h4 id="3-1-1-Create-a-Project"><a href="#3-1-1-Create-a-Project" class="headerlink" title="3.1.1. Create a Project"></a>3.1.1. Create a Project</h4><p>When you launch the application, a dialog will automatically pop up asking whether you want to create a new project or load an existing one. You can also click “New Project” after a project is already open.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965880_576f673d.png" alt="Image"></p>
+<h4 id="3-1-2-Set-Up-the-LED-Wall"><a href="#3-1-2-Set-Up-the-LED-Wall" class="headerlink" title="3.1.2. Set Up the LED Wall"></a>3.1.2. Set Up the LED Wall</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965880_e3a774a1.png" alt="Image"></p>
+<p>You’ll need to add the appropriate number of walls based on your calibration requirements. The concept of a “wall” depends on your specific use case — it might represent a combination of different cameras with the same physical LED panel, or different calibration passes.</p>
+<p>My recommendation is to name them in the format “LEDName_CameraName,” which makes it clear this is a calibration for a specific LED-camera combination. When there are multiple cameras in the scene, you can duplicate entries to create multiple LED wall + camera combinations.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980536_aea5d545.png" alt="Image"></p>
+<h4 id="3-1-3-Export-Calibration-Patches"><a href="#3-1-3-Export-Calibration-Patches" class="headerlink" title="3.1.3. Export Calibration Patches"></a>3.1.3. Export Calibration Patches</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965880_83bfc65c.png" alt="Image"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_66e0c9ff.png" alt="Image"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_224f2f34.png" alt="Image"><br>Before exporting, make sure the LED settings in OpenVPCal are correct, because the color values in the calibration patches need to be properly encoded. You can configure the patch file format, resolution, and number of frames per patch in the “Patch Generation” tab of the Project Settings widget. For example, when using Unreal Engine’s media player, exporting as linear EXR is generally more convenient; for systems like Disguise or Plate Performer, exporting display-referred patches as DPX may be more appropriate.</p>
+<p>If EXR is selected as the file format, the generated patches will bypass the EOTF (exported as linear), with a scale of 1 &#x3D; 100 nits (meaning a value of 1 in the image represents 100 nits of brightness), encoded in the target color space.</p>
+<h4 id="3-1-4-Load-Calibration-Patches-into-the-Media-Player"><a href="#3-1-4-Load-Calibration-Patches-into-the-Media-Player" class="headerlink" title="3.1.4. Load Calibration Patches into the Media Player"></a>3.1.4. Load Calibration Patches into the Media Player</h4><p>Upon export, OpenVPCal also generates a <code>Pre_Calibration_OpenVPCal.ocio</code> config file, which provides the necessary transforms to be applied to the patches — this is especially important when exporting EXR.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_c8d0c378.png" alt="Image"></p>
+<p>The <code>Pre_Calibration_OpenVPCal.ocio</code> config provides three transforms (to be used as output transforms):</p>
+<ol>
+<li><strong>First option</strong>: EOTF transform only</li>
+<li><strong>Second option</strong>: EOTF + gamut transform</li>
+<li><strong>Third option</strong>: Gamut transform only (choose this for the EXR + UE playback workflow)</li>
+</ol>
+<p>For the nDisplay output, configure it as follows: set the input to <code>WorkingColorSpace</code> (UE), which means no color transform is applied to the colors inside UE. (That said, it’s recommended to change UE’s working color space to BT.2020, so internal processing uses a richer color range. If you’ve selected Rec.2020 as the color space, your input can also be “Linear ITU-R2020.” Ideally, you’d pick ACES AP1 &#x2F; ACEScg here, but that might cause issues with…)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980527_b7a470e9.png" alt="Image"><br>This is a standard OCIO setup for shooting test patches.</p>
+<p><strong>Unreal Post-Processing Settings:</strong><br>(Refer to the exported Word document — advanced macros are not supported in Tencent Docs display.)</p>
+<h4 id="3-1-5-Camera-Setup"><a href="#3-1-5-Camera-Setup" class="headerlink" title="3.1.5. Camera Setup"></a>3.1.5. Camera Setup</h4><p>Camera setup details (to be filled in later).</p>
+<h3 id="3-2-Calibration"><a href="#3-2-Calibration" class="headerlink" title="3.2. Calibration"></a>3.2. Calibration</h3><h4 id="3-2-1-Pre-Process-the-Test-Plate"><a href="#3-2-1-Pre-Process-the-Test-Plate" class="headerlink" title="3.2.1. Pre-Process the Test Plate"></a>3.2.1. Pre-Process the Test Plate</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980529_808ac3bd.png" alt="Image"><br>Pre-process via DaVinci Resolve.</p>
+<h4 id="3-2-2-Load-the-EXR-Sequence"><a href="#3-2-2-Load-the-EXR-Sequence" class="headerlink" title="3.2.2. Load the EXR Sequence"></a>3.2.2. Load the EXR Sequence</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965881_4a0efb32.png" alt="Image"></p>
+<p>In OpenVPCal’s “Stage View” &gt; “LED Wall” panel, right-click the LED wall you want to load the plate for and select “Load Plate Sequence,” or go to “File” &gt; “Load Plate Sequence,” to load the calibration test plate corresponding to that wall.</p>
+<p>OpenVPCal will automatically recognize the test plate and attempt to determine the region of interest (ROI) for analysis as well as the gaps between patches. If auto-detection fails, you can manually align the red ROI rectangle in the viewer using the center square of the first patch as a reference.</p>
+<h4 id="3-2-3-Plate-Settings"><a href="#3-2-3-Plate-Settings" class="headerlink" title="3.2.3. Plate Settings"></a>3.2.3. Plate Settings</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_35e7e718.png" alt="Image"></p>
+<ul>
+<li><strong>Input Plate Gamut</strong>: This must always be a linear space (e.g., ACES 2065-1).</li>
+<li><strong>Native Camera Gamut</strong>: For example, ARRI Wide Gamut or Sony SGamut.</li>
+<li><strong>Auto White Balance</strong>: Not recommended. Enabling this applies automatic white balance to the image, which defeats the purpose of white balance calibration. (If your workflow requires auto white balance on the plate and you can’t do it in-camera, or if you need more precise white balance, then go ahead and select the Auto WB Source.)</li>
+</ul>
+<h4 id="3-2-4-Analyze"><a href="#3-2-4-Analyze" class="headerlink" title="3.2.4. Analyze"></a>3.2.4. Analyze</h4><p>After loading and setting up the plates for each LED wall you intend to analyze and calibrate, click “Analyze” in the Execute tab.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774683980528_4992f961.png" alt="Image"><br>The analysis operation extracts the necessary information from the plate and switches the software to “Analysis Layout.” You can select multiple walls and run the analysis simultaneously. (Note: any wall that uses another wall as a reference must be analyzed and calibrated at the same time as that reference wall.)</p>
+<p>When the analysis completes, the tool displays a popup window summarizing the results for each analyzed wall. The analysis may report critical errors, warnings, or indicate that the wall does not require calibration (because it falls within acceptable tolerance).</p>
+<h5 id="3-2-4-1-Sample-Analysis-Viewer"><a href="#3-2-4-1-Sample-Analysis-Viewer" class="headerlink" title="3.2.4.1. Sample Analysis Viewer"></a>3.2.4.1. Sample Analysis Viewer</h5><p>In the analysis layout, a patch analysis viewer appears, giving you an overview of the wall’s state and its calibration. The viewer is powered by OpenColorIO (OCIO), so patches can be mapped to any color space available in the default OCIO config bundled with the tool — ACES 1.3 Studio Config.</p>
+<p>The viewer renders each patch in the calibration sequence as a square swatch: the outer area shows the target color, and the inner area shows the actual color as captured by the camera.</p>
+<ul>
+<li><strong>Correct example</strong>:<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_ff1e51d3.png" alt="Image"></li>
+<li><strong>Example of a capture error</strong>:<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_d13e95f7.png" alt="Image"></li>
+<li>Note that the red, green, and blue positions are swapped.</li>
+</ul>
+<p><strong>What each control does:</strong></p>
+<ul>
+<li><strong>Exposure slider</strong>: Adjusts the exposure level of the image in the patch analysis viewer.</li>
+<li><strong>Display and view drop-down menus</strong>: “Display” selects which screen to view on. “View” selects what type of data to display.</li>
+<li><strong>Auto white balance preview</strong>: Lets you preview how the auto white balance algorithm would adjust the patch colors before committing.</li>
+<li><strong>Calibration preview</strong>: Shows the expected result of applying calibration to the patches.</li>
+</ul>
+<h5 id="3-2-4-2-Analysis-Widgets"><a href="#3-2-4-2-Analysis-Widgets" class="headerlink" title="3.2.4.2. Analysis Widgets"></a>3.2.4.2. Analysis Widgets</h5><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965882_b7cf71a0.png" alt="Image"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_b1a81fa0.png" alt="Image"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_71fc31cf.png" alt="Image"><br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_5118f844.png" alt="Image"></p>
+<ul>
+<li><strong>Max Distance Analysis</strong>: Shows the extent of out-of-gamut colors relative to the calibration target color space, both before and after calibration.</li>
+<li><strong>EOTF Analysis</strong>: Tracks the linear response of the LED wall, showing pre- and post-calibration data for the red, green, and blue channels.</li>
+<li><strong>White Point Analysis</strong>: Displays the LED wall’s white point as observed by the camera, including the target white point, pre-calibration white point, post-calibration white point, and the white point from the Macbeth samples.</li>
+<li><strong>Color Space Analysis</strong>: Shows the LED wall’s color space and white point range as observed by the camera, covering the target color space, pre-calibration color space, post-calibration color space, and Macbeth sample data.</li>
+</ul>
+<blockquote>
+<p><em>The Macbeth Color Checker is a standard color reference chart produced by Gretag Macbeth, a brand under X-Rite. It consists of a series of patches with precisely defined colors and reflectance values, measured and standardized to serve as a color calibration reference, helping ensure color accuracy and consistency across different devices and environments.</em></p>
+</blockquote>
+<h5 id="3-2-4-3-IPT-—-Color-Difference-Analysis-Widget"><a href="#3-2-4-3-IPT-—-Color-Difference-Analysis-Widget" class="headerlink" title="3.2.4.3. IPT — Color Difference Analysis Widget"></a>3.2.4.3. IPT — Color Difference Analysis Widget</h5><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965883_e15d7d80.png" alt="Image"></p>
+<p>This widget uses the DeltaE metric to evaluate calibration accuracy. DeltaE is a metric that quantifies the perceptual difference between two colors. In this context, it measures the difference between the colors captured by the camera (before and after calibration) and the target colors. This analysis gives you a clear picture of how effectively the calibration process reduces color error. A smaller DeltaE value means the camera-captured colors are closer to the target, indicating more accurate calibration. The widget may display these DeltaE values in graphical or numerical form, helping you quickly assess how different color regions — or the entire color space — change before and after calibration. For example, it might show the DeltaE value for each individual patch before and after calibration, or provide an average DeltaE across the entire chart as an overall quality measure.</p>
+<h4 id="3-2-5-Calibration-Settings"><a href="#3-2-5-Calibration-Settings" class="headerlink" title="3.2.5. Calibration Settings"></a>3.2.5. Calibration Settings</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_5b845e84.png" alt="Image"></p>
+<h5 id="3-2-5-1-Calibration-Options"><a href="#3-2-5-1-Calibration-Options" class="headerlink" title="3.2.5.1. Calibration Options"></a>3.2.5.1. Calibration Options</h5><p>The calibration settings offer a range of options supporting different calibration paths and features. The analysis process typically sets optimal parameters based on the condition of the LED wall, but you can also manually enable or disable options or choose a different path. The options are as follows:</p>
+<ul>
+<li><strong>REFERENCE TO TARGET CAT</strong>: Select from a list of standard chromatic adaptation transforms.</li>
+<li><strong>CALCULATIONS ORDER</strong>: Edit the operation order of the calibration transforms. Gamma calibration first, or color space calibration first.</li>
+<li><strong>ENABLE EOTF CORRECTION</strong>: Check this to enable EOTF correction.</li>
+<li><strong>TARGET TO SCREEN CAT</strong>: Select a chromatic adaptation transform from the standard list, or select “NONE” to use it as the calibration matrix. Default is “NONE.”</li>
+<li><strong>ENABLE GAMUT COMPRESSION</strong>: Check this to enable gamut compression.</li>
+<li><strong>AVOID CLIPPING</strong>: Check this to scale the entire calibration transform so highlight clipping is avoided (enabled by default).</li>
+</ul>
+<blockquote>
+<p>Note: As of 2025-02-05, there is a bug in the OpenVPCal UI where the checked options may not be reliable — always verify against what’s actually written in the OCIO config file. If Gamut Compression is enabled, the transform in the config will include additional lines like these:<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_502ebe68.png" alt="Image"></p>
+</blockquote>
+<h5 id="3-2-5-2-Calibration-Order-Calculations-Order"><a href="#3-2-5-2-Calibration-Order-Calculations-Order" class="headerlink" title="3.2.5.2. Calibration Order (Calculations Order)"></a>3.2.5.2. Calibration Order (Calculations Order)</h5><ol>
+<li><strong>EOTF CORRECTION DISABLED</strong>:<ul>
+<li><strong>Calibration method</strong>: In this path, calibration is performed solely through a 3x3 matrix applied directly to the input RGB data that has been converted to the target color space.</li>
+<li><strong>Assumption</strong>: This approach assumes the LED wall behaves linearly — meaning there is a simple linear relationship between the input signal and the wall’s luminance and color output throughout the image processing pipeline. No EOTF correction is needed.</li>
+</ul>
+</li>
+<li><strong>1D → 3x3</strong>:<ul>
+<li><strong>Calibration method</strong>: During calibration, EOTF correction and RGB balance are measured first, then the 3x3 calibration matrix is applied.</li>
+<li><strong>Assumption</strong>: This path assumes the LED wall is not linear, and that the non-linearity occurs at the end of the image processing chain. This means that after color mapping, the LED wall’s own characteristics introduce non-linear luminance or color output, so EOTF correction and RGB balance adjustments need to happen before the 3x3 matrix calibration.</li>
+</ul>
+</li>
+<li><strong>3x3 → 1D</strong>:<ul>
+<li><strong>Calibration method</strong>: The reverse of 1D → 3x3 — the 3x3 calibration matrix is applied first, then EOTF correction and RGB balance are measured.</li>
+<li><strong>Assumption</strong>: Also assumes the LED wall is non-linear, but here the non-linearity is assumed to occur at the beginning of the image processing chain (before or during pipeline color mapping, before the EOTF). That is, the non-linearity already exists at the early color mapping stage (the UE rendering stage), so the 3x3 matrix is used first to do a preliminary color space correction, followed by EOTF correction and RGB balance.</li>
+</ul>
+</li>
+<li><strong>Which one to choose</strong>:<ul>
+<li>The correct choice depends on where the non-linearity occurs in your specific image processing pipeline. Different LED wall hardware, image processing software, and hardware configurations can cause non-linearity at different stages.</li>
+<li>When the analysis determines that the LED wall is not linear, OpenVPCal defaults to the 1D &gt; 3x3 order. This is because in most common situations, the LED wall’s non-linearity is more likely to occur at the end of the processing chain, making this order the more commonly applicable choice.</li>
+</ul>
+</li>
+</ol>
+<h5 id="3-2-5-3-Chromatic-Adaptation-Transform"><a href="#3-2-5-3-Chromatic-Adaptation-Transform" class="headerlink" title="3.2.5.3. Chromatic Adaptation Transform"></a>3.2.5.3. Chromatic Adaptation Transform</h5><p>A chromatic adaptation transform (CAT) is a mathematical transform that simulates the human visual system’s ability to adjust color perception under different lighting conditions. In color management and calibration, CAT becomes especially important when converting colors between different illuminants or color spaces.</p>
+<p>For example, when converting from a color space with a specific white point (such as daylight) to one with a different white point (such as tungsten lighting), a CAT ensures that colors remain visually consistent — even though the illuminant has changed, a human observer should perceive roughly the same colors.</p>
+<p>In OpenVPCal, CAT is used throughout the calibration process to help map colors accurately between different reference standards and target color spaces. In the Calibration Settings widget, users can select an appropriate transform from the standard CAT list — for example, the “Bradford” transform, which is one of the most widely used CAT algorithms. Different CAT algorithms may perform better in different scenarios, so choosing the right one helps improve the accuracy of color calibration.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_f1f773a7.png" alt="Image"></p>
+<ul>
+<li><strong>Reference to Target</strong>: Here, “Reference” refers to the test plate’s ACES 2065-1 space, and “Target” refers to the target gamut of the screen.</li>
+<li><strong>Target to Screen</strong>:</li>
+<li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965884_ab40da37.png" alt="Image"></li>
+<li>Adjusts the test plate’s original white point to match the target screen’s white point. As a result, the calibration output will not change the screen’s white point.</li>
+</ul>
+<h5 id="3-2-5-4-Avoid-Clipping"><a href="#3-2-5-4-Avoid-Clipping" class="headerlink" title="3.2.5.4. Avoid Clipping"></a>3.2.5.4. Avoid Clipping</h5><p>The calibration process may push one or two RGB channels above the expected peak luminance. When targeting the ST2084 EOTF, if any channel exceeds that value, the display will clip it, which affects the LED wall’s white point. The “Avoid Clipping” feature scales those channels back down below the peak luminance threshold. This may have a slight effect on the overall brightness of the LED wall, but the impact should be fairly minor.</p>
+<h5 id="3-2-5-5-Calibration-Matrix"><a href="#3-2-5-5-Calibration-Matrix" class="headerlink" title="3.2.5.5. Calibration Matrix"></a>3.2.5.5. Calibration Matrix</h5><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_58f15858.png" alt="Image"><br>Once calibration is complete, this widget provides options to copy each 3x3 matrix used in the calibration transform in several useful formats.</p>
+<h3 id="3-3-Transform-Breakdown"><a href="#3-3-Transform-Breakdown" class="headerlink" title="3.3. Transform Breakdown"></a>3.3. Transform Breakdown</h3><h4 id="3-3-1-Detailed-Breakdown-of-the-OCIO-Transforms"><a href="#3-3-1-Detailed-Breakdown-of-the-OCIO-Transforms" class="headerlink" title="3.3.1. Detailed Breakdown of the OCIO Transforms"></a>3.3.1. Detailed Breakdown of the OCIO Transforms</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="bullet">-</span> <span class="type">!&lt;ColorSpace&gt;</span></span><br><span class="line"><span class="attr">2 name:</span> <span class="string">Calibration</span> <span class="string">CSC</span> <span class="bullet">-</span> <span class="string">UP</span> <span class="bullet">-</span> <span class="string">S-Gamut3.Cine</span> <span class="bullet">-</span> <span class="string">EOTF_CS</span></span><br><span class="line"><span class="attr">3 family:</span> <span class="string">OpenVPCal/Utility</span></span><br><span class="line"><span class="attr">4 equalitygroup:</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="attr">5 bitdepth:</span> <span class="string">32f</span></span><br><span class="line"><span class="attr">6 description:</span> <span class="string">|</span></span><br><span class="line"><span class="number">7</span> <span class="string">Colourspace</span> <span class="string">for</span> <span class="string">OpenVPCal.</span></span><br><span class="line"><span class="number">8</span> <span class="string">EOTF</span> <span class="string">correction</span> <span class="string">assumes</span> <span class="string">signal</span> <span class="number">1.0</span> <span class="string">represents</span> <span class="number">100</span> <span class="string">nits</span></span><br><span class="line"><span class="number">9</span> <span class="string">Configuration---</span></span><br><span class="line"><span class="number">10</span> <span class="string">target_EOTF--ST</span> <span class="number">2084</span></span><br><span class="line"><span class="number">11</span> <span class="string">target_gamut--ITU-R</span> <span class="string">BT.2020</span></span><br><span class="line"><span class="number">12</span> <span class="string">calculation_order--EOTF</span> <span class="string">&gt;</span> <span class="string">CS</span></span><br><span class="line"><span class="number">13</span> <span class="string">enable_plate_white_balance--False</span></span><br><span class="line"><span class="number">14</span> <span class="string">enable_gamut_compression--True</span></span><br><span class="line"><span class="number">15</span> <span class="string">enable_EOTF_correction--True</span></span><br><span class="line"><span class="attr">16 isdata:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">17 encoding:</span> <span class="string">scene-linear</span></span><br><span class="line"><span class="attr">18 allocation:</span> <span class="string">uniform</span></span><br></pre></td></tr></table></figure>
+<p>This section contains the description and metadata. For the final confirmation of all settings, always trust this block rather than the UI. It’s located around line 1150. The <code>calculation_order</code> field here determines the order of the two main transforms below.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">1from_scene_reference:</span> <span class="type">!&lt;GroupTransform&gt;</span></span><br><span class="line"><span class="attr">2 children:</span></span><br><span class="line"><span class="number">3</span> <span class="bullet">-</span> <span class="type">!&lt;MatrixTransform&gt;</span> &#123;<span class="attr">matrix:</span> [<span class="number">1.49040952046417</span>, <span class="number">-0.2661709192612</span>, <span class="number">-0.224238601333507</span>, <span class="number">0</span>, <span class="number">-0.080167499789956</span>, <span class="number">1.18216712107567</span>, <span class="number">-0.101999621238164</span>, <span class="number">0</span>, <span class="number">0.00322763118916624</span>, <span class="number">-0.0347764757444135</span>, <span class="number">1.03154884460315</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]&#125;</span><br><span class="line"><span class="number">4</span> <span class="bullet">-</span> <span class="type">!&lt;MatrixTransform&gt;</span> &#123;<span class="attr">matrix:</span> [<span class="number">1.15939307498367</span>, <span class="number">-0.0669171977606114</span>, <span class="number">0.121386208480261</span>, <span class="number">0</span>, <span class="number">0.0937843467518664</span>, <span class="number">0.750274773384815</span>, <span class="number">0.0937843467736498</span>, <span class="number">0</span>, <span class="number">-0.0460361329355286</span>, <span class="number">0.0651114229039448</span>, <span class="number">0.627884921201905</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]&#125;</span><br><span class="line"><span class="number">5</span> <span class="bullet">-</span> <span class="type">!&lt;GroupTransform&gt;</span></span><br><span class="line"><span class="attr">6 children:</span></span><br><span class="line"><span class="number">7</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">CURVE</span> <span class="bullet">-</span> <span class="string">LINEAR_to_ST-2084</span>&#125;</span><br><span class="line"><span class="number">8</span> <span class="bullet">-</span> <span class="type">!&lt;FileTransform&gt;</span> &#123;<span class="attr">src:</span> <span class="string">EOTF</span> <span class="string">Correction</span> <span class="string">1D</span> <span class="bullet">-</span> <span class="string">UP</span> <span class="bullet">-</span> <span class="string">S-Gamut3.Cine</span> <span class="bullet">-</span> <span class="string">EOTF_CS.clf</span>, <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br><span class="line"><span class="number">9</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">CURVE</span> <span class="bullet">-</span> <span class="string">ST-2084_to_LINEAR</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>The two main transforms are: <code>MatrixTransform</code> for gamut conversion, and the <code>GroupTransform</code> children for gamma calibration.</p>
+<ul>
+<li>The first transform — <code>!&lt;MatrixTransform&gt; &#123;matrix: [1.49040952046417, -0.2661709192612, -0.224238601333507, 0, -0.080167499789956, 1.18216712107567, -0.101999621238164, 0, 0.00322763118916624, -0.0347764757444135, 1.03154884460315, 0, 0, 0, 0, 1]&#125;</code> — is the <strong>ACES AP0 -&gt; BT.2020</strong> gamut conversion. I’m confident about this because I verified it by calculating it myself: <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_ca5abb97.png" alt="Image">. In the OpenVPCal UI, this corresponds to <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_2a65e420.png" alt="Image"> the <strong>Reference To Target Matrix</strong>. So “Reference” refers to ACES AP0, and “Target” refers to the “target gamut” (BT.2020 in this case).</li>
+<li>The second transform is: <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_e33a40c6.png" alt="Image"> the <strong>Target To Screen Matrix</strong>. This is presumably the transform that corrects for the screen’s color cast relative to BT.2020 — i.e., X * matrix &#x3D; the color cast correction to BT.2020.</li>
+<li>The children transforms below: EOTF calibration using a 1D LUT, applied separately to the R, G, and B channels.</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="string">//</span> <span class="string">The</span> <span class="string">following</span> <span class="string">is</span> <span class="string">added</span> <span class="string">if</span> <span class="string">Gamut</span> <span class="string">Compression</span> <span class="string">is</span> <span class="string">enabled</span></span><br><span class="line"><span class="number">2</span> <span class="bullet">-</span> <span class="type">!&lt;GroupTransform&gt;</span></span><br><span class="line"><span class="attr">3 children:</span></span><br><span class="line"><span class="number">4</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>&#125;</span><br><span class="line"><span class="number">5</span> <span class="bullet">-</span> <span class="type">!&lt;FixedFunctionTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACES_GamutComp13</span>, <span class="attr">params:</span> [<span class="number">1.08919025420343</span>, <span class="number">1.001</span>, <span class="number">1.03970709669469</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">4</span>]&#125;</span><br><span class="line"><span class="number">6</span> <span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>, <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br><span class="line"><span class="number">7</span> <span class="string">//</span> <span class="string">The</span> <span class="string">above</span> <span class="string">is</span> <span class="string">the</span> <span class="string">added</span> <span class="string">section</span></span><br></pre></td></tr></table></figure>
+<p>Gamut compression. See the ACES Gamut Compression and User Guide for details.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="type">!&lt;MatrixTransform&gt;</span> &#123;<span class="attr">matrix:</span> [<span class="number">1.49040952046417</span>, <span class="number">-0.2661709192612</span>, <span class="number">-0.224238601333507</span>, <span class="number">0</span>, <span class="number">-0.080167499789956</span>, <span class="number">1.18216712107567</span>, <span class="number">-0.101999621238164</span>, <span class="number">0</span>, <span class="number">0.00322763118916624</span>, <span class="number">-0.0347764757444135</span>, <span class="number">1.03154884460315</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>], <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>This is the inverse of the first gamut conversion matrix from the two main transforms above.</p>
+<h4 id="3-3-2-Alternative-if-OCIO-Is-Not-Available"><a href="#3-3-2-Alternative-if-OCIO-Is-Not-Available" class="headerlink" title="3.3.2. Alternative if OCIO Is Not Available"></a>3.3.2. Alternative if OCIO Is Not Available</h4><p>In the same directory as the output OCIO config, there is a LUT CUBE file.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_7bd1f053.png" alt="Image"><br>This file combines the matrix transforms and the 1D LUT. It can be used in environments that don’t support OCIO, such as Disguise. It should be applied at the very end of the image processing pipeline, just before the signal is sent to the LED wall.</p>
+<h4 id="3-3-3-Two-Post-Calibration-Transforms"><a href="#3-3-3-Two-Post-Calibration-Transforms" class="headerlink" title="3.3.3. Two Post-Calibration Transforms"></a>3.3.3. Two Post-Calibration Transforms</h4><p>After calibration is complete, there are two calibrated transforms available — one in <code>Desired Color Spaces</code> and one in <code>Desired Display-Views</code>:</p>
+<p><strong>Desired Color Spaces</strong>:<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965885_0cfa102a.png" alt="Image"><br>Use <code>WorkingColorSpace</code> + this for the output to screen:<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965886_dd05f365.png" alt="Image"></p>
+<p><strong>Desired Display-Views</strong>:<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965886_edd9340f.png" alt="Image"><br>Use <code>WorkingColorSpace</code> + this for the output to screen:<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965887_a76e777c.png" alt="Image"></p>
+<p>The second option (Display-Views) is clearly the correct one. Looking at the code, the Color Spaces option actually contains one extra transform on top of what Display-Views does. After completing the ColorSpace and linear calibration, the original transform converts back to AP0 — and this one tacks on an additional step to convert to CIE-XYZ. That’s likely used for generating chromaticity diagrams.<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/1774686965887_2aa2db33.png" alt="Image"></p>
+<h4 id="3-3-4-How-Gamut-Compression-Parameters-Are-Calculated"><a href="#3-3-4-How-Gamut-Compression-Parameters-Are-Calculated" class="headerlink" title="3.3.4. How Gamut Compression Parameters Are Calculated"></a>3.3.4. How Gamut Compression Parameters Are Calculated</h4><p>This code lives in the <code>colourspace_max_distances</code> function inside <code>src/open_vp_cal/core/calibrate.py</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="keyword">def</span> colourspace_max_distances(source_cs, destination_cs, cat, shadow_rolloff):</span><br><span class="line"><span class="number">2</span> <span class="comment"># Input: source_cs — source color space (target color space)</span></span><br><span class="line"><span class="number">3</span> <span class="comment"># Input: destination_cs — destination color space (screen color space)</span></span><br><span class="line"><span class="number">4</span> <span class="comment"># Input: cat — chromatic adaptation transform method (e.g., CAT02, Bradford)</span></span><br><span class="line"><span class="number">5</span> <span class="comment"># Input: shadow_rolloff — rolloff transition parameter</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">8</span> <span class="comment"># 1. Build an RGB primaries matrix and convert between color spaces</span></span><br><span class="line"><span class="number">9</span> primaries = colour.RGB_to_RGB(</span><br><span class="line"><span class="number">10</span> <span class="comment"># Create a unit RGB primaries matrix: red [1,0,0], green [0,1,0], blue [0,0,1]</span></span><br><span class="line"><span class="number">11</span> RGB=np.asarray([[<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>], <span class="comment"># Red primary</span></span><br><span class="line"><span class="number">12</span> [<span class="number">0.0</span>, <span class="number">1.0</span>, <span class="number">0.0</span>], <span class="comment"># Green primary</span></span><br><span class="line"><span class="number">13</span> [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>]]), <span class="comment"># Blue primary</span></span><br><span class="line"><span class="number">14</span> input_colourspace=source_cs, <span class="comment"># Source color space (e.g., BT.2020)</span></span><br><span class="line"><span class="number">15</span> output_colourspace=destination_cs, <span class="comment"># Destination color space (e.g., display color space)</span></span><br><span class="line"><span class="number">16</span> chromatic_adaptation_transform=cat <span class="comment"># Chromatic adaptation transform method</span></span><br><span class="line"><span class="number">17</span> )</span><br><span class="line"><span class="number">18</span></span><br><span class="line"><span class="number">19</span> <span class="comment"># 2. Calculate achromatic (greyscale) values — this is where data differences can arise</span></span><br><span class="line"><span class="number">20</span> achromatic_values = np.apply_along_axis(</span><br><span class="line"><span class="number">21</span> <span class="keyword">lambda</span> rgb: achromatic(rgb, shadow_rolloff), <span class="comment"># Calculate achromatic value for each RGB</span></span><br><span class="line"><span class="number">22</span> <span class="number">1</span>, <span class="comment"># Apply along axis 1 (rows)</span></span><br><span class="line"><span class="number">23</span> primaries <span class="comment"># Input data</span></span><br><span class="line"><span class="number">24</span> )</span><br><span class="line"><span class="number">25</span> <span class="comment"># What the achromatic function does:</span></span><br><span class="line"><span class="number">26</span> <span class="comment"># - Takes the max value from RGB</span></span><br><span class="line"><span class="number">27</span> <span class="comment"># - Applies shadow rolloff if the value is below shadow_rolloff</span></span><br><span class="line"><span class="number">28</span> <span class="comment"># - Returns a greyscale value in the form [value, value, value]</span></span><br><span class="line"><span class="number">29</span></span><br><span class="line"><span class="number">30</span> <span class="comment"># 3. Calculate distances</span></span><br><span class="line"><span class="number">31</span> distances = (achromatic_values - primaries) / achromatic_values</span><br><span class="line"><span class="number">32</span> <span class="comment"># This calculation represents:</span></span><br><span class="line"><span class="number">33</span> <span class="comment"># - The difference between the achromatic value and the primary value</span></span><br><span class="line"><span class="number">34</span> <span class="comment"># - Normalized to the achromatic value range</span></span><br><span class="line"><span class="number">35</span></span><br><span class="line"><span class="number">36</span> <span class="comment"># 4. Return the max distance per channel</span></span><br><span class="line"><span class="number">37</span> <span class="keyword">return</span> np.amax(distances, axis=<span class="number">0</span>)</span><br><span class="line"><span class="number">38</span> <span class="comment"># Returns the max distance value for each color channel (R, G, B)</span></span><br></pre></td></tr></table></figure>
+<p>The impact of these values is discussed around the 13:54 mark in the video — it relates to the <strong>ACES Parametric Gamut</strong> in the ACES standard color transforms.</p>
+<p>The purpose is to prevent color overflow (clipping) after gamut conversion. Specifically, if the colors “exceed the LED wall’s display capability” but fall within the camera’s capture range, the camera will see color clipping. This is addressed by compressing the color space by roughly 10%.</p>
+<p>Parameter example:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>&#125;</span><br><span class="line"><span class="number">2</span><span class="bullet">-</span> <span class="type">!&lt;FixedFunctionTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACES_GamutComp13</span>, <span class="attr">params:</span> [<span class="number">1.10245316504887</span>, <span class="number">1.001</span>, <span class="number">1.001</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">0.9</span>, <span class="number">4</span>]&#125;</span><br><span class="line"><span class="number">3</span><span class="bullet">-</span> <span class="type">!&lt;BuiltinTransform&gt;</span> &#123;<span class="attr">style:</span> <span class="string">ACEScg_to_ACES2065-1</span>, <span class="attr">direction:</span> <span class="string">inverse</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/Color-Management/" data-i18n-tag="Color Management">Color Management</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

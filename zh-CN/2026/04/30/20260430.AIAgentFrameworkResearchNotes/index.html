@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="AI Agent 框架调研笔记
+更新时间：2026-04-30
+随着 AI Agent 技术的快速发展，各类 Agent 开发框架层出不穷。本文档对当前主流的 6 个 Agent 框架进行调研和对比分析，帮助开发者选择合适的工具。
+
+
+目录
+一、框架概览对比
+二、LangGraph
+三、CrewAI
+四、LlamaIn">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="AI Agent 框架调研笔记">
+    
+    
+        <meta property="og:description" content="AI Agent 框架调研笔记
+更新时间：2026-04-30
+随着 AI Agent 技术的快速发展，各类 Agent 开发框架层出不穷。本文档对当前主流的 6 个 Agent 框架进行调研和对比分析，帮助开发者选择合适的工具。
+
+
+目录
+一、框架概览对比
+二、LangGraph
+三、CrewAI
+四、LlamaIn">
+    
+    
+    
+        <meta property="article:published_time" content="2026-04-30T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.538Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="AI Agent 框架调研笔记">
+    
+    
+        <meta name="twitter:description" content="AI Agent 框架调研笔记
+更新时间：2026-04-30
+随着 AI Agent 技术的快速发展，各类 Agent 开发框架层出不穷。本文档对当前主流的 6 个 Agent 框架进行调研和对比分析，帮助开发者选择合适的工具。
+
+
+目录
+一、框架概览对比
+二、LangGraph
+三、CrewAI
+四、LlamaIn">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+    
+
+    <!-- Title -->
+    
+    <title>AI Agent 框架调研笔记 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-04-30-20260430-AIAgentFrameworkResearchNotes-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/04/30/20260430.AIAgentFrameworkResearchNotes/" class="previous" data-title="AI Agent Framework Research Notes"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/04/28/20260428.TileExplorerWeb/" class="next" data-title="Tile Explorer Web..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">AI Agent 框架调研笔记</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="AI-Agent-框架调研笔记"><a href="#AI-Agent-框架调研笔记" class="headerlink" title="AI Agent 框架调研笔记"></a>AI Agent 框架调研笔记</h1><blockquote>
+<p>更新时间：2026-04-30</p>
+<p>随着 AI Agent 技术的快速发展，各类 Agent 开发框架层出不穷。本文档对当前主流的 6 个 Agent 框架进行调研和对比分析，帮助开发者选择合适的工具。</p>
+</blockquote>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#%E4%B8%80%E6%A1%86%E6%9E%B6%E6%A6%82%E8%A7%88%E5%AF%B9%E6%AF%94">一、框架概览对比</a></li>
+<li><a href="#%E4%BA%8Clanggraph">二、LangGraph</a></li>
+<li><a href="#%E4%B8%89crewai">三、CrewAI</a></li>
+<li><a href="#%E5%9B%9Bllamaindex">四、LlamaIndex</a></li>
+<li><a href="#%E4%BA%94dify">五、Dify</a></li>
+<li><a href="#%E5%85%ADopenai-agents-sdk">六、OpenAI Agents SDK</a></li>
+<li><a href="#%E4%B8%83google-adk">七、Google ADK</a></li>
+<li><a href="#%E5%85%AB%E6%A1%86%E6%9E%B6%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97">八、框架选型指南</a></li>
+</ul>
+<hr>
+<h2 id="一、框架概览对比"><a href="#一、框架概览对比" class="headerlink" title="一、框架概览对比"></a>一、框架概览对比</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>LangGraph</th>
+<th>CrewAI</th>
+<th>LlamaIndex</th>
+<th>Dify</th>
+<th>OpenAI Agents SDK</th>
+<th>Google ADK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>开发方</strong></td>
+<td>LangChain Inc.</td>
+<td>CrewAI Inc.</td>
+<td>LlamaIndex Inc.</td>
+<td>LangGenius</td>
+<td>OpenAI</td>
+<td>Google</td>
+</tr>
+<tr>
+<td><strong>最新版本</strong></td>
+<td>v1.1.10</td>
+<td>v1.14.3</td>
+<td>v0.14.6</td>
+<td>v1.6.0+</td>
+<td>v0.14.6</td>
+<td>v1.31.1</td>
+</tr>
+<tr>
+<td><strong>许可证</strong></td>
+<td>MIT</td>
+<td>MIT</td>
+<td>MIT</td>
+<td>Dify License (Apache 2.0+)</td>
+<td>MIT</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><strong>语言</strong></td>
+<td>Python &#x2F; JS</td>
+<td>Python</td>
+<td>Python &#x2F; TS</td>
+<td>可视化（多语言 SDK）</td>
+<td>Python &#x2F; JS</td>
+<td>Python &#x2F; Java &#x2F; Go &#x2F; TS</td>
+</tr>
+<tr>
+<td><strong>核心理念</strong></td>
+<td>图编排</td>
+<td>角色扮演团队</td>
+<td>RAG + Agent</td>
+<td>低代码平台</td>
+<td>极简多 Agent</td>
+<td>代码优先</td>
+</tr>
+<tr>
+<td><strong>模型支持</strong></td>
+<td>模型无关</td>
+<td>模型无关</td>
+<td>模型无关</td>
+<td>模型无关</td>
+<td>100+ LLM</td>
+<td>模型无关</td>
+</tr>
+<tr>
+<td><strong>学习曲线</strong></td>
+<td>较陡</td>
+<td>中等</td>
+<td>中等</td>
+<td>低</td>
+<td>低</td>
+<td>中等</td>
+</tr>
+<tr>
+<td><strong>适合场景</strong></td>
+<td>复杂有状态工作流</td>
+<td>多角色协作</td>
+<td>RAG + Agent</td>
+<td>快速原型&#x2F;非技术用户</td>
+<td>OpenAI 生态应用</td>
+<td>Google 生态应用</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、LangGraph"><a href="#二、LangGraph" class="headerlink" title="二、LangGraph"></a>二、LangGraph</h2><h3 id="2-1-简介"><a href="#2-1-简介" class="headerlink" title="2.1 简介"></a>2.1 简介</h3><p><strong>LangGraph</strong> 是由 LangChain 团队开发的<strong>底层编排框架</strong>，专门用于构建长时间运行的、有状态的 AI Agent。设计灵感来自 Google 的 Pregel 和 Apache Beam。</p>
+<p>核心定位：不抽象化提示词或架构，提供底层基础设施，让开发者精细控制 Agent 工作流。已被 Klarna、Replit、Elastic 等公司用于生产环境。</p>
+<table>
+<thead>
+<tr>
+<th>项目信息</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最新版本</td>
+<td>v1.1.10（2026-04-27）</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>安装</td>
+<td><code>pip install -U langgraph</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langgraph">langchain-ai&#x2F;langgraph</a></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a target="_blank" rel="noopener" href="https://docs.langchain.com/oss/python/langgraph">docs.langchain.com&#x2F;oss&#x2F;python&#x2F;langgraph</a></td>
+</tr>
+</tbody></table>
+<h3 id="2-2-核心架构"><a href="#2-2-核心架构" class="headerlink" title="2.2 核心架构"></a>2.2 核心架构</h3><p>LangGraph 将 Agent 工作流建模为<strong>图（Graph）</strong>，由三个核心组件构成：</p>
+<ul>
+<li><strong>State（状态）</strong>：共享数据结构，通常用 <code>TypedDict</code> 或 <code>Pydantic Model</code> 定义</li>
+<li><strong>Nodes（节点）</strong>：编码 Agent 逻辑的函数，接收当前状态、返回更新后的状态</li>
+<li><strong>Edges（边）</strong>：决定下一个节点的函数，支持条件分支或固定转换</li>
+</ul>
+<h3 id="2-3-关键特性"><a href="#2-3-关键特性" class="headerlink" title="2.3 关键特性"></a>2.3 关键特性</h3><ul>
+<li><strong>持久化（Persistence）</strong>：每个执行步骤将图状态保存为 checkpoint，支持内存、Redis 等后端</li>
+<li><strong>人机协作（Human-in-the-Loop）</strong>：通过 <code>interrupt()</code> 暂停执行，等待人工输入后恢复</li>
+<li><strong>流式输出（Streaming）</strong>：支持 values、messages、updates 等多种流式模式</li>
+<li><strong>子图（Subgraphs）</strong>：支持图嵌套，子图拥有独立的 checkpoint 和中断能力</li>
+<li><strong>时间旅行</strong>：可回溯到任意历史 checkpoint，支持 fork 和重放</li>
+<li><strong>可视化</strong>：编译后可生成 Mermaid 图形展示工作流结构</li>
+</ul>
+<h3 id="2-4-代码示例"><a href="#2-4-代码示例" class="headerlink" title="2.4 代码示例"></a>2.4 代码示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Literal</span></span><br><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> StateGraph, MessagesState, START, END</span><br><span class="line"><span class="keyword">from</span> langchain.messages <span class="keyword">import</span> SystemMessage, HumanMessage, ToolMessage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义工具</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multiply</span>(<span class="params">a: <span class="built_in">int</span>, b: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Multiply two numbers.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a * b</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a: <span class="built_in">int</span>, b: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Add two numbers.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line">tools = [multiply, add]</span><br><span class="line">tools_by_name = &#123;tool.name: tool <span class="keyword">for</span> tool <span class="keyword">in</span> tools&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义节点</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">llm_call</span>(<span class="params">state: MessagesState</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;LLM 决定是否调用工具&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">&quot;messages&quot;</span>: [</span><br><span class="line">            llm_with_tools.invoke(</span><br><span class="line">                [SystemMessage(content=<span class="string">&quot;You are a helpful arithmetic assistant.&quot;</span>)]</span><br><span class="line">                + state[<span class="string">&quot;messages&quot;</span>]</span><br><span class="line">            )</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tool_node</span>(<span class="params">state: <span class="built_in">dict</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;执行工具调用&quot;&quot;&quot;</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> tool_call <span class="keyword">in</span> state[<span class="string">&quot;messages&quot;</span>][-<span class="number">1</span>].tool_calls:</span><br><span class="line">        tool = tools_by_name[tool_call[<span class="string">&quot;name&quot;</span>]]</span><br><span class="line">        observation = tool.invoke(tool_call[<span class="string">&quot;args&quot;</span>])</span><br><span class="line">        result.append(ToolMessage(content=<span class="built_in">str</span>(observation), tool_call_id=tool_call[<span class="string">&quot;id&quot;</span>]))</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;messages&quot;</span>: result&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义条件边路由</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">should_continue</span>(<span class="params">state: MessagesState</span>) -&gt; <span class="type">Literal</span>[<span class="string">&quot;tool_node&quot;</span>, END]:</span><br><span class="line">    last_message = state[<span class="string">&quot;messages&quot;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> last_message.tool_calls:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;tool_node&quot;</span></span><br><span class="line">    <span class="keyword">return</span> END</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建并编译图</span></span><br><span class="line">builder = StateGraph(MessagesState)</span><br><span class="line">builder.add_node(<span class="string">&quot;llm_call&quot;</span>, llm_call)</span><br><span class="line">builder.add_node(<span class="string">&quot;tool_node&quot;</span>, tool_node)</span><br><span class="line">builder.add_edge(START, <span class="string">&quot;llm_call&quot;</span>)</span><br><span class="line">builder.add_conditional_edges(<span class="string">&quot;llm_call&quot;</span>, should_continue, [<span class="string">&quot;tool_node&quot;</span>, END])</span><br><span class="line">builder.add_edge(<span class="string">&quot;tool_node&quot;</span>, <span class="string">&quot;llm_call&quot;</span>)</span><br><span class="line"></span><br><span class="line">agent = builder.<span class="built_in">compile</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">result = agent.invoke(&#123;<span class="string">&quot;messages&quot;</span>: [HumanMessage(content=<span class="string">&quot;Add 3 and 4, then multiply by 5.&quot;</span>)]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-优势与局限"><a href="#2-5-优势与局限" class="headerlink" title="2.5 优势与局限"></a>2.5 优势与局限</h3><p><strong>优势：</strong> 精细化控制、有状态执行、原生人机协作、容错恢复、时间旅行调试、框架无关</p>
+<p><strong>局限：</strong> 学习曲线较陡、样板代码多、最佳体验需配合 LangSmith 生态、版本迭代快</p>
+<hr>
+<h2 id="三、CrewAI"><a href="#三、CrewAI" class="headerlink" title="三、CrewAI"></a>三、CrewAI</h2><h3 id="3-1-简介"><a href="#3-1-简介" class="headerlink" title="3.1 简介"></a>3.1 简介</h3><p><strong>CrewAI</strong> 是一个用于编排多个自主 AI Agent 的 Python 框架，完全从零构建，<strong>不依赖 LangChain 或其他框架</strong>。核心理念是通过角色扮演模拟真实团队协作。</p>
+<table>
+<thead>
+<tr>
+<th>项目信息</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最新版本</td>
+<td>v1.14.3（2025-04-24）</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>安装</td>
+<td><code>pip install &#39;crewai[tools]&#39;</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/crewAIInc/crewAI">crewAIInc&#x2F;crewAI</a></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a target="_blank" rel="noopener" href="https://docs.crewai.com/">docs.crewai.com</a></td>
+</tr>
+</tbody></table>
+<h3 id="3-2-核心概念"><a href="#3-2-核心概念" class="headerlink" title="3.2 核心概念"></a>3.2 核心概念</h3><ul>
+<li><strong>Agent（智能体）</strong>：通过 <code>role</code>（角色）、<code>goal</code>（目标）、<code>backstory</code>（背景故事）定义身份和行为</li>
+<li><strong>Task（任务）</strong>：具体工作单元，可指定执行者、上下文依赖和输出格式</li>
+<li><strong>Crew（团队）</strong>：一组协作 Agent 的集合，定义执行流程和记忆配置</li>
+<li><strong>Tools（工具）</strong>：丰富的内置工具集（搜索、文件读写、代码执行等），支持 MCP 集成</li>
+<li><strong>Process（流程）</strong>：Sequential（顺序）或 Hierarchical（层级，自动创建 Manager Agent）</li>
+</ul>
+<h3 id="3-3-关键特性"><a href="#3-3-关键特性" class="headerlink" title="3.3 关键特性"></a>3.3 关键特性</h3><ul>
+<li><strong>角色扮演设计</strong>：直观的角色定义方式，贴近真实团队协作</li>
+<li><strong>协作工作流</strong>：Agent 间可委派任务、传递上下文</li>
+<li><strong>四种记忆系统</strong>：短期记忆、长期记忆、实体记忆、上下文记忆</li>
+<li><strong>Flows（流程编排）</strong>：企业级事件驱动工作流，支持 <code>@start</code>、<code>@listen</code>、<code>@router</code> 装饰器</li>
+<li><strong>Checkpoint &amp; Fork</strong>：支持执行状态的保存、恢复和分支</li>
+<li><strong>YAML 配置驱动</strong>：Agent 和 Task 可通过 YAML 文件定义</li>
+</ul>
+<h3 id="3-4-代码示例"><a href="#3-4-代码示例" class="headerlink" title="3.4 代码示例"></a>3.4 代码示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> crewai <span class="keyword">import</span> Agent, Task, Crew, Process</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 Agent</span></span><br><span class="line">researcher = Agent(</span><br><span class="line">    role=<span class="string">&#x27;高级 AI 研究员&#x27;</span>,</span><br><span class="line">    goal=<span class="string">&#x27;发现 AI Agent 领域的最新发展趋势&#x27;</span>,</span><br><span class="line">    backstory=<span class="string">&#x27;你是一位经验丰富的研究员，擅长发现前沿技术的最新动态。&#x27;</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    memory=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">writer = Agent(</span><br><span class="line">    role=<span class="string">&#x27;技术报告撰写专家&#x27;</span>,</span><br><span class="line">    goal=<span class="string">&#x27;将研究发现转化为清晰、结构化的报告&#x27;</span>,</span><br><span class="line">    backstory=<span class="string">&#x27;你是一位技术写作专家，擅长将复杂信息转化为易读的报告。&#x27;</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    memory=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义 Task</span></span><br><span class="line">research_task = Task(</span><br><span class="line">    description=<span class="string">&#x27;对 &#123;topic&#125; 进行全面调研，收集最新的发展趋势。&#x27;</span>,</span><br><span class="line">    expected_output=<span class="string">&#x27;包含 10 个要点的详细研究发现列表&#x27;</span>,</span><br><span class="line">    agent=researcher,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">writing_task = Task(</span><br><span class="line">    description=<span class="string">&#x27;根据研究发现撰写一份完整的技术报告。&#x27;</span>,</span><br><span class="line">    expected_output=<span class="string">&#x27;完整的 Markdown 格式报告&#x27;</span>,</span><br><span class="line">    agent=writer,</span><br><span class="line">    context=[research_task],</span><br><span class="line">    output_file=<span class="string">&#x27;report.md&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 组建 Crew 并执行</span></span><br><span class="line">crew = Crew(</span><br><span class="line">    agents=[researcher, writer],</span><br><span class="line">    tasks=[research_task, writing_task],</span><br><span class="line">    process=Process.sequential,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">result = crew.kickoff(inputs=&#123;<span class="string">&#x27;topic&#x27;</span>: <span class="string">&#x27;多智能体协作系统&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-优势与局限"><a href="#3-5-优势与局限" class="headerlink" title="3.5 优势与局限"></a>3.5 优势与局限</h3><p><strong>优势：</strong> 完全独立无依赖、角色扮演直观、四种记忆系统、YAML 配置驱动、活跃社区（10 万+ 认证开发者）</p>
+<p><strong>局限：</strong> 仅支持 Python、多 Agent 协作 API 开销大、调试复杂、企业功能需付费</p>
+<hr>
+<h2 id="四、LlamaIndex"><a href="#四、LlamaIndex" class="headerlink" title="四、LlamaIndex"></a>四、LlamaIndex</h2><h3 id="4-1-简介"><a href="#4-1-简介" class="headerlink" title="4.1 简介"></a>4.1 简介</h3><p><strong>LlamaIndex</strong>（原名 GPT Index）是一个开源框架，最初专注于 RAG（检索增强生成），现已扩展为<strong>文档智能体和 OCR 平台</strong>。由 Jerry Liu 于 2022 年创立。</p>
+<table>
+<thead>
+<tr>
+<th>项目信息</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最新版本</td>
+<td>v0.14.6</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>安装</td>
+<td><code>pip install llama-index</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/run-llama/llama_index">run-llama&#x2F;llama_index</a></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a target="_blank" rel="noopener" href="https://developers.llamaindex.ai/python">developers.llamaindex.ai</a></td>
+</tr>
+</tbody></table>
+<h3 id="4-2-核心概念"><a href="#4-2-核心概念" class="headerlink" title="4.2 核心概念"></a>4.2 核心概念</h3><ul>
+<li><strong>Workflow（工作流）</strong>：事件驱动的编排机制，通过 <code>@step</code> 装饰器定义步骤</li>
+<li><strong>Context（上下文）</strong>：全局运行时上下文，协调步骤间数据传递，支持持久化</li>
+<li><strong>事件驱动架构</strong>：<code>StartEvent</code> → 自定义事件 → <code>StopEvent</code>，形成有向图</li>
+<li><strong>AgentWorkflow</strong>：高层封装，自动根据 LLM 能力选择合适的 Agent 类型</li>
+</ul>
+<h3 id="4-3-Agent-类型"><a href="#4-3-Agent-类型" class="headerlink" title="4.3 Agent 类型"></a>4.3 Agent 类型</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>适用场景</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>FunctionAgent</strong></td>
+<td>LLM 支持函数调用时</td>
+<td>直接使用原生 function calling，效率最高</td>
+</tr>
+<tr>
+<td><strong>ReActAgent</strong></td>
+<td>LLM 不支持函数调用时</td>
+<td>通过 ReAct（推理+行动）循环执行</td>
+</tr>
+<tr>
+<td><strong>CodeActAgent</strong></td>
+<td>需要执行代码的场景</td>
+<td>通过 <code>&lt;execute&gt;</code> 标签生成并执行代码</td>
+</tr>
+</tbody></table>
+<h3 id="4-4-关键特性"><a href="#4-4-关键特性" class="headerlink" title="4.4 关键特性"></a>4.4 关键特性</h3><ul>
+<li><strong>RAG + Agent 一体化</strong>：RAG 是核心能力而非补充，130+ 数据格式接入</li>
+<li><strong>多智能体协作</strong>：原生支持多 Agent 交接（handoff）机制</li>
+<li><strong>Context 持久化</strong>：工作流状态可序列化恢复，适合生产环境</li>
+<li><strong>LlamaParse</strong>：企业级文档解析和 OCR</li>
+<li><strong>300+ 集成包</strong>：覆盖主流 LLM、向量数据库、数据源</li>
+</ul>
+<h3 id="4-5-代码示例"><a href="#4-5-代码示例" class="headerlink" title="4.5 代码示例"></a>4.5 代码示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> llama_index.core <span class="keyword">import</span> VectorStoreIndex, SimpleDirectoryReader</span><br><span class="line"><span class="keyword">from</span> llama_index.core.agent.workflow <span class="keyword">import</span> FunctionAgent</span><br><span class="line"><span class="keyword">from</span> llama_index.llms.openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 RAG 索引</span></span><br><span class="line">documents = SimpleDirectoryReader(<span class="string">&quot;data&quot;</span>).load_data()</span><br><span class="line">index = VectorStoreIndex.from_documents(documents)</span><br><span class="line">query_engine = index.as_query_engine()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义工具</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multiply</span>(<span class="params">a: <span class="built_in">float</span>, b: <span class="built_in">float</span></span>) -&gt; <span class="built_in">float</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Multiply two numbers.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a * b</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">search_documents</span>(<span class="params">query: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Search documents for answers.&quot;&quot;&quot;</span></span><br><span class="line">    response = <span class="keyword">await</span> query_engine.aquery(query)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(response)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建智能体</span></span><br><span class="line">agent = FunctionAgent(</span><br><span class="line">    tools=[multiply, search_documents],</span><br><span class="line">    llm=OpenAI(model=<span class="string">&quot;gpt-4o-mini&quot;</span>),</span><br><span class="line">    system_prompt=<span class="string">&quot;You are a helpful assistant that can calculate and search documents.&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    response = <span class="keyword">await</span> agent.run(<span class="string">&quot;What did the author do in college? Also, what&#x27;s 7 * 8?&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(response)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-6-优势与局限"><a href="#4-6-优势与局限" class="headerlink" title="4.6 优势与局限"></a>4.6 优势与局限</h3><p><strong>优势：</strong> RAG + Agent 深度集成、事件驱动架构灵活、300+ 生态集成、多智能体支持、LlamaParse 企业级解析</p>
+<p><strong>局限：</strong> 学习曲线较陡、框架较重、TS 版本功能覆盖不全、版本迭代快有 breaking changes、企业功能需付费</p>
+<hr>
+<h2 id="五、Dify"><a href="#五、Dify" class="headerlink" title="五、Dify"></a>五、Dify</h2><h3 id="5-1-简介"><a href="#5-1-简介" class="headerlink" title="5.1 简介"></a>5.1 简介</h3><p><strong>Dify</strong>（Do It For You）是一个开源的 LLM 应用开发平台，定位为<strong>智能体工作流构建器</strong>。将 Backend-as-a-Service 与 LLMOps 结合，让非技术用户和开发者都能快速构建 AI 应用。</p>
+<table>
+<thead>
+<tr>
+<th>项目信息</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最新版本</td>
+<td>v1.6.0+</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>Dify Open Source License (Apache 2.0+)</td>
+</tr>
+<tr>
+<td>部署</td>
+<td><code>docker compose up -d</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/langgenius/dify">langgenius&#x2F;dify</a></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a target="_blank" rel="noopener" href="https://docs.dify.ai/en/use-dify/getting-started/introduction">docs.dify.ai</a></td>
+</tr>
+</tbody></table>
+<h3 id="5-2-核心功能"><a href="#5-2-核心功能" class="headerlink" title="5.2 核心功能"></a>5.2 核心功能</h3><ul>
+<li><strong>可视化工作流构建器</strong>：拖拽式画布，支持并行处理、条件分支、循环节点</li>
+<li><strong>Agent 策略</strong>：支持 Function Calling、ReAct 和自定义策略插件</li>
+<li><strong>RAG 管道</strong>：完整的数据源 → 处理 → 知识库 → 检索流程</li>
+<li><strong>模型管理</strong>：无缝集成数百种 LLM，支持模型切换和性能比较</li>
+<li><strong>Prompt IDE</strong>：直观的提示词编写界面</li>
+<li><strong>LLMOps</strong>：监控和分析应用日志和性能</li>
+</ul>
+<h3 id="5-3-Agent-策略"><a href="#5-3-Agent-策略" class="headerlink" title="5.3 Agent 策略"></a>5.3 Agent 策略</h3><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Function Calling</strong></td>
+<td>模型原生支持工具调用（如 GPT-4、Claude）</td>
+</tr>
+<tr>
+<td><strong>ReAct</strong></td>
+<td>模型不支持原生函数调用，或需要显式推理追踪</td>
+</tr>
+<tr>
+<td><strong>自定义策略插件</strong></td>
+<td>需要多轮工具调用等复杂行为</td>
+</tr>
+</tbody></table>
+<h3 id="5-4-创建-Agent-的方式"><a href="#5-4-创建-Agent-的方式" class="headerlink" title="5.4 创建 Agent 的方式"></a>5.4 创建 Agent 的方式</h3><p>Dify 采用可视化&#x2F;无代码方式：</p>
+<ol>
+<li>在 Dify Studio 中创建 “Agent” 类型应用</li>
+<li>选择 LLM 模型</li>
+<li>设置 Agent 策略（自动检测 Function Calling 支持）</li>
+<li>从 50+ 内置工具中选择或添加自定义工具</li>
+<li>编写系统提示词</li>
+<li>调试预览后一键发布</li>
+</ol>
+<h3 id="5-5-集成能力"><a href="#5-5-集成能力" class="headerlink" title="5.5 集成能力"></a>5.5 集成能力</h3><ul>
+<li><strong>API</strong>：完整的 RESTful API，支持 SSE 流式响应</li>
+<li><strong>SDK</strong>：Node.js、PHP、Java 客户端</li>
+<li><strong>插件系统</strong>：模型、工具、Agent 策略、扩展、数据源、触发器六类插件</li>
+<li><strong>MCP 集成</strong>：原生支持 Model Context Protocol</li>
+<li><strong>部署</strong>：Docker Compose、Kubernetes、Terraform、AWS CDK</li>
+</ul>
+<h3 id="5-6-优势与局限"><a href="#5-6-优势与局限" class="headerlink" title="5.6 优势与局限"></a>5.6 优势与局限</h3><p><strong>优势：</strong> 低代码&#x2F;无代码、开箱即用（50+ 内置工具）、快速原型到生产、多模型支持、活跃社区（800+ 贡献者）</p>
+<p><strong>局限：</strong> 自定义灵活性受限（不如代码框架）、执行有步骤&#x2F;时间限制、许可证非纯 Apache 2.0、平台锁定风险、高级推理模式不如专用框架成熟</p>
+<hr>
+<h2 id="六、OpenAI-Agents-SDK"><a href="#六、OpenAI-Agents-SDK" class="headerlink" title="六、OpenAI Agents SDK"></a>六、OpenAI Agents SDK</h2><h3 id="6-1-简介"><a href="#6-1-简介" class="headerlink" title="6.1 简介"></a>6.1 简介</h3><p><strong>OpenAI Agents SDK</strong> 是 OpenAI 官方推出的轻量级多智能体框架，从内部 Swarm 实验项目演化而来。核心理念是<strong>极简设计</strong>——只用 Agent &#x2F; Handoff &#x2F; Guardrail &#x2F; Tool 几个概念构建复杂工作流。</p>
+<table>
+<thead>
+<tr>
+<th>项目信息</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最新版本</td>
+<td>v0.14.6（2026-04-25）</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>安装</td>
+<td><code>pip install openai-agents</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/openai/openai-agents-python">openai&#x2F;openai-agents-python</a></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a target="_blank" rel="noopener" href="https://openai.github.io/openai-agents-python">openai.github.io&#x2F;openai-agents-python</a></td>
+</tr>
+</tbody></table>
+<h3 id="6-2-核心概念"><a href="#6-2-核心概念" class="headerlink" title="6.2 核心概念"></a>6.2 核心概念</h3><ul>
+<li><strong>Agent</strong>：配置了指令、工具、护栏和交接能力的 LLM</li>
+<li><strong>Runner</strong>：Agent 执行器，提供 <code>run()</code>（异步）、<code>run_sync()</code>（同步）、<code>run_streamed()</code>（流式）</li>
+<li><strong>Handoff</strong>：Agent 间的任务委托，被委托者继承完整对话历史</li>
+<li><strong>Guardrails</strong>：安全护栏，分输入护栏、输出护栏、工具护栏三类</li>
+<li><strong>Tools</strong>：支持函数工具、MCP 工具、OpenAI 托管工具、Agent as Tool</li>
+</ul>
+<h3 id="6-3-关键特性"><a href="#6-3-关键特性" class="headerlink" title="6.3 关键特性"></a>6.3 关键特性</h3><ul>
+<li><strong>极简设计</strong>：核心原语少，学习曲线平缓</li>
+<li><strong>Provider 无关</strong>：通过 any-llm &#x2F; LiteLLM 支持 100+ LLM</li>
+<li><strong>三层护栏</strong>：输入 → 输出 → 工具级别的安全校验</li>
+<li><strong>内置追踪（Tracing）</strong>：可视化调试 Agent 运行流程</li>
+<li><strong>Realtime Agents</strong>：支持构建语音 Agent（gpt-realtime-1.5）</li>
+<li><strong>Sandbox Agents</strong>：v0.14.0 新增，在容器环境中执行代码</li>
+<li><strong>结构化输出</strong>：通过 Pydantic Model 定义 output_type</li>
+</ul>
+<h3 id="6-4-代码示例"><a href="#6-4-代码示例" class="headerlink" title="6.4 代码示例"></a>6.4 代码示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> agents <span class="keyword">import</span> Agent, Runner, function_tool</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义工具</span></span><br><span class="line"><span class="meta">@function_tool</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_weather</span>(<span class="params">city: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;获取指定城市的天气信息。&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;The weather in <span class="subst">&#123;city&#125;</span> is sunny.&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义专业 Agent</span></span><br><span class="line">billing_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;Billing Agent&quot;</span>,</span><br><span class="line">    instructions=<span class="string">&quot;你是账单问题专家。&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">refund_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;Refund Agent&quot;</span>,</span><br><span class="line">    instructions=<span class="string">&quot;你是退款问题专家。&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义分流 Agent</span></span><br><span class="line">triage_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;Triage Agent&quot;</span>,</span><br><span class="line">    instructions=<span class="string">&quot;根据用户问题路由到正确的专业 Agent：账单 -&gt; Billing Agent；退款 -&gt; Refund Agent。&quot;</span>,</span><br><span class="line">    handoffs=[billing_agent, refund_agent],</span><br><span class="line">    tools=[get_weather],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    result = <span class="keyword">await</span> Runner.run(</span><br><span class="line">        triage_agent,</span><br><span class="line">        <span class="string">&quot;我的订阅被扣了两次费用，请帮我处理。&quot;</span>,</span><br><span class="line">    )</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;最终回答: <span class="subst">&#123;result.final_output&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;处理 Agent: <span class="subst">&#123;result.last_agent.name&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-5-优势与局限"><a href="#6-5-优势与局限" class="headerlink" title="6.5 优势与局限"></a>6.5 优势与局限</h3><p><strong>优势：</strong> 官方维护、极简设计、Provider 无关、三层护栏、内置追踪、语音 Agent 支持</p>
+<p><strong>局限：</strong> 仍处 0.x 阶段 API 可能变动、深度依赖 OpenAI 生态、不支持并行 Agent 执行、无内置持久化记忆系统</p>
+<hr>
+<h2 id="七、Google-ADK"><a href="#七、Google-ADK" class="headerlink" title="七、Google ADK"></a>七、Google ADK</h2><h3 id="7-1-简介"><a href="#7-1-简介" class="headerlink" title="7.1 简介"></a>7.1 简介</h3><p><strong>Google ADK（Agent Development Kit）</strong> 是 Google 推出的开源、代码优先的 Agent 开发框架。设计理念是让 AI Agent 开发更像传统软件开发，针对 Gemini 和 Google Cloud 优化，但保持模型无关和部署无关。</p>
+<table>
+<thead>
+<tr>
+<th>项目信息</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最新版本</td>
+<td>v1.31.1（2026-04-30）</td>
+</tr>
+<tr>
+<td>许可证</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td>安装</td>
+<td><code>pip install google-adk</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/google/adk-python">google&#x2F;adk-python</a></td>
+</tr>
+<tr>
+<td>文档</td>
+<td><a target="_blank" rel="noopener" href="https://google.github.io/adk-docs/">google.github.io&#x2F;adk-docs</a></td>
+</tr>
+</tbody></table>
+<h3 id="7-2-核心概念"><a href="#7-2-核心概念" class="headerlink" title="7.2 核心概念"></a>7.2 核心概念</h3><ul>
+<li><strong>LlmAgent</strong>（别名 <code>Agent</code>）：核心构建块，组合 LLM 模型 + 指令 + 工具</li>
+<li><strong>SequentialAgent</strong>：按顺序依次执行子 Agent（管道式）</li>
+<li><strong>ParallelAgent</strong>：并发执行多个子 Agent</li>
+<li><strong>LoopAgent</strong>：重复执行子 Agent，支持退出条件</li>
+<li><strong>sub_agents</strong>：通过嵌套构建层级式多 Agent 架构</li>
+</ul>
+<h3 id="7-3-关键特性"><a href="#7-3-关键特性" class="headerlink" title="7.3 关键特性"></a>7.3 关键特性</h3><ul>
+<li><strong>多 Agent 编排</strong>：顺序、并行、循环和 LLM 驱动的动态路由</li>
+<li><strong>内置工具</strong>：Google Search、Vertex AI Search、代码执行器等</li>
+<li><strong>Google 生态集成</strong>：原生 Gemini、Vertex AI Agent Engine、Cloud Run</li>
+<li><strong>灵活部署</strong>：本地、Agent Engine（全托管）、Cloud Run、GKE、Docker</li>
+<li><strong>内置评估</strong>：CLI 工具 <code>adk eval</code> 系统化评估 Agent 性能</li>
+<li><strong>A2A 协议</strong>：支持 Agent-to-Agent 远程通信</li>
+<li><strong>生命周期回调</strong>：<code>before/after_agent</code>、<code>before/after_model</code>、<code>before/after_tool</code> 钩子</li>
+</ul>
+<h3 id="7-4-代码示例"><a href="#7-4-代码示例" class="headerlink" title="7.4 代码示例"></a>7.4 代码示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> google.adk.agents <span class="keyword">import</span> Agent, SequentialAgent</span><br><span class="line"><span class="keyword">from</span> google.adk.runners <span class="keyword">import</span> Runner</span><br><span class="line"><span class="keyword">from</span> google.adk.sessions <span class="keyword">import</span> InMemorySessionService</span><br><span class="line"><span class="keyword">from</span> google.genai <span class="keyword">import</span> types</span><br><span class="line"><span class="keyword">from</span> google.adk.tools <span class="keyword">import</span> google_search</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义天气 Agent</span></span><br><span class="line">weather_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;weather_assistant&quot;</span>,</span><br><span class="line">    model=<span class="string">&quot;gemini-2.5-flash&quot;</span>,</span><br><span class="line">    instruction=<span class="string">&quot;你是一个天气查询助手。使用 Google 搜索查找最新天气信息。&quot;</span>,</span><br><span class="line">    tools=[google_search],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义翻译 Agent</span></span><br><span class="line">translate_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;translate_assistant&quot;</span>,</span><br><span class="line">    model=<span class="string">&quot;gemini-2.5-flash&quot;</span>,</span><br><span class="line">    instruction=<span class="string">&quot;你是一个翻译助手，将内容翻译成中文。&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 组合成顺序工作流</span></span><br><span class="line">pipeline = SequentialAgent(</span><br><span class="line">    name=<span class="string">&quot;WeatherPipeline&quot;</span>,</span><br><span class="line">    sub_agents=[weather_agent, translate_agent],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">session_service = InMemorySessionService()</span><br><span class="line">runner = Runner(agent=pipeline, app_name=<span class="string">&quot;weather_app&quot;</span>, session_service=session_service)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">run_agent</span>(<span class="params">query: <span class="built_in">str</span></span>):</span><br><span class="line">    session = session_service.create_session(</span><br><span class="line">        app_name=<span class="string">&quot;weather_app&quot;</span>, user_id=<span class="string">&quot;user_1&quot;</span>, session_id=<span class="string">&quot;session_1&quot;</span></span><br><span class="line">    )</span><br><span class="line">    content = types.Content(role=<span class="string">&#x27;user&#x27;</span>, parts=[types.Part(text=query)])</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">for</span> event <span class="keyword">in</span> runner.run_async(</span><br><span class="line">        user_id=<span class="string">&quot;user_1&quot;</span>, session_id=<span class="string">&quot;session_1&quot;</span>, new_message=content</span><br><span class="line">    ):</span><br><span class="line">        <span class="keyword">if</span> event.is_final_response() <span class="keyword">and</span> event.content <span class="keyword">and</span> event.content.parts:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Agent 回复: <span class="subst">&#123;event.content.parts[<span class="number">0</span>].text.strip()&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(run_agent(<span class="string">&quot;What&#x27;s the weather in Tokyo today?&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-5-优势与局限"><a href="#7-5-优势与局限" class="headerlink" title="7.5 优势与局限"></a>7.5 优势与局限</h3><p><strong>优势：</strong> 代码优先、强大编排能力（顺序&#x2F;并行&#x2F;循环）、Google 生态深度集成、内置评估、多语言支持（Python&#x2F;Java&#x2F;Go&#x2F;TS）、Apache 2.0 开源</p>
+<p><strong>局限：</strong> 最佳体验需 Gemini 和 Google Cloud、框架较新社区生态初期、高频发布 API 可能变动、中国大陆访问 Google 服务受限</p>
+<hr>
+<h2 id="八、框架选型指南"><a href="#八、框架选型指南" class="headerlink" title="八、框架选型指南"></a>八、框架选型指南</h2><h3 id="按使用场景选择"><a href="#按使用场景选择" class="headerlink" title="按使用场景选择"></a>按使用场景选择</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐框架</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>复杂有状态工作流</strong></td>
+<td>LangGraph</td>
+<td>底层图编排、持久化、时间旅行</td>
+</tr>
+<tr>
+<td><strong>多角色团队协作</strong></td>
+<td>CrewAI</td>
+<td>角色扮演设计、委派机制、记忆系统</td>
+</tr>
+<tr>
+<td><strong>RAG + Agent</strong></td>
+<td>LlamaIndex</td>
+<td>RAG 深度集成、130+ 数据格式、文档解析</td>
+</tr>
+<tr>
+<td><strong>快速原型 &#x2F; 非技术团队</strong></td>
+<td>Dify</td>
+<td>可视化拖拽、低代码、开箱即用</td>
+</tr>
+<tr>
+<td><strong>OpenAI 模型为主</strong></td>
+<td>OpenAI Agents SDK</td>
+<td>官方维护、极简 API、追踪调试</td>
+</tr>
+<tr>
+<td><strong>Google Cloud 部署</strong></td>
+<td>Google ADK</td>
+<td>Gemini 优化、Vertex AI 集成、内置评估</td>
+</tr>
+<tr>
+<td><strong>需要精细控制</strong></td>
+<td>LangGraph &#x2F; Google ADK</td>
+<td>底层 API、回调钩子</td>
+</tr>
+<tr>
+<td><strong>需要生产级护栏</strong></td>
+<td>OpenAI Agents SDK</td>
+<td>三层 Guardrails</td>
+</tr>
+</tbody></table>
+<h3 id="按团队特点选择"><a href="#按团队特点选择" class="headerlink" title="按团队特点选择"></a>按团队特点选择</h3><table>
+<thead>
+<tr>
+<th>团队特点</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全栈开发团队</td>
+<td>LangGraph、Google ADK</td>
+</tr>
+<tr>
+<td>Python 数据科学团队</td>
+<td>CrewAI、LlamaIndex</td>
+</tr>
+<tr>
+<td>产品经理 &#x2F; 运营团队</td>
+<td>Dify</td>
+</tr>
+<tr>
+<td>OpenAI 生态重度用户</td>
+<td>OpenAI Agents SDK</td>
+</tr>
+<tr>
+<td>Google Cloud 用户</td>
+<td>Google ADK</td>
+</tr>
+<tr>
+<td>需要快速验证想法</td>
+<td>Dify、OpenAI Agents SDK</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>注意</strong>：以上框架信息基于 2026 年 4 月的调研，各框架迭代较快，建议使用前查看官方文档获取最新信息。</p>
+</blockquote>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/Framework/" data-i18n-tag="Framework">Framework</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/OpenAI/" data-i18n-tag="OpenAI">OpenAI</a> <a href="/zh-CN/tags/LangGraph/" data-i18n-tag="LangGraph">LangGraph</a> <a href="/zh-CN/tags/CrewAI/" data-i18n-tag="CrewAI">CrewAI</a> <a href="/zh-CN/tags/LlamaIndex/" data-i18n-tag="LlamaIndex">LlamaIndex</a> <a href="/zh-CN/tags/Dify/" data-i18n-tag="Dify">Dify</a> <a href="/zh-CN/tags/Google-ADK/" data-i18n-tag="Google ADK">Google ADK</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

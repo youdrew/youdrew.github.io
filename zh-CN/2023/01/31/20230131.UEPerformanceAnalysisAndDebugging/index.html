@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2023/01/31/20230131.UEPerformanceAnalysisAndDebugging/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="UE 性能分析工具与方案一、代码插桩宏（Code Instrumentation Macros）通过在 C++ 代码中插入统计宏，标记需要测量耗时的代码块。这些数据会被 Unreal Insights 和 stat 命令采集。
+1. 循环计数器宏（Cycle Counter）
+
+
+宏
+用途
+说明
+
+
+
+DECLARE_">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2023/01/31/20230131.UEPerformanceAnalysisAndDebugging/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="UE 性能分析与调试方案">
+    
+    
+        <meta property="og:description" content="UE 性能分析工具与方案一、代码插桩宏（Code Instrumentation Macros）通过在 C++ 代码中插入统计宏，标记需要测量耗时的代码块。这些数据会被 Unreal Insights 和 stat 命令采集。
+1. 循环计数器宏（Cycle Counter）
+
+
+宏
+用途
+说明
+
+
+
+DECLARE_">
+    
+    
+    
+        <meta property="article:published_time" content="2023-01-31T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.536Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="UE 性能分析与调试方案">
+    
+    
+        <meta name="twitter:description" content="UE 性能分析工具与方案一、代码插桩宏（Code Instrumentation Macros）通过在 C++ 代码中插入统计宏，标记需要测量耗时的代码块。这些数据会被 Unreal Insights 和 stat 命令采集。
+1. 循环计数器宏（Cycle Counter）
+
+
+宏
+用途
+说明
+
+
+
+DECLARE_">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2023/01/31/20230131.UEPerformanceAnalysisAndDebugging/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2023/01/31/20230131.UEPerformanceAnalysisAndDebugging/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2023/01/31/20230131.UEPerformanceAnalysisAndDebugging/">
+    
+
+    <!-- Title -->
+    
+    <title>UE 性能分析与调试方案 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2023-01-31-20230131-UEPerformanceAnalysisAndDebugging-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2023/01/31/20230131.UEPerformanceAnalysisAndDebugging/" class="previous" data-title="UE Performance Analysis and Debugging"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2023/01/01/20230101.UnrealVirtualStudioDataControlCenter/" class="next" data-title="Unreal Virtual St..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">UE 性能分析与调试方案</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h2 id="UE-性能分析工具与方案"><a href="#UE-性能分析工具与方案" class="headerlink" title="UE 性能分析工具与方案"></a>UE 性能分析工具与方案</h2><h3 id="一、代码插桩宏（Code-Instrumentation-Macros）"><a href="#一、代码插桩宏（Code-Instrumentation-Macros）" class="headerlink" title="一、代码插桩宏（Code Instrumentation Macros）"></a>一、代码插桩宏（Code Instrumentation Macros）</h3><p>通过在 C++ 代码中插入统计宏，标记需要测量耗时的代码块。这些数据会被 Unreal Insights 和 <code>stat</code> 命令采集。</p>
+<h4 id="1-循环计数器宏（Cycle-Counter）"><a href="#1-循环计数器宏（Cycle-Counter）" class="headerlink" title="1. 循环计数器宏（Cycle Counter）"></a>1. 循环计数器宏（Cycle Counter）</h4><table>
+<thead>
+<tr>
+<th>宏</th>
+<th>用途</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DECLARE_STATS_GROUP(GroupDesc, GroupName, StatType)</code></td>
+<td>声明统计分组</td>
+<td>在 .cpp 顶部声明，将相关统计归类</td>
+</tr>
+<tr>
+<td><code>DECLARE_CYCLE_STAT(StatName, StatId, GroupName)</code></td>
+<td>声明一个循环计数统计</td>
+<td>通常在文件作用域声明</td>
+</tr>
+<tr>
+<td><code>SCOPE_CYCLE_COUNTER(StatId)</code></td>
+<td>测量当前作用域耗时</td>
+<td>作用域结束时自动记录</td>
+</tr>
+<tr>
+<td><code>QUICK_SCOPE_CYCLE_COUNTER(StatId)</code></td>
+<td>快速声明+测量</td>
+<td>无需额外 DECLARE，一行搞定</td>
+</tr>
+<tr>
+<td><code>SCOPED_NAMED_TIMER(Text, Flags)</code></td>
+<td>快速命名计时器</td>
+<td>无需提前声明，直接使用字符串标识</td>
+</tr>
+</tbody></table>
+<p><strong>典型用法：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件顶部声明</span></span><br><span class="line"><span class="built_in">DECLARE_STATS_GROUP</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;MyGame&quot;</span>), STATGROUP_MyGame, STATCAT_Advanced);</span><br><span class="line"><span class="built_in">DECLARE_CYCLE_STAT</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;ProcessAI&quot;</span>), STAT_ProcessAI, STATGROUP_MyGame);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AMyActor::Tick</span><span class="params">(<span class="type">float</span> DeltaTime)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Super::<span class="built_in">Tick</span>(DeltaTime);</span><br><span class="line">    <span class="comment">// 测量整个函数体</span></span><br><span class="line">    <span class="built_in">SCOPE_CYCLE_COUNTER</span>(STAT_ProcessAI);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ... AI 逻辑 ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-快速计时（无需预声明）"><a href="#2-快速计时（无需预声明）" class="headerlink" title="2. 快速计时（无需预声明）"></a>2. 快速计时（无需预声明）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一：QUICK_SCOPE_CYCLE_COUNTER（一步到位）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyFunction</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">QUICK_SCOPE_CYCLE_COUNTER</span>(STAT_MyFunction_LoadData);</span><br><span class="line">    <span class="comment">// ... 加载数据逻辑 ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二：SCOPED_NAMED_TIMER（用字符串标识）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyFunction</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">SCOPED_NAMED_TIMER</span>(<span class="string">&quot;MyFunction_LoadData&quot;</span>, FStatGroup::<span class="built_in">Get_STATGROUP_Threads</span>());</span><br><span class="line">    <span class="comment">// ... 加载数据逻辑 ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-计数统计宏（Counter-Stats）"><a href="#3-计数统计宏（Counter-Stats）" class="headerlink" title="3. 计数统计宏（Counter Stats）"></a>3. 计数统计宏（Counter Stats）</h4><table>
+<thead>
+<tr>
+<th>宏</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DECLARE_DWORD_ACCUMULATOR_STAT(StatName, StatId, GroupName)</code></td>
+<td>声明累计计数器</td>
+</tr>
+<tr>
+<td><code>INC_DWORD_STAT(StatId)</code></td>
+<td>计数器 +1</td>
+</tr>
+<tr>
+<td><code>DEC_DWORD_STAT(StatId)</code></td>
+<td>计数器 -1</td>
+</tr>
+<tr>
+<td><code>SET_DWORD_STAT(StatId, Value)</code></td>
+<td>设置计数器值</td>
+</tr>
+</tbody></table>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">DECLARE_DWORD_ACCUMULATOR_STAT</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;ActiveEnemies&quot;</span>), STAT_ActiveEnemies, STATGROUP_MyGame);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成敌人时</span></span><br><span class="line"><span class="built_in">INC_DWORD_STAT</span>(STAT_ActiveEnemies);</span><br><span class="line"><span class="comment">// 敌人死亡时</span></span><br><span class="line"><span class="built_in">DEC_DWORD_STAT</span>(STAT_ActiveEnemies);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-内存统计宏"><a href="#4-内存统计宏" class="headerlink" title="4. 内存统计宏"></a>4. 内存统计宏</h4><table>
+<thead>
+<tr>
+<th>宏</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DECLARE_MEMORY_STAT(StatName, StatId, GroupName)</code></td>
+<td>声明内存统计</td>
+</tr>
+<tr>
+<td><code>TRACK_OBJECT_STAT(ObjectClass, StatId)</code></td>
+<td>追踪 UObject 内存占用</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="二、Unreal-Insights"><a href="#二、Unreal-Insights" class="headerlink" title="二、Unreal Insights"></a>二、Unreal Insights</h3><p>UE5 官方推出的高性能分析工具，取代旧版 Session Frontend &#x2F; Profiler。</p>
+<h4 id="启动方式"><a href="#启动方式" class="headerlink" title="启动方式"></a>启动方式</h4><ul>
+<li>编辑器菜单：<strong>Tools → Unreal Insights</strong></li>
+<li>命令行启动：<code>UnrealInsights.exe</code></li>
+<li>运行游戏时添加参数：<code>-trace=cpu,gpu,memory,loadtime</code></li>
+</ul>
+<h4 id="核心功能模块"><a href="#核心功能模块" class="headerlink" title="核心功能模块"></a>核心功能模块</h4><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>功能</th>
+<th>查看内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Timing Insights</strong></td>
+<td>CPU&#x2F;GPU 时间线</td>
+<td>帧时间、函数调用耗时、线程活动、任务图（TaskGraph）</td>
+</tr>
+<tr>
+<td><strong>Memory Insights</strong></td>
+<td>内存分配追踪</td>
+<td>内存泄漏、分配热点、对象生命周期</td>
+</tr>
+<tr>
+<td><strong>Networking Insights</strong></td>
+<td>网络分析</td>
+<td>网络包大小、RPC 调用、复制带宽</td>
+</tr>
+<tr>
+<td><strong>Loading Insights</strong></td>
+<td>加载分析</td>
+<td>资源加载耗时、异步加载瓶颈</td>
+</tr>
+</tbody></table>
+<h4 id="Trace-通道（Channels）"><a href="#Trace-通道（Channels）" class="headerlink" title="Trace 通道（Channels）"></a>Trace 通道（Channels）</h4><p>启动时可指定采集哪些通道的数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-trace=cpu,gpu,memory,loadtime,net,frametime</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>通道</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cpu</code></td>
+<td>CPU 计时、线程调度</td>
+</tr>
+<tr>
+<td><code>gpu</code></td>
+<td>GPU 渲染耗时、Draw Call</td>
+</tr>
+<tr>
+<td><code>memory</code></td>
+<td>内存分配&#x2F;释放事件</td>
+</tr>
+<tr>
+<td><code>loadtime</code></td>
+<td>资源加载时间</td>
+</tr>
+<tr>
+<td><code>net</code></td>
+<td>网络复制数据</td>
+</tr>
+<tr>
+<td><code>frametime</code></td>
+<td>帧时间统计</td>
+</tr>
+</tbody></table>
+<h4 id="常用分析场景"><a href="#常用分析场景" class="headerlink" title="常用分析场景"></a>常用分析场景</h4><ol>
+<li><strong>帧时间分析</strong>：Timing Insights → 展开 Game Thread → 找到耗时最长的 SCOPE_CYCLE_COUNTER 标记</li>
+<li><strong>GPU 瓶颈定位</strong>：Timing Insights → GPU 视图 → 查看各 Pass 耗时</li>
+<li><strong>内存泄漏排查</strong>：Memory Insights → 对比两个时间点的内存快照</li>
+<li><strong>加载卡顿</strong>：Loading Insights → 排序找出加载最慢的资源</li>
+</ol>
+<hr>
+<h3 id="三、Stat-命令"><a href="#三、Stat-命令" class="headerlink" title="三、Stat 命令"></a>三、Stat 命令</h3><p>在编辑器或运行时通过控制台（<code>~</code> 键）输入 <code>stat</code> 命令查看实时性能数据。</p>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>stat fps</code></td>
+<td>显示帧率和帧时间</td>
+</tr>
+<tr>
+<td><code>stat unit</code></td>
+<td>显示各线程耗时（Game&#x2F;Draw&#x2F;RHI&#x2F;GPU）</td>
+</tr>
+<tr>
+<td><code>stat unitgraph</code></td>
+<td>以图表形式显示线程耗时</td>
+</tr>
+<tr>
+<td><code>stat scenerendering</code></td>
+<td>场景渲染统计（Draw Call、三角形数、可见物体数）</td>
+</tr>
+<tr>
+<td><code>stat engine</code></td>
+<td>引擎基础统计</td>
+</tr>
+<tr>
+<td><code>stat streaming</code></td>
+<td>资源流式加载统计</td>
+</tr>
+<tr>
+<td><code>stat memory</code></td>
+<td>内存使用概览</td>
+</tr>
+<tr>
+<td><code>stat particles</code></td>
+<td>粒子系统统计</td>
+</tr>
+<tr>
+<td><code>stat physics</code></td>
+<td>物理模拟统计</td>
+</tr>
+<tr>
+<td><code>stat net</code></td>
+<td>网络统计</td>
+</tr>
+<tr>
+<td><code>stat dumphitches</code></td>
+<td>记录卡顿信息到日志</td>
+</tr>
+</tbody></table>
+<h4 id="关键指标解读"><a href="#关键指标解读" class="headerlink" title="关键指标解读"></a>关键指标解读</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">stat unit 输出示例：</span><br><span class="line">  Frame:  33.2 ms   ← 整帧耗时（目标 16.67ms = 60fps）</span><br><span class="line">  Game:   12.1 ms   ← Game Thread（逻辑/AI/动画）</span><br><span class="line">  Draw:    5.3 ms   ← Render Thread（渲染命令准备）</span><br><span class="line">  RHI:     4.1 ms   ← RHI Thread（GPU 指令提交）</span><br><span class="line">  GPU:    18.7 ms   ← GPU 实际渲染耗时</span><br><span class="line"></span><br><span class="line">瓶颈判断：</span><br><span class="line">  - Game 高 → 逻辑代码优化（减少 Tick、优化 AI）</span><br><span class="line">  - Draw 高 → 减少可见物体、LOD、裁剪优化</span><br><span class="line">  - GPU 高 → 材质/光照/后处理优化</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义-Stat-分组"><a href="#自定义-Stat-分组" class="headerlink" title="自定义 Stat 分组"></a>自定义 Stat 分组</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明自定义分组后，可通过 stat MyGroup 在控制台查看</span></span><br><span class="line"><span class="built_in">DECLARE_STATS_GROUP</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;My Game Stats&quot;</span>), STATGROUP_MyGame, STATCAT_Advanced);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Stat-命令进阶"><a href="#Stat-命令进阶" class="headerlink" title="Stat 命令进阶"></a>Stat 命令进阶</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>stat startfile</code></td>
+<td>开始记录统计到文件</td>
+</tr>
+<tr>
+<td><code>stat stopfile</code></td>
+<td>停止记录，生成 .ue4stats 文件，可用 Unreal Insights 打开</td>
+</tr>
+<tr>
+<td><code>stat dumphitches</code></td>
+<td>开启卡顿记录，超过阈值时输出调用栈到日志</td>
+</tr>
+<tr>
+<td><code>t.MaxFPS 60</code></td>
+<td>限制最大帧率</td>
+</tr>
+<tr>
+<td><code>r.VSync 0</code></td>
+<td>关闭垂直同步，测试裸性能</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="四、GPU-分析工具"><a href="#四、GPU-分析工具" class="headerlink" title="四、GPU 分析工具"></a>四、GPU 分析工具</h3><h4 id="1-ProfileGPU（控制台命令）"><a href="#1-ProfileGPU（控制台命令）" class="headerlink" title="1. ProfileGPU（控制台命令）"></a>1. ProfileGPU（控制台命令）</h4><p>输入 <code>ProfileGPU</code> 后，会在 Output Log 中输出当前帧的 GPU Pass 明细：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Scene (18.2ms)</span><br><span class="line">  ├── Base Pass (6.1ms)</span><br><span class="line">  ├── Shadow Pass (3.2ms)</span><br><span class="line">  ├── Lighting (4.8ms)</span><br><span class="line">  ├── Translucency (2.1ms)</span><br><span class="line">  └── Post Process (2.0ms)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-GPU-Visualizer（vis-命令）"><a href="#2-GPU-Visualizer（vis-命令）" class="headerlink" title="2. GPU Visualizer（vis 命令）"></a>2. GPU Visualizer（<code>vis</code> 命令）</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>vis</code></td>
+<td>打开 GPU Visualizer 窗口</td>
+</tr>
+<tr>
+<td><code>ProfileGPU</code></td>
+<td>单帧 GPU Profile</td>
+</tr>
+<tr>
+<td><code>r.ScreenPercentage 50</code></td>
+<td>降低渲染分辨率测试 GPU 负载</td>
+</tr>
+</tbody></table>
+<h4 id="3-RenderDoc-PIX"><a href="#3-RenderDoc-PIX" class="headerlink" title="3. RenderDoc &#x2F; PIX"></a>3. RenderDoc &#x2F; PIX</h4><ul>
+<li><strong>RenderDoc</strong>：通用 GPU 帧分析器，支持 UE5。可逐 Draw Call 检查像素历史、Shader 资源。</li>
+<li><strong>PIX (Windows)</strong>：微软 GPU 分析工具，对 Xbox&#x2F;DirectX 项目友好。</li>
+<li><strong>Xcode GPU Profiler (macOS&#x2F;iOS)</strong>：Metal 平台 GPU 分析。</li>
+</ul>
+<ul>
+<li>这个功能（原本是UE4的）被整合进了 UE5 Unreal Insights 的 GPU 视图中。</li>
+</ul>
+<hr>
+<h3 id="五、内存分析"><a href="#五、内存分析" class="headerlink" title="五、内存分析"></a>五、内存分析</h3><table>
+<thead>
+<tr>
+<th>工具&#x2F;命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>obj list</code></td>
+<td>列出所有 UObject 及其内存占用</td>
+</tr>
+<tr>
+<td><code>obj list class=StaticMesh</code></td>
+<td>列出指定类型的对象</td>
+</tr>
+<tr>
+<td><code>memreport -full</code></td>
+<td>生成完整内存报告</td>
+</tr>
+<tr>
+<td><code>stat memory</code></td>
+<td>实时内存统计</td>
+</tr>
+<tr>
+<td><code>mimalloc</code></td>
+<td>UE5 可选的现代内存分配器（<code>.ini</code> 中配置）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="六、蓝图性能分析"><a href="#六、蓝图性能分析" class="headerlink" title="六、蓝图性能分析"></a>六、蓝图性能分析</h3><ul>
+<li><strong>Blueprint Profiler</strong>：编辑器菜单 <strong>Tools → Blueprint Profiler</strong></li>
+<li>查看蓝图节点执行耗时，定位慢节点</li>
+<li>优化建议：热点蓝图逻辑迁移到 C++</li>
+</ul>
+<hr>
+<h3 id="七、调试技巧"><a href="#七、调试技巧" class="headerlink" title="七、调试技巧"></a>七、调试技巧</h3><h4 id="1-UE-LOG-标记用时"><a href="#1-UE-LOG-标记用时" class="headerlink" title="1. UE_LOG 标记用时"></a>1. UE_LOG 标记用时</h4><p>用日志打印时间戳来测量代码段耗时，适合快速排查：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;disconnect(): waiting for receiveThread %s&quot;</span>), *FDateTime::<span class="built_in">Now</span>().<span class="built_in">ToString</span>());</span><br><span class="line"><span class="built_in">QUICK_SCOPE_CYCLE_COUNTER</span>(STAT_WaitReceive);</span><br><span class="line"><span class="built_in">WaitForSingleObject</span>(receiveThread, INFINITE);</span><br><span class="line"><span class="built_in">UE_LOG</span>(LogTemp, Warning, <span class="built_in">TEXT</span>(<span class="string">&quot;disconnect(): receiveThread finished %s&quot;</span>), *FDateTime::<span class="built_in">Now</span>().<span class="built_in">ToString</span>());</span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Warning  LogTemp  disconnect(): waiting for receiveThread 2025.12.04-16.48.31</span><br><span class="line">Warning  LogTemp  disconnect(): receiveThread finished 2025.12.04-16.48.46</span><br></pre></td></tr></table></figure>
+<p>两个时间戳相减即可得到该段代码的实际耗时（此处约 15 秒）。</p>
+<h4 id="2-关闭局部代码优化"><a href="#2-关闭局部代码优化" class="headerlink" title="2. 关闭局部代码优化"></a>2. 关闭局部代码优化</h4><p>调试时编译器优化会干扰断点和变量观察，可对指定代码段临时关闭优化：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> optimize(<span class="string">&quot;&quot;</span>, off)</span></span><br><span class="line"><span class="comment">// 这里写你想调试的函数/代码</span></span><br><span class="line"><span class="comment">// 优化被关闭，变量不会被优化掉，断点能正常命中</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> optimize(<span class="string">&quot;&quot;</span>, on)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&quot;&quot;</code> 表示使用当前工程设置的优化选项集合</li>
+<li><code>off/on</code> 用来临时关&#x2F;开优化</li>
+<li>只对它之后的代码生效（直到再 <code>on</code> 回去），一般包住某个函数实现</li>
+</ul>
+<h4 id="3-自动化性能测试"><a href="#3-自动化性能测试" class="headerlink" title="3. 自动化性能测试"></a>3. 自动化性能测试</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">IMPLEMENT_SIMPLE_AUTOMATION_TEST</span>(</span><br><span class="line">    FMyPerfTest,</span><br><span class="line">    <span class="string">&quot;Performance.MyGame.StressTest&quot;</span>,</span><br><span class="line">    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">FMyPerfTest::RunTest</span><span class="params">(<span class="type">const</span> FString&amp; Parameters)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">AddCommand</span>(<span class="keyword">new</span> <span class="built_in">FWaitLatentCommand</span>(<span class="number">5.0f</span>));  <span class="comment">// 等待预热</span></span><br><span class="line">    <span class="built_in">AddCommand</span>(<span class="keyword">new</span> <span class="built_in">FMeasureTimeLatentCommand</span>(</span><br><span class="line">        <span class="built_in">TEXT</span>(<span class="string">&quot;StressTest_100Enemies&quot;</span>),</span><br><span class="line">        [<span class="keyword">this</span>]() &#123; <span class="built_in">Spawn100Enemies</span>(); &#125;,</span><br><span class="line">        <span class="number">0.5f</span>  <span class="comment">// 期望耗时阈值</span></span><br><span class="line">    ));</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="八、性能分析流程建议"><a href="#八、性能分析流程建议" class="headerlink" title="八、性能分析流程建议"></a>八、性能分析流程建议</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">1. 定位瓶颈</span><br><span class="line">   stat fps + stat unit → 确认是 CPU 还是 GPU 瓶颈</span><br><span class="line"></span><br><span class="line">2. CPU 瓶颈</span><br><span class="line">   ├─ stat unitgraph → 确认哪个线程慢</span><br><span class="line">   ├─ Unreal Insights Timing → 找到具体函数</span><br><span class="line">   ├─ 检查 Tick、蓝图、GC、物理</span><br><span class="line">   └─ 用 SCOPE_CYCLE_COUNTER 细化测量</span><br><span class="line"></span><br><span class="line">3. GPU 瓶颈</span><br><span class="line">   ├─ ProfileGPU → 看 Pass 分布</span><br><span class="line">   ├─ stat scenerendering → Draw Call / 三角形数</span><br><span class="line">   ├─ GPU Visualizer → 可视化分析</span><br><span class="line">   └─ RenderDoc → 深入单个 Draw Call</span><br><span class="line"></span><br><span class="line">4. 内存问题</span><br><span class="line">   ├─ stat memory → 概览</span><br><span class="line">   ├─ memreport -full → 详细报告</span><br><span class="line">   └─ Unreal Insights Memory Insights → 内存泄漏追踪</span><br><span class="line"></span><br><span class="line">5. 快速调试</span><br><span class="line">   ├─ UE_LOG + 时间戳 → 快速定位耗时</span><br><span class="line">   └─ #pragma optimize(&quot;&quot;, off) → 关闭优化方便断点调试</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/273608458">https://zhuanlan.zhihu.com/p/273608458</a> </p>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/zh-CN/tags/Performance/" data-i18n-tag="Performance">Performance</a> <a href="/zh-CN/tags/Profiling/" data-i18n-tag="Profiling">Profiling</a> <a href="/zh-CN/tags/Debug/" data-i18n-tag="Debug">Debug</a> <a href="/zh-CN/tags/Unreal-Insights/" data-i18n-tag="Unreal Insights">Unreal Insights</a> <a href="/zh-CN/tags/GPU/" data-i18n-tag="GPU">GPU</a> <a href="/zh-CN/tags/C/" data-i18n-tag="C++">C++</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

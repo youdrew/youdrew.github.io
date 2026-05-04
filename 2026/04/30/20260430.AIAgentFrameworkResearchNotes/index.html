@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="AI Agent Framework Research Notes
+Last updated: 2026-04-30
+As AI Agent technology evolves at a rapid pace, new agent development frameworks keep appearing. This">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+        <meta property="og:title" content="AI Agent Framework Research Notes">
+    
+    
+        <meta property="og:description" content="AI Agent Framework Research Notes
+Last updated: 2026-04-30
+As AI Agent technology evolves at a rapid pace, new agent development frameworks keep appearing. This">
+    
+    
+    
+        <meta property="article:published_time" content="2026-04-30T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.535Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="AI Agent Framework Research Notes">
+    
+    
+        <meta name="twitter:description" content="AI Agent Framework Research Notes
+Last updated: 2026-04-30
+As AI Agent technology evolves at a rapid pace, new agent development frameworks keep appearing. This">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/04/30/20260430.AIAgentFrameworkResearchNotes/">
+    
+
+    <!-- Title -->
+    
+    <title>AI Agent Framework Research Notes - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2026-04-30-20260430-AIAgentFrameworkResearchNotes-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2026/05/02/20260502.HoudiniMCPComparison/" class="previous" data-title="Houdini MCP 项目对比评测：capoomgit/houdini-mcp..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2026/04/30/20260430.AIAgentFrameworkResearchNotes/" class="next" data-title="AI Agent 框架调研笔记"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">AI Agent Framework Research Notes</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="AI-Agent-Framework-Research-Notes"><a href="#AI-Agent-Framework-Research-Notes" class="headerlink" title="AI Agent Framework Research Notes"></a>AI Agent Framework Research Notes</h1><blockquote>
+<p>Last updated: 2026-04-30</p>
+<p>As AI Agent technology evolves at a rapid pace, new agent development frameworks keep appearing. This document surveys and compares six of the most widely adopted Agent frameworks available today, helping developers choose the right tool for their use case.</p>
+</blockquote>
+<hr>
+<h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h2><ul>
+<li><a href="#i-framework-overview-comparison">I. Framework Overview Comparison</a></li>
+<li><a href="#ii-langgraph">II. LangGraph</a></li>
+<li><a href="#iii-crewai">III. CrewAI</a></li>
+<li><a href="#iv-llamaindex">IV. LlamaIndex</a></li>
+<li><a href="#v-dify">V. Dify</a></li>
+<li><a href="#vi-openai-agents-sdk">VI. OpenAI Agents SDK</a></li>
+<li><a href="#vii-google-adk">VII. Google ADK</a></li>
+<li><a href="#viii-framework-selection-guide">VIII. Framework Selection Guide</a></li>
+</ul>
+<hr>
+<h2 id="I-Framework-Overview-Comparison"><a href="#I-Framework-Overview-Comparison" class="headerlink" title="I. Framework Overview Comparison"></a>I. Framework Overview Comparison</h2><table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>LangGraph</th>
+<th>CrewAI</th>
+<th>LlamaIndex</th>
+<th>Dify</th>
+<th>OpenAI Agents SDK</th>
+<th>Google ADK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Developer</strong></td>
+<td>LangChain Inc.</td>
+<td>CrewAI Inc.</td>
+<td>LlamaIndex Inc.</td>
+<td>LangGenius</td>
+<td>OpenAI</td>
+<td>Google</td>
+</tr>
+<tr>
+<td><strong>Latest Version</strong></td>
+<td>v1.1.10</td>
+<td>v1.14.3</td>
+<td>v0.14.6</td>
+<td>v1.6.0+</td>
+<td>v0.14.6</td>
+<td>v1.31.1</td>
+</tr>
+<tr>
+<td><strong>License</strong></td>
+<td>MIT</td>
+<td>MIT</td>
+<td>MIT</td>
+<td>Dify License (Apache 2.0+)</td>
+<td>MIT</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td><strong>Language</strong></td>
+<td>Python &#x2F; JS</td>
+<td>Python</td>
+<td>Python &#x2F; TS</td>
+<td>Visual (multi-language SDK)</td>
+<td>Python &#x2F; JS</td>
+<td>Python &#x2F; Java &#x2F; Go &#x2F; TS</td>
+</tr>
+<tr>
+<td><strong>Core Philosophy</strong></td>
+<td>Graph orchestration</td>
+<td>Role-playing teams</td>
+<td>RAG + Agent</td>
+<td>Low-code platform</td>
+<td>Minimal multi-agent</td>
+<td>Code-first</td>
+</tr>
+<tr>
+<td><strong>Model Support</strong></td>
+<td>Model-agnostic</td>
+<td>Model-agnostic</td>
+<td>Model-agnostic</td>
+<td>Model-agnostic</td>
+<td>100+ LLMs</td>
+<td>Model-agnostic</td>
+</tr>
+<tr>
+<td><strong>Learning Curve</strong></td>
+<td>Steep</td>
+<td>Moderate</td>
+<td>Moderate</td>
+<td>Low</td>
+<td>Low</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td><strong>Best For</strong></td>
+<td>Complex stateful workflows</td>
+<td>Multi-role collaboration</td>
+<td>RAG + Agent</td>
+<td>Rapid prototyping &#x2F; non-technical users</td>
+<td>OpenAI ecosystem apps</td>
+<td>Google ecosystem apps</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="II-LangGraph"><a href="#II-LangGraph" class="headerlink" title="II. LangGraph"></a>II. LangGraph</h2><h3 id="2-1-Introduction"><a href="#2-1-Introduction" class="headerlink" title="2.1 Introduction"></a>2.1 Introduction</h3><p><strong>LangGraph</strong> is a <strong>low-level orchestration framework</strong> developed by the LangChain team, specifically designed for building long-running, stateful AI Agents. It draws design inspiration from Google’s Pregel and Apache Beam.</p>
+<p>Core positioning: rather than abstracting away prompts or architecture, LangGraph provides low-level infrastructure that gives developers fine-grained control over agent workflows. It is already used in production by companies such as Klarna, Replit, and Elastic.</p>
+<table>
+<thead>
+<tr>
+<th>Project Info</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latest Version</td>
+<td>v1.1.10 (2026-04-27)</td>
+</tr>
+<tr>
+<td>License</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Install</td>
+<td><code>pip install -U langgraph</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/langchain-ai/langgraph">langchain-ai&#x2F;langgraph</a></td>
+</tr>
+<tr>
+<td>Docs</td>
+<td><a target="_blank" rel="noopener" href="https://docs.langchain.com/oss/python/langgraph">docs.langchain.com&#x2F;oss&#x2F;python&#x2F;langgraph</a></td>
+</tr>
+</tbody></table>
+<h3 id="2-2-Core-Architecture"><a href="#2-2-Core-Architecture" class="headerlink" title="2.2 Core Architecture"></a>2.2 Core Architecture</h3><p>LangGraph models agent workflows as a <strong>Graph</strong>, built from three core components:</p>
+<ul>
+<li><strong>State</strong>: A shared data structure, typically defined using <code>TypedDict</code> or a <code>Pydantic Model</code></li>
+<li><strong>Nodes</strong>: Functions that encode agent logic — they receive the current state and return an updated state</li>
+<li><strong>Edges</strong>: Functions that determine the next node, supporting conditional branching or fixed transitions</li>
+</ul>
+<h3 id="2-3-Key-Features"><a href="#2-3-Key-Features" class="headerlink" title="2.3 Key Features"></a>2.3 Key Features</h3><ul>
+<li><strong>Persistence</strong>: Saves the graph state as a checkpoint after each execution step; supports in-memory, Redis, and other backends</li>
+<li><strong>Human-in-the-Loop</strong>: Uses <code>interrupt()</code> to pause execution and wait for human input before resuming</li>
+<li><strong>Streaming</strong>: Supports multiple streaming modes including values, messages, and updates</li>
+<li><strong>Subgraphs</strong>: Supports nested graphs where subgraphs have their own independent checkpoints and interrupt capabilities</li>
+<li><strong>Time Travel</strong>: Can rewind to any historical checkpoint, with support for forking and replaying</li>
+<li><strong>Visualization</strong>: After compilation, can generate Mermaid diagrams to visualize the workflow structure</li>
+</ul>
+<h3 id="2-4-Code-Example"><a href="#2-4-Code-Example" class="headerlink" title="2.4 Code Example"></a>2.4 Code Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">Literal</span></span><br><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> StateGraph, MessagesState, START, END</span><br><span class="line"><span class="keyword">from</span> langchain.messages <span class="keyword">import</span> SystemMessage, HumanMessage, ToolMessage</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define tools</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multiply</span>(<span class="params">a: <span class="built_in">int</span>, b: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Multiply two numbers.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a * b</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">a: <span class="built_in">int</span>, b: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Add two numbers.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line">tools = [multiply, add]</span><br><span class="line">tools_by_name = &#123;tool.name: tool <span class="keyword">for</span> tool <span class="keyword">in</span> tools&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define nodes</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">llm_call</span>(<span class="params">state: MessagesState</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;LLM decides whether to call a tool&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">&quot;messages&quot;</span>: [</span><br><span class="line">            llm_with_tools.invoke(</span><br><span class="line">                [SystemMessage(content=<span class="string">&quot;You are a helpful arithmetic assistant.&quot;</span>)]</span><br><span class="line">                + state[<span class="string">&quot;messages&quot;</span>]</span><br><span class="line">            )</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tool_node</span>(<span class="params">state: <span class="built_in">dict</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Execute tool calls&quot;&quot;&quot;</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> tool_call <span class="keyword">in</span> state[<span class="string">&quot;messages&quot;</span>][-<span class="number">1</span>].tool_calls:</span><br><span class="line">        tool = tools_by_name[tool_call[<span class="string">&quot;name&quot;</span>]]</span><br><span class="line">        observation = tool.invoke(tool_call[<span class="string">&quot;args&quot;</span>])</span><br><span class="line">        result.append(ToolMessage(content=<span class="built_in">str</span>(observation), tool_call_id=tool_call[<span class="string">&quot;id&quot;</span>]))</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;messages&quot;</span>: result&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define conditional edge routing</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">should_continue</span>(<span class="params">state: MessagesState</span>) -&gt; <span class="type">Literal</span>[<span class="string">&quot;tool_node&quot;</span>, END]:</span><br><span class="line">    last_message = state[<span class="string">&quot;messages&quot;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> last_message.tool_calls:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;tool_node&quot;</span></span><br><span class="line">    <span class="keyword">return</span> END</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build and compile the graph</span></span><br><span class="line">builder = StateGraph(MessagesState)</span><br><span class="line">builder.add_node(<span class="string">&quot;llm_call&quot;</span>, llm_call)</span><br><span class="line">builder.add_node(<span class="string">&quot;tool_node&quot;</span>, tool_node)</span><br><span class="line">builder.add_edge(START, <span class="string">&quot;llm_call&quot;</span>)</span><br><span class="line">builder.add_conditional_edges(<span class="string">&quot;llm_call&quot;</span>, should_continue, [<span class="string">&quot;tool_node&quot;</span>, END])</span><br><span class="line">builder.add_edge(<span class="string">&quot;tool_node&quot;</span>, <span class="string">&quot;llm_call&quot;</span>)</span><br><span class="line"></span><br><span class="line">agent = builder.<span class="built_in">compile</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run</span></span><br><span class="line">result = agent.invoke(&#123;<span class="string">&quot;messages&quot;</span>: [HumanMessage(content=<span class="string">&quot;Add 3 and 4, then multiply by 5.&quot;</span>)]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-Strengths-and-Limitations"><a href="#2-5-Strengths-and-Limitations" class="headerlink" title="2.5 Strengths and Limitations"></a>2.5 Strengths and Limitations</h3><p><strong>Strengths:</strong> Fine-grained control, stateful execution, native human-in-the-loop, fault-tolerant recovery, time-travel debugging, framework-agnostic</p>
+<p><strong>Limitations:</strong> Steep learning curve, lots of boilerplate code, best experience requires the LangSmith ecosystem, fast-moving release cycle</p>
+<hr>
+<h2 id="III-CrewAI"><a href="#III-CrewAI" class="headerlink" title="III. CrewAI"></a>III. CrewAI</h2><h3 id="3-1-Introduction"><a href="#3-1-Introduction" class="headerlink" title="3.1 Introduction"></a>3.1 Introduction</h3><p><strong>CrewAI</strong> is a Python framework for orchestrating multiple autonomous AI Agents, built entirely from scratch with <strong>no dependency on LangChain or any other framework</strong>. Its core idea is to simulate real team collaboration through role-playing.</p>
+<table>
+<thead>
+<tr>
+<th>Project Info</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latest Version</td>
+<td>v1.14.3 (2025-04-24)</td>
+</tr>
+<tr>
+<td>License</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Install</td>
+<td><code>pip install &#39;crewai[tools]&#39;</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/crewAIInc/crewAI">crewAIInc&#x2F;crewAI</a></td>
+</tr>
+<tr>
+<td>Docs</td>
+<td><a target="_blank" rel="noopener" href="https://docs.crewai.com/">docs.crewai.com</a></td>
+</tr>
+</tbody></table>
+<h3 id="3-2-Core-Concepts"><a href="#3-2-Core-Concepts" class="headerlink" title="3.2 Core Concepts"></a>3.2 Core Concepts</h3><ul>
+<li><strong>Agent</strong>: Identity and behavior defined through <code>role</code>, <code>goal</code>, and <code>backstory</code></li>
+<li><strong>Task</strong>: A concrete unit of work; can specify the assigned agent, context dependencies, and output format</li>
+<li><strong>Crew</strong>: A collection of collaborating agents, defining the execution process and memory configuration</li>
+<li><strong>Tools</strong>: A rich set of built-in tools (search, file read&#x2F;write, code execution, etc.) with MCP integration support</li>
+<li><strong>Process</strong>: Either Sequential or Hierarchical (automatically creates a Manager Agent)</li>
+</ul>
+<h3 id="3-3-Key-Features"><a href="#3-3-Key-Features" class="headerlink" title="3.3 Key Features"></a>3.3 Key Features</h3><ul>
+<li><strong>Role-playing design</strong>: Intuitive role definitions that closely mirror real team collaboration</li>
+<li><strong>Collaborative workflows</strong>: Agents can delegate tasks to one another and pass context between them</li>
+<li><strong>Four memory systems</strong>: Short-term memory, long-term memory, entity memory, and contextual memory</li>
+<li><strong>Flows</strong>: Enterprise-grade event-driven workflow orchestration, supporting <code>@start</code>, <code>@listen</code>, and <code>@router</code> decorators</li>
+<li><strong>Checkpoint &amp; Fork</strong>: Supports saving, restoring, and branching execution state</li>
+<li><strong>YAML-driven configuration</strong>: Agents and tasks can be defined via YAML files</li>
+</ul>
+<h3 id="3-4-Code-Example"><a href="#3-4-Code-Example" class="headerlink" title="3.4 Code Example"></a>3.4 Code Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> crewai <span class="keyword">import</span> Agent, Task, Crew, Process</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define Agents</span></span><br><span class="line">researcher = Agent(</span><br><span class="line">    role=<span class="string">&#x27;Senior AI Researcher&#x27;</span>,</span><br><span class="line">    goal=<span class="string">&#x27;Discover the latest development trends in the AI Agent space&#x27;</span>,</span><br><span class="line">    backstory=<span class="string">&#x27;You are an experienced researcher with a knack for spotting cutting-edge technology developments.&#x27;</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    memory=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">writer = Agent(</span><br><span class="line">    role=<span class="string">&#x27;Technical Report Writing Specialist&#x27;</span>,</span><br><span class="line">    goal=<span class="string">&#x27;Transform research findings into clear, well-structured reports&#x27;</span>,</span><br><span class="line">    backstory=<span class="string">&#x27;You are a technical writing expert who excels at turning complex information into readable reports.&#x27;</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    memory=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define Tasks</span></span><br><span class="line">research_task = Task(</span><br><span class="line">    description=<span class="string">&#x27;Conduct comprehensive research on &#123;topic&#125; and gather the latest development trends.&#x27;</span>,</span><br><span class="line">    expected_output=<span class="string">&#x27;A detailed list of research findings with 10 key points&#x27;</span>,</span><br><span class="line">    agent=researcher,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">writing_task = Task(</span><br><span class="line">    description=<span class="string">&#x27;Write a complete technical report based on the research findings.&#x27;</span>,</span><br><span class="line">    expected_output=<span class="string">&#x27;A complete report in Markdown format&#x27;</span>,</span><br><span class="line">    agent=writer,</span><br><span class="line">    context=[research_task],</span><br><span class="line">    output_file=<span class="string">&#x27;report.md&#x27;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Assemble the Crew and run</span></span><br><span class="line">crew = Crew(</span><br><span class="line">    agents=[researcher, writer],</span><br><span class="line">    tasks=[research_task, writing_task],</span><br><span class="line">    process=Process.sequential,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">result = crew.kickoff(inputs=&#123;<span class="string">&#x27;topic&#x27;</span>: <span class="string">&#x27;multi-agent collaboration systems&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-Strengths-and-Limitations"><a href="#3-5-Strengths-and-Limitations" class="headerlink" title="3.5 Strengths and Limitations"></a>3.5 Strengths and Limitations</h3><p><strong>Strengths:</strong> Fully standalone with no external dependencies, intuitive role-playing design, four memory systems, YAML-driven configuration, active community (100,000+ certified developers)</p>
+<p><strong>Limitations:</strong> Python only, high API overhead for multi-agent collaboration, complex to debug, enterprise features require a paid plan</p>
+<hr>
+<h2 id="IV-LlamaIndex"><a href="#IV-LlamaIndex" class="headerlink" title="IV. LlamaIndex"></a>IV. LlamaIndex</h2><h3 id="4-1-Introduction"><a href="#4-1-Introduction" class="headerlink" title="4.1 Introduction"></a>4.1 Introduction</h3><p><strong>LlamaIndex</strong> (formerly GPT Index) is an open-source framework that started out focused on RAG (Retrieval-Augmented Generation) and has since expanded into a <strong>document intelligence and OCR platform</strong>. Founded by Jerry Liu in 2022.</p>
+<table>
+<thead>
+<tr>
+<th>Project Info</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latest Version</td>
+<td>v0.14.6</td>
+</tr>
+<tr>
+<td>License</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Install</td>
+<td><code>pip install llama-index</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/run-llama/llama_index">run-llama&#x2F;llama_index</a></td>
+</tr>
+<tr>
+<td>Docs</td>
+<td><a target="_blank" rel="noopener" href="https://developers.llamaindex.ai/python">developers.llamaindex.ai</a></td>
+</tr>
+</tbody></table>
+<h3 id="4-2-Core-Concepts"><a href="#4-2-Core-Concepts" class="headerlink" title="4.2 Core Concepts"></a>4.2 Core Concepts</h3><ul>
+<li><strong>Workflow</strong>: An event-driven orchestration mechanism where steps are defined using the <code>@step</code> decorator</li>
+<li><strong>Context</strong>: A global runtime context that coordinates data passing between steps and supports persistence</li>
+<li><strong>Event-driven architecture</strong>: <code>StartEvent</code> → custom events → <code>StopEvent</code>, forming a directed graph</li>
+<li><strong>AgentWorkflow</strong>: A high-level abstraction that automatically selects the appropriate agent type based on LLM capabilities</li>
+</ul>
+<h3 id="4-3-Agent-Types"><a href="#4-3-Agent-Types" class="headerlink" title="4.3 Agent Types"></a>4.3 Agent Types</h3><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use Case</th>
+<th>Characteristics</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>FunctionAgent</strong></td>
+<td>When the LLM supports function calling</td>
+<td>Uses native function calling directly — most efficient</td>
+</tr>
+<tr>
+<td><strong>ReActAgent</strong></td>
+<td>When the LLM does not support function calling</td>
+<td>Executes via the ReAct (Reasoning + Acting) loop</td>
+</tr>
+<tr>
+<td><strong>CodeActAgent</strong></td>
+<td>Scenarios that require code execution</td>
+<td>Generates and executes code via <code>&lt;execute&gt;</code> tags</td>
+</tr>
+</tbody></table>
+<h3 id="4-4-Key-Features"><a href="#4-4-Key-Features" class="headerlink" title="4.4 Key Features"></a>4.4 Key Features</h3><ul>
+<li><strong>RAG + Agent integration</strong>: RAG is a first-class capability, not an add-on; supports 130+ data formats</li>
+<li><strong>Multi-agent collaboration</strong>: Native support for multi-agent handoff mechanisms</li>
+<li><strong>Context persistence</strong>: Workflow state can be serialized and restored, suitable for production environments</li>
+<li><strong>LlamaParse</strong>: Enterprise-grade document parsing and OCR</li>
+<li><strong>300+ integration packages</strong>: Covers mainstream LLMs, vector databases, and data sources</li>
+</ul>
+<h3 id="4-5-Code-Example"><a href="#4-5-Code-Example" class="headerlink" title="4.5 Code Example"></a>4.5 Code Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> llama_index.core <span class="keyword">import</span> VectorStoreIndex, SimpleDirectoryReader</span><br><span class="line"><span class="keyword">from</span> llama_index.core.agent.workflow <span class="keyword">import</span> FunctionAgent</span><br><span class="line"><span class="keyword">from</span> llama_index.llms.openai <span class="keyword">import</span> OpenAI</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build a RAG index</span></span><br><span class="line">documents = SimpleDirectoryReader(<span class="string">&quot;data&quot;</span>).load_data()</span><br><span class="line">index = VectorStoreIndex.from_documents(documents)</span><br><span class="line">query_engine = index.as_query_engine()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define tools</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">multiply</span>(<span class="params">a: <span class="built_in">float</span>, b: <span class="built_in">float</span></span>) -&gt; <span class="built_in">float</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Multiply two numbers.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a * b</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">search_documents</span>(<span class="params">query: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Search documents for answers.&quot;&quot;&quot;</span></span><br><span class="line">    response = <span class="keyword">await</span> query_engine.aquery(query)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(response)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the agent</span></span><br><span class="line">agent = FunctionAgent(</span><br><span class="line">    tools=[multiply, search_documents],</span><br><span class="line">    llm=OpenAI(model=<span class="string">&quot;gpt-4o-mini&quot;</span>),</span><br><span class="line">    system_prompt=<span class="string">&quot;You are a helpful assistant that can calculate and search documents.&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    response = <span class="keyword">await</span> agent.run(<span class="string">&quot;What did the author do in college? Also, what&#x27;s 7 * 8?&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(response)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-6-Strengths-and-Limitations"><a href="#4-6-Strengths-and-Limitations" class="headerlink" title="4.6 Strengths and Limitations"></a>4.6 Strengths and Limitations</h3><p><strong>Strengths:</strong> Deep RAG + Agent integration, flexible event-driven architecture, 300+ ecosystem integrations, multi-agent support, LlamaParse enterprise-grade parsing</p>
+<p><strong>Limitations:</strong> Steep learning curve, relatively heavy framework, TypeScript version has incomplete feature coverage, fast release cycle with frequent breaking changes, enterprise features require a paid plan</p>
+<hr>
+<h2 id="V-Dify"><a href="#V-Dify" class="headerlink" title="V. Dify"></a>V. Dify</h2><h3 id="5-1-Introduction"><a href="#5-1-Introduction" class="headerlink" title="5.1 Introduction"></a>5.1 Introduction</h3><p><strong>Dify</strong> (Do It For You) is an open-source LLM application development platform positioned as an <strong>agentic workflow builder</strong>. It combines Backend-as-a-Service with LLMOps, enabling both non-technical users and developers to rapidly build AI applications.</p>
+<table>
+<thead>
+<tr>
+<th>Project Info</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latest Version</td>
+<td>v1.6.0+</td>
+</tr>
+<tr>
+<td>License</td>
+<td>Dify Open Source License (Apache 2.0+)</td>
+</tr>
+<tr>
+<td>Deploy</td>
+<td><code>docker compose up -d</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/langgenius/dify">langgenius&#x2F;dify</a></td>
+</tr>
+<tr>
+<td>Docs</td>
+<td><a target="_blank" rel="noopener" href="https://docs.dify.ai/en/use-dify/getting-started/introduction">docs.dify.ai</a></td>
+</tr>
+</tbody></table>
+<h3 id="5-2-Core-Features"><a href="#5-2-Core-Features" class="headerlink" title="5.2 Core Features"></a>5.2 Core Features</h3><ul>
+<li><strong>Visual workflow builder</strong>: Drag-and-drop canvas supporting parallel processing, conditional branching, and loop nodes</li>
+<li><strong>Agent strategies</strong>: Supports Function Calling, ReAct, and custom strategy plugins</li>
+<li><strong>RAG pipeline</strong>: A complete data source → processing → knowledge base → retrieval flow</li>
+<li><strong>Model management</strong>: Seamless integration with hundreds of LLMs, with model switching and performance comparison</li>
+<li><strong>Prompt IDE</strong>: An intuitive prompt authoring interface</li>
+<li><strong>LLMOps</strong>: Monitor and analyze application logs and performance</li>
+</ul>
+<h3 id="5-3-Agent-Strategies"><a href="#5-3-Agent-Strategies" class="headerlink" title="5.3 Agent Strategies"></a>5.3 Agent Strategies</h3><table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Function Calling</strong></td>
+<td>Models with native tool calling support (e.g., GPT-4, Claude)</td>
+</tr>
+<tr>
+<td><strong>ReAct</strong></td>
+<td>Models without native function calling, or when explicit reasoning traces are needed</td>
+</tr>
+<tr>
+<td><strong>Custom Strategy Plugin</strong></td>
+<td>Complex behaviors requiring multi-turn tool calls, etc.</td>
+</tr>
+</tbody></table>
+<h3 id="5-4-How-to-Create-an-Agent"><a href="#5-4-How-to-Create-an-Agent" class="headerlink" title="5.4 How to Create an Agent"></a>5.4 How to Create an Agent</h3><p>Dify uses a visual &#x2F; no-code approach:</p>
+<ol>
+<li>Create an “Agent” type application in Dify Studio</li>
+<li>Select an LLM model</li>
+<li>Set the Agent strategy (automatically detects Function Calling support)</li>
+<li>Choose from 50+ built-in tools or add custom tools</li>
+<li>Write a system prompt</li>
+<li>Preview and debug, then publish with one click</li>
+</ol>
+<h3 id="5-5-Integration-Capabilities"><a href="#5-5-Integration-Capabilities" class="headerlink" title="5.5 Integration Capabilities"></a>5.5 Integration Capabilities</h3><ul>
+<li><strong>API</strong>: Full RESTful API with SSE streaming support</li>
+<li><strong>SDK</strong>: Node.js, PHP, and Java clients</li>
+<li><strong>Plugin system</strong>: Six plugin categories — models, tools, agent strategies, extensions, data sources, and triggers</li>
+<li><strong>MCP integration</strong>: Native support for the Model Context Protocol</li>
+<li><strong>Deployment</strong>: Docker Compose, Kubernetes, Terraform, AWS CDK</li>
+</ul>
+<h3 id="5-6-Strengths-and-Limitations"><a href="#5-6-Strengths-and-Limitations" class="headerlink" title="5.6 Strengths and Limitations"></a>5.6 Strengths and Limitations</h3><p><strong>Strengths:</strong> Low-code &#x2F; no-code, ready out of the box (50+ built-in tools), rapid path from prototype to production, multi-model support, active community (800+ contributors)</p>
+<p><strong>Limitations:</strong> Limited customization flexibility (less than code-first frameworks), execution subject to step&#x2F;time limits, license is not pure Apache 2.0, risk of platform lock-in, advanced reasoning modes are less mature than dedicated frameworks</p>
+<hr>
+<h2 id="VI-OpenAI-Agents-SDK"><a href="#VI-OpenAI-Agents-SDK" class="headerlink" title="VI. OpenAI Agents SDK"></a>VI. OpenAI Agents SDK</h2><h3 id="6-1-Introduction"><a href="#6-1-Introduction" class="headerlink" title="6.1 Introduction"></a>6.1 Introduction</h3><p><strong>OpenAI Agents SDK</strong> is a lightweight multi-agent framework officially released by OpenAI, evolved from the internal Swarm experimental project. Its core philosophy is <strong>minimalist design</strong> — building complex workflows from just a few concepts: Agent, Handoff, Guardrail, and Tool.</p>
+<table>
+<thead>
+<tr>
+<th>Project Info</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latest Version</td>
+<td>v0.14.6 (2026-04-25)</td>
+</tr>
+<tr>
+<td>License</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Install</td>
+<td><code>pip install openai-agents</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/openai/openai-agents-python">openai&#x2F;openai-agents-python</a></td>
+</tr>
+<tr>
+<td>Docs</td>
+<td><a target="_blank" rel="noopener" href="https://openai.github.io/openai-agents-python">openai.github.io&#x2F;openai-agents-python</a></td>
+</tr>
+</tbody></table>
+<h3 id="6-2-Core-Concepts"><a href="#6-2-Core-Concepts" class="headerlink" title="6.2 Core Concepts"></a>6.2 Core Concepts</h3><ul>
+<li><strong>Agent</strong>: An LLM configured with instructions, tools, guardrails, and handoff capabilities</li>
+<li><strong>Runner</strong>: The agent executor, providing <code>run()</code> (async), <code>run_sync()</code> (synchronous), and <code>run_streamed()</code> (streaming)</li>
+<li><strong>Handoff</strong>: Task delegation between agents; the receiving agent inherits the full conversation history</li>
+<li><strong>Guardrails</strong>: Safety rails in three categories — input guardrails, output guardrails, and tool guardrails</li>
+<li><strong>Tools</strong>: Supports function tools, MCP tools, OpenAI hosted tools, and Agent as Tool</li>
+</ul>
+<h3 id="6-3-Key-Features"><a href="#6-3-Key-Features" class="headerlink" title="6.3 Key Features"></a>6.3 Key Features</h3><ul>
+<li><strong>Minimalist design</strong>: Few core primitives, gentle learning curve</li>
+<li><strong>Provider-agnostic</strong>: Supports 100+ LLMs via any-llm &#x2F; LiteLLM</li>
+<li><strong>Three-layer guardrails</strong>: Safety validation at the input → output → tool level</li>
+<li><strong>Built-in Tracing</strong>: Visualize and debug agent execution flows</li>
+<li><strong>Realtime Agents</strong>: Build voice agents (gpt-realtime-1.5)</li>
+<li><strong>Sandbox Agents</strong>: Added in v0.14.0 — executes code in a containerized environment</li>
+<li><strong>Structured output</strong>: Define output types via Pydantic Model using <code>output_type</code></li>
+</ul>
+<h3 id="6-4-Code-Example"><a href="#6-4-Code-Example" class="headerlink" title="6.4 Code Example"></a>6.4 Code Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> agents <span class="keyword">import</span> Agent, Runner, function_tool</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define a tool</span></span><br><span class="line"><span class="meta">@function_tool</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_weather</span>(<span class="params">city: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Get the weather for a specified city.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;The weather in <span class="subst">&#123;city&#125;</span> is sunny.&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define specialist Agents</span></span><br><span class="line">billing_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;Billing Agent&quot;</span>,</span><br><span class="line">    instructions=<span class="string">&quot;You are a billing specialist.&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">refund_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;Refund Agent&quot;</span>,</span><br><span class="line">    instructions=<span class="string">&quot;You are a refund specialist.&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define a triage Agent</span></span><br><span class="line">triage_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;Triage Agent&quot;</span>,</span><br><span class="line">    instructions=<span class="string">&quot;Route the user&#x27;s question to the correct specialist Agent: billing issues -&gt; Billing Agent; refund issues -&gt; Refund Agent.&quot;</span>,</span><br><span class="line">    handoffs=[billing_agent, refund_agent],</span><br><span class="line">    tools=[get_weather],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    result = <span class="keyword">await</span> Runner.run(</span><br><span class="line">        triage_agent,</span><br><span class="line">        <span class="string">&quot;I was charged twice for my subscription. Please help me resolve this.&quot;</span>,</span><br><span class="line">    )</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Final answer: <span class="subst">&#123;result.final_output&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Handled by Agent: <span class="subst">&#123;result.last_agent.name&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-5-Strengths-and-Limitations"><a href="#6-5-Strengths-and-Limitations" class="headerlink" title="6.5 Strengths and Limitations"></a>6.5 Strengths and Limitations</h3><p><strong>Strengths:</strong> Officially maintained, minimalist design, provider-agnostic, three-layer guardrails, built-in tracing, voice agent support</p>
+<p><strong>Limitations:</strong> Still at 0.x — API may change, deep dependency on the OpenAI ecosystem, no parallel agent execution support, no built-in persistent memory system</p>
+<hr>
+<h2 id="VII-Google-ADK"><a href="#VII-Google-ADK" class="headerlink" title="VII. Google ADK"></a>VII. Google ADK</h2><h3 id="7-1-Introduction"><a href="#7-1-Introduction" class="headerlink" title="7.1 Introduction"></a>7.1 Introduction</h3><p><strong>Google ADK (Agent Development Kit)</strong> is an open-source, code-first agent development framework released by Google. Its design philosophy is to make AI agent development feel like traditional software development. It is optimized for Gemini and Google Cloud, while remaining model-agnostic and deployment-agnostic.</p>
+<table>
+<thead>
+<tr>
+<th>Project Info</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Latest Version</td>
+<td>v1.31.1 (2026-04-30)</td>
+</tr>
+<tr>
+<td>License</td>
+<td>Apache 2.0</td>
+</tr>
+<tr>
+<td>Install</td>
+<td><code>pip install google-adk</code></td>
+</tr>
+<tr>
+<td>GitHub</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/google/adk-python">google&#x2F;adk-python</a></td>
+</tr>
+<tr>
+<td>Docs</td>
+<td><a target="_blank" rel="noopener" href="https://google.github.io/adk-docs/">google.github.io&#x2F;adk-docs</a></td>
+</tr>
+</tbody></table>
+<h3 id="7-2-Core-Concepts"><a href="#7-2-Core-Concepts" class="headerlink" title="7.2 Core Concepts"></a>7.2 Core Concepts</h3><ul>
+<li><strong>LlmAgent</strong> (alias <code>Agent</code>): The core building block — combines an LLM model, instructions, and tools</li>
+<li><strong>SequentialAgent</strong>: Executes sub-agents one after another in order (pipeline style)</li>
+<li><strong>ParallelAgent</strong>: Runs multiple sub-agents concurrently</li>
+<li><strong>LoopAgent</strong>: Repeatedly executes sub-agents with support for exit conditions</li>
+<li><strong>sub_agents</strong>: Nesting sub-agents to build hierarchical multi-agent architectures</li>
+</ul>
+<h3 id="7-3-Key-Features"><a href="#7-3-Key-Features" class="headerlink" title="7.3 Key Features"></a>7.3 Key Features</h3><ul>
+<li><strong>Multi-agent orchestration</strong>: Sequential, parallel, loop-based, and LLM-driven dynamic routing</li>
+<li><strong>Built-in tools</strong>: Google Search, Vertex AI Search, code executor, and more</li>
+<li><strong>Google ecosystem integration</strong>: Native Gemini, Vertex AI Agent Engine, Cloud Run</li>
+<li><strong>Flexible deployment</strong>: Local, Agent Engine (fully managed), Cloud Run, GKE, Docker</li>
+<li><strong>Built-in evaluation</strong>: CLI tool <code>adk eval</code> for systematic agent performance assessment</li>
+<li><strong>A2A protocol</strong>: Supports Agent-to-Agent remote communication</li>
+<li><strong>Lifecycle callbacks</strong>: <code>before/after_agent</code>, <code>before/after_model</code>, and <code>before/after_tool</code> hooks</li>
+</ul>
+<h3 id="7-4-Code-Example"><a href="#7-4-Code-Example" class="headerlink" title="7.4 Code Example"></a>7.4 Code Example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">from</span> google.adk.agents <span class="keyword">import</span> Agent, SequentialAgent</span><br><span class="line"><span class="keyword">from</span> google.adk.runners <span class="keyword">import</span> Runner</span><br><span class="line"><span class="keyword">from</span> google.adk.sessions <span class="keyword">import</span> InMemorySessionService</span><br><span class="line"><span class="keyword">from</span> google.genai <span class="keyword">import</span> types</span><br><span class="line"><span class="keyword">from</span> google.adk.tools <span class="keyword">import</span> google_search</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define a weather Agent</span></span><br><span class="line">weather_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;weather_assistant&quot;</span>,</span><br><span class="line">    model=<span class="string">&quot;gemini-2.5-flash&quot;</span>,</span><br><span class="line">    instruction=<span class="string">&quot;You are a weather query assistant. Use Google Search to find the latest weather information.&quot;</span>,</span><br><span class="line">    tools=[google_search],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define a translation Agent</span></span><br><span class="line">translate_agent = Agent(</span><br><span class="line">    name=<span class="string">&quot;translate_assistant&quot;</span>,</span><br><span class="line">    model=<span class="string">&quot;gemini-2.5-flash&quot;</span>,</span><br><span class="line">    instruction=<span class="string">&quot;You are a translation assistant. Translate content into Chinese.&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compose into a sequential workflow</span></span><br><span class="line">pipeline = SequentialAgent(</span><br><span class="line">    name=<span class="string">&quot;WeatherPipeline&quot;</span>,</span><br><span class="line">    sub_agents=[weather_agent, translate_agent],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run</span></span><br><span class="line">session_service = InMemorySessionService()</span><br><span class="line">runner = Runner(agent=pipeline, app_name=<span class="string">&quot;weather_app&quot;</span>, session_service=session_service)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">run_agent</span>(<span class="params">query: <span class="built_in">str</span></span>):</span><br><span class="line">    session = session_service.create_session(</span><br><span class="line">        app_name=<span class="string">&quot;weather_app&quot;</span>, user_id=<span class="string">&quot;user_1&quot;</span>, session_id=<span class="string">&quot;session_1&quot;</span></span><br><span class="line">    )</span><br><span class="line">    content = types.Content(role=<span class="string">&#x27;user&#x27;</span>, parts=[types.Part(text=query)])</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">for</span> event <span class="keyword">in</span> runner.run_async(</span><br><span class="line">        user_id=<span class="string">&quot;user_1&quot;</span>, session_id=<span class="string">&quot;session_1&quot;</span>, new_message=content</span><br><span class="line">    ):</span><br><span class="line">        <span class="keyword">if</span> event.is_final_response() <span class="keyword">and</span> event.content <span class="keyword">and</span> event.content.parts:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Agent reply: <span class="subst">&#123;event.content.parts[<span class="number">0</span>].text.strip()&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(run_agent(<span class="string">&quot;What&#x27;s the weather in Tokyo today?&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-5-Strengths-and-Limitations"><a href="#7-5-Strengths-and-Limitations" class="headerlink" title="7.5 Strengths and Limitations"></a>7.5 Strengths and Limitations</h3><p><strong>Strengths:</strong> Code-first, powerful orchestration (sequential &#x2F; parallel &#x2F; loop), deep Google ecosystem integration, built-in evaluation, multi-language support (Python &#x2F; Java &#x2F; Go &#x2F; TS), Apache 2.0 open source</p>
+<p><strong>Limitations:</strong> Best experience requires Gemini and Google Cloud, relatively new framework with an early-stage community ecosystem, frequent releases mean the API may change, access to Google services is restricted from mainland China</p>
+<hr>
+<h2 id="VIII-Framework-Selection-Guide"><a href="#VIII-Framework-Selection-Guide" class="headerlink" title="VIII. Framework Selection Guide"></a>VIII. Framework Selection Guide</h2><h3 id="Choose-by-Use-Case"><a href="#Choose-by-Use-Case" class="headerlink" title="Choose by Use Case"></a>Choose by Use Case</h3><table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Recommended Framework</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Complex stateful workflows</strong></td>
+<td>LangGraph</td>
+<td>Low-level graph orchestration, persistence, time travel</td>
+</tr>
+<tr>
+<td><strong>Multi-role team collaboration</strong></td>
+<td>CrewAI</td>
+<td>Role-playing design, delegation mechanism, memory systems</td>
+</tr>
+<tr>
+<td><strong>RAG + Agent</strong></td>
+<td>LlamaIndex</td>
+<td>Deep RAG integration, 130+ data formats, document parsing</td>
+</tr>
+<tr>
+<td><strong>Rapid prototyping &#x2F; non-technical teams</strong></td>
+<td>Dify</td>
+<td>Visual drag-and-drop, low-code, ready out of the box</td>
+</tr>
+<tr>
+<td><strong>Primarily OpenAI models</strong></td>
+<td>OpenAI Agents SDK</td>
+<td>Officially maintained, minimal API, tracing and debugging</td>
+</tr>
+<tr>
+<td><strong>Google Cloud deployment</strong></td>
+<td>Google ADK</td>
+<td>Gemini-optimized, Vertex AI integration, built-in evaluation</td>
+</tr>
+<tr>
+<td><strong>Need fine-grained control</strong></td>
+<td>LangGraph &#x2F; Google ADK</td>
+<td>Low-level APIs, lifecycle callback hooks</td>
+</tr>
+<tr>
+<td><strong>Need production-grade guardrails</strong></td>
+<td>OpenAI Agents SDK</td>
+<td>Three-layer Guardrails</td>
+</tr>
+</tbody></table>
+<h3 id="Choose-by-Team-Profile"><a href="#Choose-by-Team-Profile" class="headerlink" title="Choose by Team Profile"></a>Choose by Team Profile</h3><table>
+<thead>
+<tr>
+<th>Team Profile</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Full-stack development teams</td>
+<td>LangGraph, Google ADK</td>
+</tr>
+<tr>
+<td>Python data science teams</td>
+<td>CrewAI, LlamaIndex</td>
+</tr>
+<tr>
+<td>Product managers &#x2F; operations teams</td>
+<td>Dify</td>
+</tr>
+<tr>
+<td>Heavy OpenAI ecosystem users</td>
+<td>OpenAI Agents SDK</td>
+</tr>
+<tr>
+<td>Google Cloud users</td>
+<td>Google ADK</td>
+</tr>
+<tr>
+<td>Need to validate ideas quickly</td>
+<td>Dify, OpenAI Agents SDK</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Note</strong>: The framework information above is based on research conducted in April 2026. All frameworks iterate quickly — check the official documentation for the latest information before getting started.</p>
+</blockquote>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/Framework/" data-i18n-tag="Framework">Framework</a> <a href="/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/tags/OpenAI/" data-i18n-tag="OpenAI">OpenAI</a> <a href="/tags/LangGraph/" data-i18n-tag="LangGraph">LangGraph</a> <a href="/tags/CrewAI/" data-i18n-tag="CrewAI">CrewAI</a> <a href="/tags/LlamaIndex/" data-i18n-tag="LlamaIndex">LlamaIndex</a> <a href="/tags/Dify/" data-i18n-tag="Dify">Dify</a> <a href="/tags/Google-ADK/" data-i18n-tag="Google ADK">Google ADK</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

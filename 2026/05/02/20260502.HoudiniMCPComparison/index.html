@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/2026/05/02/20260502.HoudiniMCPComparison/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="Houdini MCP Project Comparison: capoomgit&amp;#x2F;houdini-mcp vs healkeiser&amp;#x2F;fxhoudinimcpIntroductionAs the MCP (Model Context Protocol) standard gains tractio">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/2026/05/02/20260502.HoudiniMCPComparison/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+        <meta property="og:title" content="Houdini MCP Project Comparison: capoomgit/houdini-mcp vs healkeiser/fxhoudinimcp">
+    
+    
+        <meta property="og:description" content="Houdini MCP Project Comparison: capoomgit&amp;#x2F;houdini-mcp vs healkeiser&amp;#x2F;fxhoudinimcpIntroductionAs the MCP (Model Context Protocol) standard gains tractio">
+    
+    
+    
+        <meta property="article:published_time" content="2026-05-02T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.535Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="Houdini MCP Project Comparison: capoomgit/houdini-mcp vs healkeiser/fxhoudinimcp">
+    
+    
+        <meta name="twitter:description" content="Houdini MCP Project Comparison: capoomgit&amp;#x2F;houdini-mcp vs healkeiser&amp;#x2F;fxhoudinimcpIntroductionAs the MCP (Model Context Protocol) standard gains tractio">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/05/02/20260502.HoudiniMCPComparison/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/05/02/20260502.HoudiniMCPComparison/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/05/02/20260502.HoudiniMCPComparison/">
+    
+
+    <!-- Title -->
+    
+    <title>Houdini MCP Project Comparison: capoomgit/houdini-mcp vs healkeiser/fxhoudinimcp - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2026-05-02-20260502-HoudiniMCPComparison-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/05/04/20250801.UEConceptScrapbox/" class="previous" data-title="Untitled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2026/05/02/20260502.HoudiniMCPComparison/" class="next" data-title="Houdini MCP 项目对比评..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Houdini MCP Project Comparison: capoomgit/houdini-mcp vs healkeiser/fxhoudinimcp</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="Houdini-MCP-Project-Comparison-capoomgit-houdini-mcp-vs-healkeiser-fxhoudinimcp"><a href="#Houdini-MCP-Project-Comparison-capoomgit-houdini-mcp-vs-healkeiser-fxhoudinimcp" class="headerlink" title="Houdini MCP Project Comparison: capoomgit&#x2F;houdini-mcp vs healkeiser&#x2F;fxhoudinimcp"></a>Houdini MCP Project Comparison: capoomgit&#x2F;houdini-mcp vs healkeiser&#x2F;fxhoudinimcp</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>As the MCP (Model Context Protocol) standard gains traction, more and more DCC applications are adding AI assistant integrations. In the Houdini ecosystem, two major open-source MCP projects currently exist:</p>
+<ol>
+<li><strong><a target="_blank" rel="noopener" href="https://github.com/capoomgit/houdini-mcp">capoomgit&#x2F;houdini-mcp</a></strong> — an early-stage project with a clean, minimal structure</li>
+<li><strong><a target="_blank" rel="noopener" href="https://github.com/healkeiser/fxhoudinimcp">healkeiser&#x2F;fxhoudinimcp</a></strong> — a newer, more feature-complete implementation</li>
+</ol>
+<p>This post compares the two across architecture design, feature coverage, installation experience, and extensibility to help you pick the right one for your workflow.</p>
+<hr>
+<h2 id="Overview-Comparison"><a href="#Overview-Comparison" class="headerlink" title="Overview Comparison"></a>Overview Comparison</h2><table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>houdini-mcp (capoomgit)</th>
+<th>fxhoudinimcp (healkeiser)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Focus</td>
+<td>Lightweight MCP bridge</td>
+<td>Full-featured Houdini MCP server</td>
+</tr>
+<tr>
+<td>Tool count</td>
+<td>Unspecified; covers basic operations</td>
+<td><strong>168 tools</strong> + 8 resources + 6 workflow prompts</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>Custom TCP socket (port 9876)</td>
+<td>Houdini’s built-in <code>hwebserver</code> (port 8100)</td>
+</tr>
+<tr>
+<td>Installation</td>
+<td>Manual file copy to Houdini directory</td>
+<td>PyPI package, <code>pip install fxhoudinimcp</code></td>
+</tr>
+<tr>
+<td>Package manager dependency</td>
+<td>Requires <code>uv</code></td>
+<td>Standard <code>pip</code> works fine</td>
+</tr>
+<tr>
+<td>Thread safety</td>
+<td>Not explicitly addressed</td>
+<td><code>hdefereval.executeInMainThreadWithResult()</code></td>
+</tr>
+<tr>
+<td>License</td>
+<td>Not specified</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td>Maintenance status</td>
+<td>Community-maintained</td>
+<td>Actively developed</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Architecture-Comparison"><a href="#Architecture-Comparison" class="headerlink" title="Architecture Comparison"></a>Architecture Comparison</h2><h3 id="houdini-mcp-capoomgit"><a href="#houdini-mcp-capoomgit" class="headerlink" title="houdini-mcp (capoomgit)"></a>houdini-mcp (capoomgit)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Claude Desktop  ──(stdio)──&gt;  MCP Bridge Script  ──(TCP :9876)──&gt;  Houdini Plugin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Communication</strong>: The MCP Bridge Script talks to Claude via stdin&#x2F;stdout and to Houdini via a custom TCP socket.</li>
+<li><strong>Server side</strong>: A hand-rolled <code>HoudiniMCPServer</code> listening on <code>localhost:9876</code>.</li>
+<li><strong>Inspired by</strong>: Adapted from <a target="_blank" rel="noopener" href="https://github.com/ahujasid/blender-mcp">blender-mcp</a>.</li>
+</ul>
+<h3 id="fxhoudinimcp-healkeiser"><a href="#fxhoudinimcp-healkeiser" class="headerlink" title="fxhoudinimcp (healkeiser)"></a>fxhoudinimcp (healkeiser)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Claude Desktop / Cursor / Claude Code  ──(stdio/streamable-http)──&gt;  FXHoudini MCP Server  ──(HTTP :8100)──&gt;  Houdini hwebserver</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Communication</strong>: The MCP Server talks to AI clients via stdio or streamable-http, and talks to Houdini via HTTP&#x2F;JSON.</li>
+<li><strong>Server side</strong>: Uses Houdini’s built-in <code>hwebserver</code> directly — no custom server process needed.</li>
+<li><strong>Thread safety</strong>: Uses <code>hdefereval.executeInMainThreadWithResult()</code> to ensure all <code>hou.*</code> API calls run on the main thread.</li>
+</ul>
+<h3 id="Architecture-Analysis"><a href="#Architecture-Analysis" class="headerlink" title="Architecture Analysis"></a>Architecture Analysis</h3><table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>houdini-mcp</th>
+<th>fxhoudinimcp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Server implementation</td>
+<td>Custom socket</td>
+<td>Houdini native <code>hwebserver</code></td>
+</tr>
+<tr>
+<td>Transport protocol</td>
+<td>TCP</td>
+<td>HTTP &#x2F; JSON</td>
+</tr>
+<tr>
+<td>MCP transport</td>
+<td>stdio</td>
+<td>stdio + streamable-http</td>
+</tr>
+<tr>
+<td>Thread safety</td>
+<td>Unknown</td>
+<td>Explicitly guaranteed</td>
+</tr>
+<tr>
+<td>Dependency complexity</td>
+<td>Requires a separate Bridge Script process</td>
+<td>MCP Server communicates directly with hwebserver</td>
+</tr>
+</tbody></table>
+<p><strong>Verdict</strong>: fxhoudinimcp’s architecture is more robust — it reuses Houdini’s native components, reducing the surface area for custom-code bugs.</p>
+<hr>
+<h2 id="Feature-Coverage-Comparison"><a href="#Feature-Coverage-Comparison" class="headerlink" title="Feature Coverage Comparison"></a>Feature Coverage Comparison</h2><h3 id="houdini-mcp-Feature-Set"><a href="#houdini-mcp-Feature-Set" class="headerlink" title="houdini-mcp Feature Set"></a>houdini-mcp Feature Set</h3><p>Provides basic Houdini control:</p>
+<ul>
+<li>Create and modify nodes</li>
+<li>Execute Python &#x2F; HScript code</li>
+<li>Basic scene operations</li>
+<li><strong>OPUS integration</strong>: Connects to the OPUS procedural furniture and environment asset library via RapidAPI (exclusive feature)</li>
+</ul>
+<h3 id="fxhoudinimcp-Feature-Set-19-categories-168-tools"><a href="#fxhoudinimcp-Feature-Set-19-categories-168-tools" class="headerlink" title="fxhoudinimcp Feature Set (19 categories, 168 tools)"></a>fxhoudinimcp Feature Set (19 categories, 168 tools)</h3><table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Tools</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scene Management</td>
+<td>7</td>
+<td>Open, save, import&#x2F;export, scene info</td>
+</tr>
+<tr>
+<td>Node Operations</td>
+<td>16</td>
+<td>Create, delete, copy, connect, layout, flag</td>
+</tr>
+<tr>
+<td>Parameters</td>
+<td>10</td>
+<td>Get&#x2F;set values, expressions, keyframes, spare parameters</td>
+</tr>
+<tr>
+<td>Geometry (SOPs)</td>
+<td>12</td>
+<td>Points, primitives, attributes, groups, sampling, nearest-point lookup</td>
+</tr>
+<tr>
+<td>LOPs&#x2F;USD</td>
+<td>18</td>
+<td>Stage inspection, Prim, layers, composition, variants, lights</td>
+</tr>
+<tr>
+<td>DOPs</td>
+<td>8</td>
+<td>Simulation info, DOP objects, step&#x2F;reset, memory usage</td>
+</tr>
+<tr>
+<td>PDG&#x2F;TOPs</td>
+<td>10</td>
+<td>Cook, Work Items, scheduler, dependency graph</td>
+</tr>
+<tr>
+<td>COPs (Copernicus)</td>
+<td>7</td>
+<td>Image nodes, layers, VDB data</td>
+</tr>
+<tr>
+<td>HDAs</td>
+<td>10</td>
+<td>Create, install, and manage digital assets</td>
+</tr>
+<tr>
+<td>Animation</td>
+<td>9</td>
+<td>Keyframes, playbar control, frame range</td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td>9</td>
+<td>Viewport screenshots, render nodes, settings, render launch</td>
+</tr>
+<tr>
+<td>VEX</td>
+<td>5</td>
+<td>Create&#x2F;edit Wrangle nodes, validate VEX code</td>
+</tr>
+<tr>
+<td>Code Execution</td>
+<td>4</td>
+<td>Python, HScript, expressions, environment variables</td>
+</tr>
+<tr>
+<td>Viewport&#x2F;UI</td>
+<td>11</td>
+<td>Pane management, screenshots, status messages, error detection</td>
+</tr>
+<tr>
+<td>Scene Context</td>
+<td>8</td>
+<td>Network overview, Cook chain, selection, scene summary, error analysis</td>
+</tr>
+<tr>
+<td>Workflows</td>
+<td>8</td>
+<td>One-click Pyro&#x2F;RBD&#x2F;FLIP&#x2F;Vellum setup, SOP chains, render configuration</td>
+</tr>
+<tr>
+<td>Materials</td>
+<td>4</td>
+<td>List, inspect, create materials and shader networks</td>
+</tr>
+<tr>
+<td>CHOPs</td>
+<td>4</td>
+<td>Channel data, CHOP nodes, export channels to parameters</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>4</td>
+<td>List, inspect, clear, write file caches</td>
+</tr>
+<tr>
+<td>Takes</td>
+<td>4</td>
+<td>List, create, switch Takes and parameter overrides</td>
+</tr>
+</tbody></table>
+<p><strong>Highlights</strong>:</p>
+<ul>
+<li><strong>One-click workflows</strong>: Instant Pyro, RBD, FLIP, and Vellum simulation setup</li>
+<li><strong>Full USD&#x2F;LOPs support</strong>: 18 tools covering the USD pipeline</li>
+<li><strong>Copernicus (COPs) support</strong>: Image processing node operations</li>
+<li><strong>Scene context analysis</strong>: Error detection and Cook chain tracing</li>
+</ul>
+<hr>
+<h2 id="Installation-and-Configuration-Comparison"><a href="#Installation-and-Configuration-Comparison" class="headerlink" title="Installation and Configuration Comparison"></a>Installation and Configuration Comparison</h2><h3 id="houdini-mcp-Installation-Steps"><a href="#houdini-mcp-Installation-Steps" class="headerlink" title="houdini-mcp Installation Steps"></a>houdini-mcp Installation Steps</h3><ol>
+<li>Install <code>uv</code> (Python package manager)</li>
+<li>Manually create the Houdini scripts directory and copy files</li>
+<li>Run <code>uv add &quot;mcp[cli]&quot;</code> in the directory</li>
+<li>Manually create a Shelf Tool</li>
+<li>(Optional) Create a Houdini Package JSON for auto-loading</li>
+<li>Configure <code>claude_desktop_config.json</code></li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;houdini&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uv&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;run&quot;</span><span class="punctuation">,</span> <span class="string">&quot;python&quot;</span><span class="punctuation">,</span> <span class="string">&quot;C:/path/to/houdini_mcp_server.py&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="fxhoudinimcp-Installation-Steps"><a href="#fxhoudinimcp-Installation-Steps" class="headerlink" title="fxhoudinimcp Installation Steps"></a>fxhoudinimcp Installation Steps</h3><ol>
+<li><code>pip install fxhoudinimcp</code> (or <code>uv pip install fxhoudinimcp</code>)</li>
+<li>Copy the Package JSON to the Houdini packages directory</li>
+<li>Configure the MCP client</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;fxhoudini&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;python&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;-m&quot;</span><span class="punctuation">,</span> <span class="string">&quot;fxhoudinimcp&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;HOUDINI_HOST&quot;</span><span class="punctuation">:</span> <span class="string">&quot;localhost&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;HOUDINI_PORT&quot;</span><span class="punctuation">:</span> <span class="string">&quot;8100&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Claude Code support</strong> (one-liner):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">claude mcp add --scope user fxhoudini -- python -m fxhoudinimcp</span><br></pre></td></tr></table></figure>
+
+<h3 id="Installation-Experience-Comparison"><a href="#Installation-Experience-Comparison" class="headerlink" title="Installation Experience Comparison"></a>Installation Experience Comparison</h3><table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>houdini-mcp</th>
+<th>fxhoudinimcp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Installation steps</td>
+<td>5-6 steps, multiple manual operations</td>
+<td>2-3 steps, standardized process</td>
+</tr>
+<tr>
+<td>Package manager</td>
+<td>Requires <code>uv</code></td>
+<td>Standard <code>pip</code> or <code>uv</code> both work</td>
+</tr>
+<tr>
+<td>PyPI package</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Auto-start</td>
+<td>Requires manual Package configuration</td>
+<td><code>uiready.py</code> handles auto-start</td>
+</tr>
+<tr>
+<td>Documentation quality</td>
+<td>Basic README</td>
+<td>Detailed categorized docs + environment variable reference</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Client-Support-Comparison"><a href="#Client-Support-Comparison" class="headerlink" title="Client Support Comparison"></a>Client Support Comparison</h2><table>
+<thead>
+<tr>
+<th>AI Client</th>
+<th>houdini-mcp</th>
+<th>fxhoudinimcp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Desktop</td>
+<td>Supported</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td>Supported</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>VS Code</td>
+<td>Not mentioned</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>Claude Code CLI</td>
+<td>Not mentioned</td>
+<td>Supported (one-liner)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Exclusive-Features"><a href="#Exclusive-Features" class="headerlink" title="Exclusive Features"></a>Exclusive Features</h2><h3 id="Exclusive-to-houdini-mcp"><a href="#Exclusive-to-houdini-mcp" class="headerlink" title="Exclusive to houdini-mcp"></a>Exclusive to houdini-mcp</h3><ul>
+<li><strong>OPUS integration</strong>: Access to the OPUS procedural asset library (furniture and environment assets) via RapidAPI. Requires a RapidAPI account and an active API subscription.</li>
+</ul>
+<h3 id="Exclusive-to-fxhoudinimcp"><a href="#Exclusive-to-fxhoudinimcp" class="headerlink" title="Exclusive to fxhoudinimcp"></a>Exclusive to fxhoudinimcp</h3><ul>
+<li><strong>One-click simulation workflows</strong>: Pyro &#x2F; RBD &#x2F; FLIP &#x2F; Vellum setup in a single call</li>
+<li><strong>Deep USD&#x2F;LOPs support</strong>: 18 dedicated tools</li>
+<li><strong>Copernicus image processing</strong>: COPs node operations</li>
+<li><strong>Scene error analysis</strong>: Automatic Cook error detection and reporting</li>
+<li><strong>Environment variable configuration</strong>: <code>HOUDINI_HOST</code>, <code>HOUDINI_PORT</code>, <code>FXHOUDINIMCP_AUTOSTART</code>, and more</li>
+<li><strong>Dual transport mode</strong>: stdio + streamable-http</li>
+</ul>
+<hr>
+<h2 id="Recommendations-by-Use-Case"><a href="#Recommendations-by-Use-Case" class="headerlink" title="Recommendations by Use Case"></a>Recommendations by Use Case</h2><h3 id="Choose-houdini-mcp-capoomgit-if-you"><a href="#Choose-houdini-mcp-capoomgit-if-you" class="headerlink" title="Choose houdini-mcp (capoomgit) if you:"></a>Choose houdini-mcp (capoomgit) if you:</h3><ul>
+<li>Only need basic AI control of Houdini</li>
+<li>Are already using a <code>uv</code>-based workflow</li>
+<li>Specifically need OPUS procedural asset library integration</li>
+<li>Have a simple project scope and want to get started quickly</li>
+</ul>
+<h3 id="Choose-fxhoudinimcp-healkeiser-if-you"><a href="#Choose-fxhoudinimcp-healkeiser-if-you" class="headerlink" title="Choose fxhoudinimcp (healkeiser) if you:"></a>Choose fxhoudinimcp (healkeiser) if you:</h3><ul>
+<li>Need comprehensive Houdini coverage (SOPs, LOPs, DOPs, TOPs, COPs, etc.)</li>
+<li>Work with USD&#x2F;LOPs pipelines</li>
+<li>Want one-click simulation workflows (Pyro &#x2F; FLIP &#x2F; Vellum &#x2F; RBD)</li>
+<li>Prefer a standardized installation via a PyPI package</li>
+<li>Use Claude Code CLI as your primary AI tool</li>
+<li>Need guaranteed thread safety</li>
+<li>Value active maintenance and long-term project evolution</li>
+</ul>
+<hr>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><table>
+<thead>
+<tr>
+<th>Evaluation Dimension</th>
+<th>houdini-mcp</th>
+<th>fxhoudinimcp</th>
+<th>Winner</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Feature richness</td>
+<td>Basic</td>
+<td>168 tools</td>
+<td>fxhoudinimcp</td>
+</tr>
+<tr>
+<td>Architecture robustness</td>
+<td>Custom socket</td>
+<td>Native hwebserver</td>
+<td>fxhoudinimcp</td>
+</tr>
+<tr>
+<td>Installation convenience</td>
+<td>Multi-step manual</td>
+<td>One-liner pip</td>
+<td>fxhoudinimcp</td>
+</tr>
+<tr>
+<td>Client compatibility</td>
+<td>Desktop + Cursor</td>
+<td>Desktop + Cursor + VSCode + Claude Code</td>
+<td>fxhoudinimcp</td>
+</tr>
+<tr>
+<td>Asset ecosystem</td>
+<td>OPUS integration</td>
+<td>None</td>
+<td>houdini-mcp</td>
+</tr>
+<tr>
+<td>Documentation quality</td>
+<td>Basic</td>
+<td>Comprehensive</td>
+<td>fxhoudinimcp</td>
+</tr>
+<tr>
+<td>Maintenance activity</td>
+<td>Community-maintained</td>
+<td>Actively developed</td>
+<td>fxhoudinimcp</td>
+</tr>
+</tbody></table>
+<p><strong>Overall recommendation</strong>: For most users, <strong>fxhoudinimcp</strong> is the better choice — broader feature coverage, a more robust architecture, and a smoother installation process. If you specifically need the OPUS procedural asset library integration, <strong>houdini-mcp</strong> is worth a look as a complementary tool.</p>
+<hr>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/capoomgit/houdini-mcp">capoomgit&#x2F;houdini-mcp</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/healkeiser/fxhoudinimcp">healkeiser&#x2F;fxhoudinimcp</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ahujasid/blender-mcp">blender-mcp</a> — the project that inspired houdini-mcp</li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/tags/Houdini/" data-i18n-tag="Houdini">Houdini</a> <a href="/tags/Technical-Art/" data-i18n-tag="Technical Art">Technical Art</a> <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/tags/Claude/" data-i18n-tag="Claude">Claude</a> <a href="/tags/Model-Context-Protocol/" data-i18n-tag="Model Context Protocol">Model Context Protocol</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

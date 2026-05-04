@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="如何让一张外部贴图在UE里显示原本的颜色？本测试主要解决两个问题：
+
+外部输入的 EXR 和内部的场景线性数据如何实现一样的处理效果？
+外部数据如何精确地复现在 8bit 的显示器上？
+
+我制作了一个 EXR（线性编码）的图片，这个图片有两个蓝色，一个是 0 0 255 的纯蓝色，一个是 0 0 0.75 的蓝色。
+同">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="UE外部贴图颜色还原测试与OCIO配置">
+    
+    
+        <meta property="og:description" content="如何让一张外部贴图在UE里显示原本的颜色？本测试主要解决两个问题：
+
+外部输入的 EXR 和内部的场景线性数据如何实现一样的处理效果？
+外部数据如何精确地复现在 8bit 的显示器上？
+
+我制作了一个 EXR（线性编码）的图片，这个图片有两个蓝色，一个是 0 0 255 的纯蓝色，一个是 0 0 0.75 的蓝色。
+同">
+    
+    
+    
+        <meta property="article:published_time" content="2024-04-06T16:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.536Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="UE外部贴图颜色还原测试与OCIO配置">
+    
+    
+        <meta name="twitter:description" content="如何让一张外部贴图在UE里显示原本的颜色？本测试主要解决两个问题：
+
+外部输入的 EXR 和内部的场景线性数据如何实现一样的处理效果？
+外部数据如何精确地复现在 8bit 的显示器上？
+
+我制作了一个 EXR（线性编码）的图片，这个图片有两个蓝色，一个是 0 0 255 的纯蓝色，一个是 0 0 0.75 的蓝色。
+同">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/">
+    
+
+    <!-- Title -->
+    
+    <title>UE外部贴图颜色还原测试与OCIO配置 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2024-04-06-20240407-UEExternalTextureColorTestAndOCIO-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('./images/page_2_img_2.png');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/" class="previous" data-title="UE External Texture Color Restoration Te..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/" class="next" data-title="HDR and UE Conten..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">UE外部贴图颜色还原测试与OCIO配置</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="如何让一张外部贴图在UE里显示原本的颜色？"><a href="#如何让一张外部贴图在UE里显示原本的颜色？" class="headerlink" title="如何让一张外部贴图在UE里显示原本的颜色？"></a>如何让一张外部贴图在UE里显示原本的颜色？</h1><p>本测试主要解决两个问题：</p>
+<ul>
+<li>外部输入的 EXR 和内部的场景线性数据如何实现一样的处理效果？</li>
+<li>外部数据如何精确地复现在 8bit 的显示器上？</li>
+</ul>
+<p>我制作了一个 EXR（线性编码）的图片，这个图片有两个蓝色，一个是 <code>0 0 255</code> 的纯蓝色，一个是 <code>0 0 0.75</code> 的蓝色。</p>
+<p>同样的，我在内部通过自发光材质也建立了两个这样的蓝色：<code>0 0 255</code> 的自发光蓝色和 <code>0 0 0.75</code> 的蓝色。</p>
+<blockquote>
+<p>一张从外部导入的贴图如何保证和内部渲染的码值一致？</p>
+</blockquote>
+<h2 id="测试设置"><a href="#测试设置" class="headerlink" title="测试设置"></a>测试设置</h2><p>当我将该图片（<code>HDR_TV_Float.exr</code>）的输入调整为：</p>
+<p>压缩设置如下：</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_1_img_3.png" alt="压缩设置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">EXR 贴图压缩设置</figcaption>
+  </figure>
+</div>
+
+<p>EXR 输入的时候，选择<strong>线性编码</strong>。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_1_img_4.png" alt="编码设置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">EXR 编码设置（选择线性编码）</figcaption>
+  </figure>
+</div>
+
+<p>这个 Encoding Override 是 Gamma 调整，因为图片是 EXR 线性的，所以这里选择 <strong>Linear</strong> 选项。</p>
+<p>这里的 ColorSpace 设置为 <strong>None</strong>（默认为项目中设置的工作色域），如果这里的设置和项目设置一样，也是不会做色域转换的。</p>
+<p>这里测试，使用工作色域 sRGB，选择 None，不做色域转换。</p>
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>得到的结果：外层是自己建的自发光材质，中间是测试图（模拟 xR 工作流程中输入的一张图片），根据图片显示，所有的数据都对应在了一起，在此时已经是一样的了。</p>
+<p>说明在这个设置下，我们能保证 UE 内部生成的码值能和外部输入的码值对应起关系（消除了图片输入的 Gamma）。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_2_img_2.png" alt="测试结果对比" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">外部输入码值与内部自发光材质码值对比</figcaption>
+  </figure>
+</div>
+
+<p>以下是部分码值显示的情况：</p>
+<h3 id="码值对照表（配置-OCIO-前）"><a href="#码值对照表（配置-OCIO-前）" class="headerlink" title="码值对照表（配置 OCIO 前）"></a>码值对照表（配置 OCIO 前）</h3><table>
+<thead>
+<tr>
+<th align="left">外部码值（浮点数）</th>
+<th align="left">描述</th>
+<th align="left">Texture 显示（8bit 截图）</th>
+<th align="left">View 显示（8bit 截图，自发光材质）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0 0 1</td>
+<td align="left">纯蓝色</td>
+<td align="left">0 0 255</td>
+<td align="left">0 0 255</td>
+</tr>
+<tr>
+<td align="left">0 0 0.75</td>
+<td align="left">半蓝色</td>
+<td align="left">0 0 255</td>
+<td align="left">0 0 224</td>
+</tr>
+<tr>
+<td align="left">1 0 0</td>
+<td align="left">红色</td>
+<td align="left">255 0 0</td>
+<td align="left">255 0 0</td>
+</tr>
+<tr>
+<td align="left">0.75 0 0</td>
+<td align="left">半红色</td>
+<td align="left">255 0 0</td>
+<td align="left">224 0 0</td>
+</tr>
+<tr>
+<td align="left">0.75 0 0.75</td>
+<td align="left">紫色</td>
+<td align="left">255 0 255</td>
+<td align="left">224 0 224</td>
+</tr>
+<tr>
+<td align="left">0.02 0.02 0.02</td>
+<td align="left">2%灰</td>
+<td align="left">39 39 39</td>
+<td align="left">43 43 43</td>
+</tr>
+<tr>
+<td align="left">0.04 0.04 0.04</td>
+<td align="left">4%灰</td>
+<td align="left">56 56 56</td>
+<td align="left">59 59 59</td>
+</tr>
+</tbody></table>
+<ul>
+<li>第一个框是：外部码值<br>（原图码值、或称为“原始码值”，即图像编码时候的码值，使用EXRView进行读取  也是图上自定义材质生成的颜色）<br>使用浮点数进行标识</li>
+<li>第二个框是：在Texture页面显示的码值（使用微信截图获取8bit的显示数据）</li>
+<li>第三个框是：在view窗口上显示的码值 （自发光材质、使用微信截图获取8bit的显示数据,view显示功能关闭如下）同时关闭所有场景中的灯光（仅仅因为做测试的需要,这个在实际生产中可以关闭交给LUT去做校准）。</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_3_img_2.png" alt="监看选项设置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">View 显示功能关闭设置 1</figcaption>
+  </figure>
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_3_img_3.png" alt="监看选项设置2" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">View 显示功能关闭设置 2</figcaption>
+  </figure>
+</div>
+
+<h2 id="从实验中获得的信息"><a href="#从实验中获得的信息" class="headerlink" title="从实验中获得的信息"></a>从实验中获得的信息</h2><ol>
+<li><p>当正确输入（线性化）EXR 的编码之后，它的处理逻辑和内部生成的场景线性的处理逻辑是一样的（外部为 0 的码值和内部 0 的码值在渲染过后的结果是一样的）。能保证内部的码值和外部的码值处于同样从处理状态（都转换成线性的进行工作）。</p>
+</li>
+<li><p>在原始码值与 Texture 显示窗口显示数据和渲染 View 显示数据显示出来的码值不一致，为什么？</p>
+<ul>
+<li><strong>Texture 显示窗口</strong>：包含了未知转换（方便用户观看），不能相信。</li>
+<li><strong>渲染 View 显示数据</strong>：能明确知道它在 Unlit 情况下用了什么样的显示转换——通过 OCIO，所以可以明确知道渲染管线上有什么。</li>
+<li><strong>原始码值</strong>：是一切的起点，理想情况下应该显示出这个颜色。</li>
+</ul>
+</li>
+</ol>
+<p>对于 xR 而言，要保证的是<strong>原始码值</strong>和<strong>渲染 View 显示数据上的码值</strong>的一致性。</p>
+<h3 id="为什么码值在视口里和外部不一致？"><a href="#为什么码值在视口里和外部不一致？" class="headerlink" title="为什么码值在视口里和外部不一致？"></a>为什么码值在视口里和外部不一致？</h3><p>为什么这张图在外部的码值是 0.75（换算成 8bit 约为 191），输入引擎之后却变成了 224？（如上测试中的半蓝色、半红色）</p>
+<p>这是因为当前显示出来的数据还是线性数据，它没有被正确地对应我们的屏幕、还原出来。当前内部显示还是 Rec.709 的线性数据，要让它正确显示，需要配置渲染 View 的 OCIO。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_5_img_2.png" alt="码值不一致原因示意" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">线性数据未正确还原导致的码值差异</figcaption>
+  </figure>
+</div>
+## OCIO 配置
+
+<p>OCIO 的工作空间选择 <strong>WorkingColorSpace</strong> 或是 <strong>Linear Rec709（SRGB）</strong>。输出选择 <strong>sRGB - Display - RAW</strong> 标准版本的 sRGB。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="./images/page_5_img_2.png" alt="OCIO 配置" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">OCIO 工作空间与输出配置</figcaption>
+  </figure>
+</div>
+
+<h3 id="配置-OCIO-后的码值对照表"><a href="#配置-OCIO-后的码值对照表" class="headerlink" title="配置 OCIO 后的码值对照表"></a>配置 OCIO 后的码值对照表</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_5_img_3.png" alt="配置 OCIO 后的码值对照" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">配置 OCIO 后的码值完美还原</figcaption>
+  </figure>
+</div>
+
+<table>
+<thead>
+<tr>
+<th align="left">外部码值（浮点数）</th>
+<th align="left">描述</th>
+<th align="left">View 显示（8bit 截图，自发光材质）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0 0 1</td>
+<td align="left">纯蓝色</td>
+<td align="left">0 0 255</td>
+</tr>
+<tr>
+<td align="left">0 0 0.75</td>
+<td align="left">半蓝色</td>
+<td align="left">0 0 191</td>
+</tr>
+<tr>
+<td align="left">1 0 0</td>
+<td align="left">红色</td>
+<td align="left">255 0 0</td>
+</tr>
+<tr>
+<td align="left">0.75 0 0</td>
+<td align="left">半红色</td>
+<td align="left">191 0 0</td>
+</tr>
+<tr>
+<td align="left">0.75 0 0.75</td>
+<td align="left">紫色</td>
+<td align="left">191 0 191</td>
+</tr>
+<tr>
+<td align="left">0.02 0.02 0.02</td>
+<td align="left">2%灰</td>
+<td align="left">5 5 5</td>
+</tr>
+<tr>
+<td align="left">0.04 0.04 0.04</td>
+<td align="left">4%灰</td>
+<td align="left">10 10 10</td>
+</tr>
+</tbody></table>
+<p><strong>完美还原原始的码值。</strong></p>
+<h2 id="UE-渲染逻辑（参数影响）研究"><a href="#UE-渲染逻辑（参数影响）研究" class="headerlink" title="UE 渲染逻辑（参数影响）研究"></a>UE 渲染逻辑（参数影响）研究</h2><p>发现 UE 的各种渲染设置也会很大程度上影响到渲染的颜色效果，所以按照类别分别讨论每一个参数对于渲染效果的影响。</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="./images/page_6_img_2.png" alt="渲染参数分类" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">渲染参数分类总览</figcaption>
+  </figure>
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="./images/page_6_img_4.png" alt="渲染参数详情" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">渲染参数详情</figcaption>
+  </figure>
+</div>
+
+<h3 id="待研究的参数类别"><a href="#待研究的参数类别" class="headerlink" title="待研究的参数类别"></a>待研究的参数类别</h3><ul>
+<li><p><strong>后处理 - Exposure 类</strong>：每种曝光设置的逻辑和影响的区别</p>
+</li>
+<li><p><strong>后处理 - Highlight Contrast &#x2F; Shadow Contrast</strong></p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_6_img_2.png" alt="Highlight Contrast / Shadow Contrast" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Highlight Contrast / Shadow Contrast 参数效果</figcaption>
+  </figure>
+</div>
+</li>
+<li><p><strong>后处理 - Tone Curve Amount</strong></p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_6_img_3.png" alt="Tone Curve Amount" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Tone Curve Amount 参数效果</figcaption>
+  </figure>
+</div>
+</li>
+<li><p><strong>后处理 - Expand Gamut</strong></p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_6_img_4.png" alt="Expand Gamut" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Expand Gamut 参数效果</figcaption>
+  </figure>
+</div></li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/zh-CN/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/zh-CN/tags/EXR/" data-i18n-tag="EXR">EXR</a> <a href="/zh-CN/tags/色彩管理/" data-i18n-tag="色彩管理">色彩管理</a> <a href="/zh-CN/tags/渲染管线/" data-i18n-tag="渲染管线">渲染管线</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

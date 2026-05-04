@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="lang: “en”
+UE “Reflection” Concept
+Reflection: UE provides runtime type information and dynamic access capabilities through systems like UClass and UProperty.UE">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+    
+        <meta property="og:description" content="lang: “en”
+UE “Reflection” Concept
+Reflection: UE provides runtime type information and dynamic access capabilities through systems like UClass and UProperty.UE">
+    
+    
+    
+        <meta property="article:published_time" content="2026-05-04T11:36:14.533Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.533Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+    
+        <meta name="twitter:description" content="lang: “en”
+UE “Reflection” Concept
+Reflection: UE provides runtime type information and dynamic access capabilities through systems like UClass and UProperty.UE">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/05/04/20250801.UEConceptScrapbox/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/">
+    
+
+    <!-- Title -->
+    
+    <title>Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2026-05-04-20250801-UEConceptScrapbox-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2026/05/04/20250801.UEConceptScrapbox/" class="previous" data-title="Untitled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/05/02/20260502.HoudiniMCPComparison/" class="next" data-title="Houdini MCP Proje..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Untitled</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <p>lang: “en”</p>
+<h2 id="UE-“Reflection”-Concept"><a href="#UE-“Reflection”-Concept" class="headerlink" title="UE “Reflection” Concept"></a>UE “Reflection” Concept</h2><ul>
+<li><strong>Reflection</strong>: UE provides runtime type information and dynamic access capabilities through systems like UClass and UProperty.<br>UE’s reflection system is a code-generation mechanism implemented via the UHT tool and specific macros. You mark classes with UCLASS, variables with UPROPERTY, and functions with UFUNCTION — these macros are recognized by UHT.<br>Before compilation, UHT scans these markers and generates <code>.generated.h</code> and <code>.cpp</code> files containing the reflection registration code for each class, such as the <code>StaticClass()</code> function and the construction logic for UClass objects.<br>The generated code registers class information into the engine’s global <code>GObjectClasses</code> array, enabling the engine at runtime to dynamically retrieve class structure, invoke functions, or access properties — which in turn powers blueprint interaction, garbage collection, and other core features.</li>
+</ul>
+<p>This exists because UE needs to dynamically process code information at runtime. Blueprint visual scripting, for example, requires the engine to know via reflection which functions and variables a C++ class exposes so that blueprints can call them.</p>
+<p>Say you write a character class in C++ with a <code>Jump()</code> function marked with UFUNCTION. Without reflection, the blueprint editor has no idea <code>Jump()</code> exists — the function name, parameters, and all that metadata get optimized away in the compiled machine code.<br>With reflection, UHT generates reflection metadata for <code>Jump()</code> at compile time, including its name, parameter types, return value, and which class it belongs to. At runtime, the engine uses this metadata to surface <code>Jump()</code> in the blueprint editor as a callable node you can drag in.<br>If you later add a height parameter to <code>Jump()</code> in C++, the reflection system automatically updates the metadata, and the corresponding blueprint node syncs up to show the new parameter — no manual binding code between blueprint and C++ required.</p>
+<h2 id="Undo-Redo-—-Command-Pattern-Lightweight"><a href="#Undo-Redo-—-Command-Pattern-Lightweight" class="headerlink" title="Undo&#x2F;Redo — Command Pattern (Lightweight)"></a>Undo&#x2F;Redo — Command Pattern (Lightweight)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Wrap each operation as ICommand &#123; Do(); Undo(); &#125;</span><br><span class="line">Maintain undoStack and redoStack</span><br><span class="line">Execute operation → push to undoStack, clear redoStack</span><br><span class="line">Undo → pop from undoStack, call Undo(), push to redoStack</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. Snapshot Pattern (for complex scenarios):</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Serialize a snapshot of the entire object state before each operation</span><br><span class="line">On Undo, restore the snapshot directly</span><br><span class="line">Pros: simple to implement, less prone to bugs</span><br><span class="line">Cons: high memory overhead</span><br></pre></td></tr></table></figure>
+
+<p><strong>Hybrid approach for real projects:</strong></p>
+<ul>
+<li>Simple property edits → Command pattern (record oldValue&#x2F;newValue)</li>
+<li>Complex operations (node graph changes, scene edits) → Snapshot or Diff pattern</li>
+<li>Merge mechanism: collapse consecutive operations of the same type (e.g., dragging a slider merges into a single history entry)</li>
+</ul>
+<h2 id="UE-Smart-Pointer-Comparison"><a href="#UE-Smart-Pointer-Comparison" class="headerlink" title="UE Smart Pointer Comparison"></a>UE Smart Pointer Comparison</h2><table>
+<thead>
+<tr>
+<th>Pointer Type</th>
+<th>Managed Object</th>
+<th>Ownership</th>
+<th>Core Role</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TObjectPtr</td>
+<td>UObject-derived</td>
+<td>Shared</td>
+<td>Safe UObject access, participates in garbage collection automatically</td>
+<td>Replaces traditional UPROPERTY pointers; everyday UObject references</td>
+</tr>
+<tr>
+<td>TWeakObjectPtr</td>
+<td>UObject-derived</td>
+<td>None</td>
+<td>Weak reference to UObject, does not prevent GC</td>
+<td>Avoids circular references; temporary access to UObjects that may be destroyed</td>
+</tr>
+<tr>
+<td>TSoftObjectPtr</td>
+<td>UObject-derived</td>
+<td>None</td>
+<td>Soft reference to UObject, supports async asset loading</td>
+<td>References assets that may not be loaded, e.g., meshes or textures outside the current level</td>
+</tr>
+<tr>
+<td>TSharedPtr</td>
+<td>Non-UObject types</td>
+<td>Shared</td>
+<td>Manages lifetime via reference counting</td>
+<td>Multiple owners sharing a non-UObject resource</td>
+</tr>
+<tr>
+<td>TUniquePtr</td>
+<td>Non-UObject types</td>
+<td>Exclusive</td>
+<td>Sole ownership, non-copyable</td>
+<td>Managing non-UObject resources that don’t need sharing, e.g., custom data structures</td>
+</tr>
+<tr>
+<td>TWeakPtr</td>
+<td>Non-UObject types</td>
+<td>None</td>
+<td>Weak reference to a TSharedPtr, does not increment ref count</td>
+<td>Avoids circular references when used alongside TSharedPtr</td>
+</tr>
+</tbody></table>
+<h2 id="Key-Distinctions"><a href="#Key-Distinctions" class="headerlink" title="Key Distinctions"></a>Key Distinctions</h2><ol>
+<li><p><strong>Object boundary</strong>: The first three are strictly for UObject-derived classes and rely on UE’s garbage collection system; the last three are for non-UObject types and use manual memory management.</p>
+</li>
+<li><p><strong>UObject pointer breakdown</strong>:</p>
+<ul>
+<li>TObjectPtr is a strong reference that keeps the UObject alive — the go-to choice for everyday development.</li>
+<li>TWeakObjectPtr is a weak reference; when a UObject is marked for collection, the pointer is automatically nulled. Common in scenarios like UI widgets holding references to character objects.</li>
+<li>TSoftObjectPtr stores a resource path rather than a direct memory address. The asset can be asynchronously loaded when it isn’t in memory, making it ideal for open-world games referencing distant assets.</li>
+</ul>
+</li>
+<li><p><strong>Non-UObject pointer breakdown</strong>:</p>
+<ul>
+<li>TSharedPtr shares an object via reference counting, automatically freeing memory when the count reaches zero. Be mindful of circular references — they must be avoided manually.</li>
+<li>TUniquePtr is an exclusive pointer: no copying allowed, ownership transfers only through move semantics. Lowest performance overhead.</li>
+<li>TWeakPtr must be bound to a TSharedPtr. Once TSharedPtr releases the object, TWeakPtr automatically becomes invalid, resolving circular reference issues.</li>
+</ul>
+</li>
+</ol>
+<h2 id="What-is-ECS-Architecture-How-Does-It-Differ-from-Traditional-OOP"><a href="#What-is-ECS-Architecture-How-Does-It-Differ-from-Traditional-OOP" class="headerlink" title="What is ECS Architecture? How Does It Differ from Traditional OOP?"></a>What is ECS Architecture? How Does It Differ from Traditional OOP?</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>OOP</th>
+<th>ECS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Data layout</td>
+<td>Objects scattered on the heap</td>
+<td>Components laid out in contiguous memory</td>
+</tr>
+<tr>
+<td>Cache friendliness</td>
+<td>Poor (pointer chasing)</td>
+<td>Good (data locality)</td>
+</tr>
+<tr>
+<td>Logic organization</td>
+<td>Methods bound to classes</td>
+<td>Systems iterate over Components independently</td>
+</tr>
+<tr>
+<td>Composability</td>
+<td>Requires multiple inheritance &#x2F; composition patterns</td>
+<td>Natural composition (just attach Components)</td>
+</tr>
+</tbody></table>
+<p>ECS essentially saves CPU time on data lookups.</p>
+<p><strong>Core concepts:</strong></p>
+<ul>
+<li><strong>Entity</strong>: an ID only, stores no data</li>
+<li><strong>Component</strong>: pure data (Position, Velocity, Health…)</li>
+<li><strong>System</strong>: pure logic (MovementSystem iterates all Position+Velocity components)</li>
+</ul>
+<p>Core difference: OOP centers on objects — data and logic are encapsulated in classes, which tends to grow complex inheritance trees. ECS separates data from logic: entities are containers for components, systems process batches of the same component type, contiguous data storage improves cache efficiency, and the architecture naturally supports dynamic composition and parallel computation.<br>UE5 Mass system example: as an ECS implementation, Mass stores entity data in “fragments” and unifies logic in “processors.” The Matrix Awakens demo’s crowd simulation of thousands of characters packs position, velocity, and other data into contiguous storage, letting the movement processor batch-update all character coordinates — performance that far exceeds the traditional Actor approach.</p>
+<h2 id="Stack-vs-Heap"><a href="#Stack-vs-Heap" class="headerlink" title="Stack vs. Heap"></a>Stack vs. Heap</h2><ul>
+<li><strong>Heap</strong>: Dynamically allocated memory, variable size, lifetime controlled by the programmer, slower access. Suitable for large objects or data whose size is determined at runtime. (No fixed access order.)</li>
+<li><strong>Stack</strong>: Automatically allocated memory, fixed size, lifetime controlled by the function call, fast access. Suitable for local variables and function parameters. (Fixed access order: last in, first out.)</li>
+</ul>
+<h2 id="What-Is-Function-Calling-and-How-Have-You-Used-It-in-Projects"><a href="#What-Is-Function-Calling-and-How-Have-You-Used-It-in-Projects" class="headerlink" title="What Is Function Calling and How Have You Used It in Projects?"></a>What Is Function Calling and How Have You Used It in Projects?</h2><p><strong>How it works:</strong> The LLM doesn’t execute functions directly — it <strong>outputs a structured function-call intent</strong> (function name + arguments), which the host program parses and executes.</p>
+<h2 id="What-Is-RAG-and-How-Did-You-Implement-It"><a href="#What-Is-RAG-and-How-Did-You-Implement-It" class="headerlink" title="What Is RAG and How Did You Implement It?"></a>What Is RAG and How Did You Implement It?</h2><p><strong>RAG (Retrieval-Augmented Generation)</strong> &#x3D; retrieve relevant documents first, then have the LLM answer based on those retrieved results.</p>
+<h2 id="What-Is-ControlNet-and-What-Problem-Does-It-Solve"><a href="#What-Is-ControlNet-and-What-Problem-Does-It-Solve" class="headerlink" title="What Is ControlNet and What Problem Does It Solve?"></a>What Is ControlNet and What Problem Does It Solve?</h2><p><strong>Reference answer:</strong></p>
+<p><strong>ControlNet</strong> adds <strong>spatial control capabilities</strong> to a pretrained Diffusion Model.</p>
+<p><strong>The problem it solves:</strong> Raw Text-to-Image generation cannot precisely control the composition, pose, edges, or other spatial structure of generated images.</p>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>A parallel “Zero Convolution” branch is added to each block of Stable Diffusion’s U-Net</li>
+<li>Additional conditioning images are fed as input (edge detection &#x2F; Canny, depth maps, pose &#x2F; OpenPose, normal maps, etc.)</li>
+<li>During training, only the ControlNet branch is trained; the original model weights are frozen</li>
+</ul>
+<p><strong>Common ControlNet types:</strong></p>
+<ul>
+<li>Canny Edge: controls outlines</li>
+<li>Depth: controls depth structure</li>
+<li>OpenPose: controls human pose</li>
+<li>Segment: controls region segmentation</li>
+<li>Scribble: controls sketch-based guidance</li>
+</ul>
+<h2 id="What-Is-LoRA-and-Why-Is-It-So-Popular"><a href="#What-Is-LoRA-and-Why-Is-It-So-Popular" class="headerlink" title="What Is LoRA and Why Is It So Popular?"></a>What Is LoRA and Why Is It So Popular?</h2><p><strong>LoRA (Low-Rank Adaptation)</strong> is a parameter-efficient fine-tuning method.<br>LoRA freezes the original model weights and trains only a small number of low-rank matrices to approximate the parameter updates needed for task adaptation. The trainable parameter count is just 0.1%–1% of full fine-tuning, drastically reducing VRAM usage and training cost. During inference, the weights can be merged with the base model, adding no extra latency.<br>In game development, LoRA lets you quickly fine-tune an image-to-image model to generate stylistically consistent character equipment and environment assets, or fine-tune a dialogue model so NPCs produce setting-appropriate natural dialogue — a great fit for small teams that need to move fast.</p>
+<h2 id="What-Is-the-Difference-Between-MVC-MVP-and-MVVM"><a href="#What-Is-the-Difference-Between-MVC-MVP-and-MVVM" class="headerlink" title="What Is the Difference Between MVC, MVP, and MVVM?"></a>What Is the Difference Between MVC, MVP, and MVVM?</h2><table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Component Responsibilities</th>
+<th>Component Relationships</th>
+<th>Pros &#x2F; Cons</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MVC</td>
+<td>Model (data) &#x2F; View (UI) &#x2F; Controller (logic)</td>
+<td>Controller directly operates both Model and View</td>
+<td>Simple and intuitive, good for small projects; Controller can become bloated</td>
+</tr>
+<tr>
+<td>MVP</td>
+<td>Model (data) &#x2F; View (UI) &#x2F; Presenter (logic)</td>
+<td>Presenter directly operates Model, updates View indirectly</td>
+<td>Presenter is highly testable; View depends on Presenter, increasing coupling</td>
+</tr>
+<tr>
+<td>MVVM</td>
+<td>Model (data) &#x2F; View (UI) &#x2F; ViewModel (logic)</td>
+<td>ViewModel directly operates Model, updates View via data binding</td>
+<td>Two-way binding simplifies UI updates; steeper learning curve, potential performance overhead</td>
+</tr>
+</tbody></table>
+<p>MVP’s Presenter and MVVM’s ViewModel are very similar in responsibility — both act as intermediaries handling business logic and data interaction. The key difference is that MVVM’s data-binding mechanism lets ViewModel update the View directly, eliminating the large amount of UI-update code you’d write in a Presenter. This makes the code more concise and testable. MVVM suits projects with complex, frequent UI interactions; MVP fits simpler UIs or scenarios where strict test isolation is needed.</p>
+<h2 id="What-Are-the-Complete-Stages-of-the-GPU-Rendering-Pipeline"><a href="#What-Are-the-Complete-Stages-of-the-GPU-Rendering-Pipeline" class="headerlink" title="What Are the Complete Stages of the GPU Rendering Pipeline?"></a>What Are the Complete Stages of the GPU Rendering Pipeline?</h2><p><strong>Reference answer:</strong></p>
+<p>The GPU Rendering Pipeline is the full process by which a GPU executes graphics rendering:</p>
+<p><strong>Application Stage (CPU side):</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. Application Stage</span><br><span class="line">   → Frustum Culling</span><br><span class="line">   → Draw Call Batching</span><br><span class="line">   → Outputs Draw Calls + vertex data to GPU</span><br></pre></td></tr></table></figure>
+
+<p><strong>Geometry Stage (GPU vertex shaders):</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2. Vertex Shader</span><br><span class="line">   → Model Space → World Space → View Space → Homogeneous Clip Space</span><br><span class="line">   → Vertex transform: LocalMatrix × WorldMatrix × ViewMatrix × ProjectionMatrix</span><br><span class="line"></span><br><span class="line">3. Tessellation (optional)</span><br><span class="line">   → Hull Shader → Tessellator → Domain Shader</span><br><span class="line"></span><br><span class="line">4. Geometry Shader (optional)</span><br><span class="line">   → Processes per-primitive, can emit or discard primitives</span><br></pre></td></tr></table></figure>
+
+<p><strong>Rasterization Stage:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">5. Primitive Assembly &amp; Clipping</span><br><span class="line">   → Clipping (homogeneous space clipping)</span><br><span class="line">   → Perspective Divide → NDC → Viewport Transform</span><br><span class="line"></span><br><span class="line">6. Back-face Culling</span><br><span class="line">   → Discards back-facing primitives based on vertex winding order (CW/CCW)</span><br><span class="line"></span><br><span class="line">7. Rasterization</span><br><span class="line">   → Discretization: points / lines / triangles → Fragments</span><br><span class="line">   → Viewport Transform: NDC → Screen Space</span><br></pre></td></tr></table></figure>
+
+<p><strong>Fragment &#x2F; Pixel Stage:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">8. Fragment Shader (Pixel Shader)</span><br><span class="line">   → Per-pixel shading: lighting calculations, texture sampling, color output</span><br><span class="line"></span><br><span class="line">9. Per-Fragment Operations</span><br><span class="line">   → Depth Test (Z-Test)</span><br><span class="line">   → Stencil Test</span><br><span class="line">   → Alpha Blending</span><br><span class="line">   → Output to Framebuffer</span><br></pre></td></tr></table></figure>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

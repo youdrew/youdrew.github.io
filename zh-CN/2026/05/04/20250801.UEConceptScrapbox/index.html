@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2026/05/04/20250801.UEConceptScrapbox/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="UE“反射”概念：
+反射：UE 通过 UClass&amp;#x2F;UProperty 等系统在运行时提供类型信息和动态访问能力。UE 的反射系统是通过 UHT 工具和特定宏实现的代码生成机制。你用 UCLASS 标记类、UPROPERTY 标记变量、UFUNCTION 标记函数，这些宏会被 UHT 识别。UHT 在编译前扫">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2026/05/04/20250801.UEConceptScrapbox/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+    
+        <meta property="og:description" content="UE“反射”概念：
+反射：UE 通过 UClass&amp;#x2F;UProperty 等系统在运行时提供类型信息和动态访问能力。UE 的反射系统是通过 UHT 工具和特定宏实现的代码生成机制。你用 UCLASS 标记类、UPROPERTY 标记变量、UFUNCTION 标记函数，这些宏会被 UHT 识别。UHT 在编译前扫">
+    
+    
+    
+        <meta property="article:published_time" content="2026-05-04T11:36:14.536Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.536Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+    
+        <meta name="twitter:description" content="UE“反射”概念：
+反射：UE 通过 UClass&amp;#x2F;UProperty 等系统在运行时提供类型信息和动态访问能力。UE 的反射系统是通过 UHT 工具和特定宏实现的代码生成机制。你用 UCLASS 标记类、UPROPERTY 标记变量、UFUNCTION 标记函数，这些宏会被 UHT 识别。UHT 在编译前扫">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2026/05/04/20250801.UEConceptScrapbox/">
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/">
+    
+
+    <!-- Title -->
+    
+    <title>Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-05-04-20250801-UEConceptScrapbox-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a class="previous disabled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/05/04/20250801.UEConceptScrapbox/" class="next" data-title="Untitled"></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Untitled</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h2 id="UE“反射”概念："><a href="#UE“反射”概念：" class="headerlink" title="UE“反射”概念："></a>UE“反射”概念：</h2><ul>
+<li><strong>反射</strong>：UE 通过 UClass&#x2F;UProperty 等系统在运行时提供类型信息和动态访问能力。<br>UE 的反射系统是通过 UHT 工具和特定宏实现的代码生成机制。你用 UCLASS 标记类、UPROPERTY 标记变量、UFUNCTION 标记函数，这些宏会被 UHT 识别。<br>UHT 在编译前扫描这些标记，生成.generated.h 和.cpp 文件，里面包含类的反射注册代码，比如 StaticClass () 函数和 UClass 对象的构造逻辑。<br>生成的代码会把类信息注册到引擎全局的 GObjectClasses 数组里，让引擎在运行时能动态获取类结构、调用函数或访问属性，这支撑了蓝图交互、垃圾回收等核心功能。</li>
+</ul>
+<p>因为 UE 需要在运行时动态处理代码信息。比如蓝图可视化编程，引擎得通过反射知道 C++ 类有哪些函数和变量，才能让蓝图调用它们。</p>
+<p>比如你在 C++ 里写了一个角色类，里面有个 UFUNCTION 标记的跳跃函数 Jump ()。没有反射的话，蓝图编辑器根本不知道这个 Jump () 函数存在，因为编译后的机器码里，函数名和参数这些信息都被优化掉了。<br>有了反射，UHT 会在编译时为这个 Jump () 函数生成反射元数据，包括函数名、参数类型、返回值，以及它属于哪个类。引擎运行时能通过这些元数据，在蓝图编辑器里把 Jump () 函数显示出来，你才能拖拽节点调用它。<br>如果后续你在 C++ 里给 Jump () 加了一个高度参数，反射系统会自动更新元数据，蓝图里对应的函数节点也会同步显示出新参数，整个过程不需要手动写任何蓝图和 C++ 交互的绑定代码。</p>
+<h2 id="回退操作-Command-模式（轻量级）："><a href="#回退操作-Command-模式（轻量级）：" class="headerlink" title="回退操作 Command 模式（轻量级）：**"></a>回退操作 Command 模式（轻量级）：**</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">每次操作封装为 ICommand &#123; Do(); Undo(); &#125;</span><br><span class="line">维护 undoStack 和 redoStack</span><br><span class="line">执行操作 → 压入 undoStack，清空 redoStack</span><br><span class="line">Undo → 弹出 undoStack，执行 Undo()，压入 redoStack</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. Snapshot 模式（适用于复杂场景）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">操作前序列化整个对象状态的快照</span><br><span class="line">Undo 时直接恢复快照</span><br><span class="line">优点：实现简单，不容易出 bug</span><br><span class="line">缺点：内存开销大</span><br></pre></td></tr></table></figure>
+
+<p><strong>实际项目中的混合方案：</strong></p>
+<ul>
+<li>简单属性修改 → Command 模式（记录 oldValue&#x2F;newValue）</li>
+<li>复杂操作（节点图变更、场景编辑）→ Snapshot 或 Diff 模式</li>
+<li>合并机制：连续同类操作合并（如拖拽 Slider 时合并为一条记录）</li>
+</ul>
+<h2 id="UE智能指针对比表"><a href="#UE智能指针对比表" class="headerlink" title="UE智能指针对比表"></a>UE智能指针对比表</h2><table>
+<thead>
+<tr>
+<th>指针类型</th>
+<th>管理对象</th>
+<th>所有权</th>
+<th>核心作用</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TObjectPtr</td>
+<td>UObject派生类</td>
+<td>共享</td>
+<td>安全访问UObject，自动参与垃圾回收</td>
+<td>替代传统UPROPERTY指针，日常UObject引用</td>
+</tr>
+<tr>
+<td>TWeakObjectPtr</td>
+<td>UObject派生类</td>
+<td>无</td>
+<td>弱引用UObject，不阻止回收</td>
+<td>避免循环引用，临时访问可能被销毁的UObject</td>
+</tr>
+<tr>
+<td>TSoftObjectPtr</td>
+<td>UObject派生类</td>
+<td>无</td>
+<td>软引用UObject，支持资源异步加载</td>
+<td>引用可能未加载的资源，如关卡外的模型、纹理</td>
+</tr>
+<tr>
+<td>TSharedPtr</td>
+<td>非UObject类型</td>
+<td>共享</td>
+<td>通过引用计数管理生命周期</td>
+<td>需要多持有者共享非UObject资源</td>
+</tr>
+<tr>
+<td>TUniquePtr</td>
+<td>非UObject类型</td>
+<td>独占</td>
+<td>唯一拥有对象，不可复制</td>
+<td>管理无需共享的非UObject资源，如自定义数据结构</td>
+</tr>
+<tr>
+<td>TWeakPtr</td>
+<td>非UObject类型</td>
+<td>无</td>
+<td>弱引用TSharedPtr，不增加引用计数</td>
+<td>配合TSharedPtr避免循环引用</td>
+</tr>
+</tbody></table>
+<h2 id="关键区别说明"><a href="#关键区别说明" class="headerlink" title="关键区别说明"></a>关键区别说明</h2><ol>
+<li><p><strong>管理对象边界</strong>：前三种严格用于UObject派生类，依赖UE垃圾回收系统；后三种用于非UObject类型，靠手动内存管理机制。</p>
+</li>
+<li><p><strong>UObject指针细分</strong>：</p>
+</li>
+</ol>
+<ul>
+<li>TObjectPtr是强引用，会让UObject保持存活，是日常开发的首选。</li>
+<li>TWeakObjectPtr是弱引用，当UObject被标记为回收时，指针会自动置空，常用在UI控件引用角色对象这类场景。</li>
+<li>TSoftObjectPtr存储的是资源路径而非直接内存地址，对象未加载时可异步加载，适合开放世界游戏引用远处的资源。</li>
+</ul>
+<ol start="3">
+<li><strong>非UObject指针细分</strong>：</li>
+</ol>
+<ul>
+<li>TSharedPtr通过引用计数共享对象，当引用计数为0时自动释放内存，但需注意手动避免循环引用。</li>
+<li>TUniquePtr是独占式指针，不允许复制，只能通过移动语义转移所有权，性能开销最小。</li>
+<li>TWeakPtr需要绑定到TSharedPtr使用，当TSharedPtr释放对象后，TWeakPtr会自动失效，解决循环引用问题。</li>
+</ul>
+<h2 id="ECS-架构是什么？和传统-OOP-有什么区别？"><a href="#ECS-架构是什么？和传统-OOP-有什么区别？" class="headerlink" title="ECS 架构是什么？和传统 OOP 有什么区别？"></a>ECS 架构是什么？和传统 OOP 有什么区别？</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>OOP</th>
+<th>ECS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据布局</td>
+<td>对象分散在堆上</td>
+<td>Component 连续内存排列</td>
+</tr>
+<tr>
+<td>缓存友好性</td>
+<td>差（指针跳转）</td>
+<td>好（数据局部性）</td>
+</tr>
+<tr>
+<td>逻辑组织</td>
+<td>方法绑定在类上</td>
+<td>System 独立遍历 Component</td>
+</tr>
+<tr>
+<td>组合性</td>
+<td>需要多重继承&#x2F;组合模式</td>
+<td>天然组合（挂 Component 即可）</td>
+</tr>
+<tr>
+<td>其实ECS节省的是cpu去查找的时间。</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>核心概念：</strong></p>
+<ul>
+<li><strong>Entity</strong>：ID 标识，不存数据</li>
+<li><strong>Component</strong>：纯数据（Position, Velocity, Health…）</li>
+<li><strong>System</strong>：纯逻辑（MovementSystem 遍历所有 Position+Velocity 组件）</li>
+</ul>
+<p>核心区别：OOP 以对象为核心，数据与逻辑封装在类中，易形成复杂继承树；ECS 将数据与逻辑分离，实体为组件容器，系统批量处理同类组件，数据连续存储提升缓存效率，支持动态组合与并行计算。<br>UE5 Mass 系统案例：作为 ECS 实现，Mass 用 “片段” 存储实体数据，“处理器” 统一处理逻辑。如《黑客帝国》Demo 中的万人级 crowd 模拟，通过将角色位置、速度等数据打包连续存储，移动处理器可批量更新所有角色坐标，性能远超传统 Actor 方案。</p>
+<h2 id="堆Stack-栈heap"><a href="#堆Stack-栈heap" class="headerlink" title="堆Stack 栈heap"></a>堆Stack 栈heap</h2><ul>
+<li><strong>堆（Heap）</strong>：动态分配内存，大小不固定，生命周期由程序员控制，访问速度较慢，适合存储大对象或需要在运行时确定大小的数据。（没有固定的存取顺序）</li>
+<li><strong>栈（Stack）</strong>：自动分配内存，大小固定，生命周期由函数调用控制，访问速度快，适合存储局部变量和函数参数。（有固定的存取顺序，后进先出）</li>
+</ul>
+<h2 id="Function-Calling-的原理是什么？你在项目中怎么用的？"><a href="#Function-Calling-的原理是什么？你在项目中怎么用的？" class="headerlink" title="Function Calling 的原理是什么？你在项目中怎么用的？"></a>Function Calling 的原理是什么？你在项目中怎么用的？</h2><p><strong>原理：</strong> LLM 不直接执行函数，而是 <strong>输出结构化的函数调用意图</strong>（函数名 + 参数），由宿主程序解析并执行。</p>
+<h2 id="RAG-是什么？你是怎么实现的？"><a href="#RAG-是什么？你是怎么实现的？" class="headerlink" title="RAG 是什么？你是怎么实现的？"></a>RAG 是什么？你是怎么实现的？</h2><p><strong>RAG（Retrieval-Augmented Generation）</strong> &#x3D; 先检索相关文档，再让 LLM 基于检索结果回答。</p>
+<h2 id="ControlNet-是什么？它解决了什么问题？"><a href="#ControlNet-是什么？它解决了什么问题？" class="headerlink" title="ControlNet 是什么？它解决了什么问题？"></a>ControlNet 是什么？它解决了什么问题？</h2><p><strong>参考答案：</strong></p>
+<p><strong>ControlNet</strong> 为预训练 Diffusion Model 添加 <strong>空间控制能力</strong>。</p>
+<p><strong>解决的问题：</strong> 原始 Text-to-Image 无法精确控制生成图像的构图、姿态、边缘等空间结构。</p>
+<p><strong>原理：</strong></p>
+<ul>
+<li>在 Stable Diffusion 的 U-Net 每个 Block 上添加一个并行的 “Zero Convolution” 分支</li>
+<li>输入额外的条件图（边缘检测&#x2F;Canny、深度图、姿态&#x2F;OpenPose、法线贴图等）</li>
+<li>训练时只训练 ControlNet 分支，冻结原始模型</li>
+</ul>
+<p><strong>常见 ControlNet 类型：</strong></p>
+<ul>
+<li>Canny Edge：控制轮廓</li>
+<li>Depth：控制深度结构</li>
+<li>OpenPose：控制人物姿态</li>
+<li>Segment：控制区域分割</li>
+<li>Scribble：控制草图</li>
+</ul>
+<h2 id="LoRA-是什么？为什么它很受欢迎？"><a href="#LoRA-是什么？为什么它很受欢迎？" class="headerlink" title="LoRA 是什么？为什么它很受欢迎？"></a>LoRA 是什么？为什么它很受欢迎？</h2><p><strong>LoRA（Low-Rank Adaptation）</strong> 是一种参数高效微调方法。<br>LoRA 是一种参数高效的大模型微调技术，核心是冻结原模型权重，仅训练少量低秩矩阵来模拟任务适配所需的参数更新。它参数量仅为全量微调的 0.1%-1%，大幅降低显存占用和训练成本，且推理时可合并权重无额外延迟。<br>在游戏领域，能快速微调图生图模型生成风格统一的角色装备、场景素材，或微调对话模型让 NPC 生成符合设定的自然台词，适配小团队高效开发需求。</p>
+<h2 id="MVC、MVP、MVVM-的区别是什么？"><a href="#MVC、MVP、MVVM-的区别是什么？" class="headerlink" title="MVC、MVP、MVVM 的区别是什么？"></a>MVC、MVP、MVVM 的区别是什么？</h2><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>组件职责</th>
+<th>组件关系</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MVC</td>
+<td>Model（数据）<br>View（界面）<br>Controller（逻辑）</td>
+<td>Controller 直接操作 Model 和 View</td>
+<td>简单直观，适合小型项目；Controller 可能变得臃肿</td>
+</tr>
+<tr>
+<td>MVP</td>
+<td>Model（数据）<br>View（界面）<br>Presenter（逻辑）</td>
+<td>Presenter 直接操作 Model，间接更新 View</td>
+<td>Presenter 可测试性强；View 依赖 Presenter，增加耦合</td>
+</tr>
+<tr>
+<td>MVVM</td>
+<td>Model（数据）<br>View（界面）<br>ViewModel（逻辑）</td>
+<td>ViewModel 直接操作 Model，通过数据绑定更新 View</td>
+<td>双向绑定简化 UI 更新；学习曲线较陡峭，可能引入性能问题</td>
+</tr>
+</tbody></table>
+<ul>
+<li>MVP的Preseter和MVVM的ViewModel在职责上非常相似，都是处理业务逻辑和数据交互的中介，但MVVM通过数据绑定机制让ViewModel直接更新View，减少了Presenter中大量的UI更新代码，使得代码更简洁、可测试性更强。MVVM适合复杂UI交互较多的项目，而MVP则更适合简单UI或需要严格分离测试的场景。</li>
+</ul>
+<h2 id="GPU-渲染流水线的完整阶段？"><a href="#GPU-渲染流水线的完整阶段？" class="headerlink" title="GPU 渲染流水线的完整阶段？"></a>GPU 渲染流水线的完整阶段？</h2><p><strong>参考答案：</strong></p>
+<p>GPU 渲染管线（Rendering Pipeline）是 GPU 执行图形渲染的完整流程：</p>
+<p><strong>应用阶段（CPU 侧）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 应用阶段（Application Stage）</span><br><span class="line">   → 视锥体裁剪（Frustum Culling）</span><br><span class="line">   → 批次合批（Draw Call Batching）</span><br><span class="line">   → 输出 Draw Call + 顶点数据到 GPU</span><br></pre></td></tr></table></figure>
+
+<p><strong>几何阶段（GPU 顶点着色器）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2. 顶点着色器（Vertex Shader）</span><br><span class="line">   → 模型空间 → 世界空间 → 视图空间 → 齐次裁剪空间</span><br><span class="line">   → 顶点变换：LocalMatrix × WorldMatrix × ViewMatrix × ProjectionMatrix</span><br><span class="line"></span><br><span class="line">3. 曲面细分（Tessellation，可选）</span><br><span class="line">   → Hull Shader → Tessellator → Domain Shader</span><br><span class="line"></span><br><span class="line">4. 几何着色器（Geometry Shader，可选）</span><br><span class="line">   → 以图元为单位处理，可生成/销毁图元</span><br></pre></td></tr></table></figure>
+
+<p><strong>光栅化阶段（Rasterization）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">5. 图元装配 &amp; 裁剪</span><br><span class="line">   → Clipping（齐次空间裁剪）</span><br><span class="line">   → Perspective Divide → NDC → Viewport Transform</span><br><span class="line"></span><br><span class="line">6. 背面剔除（Back-face Culling）</span><br><span class="line">   → 根据顶 点环绕顺序（顺时针/逆时针）剔除背面</span><br><span class="line"></span><br><span class="line">7. 光栅化（Rasterization）</span><br><span class="line">   → 离散化：点/线/三角形 → 片段（Fragment）</span><br><span class="line">   → 视口变换：NDC → Screen Space</span><br></pre></td></tr></table></figure>
+
+<p><strong>片段&#x2F;像素阶段：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">8. 片段着色器（Fragment / Pixel Shader）</span><br><span class="line">   → 逐像素着色：光照计算、纹理采样、颜色输出</span><br><span class="line"></span><br><span class="line">9. 逐片段操作（Per-Fragment Operations）</span><br><span class="line">   → 深度测试（Depth Test / Z-Test）</span><br><span class="line">   → 模板测试（Stencil Test）</span><br><span class="line">   → 混合（Alpha Blending）</span><br><span class="line">   → 输出到 Framebuffer</span><br></pre></td></tr></table></figure>
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

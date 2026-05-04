@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/2024/09/01/20240901.OpenColorIOColorManagementNotes/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="OpenColorIO Color Management System - Study NotesWhat Is OpenColorIO (OCIO)OpenColorIO (OCIO) is a complete color management solution aimed primarily at film pr">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/2024/09/01/20240901.OpenColorIOColorManagementNotes/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+        <meta property="og:title" content="OpenColorIO Color Management System - Study Notes">
+    
+    
+        <meta property="og:description" content="OpenColorIO Color Management System - Study NotesWhat Is OpenColorIO (OCIO)OpenColorIO (OCIO) is a complete color management solution aimed primarily at film pr">
+    
+    
+    
+        <meta property="article:published_time" content="2024-09-01T07:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.533Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="OpenColorIO Color Management System - Study Notes">
+    
+    
+        <meta name="twitter:description" content="OpenColorIO Color Management System - Study NotesWhat Is OpenColorIO (OCIO)OpenColorIO (OCIO) is a complete color management solution aimed primarily at film pr">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2024/09/01/20240901.OpenColorIOColorManagementNotes/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2024/09/01/20240901.OpenColorIOColorManagementNotes/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2024/09/01/20240901.OpenColorIOColorManagementNotes/">
+    
+
+    <!-- Title -->
+    
+    <title>OpenColorIO Color Management System - Study Notes - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2024-09-01-20240901-OpenColorIOColorManagementNotes-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/" class="previous" data-title="虚拟制作色彩校准及HDR制作工作流 (软件作品)"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2024/09/01/20240901.OpenColorIOColorManagementNotes/" class="next" data-title="OpenColorIO 色彩管理系..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">OpenColorIO Color Management System - Study Notes</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="OpenColorIO-Color-Management-System-Study-Notes"><a href="#OpenColorIO-Color-Management-System-Study-Notes" class="headerlink" title="OpenColorIO Color Management System - Study Notes"></a>OpenColorIO Color Management System - Study Notes</h1><h2 id="What-Is-OpenColorIO-OCIO"><a href="#What-Is-OpenColorIO-OCIO" class="headerlink" title="What Is OpenColorIO (OCIO)"></a>What Is OpenColorIO (OCIO)</h2><p>OpenColorIO (OCIO) is a complete color management solution aimed primarily at film production, with a particular focus on visual effects (VFX) and computer animation. It helps implement the management methods required for high-fidelity color imaging in modern computer graphics.</p>
+<h3 id="Core-Concepts"><a href="#Core-Concepts" class="headerlink" title="Core Concepts"></a>Core Concepts</h3><p>OCIO’s color science knowledge comes entirely from its execution of the transforms defined in an <strong>OCIO config file</strong>. These transforms can be:</p>
+<ul>
+<li>Defined by the end user in a custom OCIO config file</li>
+<li>Inherited from publicly available configs (such as ACES)</li>
+</ul>
+<p>By specifying the desired <code>config.ocio</code> file in your local environment, all OCIO-compatible applications and software libraries will recognize the color transform “universe” you’ve defined, and guide image data from one defined OCIO.ColorSpace to another.</p>
+<h2 id="OCIO-Architecture"><a href="#OCIO-Architecture" class="headerlink" title="OCIO Architecture"></a>OCIO Architecture</h2><h3 id="Configs"><a href="#Configs" class="headerlink" title="Configs"></a>Configs</h3><p>A config is the top-level entity, representing the entirety of the current color “universe.” Configs are serialized to <code>.ocio</code> files, read at runtime, and are typically used in a “read-only” context.</p>
+<p><strong>Example configs:</strong></p>
+<ul>
+<li><strong>ACES</strong> - The Academy of Motion Picture Arts and Sciences standardized color workflow</li>
+<li><strong>spi-vfx</strong> - Some VFX projects from Sony Pictures Imageworks (e.g., Spider-Man)</li>
+<li><strong>aces_1.0.3</strong> - ACES 1.0.3 stable release</li>
+<li><strong>aces_2.0.0+</strong> - ACES 2.0 config (built into OCIO 2.5+)</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> The OpenColorIO-Configs repository was archived as read-only in September 2025. It’s recommended to use the ACES config built into OCIO, or obtain configs from other sources.</p>
+</blockquote>
+<h3 id="ColorSpaces"><a href="#ColorSpaces" class="headerlink" title="ColorSpaces"></a>ColorSpaces</h3><p>A ColorSpace typically corresponds to:</p>
+<ul>
+<li>An input image state</li>
+<li>An output image state</li>
+<li>An image state used for internal processing</li>
+</ul>
+<p><strong>ColorSpace examples (from the ACES config):</strong></p>
+<ul>
+<li><code>aces</code> - HDR, scene-linear</li>
+<li><code>adx10</code> - Log-like density encoding space</li>
+<li><code>slogf35</code> - Sony F35 slog camera encoding</li>
+<li><code>rrt_srgb</code> - Baked display transform for sRGB displays</li>
+<li><code>rrt_p3dci</code> - Baked display transform for DCI-P3 displays</li>
+</ul>
+<h3 id="Transforms"><a href="#Transforms" class="headerlink" title="Transforms"></a>Transforms</h3><p>ColorSpaces contain an ordered list of transforms that define how to convert to and from the config’s “reference” space.</p>
+<p><strong>Transform types:</strong></p>
+<p><strong>OCIO 1.x &#x2F; 2.x common types:</strong></p>
+<ul>
+<li><strong>FileTransform</strong> - File-based transforms (1D LUT, 3D LUT, CLF&#x2F;CTF files, matrix files, etc.)</li>
+<li><strong>GroupTransform</strong> - Contains an ordered list of transforms</li>
+<li><strong>LookTransform</strong> - Color transform for applying creative looks</li>
+<li><strong>CDLTransform</strong> - ASC CDL (Color Decision List)</li>
+<li><strong>MatrixTransform</strong> - Matrix transform</li>
+<li><strong>LogTransform</strong> - Log&#x2F;anti-log transform</li>
+<li><strong>ExposureTransform</strong> - Exposure adjustment (in stops)</li>
+</ul>
+<p><strong>New types added in OCIO 2.0+:</strong></p>
+<ul>
+<li><strong>BuiltinTransform</strong> - Built-in transforms that require no external files (used extensively in the ACES 2.0 config)</li>
+<li><strong>ViewTransform</strong> - Display&#x2F;view transforms</li>
+<li><strong>NamedTransform</strong> - A standalone color transform not bound to a specific color space</li>
+<li><strong>ColorSpaceTransform</strong> - Color space conversion</li>
+<li><strong>AllocationTransform</strong> - Range allocation transform</li>
+<li><strong>GradingPrimaryTransform</strong> - Primary grading (brightness, contrast, saturation)</li>
+</ul>
+<h3 id="Processors"><a href="#Processors" class="headerlink" title="Processors"></a>Processors</h3><p>A processor represents one “baked” color conversion. When querying a processor, you specify two parameters:</p>
+<ul>
+<li>The source color space (colorspace_section)</li>
+<li>The destination color space (colorspace_section)</li>
+</ul>
+<blockquote>
+<p><strong>Major changes in OCIO 2.x:</strong></p>
+<ul>
+<li>New config file format (<code>.ocio</code> v2)</li>
+<li>New ViewTransform and DisplayView color space types</li>
+<li>New BuiltinTransform — use common transforms without external files</li>
+<li>Built-in ACES 2.0 config support</li>
+<li>Improved GPU code generation and performance optimizations</li>
+</ul>
+</blockquote>
+<p><strong>Code example (OCIO 1.x API):</strong></p>
+<blockquote>
+<p><strong>Note:</strong> The following example uses the OCIO 1.x API. OCIO 2.0+ has API changes but maintains backward compatibility.</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;OpenColorIO/OpenColorIO.h&gt;</span></span></span><br><span class="line"><span class="keyword">namespace</span> OCIO = OCIO_NAMESPACE;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Get the global OpenColorIO config</span></span><br><span class="line">    OCIO::ConstConfigRcPtr config = OCIO::<span class="built_in">GetCurrentConfig</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Get a processor</span></span><br><span class="line">    OCIO::ConstProcessorRcPtr processor = config-&gt;<span class="built_in">getProcessor</span>(<span class="string">&quot;adx10&quot;</span>, <span class="string">&quot;aces&quot;</span>);</span><br><span class="line">    OCIO::ConstCPUProcessorRcPtr cpu = processor-&gt;<span class="built_in">getDefaultCPUProcessor</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Wrap the image in a lightweight ImageDescription</span></span><br><span class="line">    <span class="function">OCIO::PackedImageDesc <span class="title">img</span><span class="params">(imageData, w, h, <span class="number">4</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Apply the color transform (in-place)</span></span><br><span class="line">    cpu-&gt;<span class="built_in">apply</span>(img);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span>(OCIO::Exception &amp; exception)</span><br><span class="line">&#123;</span><br><span class="line">    std::cerr &lt;&lt; <span class="string">&quot;OpenColorIO Error: &quot;</span> &lt;&lt; exception.<span class="built_in">what</span>() &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ACES-1-0-3-Color-Spaces-A-Detailed-Look"><a href="#ACES-1-0-3-Color-Spaces-A-Detailed-Look" class="headerlink" title="ACES 1.0.3 Color Spaces - A Detailed Look"></a>ACES 1.0.3 Color Spaces - A Detailed Look</h2><h3 id="ACES-Color-Spaces"><a href="#ACES-Color-Spaces" class="headerlink" title="ACES Color Spaces"></a>ACES Color Spaces</h3><table>
+<thead>
+<tr>
+<th>Color Space</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACES2065-1</td>
+<td>Core working and exchange space (AP0 primaries, linear, used for archiving)</td>
+</tr>
+<tr>
+<td>ACEScc</td>
+<td>Image editing space, pure log encoding (AP1 primaries)</td>
+</tr>
+<tr>
+<td>ACEScct</td>
+<td>Color correction transfer space, pseudo-log encoding (AP1 primaries, linear near black)</td>
+</tr>
+<tr>
+<td>ACESproxy</td>
+<td>Proxy working space, integer encoded</td>
+</tr>
+<tr>
+<td>ACEScg</td>
+<td>Scene-linear space for rendering (AP1 primaries)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>ACEScc vs ACEScct:</strong> Both use AP1 primaries, but ACEScc is pure log encoding suited for traditional grading workflows; ACEScct is pseudo-log encoded with a linear segment near black, more closely resembling native camera response.</p>
+</blockquote>
+<h3 id="Output-Color-Spaces"><a href="#Output-Color-Spaces" class="headerlink" title="Output Color Spaces"></a>Output Color Spaces</h3><table>
+<thead>
+<tr>
+<th>Color Space</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sRGB</td>
+<td>Standard monitor</td>
+</tr>
+<tr>
+<td>sRGB (D60 sim.)</td>
+<td>D60-simulated sRGB</td>
+</tr>
+<tr>
+<td>Rec.709</td>
+<td>HD television standard</td>
+</tr>
+<tr>
+<td>Rec.2020</td>
+<td>UHD television standard</td>
+</tr>
+<tr>
+<td>Rec.2020 ST2048 (1000 nits)</td>
+<td>HDR at 1000 nits</td>
+</tr>
+<tr>
+<td>DCDM</td>
+<td>Digital Cinema Distribution Master</td>
+</tr>
+<tr>
+<td>P3-D60</td>
+<td>DCI-P3 gamut, D60 white point</td>
+</tr>
+<tr>
+<td>P3-D60 ST2048 (1000&#x2F;2000&#x2F;4000 nits)</td>
+<td>HDR gamut, multiple brightness levels</td>
+</tr>
+</tbody></table>
+<h3 id="Input-Color-Spaces"><a href="#Input-Color-Spaces" class="headerlink" title="Input Color Spaces"></a>Input Color Spaces</h3><p>Input color spaces cover different camera manufacturers, gamut ranges, transfer functions, and camera parameter settings:</p>
+<p><strong>Naming conventions:</strong></p>
+<ul>
+<li><p><code>Manufacturer &#39;Format - Gamut&#39;</code> - Full conversion scheme</p>
+<ul>
+<li>Example: <code>ARRI &#39;V3 LogC (EI160) - Wide Gamut&#39;</code></li>
+<li>Example: <code>RED &#39;REDlogFilm - DRAGONcolor2&#39;</code></li>
+<li>Example: <code>Canon &#39;Canon-Log - DCI-P3 Daylight&#39;</code></li>
+</ul>
+</li>
+<li><p><code>Linear - Gamut</code> - Gamut conversion only, no transfer function applied</p>
+</li>
+<li><p><code>Curve - CurveName</code> - Transfer function only, no gamut conversion</p>
+</li>
+</ul>
+<p><strong>Supported manufacturers:</strong></p>
+<ul>
+<li>ARRI (LogC series)</li>
+<li>RED (REDlogFilm, REDgamma)</li>
+<li>Canon (C-Log)</li>
+<li>Panasonic (V-Log&#x2F;V-Gamut)</li>
+<li>Sony (S-Log)</li>
+<li>GoPro (experimental)</li>
+</ul>
+<h3 id="ADX-Color-Spaces"><a href="#ADX-Color-Spaces" class="headerlink" title="ADX Color Spaces"></a>ADX Color Spaces</h3><p>ADX (Academy Density Exchange) spaces are specifically for film scanning and printing workflows:</p>
+<ul>
+<li><strong>ADX10</strong> - 10-bit film scan</li>
+<li><strong>ADX16</strong> - 16-bit film scan</li>
+</ul>
+<p>Conversion schemes are generated based on the ACES CTL transform standard.</p>
+<h3 id="Functional-Role-Spaces-Roles"><a href="#Functional-Role-Spaces-Roles" class="headerlink" title="Functional Role Spaces (Roles)"></a>Functional Role Spaces (Roles)</h3><p>OCIO roles map abstract color space names to concrete implementations:</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Points To</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>color_picking</td>
+<td>Output - Rec.709</td>
+<td>Color picking</td>
+</tr>
+<tr>
+<td>color_timing</td>
+<td>ACEScc</td>
+<td>Color correction</td>
+</tr>
+<tr>
+<td>compositing_log</td>
+<td>ADX10</td>
+<td>Compositing log</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Raw</td>
+<td>Data channels</td>
+</tr>
+<tr>
+<td>default</td>
+<td>ACES2065-1</td>
+<td>Default space</td>
+</tr>
+<tr>
+<td>matte_paint</td>
+<td>ACEScc</td>
+<td>Matte painting</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>Raw</td>
+<td>Reference space</td>
+</tr>
+<tr>
+<td>scene_linear</td>
+<td>ACEScg</td>
+<td>Scene-linear</td>
+</tr>
+<tr>
+<td>texture_paint</td>
+<td>Raw</td>
+<td>Texture painting</td>
+</tr>
+<tr>
+<td>compositing_linear</td>
+<td>ACEScg</td>
+<td>Compositing linear</td>
+</tr>
+<tr>
+<td>rendering</td>
+<td>ACEScg</td>
+<td>Rendering</td>
+</tr>
+</tbody></table>
+<h3 id="Display-Devices-and-Views"><a href="#Display-Devices-and-Views" class="headerlink" title="Display Devices and Views"></a>Display Devices and Views</h3><p>The default config contains a display device called “ACES” with the following views:</p>
+<table>
+<thead>
+<tr>
+<th>View Name</th>
+<th>Color Space</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sRGB</td>
+<td>sRGB</td>
+</tr>
+<tr>
+<td>sRGB D60 sim.</td>
+<td>sRGB (D60 sim.)</td>
+</tr>
+<tr>
+<td>DCDM</td>
+<td>DCDM</td>
+</tr>
+<tr>
+<td>DCDM P3 gamut clip</td>
+<td>DCDM (P3 gamut clip)</td>
+</tr>
+<tr>
+<td>P3-D60</td>
+<td>P3-D60</td>
+</tr>
+<tr>
+<td>P3-D60 PQ 1000&#x2F;2000&#x2F;4000 nits</td>
+<td>P3-D60 PQ (1000&#x2F;2000&#x2F;4000 nits)</td>
+</tr>
+<tr>
+<td>P3-DCI</td>
+<td>P3-DCI</td>
+</tr>
+<tr>
+<td>Rec.2020</td>
+<td>Rec.2020</td>
+</tr>
+<tr>
+<td>Rec.2020 ST2048 1000 nits</td>
+<td>Rec.2020 ST2048 (1000 nits)</td>
+</tr>
+<tr>
+<td>Rec.709</td>
+<td>Rec.709</td>
+</tr>
+<tr>
+<td>Rec.709 D60 sim.</td>
+<td>Rec.709 (D60 sim.)</td>
+</tr>
+<tr>
+<td>Raw</td>
+<td>Raw</td>
+</tr>
+<tr>
+<td>Log</td>
+<td>ACEScc</td>
+</tr>
+</tbody></table>
+<h2 id="Sony-Pictures-Imageworks-SPI-Color-Pipeline-in-Practice"><a href="#Sony-Pictures-Imageworks-SPI-Color-Pipeline-in-Practice" class="headerlink" title="Sony Pictures Imageworks (SPI) Color Pipeline in Practice"></a>Sony Pictures Imageworks (SPI) Color Pipeline in Practice</h2><h3 id="File-Naming-Conventions"><a href="#File-Naming-Conventions" class="headerlink" title="File Naming Conventions"></a>File Naming Conventions</h3><p>Every image on disk has a substring in its <strong>filename</strong> that encodes color space information. All applications that load, write, or display images respect this convention.</p>
+<p><strong>Important:</strong></p>
+<ul>
+<li>File extensions and metadata are <strong>ignored</strong> for color processing purposes</li>
+<li>The file format extension does not imply a color space</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Filename</th>
+<th>Color Space</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>colorimage_lnf.exr</td>
+<td>lnf (linear float)</td>
+</tr>
+<tr>
+<td>dataimage_ncf.exr</td>
+<td>ncf (non-color float)</td>
+</tr>
+<tr>
+<td>plate_lg10.dpx</td>
+<td>lg10 (log 10-bit)</td>
+</tr>
+<tr>
+<td>texture_dt8.tif</td>
+<td>dt8 (diffuse texture 8-bit)</td>
+</tr>
+</tbody></table>
+<h3 id="Common-File-Formats"><a href="#Common-File-Formats" class="headerlink" title="Common File Formats"></a>Common File Formats</h3><table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Render output</td>
+<td>exr</td>
+</tr>
+<tr>
+<td>Render input (mipmap textures)</td>
+<td>exr, tif (txtif)</td>
+</tr>
+<tr>
+<td>Film negative (scanned)</td>
+<td>dpx</td>
+</tr>
+<tr>
+<td>Composite output</td>
+<td>dpx, exr</td>
+</tr>
+<tr>
+<td>On-set reference</td>
+<td>NEF, CR2, and other camera raw formats</td>
+</tr>
+<tr>
+<td>Painted textures</td>
+<td>psd, tif</td>
+</tr>
+<tr>
+<td>Output proxies</td>
+<td>jpg</td>
+</tr>
+</tbody></table>
+<h3 id="Rendering-Pipeline"><a href="#Rendering-Pipeline" class="headerlink" title="Rendering Pipeline"></a>Rendering Pipeline</h3><p><strong>Rendering and shading happen in scene-linear floating-point space:</strong></p>
+<ul>
+<li><strong>ln</strong> - Scene-linear (generic)</li>
+<li><strong>lnh</strong> - 16-bit half-float scene-linear</li>
+<li><strong>lnf</strong> - 32-bit full-float scene-linear</li>
+</ul>
+<p><strong>Rules:</strong></p>
+<ol>
+<li>All image inputs should be converted to ln before rendering<ul>
+<li>This is typically done at texture publish time</li>
+</ul>
+</li>
+<li>Renderer output is always in floating-point format</li>
+<li>Color output is typically stored as lnh (16-bit half-float)</li>
+<li>Data output (normals, depth data, etc.) is stored as ncf (“non-color” data, 32-bit full-float)</li>
+<li>Lossy compression is never used</li>
+</ol>
+<h3 id="Texture-Painting-Matte-Painting"><a href="#Texture-Painting-Matte-Painting" class="headerlink" title="Texture Painting &#x2F; Matte Painting"></a>Texture Painting &#x2F; Matte Painting</h3><p><strong>Texture painting workflow:</strong></p>
+<ol>
+<li><strong>Original texture filenames include color space information</strong></li>
+<li><strong>Color processing (linearization) is applied before mipmap generation</strong><ul>
+<li>This ensures energy conservation in the renderer</li>
+<li>If you process in the opposite order, the apparent intensity of texture values changes as objects move closer to or farther from the camera</li>
+</ul>
+</li>
+</ol>
+<p><strong>Texture type classification:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Texture Type</th>
+<th>Color Space Tag</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Data textures (bump, opacity, blend maps)</td>
+<td>nc (non-color) + bit depth</td>
+<td>e.g., skin_opacity_nc8.tif</td>
+</tr>
+<tr>
+<td>Diffuse textures</td>
+<td>dt (diffuse texture)</td>
+<td>The dt8 color space is designed so values don’t exceed 1.0 after linearization</td>
+</tr>
+<tr>
+<td>Environment maps (emissive)</td>
+<td>vd (video)</td>
+<td>May produce highlight values well above 1.0 after linearization</td>
+</tr>
+</tbody></table>
+<p><strong>Bit depth promotion:</strong></p>
+<ul>
+<li>Even if the original painted texture is only 8-bit, mipmap textures are stored as 16-bit floating-point images</li>
+<li>Linear textures require more storage space</li>
+</ul>
+<p><strong>Tools:</strong></p>
+<ul>
+<li>OpenImageIO’s <code>maketx</code> (linked to OpenColorIO)</li>
+<li>Source code available in the public OIIO repository</li>
+</ul>
+<h3 id="Compositing-Pipeline"><a href="#Compositing-Pipeline" class="headerlink" title="Compositing Pipeline"></a>Compositing Pipeline</h3><p><strong>Most compositing operations happen in scene-linear lnf color space:</strong></p>
+<ol>
+<li><p><strong>Input stage</strong></p>
+<ul>
+<li>All image inputs are linearized to lnf on load</li>
+<li>Custom input nodes make this process convenient</li>
+<li>Rendered elements (already stored as linear) require no processing</li>
+<li>Film negatives are linearized based on source type (lg10 for film scans, gn10 for Genesis, etc.)</li>
+</ul>
+</li>
+<li><p><strong>Output stage</strong></p>
+<ul>
+<li>All output images are de-linearized from lnf on write</li>
+<li>Custom output nodes make this process convenient</li>
+</ul>
+</li>
+<li><p><strong>Log data operations</strong></p>
+<ul>
+<li>Certain processing operations require log data</li>
+<li>Film resize, keying, degrain, etc.</li>
+<li>Each project specifies a color space suitable for this</li>
+<li>Artists don’t need to track which color space is appropriate</li>
+<li>The <strong>OCIOLogConvert node</strong> is always used for this purpose<ul>
+<li>In the OCIO config, this is specified using the ‘compositing_log’ role</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Color-Management-Best-Practices"><a href="#Color-Management-Best-Practices" class="headerlink" title="Color Management Best Practices"></a>Color Management Best Practices</h2><h3 id="Environment-Variables"><a href="#Environment-Variables" class="headerlink" title="Environment Variables"></a>Environment Variables</h3><ul>
+<li><code>$OCIO</code> - The environment variable is set during the “setshot” process before launching other applications</li>
+<li>Artists are not allowed to work across different projects without using a new shell + setshot</li>
+</ul>
+<h3 id="Color-Configs"><a href="#Color-Configs" class="headerlink" title="Color Configs"></a>Color Configs</h3><ul>
+<li>Color configs are project-specific</li>
+<li>While the list of color spaces may be project-specific, naming is kept as consistent as possible across projects</li>
+<li>Even if two projects don’t use exactly the same color spaces, they use the same names if the spaces serve similar purposes</li>
+</ul>
+<p><strong>Example:</strong> 10-bit scanned film negatives are labeled <code>lg10</code>. Even if two different projects use different capture film stocks and rely on different linearization curves, both are labeled lg10.</p>
+<h3 id="Cross-Project-Asset-Transfer"><a href="#Cross-Project-Asset-Transfer" class="headerlink" title="Cross-Project Asset Transfer"></a>Cross-Project Asset Transfer</h3><p><strong>There is no explicit guarantee that image assets copied across projects will transfer in a color-correct manner.</strong></p>
+<p><strong>Example:</strong> In the film scan example, linearized versions of scans processed on different projects may not match.</p>
+<p><strong>In practice, this isn’t a serious problem</strong> — color spaces that are convenient to copy (such as texture assets) happen to be defined similarly across project configs.</p>
+<h2 id="LUT-Generation-and-Usage"><a href="#LUT-Generation-and-Usage" class="headerlink" title="LUT Generation and Usage"></a>LUT Generation and Usage</h2><h3 id="Default-Resolutions"><a href="#Default-Resolutions" class="headerlink" title="Default Resolutions"></a>Default Resolutions</h3><ul>
+<li>3D LUT: 65x65x65</li>
+<li>1D LUT: 4096</li>
+</ul>
+<h3 id="OCIO-Internal-LUTs"><a href="#OCIO-Internal-LUTs" class="headerlink" title="OCIO Internal LUTs"></a>OCIO Internal LUTs</h3><ul>
+<li>LUTs used internally by OCIO are available from the repository</li>
+<li>Used for internal color processing</li>
+</ul>
+<h3 id="Pre-generated-LUTs"><a href="#Pre-generated-LUTs" class="headerlink" title="Pre-generated LUTs"></a>Pre-generated LUTs</h3><p>LUTs located in the <code>baked</code> directory can be used outside of OCIO.</p>
+<p><strong>LUT naming convention:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Output transform name] for [Input color space name].[extension]</span><br></pre></td></tr></table></figure>
+
+<p>Example: <code>sRGB (D60 sim.) for ACEScc.icc</code></p>
+<p><strong>Supported application formats:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>Application</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.3dl</td>
+<td>Autodesk Flame, Autodesk Lustre</td>
+</tr>
+<tr>
+<td>.lut</td>
+<td>SideFX Houdini</td>
+</tr>
+<tr>
+<td>.csp</td>
+<td>Autodesk Maya</td>
+</tr>
+<tr>
+<td>.icc</td>
+<td>Adobe Photoshop</td>
+</tr>
+</tbody></table>
+<h2 id="OpenColorIO-Internal-Processing-Architecture"><a href="#OpenColorIO-Internal-Processing-Architecture" class="headerlink" title="OpenColorIO Internal Processing Architecture"></a>OpenColorIO Internal Processing Architecture</h2><h3 id="Op-Abstraction"><a href="#Op-Abstraction" class="headerlink" title="Op Abstraction"></a>Op Abstraction</h3><p><strong>Why not rely on transforms to perform pixel processing directly?</strong></p>
+<ul>
+<li>FileTransform represents a wide range of image processing operations</li>
+<li>For example: A Houdini LUT format may include a log transform, a 1D LUT, and a 3D LUT all within a single file</li>
+<li>Creating lightweight processing operations (ops) is much simpler</li>
+</ul>
+<p><strong>Op interface:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">apply</span><span class="params">(<span class="type">float</span> * rgbaBuffer, <span class="type">long</span> numPixels)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>Given a packed float array and a specified pixel count, process them.</p>
+<p><strong>Op type examples:</strong></p>
+<ul>
+<li>Lut1DOp</li>
+<li>Lut3DOp</li>
+<li>MtxOffsetOp</li>
+<li>LogOp</li>
+</ul>
+<h3 id="Optimization-Flow"><a href="#Optimization-Flow" class="headerlink" title="Optimization Flow"></a>Optimization Flow</h3><ol>
+<li>A Transform converts itself into a list of Ops</li>
+<li>The Op list is optimized (folded with adjacent operations as appropriate, etc.)</li>
+<li>This is highly beneficial for optimization, since compositors typically have complex, branching image processing operation trees</li>
+</ol>
+<h3 id="CPU-Code-Path"><a href="#CPU-Code-Path" class="headerlink" title="CPU Code Path"></a>CPU Code Path</h3><ol>
+<li>The main Op list is optimized and stored inside the processor</li>
+<li>A small tile of pixels from the image is formatted into a contiguous RGBA block</li>
+<li><code>op-&gt;apply</code> is called in-place for each Op</li>
+</ol>
+<p><strong>Tile size:</strong> Optimized for compute (SSE) simplicity and performance, typically similar in size to an image scanline</p>
+<h3 id="GPU-Code-Path"><a href="#GPU-Code-Path" class="headerlink" title="GPU Code Path"></a>GPU Code Path</h3><p>The main Op list is divided into 3 ordered lists:</p>
+<ol>
+<li><strong>gpu-preops</strong> - Operations that can be resolved in shader code</li>
+<li><strong>gpu-postops</strong> - Operations that can be resolved in shader code</li>
+<li><strong>gpu-latticeops</strong> - Cannot be supported by shader code; baked into a 3D LUT</li>
+</ol>
+<p><strong>Allocation optimization:</strong></p>
+<ul>
+<li>Op stream metadata is analyzed between gpu-preops and gpu-latticeops</li>
+<li>An appropriate allocation is determined to minimize clamping, quantization, etc.</li>
+<li>Resolved by inserting a forward allocation at the end of the preops and a reverse allocation at the start of the lattice ops</li>
+</ul>
+<h2 id="Building-and-Installing"><a href="#Building-and-Installing" class="headerlink" title="Building and Installing"></a>Building and Installing</h2><h3 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h3><ul>
+<li><strong>OpenImageIO</strong> - <a target="_blank" rel="noopener" href="http://openimageio.org/">http://openimageio.org</a></li>
+<li><strong>OpenColorIO</strong> - <a target="_blank" rel="noopener" href="http://opencolorio.org/">http://opencolorio.org</a></li>
+<li><strong>CTL</strong> - <a target="_blank" rel="noopener" href="https://github.com/ampas/CTL">https://github.com/ampas/CTL</a></li>
+</ul>
+<h3 id="macOS-Build-Commands"><a href="#macOS-Build-Commands" class="headerlink" title="macOS Build Commands"></a>macOS Build Commands</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install OpenColorIO (current Homebrew method)</span></span><br><span class="line">brew install opencolorio</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install OpenImageIO</span></span><br><span class="line">brew install openimageio</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install CTL (required for ACES transforms)</span></span><br><span class="line">brew install ctl</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Note:</strong> The following are historical commands (now outdated) included for reference only:</p>
+<ul>
+<li><code>brew tap homebrew/science</code> — this tap was deprecated in 2023</li>
+<li><code>brew install --with-python</code> — compile options were removed in Homebrew 2.0+</li>
+<li>The <code>ociolutimage</code> tool is still available in OCIO 2.x, but the build process has been simplified</li>
+</ul>
+</blockquote>
+<h3 id="Getting-ACES-CTL-Source"><a href="#Getting-ACES-CTL-Source" class="headerlink" title="Getting ACES CTL Source"></a>Getting ACES CTL Source</h3><blockquote>
+<p><strong>Note:</strong> The ACES project has migrated to a new organization repository.</p>
+</blockquote>
+<p><strong>Official ACES repositories:</strong></p>
+<ul>
+<li><strong>ACES Central repository</strong>: <a target="_blank" rel="noopener" href="https://github.com/aces-aswf/aces">https://github.com/aces-aswf/aces</a></li>
+<li><strong>OpenColorIO ACES Config</strong>: <a target="_blank" rel="noopener" href="https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES">https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES</a></li>
+<li><strong>CTL runtime</strong>: <a target="_blank" rel="noopener" href="https://github.com/ampas/ctl">https://github.com/ampas/ctl</a></li>
+</ul>
+<p><strong>Historical versions (for reference only):</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ACES 1.0.3 historical version (old repository)</span></span><br><span class="line">git <span class="built_in">clone</span> --branch v1.0.3 https://github.com/ampas/aces-dev.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python-Config-Generation"><a href="#Python-Config-Generation" class="headerlink" title="Python Config Generation"></a>Python Config Generation</h3><p>Configs can be generated via the following Python package:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> aces_1.0.3/python</span><br></pre></td></tr></table></figure>
+
+<p><strong>User-customizable features:</strong></p>
+<ul>
+<li>1D LUT and 3D LUT resolution settings</li>
+<li>Custom Look integration</li>
+<li>Two generation modes for the OCIO display device and view list</li>
+<li>Shaper function selection: Log2 or Dolby PQ</li>
+</ul>
+<h2 id="Notes-on-Using-OCIO-in-UE5"><a href="#Notes-on-Using-OCIO-in-UE5" class="headerlink" title="Notes on Using OCIO in UE5"></a>Notes on Using OCIO in UE5</h2><h3 id="Known-Issues"><a href="#Known-Issues" class="headerlink" title="Known Issues"></a>Known Issues</h3><p><strong>UE5.3–5.4 has some known OpenColorIO-related issues:</strong></p>
+<ol>
+<li><strong>“OCIO Invalid” watermark error</strong> — When using the ACES OpenColorIO config, Composure output may display this error</li>
+<li><strong>Viewport color discrepancies</strong> — UE5.3 projects opened in UE5.4 may exhibit viewport color differences</li>
+<li><strong>Material Editor display issues</strong> — Some users report that HDR textures encoded as Linear with ACEScg color space may display incorrectly on sRGB monitors</li>
+</ol>
+<blockquote>
+<p><strong>Recommendation:</strong> When you encounter issues, check the latest discussions on the Epic official forums, or consider upgrading to a newer version of UE5.</p>
+</blockquote>
+<h3 id="Color-Space-Setup-Recommendations"><a href="#Color-Space-Setup-Recommendations" class="headerlink" title="Color Space Setup Recommendations"></a>Color Space Setup Recommendations</h3><p>When doing color management in UE:</p>
+<ol>
+<li>Set the working color space to ACES AP1&#x2F;ACEScg</li>
+<li>Load the OCIO config file</li>
+<li>Add color spaces in OCIO:<ul>
+<li>Lit</li>
+<li>OCIO Display</li>
+<li>Select the OCIO Asset</li>
+<li>From ACEScg to Rec.709 - ARRI ALF2 or ARRI Reveal</li>
+</ul>
+</li>
+</ol>
+<h2 id="Glossary"><a href="#Glossary" class="headerlink" title="Glossary"></a>Glossary</h2><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Transform</td>
+<td>A function that changes RGB(A) data (e.g., converting an image from scene-linear to sRGB)</td>
+</tr>
+<tr>
+<td>Reference space</td>
+<td>The connecting space between color spaces</td>
+</tr>
+<tr>
+<td>Colorspace</td>
+<td>A meaningful space that can be converted to and from the reference space</td>
+</tr>
+<tr>
+<td>Display</td>
+<td>A virtual or physical display device (e.g., an sRGB display)</td>
+</tr>
+<tr>
+<td>View</td>
+<td>A meaningful view of the reference space on a display device</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>An abstractly named color space</td>
+</tr>
+<tr>
+<td>Look</td>
+<td>A color transform that applies a creative look</td>
+</tr>
+</tbody></table>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><h3 id="Official-Documentation"><a href="#Official-Documentation" class="headerlink" title="Official Documentation"></a>Official Documentation</h3><ul>
+<li><strong>OpenColorIO official docs</strong>: <a target="_blank" rel="noopener" href="https://opencolorio.readthedocs.io/">https://opencolorio.readthedocs.io</a></li>
+<li><strong>ACES Central official repository</strong>: <a target="_blank" rel="noopener" href="https://github.com/aces-aswf/aces">https://github.com/aces-aswf/aces</a></li>
+<li><strong>OpenColorIO-Config-ACES</strong>: <a target="_blank" rel="noopener" href="https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES">https://github.com/AcademySoftwareFoundation/OpenColorIO-Config-ACES</a></li>
+<li><strong>OpenColorIO GitHub</strong>: <a target="_blank" rel="noopener" href="https://github.com/AcademySoftwareFoundation/OpenColorIO">https://github.com/AcademySoftwareFoundation/OpenColorIO</a></li>
+</ul>
+<h3 id="Classic-Documents"><a href="#Classic-Documents" class="headerlink" title="Classic Documents"></a>Classic Documents</h3><ul>
+<li>Jeremy Selan’s “Cinematic Color” document</li>
+<li>Sony Pictures Imageworks color pipeline documentation</li>
+<li><a target="_blank" rel="noopener" href="https://opencolorio.readthedocs.io/en/latest/configurations/spi_vfx.html">SPI-VFX Config Documentation</a></li>
+</ul>
+<h3 id="Historical-References-Archived"><a href="#Historical-References-Archived" class="headerlink" title="Historical References (Archived)"></a>Historical References (Archived)</h3><ul>
+<li>OpenColorIO-Configs repository (archived September 2025)</li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/Color-Management/" data-i18n-tag="Color Management">Color Management</a> <a href="/tags/Film-Production/" data-i18n-tag="Film Production">Film Production</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>

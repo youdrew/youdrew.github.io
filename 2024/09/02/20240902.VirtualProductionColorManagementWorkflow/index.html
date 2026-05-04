@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the productio">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+        <meta property="og:title" content="Virtual Production Color Calibration and HDR Production Workflow (Software Project)">
+    
+    
+        <meta property="og:description" content="In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the productio">
+    
+    
+    
+        <meta property="article:published_time" content="2024-09-02T04:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-04T11:36:14.533Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="Virtual Production Color Calibration and HDR Production Workflow (Software Project)">
+    
+    
+        <meta name="twitter:description" content="In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the productio">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
+        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
+        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
+    
+
+    <!-- Title -->
+    
+    <title>Virtual Production Color Calibration and HDR Production Workflow (Software Project) - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2024-09-02-20240902-VirtualProductionColorManagementWorkflow-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="false">
+
+    <section class="top" style="background: url('/img/default_cover_detail.jpg');">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2024/12/21/20241221.OpenVPCalWorkflow/" class="previous" data-title="OpenVPCal流程文档"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/" class="next" data-title="虚拟制作色彩校准及HDR制作工作流..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Virtual Production Color Calibration and HDR Production Workflow (Software Project)</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <p>In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the production pipeline faces numerous challenges — from differences in production standards (SDR for asset creation) and display devices (LED walls, art monitors, cameras, on-set monitors), to the varying color spaces and color management systems across different DCC tools like Unreal Engine, Nuke, Maya, and DaVinci Resolve.</p>
+<div style="display: flex; justify-content: center; margin: 24px 0;">
+  <figure style="width: min(100%, 960px); margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_004432.png" alt="" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+  </figure>
+</div>
+
+<p>To tackle these challenges, I designed a complete virtual production color calibration and HDR production workflow built on ACES, OCIO (OpenColorIO), OVC (OpenVPCal), and Unreal Engine. The system covers a wide range of color algorithm solutions, hardware-software integration workflows, and pipeline optimizations — all aimed at delivering an efficient, reliable color management solution while pushing image quality higher through HDR output.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010101.gif" alt="Asset HDR monitoring" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Asset HDR monitoring</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010102.gif" alt="Editor Python virtual environment auto-deployment" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Editor Python virtual environment auto-deployment</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010103.gif" alt="HDR asset standards editor tool" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR asset standards editor tool</figcaption>
+  </figure>
+</div>
+
+
+<p>This workflow comprises two software tools (a calibration application and an art monitor application), along with an industrialized pipeline built around hardware integration. Compared to solutions from vendors like SONY and ARRI, this approach offers better cost-effectiveness, a smoother user experience, and stronger adaptability — and has already been successfully deployed on multiple virtual production projects.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010105.gif" alt="Automated calibration verification" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Automated calibration verification</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010104.gif" alt="Multi-screen unified display" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Multi-screen unified display</figcaption>
+  </figure>
+  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010100.gif" alt="Post-calibration result comparison" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Post-calibration result comparison</figcaption>
+  </figure>
+</div>
+
+<p><strong>This solution enables a fully end-to-end HDR production pipeline:</strong></p>
+<ol>
+<li>HDR monitoring during pre-production (Unreal Engine, art monitors) or automatic texture upconversion;</li>
+<li>HDR monitoring during shooting (camera, on-set monitors) + LED HDR wall display + multi-screen HDR color calibration for unified display consistency;</li>
+<li>HDR monitoring for post-production footage review.</li>
+</ol>
+<ul>
+<li><strong>This HDR solution is the first fully end-to-end HDR workflow in the Chinese virtual production industry to go live on an actual production.</strong></li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/Software-Projects/" data-i18n-tag="Software Projects">Software Projects</a> <a href="/tags/Unreal-Engine/" data-i18n-tag="Unreal Engine">Unreal Engine</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/Color-Management/" data-i18n-tag="Color Management">Color Management</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
