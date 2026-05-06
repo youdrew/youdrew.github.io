@@ -9,14 +9,14 @@
     <atom:link href="https://youdrew.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 04 May 2026 11:36:14 GMT</pubDate>
+    <pubDate>Wed, 06 May 2026 11:07:21 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
-      <link>https://youdrew.github.io/zh-CN/2026/05/04/20250801.UEConceptScrapbox/</link>
-      <guid>https://youdrew.github.io/zh-CN/2026/05/04/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Mon, 04 May 2026 11:36:14 GMT</pubDate>
+      <link>https://youdrew.github.io/zh-CN/2026/05/06/20250801.UEConceptScrapbox/</link>
+      <guid>https://youdrew.github.io/zh-CN/2026/05/06/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Wed, 06 May 2026 11:07:21 GMT</pubDate>
       
         
         
@@ -31,15 +31,15 @@
       
       
       
-      <comments>https://youdrew.github.io/zh-CN/2026/05/04/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/zh-CN/2026/05/06/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title></title>
-      <link>https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/</link>
-      <guid>https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Mon, 04 May 2026 11:36:14 GMT</pubDate>
+      <link>https://youdrew.github.io/2026/05/06/20250801.UEConceptScrapbox/</link>
+      <guid>https://youdrew.github.io/2026/05/06/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Wed, 06 May 2026 11:07:21 GMT</pubDate>
       
         
         
@@ -54,7 +54,7 @@
       
       
       
-      <comments>https://youdrew.github.io/2026/05/04/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/05/06/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
@@ -83,9 +83,9 @@
       
       <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
-      
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       <category domain="https://youdrew.github.io/tags/Model-Context-Protocol/">Model Context Protocol</category>
       
@@ -119,9 +119,9 @@
       
       <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
-      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
-      
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       <category domain="https://youdrew.github.io/tags/Model-Context-Protocol/">Model Context Protocol</category>
       
@@ -153,8 +153,6 @@
       
       <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
       
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
-      
       <category domain="https://youdrew.github.io/tags/LangGraph/">LangGraph</category>
       
       <category domain="https://youdrew.github.io/tags/CrewAI/">CrewAI</category>
@@ -162,6 +160,8 @@
       <category domain="https://youdrew.github.io/tags/LlamaIndex/">LlamaIndex</category>
       
       <category domain="https://youdrew.github.io/tags/Dify/">Dify</category>
+      
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google-ADK/">Google ADK</category>
       
@@ -194,8 +194,6 @@
       
       <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
       
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
-      
       <category domain="https://youdrew.github.io/tags/LangGraph/">LangGraph</category>
       
       <category domain="https://youdrew.github.io/tags/CrewAI/">CrewAI</category>
@@ -203,6 +201,8 @@
       <category domain="https://youdrew.github.io/tags/LlamaIndex/">LlamaIndex</category>
       
       <category domain="https://youdrew.github.io/tags/Dify/">Dify</category>
+      
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google-ADK/">Google ADK</category>
       
@@ -514,9 +514,9 @@
       
       <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
-      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
-      
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       
       <comments>https://youdrew.github.io/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
@@ -546,9 +546,9 @@
       
       <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
-      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
-      
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
+      <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       
       <comments>https://youdrew.github.io/zh-CN/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
@@ -578,11 +578,11 @@
       
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
       
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://youdrew.github.io/tags/API/">API</category>
       
       <category domain="https://youdrew.github.io/tags/Subscription/">Subscription</category>
-      
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google/">Google</category>
       
@@ -615,11 +615,11 @@
       
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
       
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://youdrew.github.io/tags/API/">API</category>
       
       <category domain="https://youdrew.github.io/tags/Subscription/">Subscription</category>
-      
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google/">Google</category>
       

@@ -50,7 +50,7 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
     
         <meta property="article:published_time" content="2025-03-01T04:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-05-04T11:36:14.536Z">
+            <meta property="article:modified_time" content="2026-05-06T11:07:21.074Z">
         
     
     
@@ -213,7 +213,7 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <li><a target="_blank" rel="noopener" href="https://eagle.cool/">eagle</a>：一个素材和图片管理软件</li>
 </ul>
 <h2 id="💚-基础介绍"><a href="#💚-基础介绍" class="headerlink" title="💚 基础介绍"></a>💚 基础介绍</h2><h3 id="专有名词解释"><a href="#专有名词解释" class="headerlink" title="专有名词解释"></a>专有名词解释</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.sidefx.com/docs/houdini/assets/intro.html"><strong>HDA</strong></a>：Houdini的数字资产。如果掉了，需要去左上角的Asset -&gt; Install Asset Library</li>
+<li><a target="_blank" rel="noopener" href="https://www.sidefx.com/docs/houdini/assets/intro.html"><strong>HDA</strong></a>：Houdini的数字资产。如果掉了，需要去左上角的Asset -&gt; Install Asset Library。封装好的工具、程序化模型。</li>
 <li><strong>USD</strong>：Universal Scene Description，它是一种通用场景描述格式，由皮克斯开发的。简单来说，就是用来在不同软件和工具之间交换和共享 3D 数据的，能让多个部门协同工作，而且还支持非破坏性编辑呢。</li>
 <li><strong>烘焙（Baking）</strong>： 是一种将高精度模型的细节信息（如光影、纹理、材质属性等）计算并存储到低精度模型对应的纹理贴图上的技术流程。其核心目的是在保证视觉效果的前提下，降低模型在实时渲染（如游戏运行、交互场景）中的计算压力。</li>
 <li>Houdini 是 Y 轴向上的<strong>右手坐标系</strong></li>
@@ -226,6 +226,8 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <li><strong>.bgeo</strong>：Houdini 早期版本常用的独立几何文件</li>
 <li><strong>.hip</strong>（Houdini Project）：Houdini 的工程文件格式，保存了场景中所有节点、参数、连接关系和视图布局。它本质上是一个文本文件，可以用文本编辑器打开查看。还有一个加密变体 <strong>.hipnc</strong>（Non-Commercial），用于非商业版 Houdini 保存的工程</li>
 <li><strong>$HIP</strong>&#x2F;geo：经常会看到$HIP这种路径表示，代表当前选择的工作项目的根目录。</li>
+<li><strong>VOP Network</strong>（VEX Operator Network）：可视化编程环境，把 VEX 代码的逻辑变成节点连线的方式，不用手写代码就能创建着色器、材质和几何体操作。和 Attribute Wrangle 做的是同一件事，只是交互方式不同。</li>
+<li><strong>VDB</strong>：开源跨平台格式，稀疏体积格式。Houdini支持最好。最小单位是体素（Voxel，3D空间最小的立体小方搁置）</li>
 </ul>
 <h3 id="文件夹结构"><a href="#文件夹结构" class="headerlink" title="文件夹结构"></a>文件夹结构</h3><center class="half">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728161728504.png" width="500" alt="Houdini 项目文件夹结构"/>
@@ -309,9 +311,15 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <center class="half">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728165927984.png" width="100" alt="节点功能图标"/>
 </center>
-#### 🗑️ 其他
+* 👇前面两个是给节点添加描述。第三个是换节点背景。最后一个是创建一个Subnet（子网格，相当于UE的节点整合功能）
 
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506143401303.png" alt="image-20260506143401303"></p>
 <ul>
+<li>👇Template：半透明当参考版；Display： 显示；Render：渲染时用谁；（和 Display 分开设置的好处：视口里看着是一个简化版，但渲染时用另一个精细版。Display 是给视口看的，Render 是给最终渲染器看的）；</li>
+<li>Lock：锁住缓存，不再重算；Bypass：临时跳过这个节点；</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506190250271.png" alt="image-20260506190250271"></p>
+<h4 id="🗑️-其他"><a href="#🗑️-其他" class="headerlink" title="🗑️ 其他"></a>🗑️ 其他</h4><ul>
 <li>Houdini Console</li>
 </ul>
 <center class="half">
@@ -332,14 +340,32 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <li><strong>U</strong> 退出节点</li>
 <li><strong>I</strong> 进入节点</li>
 <li><strong>O</strong> 节点定位</li>
+<li>Shift+O 新建一个描述框</li>
 </ul>
 <h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><ul>
 <li><code>$HIP</code>：相对于 Hip 文件的位置</li>
 </ul>
-<h2 id="❤️-各种节点"><a href="#❤️-各种节点" class="headerlink" title="❤️ 各种节点"></a>❤️ 各种节点</h2><h3 id="树干"><a href="#树干" class="headerlink" title="树干"></a>树干</h3><ul>
-<li><strong>Curve</strong>：用来画曲线的节点。但是作者说他更倾向于使用 <strong>add</strong> 这个节点，因为这个节点可以更精确地控制每一个点的位置。然后进到Polygons页面里，将这些节点调成 by group 连成一起。</li>
-<li><strong>copy and transform&#x2F;transform</strong>：这两个节点可以用来调整模型的整体位置。</li>
-<li><strong>Resample</strong> 是把曲线从 NURBS 或 Bezier 曲线转换为 Polygon 曲线的节点。主要用来做曲线细分，重采用的功能。</li>
+<h3 id="各种节点"><a href="#各种节点" class="headerlink" title="各种节点"></a>各种节点</h3><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
+<li><strong>Merge</strong>：将多个输入的几何体<strong>物理合并</strong>为一个整体，是真正意义上的”合在一起”。</li>
+<li><strong>Group Create</strong>：只是给几何体中的点&#x2F;面<strong>打标签</strong>（创建一个命名的选择集），并不会合并几何体。它只传递第一个输入的几何体，第二个输入仅用作边界框参考。</li>
+</ul>
+<blockquote>
+<p>简单记：<strong>合并几何体用 Merge，命名选择集用 Group Create</strong>。想接合两个分支的模型，应该用 Merge。</p>
+<p>“边界框参考”是什么意思？Group Create 的一种常见用法是：用一个物体的范围去框选另一个物体的点。</p>
+</blockquote>
+<ul>
+<li><strong>VOP Network</strong>（类型名 <code>attribvop</code>）：可视化编程节点，双击进去可以自由添加、删除、连线子节点，完全自定义逻辑。类型名带 <code>vop</code> 的就是这类。VEX的节点版</li>
+<li><strong>封装型节点</strong>（如 <code>attribadjustfloat</code>）：内部也有节点结构，但是封装锁定好的，只能通过外部参数面板调节，不能改内部结构。这类节点本质是官方做好的 HDA，存放在 Houdini 安装目录的 <code>otls</code> 文件夹中。自己也可以通过选中节点 → Create Subnet → Create Digital Asset 来封装自己的 HDA。</li>
+</ul>
+<h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><ul>
+<li><p><strong>Curve</strong>：用来画曲线的节点。但是作者说他更倾向于使用 <strong>add</strong> 这个节点，因为这个节点可以更精确地控制每一个点的位置。然后进到Polygons页面里，将这些节点调成 by group 连成一起。</p>
+</li>
+<li><p><strong>copy and transform&#x2F;transform</strong>：这两个节点可以用来调整模型的整体位置。</p>
+</li>
+<li><p><strong>Resample</strong> 是把曲线从 NURBS 或 Bezier 曲线转换为 Polygon 曲线的节点。主要用来做曲线细分，重采用的功能。</p>
+</li>
+<li><p><strong>Sweep</strong>：拿一个截面形状沿着路径曲线”扫”过去，生成管状几何体（把一个线变成有体积的）。</p>
+</li>
 </ul>
 <h2 id="🩵-Bug-排查"><a href="#🩵-Bug-排查" class="headerlink" title="🩵 Bug 排查"></a>🩵 Bug 排查</h2><h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h4 id="找不到的节点"><a href="#找不到的节点" class="headerlink" title="找不到的节点"></a>找不到的节点</h4><p>可以用搜索功能找到对应没有 Cache 的文件</p>
 <p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727014420718.png" alt="找不到节点时的搜索示意"></p>
