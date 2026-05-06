@@ -50,7 +50,7 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
     
         <meta property="article:published_time" content="2025-03-01T04:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-05-06T13:46:41.662Z">
+            <meta property="article:modified_time" content="2026-05-06T14:17:43.552Z">
         
     
     
@@ -359,16 +359,14 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <p>“边界框参考”是什么意思？Group Create 的一种常见用法是：用一个物体的范围去框选另一个物体的点。</p>
 </blockquote>
 <ul>
-<li><p><strong>VOP Network</strong>（类型名 <code>attribvop</code>）：可视化编程节点，双击进去可以自由添加、删除、连线子节点，完全自定义逻辑。类型名带 <code>vop</code> 的就是这类。VEX的节点版</p>
-</li>
-<li><p><strong>封装型节点</strong>（如 <code>attribadjustfloat</code>）：内部也有节点结构，但是封装锁定好的，只能通过外部参数面板调节，不能改内部结构。这类节点本质是官方做好的 HDA，存放在 Houdini 安装目录的 <code>otls</code> 文件夹中。自己也可以通过选中节点 → Create Subnet → Create Digital Asset 来封装自己的 HDA。</p>
-</li>
-<li><p><strong>File Cache</strong>：它的核心作用就是把计算结果存到硬盘上，以后直接从硬盘读取，不再重新计算。如果开 Load from Disk &#x3D; 读存档，也就是说，上游节点不管怎么变，在 FileCache这边都不会改变。</p>
-</li>
+<li><strong>VOP Network</strong>（类型名 <code>attribvop</code>）：可视化编程节点，双击进去可以自由添加、删除、连线子节点，完全自定义逻辑。类型名带 <code>vop</code> 的就是这类。VEX的节点版</li>
+<li><strong>封装型节点</strong>（如 <code>attribadjustfloat</code>）：内部也有节点结构，但是封装锁定好的，只能通过外部参数面板调节，不能改内部结构。这类节点本质是官方做好的 HDA，存放在 Houdini 安装目录的 <code>otls</code> 文件夹中。自己也可以通过选中节点 → Create Subnet → Create Digital Asset 来封装自己的 HDA。</li>
+<li><strong>File Cache</strong>：它的核心作用就是把计算结果存到硬盘上，以后直接从硬盘读取，不再重新计算。如果开 Load from Disk &#x3D; 读存档，也就是说，上游节点不管怎么变，在 FileCache这边都不会改变。</li>
+<li><strong>Clean</strong>：清理几何体的拓扑问题，比如零面积的退化面、重叠的点、反转的法线、无效的边等。程序化建模中经常产生这些”脏数据”，Clean 就是把它们修好。</li>
+<li><strong>Fuse</strong>：把距离足够近的多个点”焊”成一个点。多边形经过布尔运算、VDB 转换等操作后，本来连在一起的边可能裂开——顶点位置几乎一样但实际是独立的点。Fuse 通过设置一个距离阈值（如 0.01）把这些”几乎重合”的点合并。</li>
 <li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506195849535.png" alt="image-20260506195849535" style="zoom:50%;" />
 这种淡绿色的节点代表的是从其他地方引用过来的实例，而不是独立创建的节点。</li>
-<li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506200413703.png" alt="image-20260506200413703" style="zoom:50%;" />
-**Null** 就是一个空节点，不对数据做任何处理，直接透传。它的存在纯粹是组织/标记用途。</li>
+<li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506200413703.png" alt="image-20260506200413703" style="zoom: 33%;" /><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506215729584.png" alt="image-20260506215729584"><br><strong>Null</strong> 就是一个空节点，不对数据做任何处理。它的存在纯粹是组织&#x2F;标记用途。可以配合着Object Merge节点实现跨节点的“远距离抓取”，根据节点名字作为参数进行引用。</li>
 </ul>
 <h4 id="UV"><a href="#UV" class="headerlink" title="UV"></a>UV</h4><ul>
 <li><strong>autouv</strong>：有些模型在变形之后，原来的 uv不适用了，所以要重新使用一下。</li>
@@ -381,7 +379,13 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 </ul>
 <h4 id="山"><a href="#山" class="headerlink" title="山"></a>山</h4><ul>
 <li><strong>mountain</strong>：Mountain 节点使用程序化噪声对几何体表面进行随机位移，让光滑的球体变成不规则的有机形态。</li>
-<li></li>
+</ul>
+<h4 id="VDB"><a href="#VDB" class="headerlink" title="VDB"></a>VDB</h4><p>这三类节点通常形成循环：<code>多边形 → [VDB from Polygons] → VDB体积 → [VDB Combine] → 处理后的VDB → [Convert VDB] → 多边形</code>。之所以要绕一圈 VDB 而不是直接在多边形上做布尔，是因为多边形布尔容易出破面、翻转法线等问题，而 VDB 布尔永远干净。</p>
+<ul>
+<li><strong>VDB from Polygons</strong>：把多边形网格转换成 VDB 体积（SDF 或 Fog）。可以理解为把一个实心 3D 模型”体素化”——记录每个小方块（体素）距离模型表面的距离。很多操作（布尔切割、碰撞检测、模拟）在体积空间里做比在多边形上做更方便、更稳定。</li>
+<li><strong>VDB Combine</strong>：对两个 VDB 做布尔运算（合并、相减、相交等）。比如：树的 VDB 减去某个形状的 VDB &#x3D; 树上被挖了个洞。</li>
+<li><strong>Convert VDB</strong>：把 VDB 体积转回多边形网格。和 VDB from Polygons 正好反过来。VDB 做完布尔&#x2F;变形等操作后，最终还是需要转回多边形才能渲染、贴材质。</li>
+<li><strong>Delete Small Parts</strong>（Labs）：删除几何体中太小的碎片&#x2F;孤立小岛。VDB 布尔、噪声变形等操作后经常产生肉眼几乎看不见的微小碎片，这个节点把它们清理掉。</li>
 </ul>
 <h2 id="🩵-Bug-排查"><a href="#🩵-Bug-排查" class="headerlink" title="🩵 Bug 排查"></a>🩵 Bug 排查</h2><h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h4 id="找不到的节点"><a href="#找不到的节点" class="headerlink" title="找不到的节点"></a>找不到的节点</h4><p>可以用搜索功能找到对应没有 Cache 的文件</p>
 <p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727014420718.png" alt="找不到节点时的搜索示意"></p>
@@ -450,7 +454,7 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 
 
 <div class="tags">
-    <a href="/zh-CN/tags/Computer-Graphics/" data-i18n-tag="Computer Graphics">Computer Graphics</a> <a href="/zh-CN/tags/Houdini/" data-i18n-tag="Houdini">Houdini</a> <a href="/zh-CN/tags/Technical-Art/" data-i18n-tag="Technical Art">Technical Art</a>
+    <a href="/zh-CN/tags/Houdini/" data-i18n-tag="Houdini">Houdini</a> <a href="/zh-CN/tags/Technical-Art/" data-i18n-tag="Technical Art">Technical Art</a> <a href="/zh-CN/tags/Computer-Graphics/" data-i18n-tag="Computer Graphics">Computer Graphics</a>
 </div>
 
 
