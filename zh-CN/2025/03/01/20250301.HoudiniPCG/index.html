@@ -50,7 +50,7 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
     
         <meta property="article:published_time" content="2025-03-01T04:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-05-06T14:17:43.552Z">
+            <meta property="article:modified_time" content="2026-05-06T18:10:10.072Z">
         
     
     
@@ -234,6 +234,74 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <blockquote>
 <p>简单记：<strong>Polygon 是用小平面拼出来的，面越多越光滑；NURBS 是用数学公式算出来的，天然就是光滑曲面。</strong> 在 Houdini 里，Sphere 节点的 Primitive Type 可以选择用哪种方式生成球体。</p>
 </blockquote>
+<h3 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h3><p>Houdini 里每种任务有自己独立的上下文（Context），每个上下文对应不同类型的节点：</p>
+<table>
+<thead>
+<tr>
+<th>上下文</th>
+<th>路径前缀</th>
+<th>处理什么</th>
+<th>典型节点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SOP</strong>（Surface Operator）</td>
+<td><code>/obj/geo1/</code></td>
+<td>几何体建模</td>
+<td>line, sweep, fuse, copytopoints, wrangle</td>
+</tr>
+<tr>
+<td><strong>OBJ</strong>（Object）</td>
+<td><code>/obj/</code></td>
+<td>场景中的物体容器、相机</td>
+<td>geo, cam, light</td>
+</tr>
+<tr>
+<td><strong>LOP</strong>（Lighting Operator）</td>
+<td><code>/stage/</code></td>
+<td>灯光、材质、USD 场景</td>
+<td>karmarendersettings, materiallibrary</td>
+</tr>
+<tr>
+<td><strong>ROP</strong>（Render Output Operator）</td>
+<td><code>/out/</code></td>
+<td>渲染输出</td>
+<td>mantra, karma, rop_fbx</td>
+</tr>
+<tr>
+<td><strong>COP</strong>（Composite Operator）</td>
+<td><code>/img/</code></td>
+<td>图像合成处理</td>
+<td>类似 Photoshop 的节点</td>
+</tr>
+<tr>
+<td><strong>CHOP</strong>（Channel Operator）</td>
+<td><code>/chop/</code></td>
+<td>动画曲线、音频通道</td>
+<td>运动数据、程序化动画</td>
+</tr>
+<tr>
+<td><strong>TOP</strong>（Task Operator）</td>
+<td><code>/tasks/</code></td>
+<td>任务调度、批处理</td>
+<td>批量渲染、数据处理流水线</td>
+</tr>
+<tr>
+<td><strong>VOP</strong>（VEX Operator）</td>
+<td>嵌套在 SOP&#x2F;LOP 内</td>
+<td>可视化编程 VEX</td>
+<td>attribvop</td>
+</tr>
+<tr>
+<td><strong>DOP</strong>（Dynamics Operator）</td>
+<td><code>/obj/dopnet1/</code></td>
+<td>动力学模拟</td>
+<td>粒子、流体、布料、刚体</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>简单记：<strong>SOP 建模型，LOP 打灯光上材质，ROP 输出渲染，DOP 做模拟。</strong> 这些上下文对应 Houdini 界面上不同的 Network View——切换到 <code>/stage</code> 就能看到 LOP 节点，切换到 <code>/out</code> 就能看到 ROP 节点，本质上是同一个编辑器，只是工作在不同的层级。</p>
+</blockquote>
 <h3 id="文件夹结构"><a href="#文件夹结构" class="headerlink" title="文件夹结构"></a>文件夹结构</h3><center class="half">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728161728504.png" width="500" alt="Houdini 项目文件夹结构"/>
 </center>
@@ -387,7 +455,12 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <li><strong>Convert VDB</strong>：把 VDB 体积转回多边形网格。和 VDB from Polygons 正好反过来。VDB 做完布尔&#x2F;变形等操作后，最终还是需要转回多边形才能渲染、贴材质。</li>
 <li><strong>Delete Small Parts</strong>（Labs）：删除几何体中太小的碎片&#x2F;孤立小岛。VDB 布尔、噪声变形等操作后经常产生肉眼几乎看不见的微小碎片，这个节点把它们清理掉。</li>
 </ul>
-<h2 id="🩵-Bug-排查"><a href="#🩵-Bug-排查" class="headerlink" title="🩵 Bug 排查"></a>🩵 Bug 排查</h2><h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h4 id="找不到的节点"><a href="#找不到的节点" class="headerlink" title="找不到的节点"></a>找不到的节点</h4><p>可以用搜索功能找到对应没有 Cache 的文件</p>
+<h2 id="🩵-Bug-排查"><a href="#🩵-Bug-排查" class="headerlink" title="🩵 Bug 排查"></a>🩵 Bug 排查</h2><h3 id="渲染不动-电脑卡死"><a href="#渲染不动-电脑卡死" class="headerlink" title="渲染不动 &#x2F; 电脑卡死"></a>渲染不动 &#x2F; 电脑卡死</h3><p>点击某个节点的蓝眼睛（Display）时，Houdini 会从源头到该节点依次计算整条链路。Houdini 有<strong>增量缓存机制</strong>：已经算过的节点结果会缓存在内存里，下次只要上游没变，就直接用缓存，只计算新的一小段。</p>
+<p>但如果直接跳到链路末尾的节点，中间所有节点都没有缓存，需要一口气全算。链路上如果包含大量 VDB 转换、UV 展开、Remesh、物理模拟（Vellum）等重操作，就会导致 CPU 跑满、内存爆满、C 盘被页面文件写满。</p>
+<blockquote>
+<p><strong>建议</strong>：不要直接点亮最终输出节点。从中间有 File Cache 的节点开始，逐个往下点亮，让 Houdini 利用增量缓存逐步计算。改了上游参数后，下游所有缓存会失效，需要重新计算。</p>
+</blockquote>
+<h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><h4 id="找不到的节点"><a href="#找不到的节点" class="headerlink" title="找不到的节点"></a>找不到的节点</h4><p>可以用搜索功能找到对应没有 Cache 的文件</p>
 <p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727014420718.png" alt="找不到节点时的搜索示意"></p>
 <h4 id="HDA-文件丢失的问题"><a href="#HDA-文件丢失的问题" class="headerlink" title="HDA 文件丢失的问题"></a>HDA 文件丢失的问题</h4><p>可以使用 Asset -&gt; Install Asset Library</p>
 <p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727023245912.png" alt="HDA 文件丢失处理"></p>
