@@ -9,14 +9,14 @@
     <atom:link href="https://youdrew.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 06 May 2026 11:58:29 GMT</pubDate>
+    <pubDate>Wed, 06 May 2026 12:14:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
       <link>https://youdrew.github.io/zh-CN/2026/05/06/20250801.UEConceptScrapbox/</link>
       <guid>https://youdrew.github.io/zh-CN/2026/05/06/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Wed, 06 May 2026 11:58:29 GMT</pubDate>
+      <pubDate>Wed, 06 May 2026 12:14:52 GMT</pubDate>
       
         
         
@@ -39,7 +39,7 @@
       <title></title>
       <link>https://youdrew.github.io/2026/05/06/20250801.UEConceptScrapbox/</link>
       <guid>https://youdrew.github.io/2026/05/06/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Wed, 06 May 2026 11:58:29 GMT</pubDate>
+      <pubDate>Wed, 06 May 2026 12:14:52 GMT</pubDate>
       
         
         
@@ -149,6 +149,8 @@
       
       <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
       
       <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
@@ -160,8 +162,6 @@
       <category domain="https://youdrew.github.io/tags/LlamaIndex/">LlamaIndex</category>
       
       <category domain="https://youdrew.github.io/tags/Dify/">Dify</category>
-      
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google-ADK/">Google ADK</category>
       
@@ -190,6 +190,8 @@
       
       <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
       
       <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
@@ -201,8 +203,6 @@
       <category domain="https://youdrew.github.io/tags/LlamaIndex/">LlamaIndex</category>
       
       <category domain="https://youdrew.github.io/tags/Dify/">Dify</category>
-      
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google-ADK/">Google ADK</category>
       
@@ -578,11 +578,11 @@
       
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
       
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
-      
       <category domain="https://youdrew.github.io/tags/API/">API</category>
       
       <category domain="https://youdrew.github.io/tags/Subscription/">Subscription</category>
+      
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google/">Google</category>
       
@@ -615,11 +615,11 @@
       
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
       
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
-      
       <category domain="https://youdrew.github.io/tags/API/">API</category>
       
       <category domain="https://youdrew.github.io/tags/Subscription/">Subscription</category>
+      
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google/">Google</category>
       

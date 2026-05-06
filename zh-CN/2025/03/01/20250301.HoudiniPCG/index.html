@@ -50,7 +50,7 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
     
         <meta property="article:published_time" content="2025-03-01T04:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-05-06T11:58:29.713Z">
+            <meta property="article:modified_time" content="2026-05-06T12:14:52.255Z">
         
     
     
@@ -359,10 +359,16 @@ HDA：Houdini的数字资产。如果掉了，需要去左上角的Asset -&amp;g
 <p>“边界框参考”是什么意思？Group Create 的一种常见用法是：用一个物体的范围去框选另一个物体的点。</p>
 </blockquote>
 <ul>
-<li><strong>VOP Network</strong>（类型名 <code>attribvop</code>）：可视化编程节点，双击进去可以自由添加、删除、连线子节点，完全自定义逻辑。类型名带 <code>vop</code> 的就是这类。VEX的节点版</li>
-<li><strong>封装型节点</strong>（如 <code>attribadjustfloat</code>）：内部也有节点结构，但是封装锁定好的，只能通过外部参数面板调节，不能改内部结构。这类节点本质是官方做好的 HDA，存放在 Houdini 安装目录的 <code>otls</code> 文件夹中。自己也可以通过选中节点 → Create Subnet → Create Digital Asset 来封装自己的 HDA。</li>
-<li><strong>File Cache</strong>：它的核心作用就是把计算结果存到硬盘上，以后直接从硬盘读取，不再重新计算。如果开 Load from Disk &#x3D; 读存档，也就是说，上游节点不管怎么变，在 FileCache这边都不会改变。</li>
-<li></li>
+<li><p><strong>VOP Network</strong>（类型名 <code>attribvop</code>）：可视化编程节点，双击进去可以自由添加、删除、连线子节点，完全自定义逻辑。类型名带 <code>vop</code> 的就是这类。VEX的节点版</p>
+</li>
+<li><p><strong>封装型节点</strong>（如 <code>attribadjustfloat</code>）：内部也有节点结构，但是封装锁定好的，只能通过外部参数面板调节，不能改内部结构。这类节点本质是官方做好的 HDA，存放在 Houdini 安装目录的 <code>otls</code> 文件夹中。自己也可以通过选中节点 → Create Subnet → Create Digital Asset 来封装自己的 HDA。</p>
+</li>
+<li><p><strong>File Cache</strong>：它的核心作用就是把计算结果存到硬盘上，以后直接从硬盘读取，不再重新计算。如果开 Load from Disk &#x3D; 读存档，也就是说，上游节点不管怎么变，在 FileCache这边都不会改变。</p>
+</li>
+<li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506195849535.png" alt="image-20260506195849535" style="zoom:50%;" />
+这种淡绿色的节点代表的是从其他地方引用过来的实例，而不是独立创建的节点。</li>
+<li><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506200413703.png" alt="image-20260506200413703" style="zoom:50%;" />
+**Null** 就是一个空节点，不对数据做任何处理，直接透传。它的存在纯粹是组织/标记用途。</li>
 </ul>
 <h4 id="UV"><a href="#UV" class="headerlink" title="UV"></a>UV</h4><ul>
 <li><strong>autouv</strong>：有些模型在变形之后，原来的 uv不适用了，所以要重新使用一下。</li>
