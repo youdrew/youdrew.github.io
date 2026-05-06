@@ -42,7 +42,7 @@ Entagma: A commerc">
     
         <meta property="article:published_time" content="2025-03-01T04:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-05-06T18:10:10.069Z">
+            <meta property="article:modified_time" content="2026-05-06T18:34:34.279Z">
         
     
     
@@ -201,22 +201,97 @@ Entagma: A commerc">
 <li><a target="_blank" rel="noopener" href="https://eagle.cool/">eagle</a>: An asset and image management tool</li>
 </ul>
 <h2 id="💚-Basic-Introduction"><a href="#💚-Basic-Introduction" class="headerlink" title="💚 Basic Introduction"></a>💚 Basic Introduction</h2><h3 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology"></a>Terminology</h3><ul>
-<li><a target="_blank" rel="noopener" href="https://www.sidefx.com/docs/houdini/assets/intro.html"><strong>HDA</strong></a>: Houdini Digital Asset. If an HDA goes missing, go to Asset -&gt; Install Asset Library in the top-left menu to reload it.</li>
+<li><a target="_blank" rel="noopener" href="https://www.sidefx.com/docs/houdini/assets/intro.html"><strong>HDA</strong></a>: Houdini Digital Asset. If an HDA goes missing, go to Asset -&gt; Install Asset Library in the top-left menu to reload it. Packaged tools and procedural models.</li>
 <li><strong>USD</strong>: Universal Scene Description — a universal scene format developed by Pixar. In short, it’s used to exchange and share 3D data between different software and tools, allowing multiple departments to collaborate, and it supports non-destructive editing.</li>
 <li><strong>Baking</strong>: A process where high-resolution model detail (lighting, textures, material properties, etc.) is computed and stored into texture maps that correspond to a lower-resolution model. The core purpose is to reduce the computational cost in real-time rendering (e.g., games, interactive scenes) while preserving visual fidelity.</li>
 <li>Houdini uses a <strong>right-handed coordinate system</strong> with Y-up</li>
 </ul>
 <center class="half">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250722154418915.png" width="200" alt="Houdini 坐标系"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250722154418915.png" width="200" alt="Houdini Coordinate System"/>
 </center>
 
 <ul>
 <li><strong>.bgeo</strong>: A standalone geometry file format commonly used in early versions of Houdini</li>
 <li><strong>.hip</strong> (Houdini Project): Houdini’s project file format, which saves all nodes, parameters, connections, and viewport layout in the scene. It’s essentially a text file you can open in any text editor. There’s also an encrypted variant <strong>.hipnc</strong> (Non-Commercial), used when saving projects in the non-commercial version of Houdini.</li>
 <li><strong>$HIP</strong>&#x2F;geo: You’ll often see path expressions like $HIP, which represents the root directory of the currently selected working project.</li>
+<li><strong>VOP Network</strong> (VEX Operator Network): A visual programming environment that turns VEX code logic into node connections — you can create shaders, materials, and geometry operations without writing code. It does the same thing as Attribute Wrangle, just with a different interaction model.</li>
+<li><strong>VDB</strong>: An open-source, cross-platform sparse volume format. Houdini has the best support for it. The smallest unit is a voxel (the smallest 3D cube in volumetric space).</li>
+<li><strong>Polygon</strong>: Flat patches (usually triangles or quads) bounded by vertices and edges to represent 3D shapes. Multiple polygons assembled together form a mesh — the most common 3D model format. Polygon models are precise and controllable, ideal for games and real-time rendering, but the surface consists of flat segments and needs enough faces to appear smooth.</li>
+<li><strong>NURBS</strong> (Non-Uniform Rational B-Splines): Smooth surfaces defined by mathematical formulas and control points. Very few patches are needed to represent extremely smooth curves and surfaces. Commonly used in industrial design (CAD), automotive modeling, and other fields requiring precise surfaces. The downside is less flexibility than polygons — harder to do boolean operations, deformations, etc. Similar to Bezier curves.</li>
 </ul>
+<blockquote>
+<p>In short: <strong>Polygons are assembled from flat facets — more faces &#x3D; smoother. NURBS are computed from math formulas — inherently smooth surfaces.</strong> In Houdini, the Sphere node’s Primitive Type lets you choose which method to use.</p>
+</blockquote>
+<h3 id="Node-Types"><a href="#Node-Types" class="headerlink" title="Node Types"></a>Node Types</h3><p>Each type of task in Houdini has its own independent context, and each context corresponds to a different type of node:</p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Path Prefix</th>
+<th>What It Handles</th>
+<th>Typical Nodes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SOP</strong> (Surface Operator)</td>
+<td><code>/obj/geo1/</code></td>
+<td>Geometry modeling</td>
+<td>line, sweep, fuse, copytopoints, wrangle</td>
+</tr>
+<tr>
+<td><strong>OBJ</strong> (Object)</td>
+<td><code>/obj/</code></td>
+<td>Object containers in the scene, cameras</td>
+<td>geo, cam, light</td>
+</tr>
+<tr>
+<td><strong>LOP</strong> (Lighting Operator)</td>
+<td><code>/stage/</code></td>
+<td>Lighting, materials, USD scenes</td>
+<td>karmarendersettings, materiallibrary</td>
+</tr>
+<tr>
+<td><strong>ROP</strong> (Render Output Operator)</td>
+<td><code>/out/</code></td>
+<td>Render output</td>
+<td>mantra, karma, rop_fbx</td>
+</tr>
+<tr>
+<td><strong>COP</strong> (Composite Operator)</td>
+<td><code>/img/</code></td>
+<td>Image compositing</td>
+<td>Photoshop-like node operations</td>
+</tr>
+<tr>
+<td><strong>CHOP</strong> (Channel Operator)</td>
+<td><code>/chop/</code></td>
+<td>Animation curves, audio channels</td>
+<td>Motion data, procedural animation</td>
+</tr>
+<tr>
+<td><strong>TOP</strong> (Task Operator)</td>
+<td><code>/tasks/</code></td>
+<td>Task scheduling, batch processing</td>
+<td>Batch rendering, data processing pipelines</td>
+</tr>
+<tr>
+<td><strong>VOP</strong> (VEX Operator)</td>
+<td>Nested inside SOP&#x2F;LOP</td>
+<td>Visual VEX programming</td>
+<td>attribvop</td>
+</tr>
+<tr>
+<td><strong>DOP</strong> (Dynamics Operator)</td>
+<td><code>/obj/dopnet1/</code></td>
+<td>Dynamics simulation</td>
+<td>Particles, fluids, cloth, rigid bodies</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>In short: <strong>SOP for modeling, LOP for lighting and materials, ROP for render output, DOP for simulations.</strong> These contexts correspond to different Network Views in Houdini’s UI — switch to <code>/stage</code> to see LOP nodes, switch to <code>/out</code> to see ROP nodes. It’s essentially the same editor, just working at different levels.</p>
+</blockquote>
 <h3 id="Folder-Structure"><a href="#Folder-Structure" class="headerlink" title="Folder Structure"></a>Folder Structure</h3><center class="half">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728161728504.png" width="500" alt="Houdini 项目文件夹结构"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728161728504.png" width="500" alt="Houdini Project Folder Structure"/>
 </center>
 
 <ul>
@@ -238,7 +313,7 @@ Entagma: A commerc">
 <li>Shelf (tool shelf)</li>
 </ul>
 <center class="half">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/WXWorkCapture_17536383497204.png" width="300" alt="Shelf 工具架"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/WXWorkCapture_17536383497204.png" width="300" alt="Shelf Tool Bar"/>
 </center>
 
 
@@ -246,7 +321,7 @@ Entagma: A commerc">
 <li><u>Press <strong>↲ (Enter)</strong> to enter edit mode, press <strong>Esc</strong> to exit edit mode and go back to view mode</u></li>
 </ul>
 <center class="half">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728231706084.png" width="25" alt="选择模式示意图"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728231706084.png" width="25" alt="Selection Mode Indicators"/>
 </center>
 
 
@@ -259,7 +334,7 @@ Entagma: A commerc">
 <li>Other node panels</li>
 </ul>
 <center class="half">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728162034450.png" width="400" alt="Houdini 节点面板"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728162034450.png" width="400" alt="Houdini Node Panels"/>
 </center>
 
 <ul>
@@ -283,8 +358,8 @@ Entagma: A commerc">
 </li>
 </ul>
 <center class="half">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727162622750.png" width="300" alt="节点未加载状态"/>
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727163349309.png" width="300" alt="节点加载状态"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727162622750.png" width="300" alt="Node Unloaded State"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727163349309.png" width="300" alt="Node Loaded State"/>
 </center>
 - Right side: display, wire display
 - Left side: Bypass (disable node), info node, freeze node
@@ -295,11 +370,17 @@ Entagma: A commerc">
 - Hold the **middle mouse button** to modify values
 
 <center class="half">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728165927984.png" width="100" alt="节点功能图标"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250728165927984.png" width="100" alt="Node Function Icons"/>
 </center>
-#### 🗑️ Other
+* 👇 The first two add descriptions to nodes. The third changes the node background color. The last one creates a Subnet (a node grouping feature, similar to UE's collapse functionality).
 
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506143401303.png" alt="Node Flags: Template, Display, Render, Lock, Bypass"></p>
 <ul>
+<li>👇 <strong>Template</strong>: semi-transparent reference overlay; <strong>Display</strong>: visible in viewport; <strong>Render</strong>: which node is used at render time; (The benefit of separating Display and Render: you can view a simplified version in the viewport but use a detailed version at render time. Display is for the viewport, Render is for the final renderer.)</li>
+<li><strong>Lock</strong>: locks the cache so it won’t recompute; <strong>Bypass</strong>: temporarily skips this node;</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506190250271.png" alt="Template, Display, Render, Lock, Bypass Flags"></p>
+<h4 id="🗑️-Other"><a href="#🗑️-Other" class="headerlink" title="🗑️ Other"></a>🗑️ Other</h4><ul>
 <li>Houdini Console</li>
 </ul>
 <center class="half">
@@ -320,21 +401,72 @@ Entagma: A commerc">
 <li><strong>U</strong> exits a node</li>
 <li><strong>I</strong> enters a node</li>
 <li><strong>O</strong> centers the view on a node</li>
+<li><strong>Shift+O</strong> creates a new description box</li>
 </ul>
 <h3 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h3><ul>
 <li><code>$HIP</code>: The path relative to the Hip file’s location</li>
 </ul>
-<h2 id="❤️-Various-Nodes"><a href="#❤️-Various-Nodes" class="headerlink" title="❤️ Various Nodes"></a>❤️ Various Nodes</h2><h3 id="Trunk-Curve-Based-Geometry"><a href="#Trunk-Curve-Based-Geometry" class="headerlink" title="Trunk (Curve-Based Geometry)"></a>Trunk (Curve-Based Geometry)</h3><ul>
+<h2 id="❤️-Various-Nodes"><a href="#❤️-Various-Nodes" class="headerlink" title="❤️ Various Nodes"></a>❤️ Various Nodes</h2><h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ul>
+<li><strong>Merge</strong>: Physically <strong>merges</strong> multiple input geometries into a single entity — a true “combine into one” operation.</li>
+<li><strong>Group Create</strong>: Only <strong>tags</strong> points&#x2F;faces in the geometry (creates a named selection set) without merging geometry. It only passes through the first input; the second input is used solely as a bounding box reference.</li>
+</ul>
+<blockquote>
+<p>In short: <strong>Use Merge to combine geometries, use Group Create to create named selection sets.</strong> If you want to join two branches of models, use Merge.</p>
+<p>What does “bounding box reference” mean? A common use of Group Create is to use one object’s range to select points from another object.</p>
+</blockquote>
+<ul>
+<li><strong>VOP Network</strong> (type name <code>attribvop</code>): A visual programming node. Double-click to enter and freely add, remove, and wire sub-nodes — fully customizable logic. Any node type with <code>vop</code> in the name is this kind. It’s the node-based version of VEX.</li>
+<li><strong>Encapsulated Nodes</strong> (e.g., <code>attribadjustfloat</code>): Also have internal node structures, but are locked and encapsulated — you can only adjust them through the external parameter panel, not modify the internal structure. These nodes are essentially official HDAs stored in Houdini’s <code>otls</code> installation directory. You can also create your own HDAs by selecting nodes → Create Subnet → Create Digital Asset.</li>
+<li><strong>File Cache</strong>: Its core function is to save computation results to disk, so future reads come directly from disk instead of recomputing. If “Load from Disk” is enabled, it reads the archive — meaning upstream node changes won’t affect the File Cache’s output.</li>
+<li><strong>Clean</strong>: Cleans up topology issues in geometry, such as degenerate faces with zero area, overlapping points, reversed normals, invalid edges, etc. Procedural modeling often produces this “dirty data,” and Clean fixes it.</li>
+<li><strong>Fuse</strong>: “Welds” multiple points that are close enough into a single point. After operations like boolean operations or VDB conversion on polygons, edges that were originally connected may split — vertices are nearly identical but are actually independent points. Fuse merges these “nearly coincident” points by setting a distance threshold (e.g., 0.01).</li>
+</ul>
+<center class="half">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506195849535.png" width="300" alt="Referenced Node Instance (Light Green)"/>
+</center>
+
+<ul>
+<li>This light-green colored node represents an instance referenced from elsewhere, not an independently created node.</li>
+</ul>
+<center class="half">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506200413703.png" width="200" alt="Null Node"/>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20260506215729584.png" width="200" alt="Null Node Usage"/>
+</center>
+
+<p>  <strong>Null</strong> is an empty node that doesn’t process data at all. It exists purely for organizational&#x2F;tagging purposes. It can be paired with an Object Merge node to achieve cross-network “remote fetching,” referencing by node name as a parameter.</p>
+<h3 id="UV"><a href="#UV" class="headerlink" title="UV"></a>UV</h3><ul>
+<li><strong>autouv</strong>: Some models need their UVs regenerated after deformation, since the original UVs may no longer be suitable.</li>
+</ul>
+<h3 id="Trunk-Curve-Based-Geometry"><a href="#Trunk-Curve-Based-Geometry" class="headerlink" title="Trunk (Curve-Based Geometry)"></a>Trunk (Curve-Based Geometry)</h3><ul>
 <li><strong>Curve</strong>: A node for drawing curves. That said, the author prefers using the <strong>add</strong> node instead, because it gives more precise control over the position of each individual point. Then in the Polygons tab, connect those points by group.</li>
 <li><strong>copy and transform &#x2F; transform</strong>: These two nodes can be used to adjust the overall position of a model.</li>
 <li><strong>Resample</strong>: A node that converts curves from NURBS or Bezier to Polygon curves. Mainly used for curve subdivision and resampling.</li>
+<li><strong>Sweep</strong>: Takes a cross-section shape and “sweeps” it along a path curve to generate tubular geometry (turning a line into something with volume).</li>
 </ul>
-<h2 id="🩵-Bug-Troubleshooting"><a href="#🩵-Bug-Troubleshooting" class="headerlink" title="🩵 Bug Troubleshooting"></a>🩵 Bug Troubleshooting</h2><h3 id="Basic-Operations"><a href="#Basic-Operations" class="headerlink" title="Basic Operations"></a>Basic Operations</h3><h4 id="Missing-Nodes"><a href="#Missing-Nodes" class="headerlink" title="Missing Nodes"></a>Missing Nodes</h4><p>You can use the search function to find files that don’t have a Cache</p>
-<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727014420718.png" alt="找不到节点时的搜索示意"></p>
+<h3 id="Mountain"><a href="#Mountain" class="headerlink" title="Mountain"></a>Mountain</h3><ul>
+<li><strong>mountain</strong>: The Mountain node applies procedural noise to displace geometry surfaces randomly, transforming smooth spheres into irregular organic shapes.</li>
+</ul>
+<h3 id="VDB"><a href="#VDB" class="headerlink" title="VDB"></a>VDB</h3><p>These three types of nodes typically form a loop: <code>Polygon → [VDB from Polygons] → VDB Volume → [VDB Combine] → Processed VDB → [Convert VDB] → Polygon</code>. The reason for going through VDB instead of doing boolean operations directly on polygons is that polygon booleans are prone to broken faces, flipped normals, and other issues, while VDB booleans are always clean.</p>
+<ul>
+<li><strong>VDB from Polygons</strong>: Converts a polygon mesh into a VDB volume (SDF or Fog). Think of it as “voxelizing” a solid 3D model — recording each small cube’s (voxel’s) distance from the model surface. Many operations (boolean cuts, collision detection, simulation) are easier and more stable in volume space than on polygons.</li>
+<li><strong>VDB Combine</strong>: Performs boolean operations (union, subtract, intersect, etc.) on two VDBs. For example: tree VDB minus a shape VDB &#x3D; a hole carved in the tree.</li>
+<li><strong>Convert VDB</strong>: Converts a VDB volume back to a polygon mesh. The reverse of VDB from Polygons. After VDB boolean&#x2F;deformation operations, you ultimately need to convert back to polygons for rendering and texturing.</li>
+<li><strong>Delete Small Parts</strong> (Labs): Deletes fragments&#x2F;isolated islands in geometry that are too small. VDB booleans, noise deformations, and similar operations often produce microscopically small debris that’s nearly invisible — this node cleans them up.</li>
+</ul>
+<h2 id="🩵-Operations"><a href="#🩵-Operations" class="headerlink" title="🩵 Operations"></a>🩵 Operations</h2><h3 id="Rendering-Stuck-Computer-Freezes"><a href="#Rendering-Stuck-Computer-Freezes" class="headerlink" title="Rendering Stuck &#x2F; Computer Freezes"></a>Rendering Stuck &#x2F; Computer Freezes</h3><p>When you click a node’s blue eye (Display), Houdini computes the entire chain from the source to that node in order. Houdini has an <strong>incremental caching mechanism</strong>: previously computed node results are cached in memory, so next time — as long as upstream hasn’t changed — it uses the cache and only computes the new segment.</p>
+<p>However, if you jump directly to the last node in the chain, none of the intermediate nodes have caches, and everything must be computed at once. If the chain contains heavy operations like VDB conversions, UV unwrapping, Remesh, or physics simulations (Vellum), it can max out the CPU, fill up memory, and fill up the C: drive with page files.</p>
+<blockquote>
+<p><strong>Recommendation</strong>: Don’t directly activate the final output node. Start from intermediate nodes that have File Caches, and activate them one by one going down the chain, letting Houdini use incremental caching to compute gradually. Note that after changing upstream parameters, all downstream caches are invalidated and must be recomputed.</p>
+</blockquote>
+<h3 id="Basic-Operations"><a href="#Basic-Operations" class="headerlink" title="Basic Operations"></a>Basic Operations</h3><h4 id="Missing-Nodes"><a href="#Missing-Nodes" class="headerlink" title="Missing Nodes"></a>Missing Nodes</h4><p>You can use the search function to find files that don’t have a Cache</p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727014420718.png" alt="Searching for Missing Nodes"></p>
 <h4 id="Missing-HDA-Files"><a href="#Missing-HDA-Files" class="headerlink" title="Missing HDA Files"></a>Missing HDA Files</h4><p>Use Asset -&gt; Install Asset Library</p>
-<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727023245912.png" alt="HDA 文件丢失处理"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727023245912.png" alt="Handling Missing HDA Files"></p>
 <h4 id="Can’t-Find-a-Node"><a href="#Can’t-Find-a-Node" class="headerlink" title="Can’t Find a Node"></a>Can’t Find a Node</h4><p>You may have navigated inside a node</p>
-<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727172645402.png" alt="进入节点内部示意"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image-20250727172645402.png" alt="Navigated Inside a Node"></p>
+<ul>
+<li>Another possibility is that you haven’t installed <strong>SideFX Labs</strong>, the official plugin.</li>
+</ul>
 <h4 id="Differences-Between-Versions"><a href="#Differences-Between-Versions" class="headerlink" title="Differences Between Versions"></a>Differences Between Versions</h4><h5 id="Group-Node-Issues"><a href="#Group-Node-Issues" class="headerlink" title="Group Node Issues"></a>Group Node Issues</h5><p>In newer versions of Houdini (18 and later), the old generic <code>group</code> node has been removed and replaced by a family of more specialized Group nodes. Press <code>Tab</code> in the Network Editor and type <code>group</code> to see all available Group nodes. The most commonly used ones are:</p>
 <table>
 <thead>
@@ -386,6 +518,51 @@ Entagma: A commerc">
 </tr>
 </tbody></table>
 <p>If you’re used to the old “Group” node, <strong>Group Create</strong> will cover 99% of use cases.</p>
+<h3 id="Exposing-HDA-Parameters-for-Unreal-Engine"><a href="#Exposing-HDA-Parameters-for-Unreal-Engine" class="headerlink" title="Exposing HDA Parameters for Unreal Engine"></a>Exposing HDA Parameters for Unreal Engine</h3><h4 id="Exposing-Parameters-in-Houdini"><a href="#Exposing-Parameters-in-Houdini" class="headerlink" title="Exposing Parameters in Houdini"></a>Exposing Parameters in Houdini</h4><p>Inside the HDA, <strong>promote</strong> the parameters you want to control in UE to the HDA’s top level:</p>
+<ul>
+<li>Open the HDA’s <strong>Type Properties</strong> (right-click node → Type Properties)</li>
+<li>Switch to the <strong>Parameters</strong> tab</li>
+<li>Drag in the parameter types you need from the left panel (Toggle, Float, String, etc.)</li>
+<li>Then in the internal network, use <strong>Channel Reference</strong> (middle-mouse drag) or <strong>Copy Parameter &#x2F; Paste Parameter Reference</strong> to link internal node parameters to these top-level parameters</li>
+</ul>
+<h4 id="Parameter-Organization-Tips"><a href="#Parameter-Organization-Tips" class="headerlink" title="Parameter Organization Tips"></a>Parameter Organization Tips</h4><p>Use <strong>Folders</strong> to group parameters in the Parameters tab of Type Properties:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Main</span><br><span class="line">  ├─ Spike Count (int)</span><br><span class="line">  ├─ Spike Height (float)</span><br><span class="line">  ├─ Add Ropes (toggle)</span><br><span class="line">  └─ Seed (float)</span><br><span class="line">Supports</span><br><span class="line">  ├─ Support Scale (float)</span><br><span class="line">  └─ Ground Offset (float)</span><br></pre></td></tr></table></figure>
+
+<p>This way, parameters will also be displayed in groups inside UE.</p>
+<h4 id="Key-Considerations"><a href="#Key-Considerations" class="headerlink" title="Key Considerations"></a>Key Considerations</h4><table>
+<thead>
+<tr>
+<th>Point</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Input Geometry</strong></td>
+<td>HDA inputs automatically become input pins in UE, accepting UE Static Meshes</td>
+</tr>
+<tr>
+<td><strong>Curve Input</strong></td>
+<td>If the HDA accepts curve input, you can use a <strong>Pack</strong> node or draw Splines directly in UE</td>
+</tr>
+<tr>
+<td><strong>Output Node</strong></td>
+<td>The HDA must have an <code>output</code> node internally for the output to be valid</td>
+</tr>
+<tr>
+<td><strong>Attribute Naming</strong></td>
+<td>Use attribute names recognized by Houdini Engine like <code>unreal_material</code> to pass material information</td>
+</tr>
+<tr>
+<td><strong>Bake Mode</strong></td>
+<td>Generated results in UE can be output as Static Mesh, Landscape, etc.</td>
+</tr>
+</tbody></table>
+<h4 id="Using-in-UE"><a href="#Using-in-UE" class="headerlink" title="Using in UE"></a>Using in UE</h4><ol>
+<li>Install the <strong>Houdini Engine for Unreal</strong> plugin in UE</li>
+<li>Place the <code>.hda</code> file in the UE project’s Content directory</li>
+<li>Drag it into the scene — parameters will automatically appear in the <strong>Details panel</strong></li>
+<li>Adjust parameters and click <strong>Recook</strong>, or set it to auto-Recook</li>
+</ol>
 
 
             <!-- Tags -->
