@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!--
+    Whale mark — Eugene's Page.
+
+    Color #8BA6C1 = hsl(210°, 30%, 65%):
+      hue 210°       = 7 × 30   (birthday 1996-07-30, month × day)
+      saturation 30  = day of the month
+    A blue derived entirely from a date.
+
+    Geometry: one continuous outline. The back curve flows directly
+    into the upper fluke tip at y = 7 (the birth month). The lower
+    fluke flows directly into the belly. The only sharp lines are
+    the inner V-notch between the flukes — the one place a real
+    whale's silhouette also breaks.
+
+    Seven path commands (M, C, C, L, L, C, C) — once more, the month.
+
+    《庄子·逍遥游》: 北冥有鱼，其名为鲲。This whale is the kun
+    before the wings — the slow, deep beginning.
+  -->
+  <path fill="#8BA6C1" d="M28,16 C28,11 24,8 17,8 C9,8 5,9 2,7 L4,16 L2,25 C5,23 9,24 17,24 C24,24 28,21 28,16 Z"/>
+  <circle fill="#ffffff" cx="23" cy="13" r="1"/>
+</svg>
