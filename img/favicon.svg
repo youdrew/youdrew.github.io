@@ -2,22 +2,32 @@
   <!--
     Whale mark — Eugene's Page.
 
-    Color #8BA6C1 = hsl(210°, 30%, 65%):
-      hue 210°       = 7 × 30   (birthday 1996-07-30, month × day)
-      saturation 30  = day of the month
+    ─── COLOR ─────────────────────────────────────────────────
+    #9CB3C9 = hsl(210°, 30%, 70%)
+      hue 210°       = 7 × 30           (month × day)
+      saturation 30  = the day
+      lightness 70   = the month × 10
+      30 + 70        = 100              (the two halves complete the scale)
     A blue derived entirely from a date.
 
-    Geometry: one continuous outline. The back curve flows directly
-    into the upper fluke tip at y = 7 (the birth month). The lower
-    fluke flows directly into the belly. The only sharp lines are
-    the inner V-notch between the flukes — the one place a real
-    whale's silhouette also breaks.
+    ─── GEOMETRY ──────────────────────────────────────────────
+    One continuous outline. The back curve flows directly into
+    the upper fluke tip at y = 7 (the birth month). The tail's
+    inner notch is a quadratic curve bowing inward to x = 10 —
+    the same depth a sharp 96° V would have reached. So 1996
+    lives in the shape itself, as depth rather than as angle.
 
-    Seven path commands (M, C, C, L, L, C, C) — once more, the month.
+    The lower fluke flows directly into the belly — the deep
+    the whale carries. The eye looks forward, slightly upward,
+    toward where the 鹏 will fly.
 
-    《庄子·逍遥游》: 北冥有鱼，其名为鲲。This whale is the kun
-    before the wings — the slow, deep beginning.
+    ─── SOURCE ────────────────────────────────────────────────
+    《庄子·逍遥游》：
+      「北冥有鱼，其名为鲲。鲲之大，不知其几千里也。
+       化而为鸟，其名为鹏。」
+    This whale is the kun before the wings — the slow, deep
+    beginning.
   -->
-  <path fill="#8BA6C1" d="M28,16 C28,11 24,8 17,8 C9,8 5,9 2,7 L4,16 L2,25 C5,23 9,24 17,24 C24,24 28,21 28,16 Z"/>
+  <path fill="#9CB3C9" d="M28,16 C28,11 24,8 17,8 C9,8 5,9 2,7 Q10,16 2,25 C5,23 9,24 17,24 C24,24 28,21 28,16 Z"/>
   <circle fill="#ffffff" cx="23" cy="13" r="1"/>
 </svg>
