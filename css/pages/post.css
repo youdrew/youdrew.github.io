@@ -10,6 +10,17 @@
   background-position: 50% 50% !important;
 }
 
+/* No cover image — clean text-only header (see article-full.ejs / article-page.ejs). */
+.top.no-cover {
+  height: 200px;
+  background: #f5f1ea;
+}
+
+.top.no-cover .title {
+  background: transparent;
+  color: #2a2520;
+}
+
 .work_nav {
   display: block;
   width: 100%;
