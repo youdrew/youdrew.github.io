@@ -2,8 +2,8 @@
   <!--
     Whale mark — Eugene's Page.
 
-    ─── COLOR ─────────────────────────────────────────────────
-    #9CB3C9 = hsl(210°, 30%, 70%)
+    ─── BODY COLOR ────────────────────────────────────────────
+    hsl(210°, 30%, 70%) → #9CB3C9
       hue 210°       = 7 × 30           (month × day)
       saturation 30  = the day
       lightness 70   = the month × 10
@@ -18,8 +18,22 @@
     lives in the shape itself, as depth rather than as angle.
 
     The lower fluke flows directly into the belly — the deep
-    the whale carries. The eye looks forward, slightly upward,
-    toward where the 鹏 will fly.
+    the whale carries.
+
+    ─── EYE ───────────────────────────────────────────────────
+    A white iris with a deeper pupil at its center.
+
+    Pupil color = hsl(210°, 30%, 19.96%)
+      The pupil shares the body's hue and saturation — same
+      birthday, same blood — but its lightness is the year of
+      birth (1996 / 100 = 19.96). The full date 1996-07-30 is
+      thus carried in three colors: body lightness 70 = month,
+      saturation 30 = day, pupil lightness 19.96 = year.
+
+    The eye looks forward, slightly upward, toward where the
+    鹏 will fly. At favicon scale the pupil collapses into the
+    iris; at larger renders it surfaces — like the future
+    emerging from within the present.
 
     ─── SOURCE ────────────────────────────────────────────────
     《庄子·逍遥游》：
@@ -29,5 +43,6 @@
     beginning.
   -->
   <path fill="#9CB3C9" d="M28,16 C28,11 24,8 17,8 C9,8 5,9 2,7 Q10,16 2,25 C5,23 9,24 17,24 C24,24 28,21 28,16 Z"/>
-  <circle fill="#ffffff" cx="23" cy="13" r="1"/>
+  <circle fill="#ffffff" cx="23" cy="13" r="2"/>
+  <circle fill="#243342" cx="23" cy="13" r="0.8"/>
 </svg>
