@@ -273,7 +273,7 @@ export function initTagGraph() {
   });
 
   // Enforce minimum distance between all node pairs to prevent overlap
-  const MIN_GAP = 40;
+  const MIN_GAP = 60;
   const allNodes = data.nodes;
   for (let iter = 0; iter < 15; iter++) {
     for (let ni = 0; ni < allNodes.length; ni++) {
@@ -374,10 +374,10 @@ export function initTagGraph() {
   document.head.appendChild(script);
 
   function calcRepulsion(count) {
-    if (count < 10) return 500;
-    if (count < 20) return 800;
-    if (count < 40) return 1100;
-    return 1400;
+    if (count < 10) return 750;
+    if (count < 20) return 1200;
+    if (count < 40) return 1650;
+    return 2100;
   }
 
   function initChart() {
@@ -494,7 +494,7 @@ export function initTagGraph() {
           draggable: true,
           force: {
             repulsion: calcRepulsion(data.nodes.length),
-            edgeLength: [100, 300],
+            edgeLength: [150, 450],
             gravity: 0.12,
             friction: 0.6,
             layoutAnimation: true,
@@ -541,12 +541,19 @@ export function initTagGraph() {
 
     chart.setOption(option);
 
-    // After force layout stabilizes, re-fit to ensure all filter nodes are visible
+    // Once force layout stabilizes, re-fit a single time so all filter nodes
+    // are visible. Skip if the user has already zoomed/panned — re-fitting on
+    // top of user input was the cause of the early-load "bouncing" behavior.
+    let userInteracted = false;
+    let didFit = false;
     if (filterNodes.length > 0) {
-      let fitAttempts = 0;
-      const fitInterval = setInterval(function () {
-        fitAttempts++;
-        // Sample current positions from the chart's internal model
+      const fitOnce = function () {
+        if (didFit) return;
+        if (userInteracted) {
+          didFit = true;
+          chart.off('finished', fitOnce);
+          return;
+        }
         const model = chart.getModel();
         const series0 = model && model.getSeriesByIndex && model.getSeriesByIndex(0);
         const graph = series0 && series0.getGraph && series0.getGraph();
@@ -573,31 +580,26 @@ export function initTagGraph() {
           if (y + r > maxY) maxY = y + r;
           validCount++;
         });
-        if (validCount > 0) {
-          const bw = maxX - minX;
-          const bh = maxY - minY;
-          if (bw > 0 && bh > 0) {
-            const zoomX = cw / bw;
-            const zoomY = ch / bh;
-            let zoom = Math.min(zoomX, zoomY, 1.5) * 0.8;
-            if (zoom < 0.3) zoom = 0.3;
-            currentZoom = zoom;
-            currentCenter = [(minX + maxX) / 2, (minY + maxY) / 2];
-            chart.setOption({
-              series: [
-                {
-                  zoom: zoom,
-                  center: currentCenter.slice(),
-                },
-              ],
-            });
-          }
-        }
-        // Stop after a few attempts (layout should be stable by then)
-        if (fitAttempts >= 4) {
-          clearInterval(fitInterval);
-        }
-      }, 800);
+        if (validCount === 0) return;
+        const bw = maxX - minX;
+        const bh = maxY - minY;
+        if (bw <= 0 || bh <= 0) return;
+        let zoom = Math.min(cw / bw, ch / bh, 1.5) * 0.8;
+        if (zoom < 0.3) zoom = 0.3;
+        didFit = true;
+        currentZoom = zoom;
+        currentCenter = [(minX + maxX) / 2, (minY + maxY) / 2];
+        chart.setOption({
+          series: [
+            {
+              zoom: zoom,
+              center: currentCenter.slice(),
+            },
+          ],
+        });
+        chart.off('finished', fitOnce);
+      };
+      chart.on('finished', fitOnce);
     }
 
     // Click node → navigate to tag page.
@@ -648,6 +650,7 @@ export function initTagGraph() {
     zr.on('mousewheel', function (e) {
       e.event.preventDefault();
       e.event.stopPropagation();
+      userInteracted = true;
       const delta = e.wheelDelta > 0 ? 1.08 : 1 / 1.08;
       let newZoom = currentZoom * delta;
       if (newZoom < 0.3) newZoom = 0.3;
@@ -664,6 +667,7 @@ export function initTagGraph() {
       // Only pan when not clicking on a graph element
       if (!e.target) {
         isPanning = true;
+        userInteracted = true;
         panStart = [e.event.clientX, e.event.clientY];
         centerAtPanStart = [currentCenter[0], currentCenter[1]];
         container.style.cursor = 'grabbing';
@@ -705,21 +709,28 @@ export function initTagGraph() {
       }, 150);
     });
 
-    // Listen for language changes and refresh labels
+    // Refresh labels on language switch WITHOUT touching zoom/center.
+    // Re-applying the full `option` would carry `zoom: initialZoom` and reset
+    // the user's pan/zoom — language-switcher.js's `applyLanguage()` calls
+    // `localStorage.setItem('siteLanguage', lang)` on EVERY page load (even
+    // when the language hasn't changed), which used to trigger that reset
+    // ~50ms after first paint and clobber any wheel zoom done in that window.
+    // Pushing only `series.data` lets ECharts re-evaluate the label formatter
+    // (which reads the current language from localStorage at call time) while
+    // merging the rest of the option in place.
+    function refreshLabels() {
+      chart.setOption({ series: [{ data: data.nodes }] });
+    }
+
     window.addEventListener('storage', function (e) {
-      if (e.key === 'siteLanguage') {
-        chart.setOption(option);
-      }
+      if (e.key === 'siteLanguage') refreshLabels();
     });
 
-    // Also re-render when language is switched on the same page
     const origSetItem = localStorage.setItem;
     localStorage.setItem = function (key, value) {
       origSetItem.call(localStorage, key, value);
       if (key === 'siteLanguage') {
-        setTimeout(function () {
-          chart.setOption(option);
-        }, 50);
+        setTimeout(refreshLabels, 50);
       }
     };
   }
