@@ -9,14 +9,14 @@
     <atom:link href="https://youdrew.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 14 May 2026 19:24:15 GMT</pubDate>
+    <pubDate>Thu, 14 May 2026 19:33:28 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
       <link>https://youdrew.github.io/zh-CN/2026/05/14/20250801.UEConceptScrapbox/</link>
       <guid>https://youdrew.github.io/zh-CN/2026/05/14/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Thu, 14 May 2026 19:24:15 GMT</pubDate>
+      <pubDate>Thu, 14 May 2026 19:33:28 GMT</pubDate>
       
         
         
@@ -39,7 +39,7 @@
       <title></title>
       <link>https://youdrew.github.io/2026/05/14/20250801.UEConceptScrapbox/</link>
       <guid>https://youdrew.github.io/2026/05/14/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Thu, 14 May 2026 19:24:15 GMT</pubDate>
+      <pubDate>Thu, 14 May 2026 19:33:28 GMT</pubDate>
       
         
         
@@ -129,11 +129,11 @@
       
       <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
       
       <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
-      
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/LangGraph/">LangGraph</category>
       
@@ -170,11 +170,11 @@
       
       <category domain="https://youdrew.github.io/tags/AI/">AI</category>
       
+      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://youdrew.github.io/tags/Framework/">Framework</category>
       
       <category domain="https://youdrew.github.io/tags/Agent/">Agent</category>
-      
-      <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/LangGraph/">LangGraph</category>
       
@@ -492,11 +492,11 @@
       
       <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
+      <category domain="https://youdrew.github.io/tags/Assistant/">Assistant</category>
+      
       <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
-      
-      <category domain="https://youdrew.github.io/tags/Assistant/">Assistant</category>
       
       
       <comments>https://youdrew.github.io/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
@@ -524,11 +524,11 @@
       
       <category domain="https://youdrew.github.io/tags/Vibe-Coding/">Vibe Coding</category>
       
+      <category domain="https://youdrew.github.io/tags/Assistant/">Assistant</category>
+      
       <category domain="https://youdrew.github.io/tags/MCP/">MCP</category>
       
       <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
-      
-      <category domain="https://youdrew.github.io/tags/Assistant/">Assistant</category>
       
       
       <comments>https://youdrew.github.io/zh-CN/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
