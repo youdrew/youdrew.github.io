@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://youdrew.github.io/zh-CN/2026/05/08/20260509.ObsidianFunctionLearning/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="Obsidian 学习路径与功能笔记
+目标：以最少的折腾时间，把 Obsidian 用成”长期可复利”的知识库；先稳住基本功，再按需扩展插件与方法论。
+
+
+0. 为什么是 Obsidian
+本地优先：所有笔记是 .md 纯文本，跟随 Git&amp;#x2F;网盘随便同步；与本仓库 Hexo 博客天然兼容（notes/_pos">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://youdrew.github.io/zh-CN/2026/05/08/20260509.ObsidianFunctionLearning/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="Obsidian 学习路径与功能笔记">
+    
+    
+        <meta property="og:description" content="Obsidian 学习路径与功能笔记
+目标：以最少的折腾时间，把 Obsidian 用成”长期可复利”的知识库；先稳住基本功，再按需扩展插件与方法论。
+
+
+0. 为什么是 Obsidian
+本地优先：所有笔记是 .md 纯文本，跟随 Git&amp;#x2F;网盘随便同步；与本仓库 Hexo 博客天然兼容（notes/_pos">
+    
+    
+    
+        <meta property="article:published_time" content="2026-05-08T16:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-05-16T18:42:27.066Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="Obsidian 学习路径与功能笔记">
+    
+    
+        <meta name="twitter:description" content="Obsidian 学习路径与功能笔记
+目标：以最少的折腾时间，把 Obsidian 用成”长期可复利”的知识库；先稳住基本功，再按需扩展插件与方法论。
+
+
+0. 为什么是 Obsidian
+本地优先：所有笔记是 .md 纯文本，跟随 Git&amp;#x2F;网盘随便同步；与本仓库 Hexo 博客天然兼容（notes/_pos">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+
+    <!-- Title -->
+    
+    <title>Obsidian 学习路径与功能笔记 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-05-08-20260509-ObsidianFunctionLearning-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <div id="menu_icon"></div>
+    <nav>
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top no-cover">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/05/16/20250801.UEConceptScrapbox/" class="previous" data-title="Untitled"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/05/02/20260502.HoudiniMCPComparison/" class="next" data-title="Houdini MCP Proje..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Obsidian 学习路径与功能笔记</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="Obsidian-学习路径与功能笔记"><a href="#Obsidian-学习路径与功能笔记" class="headerlink" title="Obsidian 学习路径与功能笔记"></a>Obsidian 学习路径与功能笔记</h1><blockquote>
+<p>目标：以最少的折腾时间，把 Obsidian 用成”长期可复利”的知识库；先稳住基本功，再按需扩展插件与方法论。</p>
+</blockquote>
+<hr>
+<h2 id="0-为什么是-Obsidian"><a href="#0-为什么是-Obsidian" class="headerlink" title="0. 为什么是 Obsidian"></a>0. 为什么是 Obsidian</h2><ul>
+<li><strong>本地优先</strong>：所有笔记是 <code>.md</code> 纯文本，跟随 Git&#x2F;网盘随便同步；与本仓库 Hexo 博客天然兼容（<code>notes/_posts/**/*.md</code> 可直接被博客引擎消费）。</li>
+<li><strong>链接驱动</strong>：用 <code>[[wikilink]]</code> 把碎片连成网，长期沉淀越久越值钱。</li>
+<li><strong>插件生态</strong>：核心插件 + 社区插件 ≈ “可编程的笔记系统”。</li>
+<li><strong>零锁定</strong>：随时可以离开，文件即数据。</li>
+</ul>
+<hr>
+<h2 id="1-学习路径总览（建议按周推进）"><a href="#1-学习路径总览（建议按周推进）" class="headerlink" title="1. 学习路径总览（建议按周推进）"></a>1. 学习路径总览（建议按周推进）</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>时长</th>
+<th>核心目标</th>
+<th>关键产出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>W1 基础</strong></td>
+<td>3–5 天</td>
+<td>掌握 Vault、Markdown、双链、标签</td>
+<td>第一篇带链接的笔记</td>
+</tr>
+<tr>
+<td><strong>W2 组织</strong></td>
+<td>1 周</td>
+<td>文件夹策略、模板、每日笔记</td>
+<td>个人 PKM 结构成型</td>
+</tr>
+<tr>
+<td><strong>W3 进阶</strong></td>
+<td>1 周</td>
+<td>Dataview、Templater、Graph View</td>
+<td>自动化索引页</td>
+</tr>
+<tr>
+<td><strong>W4 工作流</strong></td>
+<td>1 周</td>
+<td>与 Hexo &#x2F; Git &#x2F; VSCode 联动</td>
+<td>笔记 → 博客一键流程</td>
+</tr>
+<tr>
+<td><strong>持续</strong></td>
+<td>—</td>
+<td>方法论（Zettelkasten &#x2F; PARA &#x2F; Johnny Decimal）</td>
+<td>可复利的二阶笔记</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="2-W1：基础——把”骨架”立起来"><a href="#2-W1：基础——把”骨架”立起来" class="headerlink" title="2. W1：基础——把”骨架”立起来"></a>2. W1：基础——把”骨架”立起来</h2><h3 id="2-1-核心概念"><a href="#2-1-核心概念" class="headerlink" title="2.1 核心概念"></a>2.1 核心概念</h3><ul>
+<li><strong>Vault（库）</strong>：一个文件夹 &#x3D; 一个 Vault。所有 <code>.md</code> 与 <code>.obsidian/</code> 配置都在里面。</li>
+<li><strong>Note（笔记）</strong>：一个 <code>.md</code> 文件 &#x3D; 一条笔记。命名建议：<code>日期前缀 + 主题</code>，如 <code>20260509.ObsidianFunctionLearning.md</code>。</li>
+<li><strong>Frontmatter（YAML 元数据）</strong>：文件最顶部的 <code>---</code> 块，存放 <code>title / tags / date / status</code>，被 Dataview &#x2F; 主题 &#x2F; Hexo 共同消费。</li>
+<li><strong>Link（双链）</strong>：<code>[[文件名]]</code> 或 <code>[[文件名|显示文本]]</code>；<code>[[A#二级标题]]</code> 跳转到具体小节；<code>[[A^block-id]]</code> 引用块。</li>
+<li><strong>Backlink（反向链接）</strong>：右侧面板自动列出”谁链接了我”，是 Obsidian 的灵魂功能。</li>
+<li><strong>Tag（标签）</strong>：<code>#topic/subtopic</code> 支持层级；和文件夹是互补关系，不是替代。</li>
+</ul>
+<h3 id="2-2-必须背下来的快捷键"><a href="#2-2-必须背下来的快捷键" class="headerlink" title="2.2 必须背下来的快捷键"></a>2.2 必须背下来的快捷键</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全局命令面板</td>
+<td><code>Ctrl + P</code></td>
+</tr>
+<tr>
+<td>快速切换文件</td>
+<td><code>Ctrl + O</code></td>
+</tr>
+<tr>
+<td>新建笔记</td>
+<td><code>Ctrl + N</code></td>
+</tr>
+<tr>
+<td>双链补全</td>
+<td>输入 <code>[[</code> 触发</td>
+</tr>
+<tr>
+<td>切换源码&#x2F;预览</td>
+<td><code>Ctrl + E</code></td>
+</tr>
+<tr>
+<td>打开当天 Daily Note</td>
+<td><code>Ctrl + Shift + D</code>（启用 Daily Notes 插件后）</td>
+</tr>
+<tr>
+<td>源码模式切换（自己设置）</td>
+<td>ctrl + &#x2F;</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-W1-练习"><a href="#2-3-W1-练习" class="headerlink" title="2.3 W1 练习"></a>2.3 W1 练习</h3><ol>
+<li>在 <code>notes/</code> 打开 Vault，写 3 条笔记（任意主题）。</li>
+<li>让其中两条用 <code>[[]]</code> 互相链接。</li>
+<li>给每条加 <code>tags: [...]</code>，在右侧面板看 Backlink。</li>
+</ol>
+<hr>
+<h2 id="3-W2：组织——确立结构与模板"><a href="#3-W2：组织——确立结构与模板" class="headerlink" title="3. W2：组织——确立结构与模板"></a>3. W2：组织——确立结构与模板</h2><h3 id="3-1-文件夹策略（与本仓库现状对齐）"><a href="#3-1-文件夹策略（与本仓库现状对齐）" class="headerlink" title="3.1 文件夹策略（与本仓库现状对齐）"></a>3.1 文件夹策略（与本仓库现状对齐）</h3><p>当前仓库已有的目录可直接套用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">notes/</span><br><span class="line">├── _posts/        # Hexo 发布的正式文章（双语）</span><br><span class="line">│   ├── zh-CN/</span><br><span class="line">│   └── en/</span><br><span class="line">├── Learning/      # 学习笔记 / 个人草稿（本文件所在）</span><br><span class="line">├── AIdocs/        # 项目级架构、决策、路线图</span><br><span class="line">└── about/         # 关于页</span><br></pre></td></tr></table></figure>
+
+<p>建议在 <code>Learning/</code> 下再分：</p>
+<ul>
+<li><code>daily/</code>：每日笔记（自动创建）</li>
+<li><code>topic/</code>：主题长文（成熟后迁出到 <code>_posts/</code>）</li>
+<li><code>inbox/</code>：临时草稿，未分类</li>
+</ul>
+<h3 id="3-2-三种主流方法论（任选其一即可，别全上）"><a href="#3-2-三种主流方法论（任选其一即可，别全上）" class="headerlink" title="3.2 三种主流方法论（任选其一即可，别全上）"></a>3.2 三种主流方法论（任选其一即可，别全上）</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>一句话</th>
+<th>适合谁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Zettelkasten</strong></td>
+<td>一卡一念，靠双链组网，不靠分类</td>
+<td>长期写作者、研究者</td>
+</tr>
+<tr>
+<td><strong>PARA</strong></td>
+<td>Project &#x2F; Area &#x2F; Resource &#x2F; Archive</td>
+<td>项目驱动型工作者</td>
+</tr>
+<tr>
+<td><strong>Johnny Decimal</strong></td>
+<td><code>10-19 / 11.01</code> 编号制</td>
+<td>偏好结构与索引的人</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>建议</strong>：你已经有 <code>_posts / Learning / AIdocs</code> 这种”项目+资源”分布，<strong>先跑 PARA</strong>，等笔记数量过 500 篇再考虑 Zettelkasten。</p>
+</blockquote>
+<h3 id="3-3-必装核心插件（自带）"><a href="#3-3-必装核心插件（自带）" class="headerlink" title="3.3 必装核心插件（自带）"></a>3.3 必装核心插件（自带）</h3><p>进入 <code>设置 → 核心插件</code>，把这些打开：</p>
+<ul>
+<li>✅ <strong>Daily Notes</strong>：每日一篇时间轴笔记</li>
+<li>✅ <strong>Templates</strong>：插入模板内容</li>
+<li>✅ <strong>Outline</strong>：右侧大纲</li>
+<li>✅ <strong>Backlinks &#x2F; Outgoing Links</strong>：反向 &#x2F; 正向链接面板</li>
+<li>✅ <strong>Graph View</strong>：知识图谱</li>
+<li>✅ <strong>Tag Pane</strong>：标签面板</li>
+<li>✅ <strong>File Recovery</strong>：自动备份，<strong>强烈推荐</strong></li>
+<li>⚠️ <strong>Workspaces</strong>：多布局切换（进阶可开）</li>
+</ul>
+<hr>
+<h2 id="4-W3：进阶——让笔记自己动起来"><a href="#4-W3：进阶——让笔记自己动起来" class="headerlink" title="4. W3：进阶——让笔记自己动起来"></a>4. W3：进阶——让笔记自己动起来</h2><h3 id="4-1-必装社区插件（短列表，不要贪多）"><a href="#4-1-必装社区插件（短列表，不要贪多）" class="headerlink" title="4.1 必装社区插件（短列表，不要贪多）"></a>4.1 必装社区插件（短列表，不要贪多）</h3><table>
+<thead>
+<tr>
+<th>插件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Dataview</strong></td>
+<td>用类 SQL 查询笔记元数据，自动生成索引页</td>
+</tr>
+<tr>
+<td><strong>Templater</strong></td>
+<td>比内置 Templates 强 100 倍，支持 JS 脚本</td>
+</tr>
+<tr>
+<td><strong>Excalidraw</strong></td>
+<td>手绘 &#x2F; 流程图，附带双链</td>
+</tr>
+<tr>
+<td><strong>Advanced Tables</strong></td>
+<td>表格编辑器（写 Markdown 表格的人都需要）</td>
+</tr>
+<tr>
+<td><strong>Obsidian Git</strong></td>
+<td>Vault 自动 commit &#x2F; push（你这个仓库正好用得上）</td>
+</tr>
+<tr>
+<td><strong>Iconize</strong> &#x2F; <strong>Iconic</strong></td>
+<td>给文件夹&#x2F;文件加图标，提升可视性</td>
+</tr>
+<tr>
+<td><strong>Style Settings</strong></td>
+<td>调主题细节（字体、间距、颜色）</td>
+</tr>
+<tr>
+<td><strong>Linter</strong></td>
+<td>Markdown 风格统一，YAML 排序</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-Dataview-入门示例"><a href="#4-2-Dataview-入门示例" class="headerlink" title="4.2 Dataview 入门示例"></a>4.2 Dataview 入门示例</h3><p>在任意笔记里写：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">```dataview</span></span><br><span class="line"><span class="code">TABLE date, status, file.tags AS tags</span></span><br><span class="line"><span class="code">FROM &quot;Learning&quot;</span></span><br><span class="line"><span class="code">WHERE status = &quot;in-progress&quot;</span></span><br><span class="line"><span class="code">SORT date DESC</span></span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
+
+<p>→ 自动列出 <code>Learning/</code> 下所有 <code>status: in-progress</code> 的笔记。</p>
+<h3 id="4-3-Templater-模板示例"><a href="#4-3-Templater-模板示例" class="headerlink" title="4.3 Templater 模板示例"></a>4.3 Templater 模板示例</h3><p>在 <code>notes/Templates/learning.md</code>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &lt;% tp.file.title %&gt;</span><br><span class="line">date: &lt;% tp.date.now(&quot;YYYY-MM-DD&quot;) %&gt;</span><br><span class="line">tags: []</span><br><span class="line"><span class="section">status: in-progress</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="section"># &lt;% tp.file.title %&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 背景</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 内容</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 参考</span></span><br></pre></td></tr></table></figure>
+
+<p>→ 新建笔记时一键套用，<code>title / date</code> 自动填。</p>
+<hr>
+<h2 id="5-W4：工作流——把-Obsidian-嵌进现有管线"><a href="#5-W4：工作流——把-Obsidian-嵌进现有管线" class="headerlink" title="5. W4：工作流——把 Obsidian 嵌进现有管线"></a>5. W4：工作流——把 Obsidian 嵌进现有管线</h2><p>本仓库是 <strong>Hexo 博客 + Git 版本管理 + Obsidian 笔记</strong> 的三件套，目标是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">草稿（Learning/inbox/） →</span><br><span class="line">成熟（Learning/topic/） →</span><br><span class="line">发布（_posts/zh-CN/ 与 _posts/en/） →</span><br><span class="line">博客上线（Hexo build）</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-1-与-Hexo-兼容的-frontmatter"><a href="#5-1-与-Hexo-兼容的-frontmatter" class="headerlink" title="5.1 与 Hexo 兼容的 frontmatter"></a>5.1 与 Hexo 兼容的 frontmatter</h3><p>博客文章需要的字段（参考 <code>notes/_posts/</code> 现有文章）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">文章标题</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2026-05-09 12:00:00</span></span><br><span class="line"><span class="attr">categories:</span> [<span class="string">分类</span>]</span><br><span class="line"><span class="attr">tags:</span> [<span class="string">标签1</span>, <span class="string">标签2</span>]</span><br><span class="line"><span class="attr">lang:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-与-Git-联动"><a href="#5-2-与-Git-联动" class="headerlink" title="5.2 与 Git 联动"></a>5.2 与 Git 联动</h3><ul>
+<li>用 <code>Obsidian Git</code> 插件做”自动 commit”。</li>
+<li>但本仓库已经有自己的提交规范（见 <code>git log</code> 风格），建议：<ul>
+<li><strong>写作期间</strong>：手动 commit。</li>
+<li><strong>每日睡前</strong>：用 <code>Obsidian Git</code> 一键 push。</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-3-与博客主题（hexo-theme-magnetic）的注意事项"><a href="#5-3-与博客主题（hexo-theme-magnetic）的注意事项" class="headerlink" title="5.3 与博客主题（hexo-theme-magnetic）的注意事项"></a>5.3 与博客主题（hexo-theme-magnetic）的注意事项</h3><ul>
+<li>你当前主题里的 <code>tag-graph.js</code> 与 Obsidian Graph View 是<strong>两套图谱</strong>，互不影响。</li>
+<li>笔记里 <code>[[wikilink]]</code> 在博客渲染时<strong>不会</strong>自动转成超链接（除非装 Hexo 插件 <code>hexo-filter-github-emojis</code> 类的扩展）。如果要发到博客，改成标准 Markdown 链接。</li>
+</ul>
+<hr>
+<h2 id="6-进阶专题（按需展开）"><a href="#6-进阶专题（按需展开）" class="headerlink" title="6. 进阶专题（按需展开）"></a>6. 进阶专题（按需展开）</h2><h3 id="6-1-Canvas（白板）"><a href="#6-1-Canvas（白板）" class="headerlink" title="6.1 Canvas（白板）"></a>6.1 Canvas（白板）</h3><p>内置功能，<code>新建白板</code> → 把多张笔记拖进来当卡片，画连线。适合做<strong>知识地图、项目看板</strong>。</p>
+<h3 id="6-2-Sync-方案对比"><a href="#6-2-Sync-方案对比" class="headerlink" title="6.2 Sync 方案对比"></a>6.2 Sync 方案对比</h3><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>成本</th>
+<th>优点</th>
+<th>坑</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Obsidian Sync 官方</strong></td>
+<td>$4&#x2F;月</td>
+<td>端到端加密、最稳</td>
+<td>收费</td>
+</tr>
+<tr>
+<td><strong>iCloud &#x2F; OneDrive</strong></td>
+<td>免费</td>
+<td>简单</td>
+<td><code>.obsidian/</code> 容易冲突</td>
+</tr>
+<tr>
+<td><strong>Git（推荐你这种）</strong></td>
+<td>免费</td>
+<td>完整版本史</td>
+<td>大文件需 LFS</td>
+</tr>
+<tr>
+<td><strong>Syncthing</strong></td>
+<td>免费</td>
+<td>局域网快</td>
+<td>配置略折腾</td>
+</tr>
+</tbody></table>
+<h3 id="6-3-移动端"><a href="#6-3-移动端" class="headerlink" title="6.3 移动端"></a>6.3 移动端</h3><ul>
+<li>iOS &#x2F; Android 客户端免费。</li>
+<li>移动端 + iCloud &#x2F; Git 跨设备 → 手机随手记，电脑深度整理。</li>
+</ul>
+<hr>
+<h2 id="7-路径布置建议（针对本仓库）"><a href="#7-路径布置建议（针对本仓库）" class="headerlink" title="7. 路径布置建议（针对本仓库）"></a>7. 路径布置建议（针对本仓库）</h2><blockquote>
+<p><strong>关键问题</strong>：根目录 <code>D:\Project\UGit\EugenePage\.obsidian</code> 已存在，说明 Vault 当前打开的是<strong>整个仓库</strong>而不是 <code>notes/</code>。</p>
+</blockquote>
+<p>两种方案，<strong>二选一</strong>：</p>
+<h3 id="方案-A：把-notes-单独作为-Vault（推荐）"><a href="#方案-A：把-notes-单独作为-Vault（推荐）" class="headerlink" title="方案 A：把 notes/ 单独作为 Vault（推荐）"></a>方案 A：把 <code>notes/</code> 单独作为 Vault（推荐）</h3><ul>
+<li>在 Obsidian 起始页 → “打开文件夹作为库” → 选 <code>D:\Project\UGit\EugenePage\notes</code>。</li>
+<li>优点：Vault 范围干净，只看到笔记，不被 <code>themes/</code>、<code>scripts/</code> 干扰。</li>
+<li>操作：把根目录的 <code>.obsidian/</code> 移动到 <code>notes/.obsidian/</code>（或删掉重建），并在 <code>.gitignore</code> 里<strong>保留</strong> <code>notes/.obsidian/workspace.json</code>（个人布局，不必跟踪）但<strong>保留</strong>核心插件配置。</li>
+</ul>
+<h3 id="方案-B：保持仓库根作为-Vault"><a href="#方案-B：保持仓库根作为-Vault" class="headerlink" title="方案 B：保持仓库根作为 Vault"></a>方案 B：保持仓库根作为 Vault</h3><ul>
+<li>优点：可以同时编辑主题代码与笔记。</li>
+<li>缺点：Graph View 会扫描所有 <code>.md</code>，大量噪音。</li>
+<li>必须做：在 Obsidian <code>设置 → 文件与链接 → 排除的文件</code> 里把 <code>themes/</code>、<code>node_modules/</code>、<code>public/</code> 全部排除。</li>
+</ul>
+<h3 id="gitignore-建议（任一方案都加）"><a href="#gitignore-建议（任一方案都加）" class="headerlink" title=".gitignore 建议（任一方案都加）"></a><code>.gitignore</code> 建议（任一方案都加）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Obsidian 个人配置（团队不共享）</span><br><span class="line">.obsidian/workspace.json</span><br><span class="line">.obsidian/workspace-mobile.json</span><br><span class="line">.obsidian/cache</span><br><span class="line">.obsidian/plugins/*/data.json   # 视情况，含敏感的不要 push</span><br></pre></td></tr></table></figure>
+
+<p>但 <code>.obsidian/core-plugins.json</code>、<code>community-plugins.json</code>、<code>appearance.json</code>、<code>hotkeys.json</code> <strong>建议跟踪</strong>，方便多机同步。</p>
+<hr>
+<h2 id="8-插件"><a href="#8-插件" class="headerlink" title="8. 插件"></a>8. 插件</h2><h3 id="Image-Auto-Upload"><a href="#Image-Auto-Upload" class="headerlink" title="Image Auto Upload"></a>Image Auto Upload</h3><p>复制或拖入图片时自动上传至图床，与 PicGo 生态兼容。底层依赖 <strong>PicList</strong>（PicGo 的社区增强版）的命令行接口，需提前配置好图床后方可使用。功能定位与 Typora 的图片上传一致，是笔记软件的基础素质之一。</p>
+<h3 id="Obsidian-CLI-Claudian"><a href="#Obsidian-CLI-Claudian" class="headerlink" title="Obsidian CLI + Claudian"></a>Obsidian CLI + Claudian</h3><p>让 AI（Claude Code）直接读写 Vault 的桥梁，分两步启用：</p>
+<ol>
+<li><strong>开启 CLI</strong>：<code>设置 → 关于 → Obsidian CLI</code> → 点击注册 → 重启 Obsidian。</li>
+<li><strong>安装插件</strong>：从社区插件市场搜索并安装 <strong>Claudian</strong>。</li>
+</ol>
+<blockquote>
+<p>前提：本机已完成 Claude Code 的配置，Claudian 会自动识别并接入。<br><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260515-040708.png" alt="image.png"></p>
+</blockquote>
+<p>整体的体验下来，会很像在 VSCode 里面使用 GitHub Copilot。在输入框的 Yolo 功能,，相当于是自动化修改。</p>
+<p>这一部分参考教程：<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1xFwxzKE5D">https://www.bilibili.com/video/BV1xFwxzKE5D</a></p>
+<p><strong>配套 Claude Code Skills（kepano&#x2F;obsidian-skills）</strong></p>
+<p>Obsidian CEO Steph Ango 在 <a target="_blank" rel="noopener" href="https://github.com/kepano/obsidian-skills">kepano&#x2F;obsidian-skills</a> 发布了一组官方 Agent Skill，让 Claude Code 真正”懂”Obsidian 的文件格式与协议。安装方式：把每个 skill 文件夹放到 vault 的 <code>.claude/skills/&lt;name&gt;/</code> 下，<strong>仅对该 vault 启动的 Claude Code 生效</strong>，不会污染全局或其它项目。</p>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>用途</th>
+<th>是否安装</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>obsidian-markdown</strong></td>
+<td>读写 Obsidian Flavored Markdown：<code>[[wikilink]]</code>、<code>![[embed]]</code>、callouts（<code>&gt; [!note]</code>）、properties frontmatter 等 Obsidian 专属语法。不装的话 Claude 写 <code>.md</code> 时会按通用 Markdown 处理，可能破坏专属语法。</td>
+<td>未安装（计划安装）</td>
+</tr>
+<tr>
+<td><strong>obsidian-bases</strong></td>
+<td>读写 <code>.base</code> 文件（Obsidian 1.9+ 引入的数据库视图，支持 views &#x2F; filters &#x2F; formulas &#x2F; summaries）</td>
+<td>未安装（暂不需要，当前 vault 还没有 <code>.base</code> 文件，等真正用到 Bases 再补）</td>
+</tr>
+<tr>
+<td><strong>json-canvas</strong></td>
+<td>读写 <code>.canvas</code> 文件（白板的 JSON 格式，包含节点、边、组、连线），让 Claude 能直接生成或修改 Canvas</td>
+<td>未安装（计划安装）</td>
+</tr>
+<tr>
+<td><strong>obsidian-cli</strong></td>
+<td>教 Claude 调用 Obsidian <strong>内置</strong>的 <code>obsidian://</code> URI 协议（如 <code>obsidian://open?vault=...&amp;file=...</code>）以及可选的 HTTP API。<strong>不需要额外安装任何命令行二进制</strong>——所有调用走 Obsidian 自带能力。</td>
+<td>未安装（计划安装）</td>
+</tr>
+<tr>
+<td><strong>defuddle</strong></td>
+<td>用 Defuddle 库从网页抽取干净 Markdown，自动去掉导航栏、广告、推荐等噪音，节省 token，适合”网页剪藏 → 笔记”场景</td>
+<td>未安装（计划安装）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>关于 <code>obsidian-cli</code> 的常见误解</strong>：这个 skill 不等于”装一个独立 CLI 工具”。<code>obsidian://</code> URI 协议从 Obsidian 1.0 起就是<strong>默认内置功能</strong>，skill 的作用只是让 Claude 学会调用它来实现”打开某篇笔记、触发某个命令、跳转到指定 block”等操作。HTTP API 部分若想启用，需要额外安装社区插件 <strong>Local REST API</strong>（可选）。</p>
+</blockquote>
+<blockquote>
+<p><strong>与 Claudian 的关系</strong>：<code>Claudian</code> 是 Obsidian 端的插件，提供”在 Obsidian UI 里跟 Claude Code 对话”的入口；上面这些 skill 是 Claude Code 端的能力包，让 Claude 在读写 vault 文件时更专业。两者互补、不冲突。</p>
+</blockquote>
+<h2 id="9-参考资源"><a href="#9-参考资源" class="headerlink" title="9. 参考资源"></a>9. 参考资源</h2><ul>
+<li>官方文档：<a target="_blank" rel="noopener" href="https://help.obsidian.md/">https://help.obsidian.md/</a></li>
+<li>官方论坛：<a target="_blank" rel="noopener" href="https://forum.obsidian.md/">https://forum.obsidian.md/</a></li>
+<li>中文社区：少数派（sspai.com）的 Obsidian 系列</li>
+<li>YouTube：Linking Your Thinking、Nicole van der Hoeven、Bryan Jenks</li>
+<li>方法论：<ul>
+<li>Niklas Luhmann《How to Take Smart Notes》（Zettelkasten 圣经）</li>
+<li>Tiago Forte《Building a Second Brain》（PARA 提出者）</li>
+</ul>
+</li>
+</ul>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/Obsidian/" data-i18n-tag="Obsidian">Obsidian</a> <a href="/zh-CN/tags/PKM/" data-i18n-tag="PKM">PKM</a> <a href="/zh-CN/tags/笔记法/" data-i18n-tag="笔记法">笔记法</a> <a href="/zh-CN/tags/学习路径/" data-i18n-tag="学习路径">学习路径</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"AI":"人工智能","API":"接口","Assistant":"助手","Aximmetry":"Aximmetry","C":"C语言","Captury":"Captury","Claude":"Claude","GAS":"GAS","GLSL":"GLSL","GameFeature":"游戏功能","Google":"Google","HLSL":"HLSL","LLM":"大语言模型","MCP":"模型上下文协议","OpenAI":"OpenAI","OpenClaw":"OpenClaw","RPG":"角色扮演","Software Projects":"软件项目","Art Pieces":"艺术作品","Peresonal Essays":"个人随笔","Political Philosophy":"政治哲学","Learning Notes":"学习笔记","SVN":"SVN","Tags":"标签","Unreal":"虚幻","Game-Development":"游戏开发","Game-Framework":"游戏框架","Gameplay-Ability-System":"游戏能力系统","Graphics-Programming":"图形编程","Computer-Graphics":"计算机图形学","Network-Programming":"网络编程","Unreal-Engine":"虚幻引擎","Vibe-Coding":"氛围编程","Game-Development-Shader-001":"游戏开发着色器-001","Subscription":"订阅","Shader":"着色器","XR":"扩展现实","Machine Learning":"机器学习","Computer Vision":"计算机视觉"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
