@@ -23,7 +23,8 @@
 @import url('components/tooltip.css');
 @import url('components/toc.css');
 @import url('components/mermaid.css');
-@import url('_responsive.css');
+@import url('components/canvas.css');
+@import url('responsive.css');
 @import url('components/code-block.css');
 
 /* These four were standalone <link>s loaded AFTER main.css in the old

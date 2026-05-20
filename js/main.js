@@ -5,6 +5,7 @@ import { ImageZoom } from './modules/image-zoom.js';
 import { ShaderToyEmbedManager } from './modules/shadertoy.js';
 import { ArticleCollapse } from './modules/article-collapse.js';
 import { CodeBlock } from './modules/code-block.js';
+import { CanvasViewer } from './modules/canvas-viewer.js';
 import { initLanguageSwitcher } from './language-switcher.js';
 import { initTagGraph } from './tag-graph.js';
 import { initToc } from './modules/toc/index.js';
@@ -21,6 +22,7 @@ function init() {
   }, 500);
   new ArticleCollapse();
   new CodeBlock();
+  new CanvasViewer();
   initLanguageSwitcher();
   initToc();
   if (document.getElementById('tag-graph')) {

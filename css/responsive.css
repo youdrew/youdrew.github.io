@@ -1,0 +1,100 @@
+/*  Responsive code  */
+@media (max-width: 1099px) {
+  header {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    padding: 0;
+    position: relative;
+  }
+  header .logo {
+    margin: 40px 0 0 30px;
+    float: left;
+  }
+
+  header .logo a,
+  header .logo a:active,
+  header .logo a:visited {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #454545;
+    font-size: 1.5em;
+  }
+
+  header .logo a:hover {
+    text-decoration: none;
+    color: #969595;
+    font-size: 1.5em;
+  }
+
+  header .footer {
+    display: none;
+  }
+  header #menu_icon,
+  header .close_menu {
+    float: right;
+    margin: 30px 30px 0 0;
+  }
+
+  header nav {
+    width: 100%;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    z-index: 9999;
+  }
+
+  header nav ul {
+    list-style: none;
+    display: none;
+    position: relative;
+  }
+  header nav ul li a {
+    display: block;
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    color: #454545;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    border-top: 1px solid #f7f5f5;
+    background: #fff;
+  }
+  header nav ul li a:active {
+    background: #f7f5f5;
+  }
+  #menu_icon,
+  .close_menu,
+  .show_menu {
+    display: block;
+  }
+  .show_menu {
+    display: block;
+  }
+
+  .main .work {
+    width: calc(33.3333% - 30px); /* 在平板上显示3列并保留间隔 */
+  }
+  .main {
+    width: 100%;
+    position: relative;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .main .work {
+    width: calc(50% - 30px); /* 在较小屏幕上显示2列并保留间隔 */
+  }
+}
+
+@media (max-width: 550px) {
+  .main .work {
+    width: calc(100% - 30px); /* 在手机上显示1列并保留左右内边距 */
+    margin-right: 0; /* 单列时取消右侧间距以居中 */
+  }
+}
