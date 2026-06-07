@@ -38,7 +38,7 @@
     
         <meta property="article:published_time" content="2026-03-22T02:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-06-06T15:08:12.685Z">
+            <meta property="article:modified_time" content="2026-06-07T07:13:16.101Z">
         
     
     
@@ -404,6 +404,21 @@
 <li><code>/compact</code>: Compress the current context into a summary and continue the same session. A lifesaver when the context is nearly full but you don’t want to re-explain the whole project. (Not supported by OMC.)</li>
 <li><code>/doctor</code>: Check Claude Code’s installation, permissions, and configuration. When a command stops working, a plugin misbehaves, or the environment looks off, running this first usually saves a lot of debugging time.</li>
 </ul>
+<h2 id="Errors-Debugging"><a href="#Errors-Debugging" class="headerlink" title="Errors &amp; Debugging"></a>Errors &amp; Debugging</h2><h3 id="PowerShell-Garbled-Output-on-Chinese-Windows"><a href="#PowerShell-Garbled-Output-on-Chinese-Windows" class="headerlink" title="PowerShell Garbled Output on Chinese Windows"></a>PowerShell Garbled Output on Chinese Windows</h3><p><strong>Example error:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">● Bash(powershell.exe -NoProfile -Command &quot;...&quot;)</span><br><span class="line">  ⎿  Error: Exit code 1</span><br><span class="line">     ����λ�� ��:1 �ַ��: 169</span><br><span class="line">     + ... ref])|Out-Null;if(.Count -eq 0)&#123;&#x27;OK: no syntax errors&#x27;&#125;else&#123;|%&#123;extglo ...</span><br><span class="line">     +                                                                 ~</span><br><span class="line">     ������ʹ�ÿչ��Ԫ��</span><br><span class="line">         + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException</span><br><span class="line">         + FullyQualifiedErrorId : EmptyPipeElement</span><br></pre></td></tr></table></figure>
+
+<p><strong>Root cause:</strong></p>
+<p>Simplified Chinese Windows defaults to code page <strong>936 (GBK&#x2F;GB2312)</strong>, but Claude Code processes strings as <strong>UTF-8</strong> internally. When PowerShell outputs Chinese error messages encoded in GBK, Claude Code interprets them as UTF-8 → mojibake.</p>
+<p>This is a <strong>very common issue</strong> affecting virtually all CJK (Chinese&#x2F;Japanese&#x2F;Korean) Windows users. English Windows is unaffected because code page 437 is ASCII-compatible with UTF-8.</p>
+<p><strong>Fix: Set the environment variable in Claude Code settings</strong></p>
+<p>Add to your project-level <code>.claude/settings.local.json</code>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;CHCP&quot;</span><span class="punctuation">:</span> <span class="string">&quot;65001&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Or for global effect, add it to <code>~/.claude/settings.json</code>.</p>
+<p><strong>Why not change the system locale:</strong></p>
+<p>Windows offers a “Beta: Use Unicode UTF-8 for worldwide language support” toggle that changes the system code page from 936 to 65001. It’s the most thorough fix, but it’s a global irreversible change that can break older Chinese software with hardcoded GBK encoding (legacy installers, older archive tools, etc.). The <code>env CHCP=65001</code> approach only affects Claude Code’s shell process — the rest of the system remains untouched.</p>
+<p>You’ll need to restart your Claude Code session for the change to take effect.</p>
+<hr>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12hf2B9E29/">Learning video by a Bilibili creator</a></p>
 
 
@@ -412,7 +427,7 @@
 
 
 <div class="tags">
-    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/Assistant/" data-i18n-tag="Assistant">Assistant</a> <a href="/tags/VibeCoding/" data-i18n-tag="VibeCoding">VibeCoding</a> <a href="/tags/Claude/" data-i18n-tag="Claude">Claude</a> <a href="/tags/MCP/" data-i18n-tag="MCP">MCP</a>
+    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/Assistant/" data-i18n-tag="Assistant">Assistant</a> <a href="/tags/VibeCoding/" data-i18n-tag="VibeCoding">VibeCoding</a> <a href="/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/tags/Claude/" data-i18n-tag="Claude">Claude</a>
 </div>
 
 
