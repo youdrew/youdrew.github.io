@@ -36,7 +36,12 @@ const getCurrentPageLanguage = () => {
 // (<link rel="alternate" hreflang="..."> in <head>).
 const getAlternateUrl = (targetLang) => {
   const link = document.querySelector(`link[rel="alternate"][hreflang="${targetLang}"]`);
-  return link ? link.href : null;
+  if (!link) return null;
+  // The hreflang href is an absolute production URL (config.url) emitted for SEO.
+  // Re-base it onto the current origin so local preview (and any host) navigates
+  // in place instead of jumping to the deployed site.
+  const u = new URL(link.href, window.location.origin);
+  return window.location.origin + u.pathname + u.search + u.hash;
 };
 
 // Fallback: derive the alternate URL by toggling the `/zh-CN/` path prefix.
