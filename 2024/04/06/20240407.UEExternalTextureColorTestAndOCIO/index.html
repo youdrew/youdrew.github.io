@@ -42,7 +42,7 @@ How can an externally-imported EXR and UE’s ">
     
         <meta property="article:published_time" content="2024-04-06T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-06-12T14:59:15.031Z">
+            <meta property="article:modified_time" content="2026-06-13T17:49:13.693Z">
         
     
     
@@ -169,7 +169,7 @@ How can an externally-imported EXR and UE’s ">
 <!-- Main Content -->
 <section class="main clearfix" data-toc="true">
 
-    <section class="top" style="background-image: url('./images/page_2_img_2.png');">
+    <section class="top" style="background-image: url('https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204614.png');">
         <div class="wrapper content_header clearfix">
             
 
@@ -196,7 +196,7 @@ How can an externally-imported EXR and UE’s ">
             <!-- Content -->
             <h1 id="How-Do-You-Get-an-External-Texture-to-Display-Its-Original-Colors-in-UE"><a href="#How-Do-You-Get-an-External-Texture-to-Display-Its-Original-Colors-in-UE" class="headerlink" title="How Do You Get an External Texture to Display Its Original Colors in UE?"></a>How Do You Get an External Texture to Display Its Original Colors in UE?</h1><p>This test focuses on solving two problems:</p>
 <ul>
-<li>How can an externally-imported EXR and UE’s internal scene linear data be processed identically?</li>
+<li>How can an externally-imported EXR and UE’s internal scene-linear data be processed identically?</li>
 <li>How can external data be accurately reproduced on an 8-bit display?</li>
 </ul>
 <p>I created an EXR image (linearly encoded) with two shades of blue: a pure blue at <code>0 0 255</code> and a blue at <code>0 0 0.75</code>.</p>
@@ -204,11 +204,10 @@ How can an externally-imported EXR and UE’s ">
 <blockquote>
 <p>The core question: how do you guarantee that a texture imported from outside matches the code values generated internally by the renderer?</p>
 </blockquote>
-<h2 id="Test-Setup"><a href="#Test-Setup" class="headerlink" title="Test Setup"></a>Test Setup</h2><p>When I import the image (<code>HDR_TV_Float.exr</code>) and configure it as follows:</p>
-<p>Compression settings:</p>
+<h2 id="Test-Setup"><a href="#Test-Setup" class="headerlink" title="Test Setup"></a>Test Setup</h2><p>When I import the image (<code>HDR_TV_Float.exr</code>) and configure its compression as follows:</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_1_img_3.png" alt="Compression Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204602.png" alt="Compression Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">EXR texture compression settings</figcaption>
   </figure>
 </div>
@@ -216,7 +215,7 @@ How can an externally-imported EXR and UE’s ">
 <p>For the EXR input, select <strong>Linear</strong> encoding.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_1_img_4.png" alt="Encoding Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204612.png" alt="Encoding Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">EXR encoding settings (Linear selected)</figcaption>
   </figure>
 </div>
@@ -228,7 +227,7 @@ How can an externally-imported EXR and UE’s ">
 <p>This confirms that under these settings, UE can match internally-generated code values to externally-imported code values (the image’s gamma has been removed on input).</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_2_img_2.png" alt="Test Result Comparison" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204614.png" alt="Test Result Comparison" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Comparison: external input code values vs. internal emissive material code values</figcaption>
   </figure>
 </div>
@@ -239,8 +238,8 @@ How can an externally-imported EXR and UE’s ">
 <tr>
 <th align="left">External Value (Float)</th>
 <th align="left">Description</th>
-<th align="left">Texture View (8-bit screenshot)</th>
-<th align="left">Viewport View (8-bit screenshot, emissive material)</th>
+<th align="left">Texture View (8-bit)</th>
+<th align="left">Viewport View (8-bit, emissive material)</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -253,7 +252,7 @@ How can an externally-imported EXR and UE’s ">
 <td align="left">0 0 0.75</td>
 <td align="left">Half blue</td>
 <td align="left">0 0 255</td>
-<td align="left">0 0 224</td>
+<td align="left">0 0 <strong>224</strong></td>
 </tr>
 <tr>
 <td align="left">1 0 0</td>
@@ -265,13 +264,13 @@ How can an externally-imported EXR and UE’s ">
 <td align="left">0.75 0 0</td>
 <td align="left">Half red</td>
 <td align="left">255 0 0</td>
-<td align="left">224 0 0</td>
+<td align="left"><strong>224</strong> 0 0</td>
 </tr>
 <tr>
 <td align="left">0.75 0 0.75</td>
 <td align="left">Purple</td>
 <td align="left">255 0 255</td>
-<td align="left">224 0 224</td>
+<td align="left"><strong>224</strong> 0 <strong>224</strong></td>
 </tr>
 <tr>
 <td align="left">0.02 0.02 0.02</td>
@@ -287,18 +286,18 @@ How can an externally-imported EXR and UE’s ">
 </tr>
 </tbody></table>
 <ul>
-<li>Column 1 — External code values: the original pixel values from the source image (read via EXRView), which are also the values produced by the custom emissive material inside UE. Expressed as floating-point numbers.</li>
-<li>Column 2 — Code values shown in the Texture viewer (captured as 8-bit data via screenshot).</li>
-<li>Column 3 — Code values shown in the render viewport (emissive material, captured as 8-bit data via screenshot, with the View display mode disabled as shown below). All lights in the scene are also turned off (for testing purposes only — in actual production this calibration role can be handed off to a LUT).</li>
+<li><strong>External code values</strong>: the original pixel values from the source image (read via EXRView), which are also the values produced by the custom emissive material inside UE. Expressed as floating-point numbers.</li>
+<li><strong>Texture view</strong>: the code values shown in the Texture viewer (captured as 8-bit data via screenshot).</li>
+<li><strong>Viewport view</strong>: the code values shown in the render viewport (emissive material, captured as 8-bit data via screenshot, with the View display mode disabled and all scene lights turned off — for testing purposes only; in production this calibration role can be handed off to a LUT).</li>
 </ul>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_3_img_2.png" alt="View Display Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">View display mode disabled — setting 1</figcaption>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204617.png" alt="Test Scene Hierarchy" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Test scene hierarchy (Outliner)</figcaption>
   </figure>
   <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_3_img_3.png" alt="View Display Settings 2" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">View display mode disabled — setting 2</figcaption>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204619.png" alt="Viewport Display Toggles" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Viewport display toggles (Show Flags — Bloom, Tone Curve, etc. disabled)</figcaption>
   </figure>
 </div>
 
@@ -316,34 +315,20 @@ How can an externally-imported EXR and UE’s ">
 <p>For xR workflows, what matters is ensuring consistency between the <strong>original code values</strong> and the <strong>code values displayed in the render viewport</strong>.</p>
 <h3 id="Why-Don’t-the-Viewport-Values-Match-the-External-Values"><a href="#Why-Don’t-the-Viewport-Values-Match-the-External-Values" class="headerlink" title="Why Don’t the Viewport Values Match the External Values?"></a>Why Don’t the Viewport Values Match the External Values?</h3><p>Why does a value of 0.75 in the external file (roughly 191 in 8-bit) end up displaying as 224 once it enters the engine? (See the half-blue and half-red entries in the test above.)</p>
 <p>This happens because the data being displayed is still raw linear data — it hasn’t been correctly mapped to the display. The current internal display is still Rec.709 linear data. To display it correctly, the render view’s OCIO needs to be configured.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_5_img_2.png" alt="Code Value Mismatch Diagram" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Code value discrepancy caused by linear data not being correctly mapped to display</figcaption>
-  </figure>
-</div>
-
 <h2 id="OCIO-Configuration"><a href="#OCIO-Configuration" class="headerlink" title="OCIO Configuration"></a>OCIO Configuration</h2><p>Set the OCIO working color space to <strong>WorkingColorSpace</strong> or <strong>Linear Rec709 (SRGB)</strong>. Set the output to <strong>sRGB - Display - RAW</strong>, the standard sRGB display transform.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="./images/page_5_img_2.png" alt="OCIO Configuration" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">OCIO working color space and output configuration</figcaption>
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-205012.png" alt="OCIO Configuration" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">OCIO working color space and output configuration (sRGB - Display - Raw)</figcaption>
   </figure>
 </div>
 
-<h3 id="Code-Value-Reference-Table-After-OCIO"><a href="#Code-Value-Reference-Table-After-OCIO" class="headerlink" title="Code Value Reference Table (After OCIO)"></a>Code Value Reference Table (After OCIO)</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_5_img_3.png" alt="Code Values After OCIO" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Code values perfectly restored after OCIO configuration</figcaption>
-  </figure>
-</div>
-
-<table>
+<h3 id="Code-Value-Reference-Table-After-OCIO"><a href="#Code-Value-Reference-Table-After-OCIO" class="headerlink" title="Code Value Reference Table (After OCIO)"></a>Code Value Reference Table (After OCIO)</h3><table>
 <thead>
 <tr>
 <th align="left">External Value (Float)</th>
 <th align="left">Description</th>
-<th align="left">Viewport View (8-bit screenshot, emissive material)</th>
+<th align="left">Viewport View (8-bit, emissive material)</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -354,7 +339,7 @@ How can an externally-imported EXR and UE’s ">
 <tr>
 <td align="left">0 0 0.75</td>
 <td align="left">Half blue</td>
-<td align="left">0 0 191</td>
+<td align="left">0 0 <strong>191</strong></td>
 </tr>
 <tr>
 <td align="left">1 0 0</td>
@@ -364,12 +349,12 @@ How can an externally-imported EXR and UE’s ">
 <tr>
 <td align="left">0.75 0 0</td>
 <td align="left">Half red</td>
-<td align="left">191 0 0</td>
+<td align="left"><strong>191</strong> 0 0</td>
 </tr>
 <tr>
 <td align="left">0.75 0 0.75</td>
 <td align="left">Purple</td>
-<td align="left">191 0 191</td>
+<td align="left"><strong>191</strong> 0 <strong>191</strong></td>
 </tr>
 <tr>
 <td align="left">0.02 0.02 0.02</td>
@@ -384,44 +369,27 @@ How can an externally-imported EXR and UE’s ">
 </tbody></table>
 <p><strong>The original code values are perfectly restored.</strong></p>
 <h2 id="Research-UE-Render-Logic-and-Parameter-Influence"><a href="#Research-UE-Render-Logic-and-Parameter-Influence" class="headerlink" title="Research: UE Render Logic and Parameter Influence"></a>Research: UE Render Logic and Parameter Influence</h2><p>I found that UE’s various render settings have a significant impact on rendered color output, so I’ll go through each parameter category and examine how it affects the result.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="./images/page_6_img_2.png" alt="Render Parameter Categories" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Overview of render parameter categories</figcaption>
-  </figure>
-  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="./images/page_6_img_4.png" alt="Render Parameter Details" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Render parameter details</figcaption>
-  </figure>
-</div>
-
-<h3 id="Parameter-Categories-to-Investigate"><a href="#Parameter-Categories-to-Investigate" class="headerlink" title="Parameter Categories to Investigate"></a>Parameter Categories to Investigate</h3><ul>
-<li><p><strong>Post Process - Exposure</strong>: the logic behind each exposure mode and how they differ</p>
-</li>
-<li><p><strong>Post Process - Highlight Contrast &#x2F; Shadow Contrast</strong></p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_6_img_2.png" alt="Highlight Contrast / Shadow Contrast" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+<h3 id="Post-Process-Exposure"><a href="#Post-Process-Exposure" class="headerlink" title="Post Process - Exposure"></a>Post Process - Exposure</h3><p>The logic behind each exposure mode and how they differ (to be expanded).</p>
+<h3 id="Post-Process-Highlight-Contrast-Shadow-Contrast"><a href="#Post-Process-Highlight-Contrast-Shadow-Contrast" class="headerlink" title="Post Process - Highlight Contrast &#x2F; Shadow Contrast"></a>Post Process - Highlight Contrast &#x2F; Shadow Contrast</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204632.png" alt="Highlight Contrast / Shadow Contrast" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Highlight Contrast / Shadow Contrast parameter effect</figcaption>
   </figure>
 </div>
-</li>
-<li><p><strong>Post Process - Tone Curve Amount</strong></p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_6_img_3.png" alt="Tone Curve Amount" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+
+<h3 id="Post-Process-Tone-Curve-Amount"><a href="#Post-Process-Tone-Curve-Amount" class="headerlink" title="Post Process - Tone Curve Amount"></a>Post Process - Tone Curve Amount</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204635.png" alt="Tone Curve Amount" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Tone Curve Amount parameter effect</figcaption>
   </figure>
 </div>
-</li>
-<li><p><strong>Post Process - Expand Gamut</strong></p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/page_6_img_4.png" alt="Expand Gamut" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+
+<h3 id="Post-Process-Expand-Gamut"><a href="#Post-Process-Expand-Gamut" class="headerlink" title="Post Process - Expand Gamut"></a>Post Process - Expand Gamut</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204640.png" alt="Expand Gamut" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Expand Gamut parameter effect</figcaption>
   </figure>
-</div></li>
-</ul>
+</div>
 
 
             <!-- Tags -->
