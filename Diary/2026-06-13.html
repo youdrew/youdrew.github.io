@@ -11,11 +11,18 @@
     
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
+    <link rel="canonical" href="https://youdrew.github.io/Diary/2026-06-13.html">
 
     <!-- Description -->
     
-        <meta name="description" content="In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the productio">
+        <meta name="description" content="优化UI	1. 标签筛选的提前编码导致二次标签筛选修复 ok	2. 隐藏式UI设计 🆗	3. crtl+B 定位场景中的东西
+写总结
+尝试达芬奇MCP 🆗自动化调用生成视频
+优化信息获取方案朗读，
+日记系统(13)
+研究完成RAG剩下的视频
+SPEC框架研究
+设计CLI调用逻辑">
     
 
     <!-- Author -->
@@ -24,22 +31,22 @@
     
 
     <!-- Open Graph -->
-    <meta property="og:url" content="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
-    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://youdrew.github.io/Diary/2026-06-13.html">
+    <meta property="og:type" content="website">
     <meta property="og:site_name" content="Eugene&#39;s Page">
     <meta property="og:locale" content="en_US">
     
-        <meta property="og:title" content="Virtual Production Color Calibration and HDR Production Workflow (Software Project)">
+    
+        <meta property="og:description" content="优化UI	1. 标签筛选的提前编码导致二次标签筛选修复 ok	2. 隐藏式UI设计 🆗	3. crtl+B 定位场景中的东西
+写总结
+尝试达芬奇MCP 🆗自动化调用生成视频
+优化信息获取方案朗读，
+日记系统(13)
+研究完成RAG剩下的视频
+SPEC框架研究
+设计CLI调用逻辑">
     
     
-        <meta property="og:description" content="In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the productio">
-    
-    
-    
-        <meta property="article:published_time" content="2024-09-02T04:00:00.000Z">
-        
-            <meta property="article:modified_time" content="2026-06-15T16:31:01.254Z">
-        
     
     
         <meta name="article:lang" content="en">
@@ -48,24 +55,25 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     
-        <meta name="twitter:title" content="Virtual Production Color Calibration and HDR Production Workflow (Software Project)">
     
-    
-        <meta name="twitter:description" content="In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the productio">
+        <meta name="twitter:description" content="优化UI	1. 标签筛选的提前编码导致二次标签筛选修复 ok	2. 隐藏式UI设计 🆗	3. crtl+B 定位场景中的东西
+写总结
+尝试达芬奇MCP 🆗自动化调用生成视频
+优化信息获取方案朗读，
+日记系统(13)
+研究完成RAG剩下的视频
+SPEC框架研究
+设计CLI调用逻辑">
     
     
 
     <!-- Hreflang (build-time alternate language map).
          x-default always points at the English version per SEO convention. -->
     
-        <link rel="alternate" hreflang="en" href="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
-        <link rel="alternate" hreflang="zh-CN" href="https://youdrew.github.io/zh-CN/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
-        <link rel="alternate" hreflang="x-default" href="https://youdrew.github.io/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/">
-    
 
     <!-- Title -->
     
-    <title>Virtual Production Color Calibration and HDR Production Workflow (Software Project) - Eugene&#39;s Page</title>
+    <title>Eugene&#39;s Page</title>
 
     <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
     
@@ -93,7 +101,7 @@
 
 
 
-<body class="layout-post path--2024-09-02-20240902-VirtualProductionColorManagementWorkflow-">
+<body class="layout-page path-Diary-2026-06-13-html">
 
 <!-- Menu -->
 <!-- Navigation -->
@@ -161,26 +169,11 @@
 
 
 <!-- Main Content -->
-<section class="main clearfix" data-toc="false">
+<section class="main clearfix" data-toc="true">
 
     <section class="top no-cover">
         <div class="wrapper content_header clearfix">
-            
-
-<div class="work_nav">
-
-    <ul class="btn clearfix">
-        
-        <li><a href="/zh-CN/2024/12/21/20241221.OpenVPCalWorkflow/" class="previous" data-title="OpenVPCal流程文档"></a></li>
-        
-        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
-        
-        <li><a href="/zh-CN/2024/09/02/20240902.VirtualProductionColorManagementWorkflow/" class="next" data-title="虚拟制作色彩校准及HDR制作工作流..."></a></li>
-        
-    </ul>
-
-</div><!-- end work_nav -->
-            <h1 class="title">Virtual Production Color Calibration and HDR Production Workflow (Software Project)</h1>
+            <h1 class="title">Untitled</h1>
         </div>
     </section><!-- end top -->
 
@@ -188,65 +181,14 @@
         <div class="content">
 
             <!-- Content -->
-            <p>In LED-based virtual production, color management is a critical factor in ensuring the quality and consistency of the final image output. However, the production pipeline faces numerous challenges — from differences in production standards (SDR for asset creation) and display devices (LED walls, art monitors, cameras, on-set monitors), to the varying color spaces and color management systems across different DCC tools like Unreal Engine, Nuke, Maya, and DaVinci Resolve.</p>
-<div style="display: flex; justify-content: center; margin: 24px 0;">
-  <figure style="width: min(100%, 960px); margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_004432.png" alt="" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-  </figure>
-</div>
-
-<p>To tackle these challenges, I designed a complete virtual production color calibration and HDR production workflow built on ACES, OCIO (OpenColorIO), OVC (OpenVPCal), and Unreal Engine. The system covers a wide range of color algorithm solutions, hardware-software integration workflows, and pipeline optimizations — all aimed at delivering an efficient, reliable color management solution while pushing image quality higher through HDR output.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010101.gif" alt="Asset HDR monitoring" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Asset HDR monitoring</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010102.gif" alt="Editor Python virtual environment auto-deployment" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Editor Python virtual environment auto-deployment</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010103.gif" alt="HDR asset standards editor tool" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">HDR asset standards editor tool</figcaption>
-  </figure>
-</div>
-
-
-<p>This workflow comprises two software tools (a calibration application and an art monitor application), along with an industrialized pipeline built around hardware integration. Compared to solutions from vendors like SONY and ARRI, this approach offers better cost-effectiveness, a smoother user experience, and stronger adaptability — and has already been successfully deployed on multiple virtual production projects.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010105.gif" alt="Automated calibration verification" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Automated calibration verification</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010104.gif" alt="Multi-screen unified display" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Multi-screen unified display</figcaption>
-  </figure>
-  <figure style="flex: 1 1 280px; max-width: 360px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/20260329_010100.gif" alt="Post-calibration result comparison" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
-    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Post-calibration result comparison</figcaption>
-  </figure>
-</div>
-
-<p><strong>This solution enables a fully end-to-end HDR production pipeline:</strong></p>
-<ol>
-<li>HDR monitoring during pre-production (Unreal Engine, art monitors) or automatic texture upconversion;</li>
-<li>HDR monitoring during shooting (camera, on-set monitors) + LED HDR wall display + multi-screen HDR color calibration for unified display consistency;</li>
-<li>HDR monitoring for post-production footage review.</li>
-</ol>
-<ul>
-<li><strong>This HDR solution is the first fully end-to-end HDR workflow in the Chinese virtual production industry to go live on an actual production.</strong></li>
-</ul>
-
-
-            <!-- Tags -->
-            
-
-
-<div class="tags">
-    <a href="/tags/SoftwareProjects/" data-i18n-tag="SoftwareProjects">SoftwareProjects</a> <a href="/tags/UnrealEngine/" data-i18n-tag="UnrealEngine">UnrealEngine</a> <a href="/tags/ACES/" data-i18n-tag="ACES">ACES</a> <a href="/tags/OCIO/" data-i18n-tag="OCIO">OCIO</a> <a href="/tags/ColorManagement/" data-i18n-tag="ColorManagement">ColorManagement</a>
-</div>
-
+            <p><strong>优化UI</strong><br>	1. 标签筛选的提前编码导致二次标签筛选修复 ok<br>	2. 隐藏式UI设计 🆗<br>	3. crtl+B 定位场景中的东西</p>
+<p>写总结</p>
+<p>尝试达芬奇MCP 🆗<br>自动化调用生成视频</p>
+<p>优化信息获取方案<br>朗读，</p>
+<p>日记系统(13)</p>
+<p>研究完成RAG剩下的视频</p>
+<p>SPEC框架研究</p>
+<p>设计CLI调用逻辑</p>
 
 
             <!-- Comments -->
@@ -259,9 +201,6 @@
             </div>
         </div><!-- end content -->
     </section>
-
-    <!-- Table of Contents will be generated by toc-collapse.js -->
-
 </section><!-- end main -->
 
 <!-- After footer scripts -->
