@@ -9,14 +9,14 @@
     <atom:link href="https://youdrew.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 15 Jun 2026 19:05:29 GMT</pubDate>
+    <pubDate>Wed, 17 Jun 2026 14:37:50 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
-      <link>https://youdrew.github.io/zh-CN/2026/06/15/20250801.UEConceptScrapbox/</link>
-      <guid>https://youdrew.github.io/zh-CN/2026/06/15/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Mon, 15 Jun 2026 19:05:29 GMT</pubDate>
+      <link>https://youdrew.github.io/zh-CN/2026/06/17/20250801.UEConceptScrapbox/</link>
+      <guid>https://youdrew.github.io/zh-CN/2026/06/17/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Wed, 17 Jun 2026 14:37:50 GMT</pubDate>
       
         
         
@@ -31,15 +31,15 @@
       
       
       
-      <comments>https://youdrew.github.io/zh-CN/2026/06/15/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/zh-CN/2026/06/17/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title></title>
-      <link>https://youdrew.github.io/2026/06/15/20250801.UEConceptScrapbox/</link>
-      <guid>https://youdrew.github.io/2026/06/15/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Mon, 15 Jun 2026 19:05:29 GMT</pubDate>
+      <link>https://youdrew.github.io/2026/06/17/20250801.UEConceptScrapbox/</link>
+      <guid>https://youdrew.github.io/2026/06/17/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Wed, 17 Jun 2026 14:37:50 GMT</pubDate>
       
         
         
@@ -54,7 +54,7 @@
       
       
       
-      <comments>https://youdrew.github.io/2026/06/15/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://youdrew.github.io/2026/06/17/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
@@ -586,6 +586,8 @@
       
       <category domain="https://youdrew.github.io/tags/LLM/">LLM</category>
       
+      <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
+      
       <category domain="https://youdrew.github.io/tags/API/">API</category>
       
       <category domain="https://youdrew.github.io/tags/Subscription/">Subscription</category>
@@ -593,8 +595,6 @@
       <category domain="https://youdrew.github.io/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://youdrew.github.io/tags/Google/">Google</category>
-      
-      <category domain="https://youdrew.github.io/tags/Claude/">Claude</category>
       
       
       <comments>https://youdrew.github.io/2026/03/13/20260314.AI%20Services/#disqus_thread</comments>
