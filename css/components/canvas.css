@@ -171,11 +171,15 @@
 .canvas-node__body h3,
 .canvas-node__body h4,
 .canvas-node__body h5,
-.canvas-node__body h6 {
+.canvas-node__body h6,
+.canvas-node__heading {
   margin: 0 0 0.2em;
   padding: 0;
   font-size: 1.05em;
   line-height: 1.3;
+  /* canvas-processor demotes node-title <hN> to <div class="canvas-node__heading">
+     so the TOC ignores them; restore the bold weight the <hN> got for free. */
+  font-weight: 700;
   font-family: inherit;
   color: inherit;
 }
