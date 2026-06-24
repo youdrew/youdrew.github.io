@@ -1,0 +1,92 @@
+/*
+ * Obsidian-style callouts.
+ *
+ * scripts/callout.js rewrites `> [!type] title` blocks into this markup and
+ * sets --callout-color (an "R, G, B" triplet) inline per type. Colours follow
+ * Obsidian's default theme; unknown types fall back to the note blue below.
+ */
+
+.callout {
+  --callout-color: 68, 138, 255;
+  margin: 1.5em 0;
+  overflow: hidden;
+  background-color: rgb(var(--callout-color), 0.08);
+  border: 1px solid rgb(var(--callout-color), 0.25);
+  border-left: 4px solid rgb(var(--callout-color));
+  border-radius: 6px;
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.3;
+  color: rgb(var(--callout-color));
+  background-color: rgb(var(--callout-color), 0.1);
+}
+
+.callout-icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: rgb(var(--callout-color));
+}
+
+.callout-content {
+  padding: 10px 14px 12px;
+}
+
+/* Collapse the body's own outer margins so padding controls the spacing. */
+.callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* A canvas embedded in a callout shouldn't keep its large standalone margins. */
+.callout-content .canvas-embed {
+  margin: 0.6em auto;
+}
+
+/* When a callout only wraps a canvas, shrink the whole box to the canvas
+   width (centred) instead of stretching across the full content column. */
+.callout:has(> .callout-content > .canvas-embed) {
+  width: fit-content;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* -- Foldable callouts (> [!type]- / [!type]+) ----------------------- */
+
+details.callout > summary.callout-title {
+  cursor: pointer;
+  list-style: none;
+}
+
+details.callout > summary.callout-title::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron at the right edge, rotating when the callout opens. */
+details.callout > summary.callout-title::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  opacity: 0.7;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+details.callout[open] > summary.callout-title::after {
+  transform: rotate(45deg);
+}
