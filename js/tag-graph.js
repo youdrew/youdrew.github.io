@@ -23,6 +23,37 @@ export function initTagGraph() {
     archiveFilterSet[t] = true;
   });
 
+  // On small / touch screens a ~50-node force graph has no room to spread on a
+  // ~350px-wide canvas and collapses into an illegible blob. Thin it to the
+  // most significant tags: always keep the guide/filter tags, then fill up to a
+  // budget with the highest-article-count tags, and drop links whose endpoints
+  // were pruned. Desktop keeps the full graph; every shown node still taps
+  // through to its tag page, and the archive list below covers every post.
+  const MOBILE_NODE_BUDGET = 20;
+  const smallScreen =
+    typeof window.matchMedia === 'function' &&
+    (window.matchMedia('(max-width: 768px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches);
+  if (smallScreen && data.nodes.length > MOBILE_NODE_BUDGET) {
+    const keep = {};
+    archiveFilterTags.forEach(function (t) {
+      keep[t] = true;
+    });
+    const byValue = data.nodes.slice().sort(function (a, b) {
+      return (b.value || 0) - (a.value || 0);
+    });
+    for (let i = 0; i < byValue.length; i++) {
+      if (Object.keys(keep).length >= MOBILE_NODE_BUDGET) break;
+      keep[byValue[i].name] = true;
+    }
+    data.nodes = data.nodes.filter(function (n) {
+      return keep[n.name];
+    });
+    data.links = data.links.filter(function (l) {
+      return keep[l.source] && keep[l.target];
+    });
+  }
+
   function normalizeTagKey(name) {
     return String(name || '')
       .replace(/-/g, ' ')

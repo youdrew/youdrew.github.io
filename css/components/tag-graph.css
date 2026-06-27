@@ -103,8 +103,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  /* Taller on mobile so the thinned node set (see MOBILE_NODE_BUDGET in
+     tag-graph.js) has vertical room to spread instead of clumping. */
   #tag-graph-container {
-    height: 360px;
+    height: 440px;
     border-radius: 8px;
   }
 
@@ -115,7 +117,7 @@
 
 @media (max-width: 480px) {
   #tag-graph-container {
-    height: 300px;
+    height: 420px;
     border-radius: 6px;
   }
 }
