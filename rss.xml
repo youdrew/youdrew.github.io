@@ -9,14 +9,14 @@
     <atom:link href="https://eugenepage.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 27 Jun 2026 16:16:51 GMT</pubDate>
+    <pubDate>Sat, 27 Jun 2026 16:30:40 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
       <link>https://eugenepage.com/zh-CN/2026/06/27/20250801.UEConceptScrapbox/</link>
       <guid>https://eugenepage.com/zh-CN/2026/06/27/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Sat, 27 Jun 2026 16:16:51 GMT</pubDate>
+      <pubDate>Sat, 27 Jun 2026 16:30:40 GMT</pubDate>
       
         
         
@@ -39,7 +39,7 @@
       <title></title>
       <link>https://eugenepage.com/2026/06/27/20250801.UEConceptScrapbox/</link>
       <guid>https://eugenepage.com/2026/06/27/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Sat, 27 Jun 2026 16:16:51 GMT</pubDate>
+      <pubDate>Sat, 27 Jun 2026 16:30:40 GMT</pubDate>
       
         
         
@@ -161,9 +161,9 @@
       
       <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
       
-      <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
-      
       <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
+      
+      <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
       
       <category domain="https://eugenepage.com/tags/LangGraph/">LangGraph</category>
       
@@ -202,9 +202,9 @@
       
       <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
       
-      <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
-      
       <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
+      
+      <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
       
       <category domain="https://eugenepage.com/tags/LangGraph/">LangGraph</category>
       
@@ -524,9 +524,9 @@
       
       <category domain="https://eugenepage.com/tags/VibeCoding/">VibeCoding</category>
       
-      <category domain="https://eugenepage.com/tags/MCP/">MCP</category>
-      
       <category domain="https://eugenepage.com/tags/Claude/">Claude</category>
+      
+      <category domain="https://eugenepage.com/tags/MCP/">MCP</category>
       
       
       <comments>https://eugenepage.com/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
@@ -556,9 +556,9 @@
       
       <category domain="https://eugenepage.com/tags/VibeCoding/">VibeCoding</category>
       
-      <category domain="https://eugenepage.com/tags/MCP/">MCP</category>
-      
       <category domain="https://eugenepage.com/tags/Claude/">Claude</category>
+      
+      <category domain="https://eugenepage.com/tags/MCP/">MCP</category>
       
       
       <comments>https://eugenepage.com/zh-CN/2026/03/22/20260322.Claude%20Code%20Tips/#disqus_thread</comments>
