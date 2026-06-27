@@ -751,6 +751,80 @@ export function initTagGraph() {
       });
     }
 
+    // Touch only: a fullscreen toggle. Inline, the graph is static and the page
+    // scrolls over it (touch-action: manipulation) — there's no room to zoom/pan
+    // without fighting page scroll. Fullscreen hands the graph the whole screen
+    // and switches on ECharts `roam`, so native pinch-zoom and one-finger
+    // drag-pan work cleanly (the fullscreen CSS flips touch-action to none so the
+    // gestures reach ECharts instead of the browser). Tap still navigates;
+    // ✕ or Escape exits and restores the inline framing.
+    if (isTouch) {
+      const fsBtn = document.createElement('button');
+      fsBtn.type = 'button';
+      fsBtn.className = 'tag-graph-fs-btn';
+      fsBtn.setAttribute('aria-label', 'Fullscreen');
+      fsBtn.innerHTML =
+        '<svg class="tag-graph-fs-ic tag-graph-fs-ic--open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>' +
+        '<svg class="tag-graph-fs-ic tag-graph-fs-ic--close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      graphContainer.appendChild(fsBtn);
+
+      let isFs = false;
+      const showFsHint = function () {
+        if (!hintEl) return;
+        const lang =
+          (typeof localStorage !== 'undefined' && localStorage.getItem('siteLanguage')) || 'en';
+        hintEl.textContent =
+          lang === 'zh-CN'
+            ? '双指缩放 · 拖动平移 · 点按进入标签'
+            : 'Pinch to zoom · Drag to pan · Tap a tag';
+        hintEl.classList.add('visible');
+        setTimeout(function () {
+          hintEl.classList.remove('visible');
+        }, 2600);
+      };
+      const enterFs = function () {
+        isFs = true;
+        graphContainer.classList.add('tag-graph-fullscreen');
+        fsBtn.classList.add('is-fullscreen');
+        fsBtn.setAttribute('aria-label', 'Exit fullscreen');
+        document.body.style.overflow = 'hidden';
+        // Lift .main (position:relative; z-index:55 — a stacking context) above
+        // the sticky header, otherwise it traps this overlay below the header
+        // (z-index 9999) despite the overlay's own high z-index.
+        document.body.classList.add('tag-graph-fs-active');
+        // Resize into the full-screen box, then enable roam (pinch / drag-pan).
+        requestAnimationFrame(function () {
+          chart.resize();
+          chart.setOption({ series: [{ roam: true }] });
+          showFsHint();
+        });
+      };
+      const exitFs = function () {
+        isFs = false;
+        graphContainer.classList.remove('tag-graph-fullscreen');
+        fsBtn.classList.remove('is-fullscreen');
+        fsBtn.setAttribute('aria-label', 'Fullscreen');
+        document.body.style.overflow = '';
+        document.body.classList.remove('tag-graph-fs-active');
+        // Resize back and restore the inline framing + disable roam.
+        requestAnimationFrame(function () {
+          chart.resize();
+          chart.setOption({
+            series: [{ roam: false, zoom: currentZoom, center: currentCenter.slice() }],
+          });
+        });
+      };
+      fsBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isFs) exitFs();
+        else enterFs();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isFs) exitFs();
+      });
+    }
+
     // Responsive resize
     let resizeTimer;
     window.addEventListener('resize', function () {

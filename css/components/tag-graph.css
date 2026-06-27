@@ -39,6 +39,72 @@
   touch-action: manipulation !important;
 }
 
+/* Fullscreen toggle button — added by tag-graph.js on touch devices only.
+   Inline it sits top-right of the graph; tapping expands the graph to a
+   full-screen overlay (see .tag-graph-fullscreen) and the icon flips to a ✕. */
+.tag-graph-fs-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.92);
+  color: #555;
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+}
+.tag-graph-fs-ic {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+.tag-graph-fs-ic--close {
+  display: none;
+}
+.tag-graph-fs-btn.is-fullscreen .tag-graph-fs-ic--open {
+  display: none;
+}
+.tag-graph-fs-btn.is-fullscreen .tag-graph-fs-ic--close {
+  display: block;
+}
+
+/* Full-screen overlay state */
+.tag-graph-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  z-index: 99999 !important;
+}
+.tag-graph-fullscreen .tag-graph-fs-btn {
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  right: calc(12px + env(safe-area-inset-right, 0px));
+}
+/* In fullscreen the canvas must capture all touch gestures for ECharts roam
+   (pinch-zoom / drag-pan), so override the inline-mode manipulation. */
+.tag-graph-fullscreen #tag-graph,
+.tag-graph-fullscreen #tag-graph > div,
+.tag-graph-fullscreen #tag-graph canvas {
+  touch-action: none !important;
+}
+/* While fullscreen is active, lift .main (a position:relative; z-index:55
+   stacking context) above the sticky header (z-index 9999) — otherwise the
+   header paints over the overlay (and its ✕ button) despite the high z-index. */
+body.tag-graph-fs-active .main {
+  z-index: 100000 !important;
+}
+
 /* Hint overlay inside the graph container */
 .tag-graph-hint {
   position: absolute;
