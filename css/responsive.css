@@ -360,6 +360,41 @@
   .main .work {
     width: 50%; /* 2 columns */
   }
+
+  /* ---- Archive page: scale down + reclaim horizontal room ----
+     The desktop archive uses a 120px gutter for the absolute-positioned date
+     plus a 65px list indent — on a phone that squeezes titles into a sliver.
+     Trim the card padding, drop the indent, narrow the gutter, shrink type. */
+  .content.archives {
+    margin-top: 24px;
+    padding: 36px 18px;
+  }
+  #tag-graph-section {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+  }
+  .content .archive-year {
+    margin-bottom: 28px;
+  }
+  .content .archive-year .year-title {
+    font-size: 21px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+  }
+  .content ul.archive-list {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .content ul.archive-list li.archive-item {
+    margin: 12px 0;
+    padding-left: 92px;
+  }
+  .content ul.archive-list li.archive-item .archive-date {
+    font-size: 13px;
+  }
+  .content ul.archive-list li a {
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 550px) {

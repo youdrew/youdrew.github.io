@@ -384,6 +384,13 @@ export function initTagGraph() {
     // Remove loading indicator
     if (loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
 
+    // Touch devices (phones/tablets) get a non-draggable, page-scrollable graph.
+    // matchMedia('(pointer: coarse)') is the primary signal (primary input is a
+    // finger); 'ontouchstart' is a fallback for older engines.
+    const isTouch =
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+      'ontouchstart' in window;
+
     const chart = echarts.init(container);
 
     const option = {
@@ -491,7 +498,10 @@ export function initTagGraph() {
           data: data.nodes,
           links: data.links,
           roam: false,
-          draggable: true,
+          // Drag deforms the force layout — fine with a mouse, but on touch a
+          // finger swipe (e.g. trying to scroll) grabs a node and mangles the
+          // web. Disable on touch; keep tap-to-navigate via the click handler.
+          draggable: !isTouch,
           force: {
             repulsion: calcRepulsion(data.nodes.length),
             edgeLength: [150, 450],
@@ -622,83 +632,93 @@ export function initTagGraph() {
       container.style.cursor = 'default';
     });
 
-    // Prevent page scroll/zoom when interacting inside the graph container
-    const graphEl = graphContainer || container;
-    graphEl.addEventListener(
-      'wheel',
-      function (e) {
-        e.preventDefault();
-      },
-      { passive: false }
-    );
-    graphEl.addEventListener(
-      'touchmove',
-      function (e) {
-        if (e.touches.length >= 2) {
-          e.preventDefault();
-        }
-      },
-      { passive: false }
-    );
-
-    // Unified zoom & pan via ZRender (roam is disabled to avoid dual-layer conflicts)
-    const zr = chart.getZr();
+    // currentZoom/currentCenter are read & written by fitOnce() above, so they
+    // must exist regardless of input device.
     let currentZoom = initialZoom || 1;
     let currentCenter = initialCenter ? [initialCenter[0], initialCenter[1]] : [0, 0];
 
-    // Zoom: mousewheel anywhere on canvas
-    zr.on('mousewheel', function (e) {
-      e.event.preventDefault();
-      e.event.stopPropagation();
-      userInteracted = true;
-      const delta = e.wheelDelta > 0 ? 1.08 : 1 / 1.08;
-      let newZoom = currentZoom * delta;
-      if (newZoom < 0.3) newZoom = 0.3;
-      if (newZoom > 4) newZoom = 4;
-      currentZoom = newZoom;
-      chart.setOption({ series: [{ zoom: currentZoom }] });
-    });
+    // Desktop (mouse) interaction only. On touch this whole model breaks — a
+    // finger swipe grabs a node and the force layout deforms, and the
+    // wheel/touchmove capture would block page scroll. Touch users get a
+    // static-but-tappable graph (draggable:false above) that the page scrolls
+    // and pinches over naturally (touch-action in tag-graph.css).
+    if (!isTouch) {
+      // Prevent page scroll/zoom when interacting inside the graph container
+      const graphEl = graphContainer || container;
+      graphEl.addEventListener(
+        'wheel',
+        function (e) {
+          e.preventDefault();
+        },
+        { passive: false }
+      );
+      graphEl.addEventListener(
+        'touchmove',
+        function (e) {
+          if (e.touches.length >= 2) {
+            e.preventDefault();
+          }
+        },
+        { passive: false }
+      );
 
-    // Pan: drag anywhere on canvas (not on a node)
-    let isPanning = false;
-    let panStart = [0, 0];
-    let centerAtPanStart = [0, 0];
-    zr.on('mousedown', function (e) {
-      // Only pan when not clicking on a graph element
-      if (!e.target) {
-        isPanning = true;
+      // Unified zoom & pan via ZRender (roam is disabled to avoid dual-layer conflicts)
+      const zr = chart.getZr();
+
+      // Zoom: mousewheel anywhere on canvas
+      zr.on('mousewheel', function (e) {
+        e.event.preventDefault();
+        e.event.stopPropagation();
         userInteracted = true;
-        panStart = [e.event.clientX, e.event.clientY];
-        centerAtPanStart = [currentCenter[0], currentCenter[1]];
-        container.style.cursor = 'grabbing';
-      }
-    });
-    zr.on('mousemove', function (e) {
-      if (isPanning) {
-        const dx = e.event.clientX - panStart[0];
-        const dy = e.event.clientY - panStart[1];
-        // Convert pixel offset to graph coordinate offset (account for zoom & device pixel ratio)
-        const cw = container.clientWidth;
-        const ch = container.clientHeight;
-        const graphW = cw / currentZoom;
-        const graphH = ch / currentZoom;
-        currentCenter[0] = centerAtPanStart[0] - dx * (graphW / cw);
-        currentCenter[1] = centerAtPanStart[1] - dy * (graphH / ch);
-        chart.setOption({ series: [{ center: [currentCenter[0], currentCenter[1]] }] });
-      }
-    });
-    zr.on('mouseup', function () {
-      if (isPanning) {
-        isPanning = false;
-        container.style.cursor = 'default';
-      }
-    });
-    zr.on('globalout', function () {
-      if (isPanning) {
-        isPanning = false;
-        container.style.cursor = 'default';
-      }
-    });
+        const delta = e.wheelDelta > 0 ? 1.08 : 1 / 1.08;
+        let newZoom = currentZoom * delta;
+        if (newZoom < 0.3) newZoom = 0.3;
+        if (newZoom > 4) newZoom = 4;
+        currentZoom = newZoom;
+        chart.setOption({ series: [{ zoom: currentZoom }] });
+      });
+
+      // Pan: drag anywhere on canvas (not on a node)
+      let isPanning = false;
+      let panStart = [0, 0];
+      let centerAtPanStart = [0, 0];
+      zr.on('mousedown', function (e) {
+        // Only pan when not clicking on a graph element
+        if (!e.target) {
+          isPanning = true;
+          userInteracted = true;
+          panStart = [e.event.clientX, e.event.clientY];
+          centerAtPanStart = [currentCenter[0], currentCenter[1]];
+          container.style.cursor = 'grabbing';
+        }
+      });
+      zr.on('mousemove', function (e) {
+        if (isPanning) {
+          const dx = e.event.clientX - panStart[0];
+          const dy = e.event.clientY - panStart[1];
+          // Convert pixel offset to graph coordinate offset (account for zoom & device pixel ratio)
+          const cw = container.clientWidth;
+          const ch = container.clientHeight;
+          const graphW = cw / currentZoom;
+          const graphH = ch / currentZoom;
+          currentCenter[0] = centerAtPanStart[0] - dx * (graphW / cw);
+          currentCenter[1] = centerAtPanStart[1] - dy * (graphH / ch);
+          chart.setOption({ series: [{ center: [currentCenter[0], currentCenter[1]] }] });
+        }
+      });
+      zr.on('mouseup', function () {
+        if (isPanning) {
+          isPanning = false;
+          container.style.cursor = 'default';
+        }
+      });
+      zr.on('globalout', function () {
+        if (isPanning) {
+          isPanning = false;
+          container.style.cursor = 'default';
+        }
+      });
+    }
 
     // Responsive resize
     let resizeTimer;

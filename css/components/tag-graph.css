@@ -27,6 +27,18 @@
   height: 100%;
 }
 
+/* Touch devices: let the page scroll & pinch-zoom over the graph and keep taps
+   for navigation. ZRender otherwise sets touch-action:none on its canvas to
+   capture gestures itself, which blocks page scroll and (with draggable) lets a
+   finger-swipe deform the force layout. !important overrides that inline value.
+   Mouse input is unaffected by touch-action, so desktop pan/zoom still works. */
+#tag-graph-container,
+#tag-graph,
+#tag-graph > div,
+#tag-graph canvas {
+  touch-action: manipulation !important;
+}
+
 /* Hint overlay inside the graph container */
 .tag-graph-hint {
   position: absolute;
