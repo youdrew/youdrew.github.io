@@ -11,6 +11,11 @@
 @media (max-width: 1099px) {
   /* ---- Sticky top bar (collapsed header) ---- */
   header {
+    /* border-box so width:100% + horizontal padding stays within the
+       viewport. Without it the bar (and the .menu-open overlay, which
+       inherits width:100%) overflow by 2×--space-5 = 48px: the toggle
+       falls off the right edge and the language switch gets clipped. */
+    box-sizing: border-box;
     position: sticky;
     top: 0;
     left: 0;
