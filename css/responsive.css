@@ -1,100 +1,377 @@
-/*  Responsive code  */
+/* ============================================================
+   Mobile / tablet layer (≤ 1099px)
+
+   The desktop hover-sidebar (header.css, ≥1099px) collapses here
+   into a sticky frosted top bar. Tapping the toggle adds
+   `header.menu-open`, expanding <header> into a full-screen
+   overlay that reveals the editorial nav + footer. Built on the
+   tokens in base/variables.css. The 1099px breakpoint is mirrored
+   in header.css and js/modules/navigation.js — keep them in sync.
+   ============================================================ */
 @media (max-width: 1099px) {
+  /* ---- Sticky top bar (collapsed header) ---- */
   header {
-    display: block;
-    width: 100%;
-    min-height: 100px;
-    padding: 0;
-    position: relative;
-  }
-  header .logo {
-    margin: 40px 0 0 30px;
-    float: left;
-  }
-
-  header .logo a,
-  header .logo a:active,
-  header .logo a:visited {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family:
-      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    color: #454545;
-    font-size: 1.5em;
-  }
-
-  header .logo a:hover {
-    text-decoration: none;
-    color: #969595;
-    font-size: 1.5em;
-  }
-
-  header .footer {
-    display: none;
-  }
-  header #menu_icon,
-  header .close_menu {
-    float: right;
-    margin: 30px 30px 0 0;
-  }
-
-  header nav {
-    width: 100%;
-    position: absolute;
-    top: 100px;
+    position: sticky;
+    top: 0;
     left: 0;
+    width: 100%;
+    height: var(--bar-h);
+    padding: 0 var(--space-5);
+    /* block (not flex): the collapsed bar must NOT lay out nav/footer in a
+       row — even hidden they'd take flex width, overflow the viewport and
+       push the toggle off-screen. They flow below the logo, clipped by the
+       fixed height + overflow:hidden, and only show once .menu-open lifts
+       the clip. */
+    display: block;
+    background: rgb(255 255 255 / 0.82);
+    /* stylelint-disable-next-line property-no-vendor-prefix -- iOS < 18 needs the prefix for the frosted bar */
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden; /* clip nav/footer while collapsed */
+    transform: none; /* cancel any desktop translateX */
     z-index: 9999;
   }
 
-  header nav ul {
-    list-style: none;
-    display: none;
-    position: relative;
+  /* Logo → compact wordmark inside the bar */
+  header .logo {
+    margin: 0;
+    float: none;
+    display: flex;
+    align-items: center;
+    height: var(--bar-h);
   }
-  header nav ul li a {
-    display: block;
-    width: 100%;
-    padding: 30px 0;
-    text-align: center;
-    color: #454545;
-    font-family:
-      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
+  header .logo a,
+  header .logo a:active,
+  header .logo a:visited {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
     text-decoration: none;
-    border-top: 1px solid #f7f5f5;
-    background: #fff;
+    color: var(--ink);
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    font-weight: 500;
   }
-  header nav ul li a:active {
-    background: #f7f5f5;
+  header .logo a:hover {
+    color: var(--muted);
   }
-  #menu_icon,
-  .close_menu,
-  .show_menu {
-    display: block;
-  }
-  .show_menu {
-    display: block;
+  /* subtitle/description belong to the desktop sidebar only */
+  header .logo .subtitle,
+  header .logo .description {
+    display: none;
   }
 
-  .main .work {
-    width: calc(33.3333% - 30px); /* 在平板上显示3列并保留间隔 */
+  /* ---- Hamburger toggle (top-right of the bar) ---- */
+  #menu_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: calc(var(--space-5) - 11px);
+    width: var(--tap);
+    height: var(--bar-h);
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    z-index: 2;
   }
-  .main {
-    width: 100%;
+  .menu-toggle__bars {
     position: relative;
+    width: 22px;
+    height: 14px;
+  }
+  .menu-toggle__bars::before,
+  .menu-toggle__bars::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition:
+      transform 0.28s ease,
+      top 0.28s ease,
+      bottom 0.28s ease;
+  }
+  .menu-toggle__bars::before {
+    top: 0;
+  }
+  .menu-toggle__bars::after {
+    bottom: 0;
+  }
+
+  /* ---- Expanded overlay (header.menu-open) ---- */
+  header.menu-open {
+    position: fixed;
+    inset: 0;
+    height: 100dvh;
+    display: block;
+    padding: 0 var(--space-5) var(--space-5);
+    overflow-y: auto;
+    background: var(--surface);
+    /* stylelint-disable-next-line property-no-vendor-prefix -- pair with the prefixed bar rule */
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  header.menu-open .logo {
+    height: var(--bar-h);
+  }
+  /* bars morph into an X */
+  header.menu-open .menu-toggle__bars::before {
+    top: 6px;
+    transform: rotate(45deg);
+  }
+  header.menu-open .menu-toggle__bars::after {
+    bottom: 6px;
+    transform: rotate(-45deg);
+  }
+
+  /* nav + footer hidden (and unfocusable) until the overlay opens */
+  header nav,
+  header .footer {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+  }
+  header.menu-open nav,
+  header.menu-open .footer {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ---- Editorial navigation ---- */
+  header nav {
+    width: 100%;
+    margin-top: var(--space-4);
+  }
+  header nav ul {
+    display: block;
+    counter-reset: nav;
+    margin: 0;
+    list-style: none;
+  }
+  header nav ul li {
+    display: block;
+    margin: 0;
+  }
+  header nav ul li a {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    width: 100%;
+    padding: 16px 2px;
+    border-top: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-strong);
+    font-family: var(--font-sans);
+    font-size: 27px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-align: left;
+    text-decoration: none;
+    background: transparent;
+    /* stagger-in starting state */
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  header nav ul li a::before {
+    counter-increment: nav;
+    content: counter(nav, decimal-leading-zero);
+    align-self: center;
+    min-width: 22px;
+    color: var(--faint);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  /* current page: tint the numeral */
+  header nav ul li a.selected {
+    color: var(--ink-strong);
+  }
+  header nav ul li a.selected::before {
+    color: var(--accent);
+  }
+
+  /* stagger the items in once the overlay is open */
+  header.menu-open nav ul li a {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+  }
+  header.menu-open nav ul li:nth-child(1) a {
+    transition-delay: 0.08s;
+  }
+  header.menu-open nav ul li:nth-child(2) a {
+    transition-delay: 0.16s;
+  }
+  header.menu-open nav ul li:nth-child(3) a {
+    transition-delay: 0.24s;
+  }
+  header.menu-open nav ul li:nth-child(4) a {
+    transition-delay: 0.32s;
+  }
+
+  /* ---- Footer inside the overlay ---- */
+  header .footer {
+    display: block;
+    position: static;
+    margin-top: var(--space-6);
+  }
+
+  /* Language: labelled row + EN · 中文 segmented control (mobile only) */
+  .lang-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    margin-bottom: var(--space-5);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .lang-row__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 14px;
+  }
+  .lang-row__icon {
+    width: 18px;
+    height: 18px;
+    background: currentColor;
+    mask-image: url('../img/social/icon-language.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+  }
+  .lang-switch {
+    display: inline-flex;
+    overflow: hidden;
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+  }
+  .lang-switch__opt {
+    appearance: none;
+    margin: 0;
+    border: 0;
+    padding: 9px 18px;
+    background: var(--surface);
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+  .lang-switch__opt[aria-pressed='true'] {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  /* Social icons → flex row (cancel the desktop float) */
+  header ul.social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin: 0 0 var(--space-5);
+    padding: 0;
+  }
+  header ul.social li {
+    display: block;
+    float: none;
+    margin: 0;
+  }
+  header ul.social li a {
+    width: var(--tap);
+    height: var(--tap);
+    border-radius: 13px;
+    border-color: var(--line-2);
+  }
+  /* the globe toggle is replaced by the .lang-row control on mobile */
+  header ul.social li.social-lang {
+    display: none;
+  }
+
+  /* Copyright / credits */
+  header .rights p {
+    margin: 0;
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    line-height: 1.9;
+  }
+  header .rights a {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  /* ---- Main content: drop the desktop sidebar offset ---- */
+  .main,
+  header:not(.show_menu) ~ .main {
+    width: 100%;
     padding-left: 0;
+    position: relative;
+  }
+
+  /* ---- Portfolio grid: gapless photo tiles with captions ---- */
+  .main .work {
+    width: calc(100% / 3); /* 3 columns on tablet */
+    margin: 0;
+  }
+  /* Title scrim — always visible on touch (hover never fires) */
+  .main .work .caption {
+    top: auto;
+    bottom: 0;
+    height: auto;
+    opacity: 1;
+    background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
+  }
+  .work .caption .work_title {
+    position: static;
+    top: auto;
+    margin-top: 0;
+    padding: 36px 12px 12px;
+    text-align: left;
+  }
+  .main .work .caption h1 {
+    max-width: 100%;
+    padding: 0;
+    border: 0;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 0.03em;
   }
 }
 
 @media (max-width: 768px) {
   .main .work {
-    width: calc(50% - 30px); /* 在较小屏幕上显示2列并保留间隔 */
+    width: 50%; /* 2 columns */
   }
 }
 
 @media (max-width: 550px) {
   .main .work {
-    width: calc(100% - 30px); /* 在手机上显示1列并保留左右内边距 */
-    margin-right: 0; /* 单列时取消右侧间距以居中 */
+    width: 100%; /* single column */
+  }
+}
+
+/* Honour reduced-motion: no morph, no stagger */
+@media (max-width: 1099px) and (prefers-reduced-motion: reduce) {
+  .menu-toggle__bars::before,
+  .menu-toggle__bars::after,
+  header.menu-open nav ul li a {
+    transition: none !important;
+  }
+  header nav ul li a {
+    opacity: 1;
+    transform: none;
   }
 }

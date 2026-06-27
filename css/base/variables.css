@@ -1,7 +1,47 @@
 /*
  * Design tokens — CSS custom properties.
  *
- * Empty for now; future commits will extract recurring colours, spacing
- * units, and font sizes here so they can be tuned in one place. Loaded
- * early in main.css so every later sheet can reference --tokens.
+ * Loaded early in main.css so every later sheet can reference these.
+ * The mobile layer (responsive.css) is built entirely on these tokens;
+ * desktop rules are migrating onto them incrementally.
+ *
+ * Note: CSS custom properties cannot be used inside @media query
+ * conditions, so the desktop/mobile breakpoint (1099px) is duplicated
+ * literally across header.css / responsive.css and mirrored by the
+ * matchMedia('(min-width: 1099px)') call in js/modules/navigation.js.
+ * Keep the three in sync if it ever changes.
  */
+:root {
+  /* Typography — the system stack was repeated ~12× across sheets. */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Microsoft YaHei', '微软雅黑', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+
+  /* Ink / greys */
+  --ink: #454545; /* primary text */
+  --ink-strong: #2e2e2e; /* headings, large editorial type */
+  --muted: #8a8a8a; /* secondary text */
+  --faint: #bdbdbd; /* hints, index numerals */
+
+  /* Lines / surfaces */
+  --line: #ececec; /* hairline divider */
+  --line-2: #e0e0e0; /* slightly stronger divider / control border */
+  --bg: #f6f6f6; /* page background behind content */
+  --surface: #fff; /* cards, bars, overlay */
+
+  /* Accent — already used on social-icon hover; promoted to a token. */
+  --accent: #0a84ff;
+
+  /* Layout */
+  --bar-h: 56px; /* mobile sticky top-bar height */
+  --radius: 10px; /* default control/tile radius */
+  --tap: 44px; /* minimum touch target */
+
+  /* Spacing scale (component-internal gaps) */
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 18px;
+  --space-5: 24px;
+  --space-6: 32px;
+}

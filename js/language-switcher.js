@@ -59,6 +59,13 @@ const getPrefixToggleUrl = (targetLang) => {
   return window.location.origin + stripped + window.location.search + window.location.hash;
 };
 
+// Reflect the active language on the mobile EN · 中文 segmented control.
+const updateSegments = (lang) => {
+  document.querySelectorAll('.lang-switch__opt').forEach((btn) => {
+    btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+  });
+};
+
 const applyLanguage = (lang) => {
   const translations = i18nData[lang];
 
@@ -121,6 +128,9 @@ const applyLanguage = (lang) => {
       element.textContent = originalTag;
     }
   });
+
+  // Keep the mobile EN · 中文 segmented control in sync.
+  updateSegments(lang);
 };
 
 const showNotification = (message) => {
@@ -148,9 +158,16 @@ const showNotification = (message) => {
   }, 2000);
 };
 
-const switchLanguage = () => {
-  const currentInterfaceLang = getCurrentLanguage();
-  const targetLang = currentInterfaceLang === 'zh-CN' ? 'en' : 'zh-CN';
+// Switch to a specific language. When the current page has an alternate in
+// that language, navigate to it; otherwise translate the interface in place.
+// Selecting the language the page is already in just syncs the saved
+// preference (no needless reload).
+const switchToLanguage = (targetLang) => {
+  if (targetLang === getCurrentPageLanguage()) {
+    localStorage.setItem('siteLanguage', targetLang);
+    applyLanguage(targetLang);
+    return;
+  }
 
   const alternateUrl = getAlternateUrl(targetLang) || getPrefixToggleUrl(targetLang);
   if (alternateUrl) {
@@ -165,6 +182,23 @@ const switchLanguage = () => {
     ? i18nData[targetLang]['languageSwitched']
     : 'Language switched';
   showNotification(message);
+};
+
+// Toggle en ↔ zh-CN — used by the desktop globe icon.
+const switchLanguage = () => {
+  const targetLang = getCurrentLanguage() === 'zh-CN' ? 'en' : 'zh-CN';
+  switchToLanguage(targetLang);
+};
+
+// Wire the mobile EN · 中文 segmented control.
+const initLanguageSegments = () => {
+  document.querySelectorAll('.lang-switch__opt').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchToLanguage(btn.getAttribute('data-lang'));
+    });
+  });
+  updateSegments(getCurrentLanguage());
 };
 
 const initLanguage = () => {
@@ -199,5 +233,6 @@ export function initLanguageSwitcher() {
         switchLanguage();
       });
     }
+    initLanguageSegments();
   });
 }
