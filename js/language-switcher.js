@@ -23,6 +23,18 @@ const getCurrentLanguage = () => {
   return localStorage.getItem('siteLanguage') || getBrowserLanguage();
 };
 
+// Explicit language preference — written ONLY on a real switcher click, as a
+// cookie so the Cloudflare edge geo-redirect can read it (localStorage is not
+// visible at the edge). Single source of truth for honouring a manual choice
+// over the IP-based default.
+const getLangPref = () => {
+  const m = document.cookie.match(/(?:^|;\s*)lang_pref=([^;]+)/);
+  return m ? m[1] : null;
+};
+const setLangPref = (lang) => {
+  document.cookie = 'lang_pref=' + lang + '; path=/; max-age=31536000; samesite=lax';
+};
+
 // Get current page language from <meta name="article:lang"> or URL fallback.
 const getCurrentPageLanguage = () => {
   const langMeta = document.querySelector('meta[name="article:lang"]');
@@ -163,6 +175,9 @@ const showNotification = (message) => {
 // Selecting the language the page is already in just syncs the saved
 // preference (no needless reload).
 const switchToLanguage = (targetLang) => {
+  // Record the explicit choice as a cookie so the Cloudflare edge geo-redirect
+  // honours it (and so the client-side auto-redirect below treats it as intent).
+  setLangPref(targetLang);
   if (targetLang === getCurrentPageLanguage()) {
     localStorage.setItem('siteLanguage', targetLang);
     applyLanguage(targetLang);
@@ -202,16 +217,18 @@ const initLanguageSegments = () => {
 };
 
 const initLanguage = () => {
-  const preferredLang = getCurrentLanguage();
   const currentPageLang = getCurrentPageLanguage();
+  // Only an EXPLICIT choice (the lang_pref cookie, set on a real switcher click)
+  // drives a client-side redirect. First-visit language routing is handled at
+  // the edge by an IP/geo rule (Cloudflare) — don't re-decide it here from the
+  // browser language, which would fight the edge rule and can loop. With no
+  // explicit choice, just match the interface to the page we actually landed on.
+  const pref = getLangPref();
 
-  applyLanguage(preferredLang);
+  applyLanguage(pref || currentPageLang);
 
-  // If the page we landed on isn't in the preferred language and an
-  // alternate exists, silently redirect to it. Fall back to a path-prefix
-  // toggle when no <link rel="alternate"> was emitted.
-  if (preferredLang !== currentPageLang) {
-    const alternateUrl = getAlternateUrl(preferredLang) || getPrefixToggleUrl(preferredLang);
+  if (pref && pref !== currentPageLang) {
+    const alternateUrl = getAlternateUrl(pref) || getPrefixToggleUrl(pref);
     if (alternateUrl) {
       window.location.replace(alternateUrl);
     }
