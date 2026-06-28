@@ -402,12 +402,12 @@
    Headings stay em-relative to .content so they remain proportional. */
 @media (max-width: 768px) {
   .content p {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.7;
   }
   .content ol,
   .content ul {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
