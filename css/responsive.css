@@ -397,6 +397,20 @@
   }
 }
 
+/* Mobile: article body type. Desktop paragraphs are 20px / lists 18px, which
+   read too large on a phone — bring the body down to a comfortable ~16px.
+   Headings stay em-relative to .content so they remain proportional. */
+@media (max-width: 768px) {
+  .content p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .content ol,
+  .content ul {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 550px) {
   .main .work {
     width: 100%; /* single column */
