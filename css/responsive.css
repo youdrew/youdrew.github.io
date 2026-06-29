@@ -411,6 +411,41 @@
   }
 }
 
+/* Mobile: flatten the desktop heading-outline indentation.
+   On desktop every heading level steps right (h2 24px / h3 48px / h4 72px …)
+   and the body after it mirrors that step (post.css §"标题缩进"/"标题后的内容缩进").
+   On a phone that compounding margin-left shoves the whole article column far
+   right — e.g. body after an <h2> sits at 30px padding + 48px margin ≈ 78px,
+   leaving a big left gutter. Collapse the cascade to one shallow indent so the
+   text reclaims width and sits left, and trim the card's side padding.
+   `.main .content …` (0,2,1) outranks the `.content hN ~ x` rules (0,1,2). */
+@media (max-width: 768px) {
+  .content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  /* headings: drop the per-level step (keep padding-left for the +/- marker) */
+  .main .content h2,
+  .main .content h3,
+  .main .content h4,
+  .main .content h5,
+  .main .content h6 {
+    margin-left: 0;
+  }
+  /* body flow: a single shallow indent that lines up with the heading text */
+  .main .content p,
+  .main .content ul,
+  .main .content ol,
+  .main .content blockquote,
+  .main .content figure,
+  .main .content table,
+  .main .content .codeblock,
+  .main .content .code-block-container,
+  .main .content img {
+    margin-left: 24px;
+  }
+}
+
 @media (max-width: 550px) {
   .main .work {
     width: 100%; /* single column */
