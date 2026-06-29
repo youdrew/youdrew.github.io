@@ -1,4 +1,5 @@
 import { Navigation } from './modules/navigation.js';
+import { IdleOcean } from './modules/idle-ocean.js';
 import { Tooltip } from './modules/tooltip.js';
 import { MapPage } from './modules/map.js';
 import { ImageZoom } from './modules/image-zoom.js';
@@ -12,6 +13,7 @@ import { initToc } from './modules/toc/index.js';
 
 function init() {
   new Navigation();
+  new IdleOcean();
   new Tooltip();
   if (document.getElementById('map')) {
     new MapPage();

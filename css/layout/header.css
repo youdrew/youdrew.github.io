@@ -8,6 +8,9 @@
     width: 250px;
     min-height: 100%;
     padding: 0 0 0 50px;
+    /* Solid white collapsed rail (a clean 64px strip beside the covers). The
+       idle ocean is now a separate full-page overlay (idle-ocean.js), not
+       painted into this rail, so the header simply stays white. */
     background: #fff;
     float: left;
     overflow: hidden;
@@ -15,8 +18,12 @@
     transition: transform 0.3s ease;
     transition:
       transform 0.3s ease,
-      opacity 0.3s ease;
-    transform: translateX(-200px);
+      opacity 0.3s ease,
+      background 0.3s ease;
+    /* Header border-box = width(250) + padding-left(50) = 300px. Showing exactly
+       --rail px of it means translateX(--rail - 300). The collapsed .main reserves
+       the same --rail, so the rail sits flush beside the content (no overlap). */
+    transform: translateX(calc(var(--rail) - 300px));
     will-change: transform;
   }
 
@@ -36,6 +43,7 @@
   header:hover,
   header.show_menu {
     transform: translateX(0);
+    background: #fff;
     box-shadow: 2px 0 12px rgb(0, 0, 0, 0.1);
   }
 
@@ -260,4 +268,18 @@ header ul.social li a.youtube::before {
    in .social handles language, so keep it hidden by default. */
 .lang-row {
   display: none;
+}
+
+/* Full-page idle ocean overlay (idle-ocean.js — homepage + desktop only).
+   A fixed, click-through canvas that the "tide" washes across on idle. The
+   wash-in / recede and its opacity are driven inside the shader (uReveal /
+   uOpaqueMax); JS only toggles visibility, so no CSS transition is needed.
+   Sits above the collapsed header so a full submerge has no white strip. */
+.idle-ocean {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10000;
 }

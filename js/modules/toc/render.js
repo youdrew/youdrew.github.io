@@ -38,7 +38,16 @@ function applyPersistedGeometry(container) {
 export function renderToc(headings) {
   const container = document.createElement('div');
   container.className = 'toc-container';
-  container.innerHTML = '<div class="toc-content"><div class="toc-list"></div></div>';
+  // A header bar doubles as the drag handle (CSS .toc-header { cursor: move })
+  // and hosts the close button. The title text + labels are filled in,
+  // language-aware, by initVisibility(). The 45px the CSS reserves for it
+  // (.toc-content height: calc(100% - 45px)) was previously unused.
+  container.innerHTML =
+    '<div class="toc-header">' +
+    '<span class="toc-title"></span>' +
+    '<button type="button" class="toc-close-btn"><span class="toc-close-btn__x" aria-hidden="true"></span></button>' +
+    '</div>' +
+    '<div class="toc-content"><div class="toc-list"></div></div>';
   document.body.appendChild(container);
 
   const list = container.querySelector('.toc-list');

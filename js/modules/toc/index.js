@@ -17,6 +17,7 @@
  */
 import { collectHeadings } from './headings.js';
 import { renderToc } from './render.js';
+import { initVisibility } from './visibility.js';
 import { initFold } from './fold.js';
 import { startDrag } from './drag.js';
 import { attachEdgeDetection, startResize } from './resize.js';
@@ -40,7 +41,8 @@ function isInteractiveTarget(target) {
     target.classList.contains('toc-collapse-btn') ||
     target.classList.contains('toc-item-text') ||
     target.closest('.toc-collapse-btn') ||
-    target.closest('.toc-item-text')
+    target.closest('.toc-item-text') ||
+    target.closest('.toc-close-btn')
   );
 }
 
@@ -53,6 +55,7 @@ export function initToc() {
 
   const { container, items } = renderToc(headings);
 
+  initVisibility(container);
   initFold(headings, items);
 
   const ctx = { dragging: false, resizing: false, resizeDirection: '' };

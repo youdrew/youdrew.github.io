@@ -34,6 +34,7 @@
 
   /* Layout */
   --bar-h: 56px; /* mobile sticky top-bar height */
+  --rail: 64px; /* desktop collapsed sidebar rail = idle ocean-shader strip width */
   --radius: 10px; /* default control/tile radius */
   --tap: 44px; /* minimum touch target */
 

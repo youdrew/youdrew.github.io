@@ -12,7 +12,9 @@
   transition: padding-left 0.3s ease-in-out;
 }
 
-/* 当侧边栏隐藏时调整主内容区域 */
+/* 当侧边栏收起时，主内容左边距 = 可见导航条宽度(--rail)。
+   二者相等，首页第一列封面才不会被那条导航条盖住裁切（旧值 50px 小于
+   导航条实际可见宽度 ~100px，导致最左列被切掉约 50px）。 */
 header:not(.show_menu) ~ .main {
-  padding-left: 50px;
+  padding-left: var(--rail);
 }

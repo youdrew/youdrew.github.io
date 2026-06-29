@@ -57,12 +57,21 @@ export function attachEdgeDetection(container, ctx) {
 
     container.style.cursor = cursor;
     ctx.resizeDirection = dir;
+    // The header is the drag handle (CSS `cursor: move`); when the pointer is in
+    // an edge/corner resize zone that overlaps it, override inline so the resize
+    // cursor wins — otherwise the whole top of the panel always reads as 'move'
+    // even though pressing the very edge actually resizes. Interior → '' falls
+    // back to the CSS move cursor.
+    const header = container.querySelector('.toc-header');
+    if (header) header.style.cursor = dir ? cursor : '';
   });
 
   container.addEventListener('mouseleave', () => {
     if (!ctx.dragging && !ctx.resizing) {
       container.style.cursor = 'default';
       ctx.resizeDirection = '';
+      const header = container.querySelector('.toc-header');
+      if (header) header.style.cursor = '';
     }
   });
 }
