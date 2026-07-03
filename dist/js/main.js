@@ -206,7 +206,10 @@ vec3 artifactHalo(vec3 eye, vec3 ray, float maxDepth) {
     if (tC < 0.0) return vec3(0.0);
     float b2 = dot(toC, toC) - tC * tC; // squared distance ray<->light centre
     float occ = smoothstep(-0.6, 0.3, maxDepth - tC);
-    float halo = 0.030 / (b2 + 0.06) + 0.22 * exp(-b2 * 2.4);
+    // Wider halo: softer gaussian falloff (2.4 → 1.0) and a larger far-field
+    // constant (0.06 → 0.18) so the light blooms further into the scene instead
+    // of staying a tight hot core.
+    float halo = 0.040 / (b2 + 0.6) + 0.32 * exp(-b2 * 0.3);
     return vec3(0.75, 0.55, 0.45) * halo * occ * flicker;
 }
 void marchObjects(vec3 eye, vec3 ray, float wDepth, inout vec4 color) {
@@ -226,16 +229,7 @@ void marchObjects(vec3 eye, vec3 ray, float wDepth, inout vec4 color) {
             color.rgb += artifactHalo(eye, ray, depth);
             return;
         }
-        // fairy dust: sparkle motes in a spherical cloud around the light;
-        // radial falloff + step-length weighting keep the cloud round, and a
-        // cleared pocket around the whale keeps its body readable in the core
-        float r = length(rayPos - artifactOffset);
-        if (r < 1.3) {
-            float g = r / 1.3 + rand(r * 151.7 + dot(rayPos.xz, vec2(37.1, 61.7))) * 1.6;
-            color.rgb += vec3(0.75, 0.55, 0.45) * clamp(1.0 - g, 0.0, 1.0)
-                       * smoothstep(0.10, 0.45, r)
-                       * clamp(dist * 8.0, 0.05, 1.0) * 0.24 * flicker;
-        }
+
         rayPos += ray * dist;
     }
     color.rgb += artifactHalo(eye, ray, min(depth, wDepth));
