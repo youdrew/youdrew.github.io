@@ -102,26 +102,47 @@ float sdEllip(vec3 p, vec3 r) {
   float k1 = length(p/(r*r));
   return k0*(k0-1.0)/max(k1, 1e-4);
 }
-// Tiny whale, seen top-down by the camera: body along x (head +x, tail -x),
-// flat tail flukes spread in the xz plane. Returns a signed distance scaled by s.
+mat2 rot2(float a) {
+  float c = cos(a);
+  float s = sin(a);
+  return mat2(c, -s, s, c);
+}
+// Tiny whale: body along x (head +x, tail -x), flukes flat in the xz plane.
+// A dorsoventral travelling wave (amplitude growing toward the tail) plus a
+// fluke that pitches on the beat make it swim in place. Returns a signed
+// distance scaled by s, shrunk a bit since the swim warp bends space.
 float whale(vec3 p, float s) {
   p /= s;
-  float body = sdEllip(p, vec3(1.0, 0.42, 0.40));
-  float head = sdEllip(p - vec3(0.62, 0.0, 0.0), vec3(0.5, 0.40, 0.38));
-  float d = smin(body, head, 0.30);
-  float fl = sdEllip(p - vec3(-1.05, 0.0, 0.0), vec3(0.34, 0.06, 0.52));
+  // spine wave — the head barely nods, the tail sweeps up and down
+  float beat = time * 2.4;
+  float tailness = smoothstep(0.6, -1.6, p.x);
+  p.y -= (0.04 + 0.28 * tailness * tailness) * sin(p.x * 1.4 - beat);
+  // blunt head flowing into a full chest, tapering into the tail stock
+  float d = sdEllip(p - vec3(0.52, 0.02, 0.0), vec3(0.60, 0.38, 0.40));
+  d = smin(d, sdEllip(p - vec3(-0.15, 0.0, 0.0), vec3(0.82, 0.33, 0.34)), 0.22);
+  d = smin(d, sdEllip(p - vec3(-0.98, 0.04, 0.0), vec3(0.48, 0.13, 0.11)), 0.14);
+  // flukes: a swept-back crescent with a trailing notch, pitching on the beat
+  vec3 q = p - vec3(-1.42, 0.06, 0.0);
+  q.xy = rot2(0.5 * cos(beat + 2.1)) * q.xy;
+  q.x += abs(q.z) * 0.45;
+  float fl = sdEllip(q, vec3(0.26, 0.04, 0.50));
+  fl = max(fl, -sdEllip(q - vec3(-0.30, 0.0, 0.0), vec3(0.18, 0.30, 0.18)));
   d = smin(d, fl, 0.10);
-  return d * s;
+  // pectoral fins: mirrored flat blades, swept back with a slight droop
+  vec3 f = vec3(p.x - 0.30, p.y + 0.20, abs(p.z) - 0.28);
+  f.xz = rot2(0.85) * f.xz;
+  f.yz = rot2(-0.28) * f.yz;
+  d = smin(d, sdEllip(f, vec3(0.12, 0.035, 0.26)), 0.07);
+  // small raked dorsal fin
+  vec3 g = p - vec3(-0.62, 0.32, 0.0);
+  g.x += g.y * 0.9;
+  d = smin(d, sdEllip(g, vec3(0.16, 0.14, 0.035)), 0.05);
+  return d * s * 0.72;
 }
 void artifact(vec3 p, inout float curDist, inout vec3 glowColor, inout int id) {
     p -= artifactOffset;
     p = artifactRotation * p;
     float dist = whale(p, 0.15);
-    const float glowDist = 1.0;
-    if (dist < glowDist) {
-        float d = dist + rand(dist) * 1.7;
-        glowColor += vec3(0.75, 0.55, 0.45) * clamp(1.0 - pow((d / glowDist), 5.0), 0.0, 1.0) * 0.035 * flicker; // glow
-    }
     if (dist < curDist) {
         curDist = dist;
         id = 1;
@@ -174,13 +195,25 @@ vec3 objectsColor(int id, vec3 normal, vec3 ray) {
     }
     return vec3(1.0, 1.0, 0.0); // shouldn't happen
 }
+// 360° halo for the artifact light: a pure function of the ray's closest
+// approach to the light centre, so the bloom stays perfectly round no matter
+// how the whale is shaped or how the marcher steps (the old per-step SDF glow
+// picked up the body's elongation as two sideways rays). maxDepth softly
+// occludes the halo when geometry sits in front of the light.
+vec3 artifactHalo(vec3 eye, vec3 ray, float maxDepth) {
+    vec3 toC = artifactOffset - eye;
+    float tC = dot(toC, ray);
+    if (tC < 0.0) return vec3(0.0);
+    float b2 = dot(toC, toC) - tC * tC; // squared distance ray<->light centre
+    float occ = smoothstep(-0.6, 0.3, maxDepth - tC);
+    float halo = 0.030 / (b2 + 0.06) + 0.22 * exp(-b2 * 2.4);
+    return vec3(0.75, 0.55, 0.45) * halo * occ * flicker;
+}
 void marchObjects(vec3 eye, vec3 ray, float wDepth, inout vec4 color) {
     float dist = 0.0;
     int id;
-    vec3 rayPos = eye + ray * dist;
-    vec3 c;
-    float depth = CAM_FAR;
-    vec3 glowColor = vec3(0.0);
+    vec3 rayPos = eye;
+    float depth = 0.0;
     for (int i = 0; i < 100; i++) {
         dist = objects(rayPos, color.rgb, id);
         depth = distance(rayPos, eye);
@@ -190,10 +223,22 @@ void marchObjects(vec3 eye, vec3 ray, float wDepth, inout vec4 color) {
         if (dist < 0.01) {
             vec3 normal = objectsNormal(rayPos, 0.01);
             color = vec4(objectsColor(id, normal, ray), depth);
+            color.rgb += artifactHalo(eye, ray, depth);
             return;
+        }
+        // fairy dust: sparkle motes in a spherical cloud around the light;
+        // radial falloff + step-length weighting keep the cloud round, and a
+        // cleared pocket around the whale keeps its body readable in the core
+        float r = length(rayPos - artifactOffset);
+        if (r < 1.3) {
+            float g = r / 1.3 + rand(r * 151.7 + dot(rayPos.xz, vec2(37.1, 61.7))) * 1.6;
+            color.rgb += vec3(0.75, 0.55, 0.45) * clamp(1.0 - g, 0.0, 1.0)
+                       * smoothstep(0.10, 0.45, r)
+                       * clamp(dist * 8.0, 0.05, 1.0) * 0.24 * flicker;
         }
         rayPos += ray * dist;
     }
+    color.rgb += artifactHalo(eye, ray, min(depth, wDepth));
 }
 vec3 waterColor(vec3 ray, vec3 normal, vec3 p) {
     vec3 color = vec3(0.0);
@@ -211,8 +256,9 @@ vec3 waterColor(vec3 ray, vec3 normal, vec3 p) {
                 color = objectsColor(objId, objNormal, rayPos);
                 break;
             }
-            rayPos += refl * dist;    
+            rayPos += refl * dist;
         }
+        color += artifactHalo(p, refl, CAM_FAR) * 0.35; // the glow mirrors too
     }
     float fresnel = (0.04 + 0.9 * (pow(1.0 - max(0.0, dot(-normal, ray)), 7.0)));
     vec3 lightOffset = artifactOffset - p;
