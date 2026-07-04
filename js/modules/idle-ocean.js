@@ -14,9 +14,15 @@
  * 着色器取自「Artifact at Sea」(原色·夜海)；相位由这些 uniform 驱动：
  *   uReveal / uMode / uDir / uOpaqueMax / uDrain / uMouse（见 glsl 末尾）。
  *
+ * HDR：HDR 屏 + WebGPU 可用时改走 artifact-at-sea.wgsl（rgba16float 画布 +
+ * toneMapping "extended"，Chrome 129+ / Safari 26.2+）——小鲸鱼直冲显示器
+ * 峰值亮度，海面萤光抬到次一档（uHdrFish/uHdrSea）；其余环境走 WebGL2 +
+ * GLSL 的 SDR 路径，构图与色彩完全一致，寓意不变。
+ *
  * 调试：实例挂在 window.__idleOcean，debugSet({reveal,drain,mouse,...}) 可定格。
  */
 import shaderBody from './artifact-at-sea.glsl?raw';
+import wgslSource from './artifact-at-sea.wgsl?raw';
 
 const DESKTOP = '(min-width: 1099px)';
 const REDUCE = '(prefers-reduced-motion: reduce)';
@@ -27,6 +33,10 @@ const DRAIN_TIME = 1.3; // 光标让海水涟漪散开（秒）
 const RES_SCALE = 0.55; // 渲染分辨率系数（性能）
 const MAX_SIDE = 1100; // 缓冲区最长边上限
 const OPAQUE_DEFAULT = 1.0; // 1.0=不透明屏保；~0.6=半透明薄纱
+// HDR 亮度倍数（相对 SDR 白）。鲸鱼直冲峰值（超出显示器能力会截在其峰值上），
+// 海面萤光抬到次一档；只在 WebGPU extended 画布上生效，SDR 恒为 1。
+const HDR_FISH = 3.0;
+const HDR_SEA = 1.7;
 
 function isHome() {
   return /index-html$/.test(document.body.className || '');
@@ -55,6 +65,8 @@ uniform float uMode;
 uniform vec2 uDir;
 uniform float uDrain;
 uniform vec2 uMouse;
+uniform float uHdrFish;
+uniform float uHdrSea;
 out vec4 _stColor;
 ${shaderBody}
 void main() {
@@ -69,9 +81,16 @@ export class IdleOcean {
 
     this.mq = window.matchMedia(DESKTOP);
     this.reduce = window.matchMedia(REDUCE);
+    this.dyn = window.matchMedia('(dynamic-range: high)');
 
     this.canvas = null;
     this.gl = null;
+    this.gpu = null; // WebGPU 状态 {device, ctx, pipeline, ubuf, bind, u}
+    this.backend = 'webgl'; // 'webgl' | 'webgpu'
+    this.ready = false;
+    this.initPromise = null;
+    this.hdrFish = 1.0; // 传给 shader 的亮度倍数（SDR 恒 1）
+    this.hdrSea = 1.0;
     this.prog = null;
     this.raf = null;
     this.running = false;
@@ -93,9 +112,11 @@ export class IdleOcean {
     this.onVisibility = this.onVisibility.bind(this);
     this.tick = this.tick.bind(this);
     this.apply = this.apply.bind(this);
+    this.onDynChange = this.onDynChange.bind(this);
 
     this.mq.addEventListener('change', this.apply);
     this.reduce.addEventListener('change', this.apply);
+    this.dyn.addEventListener('change', this.onDynChange);
     this.apply();
 
     window.__idleOcean = this;
@@ -107,40 +128,49 @@ export class IdleOcean {
     else if (!want && this.canvas) this.disable();
   }
 
+  // 显示器 HDR 能力变化（如窗口被拖到另一块屏）：整套后端重建。
+  onDynChange() {
+    if (this.canvas) {
+      this.disable();
+      this.apply();
+    }
+  }
+
   enable() {
     const cv = document.createElement('canvas');
     cv.className = 'idle-ocean';
     cv.setAttribute('aria-hidden', 'true');
     cv.style.visibility = 'hidden';
     document.body.appendChild(cv);
-
-    const gl = cv.getContext('webgl2', {
-      alpha: true,
-      antialias: false,
-      premultipliedAlpha: false,
-    });
-    if (!gl) {
-      cv.remove();
-      return;
-    }
     this.canvas = cv;
-    this.gl = gl;
+    this.ready = false;
 
-    if (!this.build()) {
-      this.disable();
-      return;
-    }
-    this.resize();
+    // 画布一旦 getContext 就锁定类型，所以先异步挑后端（HDR→WebGPU，否则
+    // WebGL2）；就绪前不挂事件、不启相位机，避免半初始化状态被触发。
+    this.initPromise = this.initBackend().then((ok) => {
+      if (!ok) {
+        this.disable();
+        return false;
+      }
+      if (!this.canvas) {
+        // disable() 在初始化途中被调用过（如视口变窄）——清干净就走。
+        this.destroyGpu();
+        return false;
+      }
+      this.ready = true;
+      this.resize();
 
-    window.addEventListener('mousemove', this.onActivity, { passive: true });
-    window.addEventListener('wheel', this.onActivity, { passive: true });
-    window.addEventListener('keydown', this.onActivity);
-    window.addEventListener('pointerdown', this.onActivity, { passive: true });
-    window.addEventListener('touchstart', this.onActivity, { passive: true });
-    window.addEventListener('resize', this.onResize);
-    document.addEventListener('visibilitychange', this.onVisibility);
+      window.addEventListener('mousemove', this.onActivity, { passive: true });
+      window.addEventListener('wheel', this.onActivity, { passive: true });
+      window.addEventListener('keydown', this.onActivity);
+      window.addEventListener('pointerdown', this.onActivity, { passive: true });
+      window.addEventListener('touchstart', this.onActivity, { passive: true });
+      window.addEventListener('resize', this.onResize);
+      document.addEventListener('visibilitychange', this.onVisibility);
 
-    this.scheduleIdle();
+      this.scheduleIdle();
+      return true;
+    });
   }
 
   disable() {
@@ -156,10 +186,128 @@ export class IdleOcean {
     if (this.canvas) this.canvas.remove();
     this.canvas = null;
     this.gl = null;
+    this.destroyGpu();
+    this.ready = false;
   }
 
-  build() {
-    const gl = this.gl;
+  // 后端选择：HDR 屏 + WebGPU 才走 HDR；其余（含 WebGPU 初始化失败、浏览器
+  // 忽略 extended toneMapping）一律回退 WebGL2 SDR，画面一致只是没有峰值。
+  async initBackend() {
+    const wantHdr = this.dyn.matches && !!navigator.gpu;
+    if (wantHdr) {
+      try {
+        if (await this.buildGpu()) {
+          this.backend = 'webgpu';
+          this.hdrFish = HDR_FISH;
+          this.hdrSea = HDR_SEA;
+          return true;
+        }
+      } catch (e) {
+        console.warn('[idle-ocean] WebGPU HDR init failed, using WebGL/SDR:', e);
+      }
+      this.destroyGpu();
+      this.freshCanvas(); // getContext('webgpu') 已锁定旧画布，换一块再回退
+    }
+    if (!this.canvas) return false;
+    this.backend = 'webgl';
+    this.hdrFish = 1.0;
+    this.hdrSea = 1.0;
+    return this.buildGl();
+  }
+
+  /** 画布被某种 context 锁定后换不了类型；克隆一块顶上。 */
+  freshCanvas() {
+    if (!this.canvas) return;
+    const cv = this.canvas.cloneNode(false);
+    this.canvas.replaceWith(cv);
+    this.canvas = cv;
+  }
+
+  destroyGpu() {
+    if (!this.gpu) return;
+    const g = this.gpu;
+    this.gpu = null; // 先置空，免得 device.lost 处理器把主动销毁当意外丢失
+    try {
+      g.device.destroy();
+    } catch {
+      /* already lost */
+    }
+  }
+
+  // ---- WebGPU（HDR）后端 ---------------------------------------------------
+  async buildGpu() {
+    const adapter = await navigator.gpu.requestAdapter();
+    if (!adapter) return false;
+    const device = await adapter.requestDevice();
+    const ctx = this.canvas && this.canvas.getContext('webgpu');
+    if (!ctx) {
+      device.destroy();
+      return false;
+    }
+    ctx.configure({
+      device,
+      format: 'rgba16float', // float16 才装得下 >1 的扩展 sRGB 值
+      colorSpace: 'srgb',
+      toneMapping: { mode: 'extended' }, // 关键：解锁显示器的 HDR 余量
+      alphaMode: 'premultiplied',
+    });
+    // 老浏览器会静默忽略不认识的 toneMapping——那 HDR 就无从谈起，退回 WebGL。
+    const cfg = typeof ctx.getConfiguration === 'function' ? ctx.getConfiguration() : null;
+    if (!cfg || !cfg.toneMapping || cfg.toneMapping.mode !== 'extended') {
+      device.destroy();
+      return false;
+    }
+    const module = device.createShaderModule({ code: wgslSource });
+    const info = await module.getCompilationInfo();
+    if (info.messages.some((m) => m.type === 'error')) {
+      for (const m of info.messages) {
+        console.warn('[idle-ocean] wgsl ' + m.lineNum + ':' + m.linePos + ' ' + m.message);
+      }
+      device.destroy();
+      return false;
+    }
+    const pipeline = device.createRenderPipeline({
+      layout: 'auto',
+      vertex: { module, entryPoint: 'vmain' },
+      fragment: { module, entryPoint: 'fmain', targets: [{ format: 'rgba16float' }] },
+      primitive: { topology: 'triangle-list' },
+    });
+    const ubuf = device.createBuffer({
+      size: 64,
+      usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+    });
+    const bind = device.createBindGroup({
+      layout: pipeline.getBindGroupLayout(0),
+      entries: [{ binding: 0, resource: { buffer: ubuf } }],
+    });
+    this.gpu = { device, ctx, pipeline, ubuf, bind, u: new Float32Array(16) };
+    device.lost.then((lost) => {
+      // 设备意外丢失（驱动重置等）：换 WebGL/SDR 接着放，别留一块死画布。
+      if (this.gpu && this.canvas) {
+        console.warn(
+          '[idle-ocean] WebGPU device lost (' + lost.reason + '), falling back to WebGL'
+        );
+        this.gpu = null;
+        this.backend = 'webgl';
+        this.hdrFish = 1.0;
+        this.hdrSea = 1.0;
+        this.freshCanvas();
+        if (this.buildGl()) this.resize();
+        else this.disable();
+      }
+    });
+    return true;
+  }
+
+  // ---- WebGL2（SDR）后端 ---------------------------------------------------
+  buildGl() {
+    const gl = this.canvas.getContext('webgl2', {
+      alpha: true,
+      antialias: false,
+      premultipliedAlpha: false,
+    });
+    if (!gl) return false;
+    this.gl = gl;
     const compile = (type, src) => {
       const s = gl.createShader(type);
       gl.shaderSource(s, src);
@@ -200,6 +348,8 @@ export class IdleOcean {
     this.uDir = gl.getUniformLocation(prog, 'uDir');
     this.uDrain = gl.getUniformLocation(prog, 'uDrain');
     this.uMouse = gl.getUniformLocation(prog, 'uMouse');
+    this.uHdrFish = gl.getUniformLocation(prog, 'uHdrFish');
+    this.uHdrSea = gl.getUniformLocation(prog, 'uHdrSea');
     return true;
   }
 
@@ -219,7 +369,8 @@ export class IdleOcean {
     if (this.canvas.width !== w || this.canvas.height !== h) {
       this.canvas.width = w;
       this.canvas.height = h;
-      this.gl.viewport(0, 0, w, h);
+      if (this.gl) this.gl.viewport(0, 0, w, h);
+      // WebGPU 在 getCurrentTexture 时自动跟随画布尺寸，无需处理
     }
   }
 
@@ -322,17 +473,60 @@ export class IdleOcean {
   }
 
   renderFrame(now) {
+    if (!this.ready || !this.canvas) return;
+    const t = ((now || performance.now()) - this.startTime) / 1000;
+    if (this.backend === 'webgpu' && this.gpu) {
+      this.renderGpu(t);
+      return;
+    }
     const gl = this.gl;
     if (!gl) return;
     gl.uniform3f(this.uRes, this.canvas.width, this.canvas.height, 1.0);
-    gl.uniform1f(this.uTime, ((now || performance.now()) - this.startTime) / 1000);
+    gl.uniform1f(this.uTime, t);
     gl.uniform1f(this.uReveal, easeInOut(clamp01(this.reveal)));
     gl.uniform1f(this.uOpaque, this.opaqueMax);
     gl.uniform1f(this.uMode, this.mode);
     gl.uniform2f(this.uDir, this.dir[0], this.dir[1]);
     gl.uniform1f(this.uDrain, easeInOut(clamp01(this.drain)));
     gl.uniform2f(this.uMouse, this.mouse[0], this.mouse[1]);
+    gl.uniform1f(this.uHdrFish, this.hdrFish);
+    gl.uniform1f(this.uHdrSea, this.hdrSea);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+
+  renderGpu(t) {
+    const { device, ctx, pipeline, ubuf, bind, u } = this.gpu;
+    u[0] = this.canvas.width;
+    u[1] = this.canvas.height;
+    u[2] = 1.0;
+    u[3] = t;
+    u[4] = easeInOut(clamp01(this.reveal));
+    u[5] = this.opaqueMax;
+    u[6] = this.mode;
+    u[7] = easeInOut(clamp01(this.drain));
+    u[8] = this.dir[0];
+    u[9] = this.dir[1];
+    u[10] = this.mouse[0];
+    u[11] = this.mouse[1];
+    u[12] = this.hdrFish;
+    u[13] = this.hdrSea;
+    device.queue.writeBuffer(ubuf, 0, u);
+    const enc = device.createCommandEncoder();
+    const pass = enc.beginRenderPass({
+      colorAttachments: [
+        {
+          view: ctx.getCurrentTexture().createView(),
+          loadOp: 'clear',
+          clearValue: { r: 0, g: 0, b: 0, a: 0 },
+          storeOp: 'store',
+        },
+      ],
+    });
+    pass.setPipeline(pipeline);
+    pass.setBindGroup(0, bind);
+    pass.draw(3);
+    pass.end();
+    device.queue.submit([enc.finish()]);
   }
 
   /** Debug: freeze any stage and draw one frame. Pass {reveal,drain,mouse,opaqueMax,mode,dir}. */
@@ -347,11 +541,29 @@ export class IdleOcean {
     if (Array.isArray(opts.mouse)) this.mouse = opts.mouse;
     if (typeof opts.reveal === 'number') this.reveal = clamp01(opts.reveal);
     if (typeof opts.drain === 'number') this.drain = clamp01(opts.drain);
+    if (typeof opts.hdrFish === 'number') this.hdrFish = opts.hdrFish;
+    if (typeof opts.hdrSea === 'number') this.hdrSea = opts.hdrSea;
     if (!this.startTime) this.startTime = performance.now();
-    this.resize();
-    this.canvas.style.visibility = 'visible';
-    this.renderFrame(performance.now());
-    return { reveal: this.reveal, drain: this.drain, opaqueMax: this.opaqueMax, mode: this.mode };
+    const draw = () => {
+      this.resize();
+      this.canvas.style.visibility = 'visible';
+      this.renderFrame(performance.now());
+    };
+    if (this.ready) draw();
+    else if (this.initPromise) {
+      this.initPromise.then((ok) => {
+        if (ok && this.paused) draw();
+      });
+    }
+    return {
+      reveal: this.reveal,
+      drain: this.drain,
+      opaqueMax: this.opaqueMax,
+      mode: this.mode,
+      backend: this.backend,
+      hdrFish: this.hdrFish,
+      hdrSea: this.hdrSea,
+    };
   }
 
   /** Debug: leave frozen mode and go back to the live idle loop. */

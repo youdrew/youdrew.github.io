@@ -15,6 +15,13 @@ mat3 artifactRotation;
 float flicker;
 vec3 camFwd;
 vec3 camUp;
+// HDR emission buckets — the parts of the pixel that are fish light vs sea
+// glow. In SDR both ride inside `color` untouched; when the canvas has real
+// HDR headroom, mainImage lifts them past SDR white (uHdrFish / uHdrSea are
+// display-luminance multiples, 1.0 = plain SDR) so only the little whale
+// reaches the display's peak and the sea keeps a softer fluorescent shelf.
+vec3 gFish;
+vec3 gSea;
 
 float rand(float n) {
     return fract(sin(n) * 43758.5453123);
@@ -227,12 +234,16 @@ void marchObjects(vec3 eye, vec3 ray, float wDepth, inout vec4 color) {
             vec3 normal = objectsNormal(rayPos, 0.01);
             color = vec4(objectsColor(id, normal, ray), depth);
             color.rgb += artifactHalo(eye, ray, depth);
+            gFish = color.rgb; // the fish body and its halo are the emission
+            gSea = vec3(0.0);  // the opaque hit covered any water behind it
             return;
         }
 
         rayPos += ray * dist;
     }
-    color.rgb += artifactHalo(eye, ray, min(depth, wDepth));
+    vec3 halo = artifactHalo(eye, ray, min(depth, wDepth));
+    color.rgb += halo;
+    gFish += halo;
 }
 vec3 waterColor(vec3 ray, vec3 normal, vec3 p) {
     vec3 color = vec3(0.0);
@@ -285,6 +296,7 @@ void marchWater(vec3 eye, vec3 ray, inout vec4 color) {
             vec3 normPos = (eye + ray * color.w);
             normal = waterNormal(normPos.xz, 0.005);
             color.rgb = waterColor(ray, normal, normPos);
+            gSea = color.rgb; // reflections, light pool and sheen: sea glow
             return;
         }
         rayPos += ray * (rayPos.y - height);
@@ -300,7 +312,9 @@ vec3 march(vec2 uv, vec3 camPos) {
 }
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
-    
+    gFish = vec3(0.0);
+    gSea = vec3(0.0);
+
     // simulate  particles
     float pR;
     float pA;
@@ -351,6 +365,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     //   uOpaqueMax    : 1.0 opaque screensaver, ~0.6 translucent veil.
     //   uDrain [0,1]  : the cursor disperses the water in spreading ripples.
     //   uMouse        : live cursor in uv (origin bottom-left).
+    //   uHdrFish/uHdrSea : HDR luminance multiples for the emission buckets
+    //                      (1.0 on SDR; >1 only on an extended-range canvas).
     vec2 cc = uv - 0.5;
     float aspect = iResolution.x / iResolution.y;
 
@@ -373,6 +389,18 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     vec3 col = color * 1.12;
     col += vec3(0.80, 0.90, 1.0) * foam * 0.22 * (1.0 - uReveal * 0.5);
+
+    // --- HDR compose -------------------------------------------------------
+    // The canvas stores extended-sRGB encoded values, so multiplying an
+    // encoded bucket by k lifts its display luminance by ~k^2.4. uHdrFish /
+    // uHdrSea arrive as luminance multiples (1.0 in SDR, so this whole block
+    // is a no-op there): the whale overdrives to the display's peak while the
+    // sea only re-adds its luminous part — dark water must stay dark, only
+    // the glints and the light pool fluoresce (荧光海), one shelf below the fish.
+    float kF = pow(max(uHdrFish, 1.0), 1.0 / 2.4);
+    float kS = pow(max(uHdrSea, 1.0), 1.0 / 2.4);
+    float seaW = smoothstep(0.04, 0.30, dot(gSea, vec3(0.299, 0.587, 0.114)));
+    col += gFish * 1.12 * (kF - 1.0) + gSea * 1.12 * (kS - 1.0) * seaW;
 
     float waterA = clamp(washed * settle, 0.0, 1.0);   // water coverage before draining
 
