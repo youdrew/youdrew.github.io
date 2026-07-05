@@ -34,3 +34,7 @@
 @import url('components/image-zoom.css');
 @import url('components/tag-graph.css');
 @import url('components/language-switcher.css');
+
+/* Appended after the original set (order above must not change): the /daily/
+   section is new surface area with self-contained .daily-* selectors. */
+@import url('pages/daily.css');
