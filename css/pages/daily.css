@@ -54,8 +54,10 @@
   max-width: 780px;
   margin: 0 auto 16px;
   padding: 8px 10px;
-  background: rgb(255 255 255 / 0.92);
-  backdrop-filter: saturate(160%) blur(8px);
+  background: var(--frost-bg);
+  /* stylelint-disable-next-line property-no-vendor-prefix -- iOS WebKit needs the prefix; without it the pager reads as a flat pill on phones */
+  -webkit-backdrop-filter: var(--frost-filter);
+  backdrop-filter: var(--frost-filter);
   border: 1px solid #eae6df;
   border-radius: 999px;
   box-shadow: 0 6px 22px rgb(42 37 32 / 0.06);
@@ -428,6 +430,54 @@ body.type-daily-feed .content details.callout {
 .daily-transcript .transcript-para.is-reading {
   background: rgb(255 196 0 / 0.13);
   border-left-color: #e2a600;
+}
+
+/* ---- Per-item read-aloud button (injected into each news callout) ------ */
+
+.daily-item-play {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-left: auto; /* hug the right edge, before the fold chevron */
+  padding: 0;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.75);
+  color: inherit;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.daily-item-play svg {
+  width: 11px;
+  height: 11px;
+}
+
+.daily-item-play:hover {
+  background: #2a2520;
+  border-color: #2a2520;
+  color: #f5f1ea;
+  transform: scale(1.08);
+}
+
+/* The item currently being read aloud carries an amber marker, and its
+   button stays lit — you always know which story the voice is on. */
+body.type-daily-feed .content details.callout.is-reading-item {
+  box-shadow:
+    inset 3px 0 0 #e2a600,
+    0 0 0 1px rgb(226 166 0 / 0.35);
+}
+
+details.callout.is-reading-item > summary .daily-item-play {
+  background: #e2a600;
+  border-color: #e2a600;
+  color: #fff;
 }
 
 /* ---- Mobile ------------------------------------------------------------ */

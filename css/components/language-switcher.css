@@ -28,6 +28,9 @@ header ul.social li a.language::before {
   opacity: 0;
   transform: translateY(-10px);
   transition: all 0.3s ease;
+  /* dark toast, not the light frost family — but iOS still wants the prefix */
+  /* stylelint-disable-next-line property-no-vendor-prefix -- iOS WebKit */
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgb(0, 0, 0, 0.15);
   max-width: 300px;

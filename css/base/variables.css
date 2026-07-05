@@ -32,6 +32,13 @@
   /* Accent — already used on social-icon hover; promoted to a token. */
   --accent: #0a84ff;
 
+  /* Frosted glass — ONE recipe for every light frosted surface (mobile
+     top bar, daily day-pager, TOC edge tab, …). Remember: iOS WebKit
+     still needs -webkit-backdrop-filter, so every use site carries the
+     prefixed twin of --frost-filter. */
+  --frost-bg: rgb(255 255 255 / 0.82);
+  --frost-filter: saturate(180%) blur(12px);
+
   /* Layout */
   --bar-h: 56px; /* mobile sticky top-bar height */
   --rail: 64px; /* desktop collapsed sidebar rail = idle ocean-shader strip width */

@@ -28,10 +28,10 @@
        fixed height + overflow:hidden, and only show once .menu-open lifts
        the clip. */
     display: block;
-    background: rgb(255 255 255 / 0.82);
+    background: var(--frost-bg);
     /* stylelint-disable-next-line property-no-vendor-prefix -- iOS < 18 needs the prefix for the frosted bar */
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: var(--frost-filter);
+    backdrop-filter: var(--frost-filter);
     border-bottom: 1px solid var(--line);
     overflow: hidden; /* clip nav/footer while collapsed */
     transform: none; /* cancel any desktop translateX */

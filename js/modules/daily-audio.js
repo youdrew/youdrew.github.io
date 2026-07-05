@@ -12,6 +12,11 @@
  *   │  段落… ← 正在朗读的段落带琥珀色高亮，点击可跳播    │
  *   └───────────────────────────────────────────────────┘
  *
+ * 另外，本节每条新闻 callout 的标题行右侧注入一枚小播放键：点击从
+ * 该条对应的口播段落开始朗读。条目 ↔ 段落靠文本 token 匹配（口播会
+ * 合并/跳过条目，按位置对齐不可靠；匹配不到就不给按钮），正在朗读
+ * 的条目卡片同步点亮琥珀标记。
+ *
  * 跟读高亮沿用字数线性估算（TTS 管线没有逐句时间戳；中文合成语速
  * 均匀，段落级误差可忽略）。JS 不可用时原始 callout 原样保留。
  *
@@ -68,6 +73,43 @@ function sectionLabel(host) {
     el = el.previousElementSibling;
   }
   return '';
+}
+
+/**
+ * 条目标题 → 口播段落的文本匹配。
+ *
+ * token = 标题里的英文词（≥3 字符，人名/产品/论文缩写是最强信号）+
+ * 连续中文串（≥2 字）。段落里每命中一个 token 记其长度为分（Set 去重，
+ * 长 token 更独特、权重自然更高），取最高分段落；总分不过阈值视为
+ * "口播没讲这条"，不注按钮。
+ */
+// 阈值取 10：正好放进「命中一个 ≥10 字符的独特标识符」（AgenticSTS、
+// SkillCoach 这类论文缩写），而口播整条跳过的条目（无标识符命中，
+// 只有 "for" 藏在 "transformer" 里之类的碎屑分）远低于此。
+const MATCH_MIN_SCORE = 10;
+
+function matchTokens(text) {
+  const ascii = text.match(/[A-Za-z][A-Za-z0-9-]{2,}/g) || [];
+  const cjk = text.match(/[一-鿿]{2,}/g) || [];
+  return new Set([...ascii, ...cjk].map((s) => s.toLowerCase()));
+}
+
+function bestParagraph(title, paraTexts) {
+  const tokens = matchTokens(title);
+  let best = -1;
+  let bestScore = 0;
+  paraTexts.forEach((text, i) => {
+    const low = text.toLowerCase();
+    let score = 0;
+    tokens.forEach((tok) => {
+      if (low.includes(tok)) score += tok.length;
+    });
+    if (score > bestScore) {
+      bestScore = score;
+      best = i;
+    }
+  });
+  return bestScore >= MATCH_MIN_SCORE ? best : -1;
 }
 
 const SVG_PLAY =
@@ -158,6 +200,49 @@ class Player {
 
     this.bind();
     this.applyRate(loadRate());
+    this.itemsByPara = [];
+    if (this.paras.length) this.attachItemButtons();
+  }
+
+  /**
+   * 本节（音频卡片之后、下一个标题之前）的每条新闻 callout：匹配到
+   * 口播段落的，在标题行注入「从这条开始朗读」小播放键，并登记
+   * 段落 → 条目 的反向映射用于播放时点亮条目。
+   */
+  attachItemButtons() {
+    const items = [];
+    let el = this.root.nextElementSibling;
+    while (el && !/^H[1-6]$/.test(el.tagName)) {
+      if (el.matches && el.matches('details.callout') && !el.querySelector('audio')) {
+        items.push(el);
+      }
+      el = el.nextElementSibling;
+    }
+    const paraTexts = this.paras.map((p) => p.textContent);
+
+    items.forEach((item) => {
+      const summary = item.querySelector('summary');
+      if (!summary) return;
+      const idx = bestParagraph(summary.textContent || '', paraTexts);
+      if (idx === -1) return;
+
+      (this.itemsByPara[idx] || (this.itemsByPara[idx] = [])).push(item);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'daily-item-play';
+      btn.dataset.para = String(idx); // 匹配到的口播段落（也方便线上排查）
+      btn.setAttribute('aria-label', '从这条开始朗读');
+      btn.setAttribute('title', '从这条开始朗读');
+      btn.innerHTML =
+        '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5 4.3a1 1 0 0 1 1.53-.85l12 7.7a1 1 0 0 1 0 1.7l-12 7.7a1 1 0 0 1-1.53-.85Z"/></svg>';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault(); // 别顺手折叠/展开 details
+        e.stopPropagation();
+        this.seekToPara(idx);
+      });
+      summary.appendChild(btn);
+    });
   }
 
   bind() {
@@ -218,6 +303,9 @@ class Player {
     audio.addEventListener('pause', () => {
       this.el.dataset.state = 'paused';
       this.btn.setAttribute('aria-label', '播放');
+      // 条目上的琥珀标记只表示「此刻正在读」——暂停即熄（文稿段落的
+      // 高亮保留，当作面板内的进度书签）。
+      this.setItemsLit(false);
     });
     audio.addEventListener('ended', () => {
       this.el.dataset.state = 'idle';
@@ -233,6 +321,13 @@ class Player {
       if (player !== this && !player.audio.paused) player.audio.pause();
     });
     if (this.panel) this.setPanel(true);
+    this.setItemsLit(true);
+  }
+
+  setItemsLit(lit) {
+    (this.itemsByPara[this.current] || []).forEach((item) =>
+      item.classList.toggle('is-reading-item', lit)
+    );
   }
 
   setPanel(open) {
@@ -301,10 +396,14 @@ class Player {
     if (idx === this.current) return;
     const prev = this.paras[this.current];
     if (prev) prev.classList.remove('is-reading');
+    (this.itemsByPara[this.current] || []).forEach((item) =>
+      item.classList.remove('is-reading-item')
+    );
     this.current = idx;
     const cur = this.paras[idx];
     if (!cur) return;
     cur.classList.add('is-reading');
+    this.setItemsLit(!this.audio.paused);
     // 温和跟随：读者还停留在文稿附近才滚动，滚走了就不打扰。
     const anchor = prev || this.panel;
     if (follow && anchor && this.nearViewport(anchor)) {

@@ -100,10 +100,10 @@
   border: 1px solid var(--line-2);
   border-right: 0;
   border-radius: 10px 0 0 10px;
-  background: rgb(255 255 255 / 0.92);
+  background: var(--frost-bg);
   /* stylelint-disable-next-line property-no-vendor-prefix -- match the frosted top bar */
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: var(--frost-filter);
+  backdrop-filter: var(--frost-filter);
   box-shadow: -3px 2px 12px rgb(0 0 0 / 0.08);
   color: #555;
   font-size: 12px;
