@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://eugenepage.com/zh-CN/2026/05/23/20260524.RAGDeepLearning/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="RAG 入门学习笔记
+学习起点：[[20260522.SearchToolDesign（Private）]] 中的资产语义搜索项目目标：理解 RAG 原理 → 在本地图片数据上跑通最小 Demo
+
+
+一、什么是 RAG？RAG &amp;#x3D; Retrieval-Augmented Generation（检索增强生成）
+">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://eugenepage.com/zh-CN/2026/05/23/20260524.RAGDeepLearning/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="RAG 深度学习笔记">
+    
+    
+        <meta property="og:description" content="RAG 入门学习笔记
+学习起点：[[20260522.SearchToolDesign（Private）]] 中的资产语义搜索项目目标：理解 RAG 原理 → 在本地图片数据上跑通最小 Demo
+
+
+一、什么是 RAG？RAG &amp;#x3D; Retrieval-Augmented Generation（检索增强生成）
+">
+    
+    
+    
+        <meta property="article:published_time" content="2026-05-23T16:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-07-05T18:21:18.564Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="RAG 深度学习笔记">
+    
+    
+        <meta name="twitter:description" content="RAG 入门学习笔记
+学习起点：[[20260522.SearchToolDesign（Private）]] 中的资产语义搜索项目目标：理解 RAG 原理 → 在本地图片数据上跑通最小 Demo
+
+
+一、什么是 RAG？RAG &amp;#x3D; Retrieval-Augmented Generation（检索增强生成）
+">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="zh-CN" href="https://eugenepage.com/zh-CN/2026/05/23/20260524.RAGDeepLearning/">
+        <link rel="alternate" hreflang="en" href="https://eugenepage.com/2026/05/23/20260524.RAGDeepLearning/">
+        <link rel="alternate" hreflang="x-default" href="https://eugenepage.com/2026/05/23/20260524.RAGDeepLearning/">
+    
+
+    <!-- Title -->
+    
+    <title>RAG 深度学习笔记 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--zh-CN-2026-05-23-20260524-RAGDeepLearning-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <button id="menu_icon" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-toggle__bars" aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav">
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home" class="">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/daily" data-i18n-key="Daily" class="">Daily</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives" class="">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About" class="">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <div class="lang-row">
+            <span class="lang-row__label">
+                <span class="lang-row__icon" aria-hidden="true"></span>
+                <span data-i18n="Language">Language</span>
+            </span>
+            <div class="lang-switch" role="group" aria-label="Language">
+                <button type="button" class="lang-switch__opt" data-lang="en" aria-pressed="false">EN</button>
+                <button type="button" class="lang-switch__opt" data-lang="zh-CN" aria-pressed="true">中文</button>
+            </div>
+        </div>
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li class="social-lang"><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top no-cover">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/2026/06/01/20260602.AIGameSeries-Article1/" class="previous" data-title="Landing AI in Game Production — A Kung-F..."></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/2026/05/23/20260524.RAGDeepLearning/" class="next" data-title="RAG Deep Learning..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">RAG 深度学习笔记</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="RAG-入门学习笔记"><a href="#RAG-入门学习笔记" class="headerlink" title="RAG 入门学习笔记"></a>RAG 入门学习笔记</h1><blockquote>
+<p>学习起点：[[20260522.SearchToolDesign（Private）]] 中的资产语义搜索项目<br>目标：理解 RAG 原理 → 在本地图片数据上跑通最小 Demo</p>
+</blockquote>
+<hr>
+<h2 id="一、什么是-RAG？"><a href="#一、什么是-RAG？" class="headerlink" title="一、什么是 RAG？"></a>一、什么是 RAG？</h2><p><strong>RAG &#x3D; Retrieval-Augmented Generation（检索增强生成）</strong></p>
+<p>用一句话说：<strong>先从知识库里找到相关内容，再用这些内容辅助 AI 回答问题。</strong></p>
+<h3 id="1-1-为什么需要-RAG？"><a href="#1-1-为什么需要-RAG？" class="headerlink" title="1.1 为什么需要 RAG？"></a>1.1 为什么需要 RAG？</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>RAG 如何解决</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LLM 训练数据有截止日期，不知道新信息</td>
+<td>检索阶段可以实时查询最新数据</td>
+</tr>
+<tr>
+<td>LLM 不知道私有数据（公司内部资产库）</td>
+<td>把私有数据做成索引，检索后注入给 LLM</td>
+</tr>
+<tr>
+<td>LLM 会”幻觉”，凭空捏造事实</td>
+<td>提供检索到的真实文档作为依据</td>
+</tr>
+<tr>
+<td>LLM token 窗口有限，无法塞入全部资料</td>
+<td>只检索最相关的少数文档片段</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、RAG-的完整流程"><a href="#二、RAG-的完整流程" class="headerlink" title="二、RAG 的完整流程"></a>二、RAG 的完整流程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">╔══════════════════════════════════════════════════════════╗</span><br><span class="line">║              索引阶段（离线，一次性构建）                   ║</span><br><span class="line">║                                                          ║</span><br><span class="line">║  原始数据（文档 / 图片 / 资产描述）                        ║</span><br><span class="line">║       ↓                                                  ║</span><br><span class="line">║  Embedding 模型  →  将内容转成固定长度的向量               ║</span><br><span class="line">║       ↓                                                  ║</span><br><span class="line">║  向量数据库（FAISS / ChromaDB）存储向量，支持快速检索        ║</span><br><span class="line">╚══════════════════════════════════════════════════════════╝</span><br><span class="line">                          ↕</span><br><span class="line">╔══════════════════════════════════════════════════════════╗</span><br><span class="line">║              检索阶段（在线，每次查询触发）                  ║</span><br><span class="line">║                                                          ║</span><br><span class="line">║  用户问题  →  Embedding 模型  →  问题向量                 ║</span><br><span class="line">║       ↓                                                  ║</span><br><span class="line">║  向量数据库：计算相似度，找 Top-K 个最近邻                   ║</span><br><span class="line">║       ↓                                                  ║</span><br><span class="line">║  返回对应原始内容（文档片段 / 图片路径 / 资产信息）           ║</span><br><span class="line">╚══════════════════════════════════════════════════════════╝</span><br><span class="line">                          ↕（可选）</span><br><span class="line">╔══════════════════════════════════════════════════════════╗</span><br><span class="line">║              生成阶段（可选，传统 RAG 才需要）               ║</span><br><span class="line">║                                                          ║</span><br><span class="line">║  [用户问题] + [检索到的内容]  →  LLM  →  有据可查的回答    ║</span><br><span class="line">╚══════════════════════════════════════════════════════════╝</span><br></pre></td></tr></table></figure>
+
+
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">我们的项目是&quot;只检索，不生成&quot;</span></div>
+<div class="callout-content">
+
+<p>资产搜索工具只做前两个阶段——把美术的查询转成向量，找最相似的资产，直接返回结果。这是 RAG 的检索子集，学术上叫 <strong>语义检索（Semantic Search）</strong> 或 <strong>Dense Retrieval</strong>。</p>
+</div>
+</div>
+
+
+<hr>
+<h2 id="三、核心概念解释"><a href="#三、核心概念解释" class="headerlink" title="三、核心概念解释"></a>三、核心概念解释</h2><h3 id="3-1-Embedding（向量化）"><a href="#3-1-Embedding（向量化）" class="headerlink" title="3.1 Embedding（向量化）"></a>3.1 Embedding（向量化）</h3><p>把任意内容（文字、图片）压缩成一个<strong>固定长度的数字列表（向量）</strong>，使得：</p>
+<ul>
+<li>语义<strong>相似</strong>的内容 → 向量在空间中<strong>相近</strong></li>
+<li>语义<strong>不同</strong>的内容 → 向量在空间中<strong>远离</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;一棵柳树&quot;   → [0.12, -0.34, 0.87, ..., 0.05]  （768 维）</span><br><span class="line">&quot;江南垂柳&quot;   → [0.11, -0.31, 0.89, ..., 0.06]  ← 很接近！</span><br><span class="line">&quot;一块岩石&quot;   → [-0.45, 0.72, -0.13, ..., 0.91] ← 差很远</span><br></pre></td></tr></table></figure>
+
+<p><strong>常用 Embedding 模型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>输入类型</th>
+<th>维度</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BGE-M3 (BAAI)</td>
+<td>文字</td>
+<td>1024</td>
+<td>中文最强，本地部署友好</td>
+</tr>
+<tr>
+<td>CLIP (OpenAI)</td>
+<td>图片 + 文字</td>
+<td>512</td>
+<td>图文共享同一向量空间 ⭐</td>
+</tr>
+<tr>
+<td>SigLIP (Google)</td>
+<td>图片 + 文字</td>
+<td>768</td>
+<td>CLIP 改进版，零样本更好</td>
+</tr>
+<tr>
+<td>GTE-Qwen2 (阿里)</td>
+<td>文字</td>
+<td>768</td>
+<td>多语言，商用 Apache 2.0</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-FAISS（向量相似度搜索库）"><a href="#3-2-FAISS（向量相似度搜索库）" class="headerlink" title="3.2 FAISS（向量相似度搜索库）"></a>3.2 FAISS（向量相似度搜索库）</h3><p><strong>FAISS &#x3D; Facebook AI Similarity Search</strong>（Meta 开源）</p>
+<p><strong>为什么需要它？</strong><br>当你有 20000 个向量，要找和查询向量最相似的 Top-10，如果逐一比较需要 20000 次计算。FAISS 用特殊的数据结构，把这个过程加速几十到几千倍。</p>
+<p><strong>类比：</strong></p>
+<ul>
+<li>暴力搜索 &#x3D; 图书馆里一本一本翻，找和你兴趣最接近的书</li>
+<li>FAISS &#x3D; 图书馆按主题分区，直接去”植物类”书架精确查找</li>
+</ul>
+<p><strong>三种主要索引类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>原理</th>
+<th>精度</th>
+<th>速度</th>
+<th>适合规模</th>
+<th>我们的选择</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IndexFlatL2</code></td>
+<td>精确，逐一比较</td>
+<td>100%</td>
+<td>中（但绝对够用）</td>
+<td><strong>&lt; 100K</strong></td>
+<td>✅ 首选</td>
+</tr>
+<tr>
+<td><code>IndexIVFFlat</code></td>
+<td>先分群，再搜索</td>
+<td>~98%</td>
+<td>快</td>
+<td>100K–10M</td>
+<td>将来扩展用</td>
+</tr>
+<tr>
+<td><code>IndexHNSWFlat</code></td>
+<td>图结构导航</td>
+<td>~99%</td>
+<td>最快</td>
+<td>任意</td>
+<td>过度设计</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">20000 资产用 `IndexFlatL2` 即可</span></div>
+<div class="callout-content">
+
+<p>精确、代码最简单，单次查询 &lt;1ms，完全满足需求。</p>
+</div>
+</div>
+
+
+<h3 id="3-3-相似度度量"><a href="#3-3-相似度度量" class="headerlink" title="3.3 相似度度量"></a>3.3 相似度度量</h3><table>
+<thead>
+<tr>
+<th>度量方式</th>
+<th>公式含义</th>
+<th>何时用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L2 距离（欧式）</td>
+<td>向量空间中的直线距离，越小越相似</td>
+<td>FAISS 默认，图片检索</td>
+</tr>
+<tr>
+<td>余弦相似度</td>
+<td>两向量夹角的余弦值，越接近 1 越相似</td>
+<td>文本检索更常用</td>
+</tr>
+<tr>
+<td>内积（点积）</td>
+<td>方向 + 长度共同决定</td>
+<td>CLIP 官方推荐</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、图片-RAG（CLIP-的特殊能力）"><a href="#四、图片-RAG（CLIP-的特殊能力）" class="headerlink" title="四、图片 RAG（CLIP 的特殊能力）"></a>四、图片 RAG（CLIP 的特殊能力）</h2><p>CLIP 的核心创新：<strong>让图片和文字共享同一个向量空间</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;一棵柳树&quot;（文字）→ CLIP 文本编码器 → 向量 A</span><br><span class="line"> 🌳（柳树图片）   → CLIP 图片编码器 → 向量 B</span><br><span class="line"></span><br><span class="line">向量 A ≈ 向量 B  ← 这是 CLIP 的训练目标！</span><br></pre></td></tr></table></figure>
+
+<p><strong>这意味着你可以：</strong></p>
+<ul>
+<li><strong>文字 → 图片</strong>：输入”给我一个流程图”，在图片库里找最相似的</li>
+<li><strong>图片 → 图片</strong>：上传参考图，找风格相近的资产</li>
+<li><strong>图片 → 文字</strong>：输入图片，找最相关的描述文档</li>
+</ul>
+<p>这正是资产搜索工具「以文搜图」功能的核心原理。</p>
+<hr>
+<h2 id="五、本地-Demo-计划"><a href="#五、本地-Demo-计划" class="headerlink" title="五、本地 Demo 计划"></a>五、本地 Demo 计划</h2><h3 id="5-1-目标"><a href="#5-1-目标" class="headerlink" title="5.1 目标"></a>5.1 目标</h3><p>用 <code>D:\Project\UGit\MyPicGo\Images\</code> 里的博客图片（PNG&#x2F;JPG），跑通一个最小的<strong>图片语义检索 Demo</strong>：</p>
+<ul>
+<li><strong>输入</strong>：一段文字描述（如”代码截图”、”流程图”、”UI 界面”）</li>
+<li><strong>输出</strong>：图片库里最相似的 Top-5 图片路径</li>
+</ul>
+<h3 id="5-2-技术栈"><a href="#5-2-技术栈" class="headerlink" title="5.2 技术栈"></a>5.2 技术栈</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">D:\Project\UGit\MyPicGo\Images\  （博客图片，约 100+ 张 PNG/JPG）</span><br><span class="line">    ↓ 批量读取</span><br><span class="line">CLIP ViT-B/32  →  视觉编码器，每张图 → 512 维向量</span><br><span class="line">    ↓ 建索引</span><br><span class="line">FAISS IndexFlatL2  →  内存索引（不需要 GPU，不需要服务器）</span><br><span class="line">    ↓ 查询</span><br><span class="line">用户文字 → CLIP 文本编码器 → 512 维向量 → Top-K 检索</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-实战过程"><a href="#5-3-实战过程" class="headerlink" title="5.3 实战过程"></a>5.3 实战过程</h3><ol>
+<li>建项目目录 <code>D:\Project\UGit\PicGoRAGDemo\</code> + Python venv</li>
+<li>装依赖：<code>torch / transformers / faiss-cpu / modelscope / Pillow / numpy</code></li>
+<li>写 <code>build_index.py</code>（索引阶段）+ <code>search.py</code>（查询阶段）</li>
+<li>跑 <code>python build_index.py</code>：225 张图编码成 225 × 512 维向量，建 FAISS 索引落盘（CPU 上 ~15s）</li>
+<li>跑 <code>python search.py &quot;query&quot;</code> 验证检索（单次查询 &lt;100ms）</li>
+</ol>
+<p><strong>3 个关键踩坑：</strong></p>
+<ul>
+<li><strong>transformers 5.x 改了 CLIP API</strong>：<code>get_image_features(...)</code> 现在返回 <code>BaseModelOutputWithPooling</code>（不再是裸 Tensor），要 <code>.pooler_output</code> 取 512 维向量</li>
+<li><strong>HuggingFace 国内连不上</strong>：直连超时、镜像也不稳，换 <strong>ModelScope</strong>（阿里魔搭，国内服务器无障碍）</li>
+<li><strong>ModelScope 命名不同</strong>：HF 上的 <code>OFA-Sys/chinese-clip-vit-base-patch16</code> 在 MS 上对应 <code>AI-ModelScope/chinese-clip-vit-base-patch16</code>（<code>AI-ModelScope</code> 是 HF 格式镜像专用命名空间，文件结构和 HF 完全一致，<code>transformers.AutoModel</code> 可以直接加载）</li>
+</ul>
+<h3 id="5-4-测试发现：中英文-query-效果对比"><a href="#5-4-测试发现：中英文-query-效果对比" class="headerlink" title="5.4 测试发现：中英文 query 效果对比"></a>5.4 测试发现：中英文 query 效果对比</h3><p>实测发现<strong>英文 query 略准</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>模型</th>
+<th>检索效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;code screenshot&quot;</code></td>
+<td>OpenAI CLIP</td>
+<td>✅ Top-3 全是代码截图</td>
+</tr>
+<tr>
+<td><code>&quot;flowchart&quot;</code></td>
+<td>OpenAI CLIP</td>
+<td>✅ Top-3 全是流程图</td>
+</tr>
+<tr>
+<td><code>&quot;代码截图&quot;</code></td>
+<td>Chinese-CLIP</td>
+<td>✅ Top-3 全是代码截图</td>
+</tr>
+<tr>
+<td><code>&quot;流程图&quot;</code></td>
+<td>Chinese-CLIP</td>
+<td>⚠️ Top-3 有流程图但混入少量无关图</td>
+</tr>
+</tbody></table>
+<p><strong>可能原因</strong>：博客图片以英文技术截图为主（代码、终端、UI 文字大多为英文）。OpenAI CLIP 同时识别英文文字 + 视觉特征，命中更稳；Chinese-CLIP 训练数据偏中文生活 &#x2F; 资讯，对”流程图”这种偏技术的视觉概念边界不够锐利。</p>
+<p>这正印证 §6.1 的核心观点：<strong>embedding 模型在你领域的表现取决于训练数据分布——选型要看场景</strong>。</p>
+<h3 id="5-5-完整代码"><a href="#5-5-完整代码" class="headerlink" title="5.5 完整代码"></a>5.5 完整代码</h3><h4 id="build-index-py（索引阶段）"><a href="#build-index-py（索引阶段）" class="headerlink" title="build_index.py（索引阶段）"></a><code>build_index.py</code>（索引阶段）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;build_index.py — 把 N 张图编成 N 个 512 维向量，建 FAISS 索引</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">产物:</span></span><br><span class="line"><span class="string">  index.faiss  FAISS 索引（行 i = 第 i 张图的 512 维向量）</span></span><br><span class="line"><span class="string">  paths.json   行号 → 原图路径</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> faiss, numpy <span class="keyword">as</span> np, torch</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> modelscope <span class="keyword">import</span> snapshot_download</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModel, AutoProcessor</span><br><span class="line"></span><br><span class="line"><span class="comment"># ===== 配置 =====</span></span><br><span class="line">IMAGE_DIR  = Path(<span class="string">r&quot;D:\Project\UGit\MyPicGo\Images&quot;</span>)</span><br><span class="line">INDEX_PATH = Path(__file__).parent / <span class="string">&quot;index.faiss&quot;</span></span><br><span class="line">PATHS_PATH = Path(__file__).parent / <span class="string">&quot;paths.json&quot;</span></span><br><span class="line"><span class="comment"># AI-ModelScope 是 ModelScope 上的 HF 格式镜像命名空间，国内可直连</span></span><br><span class="line">MODEL_ID   = <span class="string">&quot;AI-ModelScope/chinese-clip-vit-base-patch16&quot;</span></span><br><span class="line">BATCH_SIZE = <span class="number">16</span></span><br><span class="line">IMG_EXTS   = &#123;<span class="string">&quot;.png&quot;</span>, <span class="string">&quot;.jpg&quot;</span>, <span class="string">&quot;.jpeg&quot;</span>, <span class="string">&quot;.webp&quot;</span>, <span class="string">&quot;.bmp&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">collect_images</span>(<span class="params">root: Path</span>) -&gt; <span class="built_in">list</span>[Path]:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;递归扫描所有图片&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sorted</span>(p <span class="keyword">for</span> p <span class="keyword">in</span> root.rglob(<span class="string">&quot;*&quot;</span>) <span class="keyword">if</span> p.suffix.lower() <span class="keyword">in</span> IMG_EXTS)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>() -&gt; <span class="literal">None</span>:</span><br><span class="line">    device = <span class="string">&quot;cuda&quot;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 1. 加载模型 ===</span></span><br><span class="line">    <span class="comment"># snapshot_download 首次下载 ~700MB 到 ~/.cache/modelscope/，之后直接返回本地路径</span></span><br><span class="line">    model_dir = snapshot_download(MODEL_ID)</span><br><span class="line">    model     = AutoModel.from_pretrained(model_dir).to(device).<span class="built_in">eval</span>()</span><br><span class="line">    processor = AutoProcessor.from_pretrained(model_dir)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 2. 扫描图片库 ===</span></span><br><span class="line">    paths = collect_images(IMAGE_DIR)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> paths:</span><br><span class="line">        <span class="keyword">raise</span> SystemExit(<span class="string">f&quot;no images found under <span class="subst">&#123;IMAGE_DIR&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 3. 批量编码 ===</span></span><br><span class="line">    embeddings, ok_paths = [], []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(paths), BATCH_SIZE):</span><br><span class="line">        batch = paths[i:i + BATCH_SIZE]</span><br><span class="line">        imgs, ok = [], []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> batch:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                imgs.append(Image.<span class="built_in">open</span>(p).convert(<span class="string">&quot;RGB&quot;</span>))</span><br><span class="line">                ok.append(p)</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;  skip <span class="subst">&#123;p.name&#125;</span>: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> imgs:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        inputs = processor(images=imgs, return_tensors=<span class="string">&quot;pt&quot;</span>).to(device)</span><br><span class="line">        <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">            <span class="comment"># transformers 5.x: get_image_features 返回 BaseModelOutputWithPooling</span></span><br><span class="line">            <span class="comment"># 512 维投影向量在 .pooler_output 字段里</span></span><br><span class="line">            feats = model.get_image_features(**inputs).pooler_output</span><br><span class="line">        <span class="comment"># L2 归一化：归一化后 L2 距离 ↔ cosine 相似度排名等价</span></span><br><span class="line">        feats = feats / feats.norm(dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        embeddings.append(feats.cpu().numpy().astype(<span class="string">&quot;float32&quot;</span>))</span><br><span class="line">        ok_paths.extend(ok)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 4. 建 FAISS 索引并落盘 ===</span></span><br><span class="line">    mat = np.vstack(embeddings)</span><br><span class="line">    <span class="comment"># IndexFlatL2: 精确暴力检索；&lt; 100K 向量足够，单次查询 &lt;1ms</span></span><br><span class="line">    index = faiss.IndexFlatL2(mat.shape[<span class="number">1</span>])</span><br><span class="line">    index.add(mat)</span><br><span class="line">    faiss.write_index(index, <span class="built_in">str</span>(INDEX_PATH))</span><br><span class="line">    PATHS_PATH.write_text(</span><br><span class="line">        json.dumps([<span class="built_in">str</span>(p) <span class="keyword">for</span> p <span class="keyword">in</span> ok_paths], ensure_ascii=<span class="literal">False</span>, indent=<span class="number">2</span>),</span><br><span class="line">        encoding=<span class="string">&quot;utf-8&quot;</span>,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<h4 id="search-py（查询阶段）"><a href="#search-py（查询阶段）" class="headerlink" title="search.py（查询阶段）"></a><code>search.py</code>（查询阶段）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;search.py — 文字 query → CLIP 文本编码 → FAISS Top-K → 打印路径</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">用法:</span></span><br><span class="line"><span class="string">  python search.py &quot;代码截图&quot;</span></span><br><span class="line"><span class="string">  python search.py &quot;flowchart&quot; --topk 10</span></span><br><span class="line"><span class="string">  python search.py &quot;blue UI&quot; --open    # 顺便打开 Top-1</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> annotations</span><br><span class="line"><span class="keyword">import</span> argparse, json, os</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> faiss, torch</span><br><span class="line"><span class="keyword">from</span> modelscope <span class="keyword">import</span> snapshot_download</span><br><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModel, AutoProcessor</span><br><span class="line"></span><br><span class="line">INDEX_PATH = Path(__file__).parent / <span class="string">&quot;index.faiss&quot;</span></span><br><span class="line">PATHS_PATH = Path(__file__).parent / <span class="string">&quot;paths.json&quot;</span></span><br><span class="line"><span class="comment"># 必须和 build_index.py 一致——不同模型的向量空间不通用</span></span><br><span class="line">MODEL_ID   = <span class="string">&quot;AI-ModelScope/chinese-clip-vit-base-patch16&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>() -&gt; <span class="literal">None</span>:</span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(<span class="string">&quot;query&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, <span class="built_in">help</span>=<span class="string">&quot;自然语言查询&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--topk&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">5</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;--open&quot;</span>, action=<span class="string">&quot;store_true&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;打开 Top-1&quot;</span>)</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> INDEX_PATH.exists():</span><br><span class="line">        <span class="keyword">raise</span> SystemExit(<span class="string">f&quot;找不到 <span class="subst">&#123;INDEX_PATH.name&#125;</span>，先跑 python build_index.py&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 1. 加载模型 + 索引 ===</span></span><br><span class="line">    device = <span class="string">&quot;cuda&quot;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span></span><br><span class="line">    model_dir = snapshot_download(MODEL_ID)</span><br><span class="line">    model     = AutoModel.from_pretrained(model_dir).to(device).<span class="built_in">eval</span>()</span><br><span class="line">    processor = AutoProcessor.from_pretrained(model_dir)</span><br><span class="line">    index = faiss.read_index(<span class="built_in">str</span>(INDEX_PATH))</span><br><span class="line">    paths = json.loads(PATHS_PATH.read_text(encoding=<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 2. 文字编码为向量 ===</span></span><br><span class="line">    inputs = processor(text=[args.query], return_tensors=<span class="string">&quot;pt&quot;</span>, padding=<span class="literal">True</span>).to(device)</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="comment"># 同样取 .pooler_output 拿 512 维投影向量</span></span><br><span class="line">        feat = model.get_text_features(**inputs).pooler_output</span><br><span class="line">    feat = feat / feat.norm(dim=-<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">    query_vec = feat.cpu().numpy().astype(<span class="string">&quot;float32&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 3. FAISS Top-K 检索 ===</span></span><br><span class="line">    distances, indices = index.search(query_vec, args.topk)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># === 4. 打印结果 ===</span></span><br><span class="line">    <span class="keyword">for</span> rank, (idx, dist) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(indices[<span class="number">0</span>], distances[<span class="number">0</span>]), <span class="number">1</span>):</span><br><span class="line">        <span class="comment"># 对 L2-normalized 向量：cos_sim = 1 - L2_dist^2 / 2</span></span><br><span class="line">        sim = <span class="number">1.0</span> - dist / <span class="number">2.0</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;  #<span class="subst">&#123;rank&#125;</span>  sim=<span class="subst">&#123;sim:<span class="number">.3</span>f&#125;</span>  <span class="subst">&#123;paths[idx]&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> args.<span class="built_in">open</span> <span class="keyword">and</span> <span class="built_in">len</span>(indices[<span class="number">0</span>]) &gt; <span class="number">0</span>:</span><br><span class="line">        os.startfile(paths[indices[<span class="number">0</span>][<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、学习资源"><a href="#六、学习资源" class="headerlink" title="六、学习资源"></a>六、学习资源</h2><h3 id="6-1-入门文章（由浅入深）"><a href="#6-1-入门文章（由浅入深）" class="headerlink" title="6.1 入门文章（由浅入深）"></a>6.1 入门文章（由浅入深）</h3><table>
+<thead>
+<tr>
+<th>资源</th>
+<th>类型</th>
+<th>适合阶段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IBM Technology: <em>What is RAG?</em></td>
+<td>5分钟视频</td>
+<td>零基础入门，概念最清晰</td>
+</tr>
+<tr>
+<td><em>Retrieval-Augmented Generation</em> - LangChain 官方文档</td>
+<td>图文教程</td>
+<td>理解流程，有代码示例</td>
+</tr>
+<tr>
+<td><em>Building RAG from Scratch</em> - Towards Data Science</td>
+<td>博客</td>
+<td>不依赖框架，直接用 FAISS + Python</td>
+</tr>
+<tr>
+<td>LlamaIndex 官方教程</td>
+<td>实践</td>
+<td>工程化框架，生产级 RAG</td>
+</tr>
+<tr>
+<td>OpenAI Cookbook - RAG</td>
+<td>代码示例</td>
+<td>进阶，含评估指标</td>
+</tr>
+</tbody></table>
+<h3 id="6-2-必读论文（可选）"><a href="#6-2-必读论文（可选）" class="headerlink" title="6.2 必读论文（可选）"></a>6.2 必读论文（可选）</h3><table>
+<thead>
+<tr>
+<th>论文</th>
+<th>年份</th>
+<th>为什么读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>RAG for Knowledge-Intensive NLP Tasks</em>（Lewis et al.）</td>
+<td>2020</td>
+<td>RAG 概念起源</td>
+</tr>
+<tr>
+<td><em>CLIP: Learning Transferable Visual Models</em>（Radford et al.）</td>
+<td>2021</td>
+<td>图文对齐的基础原理</td>
+</tr>
+<tr>
+<td><em>SigLIP: Sigmoid Loss for Language Image Pre-Training</em></td>
+<td>2023</td>
+<td>CLIP 改进版，了解进展</td>
+</tr>
+</tbody></table>
+<h3 id="6-3-中文资源"><a href="#6-3-中文资源" class="headerlink" title="6.3 中文资源"></a>6.3 中文资源</h3><ul>
+<li><strong>BAAI BGE 系列文档</strong>：中文 embedding 模型的官方说明，直接指导模型选型</li>
+<li><strong>知乎「RAG 实践」</strong>：国内工程师踩坑笔记，实用</li>
+<li><strong>B站 @跟李沐学AI</strong>：深度学习基础，理解 embedding 原理的必要背景</li>
+</ul>
+<hr>
+<h2 id="七、笔记"><a href="#七、笔记" class="headerlink" title="七、笔记"></a>七、笔记</h2><h3 id="模块一：RAG-Overview"><a href="#模块一：RAG-Overview" class="headerlink" title="模块一：RAG Overview"></a>模块一：RAG Overview</h3><h4 id="1-RAG体系结构："><a href="#1-RAG体系结构：" class="headerlink" title="1. RAG体系结构："></a>1. RAG体系结构：</h4><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260524-032448.png" alt="image.png"><br>在 RAG 系统内部，首先会有可以访问数据库的 retriever，它会发动一次查询（类似数据库）。然后 retriever 会得到一个查询后的 （被认为最相关的一些信息）。接着，它会把这写得到的可能最相关的信息，生成一个增强的提示词。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"># ============================================================</span><br><span class="line"># 阶段 1：定义用户提问（原始 Prompt）</span><br><span class="line"># ============================================================</span><br><span class="line"># 这是用户最初提出的问题，包含时效性信息（&quot;this weekend&quot;），</span><br><span class="line"># 大模型自身的训练数据无法覆盖实时情况。</span><br><span class="line">prompt = &quot;Why are hotel prices in Vancouver super expensive this weekend?&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ============================================================</span><br><span class="line"># 阶段 2：朴素生成（Naive Generation，作为对照基线）</span><br><span class="line"># ============================================================</span><br><span class="line"># 直接把原始 prompt 丢给 LLM 生成答案。</span><br><span class="line"># 缺点：模型不知道&quot;本周末&quot;温哥华正在发生什么事件，</span><br><span class="line"># 只能凭训练数据给出泛泛的猜测（旅游旺季、汇率等），容易出现幻觉。</span><br><span class="line">generate(prompt)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ============================================================</span><br><span class="line"># 阶段 3：检索相关文档（Retrieval）</span><br><span class="line"># ============================================================</span><br><span class="line"># 用 prompt 去外部知识库（向量数据库、搜索引擎、内部文档等）</span><br><span class="line"># 检索与问题相关的实时/权威信息，例如：</span><br><span class="line">#   - 本周末温哥华正在举办的演唱会、展会、体育赛事</span><br><span class="line">#   - 酒店行业的供需新闻</span><br><span class="line"># 这些文档是后续&quot;增强&quot;环节的关键素材。</span><br><span class="line">retrieved_documents = retrieve(prompt)</span><br><span class="line">print(retrieved_documents)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ============================================================</span><br><span class="line"># 阶段 4：构造增强提示（Augmented Prompt）</span><br><span class="line"># ============================================================</span><br><span class="line"># 把&quot;原始问题&quot; + &quot;检索到的文档&quot;拼接成一个新的 prompt，</span><br><span class="line"># 显式地把外部知识喂给模型，让它在有据可依的前提下作答。</span><br><span class="line">augmented_prompt = f&quot;&quot;&quot;Respond to the following prompt: &#123;prompt&#125;</span><br><span class="line"></span><br><span class="line">using the following retrieved information to help you answer &#123;retrieved_documents&#125;&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ============================================================</span><br><span class="line"># 阶段 5：基于增强 Prompt 重新生成（Augmented Generation）</span><br><span class="line"># ============================================================</span><br><span class="line"># 此时 LLM 拿到的是&quot;问题 + 上下文证据&quot;，</span><br><span class="line"># 输出会更准确、更具时效性，也能减少幻觉。</span><br><span class="line"># 这就是 RAG（Retrieval-Augmented Generation）的完整闭环：</span><br><span class="line">#   Retrieve → Augment → Generate</span><br><span class="line">generate(augmented_prompt)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-LLMs上理解RAG"><a href="#2-LLMs上理解RAG" class="headerlink" title="2. LLMs上理解RAG"></a>2. LLMs上理解RAG</h4><p>LLMs 本质上是在不停地预测下一个即将出现的值的可能性，RAG 是改变了这个可能性的分布。</p>
+<h4 id="3-信息检索：RAG-Retrieve-vs-搜索引擎-vs-数据库查询"><a href="#3-信息检索：RAG-Retrieve-vs-搜索引擎-vs-数据库查询" class="headerlink" title="3. 信息检索：RAG Retrieve vs 搜索引擎 vs 数据库查询"></a>3. 信息检索：RAG Retrieve vs 搜索引擎 vs 数据库查询</h4><p>三者都在”找东西”，但底层匹配逻辑完全不同：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>搜索引擎（BM25&#x2F;TF-IDF）</th>
+<th>数据库查询（SQL）</th>
+<th>RAG Retrieve（向量检索）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>匹配方式</strong></td>
+<td>关键词词频统计</td>
+<td>精确字段匹配</td>
+<td>语义相似度（向量距离）</td>
+</tr>
+<tr>
+<td><strong>查询语言</strong></td>
+<td>自然语言词袋</td>
+<td>结构化 SQL</td>
+<td>任意内容（文字 &#x2F; 图片 &#x2F; 音频）</td>
+</tr>
+<tr>
+<td><strong>能否理解同义词</strong></td>
+<td>❌ 部分（需要词典）</td>
+<td>❌ 完全不能</td>
+<td>✅ 天然支持</td>
+</tr>
+<tr>
+<td><strong>能否跨模态</strong></td>
+<td>❌ 文字只能找文字</td>
+<td>❌</td>
+<td>✅ 文字找图片（CLIP）</td>
+</tr>
+<tr>
+<td><strong>结果排序依据</strong></td>
+<td>TF-IDF 分数</td>
+<td>无排序（精确匹配 &#x2F; 过滤）</td>
+<td>向量空间距离（余弦 &#x2F; L2）</td>
+</tr>
+<tr>
+<td><strong>数据结构要求</strong></td>
+<td>需要倒排索引</td>
+<td>需要严格 Schema</td>
+<td>只需向量，原始结构无要求</td>
+</tr>
+<tr>
+<td><strong>适合的问题</strong></td>
+<td>“找包含这些词的文档”</td>
+<td>“找符合这些条件的记录”</td>
+<td>“找语义上最相关的内容”</td>
+</tr>
+</tbody></table>
+<p><strong>一句话区分三者本质：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数据库查询  ── &quot;完全相等吗？&quot;   （精确）</span><br><span class="line">搜索引擎    ── &quot;有没有这个词？&quot;  （词频）</span><br><span class="line">RAG Retrieve── &quot;意思像不像？&quot;   （语义）</span><br></pre></td></tr></table></figure>
+
+
+
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">实际工程：混合检索（Hybrid Search）</span></div>
+<div class="callout-content">
+
+<p>RAG 并非”完美替代”前两者，生产环境常将<strong>向量检索 + BM25</strong>结合使用，取并集后再用 Re-ranker 重新排序——向量检索负责语义泛化，BM25 负责关键词锚定，两者互补。</p>
+</div>
+</div>
+
+
+<h3 id="模块二：信息检索和搜索技术"><a href="#模块二：信息检索和搜索技术" class="headerlink" title="模块二：信息检索和搜索技术"></a>模块二：信息检索和搜索技术</h3><h4 id="1-检索器架构概述"><a href="#1-检索器架构概述" class="headerlink" title="1. 检索器架构概述"></a>1. 检索器架构概述</h4><h5 id="Metadata-Filtering（元数据过滤）"><a href="#Metadata-Filtering（元数据过滤）" class="headerlink" title="Metadata Filtering（元数据过滤）"></a>Metadata Filtering（元数据过滤）</h5><p>在向量检索前&#x2F;后，用结构化字段对候选集进行硬性筛选，<strong>缩小检索范围</strong>。</p>
+<ul>
+<li><strong>原理</strong>：文档在入库时附带元数据字段（如来源、日期、类别），查询时先过滤再做向量相似度排序</li>
+<li><strong>优势</strong>：大幅减少无关文档的干扰，提升精度和检索效率。</li>
+<li><strong>局限</strong>：依赖入库时的元数据质量，字段缺失或分类不准会导致有效文档被误过滤。不会理解内容，且几乎不会单独使用。</li>
+</ul>
+<h5 id="Keyword-Searching（关键词搜索）"><a href="#Keyword-Searching（关键词搜索）" class="headerlink" title="Keyword Searching（关键词搜索）"></a>Keyword Searching（关键词搜索）</h5><p>基于精确词语匹配来查找文档，是最经典的搜索方式。主要包含 TF-IDF 和 BM25 两种算法。</p>
+<ul>
+<li><strong>原理</strong>：将查询拆成词条，统计词频（如 BM25 算法），返回包含这些词的文档  </li>
+<li><strong>优势</strong>：速度快、结果可解释、对专有名词（代码、ID、型号）命中精准</li>
+<li><strong>局限</strong>：无法理解同义词或语义近似表达，换个说法就可能找不到</li>
+</ul>
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">TF-IDF vs BM25</span></div>
+<div class="callout-content">
+
+<p>两者都用词频打分，但 BM25 是 TF-IDF 的改进版：TF-IDF 词频越高得分线性增长；BM25 加入<strong>词频饱和</strong>（高频词收益递减）和<strong>文档长度归一化</strong>，短文档中出现一次与长文档出现多次权重更合理，实际检索效果更好。</p>
+</div>
+</div>
+
+
+<h5 id="Semantic-Searching（语义搜索）"><a href="#Semantic-Searching（语义搜索）" class="headerlink" title="Semantic Searching（语义搜索）"></a>Semantic Searching（语义搜索）</h5><p>将文本编码为向量，通过计算向量相似度来匹配”意思相近”的内容。</p>
+<ul>
+<li><strong>原理</strong>：用 Embedding 模型把查询和文档都映射到高维向量空间，用余弦相似度等方式度量距离</li>
+<li><strong>优势</strong>：能捕捉语义泛化，即使措辞不同也能找到相关内容</li>
+<li><strong>局限</strong>：计算开销更高，对精确词语（如特定 ID）反而不如关键词搜索可靠</li>
+</ul>
+<h4 id="2-两种常见的关键词检索算法详解"><a href="#2-两种常见的关键词检索算法详解" class="headerlink" title="2. 两种常见的关键词检索算法详解"></a>2. 两种常见的关键词检索算法详解</h4><p><strong>TF-IDF</strong></p>
+<p>核心公式：<code>Score = TF(词, 文档) × log(文档总数 / 含该词的文档数)</code></p>
+<ul>
+<li><strong>TF</strong>（词频）：词在当前文档出现越多，说明越相关</li>
+<li><strong>IDF</strong>（逆文档频率）：词在越多文档里出现，说明越”废话”，权重越低；罕见词权重越高</li>
+<li>结果：<code>&quot;的&quot; &quot;is&quot;</code> 等高频虚词接近 0 分，<code>&quot;量子纠缠&quot; &quot;BM25&quot;</code> 等专有词得高分</li>
+</ul>
+<p><strong>BM25</strong>（TF-IDF 的工业级改进版，Elasticsearch 默认算法）</p>
+<p>核心改进点：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>TF-IDF</th>
+<th>BM25</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>词频线性叠加</td>
+<td>出现 100 次 &#x3D; 1 次的 100 倍</td>
+<td>词频<strong>饱和</strong>，多了收益递减（参数 <code>k1</code>，默认 1.2–2.0）</td>
+</tr>
+<tr>
+<td>长文档天然优势</td>
+<td>惩罚过重</td>
+<td>按平均文档长度<strong>归一化</strong>（参数 <code>b</code>，默认 0.75）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong><code>k1</code></strong>：控制词频饱和速度，越高代表”多说几遍越重要”；越低代表”说 3 遍和说 100 遍差不多”<br><strong><code>b</code></strong>：控制长度惩罚力度，<code>b=0</code> 忽略长度，<code>b=1</code> 严格按密度打分，0.75 是工业经验值</p>
+</blockquote>
+<h4 id="3-语义搜索与关键词搜索的异同"><a href="#3-语义搜索与关键词搜索的异同" class="headerlink" title="3. 语义搜索与关键词搜索的异同"></a>3. 语义搜索与关键词搜索的异同</h4><h5 id="1-共同点：数字化"><a href="#1-共同点：数字化" class="headerlink" title="1. 共同点：数字化"></a>1. 共同点：数字化</h5><ul>
+<li><strong>Prompt and documents each get a vector（提示词和文档各获得一个向量）：</strong><br>  无论是哪种搜索，计算机都无法直接“读懂”文字。第一步都是将用户的提问和数据库里的文档转化成一串数字列表，这串数字就叫向量。</li>
+<li><strong>Vectors compared to generate scores（对比向量以生成评分）：</strong><br>  一旦变成了数字，计算机就可以通过数学公式（如余弦相似度）计算两个向量之间的“距离”。距离越近，分值越高，代表两者越相关。</li>
+</ul>
+<h5 id="2-核心区别：向量是如何生成的？"><a href="#2-核心区别：向量是如何生成的？" class="headerlink" title="2. 核心区别：向量是如何生成的？"></a>2. 核心区别：向量是如何生成的？</h5><h6 id="关键词搜索：统计单词数量"><a href="#关键词搜索：统计单词数量" class="headerlink" title="关键词搜索：统计单词数量"></a><strong>关键词搜索：统计单词数量</strong></h6><ul>
+<li><strong>原理：</strong> 这种方式生成的叫<strong>稀疏向量</strong>。</li>
+<li><strong>逻辑：</strong> 向量里的每一个位置代表一个特定的单词。如果文档里出现了这个词，就在对应位置标上分数（基于词频，如 BM25）。</li>
+<li><strong>特点：</strong> 字面匹配，它只认“长得一样”的词。<br>  <strong>局限：</strong> 如果你搜“医生”，它找不到包含“医师”但没写“医生”的文档，因为它不理解词义。</li>
+</ul>
+<h6 id="语义搜索：使用嵌入模型"><a href="#语义搜索：使用嵌入模型" class="headerlink" title="语义搜索：使用嵌入模型"></a><strong>语义搜索：使用嵌入模型</strong></h6><ul>
+<li><strong>原理：</strong> 这种方式生成的叫<strong>稠密向量 (Dense Vector)</strong>。</li>
+<li><strong>逻辑：</strong> 它不直接数单词，而是把文本输入到一个预训练好的<strong>深度学习模型（Embedding Model，如 BERT）</strong>。模型会把文本“映射”到一个多维的语义空间里。</li>
+<li><strong>特点：</strong> 理解含义，向量里的数字代表的是抽象的“特征”或“概念”。<br>  <strong>优势：</strong> 它能识别同义词。即使单词不匹配，只要“意思”接近（比如“猫”和“小猫”，“医生”和“医师”），它们的向量在数学空间里的距离就会非常近。</li>
+</ul>
+<h4 id="3-RRF-算法（平衡关键词和语义）"><a href="#3-RRF-算法（平衡关键词和语义）" class="headerlink" title="3.  RRF 算法（平衡关键词和语义）"></a>3.  RRF 算法（平衡关键词和语义）</h4><p>它是 <strong>混合检索</strong> 中的核心技术。当你在 RAG 系统中同时运行”关键词检索”和”语义检索”时，会得到两份完全不同的评分列表。RRF（Reciprocal Rank Fusion，倒数排名融合）的作用就是<strong>将这两份列表公正地合并成一份最终的排名列表</strong>。</p>
+<h5 id="1-核心问题：”苹果和橙子”的对比困境"><a href="#1-核心问题：”苹果和橙子”的对比困境" class="headerlink" title="1. 核心问题：”苹果和橙子”的对比困境"></a>1. 核心问题：”苹果和橙子”的对比困境</h5><p>混合检索面临一个根本性困难：</p>
+<ul>
+<li><strong>关键词检索（BM25）</strong> 的分数可能是 <code>15.4</code>、<code>12.8</code> 等。</li>
+<li><strong>语义检索（向量搜索）</strong> 的分数（余弦相似度）通常在 <code>0.8</code> 到 <code>0.9</code> 之间。</li>
+<li><strong>问题</strong>：这两种分数单位不同，无法直接相加比较。</li>
+</ul>
+<p><strong>RRF 的解法：完全忽略原始分数，只看文档在列表中的位次（排名）。</strong></p>
+<h5 id="2-核心机制"><a href="#2-核心机制" class="headerlink" title="2. 核心机制"></a>2. 核心机制</h5><ul>
+<li><strong>奖励”共识”文档：</strong> 如果一个文档在关键词搜索和语义搜索中都排名靠前，RRF 会给它极高的最终得分。</li>
+<li><strong>标准化两种搜索的权重：</strong> 提供了一种跨策略的公平比较方式，不让任何一种算法因分值范围大而主导结果。</li>
+<li><strong>得分 &#x3D; 排名的倒数（算法名称由来）：</strong><ul>
+<li>第 1 名 → <code>1/1 = 1.0</code> 分</li>
+<li>第 2 名 → <code>1/2 = 0.5</code> 分</li>
+<li>第 10 名 → <code>1/10 = 0.1</code> 分</li>
+<li>逻辑：名次越靠前分值越高，且名次越往后分值下降越快。</li>
+</ul>
+</li>
+<li><strong>汇总得分：</strong> 把同一文档在所有列表中的倒数分数相加，总分最高者赢得最终排名。</li>
+</ul>
+<h5 id="3-公式"><a href="#3-公式" class="headerlink" title="3. 公式"></a>3. 公式</h5><p>$$RRF(d) &#x3D; \sum_{i&#x3D;1}^{n} \frac{1}{k + rank_i(d)}$$</p>
+<ul>
+<li><code>rank_i</code>：文档 <code>d</code> 在第 <code>i</code> 个检索列表中的排名（从 1 开始）。</li>
+<li><code>k</code>：<strong>平滑常数</strong>，工业界通常默认设为 <strong>60</strong>。</li>
+</ul>
+<p><strong>为什么需要 <code>k</code>？</strong></p>
+<p>若不加 <code>k</code>，第 1 名（1.0 分）与第 100 名（0.01 分）差距极大，会导致排名第一的文档拥有统治级权力。<code>k</code> 作为”减震器”，能压缩极端差异，削弱偶然排第一的噪声文档的影响。</p>
+<table>
+<thead>
+<tr>
+<th>参数值</th>
+<th>效果</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>k = 0</code>（极度敏感）</td>
+<td>第一名拥有绝对统治力</td>
+<td>某个算法偶然将噪声文档排第一，会干扰整个 RAG 结果</td>
+</tr>
+<tr>
+<td><code>k = 60</code>（平滑稳健，工业默认）</td>
+<td>单列表的高排名不再独占优势</td>
+<td>无明显风险；要求多个检索策略共同认可才能胜出</td>
+</tr>
+</tbody></table>
+<h5 id="4-RRF-的核心优势：只在乎排名"><a href="#4-RRF-的核心优势：只在乎排名" class="headerlink" title="4. RRF 的核心优势：只在乎排名"></a>4. RRF 的核心优势：只在乎排名</h5><ul>
+<li><strong>无需分数归一化：</strong> 不需要考虑 BM25 的 20 分和向量搜索的 0.9 分如何换算，直接比较位次即可。</li>
+<li><strong>跨策略无缝合并：</strong> 无论是 2 种还是 5 种不同的检索技术，只要各自给出一份排名列表，RRF 就能公平融合。</li>
+</ul>
+<h5 id="5-调节语义-vs-关键词权重的参数"><a href="#5-调节语义-vs-关键词权重的参数" class="headerlink" title="5. 调节语义 vs 关键词权重的参数"></a>5. 调节语义 vs 关键词权重的参数</h5><p>标准 RRF 本身没有直接的”语义 vs 关键词”权重参数——<code>k</code> 只是平滑常数，不控制两者比重。<br>但<strong>加权 RRF（Weighted RRF）</strong> 在公式中为每个检索策略引入独立权重 <code>w</code>：</p>
+<p>$$RRF(d) &#x3D; \sum_{i&#x3D;1}^{n} \frac{w_i}{k + rank_i(d)}$$</p>
+<ul>
+<li>提高 <code>w_semantic</code> → 结果更偏向语义理解（找近义、概念相关）</li>
+<li>提高 <code>w_keyword</code> → 结果更偏向精确字面匹配</li>
+</ul>
+<p><strong>在工程实现中，这个权重在哪里调？</strong><br>以 <strong>LangChain</strong> 的 <code>EnsembleRetriever</code> 为例，最为直观：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langchain.retrievers <span class="keyword">import</span> BM25Retriever, EnsembleRetriever</span><br><span class="line"><span class="keyword">from</span> langchain_community.vectorstores <span class="keyword">import</span> FAISS</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两种检索器</span></span><br><span class="line">bm25_retriever = BM25Retriever.from_documents(docs)</span><br><span class="line">vector_retriever = FAISS.from_documents(docs, embedding_model).as_retriever()</span><br><span class="line"></span><br><span class="line"><span class="comment"># weights 就是公式里的 w_i，两个值相加通常为 1.0</span></span><br><span class="line">ensemble_retriever = EnsembleRetriever(</span><br><span class="line">    retrievers=[bm25_retriever, vector_retriever],</span><br><span class="line">    weights=[<span class="number">0.3</span>, <span class="number">0.7</span>]  <span class="comment"># 关键词 30%，语义 70%</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>weights=[0.3, 0.7]</code> 即公式中的 <code>w_keyword</code> 和 <code>w_semantic</code>。调大语义权重 → 更擅长理解意图；调大关键词权重 → 更擅长精确匹配专有名词。</p>
+</blockquote>
+<h4 id="4-评估指标"><a href="#4-评估指标" class="headerlink" title="4. 评估指标"></a>4. 评估指标</h4><p>用量化数字衡量检索器好不好用，是系统调优的科学基础。</p>
+<h5 id="三大核心指标"><a href="#三大核心指标" class="headerlink" title="三大核心指标"></a>三大核心指标</h5><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>核心目标</th>
+<th>一句话解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>召回率 Recall@K</strong></td>
+<td>“找得全”</td>
+<td>前 K 个结果里，成功找到了多少个真正相关的文档</td>
+</tr>
+<tr>
+<td><strong>精确率 Precision &amp; MAP</strong></td>
+<td>“找得准 + 排得好”</td>
+<td>Precision 衡量返回结果中有多少是噪音；MAP 进一步评估相关文档是否排在最前面</td>
+</tr>
+<tr>
+<td><strong>平均倒数排名 MRR</strong></td>
+<td>“首位命中”</td>
+<td>第一个相关文档出现的位置越靠前，得分越高</td>
+</tr>
+</tbody></table>
+<h5 id="用一个具体例子理解-Precision-和-Recall"><a href="#用一个具体例子理解-Precision-和-Recall" class="headerlink" title="用一个具体例子理解 Precision 和 Recall"></a>用一个具体例子理解 Precision 和 Recall</h5><p><strong>场景：</strong> 知识库共 100 个文档，其中 <strong>10 个</strong>真正相关（Ground Truth），检索器返回了 <strong>8 个</strong>，其中 <strong>6 个</strong>真正相关。</p>
+<p>$$Precision &#x3D; \frac{\text{返回的且相关的}}{\text{总返回数}} &#x3D; \frac{6}{8} &#x3D; 75%$$</p>
+<p>$$Recall &#x3D; \frac{\text{返回的且相关的}}{\text{库中所有相关文档数}} &#x3D; \frac{6}{10} &#x3D; 60%$$</p>
+<blockquote>
+<p><strong>Precision</strong>：站在”你返回的文档”角度 —— 有多少是真货，有多少是噪音？<br><strong>Recall</strong>：站在”知识库”角度 —— 10 个正确答案，你找到了几个？</p>
+</blockquote>
+<h5 id="Precision-与-Recall-的内在张力"><a href="#Precision-与-Recall-的内在张力" class="headerlink" title="Precision 与 Recall 的内在张力"></a>Precision 与 Recall 的内在张力</h5><p>两者天然互相拉扯：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>K 调大（如 8 → 50）</td>
+<td>⬇️ 下降</td>
+<td>⬆️ 上升</td>
+<td>捞得多，噪音增多，但遗漏减少</td>
+</tr>
+<tr>
+<td>K 调小（如 8 → 3）</td>
+<td>⬆️ 上升</td>
+<td>⬇️ 下降</td>
+<td>只选最有把握的，精准但遗漏多</td>
+</tr>
+</tbody></table>
+<h5 id="指标的实际用途"><a href="#指标的实际用途" class="headerlink" title="指标的实际用途"></a>指标的实际用途</h5><ul>
+<li><strong>评估基准表现</strong>：给当前系统打分，明确现状水平</li>
+<li><strong>验证优化效果</strong>：换 Embedding 模型、调整 Chunking 大小、修改混合检索权重时，通过对比指标前后变化来确认改动是否真的有效</li>
+</ul>
+<h5 id="最关键的前提：Ground-Truth"><a href="#最关键的前提：Ground-Truth" class="headerlink" title="最关键的前提：Ground Truth"></a>最关键的前提：Ground Truth</h5><blockquote>
+<p><strong>所有指标都依赖于”基准真相”数据集</strong></p>
+</blockquote>
+<ul>
+<li><strong>什么是 Ground Truth？</strong> 人工标注好的数据集。例如：针对问题 A，提前标注知识库里”文档 1”和”文档 5”是唯一正确答案。</li>
+<li><strong>为什么重要？</strong> Recall、Precision、MAP、MRR 的所有计算都需要对比”系统找出的答案”与”标准答案”。没有 Ground Truth，就无法进行科学调优。</li>
+</ul>
+<h4 id="5-Embedding-model深入探讨"><a href="#5-Embedding-model深入探讨" class="headerlink" title="5. Embedding model深入探讨"></a>5. Embedding model深入探讨</h4><h5 id="对比训练（Contrastive-Training-Process）"><a href="#对比训练（Contrastive-Training-Process）" class="headerlink" title="对比训练（Contrastive Training Process）"></a>对比训练（Contrastive Training Process）</h5><p>训练目标：让<strong>相似内容的向量靠近，不相似内容的向量远离</strong>。</p>
+<h5 id="正样本：来自”互联网的自然配对”"><a href="#正样本：来自”互联网的自然配对”" class="headerlink" title="正样本：来自”互联网的自然配对”"></a>正样本：来自”互联网的自然配对”</h5><p>人类在互联网上的自然行为，天然就产生了海量配对数据：</p>
+<table>
+<thead>
+<tr>
+<th>数据源</th>
+<th>正样本配对方式</th>
+<th>谁”标注”的？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>网页图片的 <code>alt</code> 属性</td>
+<td><code>&lt;img alt=&quot;夕阳下的柳树&quot;&gt;</code> → (图片, “夕阳下的柳树”)</td>
+<td>网页作者写 alt 文字时，无意识地创造了配对</td>
+</tr>
+<tr>
+<td>论坛问答（StackOverflow、知乎）</td>
+<td>(问题, 最佳答案)</td>
+<td>用户提问和回答时，无意识地创造了配对</td>
+</tr>
+<tr>
+<td>维基百科</td>
+<td>(文章标题, 正文第一段)</td>
+<td>人类写百科，结构天然就是配对</td>
+</tr>
+<tr>
+<td>新闻图片</td>
+<td>(配图, 图说文字)</td>
+<td>编辑写图说时，无意识地创造了配对</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>核心思想：互联网本身就是一个巨大的”隐式标注数据集”</strong>。人类日常创作内容时，已经在无意识地为 AI 标注数据了。</p>
+</blockquote>
+<h5 id="负样本：由算法自动生成"><a href="#负样本：由算法自动生成" class="headerlink" title="负样本：由算法自动生成"></a>负样本：由算法自动生成</h5><table>
+<thead>
+<tr>
+<th>负样本类型</th>
+<th>来源</th>
+<th>需要人工吗？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>In-batch 负样本</strong></td>
+<td>Batch 内其他样本自动充当</td>
+<td>❌ 完全自动</td>
+</tr>
+<tr>
+<td><strong>随机负样本</strong></td>
+<td>从数据集随机采样</td>
+<td>❌ 完全自动</td>
+</tr>
+<tr>
+<td><strong>Hard Negatives</strong></td>
+<td>用弱模型先检索”接近但错误”的样本</td>
+<td>⚠️ 部分需要人工验证</td>
+</tr>
+<tr>
+<td><strong>LLM 生成的 Hard Negatives</strong></td>
+<td>让 GPT-4 生成语义相近但不同的句子</td>
+<td>❌ AI 生成</td>
+</tr>
+</tbody></table>
+<h5 id="极少数需要人工标注的场景"><a href="#极少数需要人工标注的场景" class="headerlink" title="极少数需要人工标注的场景"></a>极少数需要人工标注的场景</h5><p>只有在需要<strong>高精度 Benchmark</strong>（用来测试模型好不好）时，才会动用人工标注：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">STS（Semantic Textual Similarity）数据集：</span><br><span class="line">  人类给两个句子的相似度打 1-5 分</span><br><span class="line">  但这是用来&quot;评测&quot;模型的，不是&quot;训练&quot;模型的主力数据</span><br></pre></td></tr></table></figure>
+
+<p><strong>训练过程</strong>：前向传播生成向量 → 构建相似度矩阵 → InfoNCE Loss 惩罚”正样本排名不靠前”的情况 → 反向传播更新权重。</p>
+<blockquote>
+<p>CLIP 的 4 亿训练对几乎全部自动获取。互联网本身就是隐式标注数据集，人工标注只用于评测 Benchmark，不是主力训练数据。</p>
+<p>另外我感觉这个训练的过程很像我个人网站上的节点图，这个节点图会有斥力和吸力，整个节点图系统需要保持一个稳定的状态。因此，需要保持斥力和吸力的稳定，它需要有一个调整的过程。而这个调整的过程，我觉得可能就是 embedding 这个过程。</p>
+<p>一个常见的误区——<strong>大模型参数 vs Embedding维度</strong>：参数是神经网络内部的权重总量（CLIP 约 1.5 亿个），是训练中学到的知识本身；维度是输出向量的长度（如 512 维），是设计时固定的规格。参数是模型学到的知识总量（越多越”聪明”），维度是输出向量的长度（影响表达能力的上限）。两者不是同一回事。</p>
+</blockquote>
+<h3 id="模块三：使用向量数据进行信息检索"><a href="#模块三：使用向量数据进行信息检索" class="headerlink" title="模块三：使用向量数据进行信息检索"></a>模块三：使用向量数据进行信息检索</h3><h4 id="1-从暴力检索到-ANN"><a href="#1-从暴力检索到-ANN" class="headerlink" title="1. 从暴力检索到 ANN"></a>1. 从暴力检索到 ANN</h4><p>向量检索的所有算法，都有一个关键变量 <strong>K</strong>——指定返回与 query 最相近的向量数量（Top-K）。围绕”如何高效找到这 K 个向量”，演化出了两大流派：<strong>精确检索</strong> 与 <strong>近似检索（ANN）</strong>。</p>
+<h5 id="最基础的算法：暴力检索（Brute-Force-Flat-Search-Linear-Scan）"><a href="#最基础的算法：暴力检索（Brute-Force-Flat-Search-Linear-Scan）" class="headerlink" title="最基础的算法：暴力检索（Brute Force &#x2F; Flat Search &#x2F; Linear Scan）"></a>最基础的算法：暴力检索（Brute Force &#x2F; Flat Search &#x2F; Linear Scan）</h5><p>最朴素直观的做法——计算 query 向量与数据库中<strong>每一个</strong>向量的距离（余弦&#x2F;欧氏），全排序后取 Top-K。</p>
+<blockquote>
+<p>在 FAISS 里它叫 <code>IndexFlatL2</code>，在学术界叫 <strong>Exact KNN</strong>，在工程上常被称为 <strong>Brute Force</strong> 或 <strong>Linear Scan</strong>。本质都是同一件事：不建任何索引，硬算到底。</p>
+</blockquote>
+<ul>
+<li><strong>优点</strong>：实现极简（一行 numpy 就能写完）；<strong>Recall &#x3D; 100%</strong>，是所有 ANN 算法的精度天花板与评测基准</li>
+<li><strong>致命问题</strong>：复杂度为 <strong>O(N×D)</strong>（N&#x3D;向量数，D&#x3D;维度）。数据库越大，单次查询越慢——百万向量已经吃力，亿级规模直接不可用</li>
+<li><strong>适用场景</strong>：小数据集（&lt;10万）、离线评测、为 ANN 提供 ground truth</li>
+</ul>
+<h5 id="解决方案：ANN（Approximate-Nearest-Neighbor，近似最近邻搜索）"><a href="#解决方案：ANN（Approximate-Nearest-Neighbor，近似最近邻搜索）" class="headerlink" title="解决方案：ANN（Approximate Nearest Neighbor，近似最近邻搜索）"></a>解决方案：ANN（Approximate Nearest Neighbor，近似最近邻搜索）</h5><p><strong>核心思想</strong>：预先建索引，跳过大部分不可能相关的向量，只在小范围内精细比对——通过牺牲极小的精度，换取查询速度数个数量级的提升。</p>
+<p>主流实现：</p>
+<ul>
+<li><strong>HNSW</strong>（分层可导航小世界图）：基于”跳表+小世界网络”，复杂度降至 O(log N)，精度高、查询快，工业界主流</li>
+<li><strong>IVF</strong>（倒排文件索引）：先用 K-means 聚类，查询时只扫描最近的几个簇，适合超大规模</li>
+<li><strong>PQ</strong>（乘积量化）：把高维向量切段后用聚类编号代替，向量压缩 64 倍以上，显著节省内存</li>
+</ul>
+<p>工程上需在 <strong>精度（Recall）↔ 速度（QPS）↔ 内存</strong> 三者间权衡，常见组合如 IVF+PQ、HNSW+PQ。</p>
+<h4 id="2-向量数据库"><a href="#2-向量数据库" class="headerlink" title="2. 向量数据库"></a>2. 向量数据库</h4><p>向量数据库是专门为<strong>存储、管理和检索高维向量</strong>设计的数据库系统。普通数据库存的是结构化行列，向量数据库存的是 Embedding 向量——并在其上内置 ANN 索引，让语义检索变成一等公民。</p>
+<h5 id="与传统数据库的核心区别"><a href="#与传统数据库的核心区别" class="headerlink" title="与传统数据库的核心区别"></a>与传统数据库的核心区别</h5><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>关系型数据库（MySQL）</th>
+<th>向量数据库（Qdrant&#x2F;Milvus）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心数据</td>
+<td>结构化行列</td>
+<td>高维浮点向量</td>
+</tr>
+<tr>
+<td>查询方式</td>
+<td>SQL 精确匹配</td>
+<td>ANN 近似相似度检索</td>
+</tr>
+<tr>
+<td>索引类型</td>
+<td>B-Tree、Hash</td>
+<td>HNSW、IVF、PQ</td>
+</tr>
+<tr>
+<td>典型问题</td>
+<td>“找 id&#x3D;42 的记录”</td>
+<td>“找最语义相似的 Top-10”</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>向量数据库通常<strong>同时存向量 + 元数据</strong>，支持先用元数据硬过滤，再做向量检索——即上文提到的 Metadata Filtering 与语义检索的结合。</p>
+</blockquote>
+<h5 id="主流向量数据库对比"><a href="#主流向量数据库对比" class="headerlink" title="主流向量数据库对比"></a>主流向量数据库对比</h5><ul>
+<li><strong>Qdrant</strong>：Rust 编写，性能强，REST&#x2F;gRPC 接口，支持 payload 过滤，开源可自部署</li>
+<li><strong>Milvus</strong>：专为超大规模设计（亿级），云原生架构，适合生产级分布式场景</li>
+<li><strong>ChromaDB</strong>：最轻量，几行代码启动，开发调试首选，不适合大规模生产</li>
+<li><strong>pgvector</strong>：PostgreSQL 插件，已有 PG 数据库直接加向量检索，无需引入新系统</li>
+<li><strong>FAISS</strong>：严格来说是库而非数据库——无持久化、无 CRUD，但是所有向量数据库的底层算法来源</li>
+</ul>
+<h5 id="创建向量数据库的基础流程"><a href="#创建向量数据库的基础流程" class="headerlink" title="创建向量数据库的基础流程"></a>创建向量数据库的基础流程</h5><p><strong>Step 1 — 数据库初始化（Database Setup）</strong><br>创建集合（Collection）并定义 Schema——指定存哪些字段、向量维度是多少、用什么距离度量（余弦 &#x2F; L2 &#x2F; 内积）。这是后续所有操作的容器，相当于建表。</p>
+<p><strong>Step 2 — 文档加载（Loading Documents）</strong><br>将原始数据（文本、PDF、图片等）读入内存，按需做分块（Chunking）——把长文档切成适合 Embedding 的小段，避免单段过长导致语义稀释。</p>
+<p><strong>Step 3 — 稀疏向量（Sparse Vectors，关键词检索用）</strong><br>用 BM25 等算法为每个文档块生成稀疏向量——向量大多数位置为 0，只有出现过的词对应位置有权重值。专为关键词精确匹配设计，是混合检索（Hybrid Search）的关键词侧。</p>
+<p><strong>Step 4 — 稠密向量（Dense Vectors，语义检索用）</strong><br>将文档块送入 Embedding 模型（如 BGE、CLIP），输出每个块的稠密向量——每一维都有值，承载语义信息。这是语义搜索的核心，能理解同义词和意图。</p>
+<p><strong>Step 5 — 构建 HNSW 索引（HNSW Index）</strong><br>在稠密向量上建立 HNSW（分层可导航小世界图）索引。预先在向量之间织好”导航网络”，查询时沿图跳跃定位，将检索复杂度从 O(N) 降至 O(log N)，实现毫秒级 ANN 搜索。<em>这个也可以不做，如果不做的话就是暴力检索。</em></p>
+<h4 id="3-Chunk（分块技术）"><a href="#3-Chunk（分块技术）" class="headerlink" title="3. Chunk（分块技术）"></a>3. Chunk（分块技术）</h4><p>将长文档切成适合 Embedding 的小段，是 RAG 索引阶段的关键预处理步骤。块太大语义稀释、块太小上下文丢失，切得好不好直接影响检索质量。</p>
+<h5 id="为什么要分块？"><a href="#为什么要分块？" class="headerlink" title="为什么要分块？"></a>为什么要分块？</h5><p>Embedding 模型有 <strong>Token 上限</strong>（如 BERT 系列 512 token、BGE-M3 8192 token）。把整本书塞进去只会得到一个模糊的”平均语义”，检索时很难命中具体段落。分块后每段各自有独立向量，检索精度大幅提升。</p>
+<h5 id="主要分块策略"><a href="#主要分块策略" class="headerlink" title="主要分块策略"></a>主要分块策略</h5><ul>
+<li><strong>固定大小（Fixed-size Chunking）</strong>：按字数 &#x2F; token 数硬切，简单粗暴。缺点是可能从句子中间截断，损失上下文。常配合 <strong>Overlap（重叠）</strong> 使用——相邻块共享若干 token，缓解截断问题。</li>
+<li><strong>语义分块（Semantic Chunking）</strong>：按句子边界、段落、标题层级切分，保留自然语义完整性。适合结构化文档（Markdown、PDF）。</li>
+<li><strong>递归字符分割（Recursive Character Splitting）</strong>：LangChain 默认策略，按 <code>\n\n → \n → 句号 → 空格</code> 优先级依次尝试，尽量在自然边界切割，兼顾简单与语义完整。</li>
+</ul>
+<h4 id="4-一些更高级的-chunk-技术"><a href="#4-一些更高级的-chunk-技术" class="headerlink" title="4. 一些更高级的 chunk 技术"></a>4. 一些更高级的 chunk 技术</h4><h5 id="利用-LLM-进行语义分块"><a href="#利用-LLM-进行语义分块" class="headerlink" title="利用 LLM 进行语义分块"></a>利用 LLM 进行语义分块</h5><p>传统分块靠规则（段落、标题、固定大小），而”LLM 语义分块”让模型真正<strong>理解内容的语义边界</strong>后再决定怎么切，质量更高但成本也更高。</p>
+<hr>
+<p><strong>① 基于 Embedding 相似度的语义分块（SemanticChunker）</strong></p>
+<p>原理：先按句子拆开文本 → 对每个句子计算 Embedding → 计算<strong>相邻句子的余弦相似度</strong> → 当相似度骤降时，说明话题发生了转变，在此处切割。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">句1 → 句2 → 句3 ↘↘骤降↘↘ 句4 → 句5</span><br><span class="line">                      ↑</span><br><span class="line">                   切割点（语义断裂）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>工具</strong>：LangChain 的 <code>SemanticChunker</code> 直接封装了这个逻辑</li>
+<li><strong>优点</strong>：无需调用 LLM 推理，成本低；真正按语义断点切，而不是按字数</li>
+<li><strong>缺点</strong>：需要设定相似度阈值，阈值选不好会切太碎或切太少</li>
+</ul>
+<hr>
+<p><strong>② 命题分块（Proposition Chunking）</strong></p>
+<p>原理：用 LLM 将每个文本段进一步提炼为若干<strong>原子命题</strong>——每条命题是一个<strong>独立、完整、可单独理解</strong>的最小事实单元。</p>
+<blockquote>
+<p>例：原文”爱因斯坦于 1905 年发表了狭义相对论，并因光电效应获诺贝尔奖”<br>→ 命题1：「爱因斯坦于 1905 年发表了狭义相对论」<br>→ 命题2：「爱因斯坦因光电效应研究获得了诺贝尔奖」</p>
+</blockquote>
+<ul>
+<li><strong>优点</strong>：检索时 query 与命题一一对应，精准度极高；每条命题自包含，不依赖上下文也能理解</li>
+<li><strong>缺点</strong>：每个 chunk 都要调用 LLM 提炼，<strong>token 消耗大、速度慢</strong>，索引构建成本高</li>
+<li><strong>适用</strong>：对知识库检索质量要求极高的场景（医疗、法律、精确问答）</li>
+</ul>
+<hr>
+<p><strong>③ Agentic 分块</strong></p>
+<p>直接将整段文档交给 LLM，让它自主判断语义边界、输出分割点或直接输出分好的块。最灵活，能处理复杂非结构化文档（如对话记录、混排文档），但<strong>成本最高</strong>，一般只用在离线预处理管道中。</p>
+<hr>
+<h5 id="三种方式对比"><a href="#三种方式对比" class="headerlink" title="三种方式对比"></a>三种方式对比</h5><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>是否调用 LLM</th>
+<th>成本</th>
+<th>精度</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Embedding 相似度</td>
+<td>只用 Embedding 模型</td>
+<td>低</td>
+<td>中</td>
+<td>通用场景，快速构建</td>
+</tr>
+<tr>
+<td>命题分块</td>
+<td>是（提炼命题）</td>
+<td>高</td>
+<td>高</td>
+<td>精确问答、知识库</td>
+</tr>
+<tr>
+<td>Agentic 分块</td>
+<td>是（理解+切割）</td>
+<td>最高</td>
+<td>最高</td>
+<td>复杂非结构化文档</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实际项目中最常见的折中方案：先用<strong>递归字符分割</strong>做粗切，再用<strong>Embedding 相似度</strong>做语义边界校正，只在核心知识库段落上启用<strong>命题分块</strong>。</p>
+</blockquote>
+<h4 id="5-查询解析"><a href="#5-查询解析" class="headerlink" title="5.查询解析"></a>5.查询解析</h4><p>用户的原始问题往往<strong>口语化、模糊、包含多个子意图</strong>——直接用来检索，向量相似度会偏移，漏掉真正相关的文档。”查询解析”这一步的目标，就是在检索前用 LLM <strong>把问题变得更适合检索</strong>。</p>
+<p>核心思路：<strong>在 Retrieval 之前，先用一次（或多次）LLM 调用对 Query 做变换，再去检索。</strong></p>
+<hr>
+<h5 id="Query-Rewriting-——-查询改写"><a href="#Query-Rewriting-——-查询改写" class="headerlink" title="Query Rewriting —— 查询改写"></a>Query Rewriting —— 查询改写</h5><p><strong>原理</strong>：直接用 LLM 将用户的原始问题改写为一个（或多个）措辞更精准、更接近知识库文档语言的新 Query。</p>
+<blockquote>
+<p>例：用户问”这个 bug 咋修” → 改写后：”如何修复 IndexError 数组越界异常？”</p>
+</blockquote>
+<p><strong>为什么有效</strong>：Embedding 模型是对称相似度——用户说的词和文档里写的词越像，向量越接近。改写填补了”口语 ↔ 文档语言”的词汇鸿沟（Vocabulary Mismatch）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 改写 Prompt 示意</span></span><br><span class="line">system = <span class="string">&quot;你是一个专业搜索助手，将用户问题改写为适合文档检索的精准查询语句，只输出改写后的句子。&quot;</span></span><br><span class="line">rewritten = llm.chat(system, user_query)</span><br><span class="line">results = vector_db.search(embed(rewritten), top_k=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>优点</strong>：实现简单，一次 LLM 调用；显著改善词汇不匹配问题</li>
+<li><strong>缺点</strong>：改写有可能偏离原意；增加一次 LLM 延迟</li>
+</ul>
+<hr>
+<h5 id="Query-Decomposition-——-查询分解"><a href="#Query-Decomposition-——-查询分解" class="headerlink" title="Query Decomposition —— 查询分解"></a>Query Decomposition —— 查询分解</h5><p><strong>原理</strong>：遇到包含多个子问题的复杂 Query，让 LLM 将其<strong>拆解为若干独立子问题</strong>，每个子问题单独去检索，最后汇总答案。</p>
+<blockquote>
+<p>例：用户问 “Python 和 JavaScript 在 Web 开发中各有什么优缺点，该选哪个？”<br>→ 子问题 1：「Python Web 开发的优点是什么？」<br>→ 子问题 2：「Python Web 开发的缺点是什么？」<br>→ 子问题 3：「JavaScript Web 开发的优点是什么？」<br>→ 子问题 4：「JavaScript Web 开发的缺点是什么？」</p>
+</blockquote>
+<p>每条子问题分别检索，检索结果合并后一起交给 LLM 生成最终答案。</p>
+<p><strong>为什么有效</strong>：一个复杂问题往往在知识库里对应多处分散的信息。不分解则很难用一条 Query 同时命中所有相关段落；分解后每条 Query 更聚焦，检索精度大幅提升。</p>
+<ul>
+<li><strong>优点</strong>：特别适合多跳推理（Multi-hop）和比较类问题</li>
+<li><strong>缺点</strong>：子问题数量不可控；多次检索成本倍增；汇总逻辑复杂</li>
+</ul>
+<hr>
+<h5 id="HyDE-——-假设性文档嵌入（Hypothetical-Document-Embeddings）"><a href="#HyDE-——-假设性文档嵌入（Hypothetical-Document-Embeddings）" class="headerlink" title="HyDE —— 假设性文档嵌入（Hypothetical Document Embeddings）"></a>HyDE —— 假设性文档嵌入（Hypothetical Document Embeddings）</h5><p><strong>原理</strong>：不直接对 Query 做 Embedding，而是先让 LLM <strong>生成一段假设性的”理想答案”</strong>，再对这段假设答案做 Embedding 去检索。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户 Query → LLM 生成&quot;假设答案&quot; → Embed(假设答案) → 向量检索</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>例：用户问”HNSW 为什么查询速度快？”<br>→ LLM 生成假设答案：”HNSW 基于分层图结构，查询时从高层稀疏图快速定位大致区域，再逐层精细搜索……”<br>→ 对这段假设答案做 Embedding → 比直接对问题句做 Embedding，向量更接近知识库里真实文档</p>
+</blockquote>
+<p><strong>直觉理解</strong>：问题的 Embedding 和答案的 Embedding 在语义空间里本就不在同一个位置。假设答案更像一段”真实文档”，因此和知识库里的文档向量距离更近，检索 Recall 更高。</p>
+<ul>
+<li><strong>优点</strong>：对”知识密集型问答”效果显著；不依赖关键词，纯语义驱动</li>
+<li><strong>缺点</strong>：假设答案可能包含幻觉，但<strong>检索阶段不依赖答案的正确性，只用它的向量</strong>，所以幻觉不直接影响结果</li>
+<li><strong>适用</strong>：专业领域问答、文档措辞与问题措辞差异大的场景</li>
+</ul>
+<hr>
+<h5 id="Multi-Query-——-多角度提问"><a href="#Multi-Query-——-多角度提问" class="headerlink" title="Multi-Query —— 多角度提问"></a>Multi-Query —— 多角度提问</h5><p><strong>原理</strong>：让 LLM 从多个角度<strong>生成同一问题的 N 种变体</strong>，分别检索，再对检索结果去重合并（常与 RRF 联用）。</p>
+<blockquote>
+<p>例：原问题”RAG 的局限性”<br>→ 变体 1：「RAG 在什么场景下效果不好？」<br>→ 变体 2：「Retrieval-Augmented Generation 的缺点有哪些？」<br>→ 变体 3：「RAG 系统的失败案例」</p>
+</blockquote>
+<p>三条 Query 各自检索，合并结果后用 RRF 重排序，最终 Top-K 覆盖面远超单一 Query。</p>
+<ul>
+<li><strong>优点</strong>：弥补单条 Query 的覆盖盲区；与 RRF 天然搭配</li>
+<li><strong>缺点</strong>：N 次 Embedding 检索 + LLM 调用，延迟和成本线性增长</li>
+</ul>
+<hr>
+<h5 id="总结-各方案对比"><a href="#总结-各方案对比" class="headerlink" title="总结&#x2F;各方案对比"></a>总结&#x2F;各方案对比</h5><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>核心思路</th>
+<th>适用场景</th>
+<th>额外 LLM 调用</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Query Rewriting</td>
+<td>改词，更像文档语言</td>
+<td>口语&#x2F;专业词汇不匹配</td>
+<td>1次</td>
+<td>改偏原意</td>
+</tr>
+<tr>
+<td>Query Decomposition</td>
+<td>拆子问，分别检索</td>
+<td>多跳&#x2F;比较类复杂问题</td>
+<td>1次（拆分）+ N次检索</td>
+<td>子问题爆炸</td>
+</tr>
+<tr>
+<td>HyDE</td>
+<td>先生成假设答案再检索</td>
+<td>问题与文档措辞差异大</td>
+<td>1次</td>
+<td>幻觉影响向量方向</td>
+</tr>
+<tr>
+<td>Multi-Query</td>
+<td>生成多变体覆盖盲区</td>
+<td>召回率不足、覆盖面窄</td>
+<td>1次（生成）+ N次检索</td>
+<td>成本高</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>工程实践中</strong>：最常见的轻量方案是 <strong>Query Rewriting + Multi-Query（N&#x3D;3）+ RRF</strong>——只多 1 次 LLM 调用，检索质量提升明显。HyDE 和 Decomposition 留给对质量要求极高的场景（如法律文书问答）。</p>
+</blockquote>
+<h4 id="6-Reranker-与精排策略"><a href="#6-Reranker-与精排策略" class="headerlink" title="6. Reranker 与精排策略"></a>6. Reranker 与精排策略</h4><blockquote>
+<p><strong>背景</strong>：向量检索（常规的编码两次的成为Bi-Encoder）快但粗糙——它把 Query 和 Document 分别压成单个向量再做点积，损失了大量细粒度的交互信息。Reranker 就是在粗检索之后，对 Top-N 候选做精细打分、重新排序的第二阶段模块。</p>
+</blockquote>
+<h5 id="两阶段检（Bi-Encoder）索管道"><a href="#两阶段检（Bi-Encoder）索管道" class="headerlink" title="两阶段检（Bi-Encoder）索管道"></a>两阶段检（Bi-Encoder）索管道</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">用户 Query</span><br><span class="line">    ↓</span><br><span class="line">[第一阶段] 向量检索（Bi-Encoder + FAISS） → Top-100 候选   ← 快，但粗</span><br><span class="line">    ↓</span><br><span class="line">[第二阶段] （Cross-Encoder）Reranker 精细打分 → Top-10 最终结果             ← 慢，但准</span><br></pre></td></tr></table></figure>
+
+<h5 id="交叉编码器（Cross-Encoder）"><a href="#交叉编码器（Cross-Encoder）" class="headerlink" title="交叉编码器（Cross-Encoder）"></a>交叉编码器（Cross-Encoder）</h5><p><strong>原理</strong>：把 Query 和 Document <strong>拼在一起</strong>输入同一个 Transformer，让两段文字的所有 token 互相做注意力——直接输出一个相关性分数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [CLS] Query tokens [SEP] Document tokens [SEP]</span><br><span class="line">输出: 一个 0~1 的相关性分数</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>优点</strong>：全量交互，打分最准确，是精度天花板</li>
+<li><strong>缺点</strong>：Document 向量<strong>无法预计算</strong>——每次查询都要把每个候选文档和 Query 重新跑一遍，100 个候选 &#x3D; 100 次模型推理，延迟高</li>
+<li><strong>适用</strong>：候选集不大（Top-100 以内）、对精度要求极高的场景</li>
+</ul>
+<h5 id="ColBERT（Contextualized-Late-Interaction-over-BERT）"><a href="#ColBERT（Contextualized-Late-Interaction-over-BERT）" class="headerlink" title="ColBERT（Contextualized Late Interaction over BERT）"></a>ColBERT（Contextualized Late Interaction over BERT）</h5><p><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260606-220900.png" alt="image.png"><br>如上图，问题的每一个词都会和文章里的每一个词产生呼应，从而获得更精确的结果。</p>
+<p><strong>原理</strong>：Query 和 Document 依然<strong>分开编码</strong>（所以 Document 可预计算），但不压缩成单个向量——保留每个 token 的向量。相关性分数用 <strong>MaxSim</strong> 计算：对 Query 的每个 token（逐字切分），找 Document 所有 token 里最相似的那个，累加求和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Query   → [q₁, q₂, q₃, ...]     每个 token（逐字切分） 一个向量</span><br><span class="line">Document → [d₁, d₂, d₃, ...]    每个 token（逐字切分） 一个向量（可离线存储）</span><br><span class="line"></span><br><span class="line">Score = Σ max_j sim(qᵢ, dⱼ)     ← &quot;Late Interaction&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>优点</strong>：Document 可以离线预计算并存储；交互比单向量 Bi-Encoder 丰富得多</li>
+<li><strong>缺点</strong>：存储开销大（每个 token 存一个向量，文档越长越占空间）；比 Bi-Encoder 慢，比 Cross-Encoder 快</li>
+<li><strong>定位</strong>：精度与速度的<strong>中间档</strong>，适合候选集较大（Top-1000）的场景</li>
+</ul>
+<h5 id="三者横向对比"><a href="#三者横向对比" class="headerlink" title="三者横向对比"></a>三者横向对比</h5><table>
+<thead>
+<tr>
+<th></th>
+<th>Bi-Encoder</th>
+<th>ColBERT</th>
+<th>Cross-Encoder</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>编码方式</td>
+<td>Query&#x2F;Doc 各一个向量</td>
+<td>Query&#x2F;Doc 各保留 token 向量</td>
+<td>拼接后联合编码</td>
+</tr>
+<tr>
+<td>Doc 预计算</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>交互粒度</td>
+<td>粗（单向量点积）</td>
+<td>中（token-level MaxSim）</td>
+<td>细（全量注意力）</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>最快</td>
+<td>中</td>
+<td>最慢</td>
+</tr>
+<tr>
+<td>精度</td>
+<td>最低</td>
+<td>中</td>
+<td>最高</td>
+</tr>
+<tr>
+<td>典型用途</td>
+<td>第一阶段粗检索</td>
+<td>中等规模 Reranking</td>
+<td>小候选集精排</td>
+</tr>
+</tbody></table>
+<h4 id="7-ReRanking"><a href="#7-ReRanking" class="headerlink" title="7. ReRanking"></a>7. ReRanking</h4><blockquote>
+<p>精排不是一种具体模型，而是一个<strong>管道位置</strong>的概念——在粗检索之后，对候选集重新打分排序。<br>具体实现方式有多种，§6 已详解 Cross-Encoder 与 ColBERT，这里补充另外两条路线。</p>
+</blockquote>
+<h5 id="精排的三条路线（概览）"><a href="#精排的三条路线（概览）" class="headerlink" title="精排的三条路线（概览）"></a>精排的三条路线（概览）</h5><table>
+<thead>
+<tr>
+<th>路线</th>
+<th>核心机制</th>
+<th>详见</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cross-Encoder</td>
+<td>Query+Doc 拼接联合编码，token 全量交互</td>
+<td>§6 ①</td>
+</tr>
+<tr>
+<td>ColBERT</td>
+<td>保留 token 向量，MaxSim 延迟交互</td>
+<td>§6 ②</td>
+</tr>
+<tr>
+<td><strong>RRF</strong></td>
+<td>合并多路检索的排名，无需打分</td>
+<td>下方 ↓</td>
+</tr>
+<tr>
+<td><strong>LLM 直接评分</strong></td>
+<td>让大模型判断相关性</td>
+<td>下方 ↓</td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="①-RRF（互惠排名融合，Reciprocal-Rank-Fusion）"><a href="#①-RRF（互惠排名融合，Reciprocal-Rank-Fusion）" class="headerlink" title="① RRF（互惠排名融合，Reciprocal Rank Fusion）"></a>① RRF（互惠排名融合，Reciprocal Rank Fusion）</h5><p><strong>适用场景</strong>：你同时运行了多路检索（如稀疏 BM25 + 稠密 CLIP），需要把两份排名列表合并成一份。</p>
+<p><strong>核心公式</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RRF_score(doc) = Σ  1 / (k + rank_i)       k 通常取 60</span><br><span class="line">                 i</span><br></pre></td></tr></table></figure>
+
+<p>对每路检索，用文档的排名位置（而非分数）计算贡献，再累加。</p>
+<p><strong>具体例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Query: &quot;覆有青苔的石头&quot;</span><br><span class="line"></span><br><span class="line">BM25 排名（关键词）：        CLIP 排名（视觉）：</span><br><span class="line">  stone_moss_03  → rank 1     stone_moss_03  → rank 1</span><br><span class="line">  stone_moss_01  → rank 2     rock_wet_01    → rank 2</span><br><span class="line">  rock_wet_01    → rank 8     stone_moss_01  → rank 5</span><br><span class="line"></span><br><span class="line">RRF 合并：</span><br><span class="line">  stone_moss_03 = 1/(60+1) + 1/(60+1) = 0.0328  ← 两路都认可 ✅</span><br><span class="line">  stone_moss_01 = 1/(60+2) + 1/(60+5) = 0.0315</span><br><span class="line">  rock_wet_01   = 1/(60+8) + 1/(60+2) = 0.0308</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么不直接把两路分数相加？</strong></p>
+<p>BM25 分数（词频统计）和 CLIP 余弦相似度的<strong>量纲完全不同</strong>，直接相加没有意义。<br>RRF 只关心排名位置，不看具体数值，天然绕开了量纲对齐问题。</p>
+<hr>
+<h5 id="②-LLM-直接评分"><a href="#②-LLM-直接评分" class="headerlink" title="② LLM 直接评分"></a>② LLM 直接评分</h5><p>将候选结果的文本描述喂给 LLM，让模型直接判断与 Query 的相关性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Prompt 示例：</span><br><span class="line">  查询需求：&quot;覆有青苔的石头&quot;</span><br><span class="line">  候选资产：&quot;灰褐色石块，表面密布绿色苔藓，风化纹理明显，适合古风场景&quot;</span><br><span class="line"></span><br><span class="line">  请给这个资产与查询需求的相关程度打分（0-10），并给出一句理由。</span><br><span class="line"></span><br><span class="line">LLM 输出：</span><br><span class="line">  分数：9</span><br><span class="line">  理由：石块与青苔两个核心要素完全吻合，风化纹理进一步强化古风相关性</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>优点</strong></td>
+<td>语义理解能力最强；可自定义评分标准（风格、场景适配度等）</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>每条候选都要调一次 LLM，成本高、延迟高</td>
+</tr>
+<tr>
+<td><strong>适用</strong></td>
+<td>候选集极小（Top-5 以内）、或需要可解释的评分理由</td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="选型速查"><a href="#选型速查" class="headerlink" title="选型速查"></a>选型速查</h5><table>
+<thead>
+<tr>
+<th>候选集规模</th>
+<th>推荐策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全量 10 万+</td>
+<td>只能 Bi-Encoder（向量检索）</td>
+</tr>
+<tr>
+<td>Top-1000</td>
+<td>ColBERT 或 RRF 合并多路结果</td>
+</tr>
+<tr>
+<td>Top-100</td>
+<td><strong>Cross-Encoder</strong>（推荐，精度&#x2F;延迟最佳平衡）</td>
+</tr>
+<tr>
+<td>Top-10</td>
+<td>LLM 直接评分（可选，需要极致精度或可解释性时）</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">游戏资产库项目对应策略</span></div>
+<div class="callout-content">
+
+<ul>
+<li><strong>已有（M1）</strong>：FTS5 关键词检索（稀疏）</li>
+<li><strong>已有（M4）</strong>：CLIP FAISS 视觉检索（稠密）</li>
+<li><strong>进行中（M5）</strong>：Cross-Encoder 精排，Top-100 → Top-10</li>
+<li><strong>可选升级</strong>：将 FTS5 与 CLIP 的结果先用 RRF 合并，再送入 Cross-Encoder——<br>稀疏路线补精确关键词命中，稠密路线补语义覆盖，两者互补</li>
+</ul>
+</div>
+</div>
+
+
+
+<h3 id="模块四：大语言模型与文本生成"><a href="#模块四：大语言模型与文本生成" class="headerlink" title="模块四：大语言模型与文本生成"></a>模块四：大语言模型与文本生成</h3><p>前三个模块都在讲 <strong>Retrieve（检索）</strong>——把最相关的内容找出来。本模块进入 RAG 的最后一环 <strong>Generate（生成）</strong>：把检索到的内容交给大语言模型（LLM），生成有据可查的回答。</p>
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">本模块在 RAG 流程中的位置</span></div>
+<div class="callout-content">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户问题 →【检索】Top-K 相关片段 →【拼装 Prompt】→【LLM 生成】→ 回答</span><br><span class="line">                 ↑ 模块一~三                      ↑ 模块四</span><br></pre></td></tr></table></figure>
+<p>我们的资产搜索工具是”只检索不生成”，所以模块四对它是<strong>可选项</strong>；但本地的 <code>starting-ragchatbot-codebase</code>（问答机器人）是完整 RAG，生成环节由 Claude 承担。</p>
+</div>
+</div>
+
+
+<h4 id="Transformer架构简介"><a href="#Transformer架构简介" class="headerlink" title="Transformer架构简介"></a>Transformer架构简介</h4><blockquote>
+<p>一句话：Transformer 是当今几乎所有 LLM、Embedding 模型、Reranker 的<strong>共同底座</strong>。本笔记反复出现的 BERT、CLIP、BGE、Cross-Encoder、GPT&#x2F;Claude——全部是 Transformer 的变体。</p>
+</blockquote>
+<h5 id="1-为什么是-Transformer？（对比-RNN）"><a href="#1-为什么是-Transformer？（对比-RNN）" class="headerlink" title="1. 为什么是 Transformer？（对比 RNN）"></a>1. 为什么是 Transformer？（对比 RNN）</h5><p><strong>先说命名：为什么叫 Transformer，而不叫 Attention？</strong></p>
+<ul>
+<li><strong>Attention 是零件，Transformer 是整机。</strong> Attention 早在 2014 年（Bahdanau）就作为 RNN 的配件用于机器翻译，到 2017 年已是通用技术——新架构若也叫 Attention，会和”RNN+attention”撞名。</li>
+<li><strong>论文标题是论点，架构名是产品名。</strong>《Attention Is All You Need》的潜台词是”以前 RNN 配 attention，把 RNN 拿掉、<strong>只留 attention</strong> 就够”；标题负责喊口号，新架构另起名 <strong>Transformer</strong> 与 RNN 时代切割。</li>
+<li><strong>“Transform” &#x3D; 逐层变换表示。</strong> 模型把 token 的向量表示通过堆叠多层一层层重写，最终把”孤立词向量”变成”饱含上下文语义的向量”。Attention 只描述单层的某个操作（Q·K→加权 V），Transformer 描述整机在做什么——抽象层级不同。</li>
+</ul>
+<p><strong>那为什么需要它？</strong> 2017 年论文《Attention Is All You Need》之前，处理文本主要靠 RNN&#x2F;LSTM （<strong>RNN（Recurrent Neural Network，循环神经网络）</strong>），它<strong>按顺序</strong>一个词一个词读，有两个硬伤：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>RNN&#x2F;LSTM</th>
+<th>Transformer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>并行能力</td>
+<td>必须顺序计算，无法并行</td>
+<td>整句<strong>一次性并行</strong>处理 ⭐</td>
+</tr>
+<tr>
+<td>长距离依赖</td>
+<td>距离越远信息衰减越严重</td>
+<td>任意两词<strong>直接</strong>建立联系</td>
+</tr>
+<tr>
+<td>训练速度</td>
+<td>慢</td>
+<td>快（能吃满 GPU）</td>
+</tr>
+</tbody></table>
+<p>Transformer 用**自注意力（Self-Attention）**一举解决了这两点，这也是 LLM 能”规模化”到千亿参数的前提。</p>
+<h5 id="2-核心机制：自注意力（Self-Attention）"><a href="#2-核心机制：自注意力（Self-Attention）" class="headerlink" title="2. 核心机制：自注意力（Self-Attention）"></a>2. 核心机制：自注意力（Self-Attention）</h5><p>自注意力让句子里的每个词，都去”看”句子里所有其他词，按相关性加权吸收信息。</p>
+<p><strong>关键三元组 Q &#x2F; K &#x2F; V：</strong></p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>类比（像不像检索？）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Query（查询）</strong></td>
+<td>我现在想找什么</td>
+<td>用户的搜索词</td>
+</tr>
+<tr>
+<td><strong>Key（键）</strong></td>
+<td>我能提供什么”标签”</td>
+<td>文档的索引</td>
+</tr>
+<tr>
+<td><strong>Value（值）</strong></td>
+<td>我实际的内容</td>
+<td>文档正文</td>
+</tr>
+</tbody></table>
+<p>计算流程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对每个词：</span><br><span class="line">  1. 用 Query 和所有词的 Key 做点积 → 相关性分数</span><br><span class="line">  2. softmax 归一化 → 注意力权重（加起来=1）</span><br><span class="line">  3. 用权重对所有 Value 加权求和 → 该词的新表示</span><br></pre></td></tr></table></figure>
+
+<p><strong>具体例子</strong>——理解句子”它”指代谁：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">句子： 这块石头覆满青苔，因为它很潮湿</span><br><span class="line">                              ↑</span><br><span class="line">&quot;它&quot;这个词的 Query 去匹配全句的 Key：</span><br><span class="line">  &quot;石头&quot; → 注意力 0.7   ← 权重最高，模型据此判断&quot;它=石头&quot;</span><br><span class="line">  &quot;青苔&quot; → 注意力 0.2</span><br><span class="line">  &quot;潮湿&quot; → 注意力 0.1</span><br></pre></td></tr></table></figure>
+
+
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">关键洞察：注意力本质上就是一次&quot;软检索&quot;</span></div>
+<div class="callout-content">
+
+<p>Query·Key→softmax→对 Value 加权求和——这套机制<strong>和模块二、三讲的稠密检索（向量相似度→Top-K→取回内容）是同一个数学思想</strong>，只不过它发生在模型<strong>内部</strong>，对每个 token 实时进行。理解了向量检索，你已经理解了注意力的一半。</p>
+</div>
+</div>
+
+
+<h5 id="3-多头注意力-位置编码-整体结构"><a href="#3-多头注意力-位置编码-整体结构" class="headerlink" title="3. 多头注意力 + 位置编码 + 整体结构"></a>3. 多头注意力 + 位置编码 + 整体结构</h5><ul>
+<li><strong>多头注意力（Multi-Head）</strong>：并行跑多组 Q&#x2F;K&#x2F;V，每个”头”关注不同角度（一个头看语法、一个头看指代、一个头看语义……），最后拼接。类比：多个专家从不同维度同时审阅同一句话。</li>
+<li><strong>位置编码（Positional Encoding）</strong>：自注意力本身不区分词序（”狗咬人”和”人咬狗”会被看成一样），因此要额外注入每个词的位置信息。</li>
+<li><strong>残差连接 + 层归一化 + 前馈网络（FFN）</strong>：每一层的标准配件，保证深层网络（几十上百层）能稳定训练。</li>
+</ul>
+<h5 id="4-三种架构变体（决定模型用途）"><a href="#4-三种架构变体（决定模型用途）" class="headerlink" title="4. 三种架构变体（决定模型用途）"></a>4. 三种架构变体（决定模型用途）</h5><table>
+<thead>
+<tr>
+<th>架构</th>
+<th>代表模型</th>
+<th>擅长</th>
+<th>在本笔记中的角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Encoder-only</strong>（编码器）</td>
+<td>BERT、BGE-M3</td>
+<td>理解、向量化</td>
+<td><strong>Embedding 模型</strong>（§3.1）、Cross-Encoder（§6）</td>
+</tr>
+<tr>
+<td><strong>Decoder-only</strong>（解码器）</td>
+<td>GPT、Claude、Qwen、Llama</td>
+<td>生成文本</td>
+<td><strong>本模块的主角</strong>，负责”生成”</td>
+</tr>
+<tr>
+<td><strong>Encoder-Decoder</strong></td>
+<td>T5、BART</td>
+<td>翻译、摘要</td>
+<td>较少用于聊天</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">一张图串起整本笔记</span></div>
+<div class="callout-content">
+
+<ul>
+<li>你用 <strong>CLIP&#x2F;BGE</strong>（Encoder）把资产转成向量 → 这是 Transformer</li>
+<li>你用 <strong>Cross-Encoder</strong>（Encoder）做精排 → 这是 Transformer</li>
+<li>你用 <strong>Claude&#x2F;Qwen</strong>（Decoder）生成答案 → 还是 Transformer<br>三者血缘相同，区别只在”怎么搭、用哪半边、怎么训练”。</li>
+</ul>
+</div>
+</div>
+
+
+<hr>
+<h4 id="大语言模型采样策略"><a href="#大语言模型采样策略" class="headerlink" title="大语言模型采样策略"></a>大语言模型采样策略</h4><p>检索决定”喂什么内容”，<strong>采样策略决定”模型怎么把内容说出来”</strong>——同样的上下文，参数不同，输出可以严谨也可以天马行空。对 RAG 来说这一节直接关系到<strong>幻觉率</strong>。</p>
+<h5 id="1-LLM-是怎么”吐字”的？"><a href="#1-LLM-是怎么”吐字”的？" class="headerlink" title="1. LLM 是怎么”吐字”的？"></a>1. LLM 是怎么”吐字”的？</h5><p>Decoder 模型每一步只做一件事：<strong>预测下一个词的概率分布</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：&quot;覆有青苔的石头通常出现在&quot;</span><br><span class="line">模型输出（下一个词的概率）：</span><br><span class="line">  潮湿   0.45</span><br><span class="line">  阴暗   0.25</span><br><span class="line">  森林   0.15</span><br><span class="line">  沙漠   0.02</span><br><span class="line">  ...（词表里几万个词，每个都有概率）</span><br></pre></td></tr></table></figure>
+
+<p>“采样策略”就是<strong>从这个概率分布里挑一个词</strong>的规则。挑完接到输入后面，再预测下一个，循环往复。</p>
+<h5 id="2-确定性解码"><a href="#2-确定性解码" class="headerlink" title="2. 确定性解码"></a>2. 确定性解码</h5><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>做法</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>贪心解码 Greedy</strong></td>
+<td>每步都选概率最高的词</td>
+<td>稳定但呆板，易陷入重复</td>
+</tr>
+<tr>
+<td><strong>Beam Search</strong></td>
+<td>同时保留 N 条候选路径，最后选整体最优</td>
+<td>质量高但慢，多用于翻译&#x2F;摘要</td>
+</tr>
+</tbody></table>
+<h5 id="3-随机采样（聊天-创作主流）"><a href="#3-随机采样（聊天-创作主流）" class="headerlink" title="3. 随机采样（聊天&#x2F;创作主流）"></a>3. 随机采样（聊天&#x2F;创作主流）</h5><p><strong>① Temperature（温度）</strong>——调节分布的”陡峭&#x2F;平缓”：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logits 经过 softmax 前先除以 T：</span><br><span class="line"></span><br><span class="line">T = 0（极冷）：只剩最高分，等价于贪心，最保守</span><br><span class="line">T = 0.7（温）： 高分词更可能，但偶有惊喜  ← 通用默认</span><br><span class="line">T = 1.5（热）： 分布被拉平，低分词也有机会，更随机/有创意</span><br></pre></td></tr></table></figure>
+
+<p><strong>② Top-k</strong>：只在概率最高的 <strong>k</strong> 个词里采样（如 k&#x3D;40），砍掉长尾。</p>
+<p><strong>③ Top-p &#x2F; 核采样（Nucleus）</strong>：从高到低累加概率，凑够 <strong>p</strong>（如 0.9）就停，只在这个动态集合里采样。比 Top-k 更聪明——分布陡时候选少、分布平时候选多。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">候选（按概率排序）： 潮湿0.45 阴暗0.25 森林0.15 苔藓0.08 ...</span><br><span class="line">Top-p=0.9：累加 0.45+0.25+0.15+0.08=0.93 ≥0.9 → 只在这4个里采样</span><br></pre></td></tr></table></figure>
+
+<p><strong>④ min-p（较新）</strong>：以最高概率词为基准，按比例设一个动态下限，鲁棒性比 Top-p 更好。</p>
+<p><strong>⑤ 重复惩罚（repetition &#x2F; frequency penalty）</strong>：对已经出现过的词降权，避免”复读机”。</p>
+<h5 id="4-RAG-场景该怎么调？"><a href="#4-RAG-场景该怎么调？" class="headerlink" title="4. RAG 场景该怎么调？"></a>4. RAG 场景该怎么调？</h5><div class="callout" data-callout="warning" style="--callout-color: 255, 145, 0;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="callout-title-inner">RAG 的核心诉求是&quot;忠于检索内容&quot;，不是&quot;创意&quot;</span></div>
+<div class="callout-content">
+
+<p>生成阶段如果温度太高，模型容易<strong>脱离检索到的事实、自由发挥 → 幻觉</strong>。</p>
+</div>
+</div>
+
+
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>Temperature</th>
+<th>Top-p</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RAG 事实问答</strong> ⭐</td>
+<td><strong>0 ~ 0.3</strong></td>
+<td>0.9</td>
+<td>最大化忠实度，少编造</td>
+</tr>
+<tr>
+<td>摘要&#x2F;改写</td>
+<td>0.3 ~ 0.5</td>
+<td>0.9</td>
+<td>略有灵活但不离谱</td>
+</tr>
+<tr>
+<td>创意写作&#x2F;起名</td>
+<td>0.8 ~ 1.2</td>
+<td>0.95</td>
+<td>鼓励多样性</td>
+</tr>
+<tr>
+<td>代码生成</td>
+<td>0 ~ 0.2</td>
+<td>—</td>
+<td>要确定性</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">资产库项目的启示</span></div>
+<div class="callout-content">
+
+<p>如果将来给资产搜索加一个”自然语言解释为什么推荐这个资产”的生成功能，温度应设到 <strong>0.2 左右</strong>——让它老老实实根据资产的 metadata 描述说话，而不是脑补不存在的属性。</p>
+</div>
+</div>
+
+
+<hr>
+<h4 id="选择适合的大语言模型"><a href="#选择适合的大语言模型" class="headerlink" title="选择适合的大语言模型"></a>选择适合的大语言模型</h4><p>没有”最好”的模型，只有”最适合当前任务+预算+合规要求”的模型。下面是一套可复用的选型框架。</p>
+<h5 id="1-七个评估维度"><a href="#1-七个评估维度" class="headerlink" title="1. 七个评估维度"></a>1. 七个评估维度</h5><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>关键问题</th>
+<th>对 RAG 的影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>能力等级</strong></td>
+<td>推理&#x2F;复杂指令够不够强</td>
+<td>决定答案质量上限</td>
+</tr>
+<tr>
+<td><strong>上下文窗口</strong></td>
+<td>能塞下多少检索片段</td>
+<td>RAG 直接相关，见下 ↓</td>
+</tr>
+<tr>
+<td><strong>成本</strong></td>
+<td>输入&#x2F;输出每百万 token 价格</td>
+<td>高频调用时是主要开销</td>
+</tr>
+<tr>
+<td><strong>延迟&#x2F;吞吐</strong></td>
+<td>首字时间、每秒 token 数</td>
+<td>影响用户体验</td>
+</tr>
+<tr>
+<td><strong>隐私&#x2F;合规</strong></td>
+<td>数据能否出本地</td>
+<td>私有资产&#x2F;代码的红线 ⭐</td>
+</tr>
+<tr>
+<td><strong>中文能力</strong></td>
+<td>中文理解与生成</td>
+<td>中文场景必看</td>
+</tr>
+<tr>
+<td><strong>结构化输出&#x2F;工具调用</strong></td>
+<td>能否稳定输出 JSON、调函数</td>
+<td>Agentic RAG 必备</td>
+</tr>
+</tbody></table>
+<h5 id="2-闭源-API-vs-开源本地"><a href="#2-闭源-API-vs-开源本地" class="headerlink" title="2. 闭源 API vs 开源本地"></a>2. 闭源 API vs 开源本地</h5><table>
+<thead>
+<tr>
+<th></th>
+<th>闭源 API（Claude &#x2F; GPT &#x2F; Gemini）</th>
+<th>开源本地（Qwen &#x2F; Llama &#x2F; DeepSeek …）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能力</td>
+<td>通常最强</td>
+<td>头部开源已逼近闭源</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>调 API，零运维</td>
+<td>自己用 GPU 跑，需运维</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>按量付费，无前期投入</td>
+<td>硬件前期投入，边际成本近乎 0</td>
+</tr>
+<tr>
+<td>隐私</td>
+<td>数据出本地 ⚠️</td>
+<td><strong>数据不出本地</strong> ✅</td>
+</tr>
+<tr>
+<td>定制</td>
+<td>有限</td>
+<td>可微调&#x2F;量化，完全可控</td>
+</tr>
+</tbody></table>
+<h5 id="3-2026-年中主流模型速览"><a href="#3-2026-年中主流模型速览" class="headerlink" title="3. 2026 年中主流模型速览"></a>3. 2026 年中主流模型速览</h5><div class="callout" data-callout="quote" style="--callout-color: 158, 158, 158;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span class="callout-title-inner">数据来源与时效</span></div>
+<div class="callout-content">
+
+<p>下表数据交叉核对自 Anthropic 官方 <code>claude-api</code> 参考（缓存 2026-06-04）与公开比价站（<a target="_blank" rel="noopener" href="https://www.morphllm.com/llm-api">morphllm LLM API，验证于 2026-06-09</a>、<a target="_blank" rel="noopener" href="https://www.tldl.io/resources/llm-api-pricing-2026">LLM API Pricing 2026</a>）。<strong>模型与价格变动极快，以官网为准。</strong></p>
+</div>
+</div>
+
+
+<p><strong>闭源 API（价格＝输入&#x2F;输出，每百万 token）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>定位</th>
+<th>上下文</th>
+<th>价格(in&#x2F;out)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Claude Fable 5</strong></td>
+<td>最强、长程 Agent</td>
+<td>1M</td>
+<td>$10 &#x2F; $50</td>
+</tr>
+<tr>
+<td><strong>Claude Opus 4.8</strong> ⭐</td>
+<td>旗舰、编码&#x2F;Agent 强</td>
+<td>1M</td>
+<td>$5 &#x2F; $25</td>
+</tr>
+<tr>
+<td><strong>Claude Sonnet 4.6</strong></td>
+<td>速度&#x2F;智能平衡</td>
+<td>1M</td>
+<td>$3 &#x2F; $15</td>
+</tr>
+<tr>
+<td><strong>Claude Haiku 4.5</strong></td>
+<td>快而省</td>
+<td>200K</td>
+<td>$1 &#x2F; $5</td>
+</tr>
+<tr>
+<td>GPT-5.5（OpenAI）</td>
+<td>推理&#x2F;数学强</td>
+<td>~256K</td>
+<td>~$5 &#x2F; $30</td>
+</tr>
+<tr>
+<td>Gemini 3.1 Pro（Google）</td>
+<td>超长上下文、多模态、性价比</td>
+<td>巨大(≥1M)</td>
+<td>~$2 &#x2F; $12</td>
+</tr>
+<tr>
+<td>DeepSeek V4</td>
+<td>极致性价比</td>
+<td>大</td>
+<td>~$0.14 起</td>
+</tr>
+</tbody></table>
+<p><strong>开源&#x2F;可本地部署（适合私有数据）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型族</th>
+<th>特点</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Qwen 3.5（通义千问）</strong></td>
+<td>中文最强梯队、尺寸齐全</td>
+<td>小尺寸 8GB 可跑，本地首选 ⭐</td>
+</tr>
+<tr>
+<td>Llama 4（Meta）</td>
+<td>生态最大</td>
+<td>中大尺寸</td>
+</tr>
+<tr>
+<td>DeepSeek V4</td>
+<td>推理强、开源</td>
+<td>满血版需大显存</td>
+</tr>
+<tr>
+<td>GLM-5（智谱）</td>
+<td>中文友好</td>
+<td></td>
+</tr>
+<tr>
+<td>Mistral &#x2F; Gemma &#x2F; Phi</td>
+<td>欧系&#x2F;谷歌&#x2F;微软小模型</td>
+<td>Phi 适合边缘端</td>
+</tr>
+</tbody></table>
+<h5 id="4-上下文窗口与-RAG-的关系"><a href="#4-上下文窗口与-RAG-的关系" class="headerlink" title="4. 上下文窗口与 RAG 的关系"></a>4. 上下文窗口与 RAG 的关系</h5><p>RAG 要把 <strong>[系统提示] + [Top-K 检索片段] + [对话历史] + [用户问题]</strong> 一起塞进上下文。窗口越大，能放的检索证据越多。</p>
+<div class="callout" data-callout="warning" style="--callout-color: 255, 145, 0;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="callout-title-inner">但&quot;窗口大&quot;不等于&quot;可以无脑塞&quot;</span></div>
+<div class="callout-content">
+
+<ul>
+<li>塞太多无关片段会<strong>稀释</strong>有用信息、抬高成本、还可能触发”中间遗忘”（见下一节）。</li>
+<li>正解仍是：<strong>先精排取 Top-5~10 高质量片段</strong>（模块三 §6&#x2F;§7 的 Reranker），而不是把 Top-100 全丢进去。<strong>好的检索 &gt; 大的窗口。</strong></li>
+</ul>
+</div>
+</div>
+
+
+<h5 id="5-选型速查"><a href="#5-选型速查" class="headerlink" title="5. 选型速查"></a>5. 选型速查</h5><table>
+<thead>
+<tr>
+<th>你的情况</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>私有美术资产 &#x2F; 私有代码，<strong>数据不能出本地</strong></td>
+<td>本地 <strong>Qwen3</strong> 系列（用你的 DGX Spark 节点跑，128GB 统一内存可加载量化后的中大模型） ⭐</td>
+</tr>
+<tr>
+<td>追求最高答案质量、可接受 API</td>
+<td><strong>Claude Opus 4.8</strong>（<code>claude-opus-4-8</code>）或 Fable 5</td>
+</tr>
+<tr>
+<td>高频、对成本敏感</td>
+<td>Claude Haiku 4.5 &#x2F; Gemini Flash &#x2F; DeepSeek</td>
+</tr>
+<tr>
+<td>需要超长上下文</td>
+<td>Gemini 3.1 Pro &#x2F; Claude（1M 窗口）</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">两个项目的对应选择</span></div>
+<div class="callout-content">
+
+<ul>
+<li><strong>资产库项目</strong>（私有美术资产）→ 隐私优先 → 本地 Qwen on DGX Spark</li>
+<li><strong><code>starting-ragchatbot-codebase</code></strong>（课程问答机器人）→ 已用 <strong>Claude</strong>（Anthropic 官方推荐默认 <code>claude-opus-4-8</code> + 自适应思考 <code>thinking:&#123;type:&quot;adaptive&quot;&#125;</code>），调 API 即可，无需运维</li>
+</ul>
+</div>
+</div>
+
+
+<hr>
+<h4 id="提示词工程"><a href="#提示词工程" class="headerlink" title="提示词工程"></a>提示词工程</h4><p>模型选定、检索完成后，<strong>提示词（Prompt）是你在推理阶段唯一的控制杆</strong>——不重新训练，仅靠组织输入就能大幅改变输出质量。对 RAG 而言，提示词工程的核心目标是：<strong>让模型严格基于检索内容作答，拒绝幻觉</strong>。</p>
+<h5 id="1-提示词的基本结构"><a href="#1-提示词的基本结构" class="headerlink" title="1. 提示词的基本结构"></a>1. 提示词的基本结构</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌── System（系统提示）：设定角色、规则、语气、边界</span><br><span class="line">│      &quot;你是资产库助手，只依据提供的资产信息回答...&quot;</span><br><span class="line">├── Context（上下文）：注入检索到的片段</span><br><span class="line">│      &quot;【资产1】灰褐色石块，密布青苔... 【资产2】...&quot;</span><br><span class="line">├── User（用户提问）：本轮问题</span><br><span class="line">│      &quot;推荐适合古风场景的石头类资产&quot;</span><br><span class="line">└──（可选）Few-shot 示例 / 输出格式约束</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-通用技巧"><a href="#2-通用技巧" class="headerlink" title="2. 通用技巧"></a>2. 通用技巧</h5><table>
+<thead>
+<tr>
+<th>技巧</th>
+<th>做法</th>
+<th>何时用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>角色设定</strong></td>
+<td>“你是资深美术指导……”</td>
+<td>几乎总是</td>
+</tr>
+<tr>
+<td><strong>Few-shot 少样本</strong></td>
+<td>给 1~3 个”输入→理想输出”示例</td>
+<td>输出格式&#x2F;风格要稳定</td>
+</tr>
+<tr>
+<td><strong>思维链 CoT</strong></td>
+<td>“请一步步推理后再给结论”</td>
+<td>复杂推理（注：RAG 事实问答通常不需要太多发散）</td>
+</tr>
+<tr>
+<td><strong>结构化输出</strong></td>
+<td>要求输出 JSON &#x2F; 指定字段</td>
+<td>下游程序要解析、Agentic RAG</td>
+</tr>
+</tbody></table>
+<h5 id="3-RAG-专用提示词模板（重点）"><a href="#3-RAG-专用提示词模板（重点）" class="headerlink" title="3. RAG 专用提示词模板（重点）"></a>3. RAG 专用提示词模板（重点）</h5><p>一个合格的 RAG 提示词必须包含三道”防幻觉”指令：<strong>①只用提供的内容 ②找不到就说不知道 ③标注来源</strong>。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">你是游戏资产库的检索助手。请严格遵守：</span><br><span class="line">1. 只根据下面【检索结果】中的信息回答，不要使用你自己的知识。</span><br><span class="line">2. 如果检索结果里没有答案，直接回答&quot;未找到相关资产&quot;，不要编造。</span><br><span class="line">3. 回答时用 [资产ID] 标注你依据的是哪条资产。</span><br><span class="line"></span><br><span class="line">【检索结果】</span><br><span class="line">[stone_moss_03] 灰褐色石块，表面密布绿色苔藓，风化纹理明显，适合古风场景</span><br><span class="line">[rock_wet_01]   湿润岩石，深色，无苔藓</span><br><span class="line"></span><br><span class="line">【用户问题】</span><br><span class="line">有没有适合古风场景、带青苔的石头？</span><br><span class="line"></span><br><span class="line">【期望输出】</span><br><span class="line">推荐 [stone_moss_03]：灰褐色石块且密布青苔、风化纹理，契合古风场景。</span><br><span class="line">（[rock_wet_01] 无苔藓，相关性较低未推荐。）</span><br></pre></td></tr></table></figure>
+
+
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">这三条指令直接决定 RAG 系统的可信度</span></div>
+<div class="callout-content">
+
+<p>缺了第 2 条，模型在检索为空时会”自信地胡说”；缺了第 3 条，用户无法核查，答案不可追溯。</p>
+</div>
+</div>
+
+
+<h5 id="4-“中间遗忘”现象（Lost-in-the-Middle）"><a href="#4-“中间遗忘”现象（Lost-in-the-Middle）" class="headerlink" title="4. “中间遗忘”现象（Lost in the Middle）"></a>4. “中间遗忘”现象（Lost in the Middle）</h5><p>研究发现：当上下文很长时，模型对<strong>开头和结尾</strong>的信息记得最牢，<strong>中间</strong>的内容最容易被忽略——召回率曲线呈 U 形。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">模型注意力 ▲</span><br><span class="line">          │＼            ／</span><br><span class="line">          │  ＼ ____ ／      ← 中间塌陷</span><br><span class="line">          └──────────────▶ 片段位置</span><br><span class="line">           开头   中间   结尾</span><br></pre></td></tr></table></figure>
+
+
+<div class="callout" data-callout="warning" style="--callout-color: 255, 145, 0;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="callout-title-inner">对 RAG 的直接启示</span></div>
+<div class="callout-content">
+
+<p>把 <strong>最相关的检索片段放在 Prompt 的最前面或最后面</strong>，不要埋在中间一大堆片段里。这也再次印证了<strong>精排（Reranking）的价值</strong>：与其塞 50 条让关键信息淹没在中间，不如精排出 5 条放在显眼位置。</p>
+</div>
+</div>
+
+
+<h5 id="5-好-vs-坏-提示词对比"><a href="#5-好-vs-坏-提示词对比" class="headerlink" title="5. 好 vs 坏 提示词对比"></a>5. 好 vs 坏 提示词对比</h5><table>
+<thead>
+<tr>
+<th></th>
+<th>❌ 差</th>
+<th>✅ 好</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>角色</td>
+<td>（无）</td>
+<td>“你是资产库助手”</td>
+</tr>
+<tr>
+<td>防幻觉</td>
+<td>（无，放任发挥）</td>
+<td>“只用检索结果，找不到就说没有”</td>
+</tr>
+<tr>
+<td>来源</td>
+<td>（不要求）</td>
+<td>“用 [资产ID] 标注依据”</td>
+</tr>
+<tr>
+<td>片段顺序</td>
+<td>随便堆</td>
+<td>最相关的放首&#x2F;尾</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>“随便答”</td>
+<td>指定格式&#x2F;字段</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">提示词工程 vs 微调 vs RAG——三种&quot;喂知识&quot;的方式</span></div>
+<div class="callout-content">
+
+<ul>
+<li><strong>提示词工程</strong>：临时、零成本，靠当前输入引导 → 本节</li>
+<li><strong>RAG</strong>：动态注入外部知识，知识可实时更新 → 本笔记全篇</li>
+<li><strong>微调（Fine-tuning）</strong>：把知识&#x2F;风格”焊进”模型权重，成本高、更新慢<br>三者常组合使用：<strong>RAG 提供事实 + 提示词约束行为 + （可选）微调统一风格</strong>。</li>
+</ul>
+</div>
+</div>
+
+
+<hr>
+<h3 id="模块五-生产环境中的RAG系统"><a href="#模块五-生产环境中的RAG系统" class="headerlink" title="模块五 生产环境中的RAG系统"></a>模块五 生产环境中的RAG系统</h3><h4 id="1-生产环境面临哪些挑战？"><a href="#1-生产环境面临哪些挑战？" class="headerlink" title="1. 生产环境面临哪些挑战？"></a>1. 生产环境面临哪些挑战？</h4><p>RAG 走出 demo 后，会撞上一连串 demo 里看不到的”墙”：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Demo 状态</th>
+<th>生产现实</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据</td>
+<td>几十条干净文档</td>
+<td>百万级脏文档（重复、过期、权限敏感）</td>
+</tr>
+<tr>
+<td>用户</td>
+<td>自己人测试</td>
+<td>真实用户问法千奇百怪、夹带错别字&#x2F;口语</td>
+</tr>
+<tr>
+<td>召回</td>
+<td>“差不多就行”</td>
+<td>必须可追溯、可解释、有 SLA</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>一张卡跑跑</td>
+<td>QPS、成本、延迟三者拉扯</td>
+</tr>
+<tr>
+<td>反馈</td>
+<td>没有</td>
+<td>需要日志、监控、A&#x2F;B、可观测性</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="warning" style="--callout-color: 255, 145, 0;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="callout-title-inner">本质变化</span></div>
+<div class="callout-content">
+
+<p>Demo 是”<strong>能不能答出来</strong>“，生产是”<strong>答得稳不稳、贵不贵、快不快、安不安全、能不能量化改进</strong>“。</p>
+</div>
+</div>
+
+
+<h4 id="2-实施-RAG-评估策略"><a href="#2-实施-RAG-评估策略" class="headerlink" title="2. 实施 RAG 评估策略"></a>2. 实施 RAG 评估策略</h4><p>评估 &#x3D; 回答”我的 RAG 现在到底有多好？”。三步走：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">离线评估集（黄金集） → 自动化打分 → 回归对比</span><br><span class="line">       ↑                              ↓</span><br><span class="line">       └──── 收集线上反馈，扩充集 ──────┘</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>黄金集</strong>：人工标注 question + 期望答案 &#x2F; 相关片段</li>
+<li><strong>指标</strong>：检索（Recall@k、MRR）、生成（忠实度、答案相关性）、端到端（命中率）</li>
+<li><strong>工具</strong>：RAGAS、ARES、LangSmith Evaluation、DeepEval</li>
+</ul>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">评估要&quot;可重复&quot;</span></div>
+<div class="callout-content">
+
+<p>同一份数据 + 同一份代码 &#x3D; 同一份分数。否则版本一改，谁也说不清是”模型进步”还是”prompt 改了”。</p>
+</div>
+</div>
+
+
+<h4 id="3-日志记录、监控与可观测性"><a href="#3-日志记录、监控与可观测性" class="headerlink" title="3. 日志记录、监控与可观测性"></a>3. 日志记录、监控与可观测性</h4><p>生产 RAG 是<strong>黑盒流水线</strong>，没有日志 &#x3D; 没有调试能力。三个层面：</p>
+<table>
+<thead>
+<tr>
+<th>层面</th>
+<th>记录什么</th>
+<th>用来干嘛</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Trace（链路）</strong></td>
+<td>每次 query 的 retriever &#x2F; reranker &#x2F; LLM 调用、入参出参、耗时</td>
+<td>复现问题</td>
+</tr>
+<tr>
+<td><strong>Metric（指标）</strong></td>
+<td>QPS、延迟分位、token 用量、命中率、错误率</td>
+<td>大盘告警</td>
+</tr>
+<tr>
+<td><strong>Feedback（反馈）</strong></td>
+<td>用户 👍&#x2F;👎、人工抽检、显式评分</td>
+<td>灌回评估集，迭代模型</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">三件套参考</span></div>
+<div class="callout-content">
+
+<p>LangSmith &#x2F; Langfuse &#x2F; Arize Phoenix &#x2F; MLflow —— 任选一套，别裸跑。</p>
+</div>
+</div>
+
+
+<h4 id="4-定制化评估"><a href="#4-定制化评估" class="headerlink" title="4. 定制化评估"></a>4. 定制化评估</h4><p>通用指标（如”语义相似度”）往往对不上业务。<strong>业务说答得好，才算真的好</strong>。</p>
+<ul>
+<li><strong>领域专家打分</strong>：法务&#x2F;医生&#x2F;客服主管按业务标准 1~5 分</li>
+<li><strong>规则化校验</strong>：必须出现某字段、必须引用某类来源、不能出现某些词</li>
+<li><strong>行为代理指标</strong>：点赞率、复制率、追问率（用户继续问 &#x3D; 没答清）</li>
+<li><strong>LLM-as-a-Judge</strong>：用强模型当裁判，但<strong>必须用黄金集校准</strong>，否则裁判自己也在飘</li>
+</ul>
+<h4 id="5-量化（Quantization）"><a href="#5-量化（Quantization）" class="headerlink" title="5. 量化（Quantization）"></a>5. 量化（Quantization）</h4><p>把模型&#x2F;向量的”高精度数值”换成”低精度表示”，<strong>省显存、省钱、省延迟</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>方法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Embedding 模型</td>
+<td>int8 &#x2F; binary</td>
+<td>向量库内存 ↓ 4~32x，召回略降</td>
+</tr>
+<tr>
+<td>LLM</td>
+<td>GPTQ &#x2F; AWQ &#x2F; GGUF</td>
+<td>显存 ↓ 2~4x，速度 ↑，质量微损</td>
+</tr>
+<tr>
+<td>向量存储</td>
+<td>Product Quantization (PQ)</td>
+<td>千万级向量单机可跑</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="warning" style="--callout-color: 255, 145, 0;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="callout-title-inner">量化的代价</span></div>
+<div class="callout-content">
+
+<p>召回率&#x2F;生成质量会有 1~3% 的下降，<strong>必须在黄金集上回归</strong>，别拍脑袋上生产。</p>
+</div>
+</div>
+
+
+<h4 id="6-成本-VS-响应质量"><a href="#6-成本-VS-响应质量" class="headerlink" title="6. 成本 VS 响应质量"></a>6. 成本 VS 响应质量</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">质量 ▲</span><br><span class="line">     │      ╭──── 大模型（贵）</span><br><span class="line">     │    ╱</span><br><span class="line">     │  ╱</span><br><span class="line">     │╱</span><br><span class="line">     └──────────────▶ 成本</span><br><span class="line">  小模型    路由</span><br></pre></td></tr></table></figure>
+
+<p>常见省钱策略：</p>
+<ul>
+<li><strong>模型路由</strong>：简单问题 → 小模型&#x2F;规则，复杂问题 → 大模型</li>
+<li><strong>缓存</strong>：相同 query 命中直接返回，省一次 LLM</li>
+<li><strong>减 token</strong>：精排压到 Top-3、截断长文档、用更小 context</li>
+<li><strong>批处理 &#x2F; 异步</strong>：非实时任务合并请求</li>
+</ul>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">不是越贵越好</span></div>
+<div class="callout-content">
+
+<p>把”质量提升 1% 要多花 10 倍钱”这种点找到，就是工程优化的 ROI 关键。</p>
+</div>
+</div>
+
+
+<h4 id="7-延迟-VS-响应质量"><a href="#7-延迟-VS-响应质量" class="headerlink" title="7. 延迟 VS 响应质量"></a>7. 延迟 VS 响应质量</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">首字延迟 ▲</span><br><span class="line">         │   ╭─ 长上下文 + 大模型</span><br><span class="line">         │ ╱</span><br><span class="line">         │╱───── 流式 + 小模型 + 精排</span><br><span class="line">         └──────────────▶ 质量</span><br></pre></td></tr></table></figure>
+
+<p>生产对延迟的硬要求：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>目标首字延迟</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>聊天&#x2F;搜索</td>
+<td>&lt; 1s</td>
+</tr>
+<tr>
+<td>客服自动回复</td>
+<td>&lt; 2s</td>
+</tr>
+<tr>
+<td>离线分析</td>
+<td>不敏感</td>
+</tr>
+</tbody></table>
+<p>手段：<strong>流式输出（SSE）、并行检索（向量+BM25 并发）、精排前置、speculative decoding</strong>。</p>
+<h4 id="8-安全性"><a href="#8-安全性" class="headerlink" title="8. 安全性"></a>8. 安全性</h4><p>RAG 的攻击面 &#x3D; 检索器 + LLM，两头都要防：</p>
+<table>
+<thead>
+<tr>
+<th>风险</th>
+<th>例子</th>
+<th>防御</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Prompt Injection</strong></td>
+<td>用户问题里塞”忽略上面所有指令”</td>
+<td>输入清洗 + 指令&#x2F;数据严格分段</td>
+</tr>
+<tr>
+<td><strong>数据泄露</strong></td>
+<td>检索返回了别人私有文档</td>
+<td>元数据 ACL 过滤 + 租户隔离</td>
+</tr>
+<tr>
+<td><strong>越权回答</strong></td>
+<td>内部 wiki 答给了外部用户</td>
+<td>权限网关 + 来源水印</td>
+</tr>
+<tr>
+<td><strong>幻觉</strong></td>
+<td>编造不存在的资产</td>
+<td>强制引用 + “找不到就说没有”</td>
+</tr>
+<tr>
+<td><strong>有毒输出</strong></td>
+<td>检索到恶意文本被 LLM 复述</td>
+<td>内容审核 + 输出过滤</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="warning" style="--callout-color: 255, 145, 0;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="callout-title-inner">提示词注入没有银弹</span></div>
+<div class="callout-content">
+
+<p>只能在 <strong>输入清洗 + 输出审查 + 权限隔离</strong> 三层一起做，单点防御都会被绕。</p>
+</div>
+</div>
+
+
+<h4 id="9-多模态检索增强生成"><a href="#9-多模态检索增强生成" class="headerlink" title="9. 多模态检索增强生成"></a>9. 多模态检索增强生成</h4><p>RAG 不止能喂文字。能检索&#x2F;生成的模态越多，应用场景越广：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">文本 ←─────► 文本   （最常见，问答/搜索）</span><br><span class="line">图片 ←─────► 文本   （以图搜文，CLIP）</span><br><span class="line">文本 ←─────► 图片   （文生图 / 文搜图）</span><br><span class="line">图片 ←─────► 图片   （以图搜图）</span><br><span class="line">音频 ←─────► 文本   （会议录音 → 摘要）</span><br><span class="line">视频 ←─────► 文本   （长视频 → 关键帧 + 字幕检索）</span><br></pre></td></tr></table></figure>
+
+<p>关键技术：</p>
+<ul>
+<li><strong>统一 Embedding</strong>：CLIP &#x2F; SigLIP &#x2F; BGE-M3，把多模态映射到同一向量空间</li>
+<li><strong>多模态 LLM</strong>：GPT-4o、Gemini、Qwen-VL，能看图、能听音、能读文档</li>
+<li><strong>结构化解析</strong>：PDF 表格、扫描件、Chart → 用专用模型转 Markdown&#x2F;JSON 再进 RAG</li>
+</ul>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">一个常见落地姿势</span></div>
+<div class="callout-content">
+
+<p>先把 PDF&#x2F;PPT&#x2F;截图全部 OCR + 结构化 → 转成文本 + 图块 → 进同一个向量库。一个 RAG 系统吃下企业全部知识资产。</p>
+</div>
+</div>
+
+
+
+<div class="callout" data-callout="note" style="--callout-color: 68, 138, 255;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">模块五小结</span></div>
+<div class="callout-content">
+
+<p>生产 RAG &#x3D; <strong>评估体系 + 可观测性 + 工程权衡 + 安全合规 + 多模态扩展</strong>。技术之外，工程化能力决定了它能不能真正”活下去”。</p>
+</div>
+</div>
+
+
+
+
+
+<h2 id="八、参考资料"><a href="#八、参考资料" class="headerlink" title="八、参考资料"></a>八、参考资料</h2><hr>
+<div class="callout" data-callout="quote" style="--callout-color: 158, 158, 158;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span class="callout-title-inner">关联文档</span></div>
+<div class="callout-content">
+
+<ul>
+<li>[[20260522.SearchToolDesign（Private）]]：资产搜索工具完整设计方案</li>
+<li>[[20260521.ArtPipelineAIIntegration（Private）]]：上层 AI Pipeline 集成文档</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ECQ9B5EKe/">吴恩达Rag课程 导师Zain</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/retrieval-augmented-generation/lesson/rrngb/a-conversation-with-andrew-ng?startTime=1">Zain Rag课程正版链接</a></li>
+</ul>
+</div>
+</div>
+
+
+
+<p>我本地的仓库位置 D:\Project\UGit\starting-ragchatbot-codebase</p>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/RAG/" data-i18n-tag="RAG">RAG</a> <a href="/zh-CN/tags/embedding/" data-i18n-tag="embedding">embedding</a> <a href="/zh-CN/tags/vectorSearch/" data-i18n-tag="vectorSearch">vectorSearch</a> <a href="/zh-CN/tags/CLIP/" data-i18n-tag="CLIP">CLIP</a> <a href="/zh-CN/tags/FAISS/" data-i18n-tag="FAISS">FAISS</a> <a href="/zh-CN/tags/learning/" data-i18n-tag="learning">learning</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"ACES":"ACES","ARRI":"ARRI","Aximmetry":"Aximmetry","CLIP":"CLIP","Captury":"Captury","Claude":"Claude","CrewAI":"CrewAI","Dify":"Dify","EXR":"EXR","GAS":"GAS","GLSL":"GLSL","GPU":"GPU","Google":"Google","GoogleADK":"Google ADK","HDR":"HDR","HLSL":"HLSL","Houdini":"Houdini","LangGraph":"LangGraph","LlamaIndex":"LlamaIndex","MCP":"模型上下文协议","Messiah":"Messiah","NLP":"自然语言处理","NousResearch":"NousResearch","OCIO":"OCIO","Obsidian":"Obsidian","OpenAI":"OpenAI","OpenClaw":"OpenClaw","PCG":"PCG","PKM":"个人知识管理","RAG":"RAG","RPG":"角色扮演","SQL":"SQL","SVN":"SVN","TA":"技术美术","UE4":"UE4","UE5":"UE5","Unity":"Unity","UnrealInsights":"Unreal Insights","VisionPro":"VisionPro","XR":"扩展现实","AI":"人工智能","API":"接口","Agent":"智能体","AgenticAI":"智能体 AI","Art":"艺术作品","AssetManagement":"资产管理","Assistant":"助手","BranchManagement":"分支管理","ColorManagement":"色彩管理","ComputerGraphics":"计算机图形学","ComputerVision":"计算机视觉","Cpp":"C++","Database":"数据库","Debug":"调试","Embedding":"嵌入向量","FilmProduction":"电影制作","Framework":"框架","FullStack":"全栈","GameDev":"游戏开发","GameDevelopment":"游戏开发","GameFeature":"游戏功能","GameFramework":"游戏框架","GameplayAbilitySystem":"游戏能力系统","GraphicsProgramming":"图形编程","LLM":"大语言模型","LearningPath":"学习路径","MachineLearning":"机器学习","MotionCapture":"动作捕捉","NetworkProgramming":"网络编程","NoteTaking":"笔记法","OpenSource":"开源","Performance":"性能","PersonalEssays":"个人随笔","Pipeline":"管线","PoliticalPhilosophy":"政治哲学","Profiling":"性能分析","RenderPipeline":"渲染管线","Search":"搜索","Shader":"着色器","SoftwareProjects":"软件项目","Subscription":"订阅","Tags":"标签","TechnicalArt":"技术美术","UnrealEngine":"虚幻引擎","VersionControl":"版本控制","VibeCoding":"氛围编程","VirtualHuman":"虚拟数字人","VirtualProduction":"虚拟制作","WebDevelopment":"网页开发"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
