@@ -190,28 +190,227 @@ a.daily-nav__btn:hover {
 
 /* ---- Daily post pages (body.type-daily-feed via layout.ejs) ----------- */
 
-/* Voice players sit inside callouts; stretch them to a comfortable width. */
-.content audio {
-  display: block;
-  width: 100%;
-  max-width: 620px;
-}
-
 /* Link-dense feed content: never let a long bare URL overflow the column. */
 body.type-daily-feed .content a {
   overflow-wrap: anywhere;
 }
 
-/* The playing segment announces itself on its 「本节语音」 callout. */
-body.type-daily-feed details.callout.is-playing > summary .callout-title-inner::after {
-  content: ' · 正在朗读';
-  font-weight: 400;
-  opacity: 0.75;
+/* TOC-drawer jumps land below the sticky day pager (+ mobile top bar). */
+body.type-daily-feed .content details.callout {
+  scroll-margin-top: 84px;
 }
 
-/* Transcript follow-along: paragraphs are clickable seek targets; the one
-   being read carries an amber reading bar. */
-body.type-daily-feed .callout .transcript-para {
+@media (max-width: 1099px) {
+  body.type-daily-feed .content details.callout {
+    scroll-margin-top: calc(var(--bar-h, 56px) + 64px);
+  }
+}
+
+/* ---- Audio card (built client-side by modules/daily-audio.js) ---------
+   Replaces the 「本节语音」+「跟读文稿」 callout pair with a player card
+   and an attached transcript panel. The raw <audio> stays as the hidden
+   playback engine. */
+
+.daily-audio {
+  margin: 16px 0 22px;
+}
+
+.daily-audio audio {
+  display: none;
+}
+
+.daily-player {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 15px;
+  background: #fff;
+  border: 1px solid #eae6df;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgb(42 37 32 / 0.05);
+}
+
+/* When the transcript panel is open right below, visually dock them. */
+.daily-player:has(+ .daily-transcript:not([hidden])) {
+  border-radius: 14px 14px 0 0;
+}
+
+.daily-player__btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #2a2520;
+  color: #f5f1ea;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.daily-player__btn:hover {
+  transform: scale(1.06);
+  background: #4a4038;
+}
+
+.daily-player__btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.daily-player__ic-pause {
+  display: none;
+}
+
+.daily-player[data-state='playing'] .daily-player__ic-play {
+  display: none;
+}
+
+.daily-player[data-state='playing'] .daily-player__ic-pause {
+  display: block;
+}
+
+.daily-player__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.daily-player__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.daily-player__label {
+  min-width: 0;
+  overflow: hidden;
+  color: #2a2520;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.daily-player[data-state='playing'] .daily-player__label::after {
+  content: ' · 正在朗读';
+  color: #c98f2d;
+  font-weight: 400;
+}
+
+.daily-player__time {
+  flex: none;
+  color: #8a857e;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom range: amber played-side, paper remaining-side, ink knob. */
+.daily-player__seek {
+  appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix -- older iOS WebKit needs the prefix to unstyle range inputs */
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(to right, #e2a600 var(--p, 0%), #ece8e1 var(--p, 0%));
+  outline: none;
+  cursor: pointer;
+}
+
+.daily-player__seek::-webkit-slider-thumb {
+  appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix -- older iOS WebKit needs the prefix for the custom thumb */
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  background: #2a2520;
+  box-shadow: 0 1px 5px rgb(42 37 32 / 0.35);
+  cursor: grab;
+}
+
+.daily-player__seek::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  background: #2a2520;
+  box-shadow: 0 1px 5px rgb(42 37 32 / 0.35);
+  cursor: grab;
+}
+
+.daily-player__seek:active::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+
+.daily-player__side {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.daily-player__rate,
+.daily-player__ts {
+  min-width: 50px;
+  padding: 4px 9px;
+  border: 1px solid #e3ded6;
+  border-radius: 8px;
+  background: #faf8f5;
+  color: #5c564e;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.daily-player__rate:hover,
+.daily-player__ts:hover {
+  border-color: #c9c2b7;
+  color: #2a2520;
+}
+
+.daily-player__ts[aria-expanded='true'] {
+  background: #2a2520;
+  border-color: #2a2520;
+  color: #f5f1ea;
+}
+
+/* ---- Transcript panel (docked under the player) ------------------------ */
+
+.daily-transcript {
+  margin-top: -1px;
+  padding: 14px 18px 16px;
+  background: #faf8f5;
+  border: 1px solid #eae6df;
+  border-radius: 0 0 14px 14px;
+}
+
+.daily-transcript__hint {
+  margin: 0 0 10px;
+  color: #a09a91;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* Follow-along: paragraphs are clickable seek targets; the one being read
+   carries an amber reading bar. */
+.daily-transcript .transcript-para {
   margin-left: -10px;
   padding: 3px 10px;
   border-left: 3px solid transparent;
@@ -222,11 +421,11 @@ body.type-daily-feed .callout .transcript-para {
     border-color 0.25s ease;
 }
 
-body.type-daily-feed .callout .transcript-para:hover {
-  background: rgb(68 138 255 / 0.07);
+.daily-transcript .transcript-para:hover {
+  background: rgb(226 166 0 / 0.07);
 }
 
-body.type-daily-feed .callout .transcript-para.is-reading {
+.daily-transcript .transcript-para.is-reading {
   background: rgb(255 196 0 / 0.13);
   border-left-color: #e2a600;
 }
@@ -274,5 +473,29 @@ body.type-daily-feed .callout .transcript-para.is-reading {
 
   .daily-history__summary {
     font-size: 12.5px;
+  }
+
+  .daily-player {
+    gap: 10px;
+    padding: 11px 12px;
+  }
+
+  .daily-player__btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .daily-player__label {
+    font-size: 12.5px;
+  }
+
+  .daily-player__rate,
+  .daily-player__ts {
+    min-width: 46px;
+    padding: 4px 7px;
+  }
+
+  .daily-transcript {
+    padding: 12px 13px 14px;
   }
 }

@@ -51,7 +51,7 @@ export const i18nData = {
   'zh-CN': {
     // Navigation menu
     Home: '首页',
-    Daily: '每日资讯',
+    Daily: '资讯',
     Archives: '归档',
     About: '关于',
     Portfolio: '作品集',

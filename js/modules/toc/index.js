@@ -1,26 +1,24 @@
 /**
  * TOC entry point — composes the submodules.
  *
- * Phase 9 refactor: replaces the 678-line toc-collapse.js with a small
- * orchestrator + focused submodules. Behaviour is preserved (see
- * ROADMAP.md Phase 9 verification checklist), with three notable wins:
+ * Drawer redesign: the floating draggable/resizable panel is now a
+ * right-edge slide-in drawer (render.js + visibility.js). drag.js and
+ * resize.js are gone — the drawer solved the "panel covers the article,
+ * keep nudging it around" problem they existed to mitigate, and the
+ * previously desktop-only TOC now works on mobile too (tab + scrim).
  *
- *   1. Scroll-spy uses IntersectionObserver instead of a setTimeout
- *      throttled scroll listener.
- *   2. setTimeout race-condition workarounds are gone — modules run
- *      strictly synchronously after the DOM exists.
- *   3. Drag/resize position+size persist to localStorage across reloads.
+ * On 每日资讯 pages (body.type-daily-feed) the outline additionally lists
+ * every news-item callout under its section heading (headings.js
+ * includeCallouts), and clicking such an entry unfolds the callout it
+ * scrolls to.
  *
- * Mobile (<768px) hiding is handled in CSS (`@media max-width: 768px`
- * sets `.toc-container { display: none }`), so this module makes no
- * viewport-size decisions of its own.
+ * Scroll-spy uses IntersectionObserver; fold state stays bidirectionally
+ * synced with the body headings via MutationObserver (fold.js).
  */
 import { collectHeadings } from './headings.js';
 import { renderToc } from './render.js';
 import { initVisibility } from './visibility.js';
 import { initFold } from './fold.js';
-import { startDrag } from './drag.js';
-import { attachEdgeDetection, startResize } from './resize.js';
 import { initScrollSpy } from './scroll-spy.js';
 
 function shouldRender() {
@@ -36,51 +34,35 @@ function shouldRender() {
   return content;
 }
 
-function isInteractiveTarget(target) {
-  return (
-    target.classList.contains('toc-collapse-btn') ||
-    target.classList.contains('toc-item-text') ||
-    target.closest('.toc-collapse-btn') ||
-    target.closest('.toc-item-text') ||
-    target.closest('.toc-close-btn')
-  );
-}
-
 export function initToc() {
   const content = shouldRender();
   if (!content) return;
 
-  const headings = collectHeadings(content);
+  const headings = collectHeadings(content, {
+    includeCallouts: document.body.classList.contains('type-daily-feed'),
+  });
   if (!headings.length) return;
 
   const { container, items } = renderToc(headings);
 
-  initVisibility(container);
   initFold(headings, items);
-
-  const ctx = { dragging: false, resizing: false, resizeDirection: '' };
-  attachEdgeDetection(container, ctx);
-
-  container.addEventListener('mousedown', (e) => {
-    if (isInteractiveTarget(e.target)) return;
-    if (ctx.resizeDirection) {
-      startResize(e, container, ctx);
-    } else {
-      startDrag(e, container, ctx);
-    }
-  });
-
   const spy = initScrollSpy(headings, items);
+  initVisibility(container); // last: the initial auto-open centers on the spy's active item
 
-  // Click a TOC entry → smooth-scroll to the heading and refresh the
-  // spy after the scroll settles so the active highlight catches up.
+  // Click a TOC entry → smooth-scroll to the target and refresh the spy
+  // after the scroll settles so the active highlight catches up. Virtual
+  // entries are folded callouts — unfold on arrival so the reader lands
+  // on the story, not on a closed box.
   items.forEach((item, i) => {
     const textSpan = item.querySelector('.toc-item-text');
     if (!textSpan) return;
     textSpan.addEventListener('click', () => {
-      const heading = headings[i] && headings[i].element;
-      if (!heading) return;
-      heading.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const h = headings[i];
+      if (!h || !h.element) return;
+      if (h.virtual && h.element.tagName === 'DETAILS' && !h.element.open) {
+        h.element.open = true;
+      }
+      h.element.scrollIntoView({ behavior: 'smooth', block: h.virtual ? 'start' : 'center' });
       setTimeout(() => spy.refresh(), 300);
     });
   });

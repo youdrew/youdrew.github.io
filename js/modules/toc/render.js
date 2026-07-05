@@ -1,47 +1,19 @@
 /**
- * Build the TOC panel DOM and inject it into <body>.
+ * Build the TOC drawer DOM and inject it into <body>.
  *
- * Returns { container, items } where `items` is parallel to the headings
- * array (item[i] corresponds to headings[i]). Container size and position
- * are restored from localStorage if present, otherwise CSS defaults apply.
+ * The TOC is a right-edge slide-in drawer (was: a floating draggable/
+ * resizable panel that sat over the article and had to be shooed away).
+ * Closed, it leaves only a slim edge tab — content is never occluded.
+ * Open/close wiring, the tab and the scrim live in visibility.js.
+ *
+ * Returns { container, items } where `items` is parallel to the entries
+ * array (item[i] corresponds to entries[i]). Virtual entries (news-item
+ * callouts on 每日资讯 pages) render without a fold button — they are
+ * leaves, and folding is a heading-level behaviour.
  */
-import { loadState } from './storage.js';
-
-function applyPersistedGeometry(container) {
-  const state = loadState();
-  if (!state) return;
-
-  const winW = window.innerWidth;
-  const winH = window.innerHeight;
-  const minW = 200;
-  const minH = 150;
-
-  if (typeof state.width === 'number' && typeof state.height === 'number') {
-    const w = Math.max(minW, Math.min(state.width, winW));
-    const h = Math.max(minH, Math.min(state.height, winH));
-    container.style.width = `${w}px`;
-    container.style.height = `${h}px`;
-  }
-  if (typeof state.left === 'number' && typeof state.top === 'number') {
-    const rect = container.getBoundingClientRect();
-    const w = container.style.width ? parseFloat(container.style.width) : rect.width;
-    const h = container.style.height ? parseFloat(container.style.height) : rect.height;
-    const left = Math.max(0, Math.min(state.left, winW - w));
-    const top = Math.max(0, Math.min(state.top, winH - h));
-    container.style.left = `${left}px`;
-    container.style.top = `${top}px`;
-    container.style.right = 'auto';
-    container.style.bottom = 'auto';
-  }
-}
-
 export function renderToc(headings) {
-  const container = document.createElement('div');
-  container.className = 'toc-container';
-  // A header bar doubles as the drag handle (CSS .toc-header { cursor: move })
-  // and hosts the close button. The title text + labels are filled in,
-  // language-aware, by initVisibility(). The 45px the CSS reserves for it
-  // (.toc-content height: calc(100% - 45px)) was previously unused.
+  const container = document.createElement('aside');
+  container.className = 'toc-drawer';
   container.innerHTML =
     '<div class="toc-header">' +
     '<span class="toc-title"></span>' +
@@ -53,18 +25,22 @@ export function renderToc(headings) {
   const list = container.querySelector('.toc-list');
   const items = headings.map((h) => {
     const item = document.createElement('div');
-    item.className = 'toc-item';
+    item.className = h.virtual ? 'toc-item toc-item--virtual' : 'toc-item';
     item.setAttribute('data-level', String(h.level));
     item.setAttribute('data-index', String(h.index));
 
-    const collapseBtn = document.createElement('div');
-    collapseBtn.className = 'toc-collapse-btn';
+    if (!h.virtual) {
+      const collapseBtn = document.createElement('div');
+      collapseBtn.className = 'toc-collapse-btn';
+      item.appendChild(collapseBtn);
+    }
 
     const textSpan = document.createElement('span');
     textSpan.className = 'toc-item-text';
     textSpan.style.cursor = 'pointer';
     textSpan.innerHTML = `<span class="toc-number">${h.number}.</span> `;
     textSpan.appendChild(document.createTextNode(h.text));
+    textSpan.setAttribute('title', h.text);
 
     // Reflect any existing collapsed state on the source heading so the
     // initial render matches what the user previously set.
@@ -72,13 +48,10 @@ export function renderToc(headings) {
       item.classList.add('collapsed');
     }
 
-    item.appendChild(collapseBtn);
     item.appendChild(textSpan);
     list.appendChild(item);
     return item;
   });
-
-  applyPersistedGeometry(container);
 
   return { container, items };
 }
