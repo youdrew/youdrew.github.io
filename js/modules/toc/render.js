@@ -17,7 +17,10 @@ export function renderToc(headings) {
   container.innerHTML =
     '<div class="toc-header">' +
     '<span class="toc-title"></span>' +
+    '<div class="toc-header__actions">' +
+    '<button type="button" class="toc-foldall"></button>' +
     '<button type="button" class="toc-close-btn"><span class="toc-close-btn__x" aria-hidden="true"></span></button>' +
+    '</div>' +
     '</div>' +
     '<div class="toc-content"><div class="toc-list"></div></div>';
   document.body.appendChild(container);

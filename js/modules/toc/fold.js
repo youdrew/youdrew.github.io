@@ -107,6 +107,28 @@ function toggleFromToc(headings, items, index) {
   }
 }
 
+/**
+ * Collapse or expand every collapsible heading at once (the drawer's
+ * fold-all toggle). Iterated in document order so, on expand, a parent is
+ * revealed before we reach its children; on collapse we skip items already
+ * hidden inside a collapsed ancestor (collapsing the top level hides the
+ * rest). Virtual (news-item) entries have no fold and are ignored.
+ */
+export function foldAll(headings, items, collapse) {
+  items.forEach((item, i) => {
+    if (item.classList.contains('toc-item--virtual')) return;
+    if (!item.querySelector('.toc-collapse-btn')) return; // leaf heading, nothing to fold
+    const isCollapsed = item.classList.contains('collapsed');
+    if (collapse) {
+      if (!isCollapsed && !item.classList.contains('toc-hidden')) {
+        toggleFromToc(headings, items, i);
+      }
+    } else if (isCollapsed) {
+      toggleFromToc(headings, items, i);
+    }
+  });
+}
+
 function syncFromHeading(headings, items, index) {
   const item = items[index];
   const heading = headings[index] && headings[index].element;

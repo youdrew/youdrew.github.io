@@ -18,17 +18,7 @@
  * missing IDs get filled in as `heading-${index}` / `toc-item-${index}`.
  */
 
-// TOC label for a callout: the title line carries a long preview after an
-// em-dash ("Swyx · swyx on X — best known for…") and papers carry the
-// English title in full-width parens — cut both for a scannable label.
-function calloutLabel(summaryText) {
-  let label = summaryText.trim();
-  const dash = label.indexOf(' — ');
-  if (dash > 0) label = label.slice(0, dash);
-  const paren = label.indexOf('（');
-  if (paren > 6) label = label.slice(0, paren);
-  return label.trim();
-}
+import { newsLabel } from '../news-label.js';
 
 function isNewsCallout(el) {
   if (el.querySelector('audio')) return false;
@@ -65,7 +55,9 @@ export function collectHeadings(content, opts = {}) {
       level = lastHeadingLevel + 1;
       virtual = true;
       const summary = element.querySelector('summary');
-      text = calloutLabel(summary.textContent || '');
+      text = newsLabel(summary.textContent || '', element.getAttribute('data-callout') || '', {
+        short: true,
+      });
       if (!text) return;
     }
 
@@ -81,15 +73,13 @@ export function collectHeadings(content, opts = {}) {
     const index = entries.length;
     if (!element.id) element.id = virtual ? `toc-item-${index}` : `heading-${index}`;
 
-    entries.push({
-      element,
-      level,
-      index,
-      id: element.id,
-      text,
-      number: path.map((e) => e.n).join('.'),
-      virtual,
-    });
+    const number = path.map((e) => e.n).join('.');
+    // Stamp the number onto the DOM so the daily per-item read-aloud buttons
+    // (modules/daily-audio.js, which runs after the TOC) can label each card
+    // with the same "1.2"-style number the sidebar shows.
+    element.dataset.tocNumber = number;
+
+    entries.push({ element, level, index, id: element.id, text, number, virtual });
   });
 
   return entries;

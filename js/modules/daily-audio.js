@@ -12,16 +12,20 @@
  *   │  段落… ← 正在朗读的段落带琥珀色高亮，点击可跳播    │
  *   └───────────────────────────────────────────────────┘
  *
- * 另外，本节每条新闻 callout 的标题行右侧注入一枚小播放键：点击从
- * 该条对应的口播段落开始朗读。条目 ↔ 段落靠文本 token 匹配（口播会
- * 合并/跳过条目，按位置对齐不可靠；匹配不到就不给按钮），正在朗读
- * 的条目卡片同步点亮琥珀标记。
+ * 另外，本节每条新闻 callout 的标题行被重排成「编号 · 播放键 · 标题」：
+ * 编号复用 TOC 大纲的 data-toc-number（与侧栏一致），播放键取代原来的
+ * callout 图标，点击从该条对应的口播段落开始朗读。条目 ↔ 段落靠文本
+ * token 匹配（口播会合并/跳过条目，按位置对齐不可靠）；匹配不到的条目
+ * 仍给按钮，回退到前一条已匹配的位置，但不参与点亮。正在朗读的条目
+ * 卡片同步点亮琥珀标记。
  *
  * 跟读高亮沿用字数线性估算（TTS 管线没有逐句时间戳；中文合成语速
  * 均匀，段落级误差可忽略）。JS 不可用时原始 callout 原样保留。
  *
  * 仅在 body.type-daily-feed（/daily/ 与每日资讯文章页）上激活。
  */
+
+import { newsLabel } from './news-label.js';
 
 const NEAR_PX = 160; // 「仍在文稿附近」的视口余量
 const RATES = [1, 1.25, 1.5, 2];
@@ -116,6 +120,8 @@ const SVG_PLAY =
   '<svg class="daily-player__ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5 4.3a1 1 0 0 1 1.53-.85l12 7.7a1 1 0 0 1 0 1.7l-12 7.7a1 1 0 0 1-1.53-.85Z"/></svg>';
 const SVG_PAUSE =
   '<svg class="daily-player__ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5.5" y="4" width="4.6" height="16" rx="1.4"/><rect x="13.9" y="4" width="4.6" height="16" rx="1.4"/></svg>';
+const SVG_ITEM_PLAY =
+  '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5 4.3a1 1 0 0 1 1.53-.85l12 7.7a1 1 0 0 1 0 1.7l-12 7.7a1 1 0 0 1-1.53-.85Z"/></svg>';
 
 class Player {
   constructor(audio, host, registry) {
@@ -205,9 +211,12 @@ class Player {
   }
 
   /**
-   * 本节（音频卡片之后、下一个标题之前）的每条新闻 callout：匹配到
-   * 口播段落的，在标题行注入「从这条开始朗读」小播放键，并登记
-   * 段落 → 条目 的反向映射用于播放时点亮条目。
+   * 本节（音频卡片之后、下一个标题之前）的每条新闻 callout：把标题行
+   * 重排成「编号 · 播放键 · 标题」——编号取 TOC stamp 的 data-toc-number
+   * （与侧栏大纲一致），播放键取代原 callout 图标。点击播放键从该条对应
+   * 的口播段落开始朗读；口播合并/跳过的条目匹配不到，回退到前一条已匹配
+   * 段落的位置（保持顺序单调），但不登记进 itemsByPara —— 点亮只跟真正
+   * 匹配上的条目走，避免误点亮。
    */
   attachItemButtons() {
     const items = [];
@@ -219,29 +228,55 @@ class Player {
       el = el.nextElementSibling;
     }
     const paraTexts = this.paras.map((p) => p.textContent);
+    let runningPara = 0; // 口播跳过的条目回退到这里（上一条匹配段落 / 本节开头）
 
     items.forEach((item) => {
       const summary = item.querySelector('summary');
       if (!summary) return;
-      const idx = bestParagraph(summary.textContent || '', paraTexts);
-      if (idx === -1) return;
+      item.classList.add('daily-item');
 
-      (this.itemsByPara[idx] || (this.itemsByPara[idx] = [])).push(item);
+      const matched = bestParagraph(summary.textContent || '', paraTexts);
+      const seekPara = matched === -1 ? runningPara : matched;
+      if (matched !== -1) {
+        runningPara = matched;
+        (this.itemsByPara[matched] || (this.itemsByPara[matched] = [])).push(item);
+      }
 
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'daily-item-play';
-      btn.dataset.para = String(idx); // 匹配到的口播段落（也方便线上排查）
+      btn.dataset.para = String(seekPara); // 命中/回退的口播段落（也方便线上排查）
       btn.setAttribute('aria-label', '从这条开始朗读');
       btn.setAttribute('title', '从这条开始朗读');
-      btn.innerHTML =
-        '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5 4.3a1 1 0 0 1 1.53-.85l12 7.7a1 1 0 0 1 0 1.7l-12 7.7a1 1 0 0 1-1.53-.85Z"/></svg>';
+      btn.innerHTML = SVG_ITEM_PLAY;
       btn.addEventListener('click', (e) => {
         e.preventDefault(); // 别顺手折叠/展开 details
         e.stopPropagation();
-        this.seekToPara(idx);
+        this.seekToPara(seekPara);
       });
-      summary.appendChild(btn);
+
+      // 标题去噪：砍掉 handle / 英文副标 / 与正文重复的描述尾巴，留一个干净
+      // 的头（比 TOC 宽松，保留人名后的职务/公司），完整原文进 title 悬浮。
+      const titleInner = summary.querySelector('.callout-title-inner');
+      if (titleInner) {
+        const original = titleInner.textContent.trim();
+        const clean = newsLabel(original, item.dataset.callout || '', { short: false });
+        if (clean && clean !== original) {
+          titleInner.textContent = clean;
+          titleInner.setAttribute('title', original);
+        }
+      }
+
+      // 重排标题行：[编号] [播放键] [标题] …… [折叠角标(::after)]
+      const anchor = titleInner || summary.firstChild;
+      summary.insertBefore(btn, anchor);
+      const num = item.dataset.tocNumber;
+      if (num) {
+        const noEl = document.createElement('span');
+        noEl.className = 'daily-item-no';
+        noEl.textContent = num;
+        summary.insertBefore(noEl, btn);
+      }
     });
   }
 
@@ -320,7 +355,10 @@ class Player {
     this.registry.forEach((player) => {
       if (player !== this && !player.audio.paused) player.audio.pause();
     });
-    if (this.panel) this.setPanel(true);
+    // Do NOT auto-open the transcript — reading the transcript is a low-
+    // frequency, opt-in action; a panel unfolding on its own reads as a bug
+    // ("I never clicked 文稿, why did it open?"). The per-item amber marker
+    // already shows which story the voice is on. Only the 文稿 button opens it.
     this.setItemsLit(true);
   }
 

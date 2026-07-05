@@ -46,6 +46,40 @@
   color: #333;
 }
 
+.toc-header__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 2px;
+}
+
+/* 全部折叠 / 全部展开 切换（图标按当前状态在 index.js 里切换） */
+.toc-foldall {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.toc-foldall:hover {
+  background: #ececec;
+  color: #222;
+}
+.toc-foldall svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* 收起抽屉的 × */
 .toc-close-btn {
   position: relative;
@@ -147,7 +181,7 @@
     linear-gradient(#666, #666) left top 11px / 12px 2px no-repeat;
 }
 
-/* ---- 遮罩：仅移动端；桌面端抽屉与正文并存，可边读边点 ---- */
+/* ---- 遮罩：仅移动端；桌面端正文被推开（grid.css），抽屉不压正文 ---- */
 
 .toc-scrim {
   position: fixed;

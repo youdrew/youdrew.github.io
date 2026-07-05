@@ -61,6 +61,10 @@ export function initVisibility(container) {
     container.classList.toggle('is-open', open);
     tab.classList.toggle('is-hidden', open);
     scrim.classList.toggle('is-visible', open);
+    // Desktop: shift the article left so the drawer never sits over the text
+    // (grid.css gates the padding shift to ≥1100px; on mobile the drawer is an
+    // overlay + scrim, so the class is harmless there).
+    document.body.classList.toggle('toc-drawer-open', open);
     if (open) centerActiveItem(container);
     if (persist) saveState({ hidden: !open });
   }

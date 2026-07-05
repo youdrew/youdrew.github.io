@@ -15,7 +15,6 @@ import { initToc } from './modules/toc/index.js';
 function init() {
   new Navigation();
   new IdleOcean();
-  new DailyAudio();
   new Tooltip();
   if (document.getElementById('map')) {
     new MapPage();
@@ -29,6 +28,10 @@ function init() {
   new CanvasViewer();
   initLanguageSwitcher();
   initToc();
+  // After the TOC: it stamps each news callout with data-toc-number (the
+  // single source of truth for the outline numbering), which the per-item
+  // read-aloud buttons reuse so the card number matches the sidebar.
+  new DailyAudio();
   if (document.getElementById('tag-graph')) {
     initTagGraph();
   }

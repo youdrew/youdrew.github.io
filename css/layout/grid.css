@@ -9,7 +9,9 @@
   background: #f6f6f6;
   clear: both;
   min-height: 100vh;
-  transition: padding-left 0.3s ease-in-out;
+  transition:
+    padding-left 0.3s ease-in-out,
+    padding-right 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 /* 当侧边栏收起时，主内容左边距 = 可见导航条宽度(--rail)。
@@ -17,4 +19,14 @@
    导航条实际可见宽度 ~100px，导致最左列被切掉约 50px）。 */
 header:not(.show_menu) ~ .main {
   padding-left: var(--rail);
+}
+
+/* 桌面端 TOC 抽屉展开时把正文右侧推开抽屉的宽度，正文在余下空间里重新
+   居中，抽屉不再压住文字（模仿左侧导航的“推开”交互）。断点与 TOC 自身
+   的桌面/移动分界一致（visibility.js matchMedia 1100px / toc.css 1099px）；
+   移动端抽屉是叠加层，不推正文。 */
+@media (min-width: 1100px) {
+  body.toc-drawer-open .main {
+    padding-right: 320px;
+  }
 }

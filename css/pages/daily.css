@@ -432,15 +432,44 @@ body.type-daily-feed .content details.callout {
   border-left-color: #e2a600;
 }
 
-/* ---- Per-item read-aloud button (injected into each news callout) ------ */
+/* ---- News item title row (restructured client-side by daily-audio.js) ---
+   Original callout summary: [icon] [title] …… [chevron]. We drop the callout
+   icon and rebuild the row as  [number] [play] [title] …… [chevron]  so the
+   read-aloud key sits where the icon was, left-aligned, with the same
+   outline number the TOC shows. */
+
+.daily-item > summary.callout-title {
+  gap: 9px;
+}
+
+/* Drop the Obsidian callout icon — the play key takes its place. */
+.daily-item > summary > .callout-icon {
+  display: none;
+}
+
+/* Outline number, matching the sidebar (data-toc-number). Fixed min-width so
+   the play keys line up down the column regardless of "1.2" vs "1.14". */
+.daily-item-no {
+  flex: 0 0 auto;
+  min-width: 2.3em;
+  color: rgb(var(--callout-color));
+  opacity: 0.72;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.daily-item > summary > .callout-title-inner {
+  flex: 1 1 auto;
+  min-width: 0;
+}
 
 .daily-item-play {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
-  margin-left: auto; /* hug the right edge, before the fold chevron */
+  width: 25px;
+  height: 25px;
   padding: 0;
   border: 1px solid rgb(0 0 0 / 0.12);
   border-radius: 50%;
@@ -457,6 +486,7 @@ body.type-daily-feed .content details.callout {
 .daily-item-play svg {
   width: 11px;
   height: 11px;
+  margin-left: 1px; /* optically centre the play triangle */
 }
 
 .daily-item-play:hover {
