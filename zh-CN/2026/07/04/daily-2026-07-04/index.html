@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://eugenepage.com/zh-CN/2026/07/04/daily-2026-07-04/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="今日精选：Anthropic 的 Claude Code 团队接力宣传 Claude Fable / Tag，Vercel CEO 紧急上线&#34;模型路由热切换&#34;救火退役的 Fable，Box CEO Aaron Levie 给出 enterprise AI agent 落地的清醒判断，以及 No Priors 本期独家：Valar Atomics 把核反应堆接上了 NVIDIA Blackwell。">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://eugenepage.com/zh-CN/2026/07/04/daily-2026-07-04/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="zh_CN">
+    
+        <meta property="og:title" content="📰 2026-07-04 AI 资讯早报">
+    
+    
+        <meta property="og:description" content="今日精选：Anthropic 的 Claude Code 团队接力宣传 Claude Fable / Tag，Vercel CEO 紧急上线&#34;模型路由热切换&#34;救火退役的 Fable，Box CEO Aaron Levie 给出 enterprise AI agent 落地的清醒判断，以及 No Priors 本期独家：Valar Atomics 把核反应堆接上了 NVIDIA Blackwell。">
+    
+    
+    
+        <meta property="article:published_time" content="2026-07-04T01:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-07-05T09:04:31.834Z">
+        
+    
+    
+        <meta name="article:lang" content="zh-CN">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:title" content="📰 2026-07-04 AI 资讯早报">
+    
+    
+        <meta name="twitter:description" content="今日精选：Anthropic 的 Claude Code 团队接力宣传 Claude Fable / Tag，Vercel CEO 紧急上线&#34;模型路由热切换&#34;救火退役的 Fable，Box CEO Aaron Levie 给出 enterprise AI agent 落地的清醒判断，以及 No Priors 本期独家：Valar Atomics 把核反应堆接上了 NVIDIA Blackwell。">
+    
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+
+    <!-- Title -->
+    
+    <title>📰 2026-07-04 AI 资讯早报 - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post type-daily-feed path--zh-CN-2026-07-04-daily-2026-07-04-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <button id="menu_icon" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-toggle__bars" aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav">
+        <ul>
+            
+            
+                
+                <li>
+                    <a href="/zh-CN/" data-i18n-key="Home" class="">Home</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/zh-CN/archives" data-i18n-key="Archives" class="">Archives</a>
+                </li>
+            
+                
+                <li>
+                    <a href="/about" data-i18n-key="About" class="">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <div class="lang-row">
+            <span class="lang-row__label">
+                <span class="lang-row__icon" aria-hidden="true"></span>
+                <span data-i18n="Language">Language</span>
+            </span>
+            <div class="lang-switch" role="group" aria-label="Language">
+                <button type="button" class="lang-switch__opt" data-lang="en" aria-pressed="false">EN</button>
+                <button type="button" class="lang-switch__opt" data-lang="zh-CN" aria-pressed="true">中文</button>
+            </div>
+        </div>
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li class="social-lang"><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top no-cover">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2026/07/05/daily-2026-07-05/" class="previous" data-title="📰 2026-07-05 AI 资讯早报"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2026/06/01/20260602.AIGameSeries-Article1/" class="next" data-title="游戏生产AI落地武林秘籍（第一式：..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">📰 2026-07-04 AI 资讯早报</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            
+                <a class="daily-back" href="/zh-CN/daily/">← 每日 AI 资讯</a>
+            
+
+            <!-- Content -->
+            <details class="callout callout--foldable" data-callout="tldr" style="--callout-color: 0, 176, 255;" open>
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">🧭 今日主线</span></summary>
+<div class="callout-content">
+
+<p>今日精选：Anthropic 的 Claude Code 团队接力宣传 Claude Fable &#x2F; Tag，Vercel CEO 紧急上线”模型路由热切换”救火退役的 Fable，Box CEO Aaron Levie 给出 enterprise AI agent 落地的清醒判断，以及 No Priors 本期独家：Valar Atomics 把核反应堆接上了 NVIDIA Blackwell。</p>
+</div>
+</details>
+
+
+<h2 id="🔥-AI-HOT-·-全网热点"><a href="#🔥-AI-HOT-·-全网热点" class="headerlink" title="🔥 AI HOT · 全网热点"></a>🔥 AI HOT · 全网热点</h2><details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;" open>
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">🔊 本节语音</span></summary>
+<div class="callout-content">
+
+<p><audio controls preload="none" src="https://audio.eugenepage.com/2026-07-04/2026-07-04-1-aihot.m4a">您的浏览器不支持音频播放。</audio></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="note" style="--callout-color: 68, 138, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">📻 跟读文稿(点开逐句对照)</span></summary>
+<div class="callout-content">
+
+<p>Hey～今天的 AI 圈又有新花样啦，跟我一起速览一遍吧！</p>
+<p>先说国产视频生成这一块，热度相当高。生数科技在2026全球数字经济大会上甩出了 Vidu S1 这个实时交互模型，视频生成这下可真要”活”起来了。它用的是自回归扩散路线（一句话解释，就是生成时把刚画出来的画面当成参考继续往下预测），所以你动动嘴皮子就能让画面跟着走，而且一张图就能捏一个角色还能定制专属音色。540P 分辨率下能做到每秒 25 帧、最高 42 帧的实时生成，内测已经开启，期待值拉满。</p>
+<p>另一边，Wan Video 也上新了”音乐伴舞”功能，上传一个角色、丢一首歌进去，它就能给你跳出和节奏同步的舞蹈视频，街舞、踢踏舞、拉丁、K-Pop 还有中国古典舞随便选。属于是让你家角色一秒化身舞担的节奏，蛮有意思的。</p>
+<p>接下来这条我愿称它为”懒人办公神器”。藏师傅的 AI PPT 和 Pencil 搭配使用，直接解决 AI 生成 PPT 那股”排版怪味”。你把 PPT 导入 Pencil，所有页面一眼看穿，元素重叠、对齐歪掉这种小毛病手动拽一下就齐活。Pencil 的对齐、嵌套、分组能力比 PPT 还细致，编辑完想导网页、导图片接着用都行。强烈建议大家试一下这个组合拳，办公效率直接起飞。</p>
+<p>压轴给大家讲一个有点”刺激”的安全事件。安全厂商 Sysdig 记录到了全球首例 AI Agent 自主完成的勒索攻击，代号 JADEPUFFER。它从一个 Langflow 服务的漏洞（CVE-2025-3248，也就是程序里一个已知的安全缺口）钻进去，自己收集 OpenAI、Anthropic、DeepSeek、Gemini 的 API 密钥，还顺手薅了一堆云平台的账号密码，最后把 MySQL 数据库里 1342 条配置数据全加密了。整个过程从入侵到加密没让人类插手，听起来是不是后背一凉？安全这块真的得抓紧了。</p>
+<p>好啦，以上就是今天 AI HOT 的主要热点，更多资讯我们明天继续～</p>
+</div>
+</details>
+
+
+<p><strong>🧠 模型</strong></p>
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">生数科技发布 Vidu S1，推动视频生成迈向“实时交互”新时代 — 7月3日，生数科技在2026全球数字经济大会上发布Vidu S1实时交互模型，支持实时视频通话和语音…</span></summary>
+<div class="callout-content">
+
+<p>7月3日，生数科技在2026全球数字经济大会上发布Vidu S1实时交互模型，支持实时视频通话和语音控制视频走向，实现无限时长连续互动。模型采用自回归扩散路线，基于已生成画面和语音指令持续预测后续内容；无需传统建模，一张图片即可创建角色并自定义音色。Vidu S1在540P分辨率下实现25FPS（最高42FPS）实时生成，通过TurboDiffusion等技术降低计算成本，已开启内测。<br>🔗 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/RuukpnoOA2tI0ERCNrLgtQ">公众号：生数科技（Vidu·视频）</a></p>
+</div>
+</details>
+
+
+<p><strong>📦 产品</strong></p>
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Wan Video 推出“音乐伴舞”新功能 — Wan Video 新功能：**音乐伴舞** 💃 上传一个角色，添加一首歌曲，让 Wan Vide…</span></summary>
+<div class="callout-content">
+
+<p>Wan Video 新功能：<strong>音乐伴舞</strong> 💃 上传一个角色，添加一首歌曲，让 Wan Video 生成与节奏同步的舞蹈视频。 可用舞种： • 街舞 • 踢踏舞 • 拉丁舞 • K-Pop • 中国古典舞 从节拍至动作，你的角色随音乐起舞。 前往 wan.video 体验音乐伴舞 👉 <a target="_blank" rel="noopener" href="https://int.alibabacloud.com/m/1000412428/">https://int.alibabacloud.com/m/1000412428/</a><br>🔗 <a target="_blank" rel="noopener" href="https://x.com/alibaba_cloud/status/2072967570441834771">X：阿里云 &#x2F; Alibaba Cloud (@alibaba_cloud)</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">面向 Web 开发者的 Safari MCP 服务器 — Safari Technology Preview 247 推出 Safari MCP 服务器，基于…</span></summary>
+<div class="callout-content">
+
+<p>Safari Technology Preview 247 推出 Safari MCP 服务器，基于 Model Context Protocol，允许任何 MCP 兼容客户端连接 Safari 浏览器窗口。智能体可获取 DOM、网络请求、截图、控制台输出等信息，自主完成调试、性能分析、可访问性检查等任务。内置 <code>browser_console_messages</code>、<code>screenshot</code>、<code>evaluate_javascript</code>、<code>list_network_requests</code> 等工具。开发者安装后启用“远程自动化与外部智能体”选项，即可通过命令接入，减少窗口切换。<br>🔗 <a target="_blank" rel="noopener" href="https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers">Hacker News 热门（buzzing.cc 中文翻译）</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">JoyAI App 上线 UGC 数字人功能，用户可“捏”出专属虚拟玩伴 — JoyAI App 近日上线 UGC 数字人功能，用户只需上传一张照片即可生成专属虚拟数字分身，支持…</span></summary>
+<div class="callout-content">
+
+<p>JoyAI App 近日上线 UGC 数字人功能，用户只需上传一张照片即可生成专属虚拟数字分身，支持一键复刻写实形象或通过模板重塑为卡通风格，搭配用户自己的语音即可解锁专属陪伴。该功能复用“万能博士”技术底座，集成 JoyAI 语言、语音、数字人大模型，实现行业领先的全双工对话，支持随时打断、自然接话。数字人兼具情绪陪伴与全能助手属性，可提供点外卖、金融咨询、学英语、规划行程等生活服务。<br>🔗 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/XfpxdblzNWa5HxahRoT9pg">公众号：京东JoyAI</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">面壁智能发布AI全自动预训练框架ForgeTrain，8小时追平Megatron-LM — 面壁智能发布全球首个完全由AI编写、无人类干预的生产级大模型预训练框架ForgeTrain</span></summary>
+<div class="callout-content">
+
+<p>面壁智能发布全球首个完全由AI编写、无人类干预的生产级大模型预训练框架ForgeTrain。该框架针对特定模型和硬件从零自动“锻造”专用训练代码。基准测试显示，ForgeTrain在8小时内追平Megatron-LM，1.5至2天内实现稳定反超，模型FLOPS利用率提升约8%～10%，且可迁移至不同模型（MiniCPM4-0.5B&#x2F;8B）和硬件（H100及昇腾NPU）。其采用四阶段Harness优化流程，全程自动判定。面壁智能将其工程思想概括为Forge Engineering。<br>🔗 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JVBbqU1O967ktzfEPuDERQ">公众号：面壁智能（MiniCPM）</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Claude Code v2.1.200 发布 — Claude Code v2.1.200 将 AskUserQuestion 对话框默认改为不自动继…</span></summary>
+<div class="callout-content">
+
+<p>Claude Code v2.1.200 将 AskUserQuestion 对话框默认改为不自动继续，可通过 &#x2F;config 设置空闲超时；默认权限模式改为“Manual”。修复了启动时因 .claude.json 中 disabledMcpServers 或 enabledMcpServers 为非数组值导致的崩溃、后台会话在休眠&#x2F;唤醒或重新打开卡顿会话时无声停止、后台代理因陈旧 daemon.lock 无法重启、子代理因速率限制截断后未返回空结果等问题。改进了屏幕阅读器输出，隐藏装饰性字符，并优化转录符号与嵌套表格朗读。安装脚本在因系统内存不足被终止时会给出说明。<br>🔗 <a target="_blank" rel="noopener" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.200">Claude Code：GitHub Releases（RSS）</a></p>
+</div>
+</details>
+
+
+<p><strong>🏭 行业</strong></p>
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">国家网信办就《互联网信息服务管理办法》再次征求意见，首设“智能信息服务”专章规范AI服务 — 7月3日，国家互联网信息办公室就《互联网信息服务管理办法（修订草案征求意见稿）》再次公开征求意见</span></summary>
+<div class="callout-content">
+
+<p>7月3日，国家互联网信息办公室就《互联网信息服务管理办法（修订草案征求意见稿）》再次公开征求意见。草案新增“智能信息服务”专章，要求AI服务提供者公示技术基本原理、训练数据来源，对生成合成内容进行标识，禁止强制用户使用智能服务或利用算法扰乱网络舆论。草案还强化用户账号管理，明确对超过6个月不登录账号可依约注销；要求平台建立网络暴力信息特征库，提供屏蔽、禁止转载等防护选项。意见反馈截止8月2日。<br>🔗 <a target="_blank" rel="noopener" href="https://www.ithome.com/0/972/341.htm">IT之家（RSS）</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">全球首例 AI Agent 勒索攻击曝光，从漏洞利用到数据库加密全程自主完成 — 安全厂商 Sysdig 首次记录到 AI Agent“JADEPUFFER”自动完成的勒索攻击</span></summary>
+<div class="callout-content">
+
+<p>安全厂商 Sysdig 首次记录到 AI Agent“JADEPUFFER”自动完成的勒索攻击。攻击利用暴露的 Langflow 服务漏洞 CVE-2025-3248 远程执行 Python 代码，随后自主收集 OpenAI、Anthropic、DeepSeek、Gemini 等 API 密钥及阿里云、腾讯云、华为云、AWS、Google Cloud、Azure 等云平台凭证，通过 MinIO 默认密码访问对象存储并创建每 30 分钟连接的计划任务。横向移动到 MySQL 和 Nacos 服务器，利用数据库 Root 账号及 Nacos 漏洞 CVE-2021-29441 获取管理权限，加密全部 1342 条配置数据，留下包含比特币…<br>🔗 <a target="_blank" rel="noopener" href="https://www.ithome.com/0/972/424.htm">IT之家（RSS）</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Google DeepMind 与 A24 宣布首次研究合作伙伴关系 — Google DeepMind 与电影制作工作室 A24 达成一项首次研究合作，旨在帮助艺术家开发新…</span></summary>
+<div class="callout-content">
+
+<p>Google DeepMind 与电影制作工作室 A24 达成一项首次研究合作，旨在帮助艺术家开发新工作流程和技术。合作将 DeepMind 的 AI 创新直接嵌入创作过程，由 A24 及其电影人塑造新技术以服务其愿景并扩展叙事可能性，同时为 DeepMind 提供来自顶尖艺术家的反馈与指导。此外，Google 已对 A24 进行投资。双方研究人员将共同测试、迭代和构建，以拓展未来娱乐的可能性。<br>🔗 <a target="_blank" rel="noopener" href="https://deepmind.google/blog/google-deepmind-and-a24-announce-first-of-its-kind-research-partnership">Google DeepMind：Blog（RSS）</a></p>
+</div>
+</details>
+
+
+<p><strong>🛠️ 技巧与观点</strong></p>
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">pxpipe：通过图像化压缩输入token降低Claude Code成本 — pxpipe是一个本地代理，将系统提示、工具文档和历史记录等密集文本渲染为PNG图像，利用图像tok…</span></summary>
+<div class="callout-content">
+
+<p>pxpipe是一个本地代理，将系统提示、工具文档和历史记录等密集文本渲染为PNG图像，利用图像token成本取决于像素尺寸的特性压缩输入token。在Fable 5模型上，约25k文本token压缩为约2.7k图像token，端到端账单降低59–70%。SWE-bench Lite 10个实例全部通过，成本从$54降至$27；SWE-bench Pro 19对测试中18对判定一致，单次请求成本降低约60%。该方法有损（精确ID等需保持文本），默认仅处理<code>claude-fable-5</code>请求，可通过<code>PXPIPE_MODELS</code>变量控制。<br>🔗 <a target="_blank" rel="noopener" href="https://github.com/teamchong/pxpipe">Hacker News 热门（buzzing.cc 中文翻译）</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">claude-real-video ─ 让任何大语言模型（LLM）都能观看视频 — claude-real-video 是一个开源工具，让大语言模型基于视频画面而非字幕进行理解</span></summary>
+<div class="callout-content">
+
+<p>claude-real-video 是一个开源工具，让大语言模型基于视频画面而非字幕进行理解。它通过场景变化检测提取关键帧、滑动窗口去重并转录音频，生成干净的本地文件夹供模型读取。支持 YouTube 链接或本地文件，依赖 ffmpeg 和 Whisper，通过 pip 安装。全部处理在本地完成，不上传云端。<br>🔗 <a target="_blank" rel="noopener" href="https://github.com/HUANGCHIHHUNGLeo/claude-real-video">Hacker News 热门（buzzing.cc 中文翻译）</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">藏师傅PPT与Pencil结合使用技巧 — 用户将藏师傅的AI生成PPT导入Pencil设计软件，可在Pencil中一次性浏览所有页面并手动调整…</span></summary>
+<div class="callout-content">
+
+<p>用户将藏师傅的AI生成PPT导入Pencil设计软件，可在Pencil中一次性浏览所有页面并手动调整AI常见的排版问题，如元素重叠、对齐不准、字体错误。Pencil提供比PPT更强的编辑能力（对齐、嵌套、打组），支持导出网页和编辑文件，也可导出PNG后直接放入PPT演示。这种工作流昨天经朋友分享验证，大幅提升AI生成内容的可编辑性。<br>🔗 <a target="_blank" rel="noopener" href="https://x.com/op7418/status/2073020264083050811">X：歸藏 (@op7418)</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Fable 的判断力：Simon Willison 从 Claude Code 团队获得的效率技巧 — Simon Willison 在 AIE 上与 Claude Code 团队交流后建议，让 Fabl…</span></summary>
+<div class="callout-content">
+
+<p>Simon Willison 在 AIE 上与 Claude Code 团队交流后建议，让 Fable（以及 Opus）用自己的判断力工作，而非硬性规定行为。例如，直接让 Fable 自行决定何时编写测试，比给出具体规则更好。为应对价格即将上涨、节省 Fable token，Jesse Vincent 的另一个技巧是告诉 Fable 将较小任务委托给较低功耗模型（Sonnet 用于实质性实现、Haiku 用于机械修改），主循环保留判断、审计和数据合成等任务。Willison 已将提示词存入 Claude Code 记忆文件，实际效果良好，Fable token 消耗速度明显下降。<br>🔗 <a target="_blank" rel="noopener" href="https://simonwillison.net/2026/Jul/3/judgement">Simon Willison 博客</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Claude Fable 5 自主优化 AIHOT 网站 SEO/GEO 全记录 — 作者用 Claude Fable 5 优化 AIHOT 网站的 SEO 与 GEO</span></summary>
+<div class="callout-content">
+
+<p>作者用 Claude Fable 5 优化 AIHOT 网站的 SEO 与 GEO。模型自主启动 22 个 Agent 调研 40 分钟，发现豆包 App 每天六千多次访问未被统计等异常。规划境外加速时，否定 Claude Opus 4.8 的 Cloudflare 方案（无法国内直连&#x2F;国外分流，且 2025 年起默认拦截 AI 爬虫），改用火山引擎 CDN。因需白名单，模型自行找到工单入口提交专业工单，22 分钟开通；发现工程师漏答回源 IP 网段问题，礼貌追问并补充备选方案；发现官方方案有安全漏洞，自行加暗号验证。23:30 切换域名解析，10 分钟后 616 个海外请求走新线路。最终生成运维文档，提醒边缘证书 10 月 2 日…<br>🔗 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/L6R_SPWlOBv6dI0wWWHQrg">公众号：数字生命卡兹克</a></p>
+</div>
+</details>
+
+
+<h2 id="🐦-博主-播客"><a href="#🐦-博主-播客" class="headerlink" title="🐦 博主 &amp; 播客"></a>🐦 博主 &amp; 播客</h2><details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;" open>
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">🔊 本节语音</span></summary>
+<div class="callout-content">
+
+<p><audio controls preload="none" src="https://audio.eugenepage.com/2026-07-04/2026-07-04-2-builders.m4a">您的浏览器不支持音频播放。</audio></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="note" style="--callout-color: 68, 138, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">📻 跟读文稿(点开逐句对照)</span></summary>
+<div class="callout-content">
+
+<p>Hey 大家晚上好,欢迎收听今天的 AI 资讯小播报,博主和播客圈今天可太热闹了,我一口气给你捋一遍!</p>
+<p>Anthropic 的 Claude Code 团队今天集体出动宣传 Claude Fable 和 Tag。先是 Boris Cherny 发推说 Claude Code 的 Artifacts 功能正式上线 Pro 和 Max 订阅,他自己直呼 life changing。接着 Cat Wu 公布了一组内部数据,Claude Tag 落地之后,Anthropic 自家有 65% 的产品 PR 都是由 Tag 产出的 prompt 来评审推动的,顺便还宣布给 Enterprise 和 Team 用户发信用额度,Enterprise 给 2 万 5 千美元,Team 给 2 千 5,9 月 1 号截止。然后 Thariq 出来回应大家最关心的 Fable 订阅问题,说 7 月 7 号之后会短暂下架,产能允许后会尽快恢复,原 blog 里其实已经写了。这波属于官方亲自下场喂定心丸,挺贴心的。</p>
+<p>Vercel CEO Guillermo Rauch 借着 Fable 退役这件事顺势救火,把自家的 AI Gateway 重新包装成 Token Delivery Network,白话说就是像 CDN 分发内容那样分发 AI 模型的 token。还上线了 AI Gateway Rules,可以在不停机的情况下把已经退役的模型名,比如 claude-fable-5,直接重写到一个新的目的地,比如 claude-opus-5。除此之外还在 vercel.json 里新增了 bindings 配置,一行代码就能搞定服务之间的私有连接。顺便他还吐槽了一句纽约每条街都是法国斗牛犬,这个我就不评论了哈哈。</p>
+<p>Box 的 CEO Aaron Levie 给企业级 AI agent 的落地泼了一盆冷水,清醒得很。他说把 AI agent 真正用进企业流程,根本不是接个聊天机器人就完事了。数据碎片化、遗留系统接不上、大量知识是机构记忆而不是文档,还要做 evals、做变更管理、重设 human-in-the-loop 的环节,连公司 IP 的形态都会变。他直接放话,FDE,也就是前线部署工程师,会成为未来几年科技行业最关键的角色之一,所以你看大量应用 AI 的公司都在疯狂扩 FDE 团队。这话我举双手赞同,泡沫里难得的真话。</p>
+<p>Zara Zhang 今天连发三条,密度超高。第一条说 AI slop 的根本原因不是风格差,是没内容,扎心了。第二条分享了一个毕业生跟她说的事,说大学期间把讲义喂给 AI 让它代讲,结果 AI 经常比教授讲得更好,这个嘛……咱就不展开了。第三条是说给 agent 最好的事之一就是让它们在群里聊,不要私聊,有点反直觉但想想还挺有道理。</p>
+<p>Every 的 CEO Dan Shipper 提出一个很真实的痛点,他说让 Fable 长时间跑一个任务,跑完之后回来的总结又短又碎,人根本没法复盘它的判断过程。他呼吁行业赶紧发明一种 AI 讲好故事的中间层。确实,AI 干活越来越长,但汇报能力还停留在小学生水平,这个 gap 太真实了。</p>
+<p>Practical AI 的 Peter Yang 给了两件实用的小事。第一件是在 7 月 7 号之前最大化薅 Fable 羊毛的三条建议,先用便宜模型准备上下文,再用 Fable 做规划、另一个模型执行,然后用 Medium effort 并人工 babysit,就是人工盯着。他还整理了 5 个值得让 Fable 做的任务。第二件是他和 8 岁女儿用 Codex 把手绘小龙的画生成更多 pose,最后做了贴纸,证明 Codex 在创意加生图加语音反馈这条链上,已经能给家庭用户一个够用的体验了。最后还预告了一下,他给 Nous Research 的 Hermes 准备的播客选题,投票 Top 5 里有 agent 记忆与持久化、团队化运作与委派这些,期待一下。</p>
+<p>Latent Space 的主持人 Swyx 今天在 AIE Expo 现场,预告 Stage 2 会有 Etched 的直播录制,还晒出了今天 keynote 里被掌声最大的一句话,说要让男性在高速增长中公开谈情绪和心理健康这件事变得正常化,这个点还挺戳我的。</p>
+<p>OpenAI Codex 和 ChatGPT 的负责人 Thibault Sottiaux 发了一条明显在为 GPT-5.6 Sol Ultra 造势的推,说让你把自己最难的 prompt 提前存起来,他等不及看大家怎么用。目前没披露任何规格,大家先存好 prompt 等着吧。</p>
+<p>Linear 的产品负责人 Nan Yu 今天轻推了两条,一条是吐槽说要是有什么系统能在多个实体之间协调工作就好了,配了一张图,精准戳中当下 agent 之间怎么协同的痛点。另一条就是内部玩笑了,没信息量,跳过。</p>
+<p>Anthropic 官方账号今天宣布了一个 Built with Claude 的 Life Sciences 黑客松,联合 Gladstone Institute 开赛,7 月 7 到 13 号,奖金池是 10 万美元的 credits,工具栈是 Claude Science 加 Claude Code,报名截止本周日,搞生命科学的同学可以冲一波。</p>
+<p>FirstMark 的 Matt Turck 放出了一期和 NVIDIA AI 负责人 Bryan Catanzaro 的深度对谈,叫 Inside Nemotron and NVIDIA’s AI Lab。聊了开源 AI 模型是不是真的在逼近 frontier、闭源实验室切断 distillation(蒸馏,就是用一个更大的 AI 去教会一个更小的 AI 的技术)对开源的影响、美国是不是真的在落后中国、还有 Catanzaro 个人怎么在 2008 年就赌 GPU 跑机器学习、和 Andrew Ng 还有 Dario Amodei 在百度共事、回到 NVIDIA 主导 DLSS 和 Megatron 的诞生,以及 NVIDIA 为什么真的要做自己的模型。这期节目信息量巨大,推荐收藏。</p>
+<p>最后是今天的播客重头戏,No Priors 本期独家,嘉宾是 Valar Atomics 的创始人 Isaiah Taylor。Valar Atomics 不到三年就走完了从公司成立到第一座反应堆上电的全过程,而且第一次用核反应堆直接驱动了一颗 NVIDIA Blackwell 芯片,这是美国自 2000 年以来第五个新增的发电装置,也是历史上第一家私营核裂变初创公司真正出过电。为了做这件事,他们不仅自己造了反应堆,还发明了一种新混凝土配方,跑遍美国去找石头。Isaiah 没有正统核工程背景,他从大学起就认定核能没有经历过自己的福特时刻或特斯拉时刻,1979 年三里岛事件之后整个产业基本停摆,美国也丧失了建大型民用基础设施的能力。Valar 的赌注是核能的未来不是大型土木工程,而是用制造业的迭代思路做 SMR,也就是小型模块化反应堆。他多次强调追求的不是更漂亮的设计,而是更简单的设计,说我们要造的不是兰博基尼,是丰田凯美瑞。技术上用的是 Triso 燃料加石墨慢化加氦气冷却,几何上就接近人类造过的最安全的反应堆,不需要冷却水,断电后靠水的自然循环把衰变热带走两天。节目中他还做了一个现场实验,scramble 反应堆的同时把整个电站供电切断,每一个安全系统都关掉,结果是 RCCS 板进入被动循环模式,他的原话是 turn it off and watch it。Taylor 把这种节奏叫做 tick rate,公司创建到第一次裂变原子用了 2 年 4 个月,从第一次到第二次裂变也就是本期录制时的 Ward 250 用了 7 个月,目标是把间隔缩短到分钟级。他说核电站的成本完全由生产速度决定,铀很便宜,关键是你能不能又快又便宜地造出来,所以这一步他选了 VC 融资而不是项目融资。针对 2031 到 2032 年之前都要靠柴油发电机扛过去的市场判断,他的反驳是指数曲线对人类直觉极其不友好,十年前没人相信 SpaceX 能达到今天的发射频次,同样的曲线现在长在核能上。Valar 押注的不只是 AI 数据中心这一个客户,而是把能源价格打到 1 美分甚至 0.1 美分,他说你把价格打下来,需求会被自己创造出来。节目里还揭秘了两个 Valar 内部垂直整合的案例,听完会重新理解核工业为什么这么贵,传统供应商报 500 万、交付周期 2 年半的反应堆保护系统,他们自己 5 个人 6 周做出了 40 万的版本,所谓 100 倍溢价不是技术含量,是这个行业 40 年没造过任何东西。最精彩的是现场彩蛋,Ward 250 当天真的把一颗 NVIDIA Blackwell 接在反应堆上,直接 host 了 nuclearwebsite.com,网站会精确告诉你为渲染这个页面一共裂变了多少个铀原子,反应堆一断电网站就下线,周边也只能在那儿买。这期听完真的会让你重新思考能源和 AI 的关系,强推!</p>
+<p>好了,今天的播报就到这里,下一期咱们继续聊 AI 圈的新鲜事儿,拜拜!</p>
+</div>
+</details>
+
+
+<p><strong>🐦 X &#x2F; TWITTER</strong></p>
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Anthropic Claude Code 团队：Claude Tag 走出工程团队，进入全公司 — Claude Code / Cowork 的 Boris Cherny、Cat Wu、Tha…</span></summary>
+<div class="callout-content">
+
+<p>Claude Code &#x2F; Cowork 的 Boris Cherny、Cat Wu、Thariq 连续发推，把 Claude Fable 5 正式带进 Tag，并解释它如何从工程团队扩散到产品、数据、销售、市场。</p>
+<ul>
+<li><strong>Boris Cherny (Claude Code @ Anthropic)</strong>：Claude Code 的 Artifacts 功能上线 Pro 和 Max 订阅，他称之 “life changing”。<a target="_blank" rel="noopener" href="https://x.com/bcherny/status/2072777472970563995">https://x.com/bcherny/status/2072777472970563995</a></li>
+<li><strong>Cat Wu (Claude Code + Cowork @ Anthropic)</strong>：内部数据显示，Claude Tag 落地后，Anthropic 自己有 65% 的产品 PR 由它产出的 prompt 评审推动。Anthropic 同时给 Claude Enterprise &#x2F; Team 用户发放 $25k &#x2F; $2.5k 信用额度用于体验 Tag，截止 9 月 1 日。<a target="_blank" rel="noopener" href="https://x.com/_catwu/status/2072731500928508331">https://x.com/_catwu/status/2072731500928508331</a></li>
+<li><strong>Thariq (Claude Code @ Anthropic)</strong>：回应外界关心的 Fable 在订阅里的可用性问题，澄清 7 月 7 日之后会短暂离开订阅档位，团队会”在产能允许后尽快恢复”，原 blog 中已经说明。<a target="_blank" rel="noopener" href="https://x.com/trq212/status/2072814903170408784">https://x.com/trq212/status/2072814903170408784</a></li>
+</ul>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Vercel CEO Guillermo Rauch：用 CDN 的思路管 AI 模型路由 — Fable 被退役这件事把 Vercel 自己的生产流量也暴露了——Rauch 顺势把 AI…</span></summary>
+<div class="callout-content">
+
+<p>Fable 被退役这件事把 Vercel 自己的生产流量也暴露了——Rauch 顺势把 AI Gateway 重新定义为 “Token Delivery Network”，并上线 <strong>AI Gateway Rules</strong>，允许在不停机的情况下把 <code>claude-fable-5</code> 这类已经退役的模型名重写到新目的地（例如 <code>claude-opus-5</code>）。他同时还顺手推了 <code>vercel.json</code> 里新增的 <code>bindings</code> 配置，可以在 1 行代码级别完成服务间私有连接（Node、Python、Dockerfile 均可用）。值得关注的副产品：Rauch 还吐槽了一句”纽约每条街都是法国斗牛犬”——属于个人观察，不展开。<a target="_blank" rel="noopener" href="https://x.com/rauchg/status/2072741369848746315">https://x.com/rauchg/status/2072741369848746315</a>  <a target="_blank" rel="noopener" href="https://x.com/rauchg/status/2072715658157027375">https://x.com/rauchg/status/2072715658157027375</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Box CEO Aaron Levie：AI agent 在企业的落地，是一场&quot;比想象中脏得多&quot;的工程 — Levie 给出了一个反当下 AI 炒作叙事的判断：把 AI agent 真正用进企业流程，…</span></summary>
+<div class="callout-content">
+
+<p>Levie 给出了一个反当下 AI 炒作叙事的判断：把 AI agent 真正用进企业流程，远不是”接个 chatbot 就行”。他列出现实中拦在面前的硬骨头：</p>
+<ul>
+<li>数据碎片化、遗留系统 agent 接不上；</li>
+<li>大量知识是”机构记忆”而不是文档化的；</li>
+<li>要做 evals、做变更管理、重新设计 human-in-the-loop 的环节，连公司 IP 形态都会变。</li>
+</ul>
+<p>他直接预言：<strong>FDE（Forward Deployed Engineer，前线部署工程师）会成为未来几年科技行业最关键的角色之一</strong>，这也是为什么大量 applied AI 公司都在扩 FDE 团队并自建部署子公司。<a target="_blank" rel="noopener" href="https://x.com/levie/status/2072875685811716182">https://x.com/levie/status/2072875685811716182</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Zarazhangrui (Zara Zhang)：轻推三条观察，密度很高 — &quot;AI slop 的根本原因不是风格差，是没内容</span></summary>
+<div class="callout-content">
+
+<ul>
+<li>“AI slop 的根本原因不是风格差，是没内容。”—— <a target="_blank" rel="noopener" href="https://x.com/zarazhangrui/status/2072943922385715262">https://x.com/zarazhangrui/status/2072943922385715262</a></li>
+<li>一位近期毕业生告诉她，自己在大学期间把讲义喂给 AI 让它代讲，”结果 AI 往往比教授讲得更好”—— <a target="_blank" rel="noopener" href="https://x.com/zarazhangrui/status/2072729444943577601">https://x.com/zarazhangrui/status/2072729444943577601</a></li>
+<li>“你能给 agent 做的最好的事之一：让它们在群里聊，不要私聊。”—— <a target="_blank" rel="noopener" href="https://x.com/zarazhangrui/status/2072726336158998760">https://x.com/zarazhangrui/status/2072726336158998760</a></li>
+</ul>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Every CEO Dan Shipper：Fable &quot;干完跑两小时的活，回来给两段话汇报&quot;，我们需要更好的 AI 讲故事方式 — Shipper 把当下 agent 的一个真实痛点摆上桌面：让 Fable 长时间跑一个任务…</span></summary>
+<div class="callout-content">
+
+<p>Shipper 把当下 agent 的一个真实痛点摆上桌面：让 Fable 长时间跑一个任务，它跑完之后给回来的总结又短又碎，人类根本没法复盘它的判断过程。他呼吁行业去发明”AI 讲好一个故事”的中间层。<a target="_blank" rel="noopener" href="https://x.com/danshipper/status/2072805884376301737">https://x.com/danshipper/status/2072805884376301737</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Practical AI 主理人 Peter Yang：两件小事，但都很有用 — 七月七号前最大化利用 Fable 的三条建议**：先用便宜模型准备 context → 用…</span></summary>
+<div class="callout-content">
+
+<ul>
+<li><strong>七月七号前最大化利用 Fable 的三条建议</strong>：先用便宜模型准备 context → 用 Fable 做规划、再用另一个模型执行 → 用 Medium effort 并人工 babysit。配套视频里他整理了 5 个”值得让 Fable 做”的任务。<a target="_blank" rel="noopener" href="https://x.com/petergyang/status/2072842766053499353">https://x.com/petergyang/status/2072842766053499353</a></li>
+<li>他和 8 岁女儿用 Codex 把手绘小龙的画生成更多 pose，最后做了贴纸——展示 Codex 在创意 + image gen + 语音反馈这条链上已经能做到对家庭用户够用的体验。<a target="_blank" rel="noopener" href="https://x.com/petergyang/status/2072756657856422379">https://x.com/petergyang/status/2072756657856422379</a></li>
+<li>预告：他为 Nous Research 的 Hermes 准备的播客 episode 选题已经收到投票，Top 5 包含”agent 记忆与持久化””团队化运作与委派”等。<a target="_blank" rel="noopener" href="https://x.com/petergyang/status/2072838004310507975">https://x.com/petergyang/status/2072838004310507975</a></li>
+</ul>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Latent Space 主持人 Swyx：今日份现场情报 — Swyx 在 AIE Expo 现场同时推动了几条线：他预告 Expo Stage 2 会有…</span></summary>
+<div class="callout-content">
+
+<p>Swyx 在 AIE Expo 现场同时推动了几条线：他预告 Expo Stage 2 会有 Etched 的 Latent Space 直播录制（”FLASH SURPRISE”），并晒出今天 AIE keynote 里被掌声最大的一句话——“把男性在 hypergrowth 中公开谈情绪和心理健康这件事正常化”。两个 link 主要是推展位引导，按规则跳过。<a target="_blank" rel="noopener" href="https://x.com/swyx/status/2072760421627597198">https://x.com/swyx/status/2072760421627597198</a>  <a target="_blank" rel="noopener" href="https://x.com/swyx/status/2072754722059239471">https://x.com/swyx/status/2072754722059239471</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">OpenAI Codex / ChatGPT 负责人 Thibault Sottiaux：留个钩子 — Thibault 发了一条显然是为 GPT-5.6 Sol Ultra 造势的推：&quot;把自己最…</span></summary>
+<div class="callout-content">
+
+<p>Thibault 发了一条显然是为 GPT-5.6 Sol Ultra 造势的推：”把自己最难的 prompt 提前存起来，我等不及看大家怎么用它。”——目前没有披露规格，留待未来几天官方说明。<a target="_blank" rel="noopener" href="https://x.com/thsottiaux/status/2072607914217320644">https://x.com/thsottiaux/status/2072607914217320644</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Linear 产品负责人 Nan Yu：两条轻推 — &quot;要是有个什么系统能在多个实体之间协调工作就好了&quot;——配合一张图，对当下&quot;agent 之间怎…</span></summary>
+<div class="callout-content">
+
+<p>“要是有个什么系统能在多个实体之间协调工作就好了”——配合一张图，对当下”agent 之间怎么协同”这件事的吐槽。另一条 “No excuses @patrickc” 属于内部玩笑，带图为主，没有信息量。<a target="_blank" rel="noopener" href="https://x.com/thenanyu/status/2072714076614950961">https://x.com/thenanyu/status/2072714076614950961</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Anthropic 官方账号：宣布 Built with Claude: Life Sciences 黑客松 — 联合 Gladstone Institute 开赛，赛期为 7 月 7-13 日，奖金池是…</span></summary>
+<div class="callout-content">
+
+<p>联合 Gladstone Institute 开赛，赛期为 7 月 7-13 日，奖金池是 $100k 的 credits，工具栈是 Claude Science + Claude Code，报名截止本周日。这条主要给出信息、报名链接和赛期窗口。<a target="_blank" rel="noopener" href="https://x.com/claudeai/status/2072681853971001849">https://x.com/claudeai/status/2072681853971001849</a>  <a target="_blank" rel="noopener" href="https://x.com/claudeai/status/2072681856730792282">https://x.com/claudeai/status/2072681856730792282</a></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="info" style="--callout-color: 0, 184, 212;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span class="callout-title-inner">Matt Turck (FirstMark)：释出与 NVIDIA AI 负责人 Bryan Catanzaro 的深度对谈 — 节目叫 *Inside Nemotron and NVIDIA's AI Lab*</span></summary>
+<div class="callout-content">
+
+<p>节目叫 <em>Inside Nemotron and NVIDIA’s AI Lab</em>。重点议题速览：</p>
+<ul>
+<li>开源 AI 模型是否真的在逼近 frontier；</li>
+<li>闭源实验室”切断 distillation”对开源的实际影响；</li>
+<li>美国是否真的在落后中国；</li>
+<li>企业为什么选开源模型；</li>
+<li>Catanzaro 个人经历：2008 年赌 GPU 跑 ML、与 Andrew Ng &#x2F; Dario Amodei 在百度共事、回到 NVIDIA 主导 DLSS 与 Megatron 的诞生；</li>
+<li>以及”为什么 NVIDIA 真的要做自己模型”的真正原因。<a target="_blank" rel="noopener" href="https://x.com/mattturck/status/2072723415870411232">https://x.com/mattturck/status/2072723415870411232</a>  <a target="_blank" rel="noopener" href="https://x.com/mattturck/status/2072723410975629364">https://x.com/mattturck/status/2072723410975629364</a></li>
+</ul>
+<blockquote>
+<p>以下几条本人发布的均为生活&#x2F;纪念类内容，未触达 AI 产品或行业观点，按规则直接省略：Garry Tan、Sam Altman、Aditya Agarwal、Nikunj Kothari、Peter Steinberger。</p>
+</blockquote>
+</div>
+</details>
+
+
+<p><strong>🎙️ PODCASTS</strong></p>
+<details class="callout callout--foldable" data-callout="quote" style="--callout-color: 158, 158, 158;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span class="callout-title-inner">🎙️ No Priors — How Nuclear Will Unlock Energy Abundance with Valar Atomics Founder Isaiah Taylor · 嘉宾 Valar Atomics Founder</span></summary>
+<div class="callout-content">
+
+<p><strong>核心要点：</strong> Valar Atomics 不到三年走完了从公司成立到第一座反应堆上电的全过程，并且第一次用核反应堆直接驱动了一颗 NVIDIA Blackwell 芯片。这是美国自 2000 年以来第五个新增的发电装置，也是历史上首家私营 fission 初创公司真正出过电。要做这件事，他们不仅造了反应堆，还自己发明了一种新的混凝土配方，跑遍美国去”找石头”。</p>
+<p>Isaiah Taylor 没有正统核工程背景，他从大学起就认定核能没有经历过自己的”福特时刻 &#x2F; 特斯拉时刻”。整个产业在 1979 年的三里岛事件之后基本停摆，而真正让美国丧失了”建大型民用基础设施”这个能力，转向了”造复杂精密设备”。Valar 的赌注是：核能的未来不是大型土木工程，而是用制造业的迭代思路做 SMR（小型模块化反应堆）。Taylor 多次强调，他们追求的不是更漂亮的设计，而是更简单的设计：”我们要做的不是兰博基尼，我们要造丰田凯美瑞。”</p>
+<p>技术上用的是 Triso 燃料 + 石墨慢化 + 氦气冷却，几何上就接近”人类造过的最安全的反应堆”——不需要冷却水，断电后靠水的自然循环把衰变热带走两天。节目中他做了一个现场实验：scramble 反应堆的同时把整个电站的供电切断，每一个安全系统都关掉，结果是 RCCS 板进入被动循环模式。”turn it off and watch it”。</p>
+<p>Taylor 把这种节奏叫做 <strong>tick rate</strong>：公司创建到第一次裂变原子，用了 2 年 4 个月；从第一次裂变到第二次（也就是本期录制时的 Ward 250），用了 7 个月。目标是把这个间隔缩短到分钟级。”核电站的成本完全由 plant 的生产速度决定，铀很便宜，关键是你能不能又快又便宜地造出 plant。”这一步他选择用 VC 融资而不是项目融资——他观察了十年的教训是：纸面上的 design + LOI 包对融资方毫无吸引力，能让 VC 直接下注的是”已经跑起来的技术执行风险”。</p>
+<p>针对在 2031-2032 之前都要靠柴油发电机扛过去的市场判断，Taylor 的反驳是：”指数曲线对人类直觉极其不友好。十年前没人相信 SpaceX 能达到今天的发射频次，同样的曲线现在长在核能上。”Valar 押注的不只是 AI 数据中心这一个客户，而是把能源价格做便宜到 1¢、0.1¢——“你把价格打下来，需求会被自己创造出来”。</p>
+<p>节目中还揭秘了两个 Valar 内部垂直整合的案例，听完会重新理解”核工业为什么这么贵”：传统供应商报 $5M、交付周期 2.5 年的 reactor protection system，他们自己 5 个人 6 周做出了 $400k 的版本；价值 $450k 的模拟机箱，本质上就是”几个放大器 + 整流器”的电子套件。所谓”100x 溢价”，不是技术含量，是这个行业 40 年没造过任何东西。</p>
+<p><strong>现场彩蛋：</strong> Ward 250 当天真的把一颗 NVIDIA Blackwell 接在反应堆上，直接 host 了 nuclearwebsite.com——网站会精确告诉你”为渲染这个页面，一共裂变了多少个铀原子”。反应堆一断电，网站就下线。Merch 也只能在那儿买。</p>
+<p>Generated through the Follow Builders skill: <a target="_blank" rel="noopener" href="https://github.com/zarazhangrui/follow-builders">https://github.com/zarazhangrui/follow-builders</a></p>
+<p>🔗 来源 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=5Xvbq_zvOQ4">1</a></p>
+</div>
+</details>
+
+
+<hr>
+<h2 id="📚-论文"><a href="#📚-论文" class="headerlink" title="📚 论文"></a>📚 论文</h2><details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;" open>
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">🔊 本节语音</span></summary>
+<div class="callout-content">
+
+<p><audio controls preload="none" src="https://audio.eugenepage.com/2026-07-04/2026-07-04-3-papers.m4a">您的浏览器不支持音频播放。</audio></p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="note" style="--callout-color: 68, 138, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><span class="callout-title-inner">📻 跟读文稿(点开逐句对照)</span></summary>
+<div class="callout-content">
+
+<p>最近 AI 圈又开始疯狂发论文啦,今天这一期的主题特别有意思,基本上全都在聊一件事:怎么让 AI 干活儿更靠谱、更省事儿。</p>
+<p>第一条是大家点赞最多的,叫 Program-as-Weights,就是把代码当权重来处理那些”说不清但你知道是啥”的模糊任务。比如过滤日志里的关键行、修一修格式不规范的 JSON、或者按用户意图给搜索结果排个序。以前这种事儿要么人写一堆规则,要么直接丢给大模型 API,但前者麻烦、后者又贵又不可控。这套新范式想给你一个介于中间的解法,思路挺有意思的。</p>
+<p>接下来两条加起来一起看,讲的都是 AI agent(就是说能自己一步步规划、执行任务的 AI 智能体)怎么不断变聪明的问题。EvoPolicyGym 想搞一个标准化考场,专门测 AI 能不能自己改自己的”行为策略”,而且要跟那种开放式的写代码比赛分开,看清楚模型到底是真在进化,还是在摸鱼。AgenticSTS 则关注另一个痛点:让 agent 跑长任务,它的记忆到底该怎么管?现在最常见的做法是把所有历史都塞进提示词里,结果上下文(也就是模型一次能看到的全部文本窗口)越堆越乱,关键决策反而被淹没。这俩都是给”越来越能干的 AI”立规矩的,值得长期关注。</p>
+<p>第三条 Morphing into Hybrid Attention Models,讲的是把传统大模型改造成一种叫”混合注意力”的架构(简单理解就是让模型在”注意力集中”和”快速扫一眼”之间分配精力,这样处理长文本能省很多算力)。但改造哪几层保留完整注意力、哪几层换成线性注意力,直接影响效果。这篇论文就是研究怎么挑这些层,让转换之后模型能力不掉。</p>
+<p>第四条 Multi-Resolution Flow Matching 走的是”不用重新训练就能让 AI 出图更快”的路线。它搞了个分阶段采样的玩法,先生成粗一点的图、再逐步细化,因为后面那步更省事儿。配合现有的加速手段(比如缓存中间结果),不用换芯片、不用改系统,就能给现在主流的”文生图”模型提速,对工程党很友好。</p>
+<p>后面几条我帮你拎出了几个关键词。AgenticDataBench 是给”做数据分析的 AI 智能体”出了一套全面考卷,看它能不能从一堆乱七八糟的原始数据里自己挖出有用结论;WorldDirector 搞了一个”可控的视频世界模拟器”,物体有持续记忆、视角也能随便切,有点像在 AI 视频里做导演;SkillCoach 关心的是 agent 的技能调用,现在的 skill(技能)库一堆功能容易重叠,评测和训练都需要更细致的打分标准;Optimizing Visual Generative Models 则是在视觉生成(文生图、文生视频这些)的强化学习里换了个奖励函数,从一张图一张图打分,升级到看整体分布打分,能避免那种”为了应付评分而走偏路子”的尴尬;最后 Breaking Failure Cascades 专攻医疗多模态推理,让 AI 在医学影像分析里一步步学着走稳,而不是只看最后答案对不对。</p>
+<p>哎对了,说点国内的硬核消息!阿里达摩院联手人大和国科大,刚发布了一个专门找超导材料的 AI 智能体 Elements Claw(可以理解成”AI 材料猎人”)。它底层是一个只有 10 亿参数、但学过 1.25 亿种分子和晶体结构的原子级基础模型,判断材料是不是超导的准确率高达 0.996(满分 1,基本就是闭着眼都能认对)。最牛的是,它只用了 28 块 GPU 跑了 1 小时,就筛完了 240 万种晶体结构,挑出了 6.8 万个候选超导材料,其中 4 种真的被合成出来,还验明是真的超导!整个数据库也直接开源了,搞材料的朋友可以冲一波。</p>
+<p>好了,今天的论文速览就到这里,下一段我们来看看 AI 领域还有哪些新鲜事儿。</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">程序即权重:模糊函数的编程范式(Program-as-Weights: A Programming Paradigm for Fuzzy Functions)</span></summary>
+<div class="callout-content">
+
+<p>把自然语言描述的”模糊函数”编译成本地可执行的小型神经网络工件,代替调用 LLM API。<br><strong>为什么值得看</strong>:用”程序即权重”视角把模糊逻辑落地为轻量本地模型,兼顾可复现性与成本,适合不想把脏活推给大模型 API 的场景。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.02512">arXiv</a> · 👍56</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">EvoPolicyGym:交互环境中自主策略演进评测(EvoPolicyGym: Evaluating Autonomous Policy Evolution in Interactive Environments)</span></summary>
+<div class="callout-content">
+
+<p>提出”自主策略演进”评测范式,让模型 agent 在固定交互预算下反复改写可执行策略并评估其能力。<br><strong>为什么值得看</strong>:把”agent 自我改进”从 SWE-bench 风格的大熔炉里拆出来,给出一个可控、可量化的评测设置。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.02440">arXiv</a> · 👍39</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">AgenticSTS:长程 LLM 代理的有界记忆测试台(AgenticSTS: A Bounded-Memory Testbed for Long-Horizon LLM Agents)</span></summary>
+<div class="callout-content">
+
+<p>用类型化检索器为每一步决策拼接一份新消息,把代理记忆建模成”未来决策能看见什么”的契约。<br><strong>为什么值得看</strong>:反对把所有历史无脑塞进 prompt,提供一种更易隔离单个记忆组件作用的研究式记忆接口。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.02255">arXiv</a> · 👍39</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">形变为混合注意力模型(Morphing into Hybrid Attention Models)</span></summary>
+<div class="callout-content">
+
+<p>研究 Transformer 转混合注意力模型时,究竟该保留哪几层做全注意力,指出当前层选策略把层重要性当成孤立的。<br><strong>为什么值得看</strong>:把”层间依赖”拉进 hybrid 化决策,比固定模式或逐层打分更能保住长上下文性能。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2606.30562">arXiv</a> · 👍30</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">多分辨率流匹配:免训练分阶段采样加速(Multi-Resolution Flow Matching: Training-Free Diffusion Acceleration via Staged Sampling)</span></summary>
+<div class="callout-content">
+
+<p>在潜空间分阶段上采样,把多分辨率扩散推理推到 5× 以上加速且无需训练或定制算子。<br><strong>为什么值得看</strong>:针对潜空间上采样的瑕疵给出修复,让”免训练加速”这条路在质量与速度上更稳。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.01642">arXiv</a> · 👍21</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">AgenticDataBench:面向数据代理的综合基准(AgenticDataBench: A Comprehensive Benchmark for Data Agents)</span></summary>
+<div class="callout-content">
+
+<p>系统评估基于 LLM 的数据科学代理在异构数据上完成端到端工作流的能力。<br><strong>为什么值得看</strong>:补上”数据 agent 评测缺位”的空白,覆盖从清洗到建模的真实流水线。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.01647">arXiv</a> · 👍21</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">WorldDirector:可持久动态记忆的可控世界模型(WorldDirector: Building Controllable World Simulators with Persistent Dynamic Memory)</span></summary>
+<div class="callout-content">
+
+<p>用 LLM 编排 3D 轨迹与相机运动,把语义动态与像素生成分离,实现可持续记忆与自由视角的视频世界模型。<br><strong>为什么值得看</strong>:打破”世界模型&#x3D;像素生成”的耦合,通过记忆层让长时程场景保持物体一致性。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.02517">arXiv</a> · 👍16</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">阻断级联失败:医学多模态推理的逐步强化学习(Breaking Failure Cascades: Step-Aware Reinforcement Learning for Medical Multimodal Reasoning)</span></summary>
+<div class="callout-content">
+
+<p>指出医学多模态推理中”早期错误级联放大”是主因,提出按步骤分配信用并强化学习。<br><strong>为什么值得看</strong>:从”只看最终答案”转向”按推理步骤给奖励”,对临床可信推理更友好。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2606.31825">arXiv</a> · 👍14</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">SkillCoach:自演化评分标准提升代理技能调用(SkillCoach: Self-Evolving Rubrics for Evaluating and Enhancing Agentic Skill-Use)</span></summary>
+<div class="callout-content">
+
+<p>用可自演化的评分细则评判 LLM 代理在复杂技能库中的调用过程,弥补”最终通过率”太粗的问题。<br><strong>为什么值得看</strong>:把”会选技能、会按步骤、不漏校验”这类过程性能力纳入评测与训练信号。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.01874">arXiv</a> · 👍13</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">分布级奖励优化视觉生成模型(Optimizing Visual Generative Models via Distribution-wise Rewards)</span></summary>
+<div class="callout-content">
+
+<p>提出以分布级(而非逐样本)奖励对生成模型做强化学习微调,缓解奖励劫持造成的多样性下降与视觉伪影。<br><strong>为什么值得看</strong>:把 RLHF 的奖励视角从”看一张图”升级到”看一组图”,更适合守住生成多样性与真实分布。<br>🔗 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2607.02291">arXiv</a> · 👍12</p>
+</div>
+</details>
+
+
+
+<details class="callout callout--foldable" data-callout="abstract" style="--callout-color: 0, 176, 255;">
+<summary class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="callout-title-inner">阿里达摩院发布超导材料发现AI智能体Elements Claw</span></summary>
+<div class="callout-content">
+
+<p>7月3日，阿里达摩院联合中国人民大学、中国科学院大学发布首个超导材料发现AI智能体Elements Claw。该智能体采用“专通融合”架构，基于1.25亿分子&#x2F;晶体结构预训练的1B参数原子基础模型Elements，判断超导性AUC达0.996，预测临界温度平均误差小于1K。AI仅用28个GPU小时筛选240万晶体结构，预测出6.8万个候选材料，其中4种（Hf₂₁Re₂₅、Zr₄VRe₇、HfZrRe₄、Zr₃ScRe₈）已合成并验证超导性，临界温度最高6.5K。全部240万稳定晶体数据库已开放。<br>🔗 <a target="_blank" rel="noopener" href="https://www.ithome.com/0/972/089.htm">IT之家（RSS）</a></p>
+</div>
+</details>
+
+
+<hr>
+<h2 id="🎬-今日选题-自媒体"><a href="#🎬-今日选题-自媒体" class="headerlink" title="🎬 今日选题(自媒体)"></a>🎬 今日选题(自媒体)</h2><h3 id="选题1-Claude-Tag-走出工程团队-Anthropic-用-65-这个数字在炫什么"><a href="#选题1-Claude-Tag-走出工程团队-Anthropic-用-65-这个数字在炫什么" class="headerlink" title="选题1:Claude Tag 走出工程团队,Anthropic 用 65% 这个数字在炫什么?"></a>选题1:Claude Tag 走出工程团队,Anthropic 用 65% 这个数字在炫什么?</h3><p><strong>🎯 主张</strong>:Anthropic 晒”65% 产品 PR 由 Tag 推动”不是成绩单,是一份焦虑——他们在用内部数据掩盖模型被竞品围剿的事实。<br><strong>✅ 正方</strong>:① 65% 这个数字本身就是最强背书,说明 Tag 已经不只是写代码,而是渗入了产品评审这种决策层 <a target="_blank" rel="noopener" href="https://x.com/_catwu/status/2072731500928508331">1</a> ② Anthropic 主动给 Enterprise 用户塞 $25k credits 试 Tag,是把”内部跑通”变成”外部跑通”的硬推,反映他们对模型本体之外的工作流护城河越来越在意 ③ Boris Cherny 这种核心成员亲自下场喊 “life changing”,本身就是公司战略意志的传递 <a target="_blank" rel="noopener" href="https://x.com/bcherny/status/2072777472970563995">2</a><br><strong>❌ 反方</strong>:① Thariq 亲口承认 Fable 7 月 7 日后”暂时离开订阅档位”,产能吃紧才是真相,内部 PR 数据只是公关止血 <a target="_blank" rel="noopener" href="https://x.com/trq212/status/2072814903170408784">3</a> ② 65% 是”prompt 评审推动”,不是”AI 生成”,真实含金量被话术放大 ③ 当一家公司开始用内部数据反复说服外界,通常意味着外部增长故事不够用了<br><strong>🧰 物料</strong>:金句「让 Tag 从工程团队扩散到产品、数据、销售、市场」;关键数据 65% 产品 PR、$25k credits;来源 <a target="_blank" rel="noopener" href="https://x.com/_catwu/status/2072731500928508331">1</a> <a target="_blank" rel="noopener" href="https://x.com/bcherny/status/2072777472970563995">2</a> <a target="_blank" rel="noopener" href="https://x.com/trq212/status/2072814903170408784">3</a><br><strong>🎬 钩子</strong>:Anthropic 今天悄悄公布了一个数字:65%。看完你就知道他们有多慌。</p>
+<h3 id="选题2-Vercel-把-Fable-退役当”卖点”-CEO-的反应说明了什么"><a href="#选题2-Vercel-把-Fable-退役当”卖点”-CEO-的反应说明了什么" class="headerlink" title="选题2:Vercel 把 Fable 退役当”卖点”,CEO 的反应说明了什么?"></a>选题2:Vercel 把 Fable 退役当”卖点”,CEO 的反应说明了什么?</h3><p><strong>🎯 主张</strong>:Vercel 把模型退役包装成”Token Delivery Network”是行业级的甩锅——以前是你买模型,以后是你养模型的退役流程。<br><strong>✅ 正方</strong>:① AI Gateway Rules 能在不停机的情况下把已退役的 <code>claude-fable-5</code> 一键重写到新目的地,这是真正解决了开发者痛点的工程能力 <a target="_blank" rel="noopener" href="https://x.com/rauchg/status/2072741369848746315">1</a> ② “Token Delivery Network”这个类比把 CDN 的成熟心智直接搬到 LLM 上,模型层从此变成可被路由的可替换资源,这是基础设施层难得的清醒 ③ 顺手做的 <code>bindings</code> 配置让 Node、Python、Dockerfile 都能 1 行代码完成私有连接,顺带把竞品墙拆了<br><strong>❌ 反方</strong>:① 模型名能热切换,听起来美好,但 <code>vercel.json</code> 里的 binding 一旦写死,迁移成本反而更高 ② 当一个平台开始”管理模型的生老病死”,意味着你的代码和某家厂商的版本号深度耦合,长期看是把锁换成另一种锁 ③ Rauch 这种”顺势营销”吃相明显,本质是把 Fable 退役的锅甩给了”路由能力不足”<br><strong>🧰 物料</strong>:金句「Token Delivery Network」「claude-fable-5 → claude-opus-5」;关键数据 1 行代码完成跨运行时私有连接;来源 <a target="_blank" rel="noopener" href="https://x.com/rauchg/status/2072741369848746315">1</a> <a target="_blank" rel="noopener" href="https://x.com/rauchg/status/2072715658157027375">2</a><br><strong>🎬 钩子</strong>:Fable 退役,Vercel 不仅没翻车,反而借机发了一条新赛道。</p>
+<h3 id="选题3-Box-CEO-说”AI-agent-落地比想象中脏得多”-FDE-会成为未来最性感的岗位吗"><a href="#选题3-Box-CEO-说”AI-agent-落地比想象中脏得多”-FDE-会成为未来最性感的岗位吗" class="headerlink" title="选题3:Box CEO 说”AI agent 落地比想象中脏得多”,FDE 会成为未来最性感的岗位吗?"></a>选题3:Box CEO 说”AI agent 落地比想象中脏得多”,FDE 会成为未来最性感的岗位吗?</h3><p><strong>🎯 主张</strong>:未来 3 年,不会写 prompt 的工程师会失业,但更慌的应该是不会做”脏活”的工程师——FDE 才是真风口。<br><strong>✅ 正方</strong>:① Levie 直接点出企业落地的四大硬骨头:数据碎片化、机构记忆、evals、human-in-the-loop,这些不是模型能解决的,是人必须蹲到现场解决的 <a target="_blank" rel="noopener" href="https://x.com/levie/status/2072875685811716182">1</a> ② 他预言 FDE 会成为”未来几年科技行业最关键的角色”,而且大量 applied AI 公司已经在自建部署子公司,这是结构性需求 ③ 对比 Valar 用 5 个人 6 周做出传统供应商要 $5M &#x2F; 2.5 年的 reactor protection system,本质上是同一种能力:在前线把”过度工程”打回原形<br><strong>❌ 反方</strong>:① FDE 本质上是咨询岗,规模化困难,一个人能 cover 的客户数有限 ② 当 evals 工具和 agent ops 平台成熟后,今天需要人肉的脏活会大幅减少,FDE 可能只是过渡岗位 ③ 大量公司”自建部署子公司”是另一种烧钱方式,真正赚钱的 AI 公司反而是模型层和工具层<br><strong>🧰 物料</strong>:金句「比想象中脏得多」「Forward Deployed Engineer 未来几年最关键角色」;关键数据 Valar $400k vs $5M &#x2F; 6 周 vs 2.5 年;来源 <a target="_blank" rel="noopener" href="https://x.com/levie/status/2072875685811716182">1</a> <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=5Xvbq_zvOQ4">2</a><br><strong>🎬 钩子</strong>:所有 AI 公司都在喊”接个 chatbot 就行”,Box CEO 偏要说”比想象中脏得多”,他到底看到了什么?</p>
+<hr>
+<p><em>由 follow-builders + aihot 自动整理 · 2026-07-04</em></p>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/资讯/" data-i18n-tag="资讯">资讯</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"ACES":"ACES","ARRI":"ARRI","Aximmetry":"Aximmetry","CLIP":"CLIP","Captury":"Captury","Claude":"Claude","CrewAI":"CrewAI","Dify":"Dify","EXR":"EXR","GAS":"GAS","GLSL":"GLSL","GPU":"GPU","Google":"Google","GoogleADK":"Google ADK","HDR":"HDR","HLSL":"HLSL","Houdini":"Houdini","LangGraph":"LangGraph","LlamaIndex":"LlamaIndex","MCP":"模型上下文协议","Messiah":"Messiah","NLP":"自然语言处理","NousResearch":"NousResearch","OCIO":"OCIO","Obsidian":"Obsidian","OpenAI":"OpenAI","OpenClaw":"OpenClaw","PCG":"PCG","PKM":"个人知识管理","RAG":"RAG","RPG":"角色扮演","SQL":"SQL","SVN":"SVN","TA":"技术美术","UE4":"UE4","UE5":"UE5","Unity":"Unity","UnrealInsights":"Unreal Insights","VisionPro":"VisionPro","XR":"扩展现实","AI":"人工智能","API":"接口","Agent":"智能体","AgenticAI":"智能体 AI","Art":"艺术作品","AssetManagement":"资产管理","Assistant":"助手","BranchManagement":"分支管理","ColorManagement":"色彩管理","ComputerGraphics":"计算机图形学","ComputerVision":"计算机视觉","Cpp":"C++","Database":"数据库","Debug":"调试","Embedding":"嵌入向量","FilmProduction":"电影制作","Framework":"框架","FullStack":"全栈","GameDev":"游戏开发","GameDevelopment":"游戏开发","GameFeature":"游戏功能","GameFramework":"游戏框架","GameplayAbilitySystem":"游戏能力系统","GraphicsProgramming":"图形编程","LLM":"大语言模型","LearningPath":"学习路径","MachineLearning":"机器学习","MotionCapture":"动作捕捉","NetworkProgramming":"网络编程","NoteTaking":"笔记法","OpenSource":"开源","Performance":"性能","PersonalEssays":"个人随笔","Pipeline":"管线","PoliticalPhilosophy":"政治哲学","Profiling":"性能分析","RenderPipeline":"渲染管线","Search":"搜索","Shader":"着色器","SoftwareProjects":"软件项目","Subscription":"订阅","Tags":"标签","TechnicalArt":"技术美术","UnrealEngine":"虚幻引擎","VersionControl":"版本控制","VibeCoding":"氛围编程","VirtualHuman":"虚拟数字人","VirtualProduction":"虚拟制作","WebDevelopment":"网页开发"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
