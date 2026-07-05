@@ -1,33 +1,33 @@
 /*
- * /daily/ — 每日 AI 资讯 landing page (layout/daily.ejs) plus small
- * daily-feed post-page refinements. Palette follows the no-cover post
- * header (#f5f1ea paper / #2a2520 ink) so the section feels native.
+ * /daily/ — 每日 AI 资讯 reader view (layout/daily.ejs + _partial/daily-nav.ejs)
+ * plus daily-feed post-page refinements (day pager, transcript follow-along).
+ * Palette follows the no-cover post header (#f5f1ea paper / #2a2520 ink).
  */
 
 .daily {
-  max-width: 760px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 44px 0 88px;
+  padding: 40px 0 72px;
 }
 
 /* ---- Section header -------------------------------------------------- */
 
 .daily-head {
-  margin: 0 0 26px;
+  margin: 0 0 18px;
   padding: 0 2px;
 }
 
 .daily-head__title {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   color: #2a2520;
-  font-size: 30px;
+  font-size: 26px;
   letter-spacing: 1px;
 }
 
 .daily-head__tagline {
   margin: 0;
   color: #8a857e;
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 1.8;
 }
 
@@ -41,130 +41,151 @@
   font-size: 15px;
 }
 
-/* ---- Card list -------------------------------------------------------- */
+/* ---- Day pager (also on daily-feed article pages) ---------------------- */
 
-.daily-list {
+.daily-nav {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 780px;
+  margin: 0 auto 16px;
+  padding: 8px 10px;
+  background: rgb(255 255 255 / 0.92);
+  backdrop-filter: saturate(160%) blur(8px);
+  border: 1px solid #eae6df;
+  border-radius: 999px;
+  box-shadow: 0 6px 22px rgb(42 37 32 / 0.06);
+}
+
+.daily-nav__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  color: #4b4848;
+  font-size: 13.5px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+a.daily-nav__btn:hover {
+  background: #f5f1ea;
+  color: #2a2520;
+}
+
+.daily-nav__btn.is-disabled {
+  color: #c6c1b9;
+  cursor: default;
+}
+
+.daily-nav__arrow {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.daily-nav__center {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: #2a2520;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.daily-nav__center a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.daily-nav__center a:hover {
+  color: #6b5d4f;
+}
+
+/* ---- Reader card on /daily/ ------------------------------------------- */
+
+/* .daily-article stacks on .content to inherit the post typography, then
+   tightens the card for feed reading. */
+.content.daily-article {
+  padding: 30px 30px 40px;
+  margin-bottom: 26px;
+  border-radius: 16px;
+}
+
+/* ---- History list ------------------------------------------------------ */
+
+.daily-history {
+  padding: 4px 6px 0;
+}
+
+.daily-history__title {
+  margin: 0 0 6px;
+  color: #8a857e;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.daily-history__list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
 }
 
-.daily-card {
+.daily-history__item {
   margin: 0;
+  border-bottom: 1px solid #eceae5;
 }
 
-.daily-card__link {
+.daily-history__item:last-child {
+  border-bottom: 0;
+}
+
+.daily-history__link {
   display: flex;
-  gap: 18px;
-  padding: 18px 20px;
-  background: #fff;
-  border: 1px solid #eae6df;
-  border-radius: 14px;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 6px;
   color: inherit;
   text-decoration: none;
-  transition:
-    transform 0.16s ease,
-    box-shadow 0.16s ease,
-    border-color 0.16s ease;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
 }
 
-.daily-card__link:hover {
-  transform: translateY(-2px);
-  border-color: #d9d2c6;
-  box-shadow: 0 10px 28px rgb(42 37 32 / 0.08);
-}
-
-/* Date block: soft paper square, reads as a calendar leaf. */
-.daily-card__date {
-  flex: 0 0 auto;
-  align-self: flex-start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  padding: 9px 0 7px;
+.daily-history__link:hover {
   background: #f5f1ea;
-  border-radius: 11px;
 }
 
-.daily-card__day {
-  color: #2a2520;
-  font-size: 23px;
-  font-weight: 700;
-  line-height: 1.1;
+.daily-history__date {
+  flex: 0 0 auto;
+  color: #8a857e;
+  font-size: 13px;
+  letter-spacing: 0.5px;
   font-variant-numeric: tabular-nums;
 }
 
-.daily-card__month {
-  margin-top: 2px;
-  color: #8a857e;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-.daily-card__body {
+.daily-history__summary {
   flex: 1 1 auto;
   min-width: 0;
-}
-
-.daily-card__top {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 7px;
-}
-
-.daily-card__stamp {
-  color: #8a857e;
-  font-size: 12.5px;
-  letter-spacing: 0.4px;
-  font-variant-numeric: tabular-nums;
-}
-
-.daily-card__badge {
-  flex: 0 0 auto;
-  padding: 2px 9px;
-  background: #2a2520;
-  border-radius: 999px;
-  color: #fff;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-.daily-card__summary {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-  margin: 0 0 12px;
   color: #4b4848;
-  font-size: 14.5px;
-  line-height: 1.75;
-}
-
-.daily-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.daily-chip {
-  padding: 3px 10px;
-  background: #f5f1ea;
-  border-radius: 999px;
-  color: #6b6155;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-}
-
-.daily-chip--audio {
-  background: rgb(0 176 255 / 0.1);
-  color: #0079ad;
+  font-size: 13.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* ---- Daily post pages (body.type-daily-feed via layout.ejs) ----------- */
@@ -181,52 +202,77 @@ body.type-daily-feed .content a {
   overflow-wrap: anywhere;
 }
 
-/* Back-to-section breadcrumb at the top of a daily post. */
-.daily-back {
-  display: inline-block;
-  margin: 0 0 18px;
-  color: #8a857e;
-  font-size: 13.5px;
-  letter-spacing: 0.5px;
-  text-decoration: none;
+/* The playing segment announces itself on its 「本节语音」 callout. */
+body.type-daily-feed details.callout.is-playing > summary .callout-title-inner::after {
+  content: ' · 正在朗读';
+  font-weight: 400;
+  opacity: 0.75;
 }
 
-.daily-back:hover {
-  color: #2a2520;
+/* Transcript follow-along: paragraphs are clickable seek targets; the one
+   being read carries an amber reading bar. */
+body.type-daily-feed .callout .transcript-para {
+  margin-left: -10px;
+  padding: 3px 10px;
+  border-left: 3px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+body.type-daily-feed .callout .transcript-para:hover {
+  background: rgb(68 138 255 / 0.07);
+}
+
+body.type-daily-feed .callout .transcript-para.is-reading {
+  background: rgb(255 196 0 / 0.13);
+  border-left-color: #e2a600;
 }
 
 /* ---- Mobile ------------------------------------------------------------ */
 
+@media (max-width: 1099px) {
+  /* Tuck the pager under the sticky top bar (see responsive.css). */
+  .daily-nav {
+    top: calc(var(--bar-h, 52px) + 8px);
+  }
+}
+
 @media (max-width: 768px) {
   .daily {
-    padding: 26px 0 60px;
+    padding: 22px 0 56px;
   }
 
   .daily-head__title {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .daily-head__tagline {
-    font-size: 13px;
+    font-size: 12.5px;
   }
 
-  .daily-card__link {
-    gap: 13px;
-    padding: 14px 14px 15px;
-    border-radius: 12px;
+  .daily-nav {
+    gap: 6px;
+    padding: 6px 8px;
   }
 
-  .daily-card__date {
-    width: 48px;
-    border-radius: 9px;
+  .daily-nav__btn {
+    padding: 4px 10px;
+    font-size: 12.5px;
   }
 
-  .daily-card__day {
-    font-size: 20px;
-  }
-
-  .daily-card__summary {
+  .daily-nav__center {
     font-size: 13.5px;
-    line-height: 1.7;
+  }
+
+  .content.daily-article {
+    padding: 22px 16px 30px;
+    border-radius: 13px;
+  }
+
+  .daily-history__summary {
+    font-size: 12.5px;
   }
 }

@@ -7,6 +7,7 @@ export const i18nData = {
   en: {
     // Navigation menu
     Home: 'Home',
+    Daily: 'Daily',
     Archives: 'Archives',
     About: 'About',
     Portfolio: 'Portfolio',
@@ -50,6 +51,7 @@ export const i18nData = {
   'zh-CN': {
     // Navigation menu
     Home: '首页',
+    Daily: '每日资讯',
     Archives: '归档',
     About: '关于',
     Portfolio: '作品集',

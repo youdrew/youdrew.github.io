@@ -39,7 +39,10 @@ const HDR_FISH = 3.0;
 const HDR_SEA = 1.7;
 
 function isHome() {
-  return /index-html$/.test(document.body.className || '');
+  // Exactly / and /zh-CN/ (body classes path-index-html / path-zh-CN-index-html).
+  // A bare /index-html$/ also matched every pretty-URL directory index
+  // (archives, /daily/, …), leaking the screensaver onto reading pages.
+  return /(^|\s)path-(zh-CN-)?index-html(\s|$)/.test(document.body.className || '');
 }
 
 function clamp01(x) {
