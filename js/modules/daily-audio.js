@@ -102,18 +102,35 @@ function bestParagraph(title, paraTexts) {
   const tokens = matchTokens(title);
   let best = -1;
   let bestScore = 0;
+  let bestAt = 0;
   paraTexts.forEach((text, i) => {
     const low = text.toLowerCase();
     let score = 0;
+    let firstAt = Infinity;
     tokens.forEach((tok) => {
-      if (low.includes(tok)) score += tok.length;
+      const at = low.indexOf(tok);
+      if (at !== -1) {
+        score += tok.length;
+        if (at < firstAt) firstAt = at;
+      }
     });
     if (score > bestScore) {
       bestScore = score;
       best = i;
+      bestAt = firstAt === Infinity ? 0 : firstAt;
     }
   });
-  return bestScore >= MATCH_MIN_SCORE ? best : -1;
+  if (bestScore < MATCH_MIN_SCORE) return { para: -1, offset: 0 };
+  // Back up from the first matched token to the START of its sentence. This is
+  // what fixes "clicking item N starts at the tail of item N-1": when one spoken
+  // paragraph wraps up the previous story before introducing this one, the seek
+  // lands on the sentence that names THIS item, skipping the leading transition —
+  // yet a token already in the paragraph's first sentence yields offset ≈ 0, so
+  // an item's own opening line is never clipped.
+  const text = paraTexts[best];
+  let s = bestAt;
+  while (s > 0 && !/[。！？!?；;\n]/.test(text[s - 1])) s--;
+  return { para: best, offset: s };
 }
 
 const SVG_PLAY =
@@ -236,23 +253,28 @@ class Player {
       item.classList.add('daily-item');
 
       const matched = bestParagraph(summary.textContent || '', paraTexts);
-      const seekPara = matched === -1 ? runningPara : matched;
-      if (matched !== -1) {
-        runningPara = matched;
-        (this.itemsByPara[matched] || (this.itemsByPara[matched] = [])).push(item);
+      const para = matched.para === -1 ? runningPara : matched.para;
+      if (matched.para !== -1) {
+        runningPara = matched.para;
+        (this.itemsByPara[matched.para] || (this.itemsByPara[matched.para] = [])).push(item);
       }
+      // Fine seek target: matched items jump to the sentence that introduces them
+      // (paragraph start + intra-paragraph offset);口播 skipped items fall back to
+      // the previous match's paragraph start.
+      const seekF =
+        matched.para === -1 ? this.paraStartF(para) : this.paraFrac(para, matched.offset);
 
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'daily-item-play';
-      btn.dataset.para = String(seekPara); // 命中/回退的口播段落（也方便线上排查）
+      btn.dataset.para = String(para); // 命中/回退的口播段落（也方便线上排查）
       btn.setAttribute('aria-label', '从这条开始朗读');
       btn.setAttribute('title', '从这条开始朗读');
       btn.innerHTML = SVG_ITEM_PLAY;
       btn.addEventListener('click', (e) => {
         e.preventDefault(); // 别顺手折叠/展开 details
         e.stopPropagation();
-        this.seekToPara(seekPara);
+        this.seekToFrac(seekF);
       });
 
       // 标题去噪：砍掉 handle / 英文副标 / 与正文重复的描述尾巴，留一个干净
@@ -411,13 +433,30 @@ class Player {
 
   // ---- 跟读高亮 ---------------------------------------------------------
 
-  seekToPara(i) {
-    const startF = i === 0 ? 0 : this.ends[i - 1];
+  /** Fraction at the START of paragraph i (== end of the previous paragraph). */
+  paraStartF(i) {
+    return i <= 0 ? 0 : this.ends[i - 1];
+  }
+
+  /** Fraction of a char offset WITHIN paragraph i (linear-by-length, like ends). */
+  paraFrac(i, offset) {
+    const startF = this.paraStartF(i);
+    const endF = this.ends[i];
+    const len = Math.max(1, (this.paras[i] ? this.paras[i].textContent : '').length);
+    const within = Math.min(1, Math.max(0, offset / len));
+    return startF + within * (endF - startF);
+  }
+
+  seekToFrac(startF) {
     this.ensureMetadata(() => {
-      this.audio.currentTime = startF * this.audio.duration + 0.01;
+      this.audio.currentTime = Math.max(0, startF) * this.audio.duration + 0.01;
       const p = this.audio.play();
       if (p && p.catch) p.catch(() => {});
     });
+  }
+
+  seekToPara(i) {
+    this.seekToFrac(this.paraStartF(i));
   }
 
   syncPara() {
