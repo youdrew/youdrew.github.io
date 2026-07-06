@@ -139,6 +139,8 @@ const SVG_PAUSE =
   '<svg class="daily-player__ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5.5" y="4" width="4.6" height="16" rx="1.4"/><rect x="13.9" y="4" width="4.6" height="16" rx="1.4"/></svg>';
 const SVG_ITEM_PLAY =
   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.5 4.3a1 1 0 0 1 1.53-.85l12 7.7a1 1 0 0 1 0 1.7l-12 7.7a1 1 0 0 1-1.53-.85Z"/></svg>';
+const SVG_ITEM_PAUSE =
+  '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5.5" y="4" width="4.6" height="16" rx="1.4"/><rect x="13.9" y="4" width="4.6" height="16" rx="1.4"/></svg>';
 
 class Player {
   constructor(audio, host, registry) {
@@ -224,6 +226,7 @@ class Player {
     this.bind();
     this.applyRate(loadRate());
     this.itemsByPara = [];
+    this.activeItemBtn = null; // 条目播放键里最近控制播放的那个（用于再点暂停/继续）
     if (this.paras.length) this.attachItemButtons();
   }
 
@@ -271,10 +274,23 @@ class Player {
       btn.setAttribute('aria-label', '从这条开始朗读');
       btn.setAttribute('title', '从这条开始朗读');
       btn.innerHTML = SVG_ITEM_PLAY;
+      // 播放键 = 播放/暂停开关：点「别的条」→ 跳到该条并播；点「当前正在
+      // 控制的这条」→ 播放中就暂停、暂停中就从暂停处继续（不回跳）。图标随
+      // 播放状态在 ▶/⏸ 之间切换（见 setItemBtnState + play/pause 事件）。
       btn.addEventListener('click', (e) => {
         e.preventDefault(); // 别顺手折叠/展开 details
         e.stopPropagation();
-        this.seekToFrac(seekF);
+        if (this.activeItemBtn === btn) {
+          if (this.audio.paused) {
+            const p = this.audio.play();
+            if (p && p.catch) p.catch(() => {});
+          } else {
+            this.audio.pause();
+          }
+        } else {
+          this.setActiveItemBtn(btn);
+          this.seekToFrac(seekF);
+        }
       });
 
       // 标题去噪：砍掉 handle / 英文副标 / 与正文重复的描述尾巴，留一个干净
@@ -337,6 +353,7 @@ class Player {
     });
     this.seek.addEventListener('change', () => {
       this.dragging = false;
+      this.clearActiveItemBtn(); // 拖主进度条＝离开条目键控制，复位其图标
       const frac = Number(this.seek.value) / 1000;
       this.ensureMetadata(() => {
         audio.currentTime = frac * audio.duration;
@@ -363,11 +380,13 @@ class Player {
       // 条目上的琥珀标记只表示「此刻正在读」——暂停即熄（文稿段落的
       // 高亮保留，当作面板内的进度书签）。
       this.setItemsLit(false);
+      if (this.activeItemBtn) this.setItemBtnState(this.activeItemBtn, false);
     });
     audio.addEventListener('ended', () => {
       this.el.dataset.state = 'idle';
       this.btn.setAttribute('aria-label', '播放');
       this.setCurrentPara(-1, false);
+      this.clearActiveItemBtn();
     });
   }
 
@@ -382,12 +401,37 @@ class Player {
     // ("I never clicked 文稿, why did it open?"). The per-item amber marker
     // already shows which story the voice is on. Only the 文稿 button opens it.
     this.setItemsLit(true);
+    if (this.activeItemBtn) this.setItemBtnState(this.activeItemBtn, true);
   }
 
   setItemsLit(lit) {
     (this.itemsByPara[this.current] || []).forEach((item) =>
       item.classList.toggle('is-reading-item', lit)
     );
+  }
+
+  // 条目播放键的 ▶/⏸ 图标：playing=true 显示暂停键（点它会停）。
+  setItemBtnState(btn, playing) {
+    if (!btn) return;
+    btn.innerHTML = playing ? SVG_ITEM_PAUSE : SVG_ITEM_PLAY;
+    const lbl = playing ? '暂停朗读' : '从这条开始朗读';
+    btn.setAttribute('aria-label', lbl);
+    btn.setAttribute('title', lbl);
+    btn.classList.toggle('is-playing', playing);
+  }
+
+  // 记录当前由哪个条目播放键控制播放；换一条时把上一条的图标切回 ▶。
+  setActiveItemBtn(btn) {
+    if (this.activeItemBtn && this.activeItemBtn !== btn) {
+      this.setItemBtnState(this.activeItemBtn, false);
+    }
+    this.activeItemBtn = btn;
+  }
+
+  // 播放已离开任何条目键（文稿跳段 / 拖主进度条 / 播完）→ 复位图标。
+  clearActiveItemBtn() {
+    if (this.activeItemBtn) this.setItemBtnState(this.activeItemBtn, false);
+    this.activeItemBtn = null;
   }
 
   setPanel(open) {

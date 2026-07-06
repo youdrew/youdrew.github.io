@@ -489,6 +489,10 @@ body.type-daily-feed .content details.callout {
   margin-left: 1px; /* optically centre the play triangle */
 }
 
+.daily-item-play.is-playing svg {
+  margin-left: 0; /* pause bars are symmetric — undo the play-triangle nudge */
+}
+
 .daily-item-play:hover {
   background: #2a2520;
   border-color: #2a2520;
