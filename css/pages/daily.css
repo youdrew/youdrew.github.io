@@ -432,49 +432,136 @@ body.type-daily-feed .content details.callout {
   border-left-color: #e2a600;
 }
 
-/* ---- News item title row (restructured client-side by daily-audio.js) ---
-   Original callout summary: [icon] [title] …… [chevron]. We drop the callout
-   icon and rebuild the row as  [number] [play] [title] …… [chevron]  so the
-   read-aloud key sits where the icon was, left-aligned, with the same
-   outline number the TOC shows. */
+/* ---- News item — 编号杂志栏 "A" (restructured client-side by daily-audio.js)
+   Drops the Obsidian callout box (bg / border / left bar / icon) for a clean
+   numbered magazine row: [number] │ headline + play, a 2-line dek and a source
+   byline. Collapsed = a tidy card face; expanding reveals the full body and the
+   teaser dek/source give way. Hairline separators, generous whitespace. */
 
-.daily-item > summary.callout-title {
-  gap: 9px;
+body.type-daily-feed .content details.callout.daily-item {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
 }
 
-/* Drop the Obsidian callout icon — the play key takes its place. */
+body.type-daily-feed .content details.callout.daily-item + .daily-item {
+  border-top: 1px solid #ece7df;
+}
+
+.daily-item > summary.callout-title {
+  align-items: flex-start;
+  gap: 13px;
+  padding: 15px 4px;
+  background: transparent;
+  color: #b8b1a6; /* only the chevron (::after, currentColor) inherits this */
+  font-weight: 400;
+}
+
+/* Drop the Obsidian callout icon — the editorial number leads instead. */
 .daily-item > summary > .callout-icon {
   display: none;
 }
 
-/* Outline number, matching the sidebar (data-toc-number). Fixed min-width so
-   the play keys line up down the column regardless of "1.2" vs "1.14". */
+/* Editorial index number (reuses the TOC data-toc-number). */
 .daily-item-no {
   flex: 0 0 auto;
-  min-width: 2.3em;
-  color: rgb(var(--callout-color));
-  opacity: 0.72;
-  font-size: 12.5px;
+  min-width: 1.7em;
+  padding-top: 2px;
+  color: #cc9433;
+  font-size: 17px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+}
+
+.daily-item-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.daily-item-headrow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.daily-item .callout-title-inner {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: #2a2520;
+  font-size: 15.5px;
   font-weight: 600;
+  line-height: 1.5;
+}
+
+/* The dek is a <span> (not <p>) to sidestep .content p typography (font-size,
+   mobile margins, pinned display). Clamp by max-height — display-independent. */
+.daily-item .daily-item-dek {
+  display: block;
+  margin: 0;
+  color: #6f695f;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 3.2em; /* ~2 lines */
+  overflow: hidden;
+}
+
+.daily-item .daily-item-src {
+  color: #a8a196;
+  font-size: 12px;
+  letter-spacing: 0.2px;
   font-variant-numeric: tabular-nums;
 }
 
-.daily-item > summary > .callout-title-inner {
-  flex: 1 1 auto;
-  min-width: 0;
+/* Expanded: hide the teaser dek/source; the full body takes over. */
+.daily-item[open] .daily-item-dek,
+.daily-item[open] .daily-item-src {
+  display: none;
 }
 
+/* Collapsed: hide the full body (the summary dek + source byline is the
+   teaser). Explicit so collapse never depends on UA <details> quirks — some
+   engines keep the content laid out and only visually skip it. */
+.daily-item:not([open]) > .callout-content {
+  display: none;
+}
+
+/* Chevron (from callout.css ::after): pin to the top row, keep it muted/thin. */
+.daily-item > summary.callout-title::after {
+  align-self: flex-start;
+  margin-top: 7px;
+  border-width: 1.5px;
+  opacity: 0.85;
+}
+
+/* Expanded body: align under the headline (past the number column), lighten. */
+.daily-item > .callout-content {
+  padding: 2px 4px 15px calc(1.7em + 13px);
+  color: #4b4640;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* ---- Play key (same read-aloud behaviour, restyled for the card face) --- */
 .daily-item-play {
   flex: 0 0 auto;
+  margin-top: 1px;
   display: grid;
   place-items: center;
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   padding: 0;
-  border: 1px solid rgb(0 0 0 / 0.12);
+  border: 1px solid #d9d2c6;
   border-radius: 50%;
-  background: rgb(255 255 255 / 0.75);
-  color: inherit;
+  background: #fff;
+  color: #4b4640;
   cursor: pointer;
   transition:
     background-color 0.15s ease,
@@ -500,15 +587,14 @@ body.type-daily-feed .content details.callout {
   transform: scale(1.08);
 }
 
-/* The item currently being read aloud carries an amber marker, and its
-   button stays lit — you always know which story the voice is on. */
-body.type-daily-feed .content details.callout.is-reading-item {
-  box-shadow:
-    inset 3px 0 0 #e2a600,
-    0 0 0 1px rgb(226 166 0 / 0.35);
+/* The item currently being read aloud: amber left bar + faint tint + lit key. */
+body.type-daily-feed .content details.callout.daily-item.is-reading-item {
+  box-shadow: inset 3px 0 0 #e2a600;
+  background: rgb(226 166 0 / 0.05);
+  border-radius: 6px;
 }
 
-details.callout.is-reading-item > summary .daily-item-play {
+details.callout.daily-item.is-reading-item > summary .daily-item-play {
   background: #e2a600;
   border-color: #e2a600;
   color: #fff;

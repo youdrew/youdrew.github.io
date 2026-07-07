@@ -142,6 +142,20 @@ const SVG_ITEM_PLAY =
 const SVG_ITEM_PAUSE =
   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5.5" y="4" width="4.6" height="16" rx="1.4"/><rect x="13.9" y="4" width="4.6" height="16" rx="1.4"/></svg>';
 
+// 从条目正文的来源链接里提炼一个短标签，供卡片脸的 byline 显示：
+//   "X：美团 LongCat (@Meituan_LongCat)" → "X · @Meituan_LongCat"
+//   "Hacker News 热门（buzzing.cc 中文翻译）" → "Hacker News"
+//   "MarkTechPost（RSS）" → "MarkTechPost"；兜底取「（」「：」前的头部。
+function sourceLabel(a) {
+  const t = ((a && a.textContent) || '').trim();
+  const handle = (t.match(/@[A-Za-z0-9_]+/) || [])[0];
+  if (handle) return `X · ${handle}`;
+  if (/hacker\s*news|ycombinator|buzzing/i.test(t)) return 'Hacker News';
+  if (/marktechpost/i.test(t)) return 'MarkTechPost';
+  const head = t.split(/[（(：:]/)[0].trim();
+  return head.slice(0, 22) || '来源';
+}
+
 class Player {
   constructor(audio, host, registry) {
     this.audio = audio;
@@ -305,16 +319,49 @@ class Player {
         }
       }
 
-      // 重排标题行：[编号] [播放键] [标题] …… [折叠角标(::after)]
-      const anchor = titleInner || summary.firstChild;
-      summary.insertBefore(btn, anchor);
+      // 版式 A（编号杂志栏）：把 summary 重排成一张卡片脸——
+      //   [编号] │ [标题 ……… 播放键]   ← headrow，始终显示
+      //          [两行摘要 dek]          ← 收起时显示，展开由 CSS 隐藏、让位给正文
+      //          [来源 byline]           ← 收起时显示
+      // 收起＝干净卡片；点开＝原生 <details> 展开完整 .callout-content 正文。
+      const main = document.createElement('div');
+      main.className = 'daily-item-main';
+      const head = document.createElement('div');
+      head.className = 'daily-item-headrow';
+      if (titleInner) head.appendChild(titleInner); // 从 summary 移入 headrow
+      head.appendChild(btn); // 播放键在标题行右侧
+      main.appendChild(head);
+
+      // 摘要 dek＝正文首段里 🔗 之前的描述（多数条目描述与来源同段，按 🔗 切开）；
+      // 来源＝正文最后一个链接（🔗 来源总在末尾，比取"第一个链接"更稳）。
+      const content = item.querySelector('.callout-content');
+      const firstP = content && content.querySelector('p');
+      if (firstP) {
+        const dekText = firstP.textContent.split(/\u{1F517}/u)[0].trim();
+        if (dekText) {
+          const dek = document.createElement('span'); // span, not <p>: dodges .content p rules (mobile margin etc.)
+          dek.className = 'daily-item-dek';
+          dek.textContent = dekText;
+          main.appendChild(dek);
+        }
+      }
+      const links = content ? content.querySelectorAll('a[href]') : [];
+      const srcA = links.length ? links[links.length - 1] : null;
+      if (srcA) {
+        const src = document.createElement('span');
+        src.className = 'daily-item-src';
+        src.textContent = sourceLabel(srcA);
+        main.appendChild(src);
+      }
+
       const num = item.dataset.tocNumber;
       if (num) {
         const noEl = document.createElement('span');
         noEl.className = 'daily-item-no';
         noEl.textContent = num;
-        summary.insertBefore(noEl, btn);
+        summary.appendChild(noEl);
       }
+      summary.appendChild(main);
     });
   }
 
