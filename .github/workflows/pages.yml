@@ -1,0 +1,35 @@
+# Canonical copy of youdrew.github.io's Pages deploy workflow.
+# deploy.yml bundles this into ./public/.github/workflows/pages.yml on every
+# build, so it stays resident in the publish repo (youdrew.github.io) and the
+# GitHub Actions Pages build (build_type: workflow) never loses its workflow.
+# This file itself is NOT run in EugenePage — it only ships to youdrew.github.io.
+name: Deploy Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+      - uses: actions/deploy-pages@v4
+        id: deployment

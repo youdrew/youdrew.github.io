@@ -48,7 +48,7 @@
     
         <meta property="article:published_time" content="2026-05-23T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-07-06T17:30:03.138Z">
+            <meta property="article:modified_time" content="2026-07-07T02:54:26.089Z">
         
     
     
@@ -1808,6 +1808,326 @@
 </div>
 
 
+<h4 id="幻觉抑制处理（Hallucination-Suppression）"><a href="#幻觉抑制处理（Hallucination-Suppression）" class="headerlink" title="幻觉抑制处理（Hallucination Suppression）"></a>幻觉抑制处理（Hallucination Suppression）</h4><p>前三节讲的是”如何让模型少胡说”，但当幻觉不可避免地出现时，我们还需要<strong>事后</strong>手段来检测、定位、评估、归因。下面四个概念构成 RAG 系统幻觉治理的完整闭环。</p>
+<h6 id="1-Citation-Context-Cite（上下文引用）"><a href="#1-Citation-Context-Cite（上下文引用）" class="headerlink" title="(1) Citation &#x2F; Context Cite（上下文引用）"></a>(1) Citation &#x2F; Context Cite（上下文引用）</h6><p><strong>Citation</strong> 直译”引用”，在 RAG 语境里特指：<strong>让模型把答案中每一个事实”钉”回原文的具体片段</strong>，让用户能一键追溯到出处。</p>
+<p><strong>两种实现层次：</strong></p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>做法</th>
+<th>代表</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>事后归因</strong> (Attribution)</td>
+<td>用 LLM 给答案中的每个事实反查”出处是哪个片段”</td>
+<td>Citation Generation &#x2F; Cite-and-Explain</td>
+</tr>
+<tr>
+<td><strong>原生内嵌</strong> (Native Citations)</td>
+<td>让模型在生成的同时直接产出引用，无需二次加工</td>
+<td>Anthropic Citations API、LongCite</td>
+</tr>
+</tbody></table>
+<p><strong>Anthropic Citations API 示例</strong>（<a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/build-with-claude/citations">官方文档</a>）——把文档标记为 <code>citations: &#123;&quot;enabled&quot;: True&#125;</code>，模型就会<strong>自动</strong>返回带 <code>char_start</code> &#x2F; <code>char_end</code> 区间的引用块：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">response = client.messages.create(</span><br><span class="line">    model=<span class="string">&quot;claude-opus-4-8&quot;</span>,</span><br><span class="line">    max_tokens=<span class="number">1024</span>,</span><br><span class="line">    messages=[&#123;</span><br><span class="line">        <span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>,</span><br><span class="line">        <span class="string">&quot;content&quot;</span>: [</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;document&quot;</span>,</span><br><span class="line">             <span class="string">&quot;source&quot;</span>: &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;media_type&quot;</span>: <span class="string">&quot;text/plain&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;data&quot;</span>: <span class="string">&quot;草地是绿色的。天空是蓝色的。&quot;</span>&#125;,</span><br><span class="line">             <span class="string">&quot;title&quot;</span>: <span class="string">&quot;我的文档&quot;</span>,</span><br><span class="line">             <span class="string">&quot;citations&quot;</span>: &#123;<span class="string">&quot;enabled&quot;</span>: <span class="literal">True</span>&#125;&#125;,</span><br><span class="line">            &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: <span class="string">&quot;草地和天空是什么颜色？&quot;</span>&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;]</span><br><span class="line">)</span><br><span class="line"><span class="comment"># response.content 里会带 citations 字段，</span></span><br><span class="line"><span class="comment"># 直接告诉用户&quot;天空是蓝色的&quot;出自原文第 13~24 个字符</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>它解决什么痛点？</strong></p>
+<table>
+<thead>
+<tr>
+<th>没引用</th>
+<th>有引用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“草是绿的”</td>
+<td>“草是绿的”〔引用自《我的文档》§1, char 0–6〕</td>
+</tr>
+<tr>
+<td>模型编造 → 用户无法察觉</td>
+<td>引用对照 → 用户可秒判真假</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">对资产库项目的启示</span></div>
+<div class="callout-content">
+
+<p>即便现在只做检索不做生成，将来若加 LLM 总结，把引用机制从一开始就塞进 prompt 是几乎零成本的”防御工事”。</p>
+</div>
+</div>
+
+
+<hr>
+<h6 id="2-Citation-Generation（引用生成）"><a href="#2-Citation-Generation（引用生成）" class="headerlink" title="(2) Citation Generation（引用生成）"></a>(2) Citation Generation（引用生成）</h6><blockquote>
+<p><strong>Citation Generation &#x3D; 让 LLM 主动”产出”带引用的答案。</strong></p>
+</blockquote>
+<p>它是上面 Citation 的”生成端”实现策略，强调<strong>训练&#x2F;提示</strong>模型把”输出 + 引用”打包在一起写出来。</p>
+<p><strong>主流做法分两路：</strong></p>
+<table>
+<thead>
+<tr>
+<th>路线</th>
+<th>代表</th>
+<th>思路</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>训练式</strong></td>
+<td>LongCite（THU, 2024）</td>
+<td>构造长文 QA 训练对，让模型学会”答到哪句、引到哪段”，产出<strong>细粒度句级引用</strong></td>
+</tr>
+<tr>
+<td><strong>提示式</strong></td>
+<td>Anthropic-style Citations</td>
+<td>改用提示词约束输出格式，例如：「请输出 JSON: <code>&#123;answer, citations: [&#123;doc_id, span&#125;]&#125;</code>」</td>
+</tr>
+</tbody></table>
+<p><strong>LongCite 例子（虚构示意）：</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">问：CLIP 是什么时候、由谁发布的？</span><br><span class="line">答：CLIP 由 OpenAI 于 2021 年 1 月发布。</span><br><span class="line">引用：</span><br><span class="line">  [1] 文档《CLIP 概述》§1.1 &quot;OpenAI 于 2021 年 1 月公开发布 CLIP...&quot;</span><br><span class="line">  [2] 文档《多模态模型发展史》§3 &quot;2021 年 1 月：CLIP、ALIGN...&quot;</span><br></pre></td></tr></table></figure>
+
+
+<div class="callout" data-callout="warning" style="--callout-color: 255, 145, 0;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="callout-title-inner">Citation 生成 ≠ 完全消除幻觉</span></div>
+<div class="callout-content">
+
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/html/2510.17853v1">CiteGuard（2025）</a> 指出：模型可能<strong>生成”长得像引用”但实际错位”的引用</strong>（recall 只有 16–17%）。所以生成引用本身仍需要被验证——它比无引用强，但<strong>不是银弹</strong>。</p>
+</div>
+</div>
+
+
+<hr>
+<h6 id="3-Evaluating-Criterion-Quality-in-LLMs"><a href="#3-Evaluating-Criterion-Quality-in-LLMs" class="headerlink" title="(3) Evaluating Criterion Quality in LLMs"></a>(3) Evaluating Criterion Quality in LLMs</h6><blockquote>
+<p><strong>直译：评估 LLM 中”评估标准”的质量。</strong></p>
+<p>这一节讲的不是”评估 LLM”，而是<strong>评估”用来评估 LLM 的那些打分标准（criterion &#x2F; rubric）本身靠不靠谱”</strong>。</p>
+</blockquote>
+<p><strong>为什么重要？</strong> 当我们用 <strong>LLM-as-a-Judge</strong>（让 LLM 当裁判打分）评价 RAG 输出时，裁判其实只看到了<strong>你写的 rubric</strong>（评分标准）。rubric 写得糊，裁判打得就糊。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">✅ 好 rubric（一条一维度 + 锚点 + justify）：</span><br><span class="line">  &quot;答案忠实性 (1–5)：</span><br><span class="line">    1=完全编造  3=部分基于上下文  5=完全基于上下文</span><br><span class="line">   请基于检索片段逐句核对，引用支持该分数的句子。&quot;</span><br><span class="line"></span><br><span class="line">❌ 差 rubric：</span><br><span class="line">  &quot;答案是否好？(1–5)&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>量化”rubric 质量”要看几件事：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>含义</th>
+<th>如何测</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>判别力</strong> Discriminability</td>
+<td>不同质量的答案能不能拉开档次？</td>
+<td>同 query 多份候选，看分数分布</td>
+</tr>
+<tr>
+<td><strong>一致性</strong> Inter-judge Agreement</td>
+<td>同一份答案，不同裁判（人&#x2F;LLM）打分是否一致</td>
+<td>Cohen’s κ、% 一致率</td>
+</tr>
+<tr>
+<td><strong>与人类对齐</strong> Human Alignment</td>
+<td>裁判分是否接近真人打分</td>
+<td>跟人工标注集求 Pearson&#x2F;Spearman</td>
+</tr>
+<tr>
+<td><strong>稳定性</strong> Rubric Drift</td>
+<td>同一 rubric 用久了分数是否漂移</td>
+<td>定期回测金标集</td>
+</tr>
+<tr>
+<td><strong>抗偏性</strong> Bias Resistance</td>
+<td>不受位置偏差 &#x2F; 长度偏差 &#x2F; 自家偏好影响</td>
+<td>ABX 配对测试</td>
+</tr>
+</tbody></table>
+<p><strong>实操做法（行业主流）：</strong></p>
+<ol>
+<li><strong>先建一个金标集</strong>（几百条问题 + 人工标注的”标准答案 + 标准分数”）。</li>
+<li><strong>多版 rubric 对照打</strong>同一份金标，看哪版跟人类分数最接近。</li>
+<li><strong>定期回测</strong>——模型升级、领域变化时重跑金标，看分数曲线是否漂移（rubric drift）。</li>
+<li><strong>记录 justification</strong>——每个分数要求裁判给出理由，方便事后复盘”为什么这个答案拿 4 分不是 3 分”。</li>
+</ol>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">对 RAG 评估的直接影响</span></div>
+<div class="callout-content">
+
+<p>模块五要讲的 RAG 评估三大指标——<strong>Context Relevance &#x2F; Groundedness &#x2F; Answer Relevance</strong>（即 TruLens 提出的 <a target="_blank" rel="noopener" href="https://www.snowflake.com/en/engineering-blog/benchmarking-LLM-as-a-judge-RAG-triad-metrics/">RAG Triad</a>）——能否真的衡量质量，<strong>完全取决于为这三个指标写的 rubric 写得清不清楚</strong>。这一节就是为那块内容做铺垫。</p>
+</div>
+</div>
+
+
+<hr>
+<h6 id="4-四个概念如何拧成”幻觉治理闭环”"><a href="#4-四个概念如何拧成”幻觉治理闭环”" class="headerlink" title="(4) 四个概念如何拧成”幻觉治理闭环”"></a>(4) 四个概念如何拧成”幻觉治理闭环”</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">                ┌─────────────────────────┐</span><br><span class="line">                │  Citation / Context Cite │  ← &quot;答案能溯源&quot;</span><br><span class="line">                │  （生成时内嵌 / 事后归因）│</span><br><span class="line">                └────────────┬────────────┘</span><br><span class="line">                             ↓</span><br><span class="line">Citation Generation ────→ 训练/提示 LLM 主动产出引用</span><br><span class="line">                             ↓</span><br><span class="line">                ┌─────────────────────────┐</span><br><span class="line">                │ Evaluating Criterion     │</span><br><span class="line">                │ Quality in LLMs          │  ← &quot;裁判标准本身要可靠&quot;</span><br><span class="line">                │ （rubric 质量评估）      │</span><br><span class="line">                └────────────┬────────────┘</span><br><span class="line">                             ↓</span><br><span class="line">                       RAG 评估打分</span><br><span class="line">                       （更准的分数）</span><br><span class="line">                             ↓</span><br><span class="line">              上线后持续监控 + 反馈回检索 / 生成</span><br></pre></td></tr></table></figure>
+
+<p><strong>对 RAG 的总结性建议：</strong></p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>用上哪些手段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>离线开发</strong></td>
+<td>Good prompt（§3）+ 精排 Top-K（§模块三）+ Citation Generation（训练&#x2F;提示）</td>
+</tr>
+<tr>
+<td><strong>上线前</strong></td>
+<td>RAG Triad 评估 + Evaluating Criterion Quality（人评对齐）</td>
+</tr>
+<tr>
+<td><strong>线上</strong></td>
+<td>原生 Citations（如 Anthropic API）+ 用户反馈回流</td>
+</tr>
+<tr>
+<td><strong>事后归因</strong></td>
+<td>Context Cite 反查 + 监控 Groundedness 分数</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="quote" style="--callout-color: 158, 158, 158;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span class="callout-title-inner">一句话记住</span></div>
+<div class="callout-content">
+
+<p><strong>好的 RAG 不只”答得对”，还要”答得可以查”——生成（Citation）+ 评估（Criterion）才是完整的幻觉治理。</strong></p>
+</div>
+</div>
+
+
+<h4 id="RAG-vs-微调（Fine-tuning）"><a href="#RAG-vs-微调（Fine-tuning）" class="headerlink" title="RAG vs 微调（Fine tuning）"></a>RAG vs 微调（Fine tuning）</h4><p>RAG 与微调经常被一起讨论，但其实是<strong>两条不同的路线</strong>，解决的问题不一样：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>RAG（检索增强生成）</th>
+<th>Fine-tuning（微调）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>做什么</strong></td>
+<td>检索外部知识，拼进 prompt</td>
+<td>改模型权重，让模型”记住”知识</td>
+</tr>
+<tr>
+<td><strong>知识更新</strong></td>
+<td>改知识库即可，<strong>实时生效</strong></td>
+<td>必须重新训练，耗时耗钱</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>私有数据 &#x2F; 时效性强 &#x2F; 要引出处</td>
+<td>学特定风格 &#x2F; 固定输出格式 &#x2F; 注入专业表达</td>
+</tr>
+<tr>
+<td><strong>推理成本</strong></td>
+<td>每次多一次检索（向量查询）</td>
+<td>训练贵，推理不变</td>
+</tr>
+<tr>
+<td><strong>可解释性</strong></td>
+<td>答案可追溯到具体文档</td>
+<td>黑箱，模型说啥就是啥</td>
+</tr>
+<tr>
+<td><strong>幻觉风险</strong></td>
+<td>低（有据可查）</td>
+<td>仍可能幻觉（遗忘 &#x2F; 编造）</td>
+</tr>
+<tr>
+<td><strong>数据需求</strong></td>
+<td>文档 + 嵌入索引</td>
+<td>高质量标注问答对（通常上千条起步）</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">怎么选？</span></div>
+<div class="callout-content">
+
+<ul>
+<li><strong>数据在变、要溯源、合规要求高</strong> → 优先 RAG</li>
+<li><strong>要改风格、固定输出格式、学特定表达</strong> → 优先 Fine-tuning</li>
+<li><strong>最难的任务</strong> → RAG + 微调组合（先精调基底，再外挂知识）</li>
+</ul>
+</div>
+</div>
+
+
+
+<div class="callout" data-callout="quote" style="--callout-color: 158, 158, 158;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span class="callout-title-inner">一句话记住</span></div>
+<div class="callout-content">
+
+<p><strong>RAG 是给模型”开卷考试”，Fine-tuning 是让模型”在家背书”。开卷永远比背书保鲜。</strong></p>
+</div>
+</div>
+
+
+<h4 id="常见微调方式"><a href="#常见微调方式" class="headerlink" title="常见微调方式"></a>常见微调方式</h4><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>一句话说明</th>
+<th>适合场景</th>
+<th>数据量级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>指令微调（SFT）</strong></td>
+<td>用”指令-回答”对训练，让模型听懂人话、学格式</td>
+<td>教新任务、改语气风格</td>
+<td>几千～几万条</td>
+</tr>
+<tr>
+<td><strong>持续预训练（Continued Pre-training）</strong></td>
+<td>在专业语料上继续预训练，让模型”懂行”</td>
+<td>法律、医疗、代码、金融等垂直领域</td>
+<td>大规模无标注语料</td>
+</tr>
+<tr>
+<td><strong>LoRA &#x2F; QLoRA（PEFT）</strong></td>
+<td>只训练少量参数（低秩适配器），冻结原权重</td>
+<td>资源不够 &#x2F; 多任务并行 &#x2F; 快速迭代</td>
+<td>几百～几千条</td>
+</tr>
+<tr>
+<td><strong>DPO（直接偏好优化）</strong></td>
+<td>用”好回答 vs 坏回答”对直接优化策略</td>
+<td>想要 RLHF 效果但嫌流程复杂</td>
+<td>几千条偏好对</td>
+</tr>
+<tr>
+<td><strong>RLHF</strong></td>
+<td>先训奖励模型，再用 PPO 强化学习对齐人类偏好</td>
+<td>ChatGPT 式的”听话 + 有用 + 安全”对齐</td>
+<td>几万条人类标注</td>
+</tr>
+<tr>
+<td><strong>Prefix &#x2F; Prompt &#x2F; Adapter Tuning</strong></td>
+<td>在模型上加一个可训练的小模块&#x2F;前缀</td>
+<td>一个基座服务多任务</td>
+<td>几百条</td>
+</tr>
+</tbody></table>
+<div class="callout" data-callout="tip" style="--callout-color: 0, 191, 165;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span class="callout-title-inner">工程上最常见的&quot;三段式&quot;路径</span></div>
+<div class="callout-content">
+
+<p><strong>持续预训练（学领域知识）→ 指令微调 SFT（学格式&#x2F;风格）→ DPO 或 RLHF（对齐偏好）</strong>——这也是 Llama、Qwen、DeepSeek 这类开源模型的标准训练流程。</p>
+<p>但是课程的老师也说，微调并不是让AI去学习新知识的一种好办法。AI通常经过微调之后，通常它在提示词上会有比较大的变化。但是对于信息面的影响会比较小。<br>所以这就引出了 RAG 和微调的适合场景：<strong>RAG 比较适合于注入新知识，而微调比较适合于为特定领域做适配</strong>。</p>
+</div>
+</div>
+
+
+
+<div class="callout" data-callout="quote" style="--callout-color: 158, 158, 158;">
+<div class="callout-title"><svg class="callout-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span class="callout-title-inner">一句话记住</span></div>
+<div class="callout-content">
+
+<p><strong>不是所有微调都要”改全量”——LoRA&#x2F;QLoRA 这类 PEFT 用 1% 的参数就能拿到 90% 的效果，才是工程界的性价比之王。</strong></p>
+</div>
+</div>
+
+
+
 <hr>
 <h3 id="模块五-生产环境中的RAG系统"><a href="#模块五-生产环境中的RAG系统" class="headerlink" title="模块五 生产环境中的RAG系统"></a>模块五 生产环境中的RAG系统</h3><h4 id="1-生产环境面临哪些挑战？"><a href="#1-生产环境面临哪些挑战？" class="headerlink" title="1. 生产环境面临哪些挑战？"></a>1. 生产环境面临哪些挑战？</h4><p>RAG 走出 demo 后，会撞上一连串 demo 里看不到的”墙”：</p>
 <table>
@@ -2091,7 +2411,7 @@
 
 
 <div class="tags">
-    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/RAG/" data-i18n-tag="RAG">RAG</a> <a href="/zh-CN/tags/CLIP/" data-i18n-tag="CLIP">CLIP</a> <a href="/zh-CN/tags/embedding/" data-i18n-tag="embedding">embedding</a> <a href="/zh-CN/tags/vectorSearch/" data-i18n-tag="vectorSearch">vectorSearch</a> <a href="/zh-CN/tags/FAISS/" data-i18n-tag="FAISS">FAISS</a> <a href="/zh-CN/tags/learning/" data-i18n-tag="learning">learning</a>
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/RAG/" data-i18n-tag="RAG">RAG</a> <a href="/zh-CN/tags/embedding/" data-i18n-tag="embedding">embedding</a> <a href="/zh-CN/tags/vectorSearch/" data-i18n-tag="vectorSearch">vectorSearch</a> <a href="/zh-CN/tags/CLIP/" data-i18n-tag="CLIP">CLIP</a> <a href="/zh-CN/tags/FAISS/" data-i18n-tag="FAISS">FAISS</a> <a href="/zh-CN/tags/learning/" data-i18n-tag="learning">learning</a>
 </div>
 
 
