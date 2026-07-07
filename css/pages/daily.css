@@ -31,6 +31,47 @@
   line-height: 1.8;
 }
 
+/* ---- Segmented toggle: 每日资讯 ⇄ 教程 ------------------------------- */
+
+.daily-tabs {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 2px;
+  margin: 0 2px 22px;
+  padding: 3px;
+  background: #ece7df;
+  border-radius: 11px;
+}
+
+.daily-tabs__tab {
+  flex: 0 0 auto;
+  padding: 7px 20px;
+  border-radius: 9px;
+  color: #6f695f;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.daily-tabs__tab:hover {
+  color: #2a2520;
+}
+
+.daily-tabs__tab.is-active {
+  background: #fffdf8;
+  color: #2a2520;
+  box-shadow:
+    0 1px 2px rgb(42, 37, 32, 0.12),
+    inset 0 0 0 1px rgb(204, 148, 51, 0.28);
+  cursor: default;
+}
+
 .daily-empty {
   padding: 56px 20px;
   border: 1px dashed #ddd8d0;
@@ -668,4 +709,77 @@ details.callout.daily-item.is-reading-item > summary .daily-item-play {
   .daily-transcript {
     padding: 12px 13px 14px;
   }
+}
+
+/* ---- /tutorials/ editorial cards ------------------------------------------
+   The tutorial feed is text-only (no audio player), so daily-audio.js never
+   reflows its callouts into .daily-item cards. Reproduce the card-A 编号杂志栏
+   look with pure CSS instead: the Mac converter (fetch-tutorials.mjs) already
+   puts "来源 · 名 ⭐ — 导读" in each [!example] callout title, so a CSS counter +
+   a borderless row is all it takes. Scoped to .daily--tutorial + only the item
+   ([!example]) callouts, so the JS-driven /daily/ cards and the 本周主线 tldr
+   are untouched. */
+.daily--tutorial .daily-article {
+  counter-reset: tut;
+}
+
+.daily--tutorial .daily-article details.callout[data-callout='example'] {
+  counter-increment: tut;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.daily--tutorial
+  .daily-article
+  details.callout[data-callout='example']
+  + details.callout[data-callout='example'] {
+  border-top: 1px solid #ece7df;
+}
+
+.daily--tutorial .daily-article details.callout[data-callout='example'] > summary.callout-title {
+  align-items: flex-start;
+  gap: 13px;
+  padding: 15px 2px;
+  background: transparent;
+  color: #2a2520;
+}
+
+.daily--tutorial .daily-article details.callout[data-callout='example'] > summary .callout-icon {
+  display: none; /* amber index number takes the icon's place */
+}
+
+.daily--tutorial
+  .daily-article
+  details.callout[data-callout='example']
+  > summary.callout-title::before {
+  content: counter(tut);
+  flex: 0 0 auto;
+  min-width: 1.5em;
+  color: #cc9433;
+  font-size: 17px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.55;
+}
+
+.daily--tutorial .daily-article details.callout[data-callout='example'] .callout-title-inner {
+  color: #2a2520;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.daily--tutorial .daily-article details.callout[data-callout='example'] .callout-content {
+  margin-left: calc(1.5em + 13px);
+  padding: 0 2px 15px;
+  color: #6f695f;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.daily--tutorial .daily-article details.callout[data-callout='example'] .callout-content a {
+  color: #8a857e;
 }
