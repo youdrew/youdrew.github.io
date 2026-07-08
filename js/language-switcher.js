@@ -56,21 +56,6 @@ const getAlternateUrl = (targetLang) => {
   return window.location.origin + u.pathname + u.search + u.hash;
 };
 
-// Fallback: derive the alternate URL by toggling the `/zh-CN/` path prefix.
-// Used when the build did not emit a hreflang link (e.g. on a route that
-// hasn't been wired into alternate_language_url yet). Returns null if the
-// current URL is already in the target language.
-const getPrefixToggleUrl = (targetLang) => {
-  const path = window.location.pathname;
-  if (targetLang === 'zh-CN') {
-    if (path.startsWith('/zh-CN/') || path === '/zh-CN') return null;
-    return window.location.origin + '/zh-CN' + path + window.location.search + window.location.hash;
-  }
-  if (!path.startsWith('/zh-CN/') && path !== '/zh-CN') return null;
-  const stripped = path.replace(/^\/zh-CN(?=\/|$)/, '') || '/';
-  return window.location.origin + stripped + window.location.search + window.location.hash;
-};
-
 // Reflect the active language on the mobile EN · 中文 segmented control.
 const updateSegments = (lang) => {
   document.querySelectorAll('.lang-switch__opt').forEach((btn) => {
@@ -184,7 +169,11 @@ const switchToLanguage = (targetLang) => {
     return;
   }
 
-  const alternateUrl = getAlternateUrl(targetLang) || getPrefixToggleUrl(targetLang);
+  // Navigate only when the build emitted an authoritative counterpart
+  // (<link rel="alternate" hreflang>). Pages with no counterpart — e.g. the
+  // Chinese-only daily briefs — have no target to jump to, so we translate the
+  // interface in place instead of guessing a URL that may 404.
+  const alternateUrl = getAlternateUrl(targetLang);
   if (alternateUrl) {
     localStorage.setItem('siteLanguage', targetLang);
     window.location.href = alternateUrl;
@@ -228,8 +217,13 @@ const initLanguage = () => {
   applyLanguage(pref || currentPageLang);
 
   if (pref && pref !== currentPageLang) {
-    const alternateUrl = getAlternateUrl(pref) || getPrefixToggleUrl(pref);
-    if (alternateUrl) {
+    const alternateUrl = getAlternateUrl(pref);
+    // Guard against redirecting to the page we're already on. A page should
+    // never be its own language alternate, but if a stray self-referential
+    // hreflang ever slips through, replacing the current URL with itself would
+    // spin forever — only navigate when the target is genuinely a different path.
+    const targetPath = alternateUrl && new URL(alternateUrl, window.location.origin).pathname;
+    if (targetPath && targetPath !== window.location.pathname) {
       window.location.replace(alternateUrl);
     }
   }
