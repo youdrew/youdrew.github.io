@@ -1,0 +1,493 @@
+/*
+ * /daily/ — 每日 AI 信号（signal 引擎）海洋色版式。
+ * 取自品牌鲸鱼 favicon：海雾底 #eef2f6 / 深藏青墨 #243342 / 海蓝 #4f7396 / 藏青激活药丸。
+ * 全部作用域挂在 .signal 下，和站点全局样式共存。渲染见 tools/signal/render-daily.mjs，
+ * 交互见 source/js/modules/daily-signal.js。
+ */
+
+.signal {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #243342;
+  line-height: 1.6;
+}
+
+/* 前后天翻页 */
+.signal .dnav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.signal .dnav__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #4f7396;
+  text-decoration: none;
+  padding: 6px 13px;
+  border: 1px solid rgb(79 115 150 / 0.28);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.6);
+  /* stylelint-disable-next-line property-no-vendor-prefix -- iOS WebKit needs the prefix */
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
+  backdrop-filter: saturate(160%) blur(10px);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.signal .dnav__btn:not(.is-disabled):hover {
+  background: #243342;
+  border-color: #243342;
+  color: #eef2f6;
+}
+
+.signal .dnav__btn.is-disabled {
+  color: #b3c0cc;
+  border-color: rgb(147 162 178 / 0.25);
+  background: rgb(255 255 255 / 0.4);
+  cursor: default;
+}
+
+.signal .dnav__ar {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.signal .dnav__center {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5f7183;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 吸顶分类导航 */
+.signal .dtop {
+  position: sticky;
+  top: 8px;
+  z-index: 30;
+  margin: 0 0 20px;
+  padding: 8px 10px;
+  border: 1px solid rgb(255 255 255 / 0.7);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.55);
+  /* stylelint-disable-next-line property-no-vendor-prefix -- iOS WebKit needs the prefix */
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+  box-shadow: 0 8px 30px rgb(36 51 66 / 0.1);
+}
+
+.signal .dtop__jump {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.signal .dtop__jump::-webkit-scrollbar {
+  display: none;
+}
+
+.signal .dpill {
+  flex: 0 0 auto;
+  font-size: 13px;
+  text-decoration: none;
+  color: #5f7183;
+  padding: 5px 13px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.signal .dpill:hover {
+  background: rgb(79 115 150 / 0.12);
+}
+
+.signal .dpill.active {
+  background: #243342;
+  color: #eef2f6;
+}
+
+/* 必看：毛玻璃卡片，点开展详情 */
+.signal .dmust {
+  margin: 0 0 22px;
+  padding: 16px 20px 18px;
+  border: 1px solid rgb(255 255 255 / 0.75);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 0.5);
+  /* stylelint-disable-next-line property-no-vendor-prefix -- iOS WebKit needs the prefix */
+  -webkit-backdrop-filter: saturate(170%) blur(14px);
+  backdrop-filter: saturate(170%) blur(14px);
+  box-shadow: 0 8px 30px rgb(36 51 66 / 0.09);
+}
+
+.signal .dsec__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 0 0 4px;
+}
+
+.signal .dmust .dsec__head {
+  margin-bottom: 12px;
+}
+
+.signal .dsec__head h2 {
+  margin: 0 auto 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #243342;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.signal .e {
+  font-size: 16px;
+}
+
+.signal .dsec__hint {
+  font-size: 12px;
+  color: #93a2b2;
+}
+
+.signal .dsec__n {
+  font-size: 12px;
+  color: #93a2b2;
+  font-variant-numeric: tabular-nums;
+}
+
+.signal .mgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+  align-items: start;
+}
+
+.signal .mno {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 21px;
+  padding: 0 6px;
+  background: #243342;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.signal .mcard {
+  padding: 12px 13px;
+  border: 1px solid rgb(255 255 255 / 0.85);
+  border-radius: 13px;
+  background: rgb(255 255 255 / 0.66);
+  box-shadow: 0 3px 14px rgb(36 51 66 / 0.06);
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.signal .mcard:hover {
+  border-color: rgb(79 115 150 / 0.5);
+  box-shadow: 0 5px 18px rgb(36 51 66 / 0.1);
+}
+
+.signal .mcard__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.signal .mcard__src {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: #93a2b2;
+  font-size: 11.5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.signal .mcard__chev {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #93a2b2;
+  border-bottom: 2px solid #93a2b2;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s ease;
+  opacity: 0.75;
+}
+
+.signal .mcard.open .mcard__chev {
+  transform: rotate(-135deg) translateY(2px);
+}
+
+.signal .mcard__t {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #243342;
+}
+
+.signal .mcard__detail {
+  display: none;
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px solid rgb(36 51 66 / 0.1);
+}
+
+.signal .mcard.open .mcard__detail {
+  display: block;
+}
+
+.signal .mcard__detail p {
+  margin: 0 0 8px;
+  color: #42536a;
+  font-size: 13px;
+  line-height: 1.72;
+}
+
+.signal .mcard__more {
+  font-size: 12.5px;
+  color: #4f7396;
+  text-decoration: none;
+}
+
+.signal .mcard__more:hover {
+  text-decoration: underline;
+}
+
+/* 主卡片 + 分栏 */
+.signal .dpaper {
+  background: #fff;
+  border: 1px solid #e6ecf1;
+  border-radius: 18px;
+  padding: 6px 30px 26px;
+  box-shadow: 0 6px 24px rgb(36 51 66 / 0.05);
+}
+
+.signal .dsec {
+  padding-top: 22px;
+  scroll-margin-top: 70px;
+}
+
+.signal .dsec__head h2 {
+  font-size: 17px;
+}
+
+.signal .drow {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 14px 2px;
+}
+
+.signal .dsec__list .drow + .drow {
+  border-top: 1px solid #eaeff3;
+}
+
+.signal .drow__no {
+  flex: 0 0 auto;
+  min-width: 2em;
+  padding-top: 1px;
+  color: #4f7396;
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+}
+
+.signal .drow__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.signal .drow__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.signal .drow__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #243342;
+}
+
+.signal .drow__title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.signal .drow__title a:hover {
+  color: #4f7396;
+}
+
+.signal .drow__dek {
+  display: block;
+  color: #5c6b7b;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 3.2em;
+  overflow: hidden;
+}
+
+.signal .drow__src {
+  color: #93a2b2;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 播放 / 连播 */
+.signal .drow.playing,
+.signal .mcard.playing {
+  box-shadow: inset 3px 0 0 #4f7396;
+  background: rgb(79 115 150 / 0.06);
+  border-radius: 8px;
+}
+
+.signal .mcard.playing {
+  box-shadow:
+    0 0 0 1px #4f7396,
+    0 3px 14px rgb(79 115 150 / 0.14);
+}
+
+.signal .pkey {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid #cdd8e1;
+  border-radius: 50%;
+  background: #fff;
+  color: #42566b;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.signal .pkey svg {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+}
+
+.signal .pkey .ic-play {
+  margin-left: 1px;
+}
+
+.signal .pkey .ic-pause {
+  display: none;
+  width: 11px;
+  height: 11px;
+}
+
+.signal .pkey:hover {
+  background: #243342;
+  border-color: #243342;
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.signal .playing .pkey {
+  background: #4f7396;
+  border-color: #4f7396;
+  color: #fff;
+}
+
+.signal .playing .pkey .ic-play {
+  display: none;
+}
+
+.signal .playing .pkey .ic-pause {
+  display: block;
+}
+
+.signal .secplay {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: inherit;
+  font-size: 12.5px;
+  color: #4f7396;
+  background: rgb(79 115 150 / 0.1);
+  border: 1px solid rgb(79 115 150 / 0.28);
+  border-radius: 999px;
+  padding: 3px 11px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.signal .secplay svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.signal .secplay .ic-pause {
+  display: none;
+}
+
+.signal .secplay:hover {
+  background: rgb(79 115 150 / 0.18);
+}
+
+.signal .secplay.playing {
+  background: #4f7396;
+  border-color: #4f7396;
+  color: #fff;
+}
+
+.signal .secplay.playing .ic-play {
+  display: none;
+}
+
+.signal .secplay.playing .ic-pause {
+  display: inline;
+}
+
+@media (max-width: 660px) {
+  .signal .mgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .signal .dpaper {
+    padding: 4px 16px 20px;
+  }
+}

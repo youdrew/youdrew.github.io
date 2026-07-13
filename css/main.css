@@ -38,3 +38,7 @@
 /* Appended after the original set (order above must not change): the /daily/
    section is new surface area with self-contained .daily-* selectors. */
 @import url('pages/daily.css');
+
+/* signal 引擎版 /daily/（每日 AI 信号）——海洋色，作用域全挂在 .signal 下，
+   与旧 daily.css 的 .daily-* 选择器互不相干。见 scripts/signal-daily.js。 */
+@import url('pages/daily-signal.css');

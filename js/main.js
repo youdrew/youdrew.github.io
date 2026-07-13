@@ -1,6 +1,7 @@
 import { Navigation } from './modules/navigation.js';
 import { IdleOcean } from './modules/idle-ocean.js';
 import { DailyAudio } from './modules/daily-audio.js';
+import { initSignal } from './modules/daily-signal.js';
 import { Tooltip } from './modules/tooltip.js';
 import { MapPage } from './modules/map.js';
 import { ImageZoom } from './modules/image-zoom.js';
@@ -32,6 +33,8 @@ function init() {
   // single source of truth for the outline numbering), which the per-item
   // read-aloud buttons reuse so the card number matches the sidebar.
   new DailyAudio();
+  // signal 引擎版 /daily/（每日 AI 信号）：逐条/连播音频、必看卡片展开、分类跳转。
+  initSignal();
   if (document.getElementById('tag-graph')) {
     initTagGraph();
   }
