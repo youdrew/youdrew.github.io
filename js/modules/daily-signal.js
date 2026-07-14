@@ -126,7 +126,7 @@ export function initSignal() {
     });
   });
 
-  // 必看卡片展开
+  // 必看卡片：点整卡展开 ~240 字详情
   root.querySelectorAll('.mcard').forEach((c) => {
     c.addEventListener('click', (e) => {
       if (e.target.closest('.pkey') || e.target.closest('a')) return;
@@ -134,15 +134,45 @@ export function initSignal() {
     });
   });
 
-  // 分类跳转药丸：平滑滚动 + 吸顶让位
-  root.querySelectorAll('.dpill').forEach((p) => {
+  // 分类条目：点标题行展开摘要（详情区不作切换目标，免选中文字误收起）
+  root.querySelectorAll('.drow').forEach((r) => {
+    const head = r.querySelector('.drow__head');
+    if (!head) return;
+    head.addEventListener('click', (e) => {
+      if (e.target.closest('.pkey') || e.target.closest('a')) return;
+      r.classList.toggle('open');
+    });
+  });
+
+  // 顶部切换：点「必看」只看必看、点任一分类只看资讯（并滚到该类）。data-view 驱动显隐。
+  const pills = [].slice.call(root.querySelectorAll('.dpill'));
+  const scrollToY = (el) => {
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 70;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  };
+  function setView(view, sec) {
+    root.setAttribute('data-view', view);
+    pills.forEach((p) => p.classList.toggle('active', p.dataset.sec === sec));
+  }
+  pills.forEach((p) => {
     p.addEventListener('click', (e) => {
       e.preventDefault();
-      const el = root.querySelector(p.getAttribute('href'));
-      if (el) {
-        const y = el.getBoundingClientRect().top + window.pageYOffset - 70;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+      const sec = p.dataset.sec;
+      if (sec === 'featured') {
+        setView('featured', 'featured');
+        scrollToY(root);
+      } else {
+        setView('news', sec);
+        const el = root.querySelector('#sec-' + sec);
+        if (el) scrollToY(el);
       }
     });
   });
+  // 初始高亮匹配默认视图（featured；无必看时落到第一类）
+  if ((root.getAttribute('data-view') || 'featured') === 'featured') {
+    setView('featured', 'featured');
+  } else {
+    const first = root.querySelector('.dpaper .dsec');
+    setView('news', first ? first.id.replace('sec-', '') : null);
+  }
 }

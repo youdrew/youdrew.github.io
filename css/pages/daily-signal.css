@@ -117,6 +117,16 @@
   color: #eef2f6;
 }
 
+/* 必看 / 资讯 顶部切换：同一时刻只显示一个板块（必看 or 分类资讯），消除重复感。
+   点必看药丸→data-view=featured；点任一分类药丸→data-view=news 并滚到该类。 */
+.signal[data-view='featured'] .dpaper {
+  display: none;
+}
+
+.signal[data-view='news'] .dmust {
+  display: none;
+}
+
 /* 必看：毛玻璃卡片，点开展详情 */
 .signal .dmust {
   margin: 0 0 22px;
@@ -338,24 +348,31 @@
   font-weight: 600;
   line-height: 1.5;
   color: #243342;
+  cursor: pointer;
+  transition: color 0.15s ease;
 }
 
-.signal .drow__title a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.signal .drow__title a:hover {
+.signal .drow__title:hover {
   color: #4f7396;
+}
+
+/* 折叠：详情默认收起，点标题（.drow.open）展开出摘要+来源+原文 */
+.signal .drow__detail {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.signal .drow.open .drow__detail {
+  display: flex;
 }
 
 .signal .drow__dek {
   display: block;
   color: #5c6b7b;
   font-size: 13px;
-  line-height: 1.6;
-  max-height: 3.2em;
-  overflow: hidden;
+  line-height: 1.65;
 }
 
 .signal .drow__src {
@@ -363,6 +380,15 @@
   font-size: 12px;
   letter-spacing: 0.2px;
   font-variant-numeric: tabular-nums;
+}
+
+.signal .drow__src a {
+  color: #4f7396;
+  text-decoration: none;
+}
+
+.signal .drow__src a:hover {
+  text-decoration: underline;
 }
 
 /* 播放 / 连播 */
