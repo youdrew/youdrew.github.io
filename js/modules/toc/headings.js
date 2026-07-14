@@ -10,9 +10,8 @@
  * `virtual: true` entries are not headings: on 每日资讯 pages
  * (opts.includeCallouts) every folded news-item callout becomes a TOC
  * entry one level below its section heading, so the sidebar lists each
- * story instead of just the two section titles. Voice/transcript callouts
- * (rebuilt into the audio card by daily-audio.js before the TOC runs) are
- * excluded defensively.
+ * story instead of just the two section titles. Legacy voice/transcript
+ * callouts, if present, are excluded defensively.
  *
  * IDs already present are preserved so existing anchor links keep working;
  * missing IDs get filled in as `heading-${index}` / `toc-item-${index}`.
@@ -74,8 +73,7 @@ export function collectHeadings(content, opts = {}) {
     if (!element.id) element.id = virtual ? `toc-item-${index}` : `heading-${index}`;
 
     const number = path.map((e) => e.n).join('.');
-    // Stamp the number onto the DOM so the daily per-item read-aloud buttons
-    // (modules/daily-audio.js, which runs after the TOC) can label each card
+    // Stamp the number onto the DOM so daily per-item UI can label each card
     // with the same "1.2"-style number the sidebar shows.
     element.dataset.tocNumber = number;
 
