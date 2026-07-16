@@ -517,3 +517,11 @@
     padding: 4px 16px 20px;
   }
 }
+
+/* ≤1099px：桌面悬浮侧栏收成 56px 吸顶条（header，高 --bar-h，见 responsive.css）。
+   分类导航默认 top:8px 会被这条顶栏盖住 → 改吸在顶栏正下方，滚动时始终可见。 */
+@media (max-width: 1099px) {
+  .signal .dtop {
+    top: var(--bar-h);
+  }
+}
