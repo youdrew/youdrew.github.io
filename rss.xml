@@ -9,14 +9,14 @@
     <atom:link href="https://eugenepage.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 20 Jul 2026 11:06:03 GMT</pubDate>
+    <pubDate>Mon, 20 Jul 2026 11:09:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
       <link>https://eugenepage.com/zh-CN/2026/07/20/20250801.UEConceptScrapbox/</link>
       <guid>https://eugenepage.com/zh-CN/2026/07/20/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Mon, 20 Jul 2026 11:06:03 GMT</pubDate>
+      <pubDate>Mon, 20 Jul 2026 11:09:10 GMT</pubDate>
       
         
         
@@ -39,7 +39,7 @@
       <title></title>
       <link>https://eugenepage.com/2026/07/20/20250801.UEConceptScrapbox/</link>
       <guid>https://eugenepage.com/2026/07/20/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Mon, 20 Jul 2026 11:06:03 GMT</pubDate>
+      <pubDate>Mon, 20 Jul 2026 11:09:10 GMT</pubDate>
       
         
         
@@ -83,9 +83,9 @@
       
       <category domain="https://eugenepage.com/tags/GameDev/">GameDev</category>
       
-      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
-      
       <category domain="https://eugenepage.com/tags/SemanticSearch/">SemanticSearch</category>
+      
+      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
       
       <category domain="https://eugenepage.com/tags/Embedding/">Embedding</category>
       
@@ -125,9 +125,9 @@
       
       <category domain="https://eugenepage.com/tags/GameDev/">GameDev</category>
       
-      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
-      
       <category domain="https://eugenepage.com/tags/SemanticSearch/">SemanticSearch</category>
+      
+      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
       
       <category domain="https://eugenepage.com/tags/Embedding/">Embedding</category>
       
@@ -163,11 +163,11 @@
       
       <category domain="https://eugenepage.com/tags/RAG/">RAG</category>
       
+      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
+      
       <category domain="https://eugenepage.com/tags/embedding/">embedding</category>
       
       <category domain="https://eugenepage.com/tags/vectorSearch/">vectorSearch</category>
-      
-      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
       
       <category domain="https://eugenepage.com/tags/FAISS/">FAISS</category>
       
@@ -200,11 +200,11 @@
       
       <category domain="https://eugenepage.com/tags/RAG/">RAG</category>
       
+      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
+      
       <category domain="https://eugenepage.com/tags/embedding/">embedding</category>
       
       <category domain="https://eugenepage.com/tags/vectorSearch/">vectorSearch</category>
-      
-      <category domain="https://eugenepage.com/tags/CLIP/">CLIP</category>
       
       <category domain="https://eugenepage.com/tags/FAISS/">FAISS</category>
       
