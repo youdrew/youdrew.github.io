@@ -9,14 +9,14 @@
     <atom:link href="https://eugenepage.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 28 Jul 2026 10:08:25 GMT</pubDate>
+    <pubDate>Tue, 28 Jul 2026 23:13:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
       <link>https://eugenepage.com/zh-CN/2026/07/28/20250801.UEConceptScrapbox/</link>
       <guid>https://eugenepage.com/zh-CN/2026/07/28/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Tue, 28 Jul 2026 10:08:25 GMT</pubDate>
+      <pubDate>Tue, 28 Jul 2026 23:13:22 GMT</pubDate>
       
         
         
@@ -39,7 +39,7 @@
       <title></title>
       <link>https://eugenepage.com/2026/07/28/20250801.UEConceptScrapbox/</link>
       <guid>https://eugenepage.com/2026/07/28/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Tue, 28 Jul 2026 10:08:25 GMT</pubDate>
+      <pubDate>Tue, 28 Jul 2026 23:13:22 GMT</pubDate>
       
         
         
@@ -316,6 +316,8 @@
       
       <category domain="https://eugenepage.com/tags/AI/">AI</category>
       
+      <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
       
       <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
@@ -327,8 +329,6 @@
       <category domain="https://eugenepage.com/tags/LlamaIndex/">LlamaIndex</category>
       
       <category domain="https://eugenepage.com/tags/Dify/">Dify</category>
-      
-      <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://eugenepage.com/tags/GoogleADK/">GoogleADK</category>
       
@@ -357,6 +357,8 @@
       
       <category domain="https://eugenepage.com/tags/AI/">AI</category>
       
+      <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
+      
       <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
       
       <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
@@ -368,8 +370,6 @@
       <category domain="https://eugenepage.com/tags/LlamaIndex/">LlamaIndex</category>
       
       <category domain="https://eugenepage.com/tags/Dify/">Dify</category>
-      
-      <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
       
       <category domain="https://eugenepage.com/tags/GoogleADK/">GoogleADK</category>
       
