@@ -9,14 +9,14 @@
     <atom:link href="https://eugenepage.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 08 Aug 2026 23:05:39 GMT</pubDate>
+    <pubDate>Sun, 09 Aug 2026 04:02:33 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
-      <link>https://eugenepage.com/zh-CN/2026/08/08/20250801.UEConceptScrapbox/</link>
-      <guid>https://eugenepage.com/zh-CN/2026/08/08/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Sat, 08 Aug 2026 23:05:39 GMT</pubDate>
+      <link>https://eugenepage.com/zh-CN/2026/08/09/20250801.UEConceptScrapbox/</link>
+      <guid>https://eugenepage.com/zh-CN/2026/08/09/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Sun, 09 Aug 2026 04:02:33 GMT</pubDate>
       
         
         
@@ -31,15 +31,15 @@
       
       
       
-      <comments>https://eugenepage.com/zh-CN/2026/08/08/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://eugenepage.com/zh-CN/2026/08/09/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title></title>
-      <link>https://eugenepage.com/2026/08/08/20250801.UEConceptScrapbox/</link>
-      <guid>https://eugenepage.com/2026/08/08/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Sat, 08 Aug 2026 23:05:39 GMT</pubDate>
+      <link>https://eugenepage.com/2026/08/09/20250801.UEConceptScrapbox/</link>
+      <guid>https://eugenepage.com/2026/08/09/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Sun, 09 Aug 2026 04:02:33 GMT</pubDate>
       
         
         
@@ -54,7 +54,7 @@
       
       
       
-      <comments>https://eugenepage.com/2026/08/08/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://eugenepage.com/2026/08/09/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
@@ -435,34 +435,6 @@
     </item>
     
     <item>
-      <title>Veil Lingo — Online English Education Platform (Software Project)</title>
-      <link>https://eugenepage.com/2026/04/18/20260428.VeilLingo/</link>
-      <guid>https://eugenepage.com/2026/04/18/20260428.VeilLingo/</guid>
-      <pubDate>Sat, 18 Apr 2026 04:00:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;Veil Lingo is a live one-on-one English speaking education platform targeting Chinese learners, connecting them with professional teacher</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>Veil Lingo is a live one-on-one English speaking education platform targeting Chinese learners, connecting them with professional teachers from English-speaking countries. The platform name draws from John Rawls’ philosophical concept of the “veil of ignorance” — the idea being to create a fair, transparent teaching marketplace where the quality of instruction itself becomes the core basis for pricing. The project is deployed and live at <a href="https://talk-lingo.com/">talk-lingo.com</a>.</p><div style="position: relative; width: 100%; padding-bottom: 65%; margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">  <iframe src="https://talk-lingo.com" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" loading="lazy"></iframe></div><p style="text-align: center; font-size: 13px; color: #888; margin-top: 4px;">↑ Live site preview above (or visit <a href="https://talk-lingo.com" target="_blank">talk-lingo.com</a> directly)</p><p>The project covers three user-facing portals: a student portal (browse teachers, book lessons, credit wallet, review system), a teacher portal (personal profile, calendar scheduling, earnings dashboard, rating feedback), and an admin backend (data dashboard, teacher approval, review moderation, violation management, system parameter configuration) — totaling 28+ pages and 34+ components.</p><p>Key technical highlights:</p><ol><li><strong>Dynamic Pricing and Salary Algorithm</strong>: The platform’s core differentiating design. Lesson prices float dynamically based on a teacher’s booking rate — high-demand teachers see prices automatically rise, while prices pull back when demand is low, creating a positive incentive loop. Teacher salaries are similarly auto-adjusted based on demand and ratings, ensuring top teachers earn higher returns. All parameters are configurable in the admin backend, so strategy adjustments require no code changes.</li><li><strong>Pairwise Comparison Review System</strong>: Students can evaluate two teachers they’ve taken lessons with in a head-to-head comparison. This produces more reliable quality signals than traditional independent scoring, helping the platform more accurately identify differences in teaching ability.</li><li><strong>Multi-Dimensional Radar Chart Scoring</strong>: Teacher evaluations span multiple teaching dimensions, visualized as radar charts. This gives students an intuitive view of a teacher’s style and strengths, and provides teachers with clear direction for improvement.</li><li><strong>Mainland China Network Optimization</strong>: Geo-aware routing via Cloudflare Workers automatically selects the optimal access path for mainland users, reducing latency and improving availability.</li><li><strong>Full Internationalization Support</strong>: Complete bilingual coverage in Chinese and English, with 874 translation keys managing all user-facing copy through a translation system.</li></ol><p>On the tech stack side, the frontend uses Next.js (App Router + Server Components) + TypeScript + Tailwind CSS + shadcn&#x2F;ui. The backend runs on Supabase (PostgreSQL + Auth + Storage + Realtime), with Row-Level Security enforcing data access control. The app is deployed on Vercel, with Cloudflare handling CDN and DNS. The entire project was built from scratch to production launch, covering full-stack development end to end: database design (21 tables + 26 migration scripts), authentication and authorization, payment wallet, scheduled jobs, SEO optimization, and more.</p>]]></content:encoded>
-      
-      
-      
-      <category domain="https://eugenepage.com/tags/SoftwareProjects/">SoftwareProjects</category>
-      
-      <category domain="https://eugenepage.com/tags/WebDevelopment/">WebDevelopment</category>
-      
-      <category domain="https://eugenepage.com/tags/FullStack/">FullStack</category>
-      
-      
-      <comments>https://eugenepage.com/2026/04/18/20260428.VeilLingo/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
       <title>Veil Lingo — 在线英语教育平台 (软件作品)</title>
       <link>https://eugenepage.com/zh-CN/2026/04/18/20260428.VeilLingo/</link>
       <guid>https://eugenepage.com/zh-CN/2026/04/18/20260428.VeilLingo/</guid>
@@ -487,6 +459,34 @@
       
       
       <comments>https://eugenepage.com/zh-CN/2026/04/18/20260428.VeilLingo/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Veil Lingo — Online English Education Platform (Software Project)</title>
+      <link>https://eugenepage.com/2026/04/18/20260428.VeilLingo/</link>
+      <guid>https://eugenepage.com/2026/04/18/20260428.VeilLingo/</guid>
+      <pubDate>Sat, 18 Apr 2026 04:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;Veil Lingo is a live one-on-one English speaking education platform targeting Chinese learners, connecting them with professional teacher</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>Veil Lingo is a live one-on-one English speaking education platform targeting Chinese learners, connecting them with professional teachers from English-speaking countries. The platform name draws from John Rawls’ philosophical concept of the “veil of ignorance” — the idea being to create a fair, transparent teaching marketplace where the quality of instruction itself becomes the core basis for pricing. The project is deployed and live at <a href="https://talk-lingo.com/">talk-lingo.com</a>.</p><div style="position: relative; width: 100%; padding-bottom: 65%; margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">  <iframe src="https://talk-lingo.com" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" loading="lazy"></iframe></div><p style="text-align: center; font-size: 13px; color: #888; margin-top: 4px;">↑ Live site preview above (or visit <a href="https://talk-lingo.com" target="_blank">talk-lingo.com</a> directly)</p><p>The project covers three user-facing portals: a student portal (browse teachers, book lessons, credit wallet, review system), a teacher portal (personal profile, calendar scheduling, earnings dashboard, rating feedback), and an admin backend (data dashboard, teacher approval, review moderation, violation management, system parameter configuration) — totaling 28+ pages and 34+ components.</p><p>Key technical highlights:</p><ol><li><strong>Dynamic Pricing and Salary Algorithm</strong>: The platform’s core differentiating design. Lesson prices float dynamically based on a teacher’s booking rate — high-demand teachers see prices automatically rise, while prices pull back when demand is low, creating a positive incentive loop. Teacher salaries are similarly auto-adjusted based on demand and ratings, ensuring top teachers earn higher returns. All parameters are configurable in the admin backend, so strategy adjustments require no code changes.</li><li><strong>Pairwise Comparison Review System</strong>: Students can evaluate two teachers they’ve taken lessons with in a head-to-head comparison. This produces more reliable quality signals than traditional independent scoring, helping the platform more accurately identify differences in teaching ability.</li><li><strong>Multi-Dimensional Radar Chart Scoring</strong>: Teacher evaluations span multiple teaching dimensions, visualized as radar charts. This gives students an intuitive view of a teacher’s style and strengths, and provides teachers with clear direction for improvement.</li><li><strong>Mainland China Network Optimization</strong>: Geo-aware routing via Cloudflare Workers automatically selects the optimal access path for mainland users, reducing latency and improving availability.</li><li><strong>Full Internationalization Support</strong>: Complete bilingual coverage in Chinese and English, with 874 translation keys managing all user-facing copy through a translation system.</li></ol><p>On the tech stack side, the frontend uses Next.js (App Router + Server Components) + TypeScript + Tailwind CSS + shadcn&#x2F;ui. The backend runs on Supabase (PostgreSQL + Auth + Storage + Realtime), with Row-Level Security enforcing data access control. The app is deployed on Vercel, with Cloudflare handling CDN and DNS. The entire project was built from scratch to production launch, covering full-stack development end to end: database design (21 tables + 26 migration scripts), authentication and authorization, payment wallet, scheduled jobs, SEO optimization, and more.</p>]]></content:encoded>
+      
+      
+      
+      <category domain="https://eugenepage.com/tags/SoftwareProjects/">SoftwareProjects</category>
+      
+      <category domain="https://eugenepage.com/tags/WebDevelopment/">WebDevelopment</category>
+      
+      <category domain="https://eugenepage.com/tags/FullStack/">FullStack</category>
+      
+      
+      <comments>https://eugenepage.com/2026/04/18/20260428.VeilLingo/#disqus_thread</comments>
       
     </item>
     
