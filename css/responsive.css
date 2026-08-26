@@ -397,52 +397,60 @@
   }
 }
 
-/* Mobile: article body type. Desktop paragraphs are 20px / lists 18px, which
-   read too large on a phone — bring the body down to a comfortable ~16px.
-   Headings stay em-relative to .content so they remain proportional. */
+/* Mobile long-form reading: one clean measure with no heading-based indent. */
 @media (max-width: 768px) {
-  .content p {
-    font-size: 15px;
-    line-height: 1.7;
+  .content:not(.archives) {
+    padding: 44px 18px 60px;
+    font-size: 16px;
+    line-height: 1.75;
   }
-  .content ol,
-  .content ul {
-    font-size: 15px;
-  }
-}
 
-/* Mobile: flatten the desktop heading-outline indentation.
-   On desktop every heading level steps right (h2 24px / h3 48px / h4 72px …)
-   and the body after it mirrors that step (post.css §"标题缩进"/"标题后的内容缩进").
-   On a phone that compounding margin-left shoves the whole article column far
-   right — e.g. body after an <h2> sits at 30px padding + 48px margin ≈ 78px,
-   leaving a big left gutter. Collapse the cascade to one shallow indent so the
-   text reclaims width and sits left, and trim the card's side padding.
-   `.main .content …` (0,2,1) outranks the `.content hN ~ x` rules (0,1,2). */
-@media (max-width: 768px) {
-  .content {
-    padding-left: 20px;
-    padding-right: 20px;
+  .content:not(.archives) p,
+  .content:not(.archives) ol,
+  .content:not(.archives) ul {
+    font-size: 16px;
+    line-height: 1.75;
   }
-  /* headings: drop the per-level step (keep padding-left for the +/- marker) */
-  .main .content h2,
-  .main .content h3,
-  .main .content h4,
-  .main .content h5,
-  .main .content h6 {
-    margin-left: 0;
+
+  .content:not(.archives) h1 {
+    margin-bottom: 24px;
+    font-size: 28px;
   }
-  /* body flow: a single shallow indent that lines up with the heading text */
-  .main .content p,
-  .main .content ul,
-  .main .content ol,
-  .main .content blockquote,
-  .main .content figure,
-  .main .content table,
-  .main .content .codeblock,
-  .main .content .code-block-container,
-  .main .content img {
-    margin-left: 24px;
+
+  .content:not(.archives) h2 {
+    margin-top: 46px;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    font-size: 24px;
+  }
+
+  .content:not(.archives) h3 {
+    margin-top: 36px;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .content:not(.archives) h4 {
+    margin-top: 30px;
+    font-size: 18px;
+  }
+
+  .content:not(.archives) h5,
+  .content:not(.archives) h6 {
+    font-size: 16px;
+  }
+
+  .content:not(.archives) h1,
+  .content:not(.archives) h2,
+  .content:not(.archives) h3,
+  .content:not(.archives) h4,
+  .content:not(.archives) h5,
+  .content:not(.archives) h6 {
+    padding-left: 22px;
+  }
+
+  .content:not(.archives) blockquote {
+    padding: 12px 14px;
   }
 }
 

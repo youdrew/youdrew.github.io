@@ -40,7 +40,7 @@
     
         <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-08-26T11:32:45.407Z">
+            <meta property="article:modified_time" content="2026-08-26T12:21:41.599Z">
         
     
     
@@ -196,11 +196,11 @@
 
     <ul class="btn clearfix">
         
-        <li><a href="/2026/06/24/20260625.AIGameSeries-Article2/" class="previous" data-title="Landing AI in Game Production — A Kung-F..."></a></li>
+        <li><a href="/2026/08/26/20250801.UEConceptScrapbox/" class="previous" data-title="Untitled"></a></li>
         
         <li><a href="/" class="grid" data-title="Portfolio"></a></li>
         
-        <li><a href="/2026/06/01/20260602.AIGameSeries-Article1/" class="next" data-title="Landing AI in Gam..."></a></li>
+        <li><a href="/2026/06/24/20260625.AIGameSeries-Article2/" class="next" data-title="Landing AI in Gam..."></a></li>
         
     </ul>
 
@@ -219,10 +219,36 @@
 </blockquote>
 <hr>
 <h2 id="一、缘起：无法理解的场景"><a href="#一、缘起：无法理解的场景" class="headerlink" title="一、缘起：无法理解的场景"></a>一、缘起：无法理解的场景</h2><p>第一式我们通过语义编码认识了每个资产，这一回，我们要回答的是：我在哪里？</p>
-<p>众所周知，LLM是不理解场景的，即使截图给它，它也看不懂美术摆下的龙门阵：<br>    ① “这个区域大概是什么风格？”<br>	     → AI：幻觉回答一下。<br>    ② “帮我去找场景中一个在楼梯边的宝箱”<br>	    → AI：遍历世界大纲里面的东西，然后一个个地去找。然后哪个在楼梯边？不知道。<br>    ③ “给你一张图，这个图上的位置在我大世界的哪里啊？”<br>	    → AI：什么玩意儿？这我咋找？<br>	④ “帮我找到一个我用石头堆成的山洞”<br>		→ AI：@#￥%……&amp;*</p>
+<p>众所周知，LLM是不理解场景的，即使截图给它，它也看不懂美术摆下的龙门阵：</p>
+<ol>
+<li>“这个区域大概是什么风格？”<ul>
+<li>AI：幻觉回答一下。</li>
+</ul>
+</li>
+<li>“帮我去找场景中一个在楼梯边的宝箱”<ul>
+<li>AI：遍历世界大纲里面的东西，然后一个个地去找。然后哪个在楼梯边？不知道。</li>
+</ul>
+</li>
+<li>“给你一张图，这个图上的位置在我大世界的哪里啊？”<ul>
+<li>AI：什么玩意儿？这我咋找？</li>
+</ul>
+</li>
+<li>“帮我找到一个我用石头堆成的山洞”<ul>
+<li>AI：@#￥%……&amp;*</li>
+</ul>
+</li>
+</ol>
 <p>本文要解决的就是这些问题（地图理解因为内容有点多故分成两篇文章，此篇是第一篇，讲述理解地图，第二篇会讲全地图的向量检索）。<br>经过本轮修炼，你的 AI 能像人一样，<mark>真正意义上“理解”</mark>你的地图，并且将采集过的场景和位置<mark>“背”</mark>下来；对于未拍摄的视角，则计划通过相邻视角的插值推断加以补全，最终实现大世界地图任意位置的<mark>毫秒级</mark>查询。</p>
-<h2 id="二、如何理解一个场景？"><a href="#二、如何理解一个场景？" class="headerlink" title="二、如何理解一个场景？"></a>二、如何理解一个场景？</h2><p>我们来看一下，人类看到一个场景时，是怎么样的？<br>	最先，是看到游戏场景 -&gt; “诶，黑黢黢的” （视觉）<br>	然后，感受了其中的空间关系 -&gt; “咦，前面有点光” （空间）<br>	最后，理解了场景所表达的含义 -&gt; “哦，这里那个白骨精的山洞” （语义）</p>
-<p>他会怎么向别人表述这个场景，他说：<br>	 我刚刚去了一个场景，从 <strong>黑井附近</strong> 按E就可以进去，那个地方 <strong>比花果山山洞还要黑</strong>，我感觉那里应该就是 <strong>隐藏关卡boss白骨精的老窝</strong> 了。</p>
+<h2 id="二、如何理解一个场景？"><a href="#二、如何理解一个场景？" class="headerlink" title="二、如何理解一个场景？"></a>二、如何理解一个场景？</h2><p>我们来看一下，人类看到一个场景时，是怎么样的？</p>
+<ol>
+<li>最先，是看到游戏场景 → “诶，黑黢黢的”（视觉）</li>
+<li>然后，感受了其中的空间关系 → “咦，前面有点光”（空间）</li>
+<li>最后，理解了场景所表达的含义 → “哦，这里那个白骨精的山洞”（语义）</li>
+</ol>
+<p>他会怎么向别人表述这个场景，他说：</p>
+<blockquote>
+<p>我刚刚去了一个场景，从 <strong>黑井附近</strong> 按E就可以进去，那个地方 <strong>比花果山山洞还要黑</strong>，我感觉那里应该就是 <strong>隐藏关卡boss白骨精的老窝</strong> 了。</p>
+</blockquote>
 <p>根据上面的描述，我将理解和表述能力拆分开来：</p>
 <table>
 <thead>
@@ -366,8 +392,11 @@
 <td><strong>贵 + 受视角和渲染状态影响 + 失结构</strong></td>
 </tr>
 </tbody></table>
+<p>上面这五种方案，按”信息从哪来”可以归成三类：</p>
 <ul>
-<li>上面这五种方案，按”信息从哪来”可以归成三类：<br>  <strong>MCP + CLI</strong>：<br>  通过引擎接口<strong>在线获取</strong>信息。好处是数据新鲜度最高、能实时反映当前场景状态；代价是接口要自己维护、返回数据量大，还要吃引擎版本迭代的成本。<br>  <strong>导出快照 + OpenUSD</strong>:<br>  以<strong>离线数据</strong>还原场景信息。好处是不占引擎运行时、可版本化、便于跨工具读写；代价是有时差、且大场景下快照体积容易爆炸。<br>  <strong>直读截图</strong>:<br>  通过<strong>图像 + VLM</strong>获取信息，更接近人观察场景的方式。好处是语义直觉强、跨版本灵活；坏处是上限完全取决于 VLM 对图像的理解力和图像本身的信息量。</li>
+<li><strong>MCP + CLI</strong>：通过引擎接口<strong>在线获取</strong>信息。好处是数据新鲜度最高、能实时反映当前场景状态；代价是接口要自己维护、返回数据量大，还要吃引擎版本迭代的成本。</li>
+<li><strong>导出快照 + OpenUSD</strong>：以<strong>离线数据</strong>还原场景信息。好处是不占引擎运行时、可版本化、便于跨工具读写；代价是有时差、且大场景下快照体积容易爆炸。</li>
+<li><strong>直读截图</strong>：通过<strong>图像 + VLM</strong>获取信息，更接近人观察场景的方式。好处是语义直觉强、跨版本灵活；坏处是上限完全取决于 VLM 对图像的理解力和图像本身的信息量。</li>
 </ul>
 <p>小孩子才做选择，我全都要！我将上面的方案，两两结合。<br>针对视觉、空间与语义（上文 3 * 3 坐标纵轴坐标），我分别提出了三个应对的方法及技术实现：</p>
 <ul>
@@ -385,15 +414,13 @@
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图片源自于李飞飞 CS231 ppt</figcaption>
   </figure>
 </div>
-在图像理解领域，常见的基础任务包括图像分类、目标检测、语义分割和实例分割。
-中台的同事 Fufu 在七月初提出来的一个图像识别-射线检测的方案：先通过小模型区分出场景中的 actor（物体识别），然后再通过射线检测，去 get 到这个 actor（实例分割）。这个方案通过视觉分析的小模型的中间层，实现LLM主动地去获取画面中的内容。对画面内容进行分割、解析，以达到对画面的理解的能力。
-（BTW：在大模型和应用之间叠中间层，这是 agent 设计中一个很棒的 trick，我后面提到的 GSDL 也是基于这个逻辑）
 
+<p>在图像理解领域，常见的基础任务包括图像分类、目标检测、语义分割和实例分割。<br>中台的同事 Fufu 在七月初提出来的一个图像识别-射线检测的方案：先通过小模型区分出场景中的 actor（物体识别），然后再通过射线检测，去 get 到这个 actor（实例分割）。这个方案通过视觉分析的小模型的中间层，实现LLM主动地去获取画面中的内容。对画面内容进行分割、解析，以达到对画面的理解的能力。<br>（BTW：在大模型和应用之间叠中间层，这是 agent 设计中一个很棒的 trick，我后面提到的 GSDL 也是基于这个逻辑）</p>
 <p>这个方案启发了我。</p>
 <p>可是，这又回到了那个问题，如果只是让模型去直接区分图像，会有一定的失败概率，就又会造成分析的不稳定性这个问题的出现。<br>于是，为何不反着来？引擎主动提供每个位置上的点分别代表什么actor，然后输出一张掩码表给LLM，以此补足LLM无法完整地区分画面的每个组成部分的问题。</p>
 <p>这就是我的“2D 资产掩码方案”——LLM提出要在某个位置拍摄图像，编辑器响应，在拍图图像时，（可选）不只是拍摄图像信息，而是一次性给出整个画面的所有内容，将图片信息压缩成文字，并标注画面中每个部分代表的是什么。（该方案不仅token 消耗猛猛降，同时又达到超高物体识别率，稳定性极高的实例分割 Instance Segmentation方案）</p>
 <h3 id="2-如何建立视觉归属"><a href="#2-如何建立视觉归属" class="headerlink" title="2. 如何建立视觉归属"></a>2. 如何建立视觉归属</h3><p>实际上，引擎编辑器为了支持物体点选，会维护一套 Hit Proxy（点选代理）的渲染与读取机制。其缓冲区与视口对应，可命中的像素会关联一个 Hit Proxy，进而还原到 Actor、Component 或其他编辑器对象。我们可以复用这套数据，将像素归属主动提供给 LLM；相比额外运行视觉分割模型，它的获取和解析成本很低。</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015943.png" alt="原始截图（游戏视角）" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">原始截图（游戏视角）</figcaption>
@@ -411,8 +438,8 @@
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">focus 图（多目标分色高亮：蘑菇群=青、装饰柱=品红，余者压暗）</figcaption>
   </figure>
 </div>
-拿到了画面中的每一个actor后，就可以知道画面的语义了吗？
 
+<p>拿到了画面中的每一个actor后，就可以知道画面的语义了吗？</p>
 <p>是的！当然可以。<br>因为好巧不巧，我前段时间刚好做了一个资产理解工具（上一期）</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
   <figure style="margin: 0; text-align: center;">
@@ -424,14 +451,15 @@
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">NeuroMap统计出来的资产掩码表单</figcaption>
   </figure>
 </div>
-在做资产理解的时候，我就做了一件事情，我为每个资产都生成了描述（左图，而且这些描述还在被美术不断地更新，优化）。
 
+<p>在做资产理解的时候，我就做了一件事情，我为每个资产都生成了描述（左图，而且这些描述还在被美术不断地更新，优化）。</p>
 <p>资产掩码信息统计下来（右图），能够知道：</p>
 <ol>
 <li>这个资产在画面中的占比、分布、距离；</li>
 <li>它的原始资产是什么（能链接到资产语义）；</li>
-<li>它在场景中叫什么名字，在场景中的参数。<br>等信息。</li>
+<li>它在场景中叫什么名字，在场景中的参数。</li>
 </ol>
+<p>等信息。</p>
 <h3 id="3-边缘情况及视觉模型本地支持"><a href="#3-边缘情况及视觉模型本地支持" class="headerlink" title="3. 边缘情况及视觉模型本地支持"></a>3. 边缘情况及视觉模型本地支持</h3><p>细心的读者可能已经注意到——hit proxy 报回来的对象里，会有三类”特殊资产”要走专属通道，我对他们进行了专门处理：</p>
 <ol>
 <li><strong>程序化植被</strong>（拆开来，按照foliage的actor归属对应的资产语义）；</li>
@@ -439,9 +467,7 @@
 <li><strong>天空&#x2F;大气</strong>等引擎内置对象（因为数量比较少，手写语义，不依赖 hit proxy）。</li>
 </ol>
 <p>现在，我们把这些描述 + 画面 + 掩码信息（按不同 LoD 组织）拿给 VLM，让它为这个画面生成一个描述（套娃了属实是），就可以得到最基本的单次截图信息。这些 LoD 可以做成接口参数，以适配不同颗粒度的使用场景。</p>
-<ul>
-<li>*这里的 LoD 描述的是“给模型看的信息颗粒度”，不是 Mesh 的几何精度，但编号方向保持一致。</li>
-</ul>
+<p><em>这里的 LoD 描述的是“给模型看的信息颗粒度”，不是 Mesh 的几何精度，但编号方向保持一致。</em></p>
 <p>想要更进一步，我们甚至可以在 MCP 中本地部署一个小的视觉语言模型（譬如 Qwen2.5-VL-7B int4 VRAM平均占用5.95GB，峰值6.65GB，可以在大部分的美术本地跑起来。或者团队局域网部署qwen3.8 27b，也不是很难的事情）。<br>图片及信息解释是典型的感知任务（perception），不存在较长的逻辑链路——这正是小模型的甜区。现在的 VLM 普遍经过大规模图像或图文数据预训练，已经具备了基础的视觉语义能力。这样套一个本地部署中间层，可以让Deepseek v4 flash 0731这样便宜又好用的非多模态模型也能支持我们的视觉理解；<br>至于小模型能做什么、不能做什么，大致可以这样划分：</p>
 <table>
 <thead>
@@ -466,12 +492,8 @@
 <td>“有什么”（感知）</td>
 <td>“为什么这样摆、应该怎么改”（推理 + 决策）</td>
 </tr>
-<tr>
-<td>但这个部署问题就取决于不同环境的具体情况。</td>
-<td></td>
-<td></td>
-</tr>
 </tbody></table>
+<p>但这个部署问题就取决于不同环境的具体情况。</p>
 <p>（8.10日补：阿里前几天发布了<a target="_blank" rel="noopener" href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a>和我的想法很像，将视觉理解这个事情放到Harness层面，通过多层分辨率设计与抽帧方案实现图片和视频的理解，基本上完成了我这个sidecar视觉辅助能力。我在后面也会升级我的方案）</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
@@ -504,8 +526,9 @@
 <p>综上，它主要负责两件事情：</p>
 <ol>
 <li>理解空间信息（把离散对象组织成密度、结构、关系、可见性和语义归属）</li>
-<li>获取的信息压缩（把获取的信息通过一定的规则压缩成规则严谨的语义表述）<br>下面我分别介绍。</li>
+<li>获取的信息压缩（把获取的信息通过一定的规则压缩成规则严谨的语义表述）</li>
 </ol>
+<p>下面我分别介绍。</p>
 <h3 id="2-空间是如何被测量的？"><a href="#2-空间是如何被测量的？" class="headerlink" title="2. 空间是如何被测量的？"></a>2. 空间是如何被测量的？</h3><p>我拿其中一个接口做图形化的展示，让你更加明白地了解它的实现逻辑。<br>下面这个接口叫作<code>find_opening</code>。它主要测试当前的腔体环境中是否存在开口。<br>比如说在一个山洞中，通过这种算法能测出环境中存在几个洞口、房间有没有开着的窗户之类的应用场景。</p>
 <p><em>其实UE本身是一个很棒的仿真工具，在里面其实可以做很多“测量”的工作。</em></p>
 <p>游戏引擎本身就有射线检测接口——UE 里叫 <code>LineTraceSingleByChannel</code>，是物理引擎原生开放给上层做碰撞查询的能力。墙、岩石和门框都是正空间，洞口恰恰是它们围出来的<strong>负空间</strong>。<br>因此<code>find_opening</code>的查询方法，不是通过搜索名字中带 <code>Door</code> 或 <code>Archway</code> 的 Actor，而是反过来使用碰撞查询：命中的射线勾勒洞壁，能够连续逃逸到远处的射线组成开口，再回到开口两侧寻找真实门框。</p>
@@ -515,13 +538,15 @@
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">find_opening 五阶段动画（模拟项目实际场景效果案例）</figcaption>
   </figure>
 </div>
-实现大致可以拆成五步：
-1. **找内部点。** 在腔体内铺一批采样点，挑出真正处于洞内的。
-2. **选观察位。** 从中取几个互相错开的点，作为观察位置。
-3. **打射线。** 从各观察位向四周发射线，找通向远处的方向。
-4. **汇总分类。** 合并各处观察，区分洞口、高窗与内部通道。
-5. **量具体尺寸。** 回到洞口边缘细测，给出实际宽高。
 
+<p>实现大致可以拆成五步：</p>
+<ol>
+<li><strong>找内部点。</strong> 在腔体内铺一批采样点，挑出真正处于洞内的。</li>
+<li><strong>选观察位。</strong> 从中取几个互相错开的点，作为观察位置。</li>
+<li><strong>打射线。</strong> 从各观察位向四周发射线，找通向远处的方向。</li>
+<li><strong>汇总分类。</strong> 合并各处观察，区分洞口、高窗与内部通道。</li>
+<li><strong>量具体尺寸。</strong> 回到洞口边缘细测，给出实际宽高。</li>
+</ol>
 <p>底层的 C++ Probe 负责从 Editor 现场取得地形、实例、碰撞命中和射线结果；Python 空间内核负责候选采样、测站选择、扇区融合、类型判断与精测调度。然后将经过测算的结果结论给到LLM，模型拿到的不再是一万多条原始射线，而是一组带有<strong>类型、位置、方向、宽高、来源测站和证据等级</strong>的场景事实。模型既能直接引用测量值，也能沿工具给出的机位再去截图复核。<br>于是我们便完成了对场景的空间关系的理解。</p>
 <h3 id="3-语言是如何被压缩的？"><a href="#3-语言是如何被压缩的？" class="headerlink" title="3. 语言是如何被压缩的？"></a>3. 语言是如何被压缩的？</h3><p>上一节的五步测量走完，手里攥着的是一万多条射线、几百个采样点、三千多个实例的原始事实。这些东西没法直接交给模型——上下文会当场爆炸。（所以我在上面的Canvas图表中有一个python数据整理层，来压缩数据信息再给LLM，下面讲的就是在这个python压缩层）</p>
 <p>压缩不是把句子改短，它是语言层的一套设计原则：</p>
@@ -578,13 +603,8 @@
 <td>921,223</td>
 <td>~230,000</td>
 </tr>
-<tr>
-<td>LoD3 全文原样贴出来：</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody></table>
+<p>LoD3 全文原样贴出来：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@gsdl v0.1</span><br><span class="line">@project: ScatterTest</span><br><span class="line">@asset_classes: [Foliage, StaticMesh]</span><br><span class="line">@enrichment: []</span><br><span class="line">@frame: m</span><br><span class="line"></span><br><span class="line">region(id=R7, bbox=[0.0..200.0, 0.0..200.0, 0.0..18.0]m) &#123;</span><br><span class="line"></span><br><span class="line">  # -- summary (LoD3) --</span><br><span class="line">  R7 summary “锚=watch_tower; 10021实例/3类; 密度0.25/m²; 朝向散.”.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>LoD3 这段全文，逐行每句话在说什么：</p>
@@ -599,7 +619,14 @@
 <li><code>R7 summary “锚=watch_tower; 10021实例/3类; 密度0.25/m²; 朝向散.”.</code>——唯一的正文，也是全文唯一的句式：<strong>三元组</strong>。主语 R7、谓词 summary、宾语是这句分号串联的压缩陈述，行尾句号收束；谓词都来自一张固定词汇表（located_at、bound、near、density……），没有自由发挥的散文。</li>
 </ul>
 <p>谓语里面：<br><code>锚=watch_tower</code>——锚是这片区域的地标，由显著度（视觉面积×稀有度）选出，一万棵六米高的松树里，就那座 18 米的瞭望塔配得上；此后簇与簇的空间关系都挂在它身上（<code>pine_c2 of watch_tower</code>、<code>pine_c2 offset (dir=NE, d=43.2m)</code> 就是以它为原点的相对表述）。<code>10021实例/3类</code> 是量级，<code>密度0.25/m²</code> 是疏密，<code>朝向散</code> 是朝向熵的档位（摆放的是乱还是规整）。<br>人指路也是这个顺序——先报地标（“黑井附近”），再给相对关系（“比花果山山洞还黑”）；锚，就是把人类这个习惯写成了语法。</p>
-<p>这段里示例还有两个语法元素你看不到。<br>一个是<strong>精度描述</strong>：<br>	实测值不带符号（<code>pine_c1.1 pose [92.05, 12.65, 0.0]m</code>，每个数都是量出来的）；<br>	估计值带 <code>~</code>（<code>watch_tower salience ~1.00</code>，显著度是算出来的估计）；<br>	分类判定带 <code>#</code>（<code>size_dist &#123;M:20, L:10001&#125;#</code>，分桶是规则判的，不是量的）。<br>另一个是<strong>指代方案</strong>：<br>会把相似的东西整合成一个“簇”，碎尾合并成弥散场，再多的实例，最后会整合成十来个名字（即十几种元素）。比如一盒铅笔，我们没必要说，铅笔A、铅笔B…这也是指代上的一种压缩技巧。</p>
+<p>这段里示例还有两个语法元素你看不到。<br>一个是<strong>精度描述</strong>：</p>
+<ul>
+<li>实测值不带符号（<code>pine_c1.1 pose [92.05, 12.65, 0.0]m</code>，每个数都是量出来的）；</li>
+<li>估计值带 <code>~</code>（<code>watch_tower salience ~1.00</code>，显著度是算出来的估计）；</li>
+<li>分类判定带 <code>#</code>（<code>size_dist &#123;M:20, L:10001&#125;#</code>，分桶是规则判的，不是量的）。</li>
+</ul>
+<p>另一个是<strong>指代方案</strong>：</p>
+<p>会把相似的东西整合成一个“簇”，碎尾合并成弥散场，再多的实例，最后会整合成十来个名字（即十几种元素）。比如一盒铅笔，我们没必要说，铅笔A、铅笔B…这也是指代上的一种压缩技巧。</p>
 <p>总之，锚点、量级、密度、朝向都在这 61 个 token 里——模型会根据自己在意的点往下深究。<br>LoD0 是一个实例一到两行，长这样：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pine_c1.1      pose  [92.05, 12.65, 0.0]m @ yaw=99.7°.</span><br><span class="line">pine_c1.1      bound [0.85×0.85×6.41]m.</span><br></pre></td></tr></table></figure>
 
@@ -677,9 +704,8 @@
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">GSDL 各接口调用量与耗时统计面板</figcaption>
   </figure>
 </div>
-GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这份清单不是一次性设计出来的，而是被每一轮评测数据推着长出来的，所以上面给你看到的只是它某一个时间切片的样子。
-（目前大概有 35 个接口，其中大概20个左右是目前稳定的）
 
+<p>GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这份清单不是一次性设计出来的，而是被每一轮评测数据推着长出来的，所以上面给你看到的只是它某一个时间切片的样子。<br>（目前大概有 35 个接口，其中大概20个左右是目前稳定的）</p>
 <p>我之前也试过用常规的方式来对它进行迭代。但是效果微乎其微（问题主要是：迭代速度太慢，另外我的个人判断也过于主观），后面我改成了“基于 &#x2F;Loop 的评测驱动”的方式来优化接口：先建好一批场景测试题，LLM 直接基于每轮的执行数据和结果自己判断自我迭代，效果有了质的飞跃。</p>
 <p>我的 <code>/Loop</code> 循环开发大致分为两个阶段：<br>第一个阶段，我给它写了36道测试题（因为测试题不够，最早是11道题，后来扩展为36道，全是手动提问并人肉标注答案，累死俺了）。</p>
 <p>这些测试题涵盖了：</p>
@@ -689,8 +715,9 @@ GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这
 <li><strong>异常检测</strong>：(有没有悬空、穿模、明显摆错位的东西）</li>
 <li><strong>通行结构</strong>(这个洞穴有几个洞口、分别多宽）</li>
 <li><strong>复合体拆解</strong>（14 个牌坊资产里哪 6 个组成完整牌坊、一座瓮城由哪些构件构成）</li>
-<li><strong>诚实否认</strong>（场景里没有汽车、没有霓虹灯，能否有依据地说“没有”，而不是硬猜一个）等等十几个方向的内容。<br>所有题目都用自然语言出题、并且刻意不点名任何工具名。</li>
+<li><strong>诚实否认</strong>（场景里没有汽车、没有霓虹灯，能否有依据地说“没有”，而不是硬猜一个）等等十几个方向的内容。</li>
 </ul>
+<p>所有题目都用自然语言出题、并且刻意不点名任何工具名。</p>
 <p>我使用两个agent都跑<code>/Loop</code>循环，<strong>一个跑测试</strong>（开N个空白上下文的子agent去调用mcp进行提问，Fable5主agent只负责调度，写总结文档，和提需求），<strong>一个改代码</strong>（opus&#x2F;GLM5.2 根据前者的需求优化接口逻辑）。<br><em>（跑mcp测试的子 agent 用本地 qwen3.6 27b、minimax m3。SOTA 模型的完成率确实更高，但真实场景里一旦大量铺开，MCP 消耗会是个可怕的数字——工具是面向生产的，不是用来跑分的，那就得按生产环境里真正会用的模型来适配）</em></p>
 <p>我主要看三个主要硬性指标：</p>
 <ul>
@@ -705,8 +732,8 @@ GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">案例路由优化前后的工具调用记录对比</figcaption>
   </figure>
 </div>
-三个硬指标的变化是这样的（取 7 月 21–22 日、10 题同口径的数据）：
 
+<p>三个硬指标的变化是这样的（取 7 月 21–22 日、10 题同口径的数据）：</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025518.png" alt="GSDL /Loop 迭代指标表：Token 消耗、调用次数与正确题数逐轮变化" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
@@ -748,22 +775,18 @@ GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">→ nm_status             ← 确认工具状态</span><br><span class="line">→ describe_region       ← 区域普查</span><br><span class="line">→ find_opening          ← 射线测洞口</span><br><span class="line">→ fly_to                ← 飞抵现场</span><br><span class="line">→ capture_view          ← 截图复核</span><br><span class="line"></span><br><span class="line">→ 带类型、位置、宽度与证据等级的回答</span><br></pre></td></tr></table></figure>
 
 <p>同一个问题，加入 <code>find_opening</code> 路由之前，模型用了 47 次工具调用、消耗 64,820 字符，仍然把名字带 <code>Archway</code> 的墙体构件当成洞口；加入路由后，只用了 5 次调用和 15,540 字符，就完成了测量与视觉复核。</p>
-<table>
-<thead>
-<tr>
-<th>洞口区域实景渲染</th>
-<th>同一机位的像素级实例分割</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="洞穴岩壁间的洞口，透光可见远处场景"></td>
-<td><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191249.png" alt="同一机位的逐像素实例分割，用于区分画面中的洞壁与背景物体"></td>
-</tr>
-<tr>
-<td>模型随后飞到候选洞口前进行截图复核。掩码中出现了 494 个属于 <code>BP_Sky_Sphere</code> 的像素，说明视线确实能够穿过开口看到外部背景；但这只能作为“开口存在”的视觉旁证。它是否能够通行、宽度是多少，仍由贴近地面的碰撞射线与门框精测结果决定。</td>
-<td></td>
-</tr>
-</tbody></table>
+<div style="display: flex; flex-wrap: nowrap; gap: 10px; align-items: flex-start; margin: 24px 0;">
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="洞穴岩壁间的洞口，透光可见远处场景" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption>洞口区域实景渲染</figcaption>
+  </figure>
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191249.png" alt="同一机位的逐像素实例分割，用于区分画面中的洞壁与背景物体" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption>同一机位的像素级实例分割</figcaption>
+  </figure>
+</div>
+
+<p>模型随后飞到候选洞口前进行截图复核。掩码中出现了 494 个属于 <code>BP_Sky_Sphere</code> 的像素，说明视线确实能够穿过开口看到外部背景；但这只能作为“开口存在”的视觉旁证。它是否能够通行、宽度是多少，仍由贴近地面的碰撞射线与门框精测结果决定。</p>
 <p>最终，系统把候选结构分成了10个地面可通行洞口或通道、高位窗口和天窗，并给出了地面开口的位置与实测宽度。它甚至找出了我此前没有注意到的开口。这里真正重要的不是“搜到了多少个叫 <code>Archway</code> 的 Actor”，而是它能够区分洞壁、内部通道、对外洞口和不可直接通行的高位开口。</p>
 <h3 id="6-项目开源"><a href="#6-项目开源" class="headerlink" title="6. 项目开源"></a>6. 项目开源</h3><p>感谢你看到这里。<br>这个GSDL项目，我这段时间忙完之后，剥离公司项目内容后，会在Github上开源，欢迎大家一来尝试和提建议。一个人的精力确实太有限了。<br>项目地址暂时先放在这里了：<a target="_blank" rel="noopener" href="https://github.com/youdrew/OpenGSDL">OpenGSDL</a> 大概9月初会上传。里面会包含着掩码方案 + GSDL。会以 UE 多版本 MCP 插件的形式呈现，你可以基于它做二次开发，或者直接用来辅助UE的官方MCP。</p>
 <h2 id="六、Vector-Atlas（全地图语义编码）"><a href="#六、Vector-Atlas（全地图语义编码）" class="headerlink" title="六、Vector Atlas（全地图语义编码）"></a>六、Vector Atlas（全地图语义编码）</h2><p>我之所以做这个东西，是因为每一次模型去查询地图里面的东西，其实都是一个<strong>非常久的延迟操作</strong>（在这个过程中，要去加载场景，获取掩码、截图…），至少对于我们的项目来说，是一个60s+的操作。更别提，要进行全地图大规模的查询，会显著拉长单次任务的完成时间。所以我在想，能不能让这个过程更加的迅速一点。</p>
@@ -775,7 +798,7 @@ GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这
 <p>开篇我提到的：把每个位置「背」下来、毫秒级查询的承诺，就靠它兑现。用存储，换性能的工程化实现。</p>
 <p>因为这篇文章实在太长了，且Vector Atlas这个东西也是一个非常复杂的项目（要考虑到如何优化搜索、如何拍摄、如何部署、如何让AI得到未拍摄的角度…这些都是要思考的东西）。<br>所以 Vector Atlas 加上（上面提到的）“基于用户真实数据的自进化的Agent系统”（第二期自进化接口），我会留到下一篇文章详细阐述，那时候，我的系统也更加完善了。在这里仅先简单地预告一下。</p>
 <p>下面欣赏一下工具的Demo吧。</p>
-<h2 id="七、给碳基生物的版本"><a href="#七、给碳基生物的版本" class="headerlink" title="七、给碳基生物的版本"></a>七、给碳基生物的版本</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<h2 id="七、给碳基生物的版本"><a href="#七、给碳基生物的版本" class="headerlink" title="七、给碳基生物的版本"></a>七、给碳基生物的版本</h2><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-search-redacted-v2.gif" alt="语义搜索" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图1 全地图场景位置语义搜索</figcaption>
@@ -922,7 +945,7 @@ GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这
 
 
 <div class="tags">
-    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
 </div>
 
 

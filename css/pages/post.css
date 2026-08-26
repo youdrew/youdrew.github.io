@@ -95,173 +95,122 @@
 }
 
 .content {
-  color: #4b4848;
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 22px;
   padding: 60px 30px;
-  background: #fff;
+  background: var(--surface);
   margin-bottom: 70px;
   box-sizing: border-box;
+}
+
+.content:not(.archives) {
+  padding: 64px clamp(24px, 4vw, 72px) 80px;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+/* The post hero already prints the title; keep the Markdown H1 for Obsidian only. */
+body.layout-post .content:not(.archives) > h1:first-child {
+  display: none;
 }
 
 .content.archives {
   margin-top: 90px;
 }
 
-.content p {
-  color: #4b4848;
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 20px;
-  line-height: 30px;
-  margin-bottom: 30px; /* 从18px提高到22px，增加段落间距 */
+.content:not(.archives) > p,
+.content:not(.archives) > ul,
+.content:not(.archives) > ol,
+.content:not(.archives) > blockquote,
+.content:not(.archives) > hr,
+.content:not(.archives) > h1,
+.content:not(.archives) > h2,
+.content:not(.archives) > h3,
+.content:not(.archives) > h4,
+.content:not(.archives) > h5,
+.content:not(.archives) > h6,
+.content:not(.archives) > .callout {
+  box-sizing: border-box;
+  width: min(100%, var(--reading-width));
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.content h1,
-.content h2,
-.content h3,
-.content h4,
-.content h5,
-.content h6 {
-  color: #4b4848;
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: bold;
-  line-height: 1.4;
+/* Keep prose easy to scan while letting data-heavy blocks use more of the page. */
+.content:not(.archives) > table,
+.content:not(.archives) > figure,
+.content:not(.archives) > .codeblock,
+.content:not(.archives) > .code-block-container,
+.content:not(.archives) > .mermaid,
+.content:not(.archives) > div:not(.callout) {
+  box-sizing: border-box;
+  max-width: min(100%, var(--content-wide-width));
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.content:not(.archives) p {
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 1.25em;
+}
+
+.content:not(.archives) h1,
+.content:not(.archives) h2,
+.content:not(.archives) h3,
+.content:not(.archives) h4,
+.content:not(.archives) h5,
+.content:not(.archives) h6 {
+  color: var(--ink-strong);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
   position: relative;
-  padding-left: 24px; /* 为折叠按钮留出空间 */
+  padding-left: 24px; /* room for the collapse control */
+  scroll-margin-top: 80px;
 }
 
-/* 随层级调整间距 */
-.content h1 {
-  margin-top: 40px;
-  margin-bottom: 25px;
-  font-size: 2em;
+.content:not(.archives) h1 {
+  margin-top: 0;
+  margin-bottom: 28px;
+  font-size: 34px;
 }
 
-.content h2 {
-  margin-top: 35px;
-  margin-bottom: 20px;
-  font-size: 1.5em;
+.content:not(.archives) h2 {
+  margin-top: 56px;
+  margin-bottom: 22px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 28px;
 }
 
-.content h3 {
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-size: 1.4em;
+.content:not(.archives) h3 {
+  margin-top: 42px;
+  margin-bottom: 18px;
+  font-size: 23px;
 }
 
-.content h4 {
-  margin-top: 25px;
+.content:not(.archives) h4 {
+  margin-top: 34px;
+  margin-bottom: 14px;
+  font-size: 20px;
+}
+
+.content:not(.archives) h5 {
+  margin-top: 28px;
   margin-bottom: 12px;
-  font-size: 1.35em;
+  font-size: 18px;
 }
 
-.content h5 {
-  margin-top: 20px;
+.content:not(.archives) h6 {
+  margin-top: 24px;
   margin-bottom: 10px;
-  font-size: 1.3em;
-}
-
-.content h6 {
-  margin-top: 15px;
-  margin-bottom: 10px;
-  font-size: 1.25em;
-}
-
-/* 标题缩进 */
-.content h1 {
-  margin-left: 0;
-}
-.content h2 {
-  margin-left: 24px;
-}
-.content h3 {
-  margin-left: 48px;
-}
-.content h4 {
-  margin-left: 72px;
-}
-.content h5 {
-  margin-left: 96px;
-}
-.content h6 {
-  margin-left: 120px;
-}
-
-/* 标题后的内容缩进 */
-.content h1 ~ p,
-.content h1 ~ ul,
-.content h1 ~ ol,
-.content h1 ~ blockquote,
-.content h1 ~ figure,
-.content h1 ~ table,
-.content h1 ~ .codeblock,
-.content h1 ~ .code-block-container,
-.content h1 ~ img {
-  margin-left: 24px;
-}
-
-.content h2 ~ p,
-.content h2 ~ ul,
-.content h2 ~ ol,
-.content h2 ~ blockquote,
-.content h2 ~ figure,
-.content h2 ~ table,
-.content h2 ~ .codeblock,
-.content h2 ~ .code-block-container,
-.content h2 ~ img {
-  margin-left: 48px;
-}
-
-.content h3 ~ p,
-.content h3 ~ ul,
-.content h3 ~ ol,
-.content h3 ~ blockquote,
-.content h3 ~ figure,
-.content h3 ~ table,
-.content h3 ~ .codeblock,
-.content h3 ~ .code-block-container,
-.content h3 ~ img {
-  margin-left: 72px;
-}
-
-.content h4 ~ p,
-.content h4 ~ ul,
-.content h4 ~ ol,
-.content h4 ~ blockquote,
-.content h4 ~ figure,
-.content h4 ~ table,
-.content h4 ~ .codeblock,
-.content h4 ~ .code-block-container,
-.content h4 ~ img {
-  margin-left: 96px;
-}
-
-.content h5 ~ p,
-.content h5 ~ ul,
-.content h5 ~ ol,
-.content h5 ~ blockquote,
-.content h5 ~ figure,
-.content h5 ~ table,
-.content h5 ~ .codeblock,
-.content h5 ~ .code-block-container,
-.content h5 ~ img {
-  margin-left: 120px;
-}
-
-.content h6 ~ p,
-.content h6 ~ ul,
-.content h6 ~ ol,
-.content h6 ~ blockquote,
-.content h6 ~ figure,
-.content h6 ~ table,
-.content h6 ~ .codeblock,
-.content h6 ~ .code-block-container,
-.content h6 ~ img {
-  margin-left: 144px;
+  font-size: 17px;
 }
 
 /* 折叠按钮样式 */
@@ -299,12 +248,12 @@
 }
 
 /* 折叠状态 */
-.content h1.collapsed .collapse-button::after,
-.content h2.collapsed .collapse-button::after,
-.content h3.collapsed .collapse-button::after,
-.content h4.collapsed .collapse-button::after,
-.content h5.collapsed .collapse-button::after,
-.content h6.collapsed .collapse-button::after {
+.content:not(.archives) h1.collapsed .collapse-button::after,
+.content:not(.archives) h2.collapsed .collapse-button::after,
+.content:not(.archives) h3.collapsed .collapse-button::after,
+.content:not(.archives) h4.collapsed .collapse-button::after,
+.content:not(.archives) h5.collapsed .collapse-button::after,
+.content:not(.archives) h6.collapsed .collapse-button::after {
   transform: scaleY(0);
 }
 
@@ -314,66 +263,77 @@
   display: block;
 }
 
-/* 列表样式 - 统一有序和无序列表的样式 */
-.content ol,
-.content ul {
-  margin-left: 0; /* 移除固定缩进，继承父级 */
+.content:not(.archives) a {
+  color: #356aa0;
+  text-decoration-color: rgb(53 106 160 / 0.45);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+.content:not(.archives) a:hover {
+  color: #214f7d;
+  text-decoration-color: currentcolor;
+}
+
+.content:not(.archives) mark {
+  padding: 0.05em 0.18em;
+  border-radius: 3px;
+  background: #fff1a8;
+  color: inherit;
+  font-style: normal;
+  font-weight: inherit;
+}
+
+.content:not(.archives) hr {
+  height: 1px;
+  margin-top: 36px;
+  margin-bottom: 36px;
+  border: 0;
+  background: var(--line-2);
+}
+
+.content:not(.archives) figcaption {
+  margin-top: 10px;
+  color: var(--muted) !important;
+  font-family: var(--font-sans);
+  font-size: 14px !important;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* Lists share the article's type scale and vertical rhythm. */
+.content:not(.archives) ol,
+.content:not(.archives) ul {
   margin-top: 0;
-  margin-bottom: 0; /* 减小下间距，与上间距一致 */
-  padding-left: 1.5em; /* 给标记符号留出空间 */
-  list-style-position: outside; /* 标记符号在外部，避免长文本换行问题 */
-  line-height: 1.6;
-  font-family:
-    'noto-sans-sc',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    'Microsoft YaHei',
-    '微软雅黑',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    sans-serif;
+  margin-bottom: 1.25em;
+  padding-left: 1.45em;
+  color: var(--ink);
+  font-family: var(--font-sans);
   font-size: 18px;
-  color: #4b4848;
+  line-height: 1.75;
+  list-style-position: outside;
 }
 
-.content ol li,
-.content ul li {
-  margin-bottom: 4px; /* 减小列表项之间的间距 */
-  line-height: 1.6;
-  padding-left: 0.3em; /* 标记和文本之间的小间距 */
+.content:not(.archives) ol li,
+.content:not(.archives) ul li {
+  margin-bottom: 0.4em;
+  padding-left: 0.18em;
+  line-height: inherit;
 }
 
-.content ol li:last-child,
-.content ul li:last-child {
+.content:not(.archives) ol li:last-child,
+.content:not(.archives) ul li:last-child {
   margin-bottom: 0;
 }
 
-/* 嵌套列表的间距调整 - 保持一致 */
-.content ol ol,
-.content ul ul,
-.content ol ul,
-.content ul ol {
-  margin-top: 4px; /* 减小嵌套列表与父项的间距 */
-  margin-bottom: 0; /* 嵌套列表下间距由父li控制 */
-  margin-left: 0; /* 嵌套列表不额外缩进，靠padding-left控制 */
-  font-size: 17px; /* 嵌套列表稍小 */
-}
-
-/* 二级嵌套列表 */
-.content ol ol ol,
-.content ul ul ul,
-.content ol ul ul,
-.content ul ol ol {
-  font-size: 16px;
-  color: #5a5757;
-}
-
-/* 三级嵌套列表 */
-.content ol ol ol ol,
-.content ul ul ul ul {
-  font-size: 15px;
-  color: #6a6767;
+.content:not(.archives) ol ol,
+.content:not(.archives) ul ul,
+.content:not(.archives) ol ul,
+.content:not(.archives) ul ol {
+  margin-top: 0.4em;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-size: 0.96em;
 }
 
 .content .archive-filters {
@@ -485,18 +445,34 @@
   color: #969595;
 }
 
-/* Quotes */
-blockquote {
-  border-left: 3px solid #5d686f;
-  padding: 0 15px;
-  font-style: italic;
-  margin: 1.5em 0 0;
+/* Quiet, Obsidian-like notes and quotations. */
+.content:not(.archives) blockquote {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding: 14px 18px;
+  border-left: 4px solid #aeb7c1;
+  border-radius: 0 7px 7px 0;
+  background: #f7f8fa;
+  color: #555d66;
+  font-style: normal;
 }
-blockquote cite::before {
+
+.content:not(.archives) blockquote cite::before {
   content: ' — ';
   padding: 0 0.3em;
 }
-blockquote > p:first-child {
+
+.content:not(.archives) blockquote > p {
+  color: inherit;
+  font-size: inherit;
+  line-height: 1.7;
+}
+
+.content:not(.archives) blockquote > p:first-child {
+  margin-top: 0;
+}
+
+.content:not(.archives) blockquote > p:last-child {
   margin: 0;
 }
 

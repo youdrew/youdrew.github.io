@@ -5,25 +5,29 @@ pre > code {
   width: 100%;
   box-sizing: border-box;
   padding: 15px;
-  font-family:
-    Courier New,
-    Courier,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
   margin: 0;
   cursor: text;
   overflow-x: auto;
   line-height: 1.7em;
-  font-size: 15px;
+  font-size: 0.88em;
 }
 
 code {
-  font-size: 15px;
-  display: inline-block;
-  font-family: 'Courier New', Courier, monospace;
+  display: inline;
+  padding: 0.12em 0.36em;
+  border-radius: 4px;
+  background-color: #f1f3f5;
+  color: #c8346e;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.88em;
   font-weight: 400;
-  background-color: #f7f8f8;
-  padding: 0 10px;
+  line-height: inherit;
+  box-decoration-break: clone;
 }
 
 figure.highlight,
@@ -51,10 +55,7 @@ figure.highlight .tag,
 .codeblock .code,
 .codeblock .tag {
   background-color: inherit;
-  font-family:
-    Courier New,
-    Courier,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   border: none;
   padding: 0;
   margin: 0;
@@ -130,7 +131,7 @@ figure.highlight .line,
 
 .gist .line,
 .gist .line-number {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   font-size: 1em;
   margin: 0 0 5px 0;
 }
@@ -141,7 +142,7 @@ pre > code {
 }
 
 code {
-  background-color: #f7f8f8;
+  background-color: #f1f3f5;
 }
 
 .codeblock--tabbed figcaption .tab.active {
@@ -843,10 +844,7 @@ figure.highlight.yml .number,
   max-height: 400px;
   overflow: auto;
   background-color: #f7f8f8;
-  font-family:
-    Courier New,
-    Courier,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   line-height: 1.3em;
 }
 
@@ -989,10 +987,7 @@ figure.highlight {
   overflow-y: auto;
   overflow-x: auto;
   background-color: #f7f8f8;
-  font-family:
-    Courier New,
-    Courier,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   line-height: 1.3em;
   border-radius: 8px;
   box-sizing: border-box;

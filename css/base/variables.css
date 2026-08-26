@@ -44,6 +44,8 @@
   --rail: 64px; /* desktop collapsed sidebar rail = idle ocean-shader strip width */
   --radius: 10px; /* default control/tile radius */
   --tap: 44px; /* minimum touch target */
+  --reading-width: 900px; /* comfortable long-form reading measure */
+  --content-wide-width: 1400px; /* tables, diagrams, code and media groups */
 
   /* Spacing scale (component-internal gaps) */
   --space-1: 6px;
