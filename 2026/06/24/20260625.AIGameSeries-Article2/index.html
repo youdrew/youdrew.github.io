@@ -40,7 +40,7 @@
     
         <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-08-26T13:39:09.056Z">
+            <meta property="article:modified_time" content="2026-08-26T16:06:40.005Z">
         
     
     
@@ -78,45 +78,45 @@
     -->
     
     
-        <link rel="stylesheet" href="/css/base/reset.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/base/reset.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/base/variables.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/base/variables.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/base/fonts.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/base/fonts.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/base/typography.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/base/typography.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/layout/header.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/layout/header.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/layout/grid.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/layout/grid.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/pages/home.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/pages/home.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/pages/post.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/pages/post.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/tooltip.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/tooltip.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/toc.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/toc.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/mermaid.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/mermaid.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/canvas.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/canvas.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/callout.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/callout.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/responsive.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/responsive.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/code-block.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/code-block.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/table.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/table.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/image-zoom.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/image-zoom.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/tag-graph.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/tag-graph.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/components/language-switcher.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/components/language-switcher.css?v=6830df4c2859">
     
-        <link rel="stylesheet" href="/css/pages/daily-signal.css?v=3c07d63fdfcf">
+        <link rel="stylesheet" href="/css/pages/daily-signal.css?v=6830df4c2859">
     
 
     <!-- Mermaid is loaded in after-footer.ejs -->
@@ -753,7 +753,7 @@
 </tr>
 </tbody></table>
 <p>Before discussing spatial relations, the LLM must first know what exists and which instance a phrase refers to. Only then does it call the deeper reasoning interfaces.</p>
-<div class="media-layout media-layout--right">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 340px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-222622.png" alt="GSDL interface statistics showing call count, failures or refusals, LLM characters, and latency" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">GSDL interface call volume and latency dashboard</figcaption>
@@ -818,7 +818,7 @@
 
 <p>I built a passive-update system. When users call MCP tools during their normal work, a Hook records the exact question and the conversation in a background database. Users are also occasionally asked to rate how completely the LLM finished the task.</p>
 <p>A scheduled agent turns those interaction records into a capability-requirements table whenever it detects a weak area. At night, after I leave work, an executor agent implements the capability. Another lead agent then launches many subagents to test the MCP changes, summarizes their reports and recommendations, and feeds them back to the executor. The executor iterates again. The loop continues until the new interface stabilizes.</p>
-<div class="media-layout media-layout--left">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 250px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-034651.png" alt="Two NVIDIA DGX Spark systems on a wooden table" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Two heavily armed DGX Sparks, purchased at great expense</figcaption>
