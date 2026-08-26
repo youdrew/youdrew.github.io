@@ -502,11 +502,13 @@ export function initTagGraph() {
           layout: 'force',
           data: data.nodes,
           links: data.links,
-          roam: false,
-          // Drag deforms the force layout — fine with a mouse, but on touch a
-          // finger swipe (e.g. trying to scroll) grabs a node and mangles the
-          // web. Disable on touch; keep tap-to-navigate via the click handler.
-          draggable: !isTouch,
+          // Native roam transforms the rendered view directly, without
+          // rebuilding the force layout on every pointer move. Touch keeps its
+          // dedicated fullscreen interaction below.
+          roam: !isTouch,
+          // Enable node dragging only after the initial force simulation has
+          // been snapshotted into a static layout (see lockLayout).
+          draggable: false,
           force: {
             repulsion: calcRepulsion(data.nodes.length),
             edgeLength: [150, 450],
@@ -554,68 +556,175 @@ export function initTagGraph() {
       ],
     };
 
+    // Kept in sync with native roam so touch fullscreen can restore the inline
+    // framing on exit.
+    let currentZoom = initialZoom || 1;
+    let currentCenter = initialCenter ? [initialCenter[0], initialCenter[1]] : [0, 0];
+    let layoutFrozen = false;
+    let staticViewReference = null;
+
     chart.setOption(option);
 
-    // Once force layout stabilizes, re-fit a single time so all filter nodes
-    // are visible. Skip if the user has already zoomed/panned — re-fitting on
-    // top of user input was the cause of the early-load "bouncing" behavior.
-    let userInteracted = false;
-    let didFit = false;
-    if (filterNodes.length > 0) {
-      const fitOnce = function () {
-        if (didFit) return;
-        if (userInteracted) {
-          didFit = true;
-          chart.off('finished', fitOnce);
-          return;
-        }
-        const model = chart.getModel();
-        const series0 = model && model.getSeriesByIndex && model.getSeriesByIndex(0);
-        const graph = series0 && series0.getGraph && series0.getGraph();
-        let minX = Infinity,
-          maxX = -Infinity,
-          minY = Infinity,
-          maxY = -Infinity;
-        let validCount = 0;
-        filterNodes.forEach(function (node) {
-          const gNode = graph && graph.getNodeByName && graph.getNodeByName(node.name);
-          const layout = gNode && gNode.getLayout && gNode.getLayout();
-          let x, y;
-          if (layout && layout.length >= 2) {
-            x = layout[0];
-            y = layout[1];
-          } else {
-            x = node.x || 0;
-            y = node.y || 0;
-          }
-          const r = (node.symbolSize || 20) / 2 + 50;
-          if (x - r < minX) minX = x - r;
-          if (x + r > maxX) maxX = x + r;
-          if (y - r < minY) minY = y - r;
-          if (y + r > maxY) maxY = y + r;
-          validCount++;
-        });
-        if (validCount === 0) return;
-        const bw = maxX - minX;
-        const bh = maxY - minY;
-        if (bw <= 0 || bh <= 0) return;
-        let zoom = Math.min(cw / bw, ch / bh, 1.5) * 0.8;
-        if (zoom < 0.3) zoom = 0.3;
-        didFit = true;
-        currentZoom = zoom;
-        currentCenter = [(minX + maxX) / 2, (minY + maxY) / 2];
-        chart.setOption({
-          series: [
-            {
-              zoom: zoom,
-              center: currentCenter.slice(),
-            },
-          ],
-        });
-        chart.off('finished', fitOnce);
-      };
-      chart.on('finished', fitOnce);
+    // ECharts' `finished` event can fire between force-layout steps, so it is
+    // not a reliable "physics settled" signal. Debounce `rendered` instead:
+    // while the force simulation is active it renders about every 16ms. After
+    // 200ms of silence (or 2.5s at most), snapshot the calculated positions
+    // and switch to the static graph layout before enabling drag. ECharts can
+    // then update one node and its edges without reflowing the rest of the web.
+    let forceIdleTimer = null;
+    let forceMaxWaitTimer = null;
+
+    function getSeriesModel() {
+      const model = chart.getModel();
+      return model && model.getSeriesByIndex && model.getSeriesByIndex(0);
     }
+
+    function getRenderedGraph() {
+      const series0 = getSeriesModel();
+      return series0 && series0.getGraph && series0.getGraph();
+    }
+
+    function snapshotNodePositions(graph) {
+      const nodes = [];
+      for (let i = 0; i < data.nodes.length; i++) {
+        const node = data.nodes[i];
+        const graphNode = graph && graph.getNodeById && graph.getNodeById(node.name);
+        const position = graphNode && graphNode.getLayout && graphNode.getLayout();
+        if (
+          !position ||
+          position.length < 2 ||
+          !Number.isFinite(position[0]) ||
+          !Number.isFinite(position[1])
+        ) {
+          return null;
+        }
+        nodes.push(
+          Object.assign({}, node, {
+            x: position[0],
+            y: position[1],
+          })
+        );
+      }
+      return nodes;
+    }
+
+    function getNodeBounds(nodes) {
+      let minX = Infinity,
+        maxX = -Infinity,
+        minY = Infinity,
+        maxY = -Infinity;
+      nodes.forEach(function (node) {
+        if (node.x < minX) minX = node.x;
+        if (node.x > maxX) maxX = node.x;
+        if (node.y < minY) minY = node.y;
+        if (node.y > maxY) maxY = node.y;
+      });
+      if (maxX === minX) {
+        minX -= 1;
+        maxX += 1;
+      }
+      if (maxY === minY) {
+        minY -= 1;
+        maxY += 1;
+      }
+      return {
+        width: maxX - minX,
+        height: maxY - minY,
+      };
+    }
+
+    function getStaticViewBox(nodes) {
+      const bounds = getNodeBounds(nodes);
+      const widthRatio = chart.getWidth() / staticViewReference.chartWidth;
+      const heightRatio = chart.getHeight() / staticViewReference.chartHeight;
+      const responsiveScale = Math.min(widthRatio, heightRatio);
+      const rawScale = staticViewReference.rawScale * responsiveScale;
+      const viewWidth = bounds.width * rawScale;
+      const viewHeight = bounds.height * rawScale;
+      const viewCenterX = staticViewReference.anchorX * chart.getWidth();
+      const viewCenterY = staticViewReference.anchorY * chart.getHeight();
+      return {
+        left: viewCenterX - viewWidth / 2,
+        top: viewCenterY - viewHeight / 2,
+        width: viewWidth,
+        height: viewHeight,
+      };
+    }
+
+    function applyStaticLayout(nodes) {
+      const viewBox = getStaticViewBox(nodes);
+      chart.setOption({
+        series: [
+          {
+            animation: false,
+            layout: 'none',
+            data: nodes,
+            draggable: !isTouch,
+            roam: !isTouch,
+            left: viewBox.left,
+            top: viewBox.top,
+            width: viewBox.width,
+            height: viewBox.height,
+            center: currentCenter.slice(),
+            zoom: currentZoom,
+          },
+        ],
+      });
+    }
+
+    function lockLayout() {
+      if (layoutFrozen) return;
+
+      const series0 = getSeriesModel();
+      const coordSys = series0 && series0.coordinateSystem;
+      const graph = series0 && series0.getGraph && series0.getGraph();
+      const nodes = snapshotNodePositions(graph);
+      const transformInfo = coordSys && coordSys.getTransformInfo && coordSys.getTransformInfo();
+      const rawTransform = transformInfo && transformInfo.raw;
+      const viewRect = coordSys && coordSys.getViewRect && coordSys.getViewRect();
+
+      if (!nodes || !rawTransform || !viewRect) {
+        forceIdleTimer = setTimeout(lockLayout, 100);
+        return;
+      }
+
+      currentZoom = coordSys.getZoom ? coordSys.getZoom() : currentZoom;
+      currentCenter = coordSys.getCenter ? coordSys.getCenter().slice() : currentCenter;
+      staticViewReference = {
+        chartWidth: chart.getWidth(),
+        chartHeight: chart.getHeight(),
+        // createView keeps the graph aspect ratio, so raw X/Y scales should be
+        // equal. The geometric mean avoids carrying a floating-point mismatch
+        // into the explicit width/height aspect ratio.
+        rawScale: Math.sqrt(Math.abs(rawTransform.scaleX * rawTransform.scaleY)),
+        anchorX: (viewRect.x + viewRect.width / 2) / chart.getWidth(),
+        anchorY: (viewRect.y + viewRect.height / 2) / chart.getHeight(),
+      };
+      data.nodes = nodes;
+      layoutFrozen = true;
+      clearTimeout(forceIdleTimer);
+      clearTimeout(forceMaxWaitTimer);
+      chart.off('rendered', waitForForceIdle);
+      applyStaticLayout(data.nodes);
+    }
+
+    function waitForForceIdle() {
+      if (layoutFrozen) return;
+      clearTimeout(forceIdleTimer);
+      forceIdleTimer = setTimeout(lockLayout, 200);
+    }
+
+    chart.on('rendered', waitForForceIdle);
+    chart.on('graphroam', function () {
+      const series0 = getSeriesModel();
+      const modelZoom = series0 && series0.get && series0.get('zoom');
+      const modelCenter = series0 && series0.get && series0.get('center');
+      if (Number.isFinite(modelZoom)) currentZoom = modelZoom;
+      if (modelCenter && modelCenter.length >= 2) {
+        currentCenter = [modelCenter[0], modelCenter[1]];
+      }
+    });
+    forceMaxWaitTimer = setTimeout(lockLayout, 2500);
 
     // Click node → navigate to tag page.
     // Click edge → no-op; the tooltip exposes clickable article links instead,
@@ -637,93 +746,30 @@ export function initTagGraph() {
       container.style.cursor = 'default';
     });
 
-    // currentZoom/currentCenter are read & written by fitOnce() above, so they
-    // must exist regardless of input device.
-    let currentZoom = initialZoom || 1;
-    let currentCenter = initialCenter ? [initialCenter[0], initialCenter[1]] : [0, 0];
-
-    // Desktop (mouse) interaction only. On touch this whole model breaks — a
-    // finger swipe grabs a node and the force layout deforms, and the
-    // wheel/touchmove capture would block page scroll. Touch users get a
-    // static-but-tappable graph (draggable:false above) that the page scrolls
-    // and pinches over naturally (touch-action in tag-graph.css).
-    if (!isTouch) {
-      // Prevent page scroll/zoom when interacting inside the graph container
-      const graphEl = graphContainer || container;
-      graphEl.addEventListener(
-        'wheel',
-        function (e) {
-          e.preventDefault();
-        },
-        { passive: false }
-      );
-      graphEl.addEventListener(
-        'touchmove',
-        function (e) {
-          if (e.touches.length >= 2) {
-            e.preventDefault();
-          }
-        },
-        { passive: false }
-      );
-
-      // Unified zoom & pan via ZRender (roam is disabled to avoid dual-layer conflicts)
-      const zr = chart.getZr();
-
-      // Zoom: mousewheel anywhere on canvas
-      zr.on('mousewheel', function (e) {
-        e.event.preventDefault();
-        e.event.stopPropagation();
-        userInteracted = true;
-        const delta = e.wheelDelta > 0 ? 1.08 : 1 / 1.08;
-        let newZoom = currentZoom * delta;
-        if (newZoom < 0.3) newZoom = 0.3;
-        if (newZoom > 4) newZoom = 4;
-        currentZoom = newZoom;
-        chart.setOption({ series: [{ zoom: currentZoom }] });
+    // Persist the dragged coordinate into the static data after pointer-up, so
+    // resize or a label refresh cannot snap the node back to its old position.
+    function syncFrozenNodePositions() {
+      if (!layoutFrozen) return;
+      const nodes = snapshotNodePositions(getRenderedGraph());
+      if (!nodes) return;
+      const changed = nodes.some(function (node, index) {
+        const previous = data.nodes[index];
+        return !previous || node.x !== previous.x || node.y !== previous.y;
       });
-
-      // Pan: drag anywhere on canvas (not on a node)
-      let isPanning = false;
-      let panStart = [0, 0];
-      let centerAtPanStart = [0, 0];
-      zr.on('mousedown', function (e) {
-        // Only pan when not clicking on a graph element
-        if (!e.target) {
-          isPanning = true;
-          userInteracted = true;
-          panStart = [e.event.clientX, e.event.clientY];
-          centerAtPanStart = [currentCenter[0], currentCenter[1]];
-          container.style.cursor = 'grabbing';
-        }
-      });
-      zr.on('mousemove', function (e) {
-        if (isPanning) {
-          const dx = e.event.clientX - panStart[0];
-          const dy = e.event.clientY - panStart[1];
-          // Convert pixel offset to graph coordinate offset (account for zoom & device pixel ratio)
-          const cw = container.clientWidth;
-          const ch = container.clientHeight;
-          const graphW = cw / currentZoom;
-          const graphH = ch / currentZoom;
-          currentCenter[0] = centerAtPanStart[0] - dx * (graphW / cw);
-          currentCenter[1] = centerAtPanStart[1] - dy * (graphH / ch);
-          chart.setOption({ series: [{ center: [currentCenter[0], currentCenter[1]] }] });
-        }
-      });
-      zr.on('mouseup', function () {
-        if (isPanning) {
-          isPanning = false;
-          container.style.cursor = 'default';
-        }
-      });
-      zr.on('globalout', function () {
-        if (isPanning) {
-          isPanning = false;
-          container.style.cursor = 'default';
-        }
-      });
+      if (!changed) return;
+      data.nodes = nodes;
+      applyStaticLayout(data.nodes);
     }
+
+    // Native roam deliberately ignores draggable graph elements, so node drag
+    // and background pan no longer compete for the same pointer gesture.
+    const zr = chart.getZr();
+    zr.on('mouseup', function () {
+      requestAnimationFrame(syncFrozenNodePositions);
+    });
+    zr.on('globalout', function () {
+      requestAnimationFrame(syncFrozenNodePositions);
+    });
 
     // Touch only: a fullscreen toggle. Inline, the graph is static and the page
     // scrolls over it (touch-action: manipulation) — there's no room to zoom/pan
@@ -769,6 +815,7 @@ export function initTagGraph() {
         // Resize into the full-screen box, then enable roam (pinch / drag-pan).
         requestAnimationFrame(function () {
           chart.resize();
+          if (layoutFrozen) applyStaticLayout(data.nodes);
           chart.setOption({ series: [{ roam: true }] });
           showFsHint();
         });
@@ -783,6 +830,7 @@ export function initTagGraph() {
         // Resize back and restore the inline framing + disable roam.
         requestAnimationFrame(function () {
           chart.resize();
+          if (layoutFrozen) applyStaticLayout(data.nodes);
           chart.setOption({
             series: [{ roam: false, zoom: currentZoom, center: currentCenter.slice() }],
           });
@@ -805,6 +853,7 @@ export function initTagGraph() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function () {
         chart.resize();
+        if (layoutFrozen) applyStaticLayout(data.nodes);
       }, 150);
     });
 
@@ -818,7 +867,8 @@ export function initTagGraph() {
     // (which reads the current language from localStorage at call time) while
     // merging the rest of the option in place.
     function refreshLabels() {
-      chart.setOption({ series: [{ data: data.nodes }] });
+      if (layoutFrozen) applyStaticLayout(data.nodes);
+      else chart.setOption({ series: [{ data: data.nodes }] });
     }
 
     window.addEventListener('storage', function (e) {

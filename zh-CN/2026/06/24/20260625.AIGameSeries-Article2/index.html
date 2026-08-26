@@ -40,7 +40,7 @@
     
         <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-08-26T10:36:28.287Z">
+            <meta property="article:modified_time" content="2026-08-26T10:55:02.425Z">
         
     
     
@@ -220,7 +220,7 @@
 <hr>
 <h2 id="一、缘起：无法理解的场景"><a href="#一、缘起：无法理解的场景" class="headerlink" title="一、缘起：无法理解的场景"></a>一、缘起：无法理解的场景</h2><p>第一式我们通过语义编码认识了每个资产，这一回，我们要回答的是：我在哪里？</p>
 <p>众所周知，LLM是不理解场景的，即使截图给它，它也看不懂美术摆下的龙门阵：<br>    ① “这个区域大概是什么风格？”<br>	     → AI：幻觉回答一下。<br>    ② “帮我去找场景中一个在楼梯边的宝箱”<br>	    → AI：遍历世界大纲里面的东西，然后一个个地去找。然后哪个在楼梯边？不知道。<br>    ③ “给你一张图，这个图上的位置在我大世界的哪里啊？”<br>	    → AI：什么玩意儿？这我咋找？<br>	④ “帮我找到一个我用石头堆成的山洞”<br>		→ AI：@#￥%……&amp;*</p>
-<p>本文要解决的就是这些问题（地图理解因为内容有点多故分成两篇文章，此篇是第一篇，讲述理解地图，第二篇会讲全地图的向量检索）。<br>经过本轮修炼，你的 AI 能像人一样，&#x3D;&#x3D;真正意义上“理解”&#x3D;&#x3D;你的地图，并且将采集过的场景和位置&#x3D;&#x3D;“背”&#x3D;&#x3D;下来；对于未拍摄的视角，则计划通过相邻视角的插值推断加以补全，最终实现大世界地图任意位置的&#x3D;&#x3D;毫秒级&#x3D;&#x3D;查询。</p>
+<p>本文要解决的就是这些问题（地图理解因为内容有点多故分成两篇文章，此篇是第一篇，讲述理解地图，第二篇会讲全地图的向量检索）。<br>经过本轮修炼，你的 AI 能像人一样，<mark>真正意义上“理解”</mark>你的地图，并且将采集过的场景和位置<mark>“背”</mark>下来；对于未拍摄的视角，则计划通过相邻视角的插值推断加以补全，最终实现大世界地图任意位置的<mark>毫秒级</mark>查询。</p>
 <h2 id="二、如何理解一个场景？"><a href="#二、如何理解一个场景？" class="headerlink" title="二、如何理解一个场景？"></a>二、如何理解一个场景？</h2><p>我们来看一下，人类看到一个场景时，是怎么样的？<br>	最先，是看到游戏场景 -&gt; “诶，黑黢黢的” （视觉）<br>	然后，感受了其中的空间关系 -&gt; “咦，前面有点光” （空间）<br>	最后，理解了场景所表达的含义 -&gt; “哦，这里那个白骨精的山洞” （语义）</p>
 <p>他会怎么向别人表述这个场景，他说：<br>	 我刚刚去了一个场景，从 <strong>黑井附近</strong> 按E就可以进去，那个地方 <strong>比花果山山洞还要黑</strong>，我感觉那里应该就是 <strong>隐藏关卡boss白骨精的老窝</strong> 了。</p>
 <p>根据上面的描述，我将理解和表述能力拆分开来：</p>
@@ -921,7 +921,7 @@ GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这
 
 
 <div class="tags">
-    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
 </div>
 
 
