@@ -53,8 +53,8 @@
   gap: 2px;
 }
 
-/* 全部折叠 / 全部展开 切换（图标按当前状态在 index.js 里切换） */
-.toc-foldall {
+/* 全部折叠 / 全部展开：两个控制始终并列，避免切换后动作入口消失。 */
+.toc-fold-control {
   display: grid;
   place-items: center;
   flex: none;
@@ -71,11 +71,16 @@
     background-color 0.15s ease,
     color 0.15s ease;
 }
-.toc-foldall:hover {
+.toc-fold-control:hover:not(:disabled) {
   background: #ececec;
   color: #222;
 }
-.toc-foldall svg {
+.toc-fold-control:disabled {
+  color: #aaa;
+  cursor: default;
+  opacity: 0.5;
+}
+.toc-fold-control svg {
   width: 18px;
   height: 18px;
 }

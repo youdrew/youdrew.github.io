@@ -2,6 +2,50 @@
  * 文章折叠模块
  * 为文章标题添加折叠/展开功能
  */
+
+function isHeading(element) {
+  return !!element.tagName && /^H[1-6]$/.test(element.tagName);
+}
+
+function headingLevel(element) {
+  return parseInt(element.tagName.charAt(1), 10);
+}
+
+/**
+ * Apply one heading's current fold state to its body section while preserving
+ * every descendant heading's independent state. When a parent is reopened,
+ * child headings become visible, but content below a still-collapsed child
+ * stays hidden.
+ */
+export function syncHeadingSection(heading) {
+  if (!isHeading(heading)) return;
+
+  const rootLevel = headingLevel(heading);
+  const collapsedLevels = heading.classList.contains('collapsed') ? [rootLevel] : [];
+  let next = heading.nextElementSibling;
+
+  while (next) {
+    if (isHeading(next)) {
+      const level = headingLevel(next);
+      if (level <= rootLevel) break;
+
+      while (collapsedLevels.length && collapsedLevels[collapsedLevels.length - 1] >= level) {
+        collapsedLevels.pop();
+      }
+
+      next.style.display = collapsedLevels.length ? 'none' : '';
+      if (next.classList.contains('collapsed')) collapsedLevels.push(level);
+    } else if (next.classList && next.classList.contains('tags')) {
+      // Post metadata remains visible regardless of article fold state.
+      next.style.display = '';
+    } else {
+      next.style.display = collapsedLevels.length ? 'none' : '';
+    }
+
+    next = next.nextElementSibling;
+  }
+}
+
 export class ArticleCollapse {
   constructor() {
     this.init();
@@ -29,23 +73,7 @@ export class ArticleCollapse {
   }
 
   toggleCollapse(heading) {
-    const headingLevel = parseInt(heading.tagName[1]);
-    let nextEl = heading.nextElementSibling;
     heading.classList.toggle('collapsed');
-
-    const isCollapsed = heading.classList.contains('collapsed');
-
-    // 隐藏/显示所有下级内容直到遇到同级或更高级的标题
-    while (nextEl) {
-      const isHeading = nextEl.tagName && nextEl.tagName.match(/^H[1-6]$/);
-
-      if (isHeading) {
-        const nextLevel = parseInt(nextEl.tagName[1]);
-        if (nextLevel <= headingLevel) break;
-      }
-
-      nextEl.style.display = isCollapsed ? 'none' : '';
-      nextEl = nextEl.nextElementSibling;
-    }
+    syncHeadingSection(heading);
   }
 }

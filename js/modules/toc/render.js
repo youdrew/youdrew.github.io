@@ -18,7 +18,8 @@ export function renderToc(headings) {
     '<div class="toc-header">' +
     '<span class="toc-title"></span>' +
     '<div class="toc-header__actions">' +
-    '<button type="button" class="toc-foldall"></button>' +
+    '<button type="button" class="toc-fold-control toc-collapse-all"></button>' +
+    '<button type="button" class="toc-fold-control toc-expand-all"></button>' +
     '<button type="button" class="toc-close-btn"><span class="toc-close-btn__x" aria-hidden="true"></span></button>' +
     '</div>' +
     '</div>' +

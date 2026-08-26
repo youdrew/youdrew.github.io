@@ -15,6 +15,8 @@
  * post-article metadata that should remain visible regardless of fold state.
  */
 
+import { syncHeadingSection } from '../article-collapse.js';
+
 function hideTocChildren(items, startIndex, parentLevel) {
   for (let i = startIndex + 1; i < items.length; i += 1) {
     const level = parseInt(items[i].getAttribute('data-level') || '1', 10);
@@ -47,41 +49,6 @@ function showTocChildren(items, startIndex, parentLevel) {
   }
 }
 
-function hideHeadingSiblings(heading) {
-  const level = parseInt(heading.tagName.charAt(1), 10);
-  let next = heading.nextElementSibling;
-  while (next) {
-    if (next.tagName && /^H[1-6]$/.test(next.tagName)) {
-      const nextLevel = parseInt(next.tagName.charAt(1), 10);
-      if (nextLevel <= level) break;
-    }
-    if (next.classList && next.classList.contains('tags')) {
-      next = next.nextElementSibling;
-      continue;
-    }
-    next.style.display = 'none';
-    next = next.nextElementSibling;
-  }
-}
-
-function showHeadingSiblings(heading) {
-  const level = parseInt(heading.tagName.charAt(1), 10);
-  let next = heading.nextElementSibling;
-  while (next) {
-    if (next.tagName && /^H[1-6]$/.test(next.tagName)) {
-      const nextLevel = parseInt(next.tagName.charAt(1), 10);
-      if (nextLevel <= level) break;
-    }
-    if (next.classList && next.classList.contains('tags')) {
-      next.style.display = '';
-      next = next.nextElementSibling;
-      continue;
-    }
-    next.style.display = '';
-    next = next.nextElementSibling;
-  }
-}
-
 function toggleFromToc(headings, items, index) {
   const item = items[index];
   const heading = headings[index] && headings[index].element;
@@ -93,26 +60,22 @@ function toggleFromToc(headings, items, index) {
   if (willCollapse) {
     item.classList.add('collapsed');
     hideTocChildren(items, index, level);
-    if (!heading.classList.contains('collapsed')) {
-      heading.classList.add('collapsed');
-      hideHeadingSiblings(heading);
-    }
+    heading.classList.add('collapsed');
   } else {
     item.classList.remove('collapsed');
     showTocChildren(items, index, level);
-    if (heading.classList.contains('collapsed')) {
-      heading.classList.remove('collapsed');
-      showHeadingSiblings(heading);
-    }
+    heading.classList.remove('collapsed');
   }
+
+  syncHeadingSection(heading);
 }
 
 /**
  * Collapse or expand every collapsible heading at once (the drawer's
- * fold-all toggle). Iterated in document order so, on expand, a parent is
- * revealed before we reach its children; on collapse we skip items already
- * hidden inside a collapsed ancestor (collapsing the top level hides the
- * rest). Virtual (news-item) entries have no fold and are ignored.
+ * global fold controls). Every real heading receives its own state, including
+ * headings already hidden inside a collapsed ancestor. This is what lets a
+ * user reopen one parent while its descendants remain independently folded.
+ * Virtual (news-item) entries have no fold and are ignored.
  */
 export function foldAll(headings, items, collapse) {
   items.forEach((item, i) => {
@@ -120,9 +83,7 @@ export function foldAll(headings, items, collapse) {
     if (!item.querySelector('.toc-collapse-btn')) return; // leaf heading, nothing to fold
     const isCollapsed = item.classList.contains('collapsed');
     if (collapse) {
-      if (!isCollapsed && !item.classList.contains('toc-hidden')) {
-        toggleFromToc(headings, items, i);
-      }
+      if (!isCollapsed) toggleFromToc(headings, items, i);
     } else if (isCollapsed) {
       toggleFromToc(headings, items, i);
     }
@@ -144,9 +105,11 @@ function syncFromHeading(headings, items, index) {
     item.classList.remove('collapsed');
     showTocChildren(items, index, level);
   }
+
+  syncHeadingSection(heading);
 }
 
-export function initFold(headings, items) {
+export function initFold(headings, items, onStateChange = null) {
   // Apply initial nested-hide for any items that started collapsed.
   // (render.js already added .collapsed to the item if the heading had it,
   // but its descendants still need .toc-hidden.)
@@ -164,6 +127,7 @@ export function initFold(headings, items) {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleFromToc(headings, items, i);
+      if (onStateChange) onStateChange();
     });
   });
 
@@ -174,12 +138,15 @@ export function initFold(headings, items) {
   headings.forEach((h, i) => headingByElement.set(h.element, i));
 
   const observer = new MutationObserver((mutations) => {
+    let changed = false;
     mutations.forEach((mutation) => {
       if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') return;
       const i = headingByElement.get(mutation.target);
       if (i === undefined) return;
       syncFromHeading(headings, items, i);
+      changed = true;
     });
+    if (changed && onStateChange) onStateChange();
   });
   headings.forEach((h) => {
     observer.observe(h.element, { attributes: true, attributeFilter: ['class'] });

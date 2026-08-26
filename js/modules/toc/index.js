@@ -21,8 +21,8 @@ import { initVisibility } from './visibility.js';
 import { initFold, foldAll } from './fold.js';
 import { initScrollSpy } from './scroll-spy.js';
 
-// Material "unfold_less" (arrows in → click collapses) / "unfold_more"
-// (arrows out → click expands).
+// Material "unfold_less" (arrows in → collapse) / "unfold_more"
+// (arrows out → expand).
 const SVG_FOLD_LESS =
   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.41 18.59 8.83 20 12 16.83 15.17 20l1.41-1.41L12 14zM16.59 5.41 15.17 4 12 7.17 8.83 4 7.41 5.41 12 10z"/></svg>';
 const SVG_FOLD_MORE =
@@ -56,36 +56,51 @@ export function initToc() {
 
   const { container, items } = renderToc(headings);
 
-  initFold(headings, items);
-  const spy = initScrollSpy(headings, items);
-  initVisibility(container); // last: the initial auto-open centers on the spy's active item
-
-  // Fold-all toggle in the drawer header: collapse every section at once when
-  // any is open, expand all when everything is collapsed.
-  const foldBtn = container.querySelector('.toc-foldall');
+  // Keep both global actions visible. Disabled state communicates which action
+  // is currently a no-op without making the opposite action disappear.
+  const collapseAllBtn = container.querySelector('.toc-collapse-all');
+  const expandAllBtn = container.querySelector('.toc-expand-all');
   const collapsibles = items.filter(isCollapsible);
-  if (foldBtn && collapsibles.length) {
+  let updateFoldControls = null;
+  if (collapseAllBtn && expandAllBtn && collapsibles.length) {
     const zh =
       (document.documentElement.getAttribute('lang') || '').toLowerCase().indexOf('zh') === 0;
     const T = zh
       ? { collapse: '全部折叠', expand: '全部展开' }
       : { collapse: 'Collapse all', expand: 'Expand all' };
-    const paint = () => {
-      const anyOpen = collapsibles.some((it) => !it.classList.contains('collapsed'));
-      // Show the action the click will perform.
-      foldBtn.innerHTML = anyOpen ? SVG_FOLD_LESS : SVG_FOLD_MORE;
-      foldBtn.setAttribute('aria-label', anyOpen ? T.collapse : T.expand);
-      foldBtn.setAttribute('title', anyOpen ? T.collapse : T.expand);
+
+    collapseAllBtn.innerHTML = SVG_FOLD_LESS;
+    collapseAllBtn.setAttribute('aria-label', T.collapse);
+    collapseAllBtn.setAttribute('title', T.collapse);
+    expandAllBtn.innerHTML = SVG_FOLD_MORE;
+    expandAllBtn.setAttribute('aria-label', T.expand);
+    expandAllBtn.setAttribute('title', T.expand);
+
+    updateFoldControls = () => {
+      const collapsedCount = collapsibles.filter((item) =>
+        item.classList.contains('collapsed')
+      ).length;
+      collapseAllBtn.disabled = collapsedCount === collapsibles.length;
+      expandAllBtn.disabled = collapsedCount === 0;
     };
-    foldBtn.addEventListener('click', () => {
-      const anyOpen = collapsibles.some((it) => !it.classList.contains('collapsed'));
-      foldAll(headings, items, anyOpen);
-      paint();
+
+    collapseAllBtn.addEventListener('click', () => {
+      foldAll(headings, items, true);
+      updateFoldControls();
     });
-    paint();
-  } else if (foldBtn) {
-    foldBtn.remove(); // nothing foldable (e.g. a flat article) → no toggle
+    expandAllBtn.addEventListener('click', () => {
+      foldAll(headings, items, false);
+      updateFoldControls();
+    });
+  } else {
+    if (collapseAllBtn) collapseAllBtn.remove();
+    if (expandAllBtn) expandAllBtn.remove();
   }
+
+  initFold(headings, items, updateFoldControls);
+  if (updateFoldControls) updateFoldControls();
+  const spy = initScrollSpy(headings, items);
+  initVisibility(container); // last: the initial auto-open centers on the spy's active item
 
   // Click a TOC entry → smooth-scroll to the target and refresh the spy
   // after the scroll settles so the active highlight catches up. Virtual
