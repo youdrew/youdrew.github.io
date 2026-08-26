@@ -213,6 +213,10 @@ body.layout-post .content:not(.archives) > h1:first-child {
   font-size: 17px;
 }
 
+.content:not(.archives) .collapsible-heading {
+  cursor: pointer;
+}
+
 /* 折叠按钮样式 */
 .collapse-button {
   position: absolute;

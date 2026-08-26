@@ -11,6 +11,11 @@ function headingLevel(element) {
   return parseInt(element.tagName.charAt(1), 10);
 }
 
+function isInteractiveHeadingTarget(target) {
+  if (!target || typeof target.closest !== 'function') return false;
+  return !!target.closest('a, button, input, textarea, select, summary, [contenteditable="true"]');
+}
+
 /**
  * Apply one heading's current fold state to its body section while preserving
  * every descendant heading's independent state. When a parent is reopened,
@@ -59,6 +64,8 @@ export class ArticleCollapse {
     const headings = articleContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
     headings.forEach((heading) => {
+      heading.classList.add('collapsible-heading');
+
       // 创建折叠按钮
       const collapseButton = document.createElement('span');
       collapseButton.className = 'collapse-button';
@@ -67,6 +74,12 @@ export class ArticleCollapse {
       // 添加点击事件
       collapseButton.addEventListener('click', (e) => {
         e.stopPropagation();
+        this.toggleCollapse(heading);
+      });
+
+      // 标题正文也作为折叠触发区；标题中的真实链接仍保留原有行为。
+      heading.addEventListener('click', (e) => {
+        if (isInteractiveHeadingTarget(e.target)) return;
         this.toggleCollapse(heading);
       });
     });
