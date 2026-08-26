@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://eugenepage.com/2026/06/24/20260625.AIGameSeries-Article2/">
+
+    <!-- Description -->
+    
+        <meta name="description" content="Why do LLMs fail to understand a large Unreal Engine world? This article introduces a 2D asset-mask method built on the editor&#39;s Hit Proxy system and GSDL, a variable-granularity scene description language, then compares five engine-to-LLM translation layers—MCP, CLI, snapshots, OpenUSD, and direct screenshots—and previews Vector Atlas for map-wide semantic encoding.">
+    
+
+    <!-- Author -->
+    
+        <meta name="author" content="Eugene Hsuan">
+    
+
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://eugenepage.com/2026/06/24/20260625.AIGameSeries-Article2/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Eugene&#39;s Page">
+    <meta property="og:locale" content="en_US">
+    
+        <meta property="og:title" content="Landing AI in Game Production — A Kung-Fu Manual · Form 2 «Read the Board, Discern the Formation»: Game-Scene Understanding Through Image Masks and Semantic Abstraction">
+    
+    
+        <meta property="og:description" content="Why do LLMs fail to understand a large Unreal Engine world? This article introduces a 2D asset-mask method built on the editor&#39;s Hit Proxy system and GSDL, a variable-granularity scene description language, then compares five engine-to-LLM translation layers—MCP, CLI, snapshots, OpenUSD, and direct screenshots—and previews Vector Atlas for map-wide semantic encoding.">
+    
+    
+        <meta property="og:image" content="https://eugenepage.com/img/og-default.png">
+    
+    
+        <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
+        
+            <meta property="article:modified_time" content="2026-08-26T09:47:23.891Z">
+        
+    
+    
+        <meta name="article:lang" content="en">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    
+        <meta name="twitter:title" content="Landing AI in Game Production — A Kung-Fu Manual · Form 2 «Read the Board, Discern the Formation»: Game-Scene Understanding Through Image Masks and Semantic Abstraction">
+    
+    
+        <meta name="twitter:description" content="Why do LLMs fail to understand a large Unreal Engine world? This article introduces a 2D asset-mask method built on the editor&#39;s Hit Proxy system and GSDL, a variable-granularity scene description language, then compares five engine-to-LLM translation layers—MCP, CLI, snapshots, OpenUSD, and direct screenshots—and previews Vector Atlas for map-wide semantic encoding.">
+    
+    
+        <meta name="twitter:image" content="https://eugenepage.com/img/og-default.png">
+    
+
+    <!-- Hreflang (build-time alternate language map).
+         x-default always points at the English version per SEO convention. -->
+    
+        <link rel="alternate" hreflang="en" href="https://eugenepage.com/2026/06/24/20260625.AIGameSeries-Article2/">
+        <link rel="alternate" hreflang="zh-CN" href="https://eugenepage.com/zh-CN/2026/06/24/20260625.AIGameSeries-Article2/">
+        <link rel="alternate" hreflang="x-default" href="https://eugenepage.com/2026/06/24/20260625.AIGameSeries-Article2/">
+    
+
+    <!-- Title -->
+    
+    <title>Landing AI in Game Production — A Kung-Fu Manual · Form 2 «Read the Board, Discern the Formation»: Game-Scene Understanding Through Image Masks and Semantic Abstraction - Eugene&#39;s Page</title>
+
+    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    
+<link rel="stylesheet" href="/css/main.css">
+
+
+    <!-- Mermaid is loaded in after-footer.ejs -->
+
+    <!-- Google Analytics -->
+    
+
+
+    <!--Favicon-->
+    
+        <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    
+
+    
+        <link rel="alternate" type="application/atom+xml" title="Eugene&#39;s Page" href="/atom.xml">
+    
+        <link rel="alternate" type="application/rss+xml" title="Eugene&#39;s Page" href="/rss.xml">
+    
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body class="layout-post path--2026-06-24-20260625-AIGameSeries-Article2-">
+
+<!-- Menu -->
+<!-- Navigation -->
+<header>
+    <div class="logo">
+        <a href="/">Eugene's Page</a>
+        <div class="subtitle"></div>
+        <div class="description"></div>
+    </div><!-- end logo -->
+
+    <button id="menu_icon" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-toggle__bars" aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav">
+        <ul>
+            
+            
+                
+                
+                <li>
+                    <a href="/" data-i18n-key="Home" class="">Home</a>
+                </li>
+            
+                
+                
+                
+                <li>
+                    <a href="/archives" data-i18n-key="Archives" class="">Archives</a>
+                </li>
+            
+                
+                
+                <li>
+                    <a href="/about" data-i18n-key="About" class="">About</a>
+                </li>
+            
+        </ul>
+    </nav><!-- end navigation menu -->
+
+    <div class="footer clearfix">
+        <div class="lang-row">
+            <span class="lang-row__label">
+                <span class="lang-row__icon" aria-hidden="true"></span>
+                <span data-i18n="Language">Language</span>
+            </span>
+            <div class="lang-switch" role="group" aria-label="Language">
+                <button type="button" class="lang-switch__opt" data-lang="en" aria-pressed="true">EN</button>
+                <button type="button" class="lang-switch__opt" data-lang="zh-CN" aria-pressed="false">中文</button>
+            </div>
+        </div>
+        <ul class="social clearfix">
+            
+                <li><a href="https://space.bilibili.com/29291963" class="behance" target="_blank" data-title="Bilibili"></a></li>
+            
+            
+                <li><a href="https://github.com/youdrew" class="github" target="_blank" data-title="GitHub"></a></li>
+            
+            
+                <li><a href="https://www.instagram.com/yu_chinghsuan?igsh=Mm54ajloc3c1NW5m&utm_source=qr" class="instagram" target="_blank" data-title="Instagram"></a></li>
+            
+            
+                <li><a href="https://www.douban.com/people/Youdrew_Xuan/" class="dribble" target="_blank" data-title="Douban"></a></li>
+            
+            
+                <li><a href="mailto:youdrewxuan@icloud.com" class="google" target="_blank" data-title="Email"></a></li>
+            
+            
+                <li><a href="/rss.xml" class="rss" target="_blank" data-title="RSS"></a></li>
+            
+            <li class="social-lang"><a href="javascript:void(0);" class="language" id="langSwitch" data-title="Language"></a></li>
+        </ul><!-- end social -->
+
+        <div class="rights">
+            <p><span data-i18n="Copyright">Copyright</span> © 2026 Eugene Hsuan</p>
+            <p><span data-i18n="Powered by">Powered by</span> <a href="https://hexo.io/" target="_blank">Hexo</a></p>
+            <p><span data-i18n="Modified based on">Modified based on</span> <a href="https://github.com/klugjo/hexo-theme-magnetic" target="_blank">Magnetic</a> <span data-i18n="theme">theme</span></p>
+            <p data-i18n="Mainly maintained using AI">Mainly maintained using AI</p>
+        </div><!-- end rights -->
+    </div ><!-- end footer -->
+</header><!-- end header -->
+
+
+<!-- Main Content -->
+<section class="main clearfix" data-toc="true">
+
+    <section class="top no-cover">
+        <div class="wrapper content_header clearfix">
+            
+
+<div class="work_nav">
+
+    <ul class="btn clearfix">
+        
+        <li><a href="/zh-CN/2026/06/24/20260625.AIGameSeries-Article2/" class="previous" data-title="游戏生产AI落地武林秘籍（第二式：观局识阵）：图像掩码及语义抽象实现游戏场景理解"></a></li>
+        
+        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
+        
+        <li><a href="/zh-CN/2026/06/01/20260602.AIGameSeries-Article1/" class="next" data-title="游戏生产AI落地武林秘籍（第一式：..."></a></li>
+        
+    </ul>
+
+</div><!-- end work_nav -->
+            <h1 class="title">Landing AI in Game Production — A Kung-Fu Manual · Form 2 «Read the Board, Discern the Formation»: Game-Scene Understanding Through Image Masks and Semantic Abstraction</h1>
+        </div>
+    </section><!-- end top -->
+
+    <section class="wrapper">
+        <div class="content">
+
+            <!-- Content -->
+            <h1 id="Landing-AI-in-Game-Production-·-Form-2-«Read-the-Board-Discern-the-Formation»-Game-Scene-Understanding-Through-Image-Masks-and-Semantic-Abstraction"><a href="#Landing-AI-in-Game-Production-·-Form-2-«Read-the-Board-Discern-the-Formation»-Game-Scene-Understanding-Through-Image-Masks-and-Semantic-Abstraction" class="headerlink" title="Landing AI in Game Production · Form 2 «Read the Board, Discern the Formation»: Game-Scene Understanding Through Image Masks and Semantic Abstraction"></a>Landing AI in Game Production · Form 2 «Read the Board, Discern the Formation»: Game-Scene Understanding Through Image Masks and Semantic Abstraction</h1><blockquote>
+<p><strong>Series intro</strong>: “The Kung-Fu Manual for Landing AI in Game Production” records the road I took—every step of it paid for in blood and tears.<br>In Form 1, «Within Easy Reach», we taught AI to recognize every asset in a project. It knows which Jiangnan-style low shrub <code>shrub_jn_01a</code> refers to. But that is not enough: <strong>recognizing every piece on the board does not mean understanding the formation.</strong> In Form 2, «Read the Board, Discern the Formation», we teach AI to understand the “formation” an artist has arranged across a map.</p>
+<p><em>Note: almost every article in this series is handcrafted. If you only care about the result and not the implementation, feel free to skip Chapters 3 through 6.</em></p>
+</blockquote>
+<hr>
+<h2 id="1-Origin-A-Scene-AI-Cannot-Understand"><a href="#1-Origin-A-Scene-AI-Cannot-Understand" class="headerlink" title="1. Origin: A Scene AI Cannot Understand"></a>1. Origin: A Scene AI Cannot Understand</h2><p>In Form 1, semantic encoding taught the AI to recognize individual assets. This time, the question is: <strong>where am I?</strong></p>
+<p>As everyone knows, an LLM does not understand a scene. Even if you hand it a screenshot, it still cannot read the elaborate formation an artist has built:</p>
+<pre><code>① &quot;What kind of visual style does this area have?&quot;
+     → AI: Make up something plausible.
+② &quot;Find the treasure chest beside a staircase.&quot;
+     → AI: Traverse the World Outliner and inspect objects one by one. Which one is beside a staircase? No idea.
+③ &quot;Here is a screenshot. Where is this location in my open world?&quot;
+     → AI: What on earth am I looking at?
+④ &quot;Find a cave I built out of piled rocks.&quot;
+     → AI: @#￥%……&amp;*
+</code></pre>
+<p>Those are the problems this article sets out to solve. Map understanding turned out to contain too much material for one article, so I am splitting it into two: this one is about <strong>understanding the map</strong>, while the next will cover <strong>vector search across the entire map</strong>.</p>
+<p>After this round of training, your AI will be able to &#x3D;&#x3D;understand&#x3D;&#x3D; a map in the real sense of the word, much as a person does, and &#x3D;&#x3D;memorize&#x3D;&#x3D; every scene and position it has sampled. For viewpoints that were never captured, I plan to infer them by interpolating between neighboring views, ultimately enabling &#x3D;&#x3D;millisecond-level&#x3D;&#x3D; lookup at any position in a large open world.</p>
+<h2 id="2-What-Does-It-Mean-to-Understand-a-Scene"><a href="#2-What-Does-It-Mean-to-Understand-a-Scene" class="headerlink" title="2. What Does It Mean to Understand a Scene?"></a>2. What Does It Mean to Understand a Scene?</h2><p>Consider what happens when a person sees a scene.</p>
+<p>First, they see the game world: “Huh, it is pitch-dark in here.” <strong>(visual)</strong></p>
+<p>Then they sense the spatial relationships: “Wait, there is some light ahead.” <strong>(spatial)</strong></p>
+<p>Finally, they understand what the scene means: “Oh—this must be the White Bone Demon’s cave.” <strong>(semantic)</strong></p>
+<p>How would they describe the scene to someone else?</p>
+<blockquote>
+<p>I just found a place. You enter it by pressing E near <strong>Black Well</strong>. It is <strong>even darker than the cave at Flower-Fruit Mountain</strong>. I think it must be <strong>the hidden boss White Bone Demon’s lair</strong>.</p>
+</blockquote>
+<p>From that description, I separate understanding from expression:</p>
+<table>
+<thead>
+<tr>
+<th>Perception \ Expression</th>
+<th>Reference</th>
+<th>Comparison</th>
+<th>Metaphor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Visual information</strong></td>
+<td>🟢 Identify by visual style</td>
+<td>🟡 Compare density and style intensity</td>
+<td>🟠 Use cultural imagery to describe texture or style</td>
+</tr>
+<tr>
+<td><strong>Spatial information</strong></td>
+<td>🟡 Identify by spatial position</td>
+<td>🟡 Compare relative position and distribution</td>
+<td>🟠 Describe spatial form through another object</td>
+</tr>
+<tr>
+<td><strong>Semantic information</strong></td>
+<td>🟡 Identify by function or use</td>
+<td>🟠 Express preference or negation</td>
+<td>🔴 Describe function and narrative through metaphor</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Difficulty: 🟢 easy ｜ 🟡 medium ｜ 🟠 hard ｜ 🔴 extremely hard. The harder cells are difficult for AI both to understand and to express accurately.</p>
+</blockquote>
+<p>The <strong>vertical axis—the perception layer</strong>—corresponds to three abilities an AI needs in order to understand a scene:</p>
+<ul>
+<li><strong>Visual information</strong> — <strong>What does this area look like?</strong> Style, density, texture, and aesthetic impression.</li>
+<li><strong>Spatial information</strong> — <strong>How are A and B arranged in space?</strong> Who contains whom, what touches or intersects what, what supports what, and what occludes what: topology + direction + distance + support + occlusion.<br>Topological relations—RCC-8’s DC &#x2F; EC &#x2F; PO &#x2F; EQ &#x2F; TPP &#x2F; NTPP and so on—are already a mature area of qualitative spatial reasoning; see Cohn and Renz’s classic survey, <a target="_blank" rel="noopener" href="https://users.cecs.anu.edu.au/~jrenz/papers/cohn-renz-krbook07.pdf">Qualitative Spatial Representation and Reasoning</a>. Support and occlusion are often treated separately in vision research, as in Biederman’s 1982 discussion of <a target="_blank" rel="noopener" href="https://www.cs.princeton.edu/courses/archive/spring08/cos598B/Readings/Biederman1982.pdf">Support &#x2F; Interposition</a>. In an engine, however, they ultimately come from the same geometric data, so this framework groups them together by <strong>data source</strong>.</li>
+<li><strong>Semantic information</strong> — <strong>What is A doing here, and what narrative role does it serve?</strong><ol>
+<li><strong>Object meaning</strong> — What does this individual object imply?</li>
+<li><strong>Compositional meaning</strong> — What does a group of objects mean together? This is mereology: for example, a gap hollowed out from a pile of rocks becomes a cave.</li>
+<li><strong>Design semantics</strong> — This scene is run-down because it is meant to depict a village suffering through famine.</li>
+<li><strong>Co-occurrence</strong> — Do A and B often appear together? Which pairings are stable?<br>This level touches several different fields at once: distributional semantics, RDF for knowledge representation, and FrameNet for frame semantics. Co-occurrence is learned from frequency or vectors, not calculated from geometry. Modeling how the current state affects the next state would move further into Markov models. I treat co-occurrence as part of semantics because it expresses scene logic above the level of individual geometry. That topic is somewhat beyond the scope of this article.</li>
+</ol>
+</li>
+</ul>
+<p>The <strong>horizontal axis—the expression layer</strong>, meaning whether the system can restate what it has learned, covers three strategies:</p>
+<ul>
+<li><strong>Reference</strong> corresponds to <em>deixis</em>: shared attention anchors both parties to the same object even without coordinates.</li>
+<li><strong>Comparison</strong> uses vague quantifiers and vague language. It need not produce an exact number; it can instead communicate direction, degree, and an implied baseline.</li>
+<li><strong>Metaphor</strong> corresponds to conceptual metaphor or cross-domain mapping: shared cultural experience is used to express space, texture, or function that would otherwise be difficult to state directly.</li>
+</ul>
+<p>An ideal AI scene-understanding tool should, in theory, cover every cell in that 3 × 3 matrix.</p>
+<p>A good agent also needs a long-term scene memory: if we discussed something before, it should be able to retrieve it when the subject comes up again.</p>
+<p>Now let us talk about implementation.</p>
+<h2 id="3-Stop-Talking-Only-About-MCP-It-Is-a-Bottomless-Pit"><a href="#3-Stop-Talking-Only-About-MCP-It-Is-a-Bottomless-Pit" class="headerlink" title="3. Stop Talking Only About MCP: It Is a Bottomless Pit"></a>3. Stop Talking Only About MCP: It Is a Bottomless Pit</h2><p>What we actually need is a <strong>translation layer</strong> between engine data and the LLM: something that extracts whatever the LLM wants to know from the engine, then translates it into a form the model can use. MCP is the obvious first thought.</p>
+<p>MCP has indeed been extremely popular for a while.</p>
+<p>But MCP is not a pleasant job if what you want is a fast, dramatic payoff. It demands a great deal of engineering and tuning. Over the past few months I have spent an enormous amount of effort debugging it, even developing a tuning methodology and staring at telemetry every day. Honestly, the result is still not as good as I want.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-171132.png" alt="Tuning dashboard showing tool calls, failures, and call trends" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">My tuning dashboard</figcaption>
+  </figure>
+</div>
+
+<p>Why?</p>
+<p>If you have used any UE MCP tools, you have probably encountered several problems in the scene-understanding layer:</p>
+<ol>
+<li><p><strong>It cannot truly understand the style I am asking about.</strong><br>A person can look at a field and describe whether the grass is sparse or dense. The tool cannot “understand” or summarize that impression.</p>
+</li>
+<li><p><strong>Context explodes as the tool count grows geometrically.</strong><br>Many MCP implementations expose interfaces originally designed for UI directly to the LLM. That is like handing a swordsman a kitchen knife: usable, but awkward. UI was designed for people; its architecture never accounted for limited context windows, hallucination, and the other weaknesses of an AI.</p>
+</li>
+<li><p><strong>More tasks mean more interfaces.</strong><br>An atomic tool signature is fixed. A <code>find</code> tool may begin as a name search, but the requests quickly become “find a treasure chest beside a staircase” (neighborhood reasoning), “find a shrub in this visual style” (semantic filtering), or “count the rocks in this area” (aggregation). The same <code>find</code> now hides several fundamentally different computations. One rigid interface cannot span all of them: either the number of tools explodes or the depth of analysis collapses. My testing also found that offering more MCP tools can actually lower completion rate—not because the tools lack capability, but because the model no longer knows which one to choose.</p>
+</li>
+<li><p><strong>There is no validation, so one bad step poisons everything after it.</strong><br>Every tool call can fail. Most MCP systems only “provide data”; they do not tell you whether the data is correct. If the agent says there is a pine tree at <code>xxx</code>, should you believe it? Without a mirror in which it can inspect its own work, errors snowball through multi-step reasoning until the whole task drifts off course.</p>
+</li>
+<li><p><strong>It is slow and expensive—often slower than doing the job yourself.</strong><br>Every probe crosses a bridge, waits for the editor, and burns tokens. By the time it finishes a lap, I could have clicked through the task myself. A system whose nominal capabilities cannot beat the time and cost of a human using the editor directly has no place in serious production.</p>
+</li>
+</ol>
+<p>MCP is not the only option available to us:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>One-line principle</th>
+<th>Per-call latency</th>
+<th>Context</th>
+<th>Read&#x2F;write</th>
+<th>AI compatibility</th>
+<th>Cross-version</th>
+<th>Compute per call</th>
+<th>Fatal flaw</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MCP</strong></td>
+<td>Run an MCP server in the engine via JSON-RPC</td>
+<td>🟡 seconds</td>
+<td>🔴 every interface exposed</td>
+<td>✅</td>
+<td>🟢 protocol-native</td>
+<td>🔴 tied to APIs</td>
+<td>🟡</td>
+<td><strong>slow + expensive + context explosion + wrong granularity</strong></td>
+</tr>
+<tr>
+<td><strong>CLI + Commandlet</strong></td>
+<td>Launch headless UE to run a command</td>
+<td>🔴 30s+ startup tax</td>
+<td>🟢 persisted output</td>
+<td>✅</td>
+<td>🟡 needs another parser</td>
+<td>🟡 tied to versions</td>
+<td>🔴 process fork</td>
+<td><strong>cold start makes interaction impossible</strong></td>
+</tr>
+<tr>
+<td><strong>Exported text snapshot</strong></td>
+<td>Cook the scene into JSON&#x2F;XML on disk</td>
+<td>🟡 seconds</td>
+<td>🔴 explodes on large scenes</td>
+<td>🔴 read-heavy</td>
+<td>🟡 superficially friendly</td>
+<td>🟡 brittle format</td>
+<td>🟡</td>
+<td><strong>stale + one-way + brittle</strong></td>
+</tr>
+<tr>
+<td><strong>OpenUSD</strong></td>
+<td>Standardized scene description with bidirectional I&#x2F;O</td>
+<td>🟢 seconds</td>
+<td>🟡 structured</td>
+<td>✅</td>
+<td>🟢 text-native</td>
+<td>🟢 stable standard</td>
+<td>🟢</td>
+<td><strong>not unified across the game industry</strong></td>
+</tr>
+<tr>
+<td><strong>Direct screenshots</strong></td>
+<td>Render + let a VLM inspect the image</td>
+<td>🔴 tens of seconds</td>
+<td>🔴 image tokens</td>
+<td>🔴 observation-heavy</td>
+<td>🟢 multimodal-native</td>
+<td>🟢 flexible</td>
+<td>🔴 very high</td>
+<td><strong>expensive + view&#x2F;render-state dependent + loses structure</strong></td>
+</tr>
+</tbody></table>
+<p>By where the information comes from, those five approaches form three groups:</p>
+<p><strong>MCP + CLI</strong> acquire information <strong>online through engine interfaces</strong>. The data is fresh and reflects the current scene, but the interfaces must be maintained, the returned payload can be huge, and every engine upgrade carries a migration cost.</p>
+<p><strong>Exported snapshots + OpenUSD</strong> reconstruct the scene from <strong>offline data</strong>. They avoid occupying a running editor, can be versioned, and are convenient for cross-tool workflows, but they are stale and large scenes can produce enormous snapshots.</p>
+<p><strong>Direct screenshots</strong> acquire information through <strong>images + a VLM</strong>, much closer to how a person observes a scene. Their semantic intuition is strong and they are flexible across engine versions, but the ceiling is set entirely by the VLM’s visual ability and by the information present in the image.</p>
+<p>Only children choose one. I want all of them—combined in pairs.</p>
+<p>For the three kinds of information on the vertical axis of the earlier 3 × 3 matrix, I propose three corresponding implementations:</p>
+<ul>
+<li>Visual information ➡️ <strong>2D asset masks</strong>: VLM screenshots + exported snapshot text, extending what an image can communicate.</li>
+<li>Spatial information ➡️ <strong>GSDL, the General Scene Description Language</strong>: a variable-granularity, human-language-level USD + MCP layer that tackles context explosion and weak spatial perception.</li>
+<li>Semantic information ➡️ <strong>Vector Atlas, map-wide semantic encoding</strong>: Commandlets combined with the two methods above. The implementation has enough difficult bottlenecks to deserve a separate article.</li>
+</ul>
+<p>Let us examine each in turn.</p>
+<h2 id="4-The-2D-Asset-Mask-Method"><a href="#4-The-2D-Asset-Mask-Method" class="headerlink" title="4. The 2D Asset-Mask Method"></a>4. The 2D Asset-Mask Method</h2><h3 id="4-1-Why-a-Screenshot-Alone-Is-Not-Enough"><a href="#4-1-Why-a-Screenshot-Alone-Is-Not-Enough" class="headerlink" title="4.1 Why a Screenshot Alone Is Not Enough"></a>4.1 Why a Screenshot Alone Is Not Enough</h3><p>For visual-semantic understanding, the most direct and human-like approach is to hand an image to a VLM—or to an LLM augmented with image-understanding capability.</p>
+<p>In the ideal future, a large model would read video, understand spatial relationships, and act accordingly. That begins to sound like a world model. Today’s LLMs do not seem to be there yet.</p>
+<p>Some products export extra channels such as <strong>depth and normal maps</strong> to improve a VLM’s spatial perception. But this depends on what the model saw in training. Even before considering the enormous image-token cost, understanding begins to drift when the image is blurry or when the stylized way an Actor is displayed differs from the training distribution. In my view, feeding raw images directly to the model is therefore not an especially good solution.</p>
+<p>But what is the root cause of “not understanding”?</p>
+<p>Return to the basics of computer vision. Understanding an image means recovering structured semantic information from its pixels: what is here, and what is over there?</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015740.png" alt="Instance-segmentation example from Fei-Fei Li's CS231 slides" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Image from Fei-Fei Li's CS231 slides</figcaption>
+  </figure>
+</div>
+
+<p>Common foundational computer-vision tasks include image classification, object detection, semantic segmentation, and instance segmentation.</p>
+<p>In early July, my colleague Fufu from the platform team proposed an image-recognition-plus-raycast approach: use a small model to identify the Actors in a scene, then raycast to retrieve the corresponding Actor. In other words, object recognition followed by instance selection. This inserts a small visual-analysis model between the application and the LLM, letting the LLM actively acquire and segment the contents of the image.</p>
+<p><em>By the way, placing an intermediate layer between a large model and an application is a wonderful agent-design trick. GSDL, which appears later, follows the same logic.</em></p>
+<p>That proposal inspired me.</p>
+<p>But it returns us to the same problem: if the model itself distinguishes objects directly from the image, it will sometimes fail, and the resulting analysis is unstable.</p>
+<p>So why not reverse the direction? Let the engine report which Actor owns every pixel and output a mask table to the LLM, compensating for the model’s inability to separate every component of an image reliably.</p>
+<p>That is my <strong>2D asset-mask method</strong>. When the LLM asks for an image from a position, the editor responds. Optionally, instead of returning only the image, it also reports everything in the frame, compresses that visual information into text, and labels what every part of the image represents. The method slashes token cost while providing extremely stable, high-recall instance segmentation.</p>
+<h3 id="4-2-Establishing-Visual-Ownership"><a href="#4-2-Establishing-Visual-Ownership" class="headerlink" title="4.2 Establishing Visual Ownership"></a>4.2 Establishing Visual Ownership</h3><p>The editor already maintains a Hit Proxy rendering and readback mechanism so users can click objects. Its buffer corresponds to the viewport: every hittable pixel maps to a Hit Proxy, which can then be resolved back to an Actor, Component, or another editor object. We can reuse this mechanism and expose pixel ownership to the LLM. Compared with running a separate vision segmentation model, acquiring and parsing this data is cheap.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015943.png" alt="Original screenshot from the game viewport" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Original game-viewport screenshot</figcaption>
+  </figure>
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-020021.png" alt="ID-color mask where each color represents one Actor" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">ID-color mask: one color per Actor</figcaption>
+  </figure>
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-020004.png" alt="Layout composite combining the scene, masks, and measured coverage labels" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Layout composite: scene × masks + measured coverage labels</figcaption>
+  </figure>
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015848.png" alt="Focus view with mushrooms highlighted in cyan, decorative pillars in magenta, and everything else dimmed" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Focus view: mushrooms in cyan, decorative pillars in magenta, everything else dimmed</figcaption>
+  </figure>
+</div>
+
+<p>Once we know every Actor in the image, do we understand the image’s semantics?</p>
+<p>Yes. Absolutely.</p>
+<p>By a fortunate coincidence, I had just finished an asset-understanding tool—the previous installment in this series.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021528.png" alt="Asset descriptions generated in NeuroBrowser" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Asset descriptions in NeuroBrowser</figcaption>
+  </figure>
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021955.png" alt="Asset-mask table produced by NeuroMap" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Asset-mask table produced by NeuroMap</figcaption>
+  </figure>
+</div>
+
+<p>While building asset understanding, I generated a description for every asset—the left image above—and artists continue editing and improving those descriptions.</p>
+<p>The mask statistics on the right reveal, among other things:</p>
+<ol>
+<li>how much of the image each asset occupies, how it is distributed, and how far away it is;</li>
+<li>which source asset it comes from, so it can link back to asset semantics;</li>
+<li>what the instance is called in the scene and which scene parameters it has.</li>
+</ol>
+<h3 id="4-3-Edge-Cases-and-Local-Vision-Model-Support"><a href="#4-3-Edge-Cases-and-Local-Vision-Model-Support" class="headerlink" title="4.3 Edge Cases and Local Vision-Model Support"></a>4.3 Edge Cases and Local Vision-Model Support</h3><p>Careful readers may have noticed that three kinds of “special asset” reported by Hit Proxy need dedicated channels. I handle each separately:</p>
+<ol>
+<li><strong>Procedural foliage</strong> — split it apart and map each foliage Actor back to the semantics of its source asset.</li>
+<li><strong>Terrain</strong> — Hit Proxy reports an entire Landscape Proxy: one name covering a huge swath of pixels. Artists, however, paint multiple user layers into the weightmap—grass, sand, snow, water, and so on. The integration layer therefore follows a dedicated route: world coordinate → proxy-local UV, calculated from proxy scale → weightmap texture sample → <code>ULandscapeLayerInfoObject::GetLayerName()</code>. No visual inference is involved anywhere in the chain, which makes it highly stable.</li>
+<li><strong>Built-in engine objects such as sky and atmosphere</strong> — there are few of them, so I provide handwritten semantics rather than depending on Hit Proxy.</li>
+</ol>
+<p>Now we give the VLM the descriptions + image + mask information, organized at several LoD levels, and ask it to generate a description of the frame. Yes, this is a model describing a description—recursion achieved. These LoD levels can be exposed as interface parameters for different levels of detail.</p>
+<p><em>Here, LoD means the granularity of information shown to the model, not mesh geometric detail, although the numbering direction remains consistent.</em></p>
+<p>We can go further by deploying a small vision-language model locally behind the MCP layer. For example, Qwen2.5-VL-7B int4 averages 5.95 GB of VRAM and peaks at 6.65 GB, small enough to run on most artists’ workstations. Deploying Qwen3.8 27B on the studio LAN is not especially difficult either.</p>
+<p>Interpreting images and their attached information is a classic perception task and does not require a long chain of reasoning—the sweet spot for a small model. Modern VLMs are pre-trained on large image or image-text corpora and already possess basic visual-semantic ability. This local sidecar lets a cheap, effective, non-multimodal model such as DeepSeek V4 Flash 0731 use our visual-understanding layer as well.</p>
+<p>Roughly speaking, a small model is sufficient on one side of the following boundary and begins to struggle on the other:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>🟢 A small model is enough</th>
+<th>🔴 A small model begins to struggle</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Spatial</td>
+<td>“There is a treasure chest &#x2F; mushroom &#x2F; rock &#x2F; distant silhouette in the image”</td>
+<td>“The exact distance between the chest and the nearest mushroom; back-projecting a precise 3D coordinate”</td>
+</tr>
+<tr>
+<td>Visual</td>
+<td>“Warm palette, cave atmosphere, low-poly style”</td>
+<td>“A 0.7 silhouette deviation from the concept art; which subject damages the composition”</td>
+</tr>
+<tr>
+<td>Semantic</td>
+<td>“What is present”—perception</td>
+<td>“Why was it placed this way, and how should it change?”—reasoning + decision-making</td>
+</tr>
+</tbody></table>
+<p>The exact deployment choice naturally depends on the environment.</p>
+<p><em>Update, August 10: Alibaba recently released <a target="_blank" rel="noopener" href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a>, which is very close to my idea. It moves visual understanding into the harness layer and uses multi-resolution processing and frame sampling to understand images and video, essentially completing the sidecar capability I describe here. I will upgrade my approach accordingly.</em></p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-170645.png" alt="Qwen-MM-Plugins architecture for giving any agent harness native multimodal support" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Qwen-MM-Plugins architecture (github.com/QwenLM/Qwen-MM-Plugins)</figcaption>
+  </figure>
+</div>
+
+<p>With this framework, everything in an image can be assigned semantic ownership. Auxiliary objects that Hit Proxy never hits—post-process volumes, lights, and the like—leave no trace in an image mask, so we need another probing dimension.</p>
+<p>Enter GSDL.</p>
+<h2 id="5-GSDL-The-General-Scene-Description-Language"><a href="#5-GSDL-The-General-Scene-Description-Language" class="headerlink" title="5. GSDL: The General Scene Description Language"></a>5. GSDL: The General Scene Description Language</h2><p>Never heard of it?</p>
+<p>Of course not. I made it up. 🐶</p>
+<h3 id="5-1-How-Do-We-Understand-Space"><a href="#5-1-How-Do-We-Understand-Space" class="headerlink" title="5.1 How Do We Understand Space?"></a>5.1 How Do We Understand Space?</h3><p>The 2D mask method only fills half the gap. It tells the model <strong>what is in the image</strong>—visual information plus content semantics—but the spatial-relations row in the 3 × 3 matrix remains unsolved.</p>
+<p>The editor was built for people. A person can glance at a viewport and immediately feel whether an area is dense or sparse, whether objects are scattered or huddled together. The editor cannot answer those questions directly.</p>
+<p>The data we need is not hiding in a single engine field, waiting to be retrieved. It must be <strong>measured, aggregated, and inferred</strong> from Actors, coordinates, bounding boxes, collision, terrain, rays, and rendering results. The engine does not expose those conclusions as ready-made APIs. A person acquires them intuitively by walking through a scene; an LLM does not.</p>
+<p>That is what GSDL does. Through measurement, it cooks and compresses low-level engine state into scene facts that an AI can query, compare, and verify: “there is a mountain at A,” “there is a depression at B,” and so on.</p>
+<p>GSDL is also built on MCP, but it does not expose raw engine interfaces directly. A layer of GSDL query functions sits in between, and those functions are the language’s most important rules and conventions. Every query first performs its measurements inside the scene, then converts the result into standardized language for the LLM. In that sense, it can be viewed as an OpenUSD-like textual description language.</p>
+<p>But “description language” only names the final output. More precisely, <strong>GSDL is a complete methodology for observing, measuring, and describing a scene for AI. One end connects to geometric and rendering facts in the engine; the other connects to asset semantics. Between them, it organizes what exists, how it is distributed, and how the pieces relate into structured language at multiple LoD levels for the LLM.</strong></p>
+<div class="canvas-embed" data-canvas-slug="attachments/Canvas/mcp-query-loop.en"><svg xmlns="http://www.w3.org/2000/svg" class="canvas-svg" width="509" height="280" viewBox="-120 -40 1200 660" preserveAspectRatio="xMidYMid meet" role="img" aria-label="mcp-query-loop.en"><title>mcp-query-loop.en</title><defs><marker id="canvas-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs><g class="canvas-groups"><g class="canvas-node canvas-node--group" data-id="b572bb250efcbad3" data-color="custom" style="--canvas-node-accent:#a7f3d0"><rect class="canvas-group__bg" x="340" y="0" width="300" height="580" rx="12" /><text class="canvas-group__label" x="352" y="22">② Query Inside UE</text></g><g class="canvas-node canvas-node--group" data-id="5cfa297760b8a416" data-color="custom" style="--canvas-node-accent:#fbcfe8"><rect class="canvas-group__bg" x="700" y="0" width="340" height="420" rx="12" /><text class="canvas-group__label" x="712" y="22">③ Compress into Standardized Language</text></g><g class="canvas-node canvas-node--group" data-id="faca46ce5d698ba6" data-color="custom" style="--canvas-node-accent:#c7d2fe"><rect class="canvas-group__bg" x="-80" y="20" width="340" height="335" rx="12" /><text class="canvas-group__label" x="-68" y="42">① Large Language Model</text></g></g><g class="canvas-edges"><g class="canvas-edge-group" data-id="fd653b4d34e27831"><path class="canvas-edge" d="M 235 73 C 276.6879945414611 73, 318.3120054585389 77, 360 77" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="0898129a83536ec6"><path class="canvas-edge" d="M 490 104 C 490 144, 490 160, 490 200" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="2dfb95721cb0ef3b"><path class="canvas-edge" d="M 490 254 C 490 294, 490 285, 490 325" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="016d21134901fe6b"><path class="canvas-edge" d="M 490 379 C 490 419, 490 420, 490 460" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="26757a79145d96c4"><path class="canvas-edge" d="M 620 487 C 770.7849830424473 487, 574.2150169575527 47, 725 47" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="7a85a9327f01e66e"><path class="canvas-edge" d="M 860 74 C 860 114, 860 130, 860 170" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="9533d7015116d90e"><path class="canvas-edge" d="M 860 260 C 860 300, 860 295, 860 335" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="d6571dc128dab9cc"><path class="canvas-edge" d="M 860 335 C 860 76.01260219419515, 89.5 -23.987397805804846, 89.5 235" fill="none" marker-end="url(#canvas-arrow)" /><text class="canvas-edge__label" x="474.75" y="285" text-anchor="middle">Next query</text></g><g class="canvas-edge-group" data-id="020393000e47e963" style="--canvas-edge-color:#94a3b8"><path class="canvas-edge" d="M -56 262 C -119 262, -119 73, -56 73" fill="none" marker-end="url(#canvas-arrow)" /></g></g><g class="canvas-nodes"><g class="canvas-node canvas-node--text" data-id="662e9e99a91bebdb" data-color="custom" style="--canvas-node-accent:#059669"><rect class="canvas-node__bg" x="360" y="50" width="260" height="54" rx="8" /><foreignObject x="360" y="50" width="260" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>MCP Query Interface</strong></p>
+<p>GSDL rules and conventions</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="e5f5f4079075ba13" data-color="custom" style="--canvas-node-accent:#db2777"><rect class="canvas-node__bg" x="720" y="170" width="280" height="90" rx="8" /><foreignObject x="720" y="170" width="280" height="90"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>GSDL Encoder</strong></p>
+<p>LoD0–LoD3 · converge to character budget</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="05f44c30b82ff4cf" data-color="custom" style="--canvas-node-accent:#4f46e5"><rect class="canvas-node__bg" x="-56" y="235" width="291" height="54" rx="8" /><foreignObject x="-56" y="235" width="291" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Read normalized result → reason</strong></p>
+<p>Choose the next query</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="31c9333cf894383a" data-color="custom" style="--canvas-node-accent:#4f46e5"><rect class="canvas-node__bg" x="-56" y="36" width="291" height="74" rx="8" /><foreignObject x="-56" y="36" width="291" height="74"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Issue an MCP call</strong></p>
+<p>describe_region · find_opening · compare …</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="c222923740c10c1d" data-color="custom" style="--canvas-node-accent:#db2777"><rect class="canvas-node__bg" x="730" y="335" width="260" height="60" rx="8" /><foreignObject x="730" y="335" width="260" height="60"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Normalized GSDL text</strong></p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="4c210a572a8a0638" data-color="custom" style="--canvas-node-accent:#db2777"><rect class="canvas-node__bg" x="725" y="20" width="270" height="54" rx="8" /><foreignObject x="725" y="20" width="270" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Spatial Kernel</strong></p>
+<p>Clustering · relation inference</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="6aa9b9dd3f8e01e1" data-color="custom" style="--canvas-node-accent:#059669"><rect class="canvas-node__bg" x="360" y="200" width="260" height="54" rx="8" /><foreignObject x="360" y="200" width="260" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>File Bridge</strong></p>
+<p>Request &#x2F; response polling</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="21d77697417ddb26" data-color="custom" style="--canvas-node-accent:#ea580c"><rect class="canvas-node__bg" x="360" y="325" width="260" height="54" rx="8" /><foreignObject x="360" y="325" width="260" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>UE Scene Probe</strong></p>
+<p>Enumerate · sample · raycast</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="229a9e99ce52ac2e" data-color="custom" style="--canvas-node-accent:#ea580c"><rect class="canvas-node__bg" x="360" y="460" width="260" height="54" rx="8" /><foreignObject x="360" y="460" width="260" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Raw Query Result</strong></p>
+<p>Large and not yet compressed</p></div></foreignObject></g></g></svg><span class="canvas-embed__expand" aria-hidden="true" title="点击放大">⛶</span></div>
+
+
+
+<blockquote>
+<p>This diagram shows one complete query loop. MCP is only a thin wrapper: it does not do the work itself; it forwards calls into the engine.</p>
+<p><strong>①</strong> The model issues an MCP call—<code>describe_region</code>, <code>find_opening</code>, <code>compare</code>, and so on—which arrives at <strong>②</strong>, the MCP query interface: the GSDL query layer described above.</p>
+<p><strong>②</strong> A file bridge carries the request into UE, where scene probes perform the actual measurements and produce raw, uncompressed facts.</p>
+<p><strong>③</strong> The spatial kernel clusters those facts and infers relationships. The GSDL encoder then compresses them according to LoD and a character budget. Only then does the model receive the result.</p>
+<p>After reading the result, the model reasons about what to measure next and returns to <strong>①</strong> with a new question. The query keeps circling through this loop.</p>
+</blockquote>
+<p>In short, GSDL has two main jobs:</p>
+<ol>
+<li>understand spatial information by organizing discrete objects into density, structure, relations, visibility, and semantic ownership;</li>
+<li>compress acquired information into concise but rigorously structured semantic statements.</li>
+</ol>
+<p>Let us examine them separately.</p>
+<h3 id="5-2-How-Is-Space-Measured"><a href="#5-2-How-Is-Space-Measured" class="headerlink" title="5.2 How Is Space Measured?"></a>5.2 How Is Space Measured?</h3><p>I will visualize one interface so its implementation is easier to understand.</p>
+<p>The interface is called <code>find_opening</code>. It tests whether a cavity contains openings. In a cave, for example, it can measure how many entrances exist; in a room, it can determine whether a window is open.</p>
+<p><em>UE is an excellent simulation tool. There is a surprising amount of “measurement” you can do inside it.</em></p>
+<p>The engine already exposes raycasting—<code>LineTraceSingleByChannel</code> in UE—as a native physics query. Walls, rocks, and doorframes are positive space. An opening is the <strong>negative space</strong> enclosed by them.</p>
+<p>So <code>find_opening</code> does not search for Actors whose names contain <code>Door</code> or <code>Archway</code>. It works backward through collision queries: rays that hit geometry trace the walls of a cavity, while groups of rays that escape continuously into the distance indicate an opening. The system then returns to either side of that opening to measure the real frame.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-030817.gif" alt="Five-stage find_opening animation, from candidate sampling and multi-station rays to precise frame measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Five-stage find_opening animation, using a simulated production-scene case</figcaption>
+  </figure>
+</div>
+
+<p>The implementation can be divided into five steps:</p>
+<ol>
+<li><strong>Find interior points.</strong> Lay down candidate samples inside the cavity and keep those that are genuinely enclosed.</li>
+<li><strong>Choose observation stations.</strong> Select several spatially separated interior points as viewpoints.</li>
+<li><strong>Cast rays.</strong> Fire rays around each station and find directions that escape into the distance.</li>
+<li><strong>Fuse and classify.</strong> Combine observations from all stations and distinguish entrances, high windows, and internal passages.</li>
+<li><strong>Measure exact dimensions.</strong> Return to the edges of each opening and measure its real width and height.</li>
+</ol>
+<p>The low-level C++ Probe retrieves terrain, instances, collision hits, and ray results from the live Editor. A Python spatial kernel handles candidate sampling, station selection, sector fusion, classification, and precise-measurement scheduling. The LLM no longer receives more than ten thousand raw rays. It receives a compact set of scene facts with <strong>type, position, direction, width, height, source station, and evidence grade</strong>. It can quote the measurements directly or revisit the supplied camera positions for screenshot verification.</p>
+<p>That is how we complete the spatial side of scene understanding.</p>
+<h3 id="5-3-How-Is-Language-Compressed"><a href="#5-3-How-Is-Language-Compressed" class="headerlink" title="5.3 How Is Language Compressed?"></a>5.3 How Is Language Compressed?</h3><p>After the five measurement stages above, we are holding more than ten thousand rays, hundreds of sample points, and over three thousand instances. We cannot hand all that directly to the model—the context window would explode. This is why the earlier Canvas diagram includes a Python data-reduction layer between the raw probes and the LLM.</p>
+<p>Compression here does not mean shortening sentences. It is a set of language-design principles:</p>
+<ol>
+<li><strong>Description is not a data dump.</strong> The tool cooks raw instance data into statements: “this region contains 3,242 instances across 200 asset types, organized into 12 clusters; the largest cluster lies to the southeast…” If the text exceeds its budget, it automatically falls back to a coarser LoD. The underlying detail remains available at finer levels.</li>
+<li><strong>Disclose progressively; summarize first.</strong> Descriptions have four levels, LoD0 through LoD3. LoD3 is a one-sentence summary. LoD2 is an asset inventory with statistics. LoD1 expands clusters and spatial relations. LoD0 preserves per-instance detail. The result is also divided into themed channels. By default, the model receives only LoD3: spend a few tokens deciding whether the region deserves attention, then drill down only when necessary—exactly how a person explores a scene, scanning from afar before walking closer.</li>
+<li><strong>Aggregation is reversible.</strong> Compressed detail is not destroyed. LoD1 shows clusters; if the model wants LoD0 for one cluster, <code>expand</code> drills into only that cluster instead of describing the whole region again.</li>
+<li><strong>Truncation must confess.</strong> Every compressed or sampled result says so: <code>truncated (~30% sampled)</code>, <code>(3 of 148)</code>, or an approximate value prefixed with <code>~</code>. Every number tells the model whether it came from the full population or a sample.</li>
+</ol>
+<p>This is what I meant earlier by “compressing acquired information into rigorously structured semantic expression”: <strong>we compress tokens while progressive disclosure preserves access to the information.</strong></p>
+<p>Here is the token cost of four output levels for the same <code>describe_region</code> query:</p>
+<table>
+<thead>
+<tr>
+<th>Output form</th>
+<th>What the model receives</th>
+<th align="right">Characters</th>
+<th align="right">≈ tokens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Raw JSON data dump</td>
+<td>One coordinate array per instance</td>
+<td align="right">461,193</td>
+<td align="right">~115,000</td>
+</tr>
+<tr>
+<td>LoD3 summary</td>
+<td>One sentence</td>
+<td align="right"><strong>244</strong></td>
+<td align="right"><strong>61</strong></td>
+</tr>
+<tr>
+<td>LoD2 inventory</td>
+<td>Asset inventory + density statistics</td>
+<td align="right">840</td>
+<td align="right">210</td>
+</tr>
+<tr>
+<td>LoD1 relations</td>
+<td>Clusters + spatial relations + statistics</td>
+<td align="right">2,616</td>
+<td align="right">654</td>
+</tr>
+<tr>
+<td>LoD0 detail, one expanded cluster</td>
+<td>One category only: a 20-instance scattered-rock cluster</td>
+<td align="right"><strong>1,687</strong></td>
+<td align="right"><strong>421</strong></td>
+</tr>
+<tr>
+<td>LoD0 detail, entire region</td>
+<td>One or two lines per instance, about 23 tokens each. <strong>The system never normally requests an entire region this way.</strong> A forced full dump can even exceed raw JSON because GSDL carries many annotations.</td>
+<td align="right">921,223</td>
+<td align="right">~230,000</td>
+</tr>
+</tbody></table>
+<p>Here is the complete LoD3 result:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@gsdl v0.1</span><br><span class="line">@project: ScatterTest</span><br><span class="line">@asset_classes: [Foliage, StaticMesh]</span><br><span class="line">@enrichment: []</span><br><span class="line">@frame: m</span><br><span class="line"></span><br><span class="line">region(id=R7, bbox=[0.0..200.0, 0.0..200.0, 0.0..18.0]m) &#123;</span><br><span class="line"></span><br><span class="line">  # -- summary (LoD3) --</span><br><span class="line">  R7 summary “anchor=watch_tower; 10021 instances/3 classes; density=0.25/m²; orientation=scattered.”.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Line by line:</p>
+<ul>
+<li><code>@gsdl v0.1</code> — the version declaration.</li>
+<li><code>@project: ScatterTest</code> — the map or project being observed.</li>
+<li><code>@asset_classes: [Foliage, StaticMesh]</code> — the broad asset classes present in the region.</li>
+<li><code>@enrichment: []</code> — the semantic-enrichment slot, connected to the asset-semantic encoding from Form 1. It is empty in this example.</li>
+<li><code>@frame: m</code> — the unit contract. Every following length is in meters and every angle is a compass angle, so the model never has to guess whether <code>92.05</code> means centimeters or meters.</li>
+<li><code>region(id=R7, bbox=[0.0..200.0, 0.0..200.0, 0.0..18.0]m)</code> — the region envelope. Every statement inside the braces applies to exactly this bounding box and not an inch beyond it.</li>
+<li><code># -- summary (LoD3) --</code> — a channel heading that identifies the theme of the following block.</li>
+<li><code>R7 summary ...</code> — the only body sentence and the only sentence form in the entire output: a <strong>triple</strong>. The subject is R7, the predicate is <code>summary</code>, and the object is a semicolon-separated compressed statement terminated by a period. Predicates come from a fixed vocabulary—<code>located_at</code>, <code>bound</code>, <code>near</code>, <code>density</code>, and so on—rather than free-form prose.</li>
+</ul>
+<p>Inside that predicate:</p>
+<p><code>anchor=watch_tower</code> names the landmark. The anchor is selected by salience—visual area × rarity. Among ten thousand six-meter pine trees, only the eighteen-meter watchtower deserves the title. Every later cluster relation hangs from it: <code>pine_c2 of watch_tower</code> or <code>pine_c2 offset (dir=NE, d=43.2m)</code> uses the tower as an origin. <code>10021 instances/3 classes</code> reports scale, <code>density=0.25/m²</code> reports spacing, and <code>orientation=scattered</code> is a binned orientation-entropy result: ordered placement or disorder.</p>
+<p>People give directions in the same order: first a landmark—“near Black Well”—then a relative comparison—“darker than the cave at Flower-Fruit Mountain.” The anchor turns that human habit into grammar.</p>
+<p>Two other grammatical elements are not visible in this sample.</p>
+<p>The first is <strong>precision marking</strong>:</p>
+<ul>
+<li>measured values have no prefix: <code>pine_c1.1 pose [92.05, 12.65, 0.0]m</code>; every number was measured;</li>
+<li>estimated values use <code>~</code>: <code>watch_tower salience ~1.00</code>; salience is a calculated estimate;</li>
+<li>classifications use <code>#</code>: <code>size_dist &#123;M:20, L:10001&#125;#</code>; bins are rule-based judgments rather than direct measurements.</li>
+</ul>
+<p>The second is <strong>reference resolution</strong>. Similar objects are combined into clusters and the long tail is merged into a diffuse field. No matter how many instances exist, the language usually collapses them into only a dozen or so names. If you have a box of pencils, you do not need to say “pencil A, pencil B, pencil C…” Clustering is another form of referential compression.</p>
+<p>Anchor, scale, density, and orientation all fit into those 61 tokens. The model can drill into whichever part it cares about.</p>
+<p>LoD0 gives each instance one or two lines:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pine_c1.1      pose  [92.05, 12.65, 0.0]m @ yaw=99.7°.</span><br><span class="line">pine_c1.1      bound [0.85×0.85×6.41]m.</span><br></pre></td></tr></table></figure>
+
+<p>The model calls the appropriate interface itself to retrieve the detail it needs.</p>
+<p>Do you remember the 3 × 3 understanding&#x2F;expression matrix from Chapter 2? I proposed three expression strategies: reference, comparison, and metaphor. Now we can evaluate them.</p>
+<p><strong>Reference</strong> is exactly what anchors and clusters provide. <code>pine_c2</code> and “the group northeast of the watchtower” refer to the same thing. <code>offset (dir=NE, d=43.2m)</code> is the formal version of “near Black Well.”</p>
+<p><strong>Comparison</strong> is quantized in GSDL. The system can provide precise numbers and comparative bands. But bands require quantization and judgment, and judgment introduces instability. That is why comparison received an orange, hard rating in the matrix.</p>
+<p>The third strategy, <strong>metaphor</strong>—“this cave looks like the White Bone Demon’s lair”—is genuinely difficult. It depends partly on the LLM’s own understanding and partly on Vector Atlas, introduced later, which needs artists to teach and annotate scene semantics.</p>
+<h3 id="5-4-Self-Evolving-Interfaces"><a href="#5-4-Self-Evolving-Interfaces" class="headerlink" title="5.4 Self-Evolving Interfaces"></a>5.4 Self-Evolving Interfaces</h3><p>The interface above is only one example. Around July 20, 2026, GSDL’s measurable spatial capabilities looked roughly like this:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Representative interfaces</th>
+<th>Core implementation</th>
+<th>Questions it can answer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Topology</strong></td>
+<td><code>compare(on=&quot;spatial&quot;)</code>, <code>query</code></td>
+<td>World-AABB reasoning using RCC-8; scale-adaptive tolerances; DC &#x2F; EC &#x2F; PO &#x2F; TPP relation codes</td>
+<td>Are they disconnected, touching, overlapping, or contained?</td>
+</tr>
+<tr>
+<td><strong>Direction</strong></td>
+<td><code>compare(on=&quot;spatial&quot;)</code>, <code>describe_region</code></td>
+<td>Eight compass directions; facing &#x2F; parallel &#x2F; opposed &#x2F; oblique orientation</td>
+<td>Which side is A on? Are they facing or back-to-back?</td>
+</tr>
+<tr>
+<td><strong>Distance</strong></td>
+<td><code>compare(on=&quot;spatial&quot;)</code>, <code>query</code></td>
+<td>AABB surface gap, center distance, vertical offset; footprint-scaled <code>near</code> levels</td>
+<td>How far apart? Which is higher? Does this count as “next to”?</td>
+</tr>
+<tr>
+<td><strong>Support</strong></td>
+<td><code>describe_region</code>, <code>relation_trace</code>, <code>compare</code></td>
+<td>Vertical contact + footprint overlap as support evidence; sparse support graph</td>
+<td>What supports what? “The cup is on the table” becomes a measurement.</td>
+</tr>
+<tr>
+<td><strong>Passage and occlusion</strong></td>
+<td><code>find_opening</code>, <code>skyline</code>, <code>query_view</code>, <code>rays</code> &#x2F; <code>los_ring</code></td>
+<td>Multi-station rays, escape-direction clustering, frame remeasurement; viewpoint-relative occlusion jointly verified by rays and masks</td>
+<td>How many exits does the cave have? What blocks the view?</td>
+</tr>
+</tbody></table>
+<p>Those capabilities correspond directly to the spatial relations discussed above. GSDL also includes supporting spatial capabilities:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Representative interfaces</th>
+<th>Core implementation</th>
+<th>Questions it can answer</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Survey</strong></td>
+<td><code>scan_density</code>, <code>describe_region</code></td>
+<td>Enumerate Actors &#x2F; Instances &#x2F; Landscape; grid aggregation; snapshots, clusters, layered summaries</td>
+<td>What is here? Where is it concentrated? Scattered or clustered?</td>
+</tr>
+<tr>
+<td><strong>Localization</strong></td>
+<td><code>search_subjects</code>, <code>find_by_class</code>, <code>actor_meta</code>, <code>semantic_search</code></td>
+<td>Name and Chinese-alias indexes, class queries, asset-metadata joins, cross-checking retrieval results against instances</td>
+<td>What is the “treasure chest” called? Where is it? Which asset does it use?</td>
+</tr>
+</tbody></table>
+<p>Before discussing spatial relations, the LLM must first know what exists and which instance a phrase refers to. Only then does it call the deeper reasoning interfaces.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 340px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-222622.png" alt="GSDL interface statistics showing call count, failures or refusals, LLM characters, and latency" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">GSDL interface call volume and latency dashboard</figcaption>
+  </figure>
+</div>
+
+<p>GSDL exposes a growing collection of question-oriented measurement capabilities. The list was not designed all at once; each evaluation round pushed it in a new direction. What you see above is only one snapshot in time. At present there are roughly 35 interfaces, about 20 of which are stable.</p>
+<p>I first tried iterating on them in the conventional way. The result was negligible, mainly because iteration was too slow and my own judgment too subjective. I later switched to <strong>evaluation-driven development with <code>/Loop</code></strong>: establish a bank of scene questions, have an LLM judge each round from its execution traces and answers, then let those results drive the next interface change. The improvement was dramatic.</p>
+<p>My <code>/Loop</code> process has two stages.</p>
+<p>For the first stage, I wrote 36 test questions by hand. The earliest bank contained only 11 questions; I later expanded it to 36, manually phrasing every question and annotating every answer. It nearly killed me.</p>
+<p>The questions cover more than a dozen categories, including:</p>
+<ul>
+<li><strong>Description and understanding</strong>: what is visible in the current viewport, how a district is planned, and how its functions are divided.</li>
+<li><strong>Spatial relations</strong>: how far A is from B, in which direction, which is higher, and which blocks the other.</li>
+<li><strong>Anomaly detection</strong>: floating objects, intersections, and obviously misplaced assets.</li>
+<li><strong>Passage structure</strong>: how many openings a cave has and how wide they are.</li>
+<li><strong>Composite decomposition</strong>: which six of fourteen archway assets form one complete gate, or which components make up a fortified enclosure.</li>
+<li><strong>Honest denial</strong>: if the scene contains no cars and no neon, can the model say “none” with evidence instead of hallucinating one?</li>
+</ul>
+<p>Every question is written in natural language and deliberately avoids naming any tool.</p>
+<p>I run the <code>/Loop</code> with two agents. <strong>One runs the evaluation</strong>: it opens N subagents with clean contexts and asks each to call MCP; a Fable 5 lead agent only schedules work, writes the summary, and produces requirements. <strong>The other changes the code</strong>: Opus or GLM 5.2 optimizes the interface logic from those requirements.</p>
+<p><em>The MCP-testing subagents use local Qwen3.6 27B and MiniMax M3. SOTA models do achieve higher completion rates, but production-scale MCP usage can become frighteningly expensive. These tools are meant for production, not leaderboards, so they must be adapted to the models that will actually be deployed.</em></p>
+<p>I focus on three hard groups of metrics:</p>
+<ul>
+<li><strong>Delivery</strong>: completion rate, accuracy, and honesty.</li>
+<li><strong>Cost</strong>: actual token usage, interface call count, and the interface-schema tax.</li>
+<li><strong>Speed</strong>: time per question, average latency in milliseconds, maximum latency, and watchdog timeout count. I sometimes also track health and discoverability.</li>
+</ul>
+<p>Large and small models differ sharply in some respects, particularly tool use. Small models often forget which interfaces exist. I eventually built a routing layer that the model can call before querying the scene, so it can confirm which tool is appropriate. This trades more routing calls for a higher completion rate:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025635.png" alt="Per-case comparison of tool-call traces before and after routing" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Per-case tool-call comparison before and after routing</figcaption>
+  </figure>
+</div>
+
+<p>Here is how the three hard metrics changed, using ten questions under the same protocol on July 21–22:</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025518.png" alt="GSDL Loop metrics showing token usage, call count, and correct answers across rounds" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">The three hard metrics across iteration rounds</figcaption>
+  </figure>
+</div>
+
+<p>Within a few days, tokens fell by 54%, calls fell by 64%, and the system reached a perfect score and held it.</p>
+<p>I later expanded the question bank. After more than ten additional rounds, the metrics flattened out. Pushing further no longer made much sense; overfitting began to appear.</p>
+<p>Time for a stronger dose.</p>
+<p>That brought me to the second stage of <code>/Loop</code> development:</p>
+<div class="canvas-embed" data-canvas-slug="attachments/Canvas/gsdl-evolution-loop.en"><svg xmlns="http://www.w3.org/2000/svg" class="canvas-svg" width="582" height="280" viewBox="20 -80 1580 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="gsdl-evolution-loop.en"><title>gsdl-evolution-loop.en</title><defs><marker id="canvas-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs><g class="canvas-groups"><g class="canvas-node canvas-node--group" data-id="a4c4c4c4c4c4c4c4" data-color="custom" style="--canvas-node-accent:#bbf7d0"><rect class="canvas-group__bg" x="60" y="260" width="880" height="360" rx="12" /><text class="canvas-group__label" x="72" y="282">④ Test · Feedback Loop</text></g><g class="canvas-node canvas-node--group" data-id="a1c1c1c1c1c1c1c1" data-color="custom" style="--canvas-node-accent:#bae6fd"><rect class="canvas-group__bg" x="480" y="-40" width="740" height="180" rx="12" /><text class="canvas-group__label" x="492" y="-18">① Daytime · Collect Usage Signals</text></g><g class="canvas-node canvas-node--group" data-id="a2c2c2c2c2c2c2c2" data-color="custom" style="--canvas-node-accent:#e9d5ff"><rect class="canvas-group__bg" x="1280" y="200" width="280" height="240" rx="12" /><text class="canvas-group__label" x="1292" y="222">② Scheduled · Organize Requirements</text></g><g class="canvas-node canvas-node--group" data-id="a3c3c3c3c3c3c3c3" data-color="custom" style="--canvas-node-accent:#fed7aa"><rect class="canvas-group__bg" x="1020" y="500" width="280" height="140" rx="12" /><text class="canvas-group__label" x="1032" y="522">③ Nighttime · Implement Capabilities</text></g></g><g class="canvas-edges"><g class="canvas-edge-group" data-id="e101010101010101"><path class="canvas-edge" d="M 700 27 C 740 27, 700 50, 740 50" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="e202020202020202"><path class="canvas-edge" d="M 940 50 C 980 50, 940 27, 980 27" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="e303030303030303"><path class="canvas-edge" d="M 1090 54 C 1090 177.13317090767123, 1420 96.86682909232876, 1420 220" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="e404040404040404"><path class="canvas-edge" d="M 1420 300 C 1420 340, 1420 290, 1420 330" fill="none" marker-end="url(#canvas-arrow)" /></g><g class="canvas-edge-group" data-id="e505050505050505"><path class="canvas-edge" d="M 1420 384 C 1420 481.80706632049765, 1160 422.19293367950235, 1160 520" fill="none" marker-end="url(#canvas-arrow)" /><text class="canvas-edge__label" x="1290" y="452" text-anchor="middle">Gap</text></g><g class="canvas-edge-group" data-id="e606060606060606"><path class="canvas-edge" d="M 1040 547 C 971.3624657267533 547, 928.6375342732467 447, 860 447" fill="none" marker-end="url(#canvas-arrow)" /><text class="canvas-edge__label" x="950" y="497" text-anchor="middle">Deliver</text></g><g class="canvas-edge-group" data-id="e707070707070707"><path class="canvas-edge" d="M 640 447 C 591.4659340714632 447, 648.5340659285368 307, 600 307" fill="none" marker-end="url(#canvas-arrow)" /><text class="canvas-edge__label" x="620" y="377" text-anchor="middle">Results</text></g><g class="canvas-edge-group" data-id="e808080808080808"><path class="canvas-edge" d="M 380 307 C 340 307, 340 330, 300 330" fill="none" marker-end="url(#canvas-arrow)" /><text class="canvas-edge__label" x="340" y="318.5" text-anchor="middle">Summary</text></g><g class="canvas-edge-group" data-id="e909090909090909"><path class="canvas-edge" d="M 190 380 C 190 430, 310 420, 310 470" fill="none" marker-end="url(#canvas-arrow)" /><text class="canvas-edge__label" x="250" y="425" text-anchor="middle">Feedback</text></g><g class="canvas-edge-group" data-id="ea0a0a0a0a0a0a0a" style="--canvas-edge-color:#dc2626"><path class="canvas-edge" d="M 420 520 C 667.3225514271686 520, 1160 821.3225514271686, 1160 574" fill="none" marker-end="url(#canvas-arrow)" /><text class="canvas-edge__label" x="790" y="547" text-anchor="middle">Close loop · fix</text></g></g><g class="canvas-nodes"><g class="canvas-node canvas-node--text" data-id="b101010101010101" data-color="custom" style="--canvas-node-accent:#0284c7"><rect class="canvas-node__bg" x="500" y="0" width="200" height="54" rx="8" /><foreignObject x="500" y="0" width="200" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>User Calls a Tool</strong></p>
+<p>Everyday GSDL usage</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b202020202020202" data-color="custom" style="--canvas-node-accent:#0284c7"><rect class="canvas-node__bg" x="740" y="0" width="200" height="100" rx="8" /><foreignObject x="740" y="0" width="200" height="100"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Hook Fires</strong></p>
+<p>Record the question silently</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b303030303030303" data-color="custom" style="--canvas-node-accent:#0284c7"><rect class="canvas-node__bg" x="980" y="0" width="220" height="54" rx="8" /><foreignObject x="980" y="0" width="220" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>User Rating</strong></p>
+<p>LLM completion score</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b909090909090909" data-color="custom" style="--canvas-node-accent:#16a34a"><rect class="canvas-node__bg" x="80" y="280" width="220" height="100" rx="8" /><foreignObject x="80" y="280" width="220" height="100"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Test Report</strong></p>
+<p>Pass &#x2F; fail &#x2F; recommendations</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b707070707070707" data-color="custom" style="--canvas-node-accent:#16a34a"><rect class="canvas-node__bg" x="640" y="420" width="220" height="54" rx="8" /><foreignObject x="640" y="420" width="220" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Subagent Swarm</strong></p>
+<p>Run real MCP tests</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="ba0a0a0a0a0a0a0a" data-color="custom" style="--canvas-node-accent:#dc2626"><rect class="canvas-node__bg" x="200" y="470" width="220" height="100" rx="8" /><foreignObject x="200" y="470" width="220" height="100"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Feedback to Executor Agent</strong></p>
+<p>Fix → next round</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b606060606060606" data-color="custom" style="--canvas-node-accent:#ea580c"><rect class="canvas-node__bg" x="1040" y="520" width="240" height="54" rx="8" /><foreignObject x="1040" y="520" width="240" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Nighttime Executor Agent</strong></p>
+<p>Implement new capabilities</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b404040404040404" data-color="custom" style="--canvas-node-accent:#7c3aed"><rect class="canvas-node__bg" x="1300" y="220" width="240" height="80" rx="8" /><foreignObject x="1300" y="220" width="240" height="80"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Scheduled Agent</strong></p>
+<p>Summarize interaction logs</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b505050505050505" data-color="custom" style="--canvas-node-accent:#7c3aed"><rect class="canvas-node__bg" x="1300" y="330" width="240" height="54" rx="8" /><foreignObject x="1300" y="330" width="240" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Capability Requirements</strong></p>
+<p>Identify capability gaps</p></div></foreignObject></g><g class="canvas-node canvas-node--text" data-id="b808080808080808" data-color="custom" style="--canvas-node-accent:#16a34a"><rect class="canvas-node__bg" x="380" y="280" width="220" height="54" rx="8" /><foreignObject x="380" y="280" width="220" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="canvas-node__body"><p><strong>Test Lead Agent</strong></p>
+<p>Aggregate and judge</p></div></foreignObject></g></g></svg><span class="canvas-embed__expand" aria-hidden="true" title="点击放大">⛶</span></div>
+
+
+
+<p>I built a passive-update system. When users call MCP tools during their normal work, a Hook records the exact question and the conversation in a background database. Users are also occasionally asked to rate how completely the LLM finished the task.</p>
+<p>A scheduled agent turns those interaction records into a capability-requirements table whenever it detects a weak area. At night, after I leave work, an executor agent implements the capability. Another lead agent then launches many subagents to test the MCP changes, summarizes their reports and recommendations, and feeds them back to the executor. The executor iterates again. The loop continues until the new interface stabilizes.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+  <figure style="flex: 1 1 280px; max-width: 250px; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-034651.png" alt="Two NVIDIA DGX Spark systems on a wooden table" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Two heavily armed DGX Sparks, purchased at great expense</figcaption>
+  </figure>
+</div>
+
+<p>To make this loop work, I even bought two DGX Sparks to run DeepSeek V4 Flash locally. They are chewing grass as I write this—an otherwise pointless display of armament. I hope my Leader sees this paragraph and gives me a raise. ლ(╹◡╹ლ)</p>
+<p>The <code>/Loop</code> is still not as complete as I want. I am continuously tuning it, and it contains far more concerns than the sketch suggests: user authorization, data redaction, sandboxing, audit, rollback, and so on. That is another subject I want to cover next time: a self-evolving agent system driven by real user data.</p>
+<h3 id="5-5-A-GSDL-Call-in-Practice"><a href="#5-5-A-GSDL-Call-in-Practice" class="headerlink" title="5.5 A GSDL Call in Practice"></a>5.5 A GSDL Call in Practice</h3><p>Here is one real GSDL invocation from a test I ran on July 23, 2026:</p>
+<blockquote>
+<p><strong>“How many passable openings does this cave have, and how wide is each one?”</strong></p>
+</blockquote>
+<p>It neatly illustrates the difference between “reading Actors” and “understanding space.”</p>
+<p>Without GSDL—for example, with a conventional UE MCP approach—the LLM searches for assets whose names contain <code>Archway</code> and treats components such as <code>SM_WallArchway_12x3</code> and <code>SM_WallArchway_3x6</code> as openings. In my test, those <code>Archway</code> Actors were the walls surrounding the openings, not the openings themselves, so the model misclassified them.</p>
+<p>With GSDL:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">→ nm_status             ← confirm tool status</span><br><span class="line">→ describe_region       ← survey the region</span><br><span class="line">→ find_opening          ← measure openings with rays</span><br><span class="line">→ fly_to                ← fly to the site</span><br><span class="line">→ capture_view          ← verify with a screenshot</span><br><span class="line"></span><br><span class="line">→ answer with type, position, width, and evidence grade</span><br></pre></td></tr></table></figure>
+
+<p>Before the <code>find_opening</code> route existed, the model used 47 tool calls and consumed 64,820 returned characters, yet still mistook wall components containing <code>Archway</code> for entrances. After routing was added, it needed only five calls and 15,540 characters to complete both measurement and visual verification.</p>
+<table>
+<thead>
+<tr>
+<th>Rendered view of the cave opening</th>
+<th>Pixel-level instance segmentation from the same camera</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="A lit opening between cave walls, with the distant scene visible through it"></td>
+<td><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191249.png" alt="Per-pixel instance segmentation separating the cave walls from background objects"></td>
+</tr>
+</tbody></table>
+<p>The model then flew to each candidate opening and captured a verification image. The mask contained 494 pixels belonging to <code>BP_Sky_Sphere</code>, showing that the line of sight passed through the opening into the outside background. That is only visual supporting evidence for the opening’s existence. Whether it is passable and how wide it is still come from collision rays near the ground and precise frame measurements.</p>
+<p>In the end, the system classified ten candidate structures into ground-level passable openings or passages, elevated windows, and skylights, then reported the positions and measured widths of the ground openings. It even found an opening I had never noticed. The important point is not “how many Actors named <code>Archway</code> did it find?” It is that the system can distinguish a cave wall, an internal passage, an exterior entrance, and an elevated opening that cannot be traversed directly.</p>
+<h3 id="5-6-Open-Sourcing-the-Project"><a href="#5-6-Open-Sourcing-the-Project" class="headerlink" title="5.6 Open-Sourcing the Project"></a>5.6 Open-Sourcing the Project</h3><p>Thank you for making it this far.</p>
+<p>Once this busy period is over and the company-specific material has been separated, I will open-source GSDL on GitHub. I would be delighted if people tried it and sent suggestions; one person’s energy is simply too limited.</p>
+<p>The repository placeholder is already here: <a target="_blank" rel="noopener" href="https://github.com/youdrew/OpenGSDL">OpenGSDL</a>. I expect to upload the code in early September. It will contain both the mask method and GSDL, packaged as a multi-version UE MCP plugin that you can extend or use alongside Epic’s official MCP.</p>
+<h2 id="6-Vector-Atlas-Semantic-Encoding-for-the-Entire-Map"><a href="#6-Vector-Atlas-Semantic-Encoding-for-the-Entire-Map" class="headerlink" title="6. Vector Atlas: Semantic Encoding for the Entire Map"></a>6. Vector Atlas: Semantic Encoding for the Entire Map</h2><p>I built Vector Atlas because every live model query against a map is painfully slow. It has to load a scene, acquire masks, capture screenshots, and so on. In our project, one such operation takes at least 60 seconds. Searching across an entire world multiplies that latency dramatically. Could the process be made much faster?</p>
+<p>I also need far more semantic information about the scene. Artists must annotate much of it; I could never label an entire large map alone. Scene semantics—“this is a particular NPC’s house,” for example—also change as production evolves and therefore cannot be hard-coded. I need a dynamic, editable service for collecting scene semantics.</p>
+<p>That is why I built <strong>Vector Atlas</strong>, a semantic encoding of the whole map.</p>
+<p>It combines the 2D mask method and GSDL.</p>
+<blockquote>
+<p>Encode every map <strong>offline</strong> into a semantically searchable table of viewpoints. People can search the entire map by meaning, add viewpoints manually, and edit their semantics. The same structure also becomes cross-session long-term memory for AI: an agent can add a viewpoint, preserve it as a memory, and retrieve it later.</p>
+</blockquote>
+<p>The promise from the beginning—to “memorize” every place and query it in milliseconds—is fulfilled here. It is an engineered trade: storage for performance.</p>
+<p>This article is already far too long, and Vector Atlas is itself a very complicated project. How should search be optimized? How should viewpoints be captured? How should it be deployed? How can the system infer an angle it never photographed? Each question deserves serious thought.</p>
+<p>So Vector Atlas, together with the real-user-data self-evolving agent system introduced above, will be the subject of the next article. By then, the system should also be more complete.</p>
+<p>For now, here is a short tool demo.</p>
+<h2 id="7-The-Version-for-Carbon-Based-Lifeforms"><a href="#7-The-Version-for-Carbon-Based-Lifeforms" class="headerlink" title="7. The Version for Carbon-Based Lifeforms"></a>7. The Version for Carbon-Based Lifeforms</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-search-redacted-v2.gif" alt="Semantic search" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Figure 1. Semantic search for scene locations across the entire map</figcaption>
+  </figure>
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-asset-redacted-v2.gif" alt="Reaching the underlying asset" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Figure 2. Click a mask to jump directly to the corresponding asset</figcaption>
+  </figure>
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-camera-redacted-v2.gif" alt="Viewpoint adjustment anywhere on the complete map" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Figure 3. Jump the camera to any region without loading the map</figcaption>
+  </figure>
+  <figure style="margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-mask-redacted-v2.gif" alt="Asset-mask information display" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Figure 4. Even an asset covering only 0.01% of an image is recorded</figcaption>
+  </figure>
+</div>
+
+<h2 id="8-The-Version-for-Silicon-Based-Lifeforms—and-a-Comparison-with-Epic’s-Approach"><a href="#8-The-Version-for-Silicon-Based-Lifeforms—and-a-Comparison-with-Epic’s-Approach" class="headerlink" title="8. The Version for Silicon-Based Lifeforms—and a Comparison with Epic’s Approach"></a>8. The Version for Silicon-Based Lifeforms—and a Comparison with Epic’s Approach</h2><p>I prepared 11 questions and had each model use either Epic’s official MCP or my MCP, NeuroMap build 08-14. Every question started from a clean context, and I repeated the evaluation with three models.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th align="right">DSV4flash<br>+ local Qwen3.5-9B-4bit<br>Epic</th>
+<th align="right">DSV4flash<br>+ local Qwen3.5-9B-4bit<br>NeuroMap</th>
+<th align="right">Qwen3.8 27B<br>Epic</th>
+<th align="right">Qwen3.8 27B<br>NeuroMap</th>
+<th align="right">GPT-5.6 Luna<br>Epic</th>
+<th align="right">GPT-5.6 Luna<br>NeuroMap</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Harness</td>
+<td align="right">Claude Code</td>
+<td align="right">Claude Code</td>
+<td align="right">Claude Code</td>
+<td align="right">Claude Code</td>
+<td align="right">Codex</td>
+<td align="right">Codex</td>
+</tr>
+<tr>
+<td>Completion rate</td>
+<td align="right">100% (11&#x2F;11)</td>
+<td align="right"><strong>100% (11&#x2F;11)</strong></td>
+<td align="right">72.7% (8&#x2F;11)</td>
+<td align="right"><strong>90.9% (10&#x2F;11)</strong></td>
+<td align="right">100% (11&#x2F;11)</td>
+<td align="right"><strong>100% (11&#x2F;11)</strong></td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td align="right">77.3%</td>
+<td align="right"><strong>77.3%</strong></td>
+<td align="right">59.1%</td>
+<td align="right"><strong>86.4%</strong></td>
+<td align="right">90.9%</td>
+<td align="right"><strong>90.9%</strong></td>
+</tr>
+<tr>
+<td>Honesty</td>
+<td align="right"><strong>95.5%</strong></td>
+<td align="right">90.9%</td>
+<td align="right">68.2%</td>
+<td align="right"><strong>72.7%</strong></td>
+<td align="right">86.4%</td>
+<td align="right"><strong>90.9%</strong></td>
+</tr>
+<tr>
+<td>Total time, official primary runs</td>
+<td align="right">468m 7.0s</td>
+<td align="right"><strong>64m 52.2s</strong></td>
+<td align="right">611m 8.9s</td>
+<td align="right"><strong>291m 21.8s</strong></td>
+<td align="right">141m 35.5s</td>
+<td align="right"><strong>40m 3.6s</strong></td>
+</tr>
+<tr>
+<td>Mean time across all 11 questions</td>
+<td align="right">42m 33.4s</td>
+<td align="right"><strong>5m 53.8s</strong></td>
+<td align="right">55m 33.5s</td>
+<td align="right"><strong>26m 29.3s</strong></td>
+<td align="right">12m 52.3s</td>
+<td align="right"><strong>3m 38.5s</strong></td>
+</tr>
+<tr>
+<td>Maximum time for one question</td>
+<td align="right">197m 4.3s</td>
+<td align="right"><strong>20m 15.0s</strong></td>
+<td align="right">220m 3.8s</td>
+<td align="right"><strong>84m 50.3s</strong></td>
+<td align="right">52m 1.6s</td>
+<td align="right"><strong>18m 6.3s</strong></td>
+</tr>
+<tr>
+<td>Total MCP calls</td>
+<td align="right">514</td>
+<td align="right"><strong>261</strong></td>
+<td align="right">318</td>
+<td align="right"><strong>221</strong></td>
+<td align="right">7,919</td>
+<td align="right"><strong>313</strong></td>
+</tr>
+<tr>
+<td>Input &#x2F; output</td>
+<td align="right">20,179,996 &#x2F; 261,572</td>
+<td align="right"><strong>6,158,052 &#x2F; 119,825</strong></td>
+<td align="right">10,173,709 &#x2F; 234,831</td>
+<td align="right"><strong>8,438,133 &#x2F; 150,085</strong></td>
+<td align="right">47,692,261 &#x2F; 207,474</td>
+<td align="right"><strong>21,170,665 &#x2F; 94,384</strong></td>
+</tr>
+<tr>
+<td>Fixed first-turn overhead</td>
+<td align="right"><strong>700 tokens</strong></td>
+<td align="right">12,326 tokens</td>
+<td align="right"><strong>569 tokens</strong></td>
+<td align="right">14,761 tokens</td>
+<td align="right"><strong>~350 tokens</strong></td>
+<td align="right">~12,900 tokens</td>
+</tr>
+</tbody></table>
+<p>Overall, NeuroMap matched or exceeded delivery quality while sharply reducing tool calls and runtime. In the Luna evaluation, Epic’s MCP made <strong>7,919 calls</strong>; NeuroMap made only <strong>313</strong>, about <strong>one twenty-fifth as many</strong>, and took only <strong>28% of the total time</strong>.</p>
+<p>Epic’s MCP exposes general-purpose, atomic editor operations. The model must route repeatedly and inspect objects one by one—almost a traversal of every Actor in the scene. As scene complexity grows, one question can fragment into hundreds or thousands of calls, and round-trip overhead expands rapidly. NeuroMap aggregates region description, anomaly detection, opening analysis, and other spatial computation on the UE side, then compresses the result with GSDL. Across all three models, that produced fewer calls, shorter long tails, and higher delivery rates.</p>
+<p>The most striking accuracy result came from Qwen: my MCP raised accuracy from <strong>59.1%</strong> to <strong>86.4%</strong>. Aggregated, problem-oriented tools are not merely cheaper; they also reduce the burden on a weaker model that would otherwise have to traverse Actors, choose tools, and infer spatial relations by itself.</p>
+<p>NeuroMap still has a relatively high schema overhead, and its tool set continues to be consolidated. There is more optimization ahead.</p>
+<p>The following is one real workflow. The AI receives only a vague description—“a table with a Go board on top”—then locates it in a large scene, adjusts the camera, and saves a screenshot.</p>
+<div style="display: flex; flex-wrap: nowrap; gap: 10px; align-items: flex-start; margin: 18px 0;">
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-before-scene-redacted.png" alt="Giving the AI a vague task to locate a Go table" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666; text-align: center;">① The prompt describes only the remembered appearance and use, with no asset name or coordinate.</figcaption>
+  </figure>
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-after-scene-redacted.png" alt="The AI locates the Go table and captures a screenshot" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption style="margin-top: 8px; font-size: 14px; color: #666; text-align: center;">② About 57 seconds later, it has located the Go table, framed the view, and saved the screenshot to the desktop.</figcaption>
+  </figure>
+</div>
+
+<h2 id="9-Afterword"><a href="#9-Afterword" class="headerlink" title="9. Afterword"></a>9. Afterword</h2><p>Have you noticed something? NeuroBrowser—the plugin from Form 1—and NeuroMap—the plugin from this installment—both inject AI capabilities into the engine editor. Their initials are NB and NM; internally, the Chinese pronunciation gave them the nicknames “Your Dad” and “Your Mom.” Together, they feel a little like <strong>rebuilding the editor around AI capabilities</strong>.</p>
+<p>Perhaps this is what the next generation of game editors should look like.</p>
+<p>What do you think?</p>
+
+
+            <!-- Tags -->
+            
+
+
+<div class="tags">
+    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/tags/USD/" data-i18n-tag="USD">USD</a>
+</div>
+
+
+
+            <!-- Comments -->
+            <div>
+                
+
+
+
+
+            </div>
+        </div><!-- end content -->
+    </section>
+
+    <!-- Table of Contents will be generated by toc-collapse.js -->
+
+</section><!-- end main -->
+
+<!-- After footer scripts -->
+
+<!-- Tag dictionary injected from theme _config.yml (single source of truth, see Phase 5)
+     — must run BEFORE main.js because language-switcher reads window.tagTranslations. -->
+<script>window.tagTranslations = {"ACES":"ACES","ARRI":"ARRI","Aximmetry":"Aximmetry","CLIP":"CLIP","Captury":"Captury","Claude":"Claude","CrewAI":"CrewAI","Dify":"Dify","EXR":"EXR","GAS":"GAS","GLSL":"GLSL","GPU":"GPU","Google":"Google","GoogleADK":"Google ADK","HDR":"HDR","HLSL":"HLSL","Houdini":"Houdini","LangGraph":"LangGraph","LlamaIndex":"LlamaIndex","MCP":"模型上下文协议","Messiah":"Messiah","NLP":"自然语言处理","NousResearch":"NousResearch","OCIO":"OCIO","Obsidian":"Obsidian","OpenAI":"OpenAI","OpenClaw":"OpenClaw","PCG":"PCG","PKM":"个人知识管理","RAG":"RAG","RPG":"角色扮演","SQL":"SQL","SVN":"SVN","TA":"技术美术","UE4":"UE4","UE5":"UE5","Unity":"Unity","UnrealInsights":"Unreal Insights","VisionPro":"VisionPro","XR":"扩展现实","AI":"人工智能","API":"接口","Agent":"智能体","AgenticAI":"智能体 AI","Art":"艺术作品","AssetManagement":"资产管理","Assistant":"助手","BranchManagement":"分支管理","ColorManagement":"色彩管理","ComputerGraphics":"计算机图形学","ComputerVision":"计算机视觉","Cpp":"C++","Database":"数据库","Debug":"调试","Embedding":"嵌入向量","FilmProduction":"电影制作","Framework":"框架","FullStack":"全栈","GameDev":"游戏开发","GameDevelopment":"游戏开发","GameFeature":"游戏功能","GameFramework":"游戏框架","GameplayAbilitySystem":"游戏能力系统","GraphicsProgramming":"图形编程","LLM":"大语言模型","LearningPath":"学习路径","MachineLearning":"机器学习","MotionCapture":"动作捕捉","NetworkProgramming":"网络编程","NoteTaking":"笔记法","OpenSource":"开源","Performance":"性能","PersonalEssays":"个人随笔","Pipeline":"管线","PoliticalPhilosophy":"政治哲学","Profiling":"性能分析","RenderPipeline":"渲染管线","Search":"搜索","Shader":"着色器","SoftwareProjects":"软件项目","Subscription":"订阅","Tags":"标签","TechnicalArt":"技术美术","UnrealEngine":"虚幻引擎","VersionControl":"版本控制","VibeCoding":"氛围编程","VirtualHuman":"虚拟数字人","VirtualProduction":"虚拟制作","WebDevelopment":"网页开发"};</script>
+
+<!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
+     toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
+
+<script src="/dist/js/main.js"></script>
+
+
+<!-- 第三方库 (CDN) -->
+<!-- Mermaid -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
+        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
+        crossorigin="anonymous"></script>
+
+<!-- Mermaid 初始化 -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+
+    // Find and process mermaid code blocks rendered by Hexo
+    // Hexo renders ```mermaid as <figure class="highlight mermaid">
+    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
+
+    codeBlocks.forEach((codeElement, index) => {
+      // Extract text line by line from span.line elements to preserve newlines
+      const lineSpans = codeElement.querySelectorAll('.line');
+      let code = lineSpans.length > 0
+        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
+        : (codeElement.innerText || codeElement.textContent);
+      const figureElement = codeElement.closest('figure');
+
+      // For figure.highlight.mermaid, always convert
+      // For figure.highlight.plaintext, check if content looks like mermaid
+      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
+      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
+
+      if (isMermaidFigure || looksLikeMermaid) {
+        code = code.trim();
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = code;
+        mermaidDiv.id = 'mermaid-diagram-' + index;
+
+        // Remove the mermaid class from figure before replacing to prevent
+        // mermaid from trying to auto-render the raw HTML figure
+        if (figureElement) {
+          figureElement.classList.remove('mermaid');
+          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
+        }
+      }
+    });
+
+    setTimeout(() => {
+      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+    }, 100);
+  }
+});
+</script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Google Analytics -->
+
+
+
+</body>
+
+</html>
