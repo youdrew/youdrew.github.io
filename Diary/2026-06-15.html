@@ -88,10 +88,53 @@ PCG方案细">
     
     <title>Eugene&#39;s Page</title>
 
-    <!-- Custom CSS — main.css @imports the layered base/layout/components/pages stylesheets (see Phase 10). -->
+    <!--
+        Load the layered stylesheets directly so every file receives the same
+        deployment fingerprint. This prevents new HTML from being paired with
+        stale @import-ed CSS during the CDN/browser cache window.
+    -->
     
-<link rel="stylesheet" href="/css/main.css">
-
+    
+        <link rel="stylesheet" href="/css/base/reset.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/base/variables.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/base/fonts.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/base/typography.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/layout/header.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/layout/grid.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/pages/home.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/pages/post.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/tooltip.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/toc.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/mermaid.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/canvas.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/callout.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/responsive.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/code-block.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/table.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/image-zoom.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/tag-graph.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/components/language-switcher.css?v=3c07d63fdfcf">
+    
+        <link rel="stylesheet" href="/css/pages/daily-signal.css?v=3c07d63fdfcf">
+    
 
     <!-- Mermaid is loaded in after-footer.ejs -->
 
