@@ -40,7 +40,7 @@
     
         <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-08-26T12:21:41.591Z">
+            <meta property="article:modified_time" content="2026-08-26T13:23:16.363Z">
         
     
     
@@ -191,11 +191,11 @@
 
     <ul class="btn clearfix">
         
-        <li><a href="/zh-CN/2026/06/24/20260625.AIGameSeries-Article2/" class="previous" data-title="游戏生产AI落地武林秘籍（第二式：观局识阵）：图像掩码及语义抽象实现游戏场景理解"></a></li>
+        <li><a href="/2026/08/26/20250801.UEConceptScrapbox/" class="previous" data-title="Untitled"></a></li>
         
         <li><a href="/" class="grid" data-title="Portfolio"></a></li>
         
-        <li><a href="/2026/06/01/20260602.AIGameSeries-Article1/" class="next" data-title="Landing AI in Gam..."></a></li>
+        <li><a href="/zh-CN/2026/06/24/20260625.AIGameSeries-Article2/" class="next" data-title="游戏生产AI落地武林秘籍（第二式：..."></a></li>
         
     </ul>
 
@@ -290,7 +290,7 @@
 <h2 id="3-Stop-Talking-Only-About-MCP-It-Is-a-Bottomless-Pit"><a href="#3-Stop-Talking-Only-About-MCP-It-Is-a-Bottomless-Pit" class="headerlink" title="3. Stop Talking Only About MCP: It Is a Bottomless Pit"></a>3. Stop Talking Only About MCP: It Is a Bottomless Pit</h2><p>What we actually need is a <strong>translation layer</strong> between engine data and the LLM: something that extracts whatever the LLM wants to know from the engine, then translates it into a form the model can use. MCP is the obvious first thought.</p>
 <p>MCP has indeed been extremely popular for a while.</p>
 <p>But MCP is not a pleasant job if what you want is a fast, dramatic payoff. It demands a great deal of engineering and tuning. Over the past few months I have spent an enormous amount of effort debugging it, even developing a tuning methodology and staring at telemetry every day. Honestly, the result is still not as good as I want.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-171132.png" alt="Tuning dashboard showing tool calls, failures, and call trends" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">My tuning dashboard</figcaption>
@@ -399,7 +399,7 @@
 <p>Some products export extra channels such as <strong>depth and normal maps</strong> to improve a VLM’s spatial perception. But this depends on what the model saw in training. Even before considering the enormous image-token cost, understanding begins to drift when the image is blurry or when the stylized way an Actor is displayed differs from the training distribution. In my view, feeding raw images directly to the model is therefore not an especially good solution.</p>
 <p>But what is the root cause of “not understanding”?</p>
 <p>Return to the basics of computer vision. Understanding an image means recovering structured semantic information from its pixels: what is here, and what is over there?</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015740.png" alt="Instance-segmentation example from Fei-Fei Li's CS231 slides" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Image from Fei-Fei Li's CS231 slides</figcaption>
@@ -414,7 +414,7 @@
 <p>So why not reverse the direction? Let the engine report which Actor owns every pixel and output a mask table to the LLM, compensating for the model’s inability to separate every component of an image reliably.</p>
 <p>That is my <strong>2D asset-mask method</strong>. When the LLM asks for an image from a position, the editor responds. Optionally, instead of returning only the image, it also reports everything in the frame, compresses that visual information into text, and labels what every part of the image represents. The method slashes token cost while providing extremely stable, high-recall instance segmentation.</p>
 <h3 id="4-2-Establishing-Visual-Ownership"><a href="#4-2-Establishing-Visual-Ownership" class="headerlink" title="4.2 Establishing Visual Ownership"></a>4.2 Establishing Visual Ownership</h3><p>The editor already maintains a Hit Proxy rendering and readback mechanism so users can click objects. Its buffer corresponds to the viewport: every hittable pixel maps to a Hit Proxy, which can then be resolved back to an Actor, Component, or another editor object. We can reuse this mechanism and expose pixel ownership to the LLM. Compared with running a separate vision segmentation model, acquiring and parsing this data is cheap.</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<div class="media-layout media-layout--quad">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015943.png" alt="Original screenshot from the game viewport" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Original game-viewport screenshot</figcaption>
@@ -436,7 +436,7 @@
 <p>Once we know every Actor in the image, do we understand the image’s semantics?</p>
 <p>Yes. Absolutely.</p>
 <p>By a fortunate coincidence, I had just finished an asset-understanding tool—the previous installment in this series.</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<div class="media-layout media-layout--pair">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021528.png" alt="Asset descriptions generated in NeuroBrowser" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Asset descriptions in NeuroBrowser</figcaption>
@@ -491,7 +491,7 @@
 </tbody></table>
 <p>The exact deployment choice naturally depends on the environment.</p>
 <p><em>Update, August 10: Alibaba recently released <a target="_blank" rel="noopener" href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a>, which is very close to my idea. It moves visual understanding into the harness layer and uses multi-resolution processing and frame sampling to understand images and video, essentially completing the sidecar capability I describe here. I will upgrade my approach accordingly.</em></p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-170645.png" alt="Qwen-MM-Plugins architecture for giving any agent harness native multimodal support" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Qwen-MM-Plugins architecture (github.com/QwenLM/Qwen-MM-Plugins)</figcaption>
@@ -538,7 +538,7 @@
 <p><em>UE is an excellent simulation tool. There is a surprising amount of “measurement” you can do inside it.</em></p>
 <p>The engine already exposes raycasting—<code>LineTraceSingleByChannel</code> in UE—as a native physics query. Walls, rocks, and doorframes are positive space. An opening is the <strong>negative space</strong> enclosed by them.</p>
 <p>So <code>find_opening</code> does not search for Actors whose names contain <code>Door</code> or <code>Archway</code>. It works backward through collision queries: rays that hit geometry trace the walls of a cavity, while groups of rays that escape continuously into the distance indicate an opening. The system then returns to either side of that opening to measure the real frame.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-030817.gif" alt="Five-stage find_opening animation, from candidate sampling and multi-station rays to precise frame measurement" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Five-stage find_opening animation, using a simulated production-scene case</figcaption>
@@ -710,7 +710,7 @@
 </tr>
 </tbody></table>
 <p>Before discussing spatial relations, the LLM must first know what exists and which instance a phrase refers to. Only then does it call the deeper reasoning interfaces.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--right">
   <figure style="flex: 1 1 280px; max-width: 340px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-222622.png" alt="GSDL interface statistics showing call count, failures or refusals, LLM characters, and latency" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">GSDL interface call volume and latency dashboard</figcaption>
@@ -740,7 +740,7 @@
 <li><strong>Speed</strong>: time per question, average latency in milliseconds, maximum latency, and watchdog timeout count. I sometimes also track health and discoverability.</li>
 </ul>
 <p>Large and small models differ sharply in some respects, particularly tool use. Small models often forget which interfaces exist. I eventually built a routing layer that the model can call before querying the scene, so it can confirm which tool is appropriate. This trades more routing calls for a higher completion rate:</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025635.png" alt="Per-case comparison of tool-call traces before and after routing" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Per-case tool-call comparison before and after routing</figcaption>
@@ -748,7 +748,7 @@
 </div>
 
 <p>Here is how the three hard metrics changed, using ten questions under the same protocol on July 21–22:</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025518.png" alt="GSDL Loop metrics showing token usage, call count, and correct answers across rounds" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">The three hard metrics across iteration rounds</figcaption>
@@ -775,7 +775,7 @@
 
 <p>I built a passive-update system. When users call MCP tools during their normal work, a Hook records the exact question and the conversation in a background database. Users are also occasionally asked to rate how completely the LLM finished the task.</p>
 <p>A scheduled agent turns those interaction records into a capability-requirements table whenever it detects a weak area. At night, after I leave work, an executor agent implements the capability. Another lead agent then launches many subagents to test the MCP changes, summarizes their reports and recommendations, and feeds them back to the executor. The executor iterates again. The loop continues until the new interface stabilizes.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--left">
   <figure style="flex: 1 1 280px; max-width: 250px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-034651.png" alt="Two NVIDIA DGX Spark systems on a wooden table" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Two heavily armed DGX Sparks, purchased at great expense</figcaption>
@@ -794,18 +794,17 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">→ nm_status             ← confirm tool status</span><br><span class="line">→ describe_region       ← survey the region</span><br><span class="line">→ find_opening          ← measure openings with rays</span><br><span class="line">→ fly_to                ← fly to the site</span><br><span class="line">→ capture_view          ← verify with a screenshot</span><br><span class="line"></span><br><span class="line">→ answer with type, position, width, and evidence grade</span><br></pre></td></tr></table></figure>
 
 <p>Before the <code>find_opening</code> route existed, the model used 47 tool calls and consumed 64,820 returned characters, yet still mistook wall components containing <code>Archway</code> for entrances. After routing was added, it needed only five calls and 15,540 characters to complete both measurement and visual verification.</p>
-<table>
-<thead>
-<tr>
-<th>Rendered view of the cave opening</th>
-<th>Pixel-level instance segmentation from the same camera</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="A lit opening between cave walls, with the distant scene visible through it"></td>
-<td><img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191249.png" alt="Per-pixel instance segmentation separating the cave walls from background objects"></td>
-</tr>
-</tbody></table>
+<div class="media-layout media-layout--pair media-layout--compact">
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="A lit opening between cave walls, with the distant scene visible through it" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption>Rendered view of the cave opening</figcaption>
+  </figure>
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0; text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191249.png" alt="Per-pixel instance segmentation separating the cave walls from background objects" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <figcaption>Pixel-level instance segmentation from the same camera</figcaption>
+  </figure>
+</div>
+
 <p>The model then flew to each candidate opening and captured a verification image. The mask contained 494 pixels belonging to <code>BP_Sky_Sphere</code>, showing that the line of sight passed through the opening into the outside background. That is only visual supporting evidence for the opening’s existence. Whether it is passable and how wide it is still come from collision rays near the ground and precise frame measurements.</p>
 <p>In the end, the system classified ten candidate structures into ground-level passable openings or passages, elevated windows, and skylights, then reported the positions and measured widths of the ground openings. It even found an opening I had never noticed. The important point is not “how many Actors named <code>Archway</code> did it find?” It is that the system can distinguish a cave wall, an internal passage, an exterior entrance, and an elevated opening that cannot be traversed directly.</p>
 <h3 id="5-6-Open-Sourcing-the-Project"><a href="#5-6-Open-Sourcing-the-Project" class="headerlink" title="5.6 Open-Sourcing the Project"></a>5.6 Open-Sourcing the Project</h3><p>Thank you for making it this far.</p>
@@ -822,7 +821,7 @@
 <p>This article is already far too long, and Vector Atlas is itself a very complicated project. How should search be optimized? How should viewpoints be captured? How should it be deployed? How can the system infer an angle it never photographed? Each question deserves serious thought.</p>
 <p>So Vector Atlas, together with the real-user-data self-evolving agent system introduced above, will be the subject of the next article. By then, the system should also be more complete.</p>
 <p>For now, here is a short tool demo.</p>
-<h2 id="7-The-Version-for-Carbon-Based-Lifeforms"><a href="#7-The-Version-for-Carbon-Based-Lifeforms" class="headerlink" title="7. The Version for Carbon-Based Lifeforms"></a>7. The Version for Carbon-Based Lifeforms</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<h2 id="7-The-Version-for-Carbon-Based-Lifeforms"><a href="#7-The-Version-for-Carbon-Based-Lifeforms" class="headerlink" title="7. The Version for Carbon-Based Lifeforms"></a>7. The Version for Carbon-Based Lifeforms</h2><div class="media-layout media-layout--quad">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-search-redacted-v2.gif" alt="Semantic search" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Figure 1. Semantic search for scene locations across the entire map</figcaption>
@@ -950,7 +949,7 @@
 <p>The most striking accuracy result came from Qwen: my MCP raised accuracy from <strong>59.1%</strong> to <strong>86.4%</strong>. Aggregated, problem-oriented tools are not merely cheaper; they also reduce the burden on a weaker model that would otherwise have to traverse Actors, choose tools, and infer spatial relations by itself.</p>
 <p>NeuroMap still has a relatively high schema overhead, and its tool set continues to be consolidated. There is more optimization ahead.</p>
 <p>The following is one real workflow. The AI receives only a vague description—“a table with a Go board on top”—then locates it in a large scene, adjusts the camera, and saves a screenshot.</p>
-<div style="display: flex; flex-wrap: nowrap; gap: 10px; align-items: flex-start; margin: 18px 0;">
+<div class="media-layout media-layout--pair media-layout--compact">
   <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-before-scene-redacted.png" alt="Giving the AI a vague task to locate a Go table" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666; text-align: center;">① The prompt describes only the remembered appearance and use, with no asset name or coordinate.</figcaption>
@@ -971,7 +970,7 @@
 
 
 <div class="tags">
-    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/tags/USD/" data-i18n-tag="USD">USD</a>
+    <a href="/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/tags/USD/" data-i18n-tag="USD">USD</a>
 </div>
 
 

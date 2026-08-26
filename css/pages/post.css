@@ -138,17 +138,17 @@ body.layout-post .content:not(.archives) > h1:first-child {
   margin-left: auto;
 }
 
-/* Keep prose easy to scan while letting data-heavy blocks use more of the page. */
+/* Keep prose easy to scan while letting known data-heavy blocks use more of the page.
+   Media containers own their alignment; never override authored left/right/center margins. */
 .content:not(.archives) > table,
-.content:not(.archives) > figure,
+.content:not(.archives) > figure.highlight,
 .content:not(.archives) > .codeblock,
 .content:not(.archives) > .code-block-container,
-.content:not(.archives) > .mermaid,
-.content:not(.archives) > div:not(.callout) {
+.content:not(.archives) > .mermaid {
   box-sizing: border-box;
   max-width: min(100%, var(--content-wide-width));
-  margin-right: auto !important;
-  margin-left: auto !important;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .content:not(.archives) p {
@@ -258,9 +258,104 @@ body.layout-post .content:not(.archives) > h1:first-child {
 }
 
 .content img {
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Only standalone Markdown images are centered by default. Inline images and
+   authored figure layouts keep their own flow and alignment. */
+.content:not(.archives) > img:not(.media-align-left, .media-align-right),
+.content:not(.archives) > p > img:only-child:not(.media-align-left, .media-align-right),
+.content:not(.archives)
+  > p
+  > a:only-child
+  > img:only-child:not(.media-align-left, .media-align-right) {
   display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Semantic media layouts: alignment describes the visual composition instead
+   of being imposed globally by the theme. */
+.content:not(.archives) > .media-layout {
+  box-sizing: border-box;
+  max-width: min(100%, var(--content-wide-width));
+  margin: 24px auto;
+}
+
+.media-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.media-layout > figure {
+  margin: 0;
+  text-align: center;
+}
+
+.media-layout > figure > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.media-layout--left,
+.media-layout--right {
+  width: min(100%, var(--reading-width));
+}
+
+.media-layout--left {
+  justify-content: flex-start;
+}
+
+.media-layout--center {
+  justify-content: center;
+}
+
+.media-layout--right {
+  justify-content: flex-end;
+}
+
+.media-layout--grid,
+.media-layout--quad,
+.media-layout--pair {
+  display: grid;
+}
+
+.media-layout--grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+}
+
+.media-layout--quad,
+.media-layout--pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.content:not(.archives) > .media-layout--compact {
+  gap: 10px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.content img.media-align-left {
+  display: block;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.content img.media-align-center {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.content img.media-align-right {
+  display: block;
+  margin-right: 0;
+  margin-left: auto;
 }
 
 .content:not(.archives) a {

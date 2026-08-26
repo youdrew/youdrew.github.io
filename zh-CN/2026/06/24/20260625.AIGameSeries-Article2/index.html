@@ -40,7 +40,7 @@
     
         <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-08-26T12:21:41.599Z">
+            <meta property="article:modified_time" content="2026-08-26T13:23:16.372Z">
         
     
     
@@ -196,11 +196,11 @@
 
     <ul class="btn clearfix">
         
-        <li><a href="/2026/08/26/20250801.UEConceptScrapbox/" class="previous" data-title="Untitled"></a></li>
+        <li><a href="/2026/06/24/20260625.AIGameSeries-Article2/" class="previous" data-title="Landing AI in Game Production — A Kung-F..."></a></li>
         
         <li><a href="/" class="grid" data-title="Portfolio"></a></li>
         
-        <li><a href="/2026/06/24/20260625.AIGameSeries-Article2/" class="next" data-title="Landing AI in Gam..."></a></li>
+        <li><a href="/2026/06/01/20260602.AIGameSeries-Article1/" class="next" data-title="Landing AI in Gam..."></a></li>
         
     </ul>
 
@@ -301,7 +301,7 @@
 </ul>
 <p>一个理想的AI场景理解工具，理论上应该能做到上述 3 * 3 坐标里面所有的东西。<br>另外，一个优秀的agent，理论上还需要具备：长程场景记忆系统，即我们聊过的东西，再次提起还能查得到。<br>好，接下来我们来讨论实现。</p>
 <h2 id="三、别只聊MCP了，它注定是一个无底洞"><a href="#三、别只聊MCP了，它注定是一个无底洞" class="headerlink" title="三、别只聊MCP了，它注定是一个无底洞"></a>三、别只聊MCP了，它注定是一个无底洞</h2><p>其实，我们想要的是一个转译层，夹在引擎数据和大语言模型之间，把LLM想要了解的信息，从引擎中抽取，然后转译给LLM。那可能很自然地想到了MCP。<br>确实，MCP是过去一段时间很火的方案。<br>然而MCP这事并不是一个好活儿（不能快速地产出立竿见影的效果），它需要大量的资源投入及调优。<br>（事实上在过去一段时间里，我耗费了很多精力来调试，我甚至整理了一套调优方法论。每天盯着埋点数据，老实说，效果仍然称不上满意）。</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-171132.png" alt="调优数据面板：工具调用、故障与调用趋势统计" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">我的调优数据面板</figcaption>
@@ -408,7 +408,7 @@
 <h2 id="四、2D资产掩码方案"><a href="#四、2D资产掩码方案" class="headerlink" title="四、2D资产掩码方案"></a>四、2D资产掩码方案</h2><h3 id="1-视觉理解为什么只看截图不够"><a href="#1-视觉理解为什么只看截图不够" class="headerlink" title="1.  视觉理解为什么只看截图不够"></a>1.  视觉理解为什么只看截图不够</h3><p>首先来讲视觉信息的语义理解，理论上来说，直接将图片拿给VLM或是图像理解能力扩展后的LLM，是最直接，最接近人类感知的方案。<br>理想情况下，如果大模型可以直接读懂视频，并看懂空间关系后，执行对应的操作，这听起来像世界模型干的事情。但目前LLM似乎还不是很能达到类似的效果。</p>
 <p>所以我看到一些产品会额外导出<strong>深度图、法线图</strong>等辅助通道，给 VLM 补足空间感知能力，但这通常仰赖模型的训练数据，抛开图片本身的巨量token消耗不谈，一旦当画面变得很模糊，或者画面中的actor带有的风格化显示，和训练数据不一致的时候，就会产生理解的漂移。<br>所以在我看来直接喂图的方案并不是一个很优的解决方案。</p>
 <p>但”看不懂”的根源在哪？<br>我们可以回到计算机视觉的课程<br>——理解画面，本质上是理解像素拼出的图像所代表的物体的含义：把像素还原成”这里是什么、那里是什么”的结构化语义信息。</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015740.png" alt="李飞飞 CS231 实例分割示例" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图片源自于李飞飞 CS231 ppt</figcaption>
@@ -420,7 +420,7 @@
 <p>可是，这又回到了那个问题，如果只是让模型去直接区分图像，会有一定的失败概率，就又会造成分析的不稳定性这个问题的出现。<br>于是，为何不反着来？引擎主动提供每个位置上的点分别代表什么actor，然后输出一张掩码表给LLM，以此补足LLM无法完整地区分画面的每个组成部分的问题。</p>
 <p>这就是我的“2D 资产掩码方案”——LLM提出要在某个位置拍摄图像，编辑器响应，在拍图图像时，（可选）不只是拍摄图像信息，而是一次性给出整个画面的所有内容，将图片信息压缩成文字，并标注画面中每个部分代表的是什么。（该方案不仅token 消耗猛猛降，同时又达到超高物体识别率，稳定性极高的实例分割 Instance Segmentation方案）</p>
 <h3 id="2-如何建立视觉归属"><a href="#2-如何建立视觉归属" class="headerlink" title="2. 如何建立视觉归属"></a>2. 如何建立视觉归属</h3><p>实际上，引擎编辑器为了支持物体点选，会维护一套 Hit Proxy（点选代理）的渲染与读取机制。其缓冲区与视口对应，可命中的像素会关联一个 Hit Proxy，进而还原到 Actor、Component 或其他编辑器对象。我们可以复用这套数据，将像素归属主动提供给 LLM；相比额外运行视觉分割模型，它的获取和解析成本很低。</p>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<div class="media-layout media-layout--quad">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015943.png" alt="原始截图（游戏视角）" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">原始截图（游戏视角）</figcaption>
@@ -441,7 +441,7 @@
 
 <p>拿到了画面中的每一个actor后，就可以知道画面的语义了吗？</p>
 <p>是的！当然可以。<br>因为好巧不巧，我前段时间刚好做了一个资产理解工具（上一期）</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<div class="media-layout media-layout--pair">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021528.png" alt="场景描述生成 1" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">NeuroBrowser里面的资产描述</figcaption>
@@ -495,7 +495,7 @@
 </tbody></table>
 <p>但这个部署问题就取决于不同环境的具体情况。</p>
 <p>（8.10日补：阿里前几天发布了<a target="_blank" rel="noopener" href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a>和我的想法很像，将视觉理解这个事情放到Harness层面，通过多层分辨率设计与抽帧方案实现图片和视频的理解，基本上完成了我这个sidecar视觉辅助能力。我在后面也会升级我的方案）</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-170645.png" alt="Qwen-MM-Plugins：让任意 agent harness 原生支持多模态" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Qwen-MM-Plugins 架构示意（github.com/QwenLM/Qwen-MM-Plugins）</figcaption>
@@ -532,7 +532,7 @@
 <h3 id="2-空间是如何被测量的？"><a href="#2-空间是如何被测量的？" class="headerlink" title="2. 空间是如何被测量的？"></a>2. 空间是如何被测量的？</h3><p>我拿其中一个接口做图形化的展示，让你更加明白地了解它的实现逻辑。<br>下面这个接口叫作<code>find_opening</code>。它主要测试当前的腔体环境中是否存在开口。<br>比如说在一个山洞中，通过这种算法能测出环境中存在几个洞口、房间有没有开着的窗户之类的应用场景。</p>
 <p><em>其实UE本身是一个很棒的仿真工具，在里面其实可以做很多“测量”的工作。</em></p>
 <p>游戏引擎本身就有射线检测接口——UE 里叫 <code>LineTraceSingleByChannel</code>，是物理引擎原生开放给上层做碰撞查询的能力。墙、岩石和门框都是正空间，洞口恰恰是它们围出来的<strong>负空间</strong>。<br>因此<code>find_opening</code>的查询方法，不是通过搜索名字中带 <code>Door</code> 或 <code>Archway</code> 的 Actor，而是反过来使用碰撞查询：命中的射线勾勒洞壁，能够连续逃逸到远处的射线组成开口，再回到开口两侧寻找真实门框。</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-030817.gif" alt="find_opening 从候选采样、多测站射线到门框精测的五阶段动画" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">find_opening 五阶段动画（模拟项目实际场景效果案例）</figcaption>
@@ -698,7 +698,7 @@
 </tr>
 </tbody></table>
 <p>先知道这里有什么、说的是哪个实例，才谈得上空间关系。LLM才会调用具体的理解接口去做事情。</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--right">
   <figure style="flex: 1 1 280px; max-width: 340px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-222622.png" alt="GSDL 接口调用统计表：调用次数、故障/拒绝、LLM 字符与耗时" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">GSDL 各接口调用量与耗时统计面板</figcaption>
@@ -726,7 +726,7 @@
 <li><strong>速度</strong>（单题耗时、均耗时 ms、最大 ms、看门狗超时数），有时候还会关注点其他指标，包括健康度、可能发现性。</li>
 </ul>
 <p>根据我的测试来看，大模型和小模型在某些层面确实有很明显的差距，比如体现在对工具的利用能力上：小模型会经常忘记有哪些工具接口。所以我后面甚至特地做了一个路由层，模型在对场景进行查询之前，可以先调用路由层去确认使用哪个工具会更加合适一点，以调用次数换完成率：</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025635.png" alt="案例路由优化前后的工具调用记录对比" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">案例路由优化前后的工具调用记录对比</figcaption>
@@ -734,7 +734,7 @@
 </div>
 
 <p>三个硬指标的变化是这样的（取 7 月 21–22 日、10 题同口径的数据）：</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025518.png" alt="GSDL /Loop 迭代指标表：Token 消耗、调用次数与正确题数逐轮变化" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">三个硬指标随迭代轮次的变化</figcaption>
@@ -757,7 +757,7 @@
 
 
 <p>我构建了被动更新系统：用户每天调用MCP工具时会触发我的Hook、在后台数据库会记录用户调用工具时候的具体问题，以及对话记录，用户也被要求时不时给LLM的任务完成度打分。<br>这些交流记录会被一个定时的Agent整理成能力需求表（如果发现比较弱的能力的话）。在夜间我下班后，由一个执行的Agent来负责实现这些能力，然后另外一个Agent会调用大量的子agent，对mcp进行测试，最后由这些子agent的主agent总结测试报表与意见。反馈给执行agent。然后执行再进行迭代…以此循环数次，直到新接口的指标稳定下来。</p>
-<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
+<div class="media-layout media-layout--left">
   <figure style="flex: 1 1 280px; max-width: 250px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-034651.png" alt="两台 NVIDIA DGX Spark 迷你主机放在木桌上" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">重金购入的两台 DGX Spark（军火展示）</figcaption>
@@ -775,7 +775,7 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">→ nm_status             ← 确认工具状态</span><br><span class="line">→ describe_region       ← 区域普查</span><br><span class="line">→ find_opening          ← 射线测洞口</span><br><span class="line">→ fly_to                ← 飞抵现场</span><br><span class="line">→ capture_view          ← 截图复核</span><br><span class="line"></span><br><span class="line">→ 带类型、位置、宽度与证据等级的回答</span><br></pre></td></tr></table></figure>
 
 <p>同一个问题，加入 <code>find_opening</code> 路由之前，模型用了 47 次工具调用、消耗 64,820 字符，仍然把名字带 <code>Archway</code> 的墙体构件当成洞口；加入路由后，只用了 5 次调用和 15,540 字符，就完成了测量与视觉复核。</p>
-<div style="display: flex; flex-wrap: nowrap; gap: 10px; align-items: flex-start; margin: 24px 0;">
+<div class="media-layout media-layout--pair media-layout--compact">
   <figure style="flex: 1 1 0; min-width: 0; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="洞穴岩壁间的洞口，透光可见远处场景" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption>洞口区域实景渲染</figcaption>
@@ -798,7 +798,7 @@
 <p>开篇我提到的：把每个位置「背」下来、毫秒级查询的承诺，就靠它兑现。用存储，换性能的工程化实现。</p>
 <p>因为这篇文章实在太长了，且Vector Atlas这个东西也是一个非常复杂的项目（要考虑到如何优化搜索、如何拍摄、如何部署、如何让AI得到未拍摄的角度…这些都是要思考的东西）。<br>所以 Vector Atlas 加上（上面提到的）“基于用户真实数据的自进化的Agent系统”（第二期自进化接口），我会留到下一篇文章详细阐述，那时候，我的系统也更加完善了。在这里仅先简单地预告一下。</p>
 <p>下面欣赏一下工具的Demo吧。</p>
-<h2 id="七、给碳基生物的版本"><a href="#七、给碳基生物的版本" class="headerlink" title="七、给碳基生物的版本"></a>七、给碳基生物的版本</h2><div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; margin: 24px 0;">
+<h2 id="七、给碳基生物的版本"><a href="#七、给碳基生物的版本" class="headerlink" title="七、给碳基生物的版本"></a>七、给碳基生物的版本</h2><div class="media-layout media-layout--quad">
   <figure style="margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-search-redacted-v2.gif" alt="语义搜索" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图1 全地图场景位置语义搜索</figcaption>
@@ -925,7 +925,7 @@
 <p>正确率上，最值得注意的是 Qwen这一轮测试，我的MCP从 <strong>59.1%</strong> 大幅提高到 <strong>86.4%</strong>。这说明聚合式接口不仅更省，也能明显降低较弱模型自己遍历 Actor、判断工具和归纳空间关系的难度。</p>
 <p>不过，NeuroMap 当前的 Schema 开销仍然偏高，工具集合也还在持续收敛，后面还得持续优化。</p>
 <p>下面是一次实际工作流：只给 AI 一个模糊描述，让它在大场景中寻找“摆着围棋的桌子”，定位目标、调整镜头并保存截图。</p>
-<div style="display: flex; flex-wrap: nowrap; gap: 10px; align-items: flex-start; margin: 18px 0;">
+<div class="media-layout media-layout--pair media-layout--compact">
   <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-before-scene-redacted.png" alt="向 AI 输入模糊的围棋桌定位任务" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666; text-align: center;">① 只描述记忆中的外观与用途，没有提供资产名或坐标。</figcaption>
@@ -945,7 +945,7 @@
 
 
 <div class="tags">
-    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
 </div>
 
 

@@ -452,6 +452,22 @@
   .content:not(.archives) blockquote {
     padding: 12px 14px;
   }
+
+  .content:not(.archives) > .media-layout {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .media-layout--grid,
+  .media-layout--quad,
+  .media-layout--pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .media-layout--left,
+  .media-layout--right {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 550px) {
