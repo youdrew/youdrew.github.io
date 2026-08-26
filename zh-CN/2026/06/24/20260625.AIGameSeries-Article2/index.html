@@ -40,7 +40,7 @@
     
         <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-08-26T10:55:02.425Z">
+            <meta property="article:modified_time" content="2026-08-26T11:32:45.407Z">
         
     
     
@@ -651,25 +651,26 @@
 <table>
 <thead>
 <tr>
-<th><strong>普查</strong></th>
-<th><code>scan_density</code>、<code>describe_region</code></th>
-<th>枚举 Actor &#x2F; Instance &#x2F; Landscape，网格聚合，生成快照、簇与分层摘要</th>
-<th>这里有什么？集中在哪？散布还是聚集？</th>
+<th>能力</th>
+<th>代表接口</th>
+<th>核心实现</th>
+<th>能回答的问题</th>
 </tr>
 </thead>
 <tbody><tr>
+<td><strong>普查</strong></td>
+<td><code>scan_density</code>、<code>describe_region</code></td>
+<td>枚举 Actor &#x2F; Instance &#x2F; Landscape，网格聚合，生成快照、簇与分层摘要</td>
+<td>这里有什么？集中在哪？散布还是聚集？</td>
+</tr>
+<tr>
 <td><strong>定位</strong></td>
 <td><code>search_subjects</code>、<code>find_by_class</code>、<code>actor_meta</code>、<code>semantic_search</code></td>
 <td>名称与中文别名索引、类查询、资产元数据联接、检索结果与实例交叉验证</td>
 <td>“宝箱”叫什么？在哪？用什么资产？</td>
 </tr>
-<tr>
-<td>先知道这里有什么、说的是哪个实例，才谈得上空间关系。LLM才会调用具体的理解接口去做事情。</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody></table>
+<p>先知道这里有什么、说的是哪个实例，才谈得上空间关系。LLM才会调用具体的理解接口去做事情。</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 280px; max-width: 340px; margin: 0; text-align: center;">
     <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-222622.png" alt="GSDL 接口调用统计表：调用次数、故障/拒绝、LLM 字符与耗时" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
@@ -921,7 +922,7 @@ GSDL 对外提供的是一组面向问题、且仍在生长的测量能力。这
 
 
 <div class="tags">
-    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
+    <a href="/zh-CN/tags/AI/" data-i18n-tag="AI">AI</a> <a href="/zh-CN/tags/LLM/" data-i18n-tag="LLM">LLM</a> <a href="/zh-CN/tags/MCP/" data-i18n-tag="MCP">MCP</a> <a href="/zh-CN/tags/Agent/" data-i18n-tag="Agent">Agent</a> <a href="/zh-CN/tags/GameDev/" data-i18n-tag="GameDev">GameDev</a> <a href="/zh-CN/tags/UE4/" data-i18n-tag="UE4">UE4</a> <a href="/zh-CN/tags/Pipeline/" data-i18n-tag="Pipeline">Pipeline</a> <a href="/zh-CN/tags/PCG/" data-i18n-tag="PCG">PCG</a> <a href="/zh-CN/tags/Scatter/" data-i18n-tag="Scatter">Scatter</a> <a href="/zh-CN/tags/Statistics/" data-i18n-tag="Statistics">Statistics</a> <a href="/zh-CN/tags/RDF/" data-i18n-tag="RDF">RDF</a> <a href="/zh-CN/tags/Copilot/" data-i18n-tag="Copilot">Copilot</a> <a href="/zh-CN/tags/VLM/" data-i18n-tag="VLM">VLM</a> <a href="/zh-CN/tags/Mask/" data-i18n-tag="Mask">Mask</a> <a href="/zh-CN/tags/Segmentation/" data-i18n-tag="Segmentation">Segmentation</a> <a href="/zh-CN/tags/SceneUnderstanding/" data-i18n-tag="SceneUnderstanding">SceneUnderstanding</a> <a href="/zh-CN/tags/GSDL/" data-i18n-tag="GSDL">GSDL</a> <a href="/zh-CN/tags/VectorAtlas/" data-i18n-tag="VectorAtlas">VectorAtlas</a> <a href="/zh-CN/tags/USD/" data-i18n-tag="USD">USD</a>
 </div>
 
 

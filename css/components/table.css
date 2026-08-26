@@ -7,8 +7,9 @@
   margin: 20px 0;
   border: 1px solid #ddd;
   background-color: #fff;
-  font-size: 14px;
-  line-height: 1.5;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.6;
   box-shadow: 0 1px 3px rgb(0, 0, 0, 0.1);
   display: table;
   table-layout: auto;
@@ -112,7 +113,7 @@
 /* 响应式表格 */
 @media (max-width: 768px) {
   .content table {
-    font-size: 12px;
+    font-size: 14px;
     margin: 15px 0;
   }
 
@@ -150,7 +151,7 @@
 
 @media (max-width: 480px) {
   .content table {
-    font-size: 11px;
+    font-size: 13px;
     display: block;
     overflow-x: auto;
     white-space: nowrap;
