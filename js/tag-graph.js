@@ -8,7 +8,38 @@ export function initTagGraph() {
   const container = document.getElementById('tag-graph');
   const graphContainer = document.getElementById('tag-graph-container');
   const data = window.__TAG_GRAPH_DATA__;
-  if (!container || !data || !data.nodes || data.nodes.length === 0) return;
+  if (!container || !graphContainer || !data || !data.nodes || data.nodes.length === 0) return;
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  // Grow both the desktop canvas and its force spacing continuously as the
+  // knowledge map gains tags. The cap keeps very large maps navigable instead
+  // of letting the page and force simulation expand without bound.
+  function calcDesktopSpacing(count) {
+    const currentGrowth = clamp((count - 40) / 58, 0, 1);
+    const futureGrowth = Math.max(0, Math.log2(Math.max(count, 98) / 98));
+    return clamp(1 + currentGrowth * 0.12 + futureGrowth * 0.15, 1, 1.5);
+  }
+
+  // Touch devices (phones/tablets) keep the compact, page-scrollable overview.
+  // matchMedia('(pointer: coarse)') is the primary signal; 'ontouchstart' is a
+  // fallback for older engines.
+  const isTouch =
+    (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+    'ontouchstart' in window;
+
+  function applyAdaptiveGraphHeight() {
+    if (isTouch) return;
+    let baseHeight = 480;
+    if (window.matchMedia && window.matchMedia('(max-width: 480px)').matches) baseHeight = 420;
+    else if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) baseHeight = 440;
+    const adaptiveHeight = Math.round(baseHeight * calcDesktopSpacing(data.nodes.length));
+    graphContainer.style.height = adaptiveHeight + 'px';
+  }
+
+  applyAdaptiveGraphHeight();
 
   // Show loading indicator
   const loadingEl = document.createElement('div');
@@ -379,24 +410,56 @@ export function initTagGraph() {
   document.head.appendChild(script);
 
   function calcRepulsion(count) {
+    const density = clamp((count - 1) / 39, 0, 1);
+    return Math.round(700 + density * 1050);
+  }
+
+  function calcTouchRepulsion(count) {
     if (count < 10) return 750;
     if (count < 20) return 1200;
     if (count < 40) return 1650;
     return 2100;
   }
 
+  function calcDesktopForce(count) {
+    const spacing = calcDesktopSpacing(count);
+    let repulsion = calcRepulsion(count);
+
+    // ECharts computes repulsion for every node pair. As the graph grows, edge
+    // length and canvas size provide the extra room while slightly reducing
+    // repulsion prevents future dense maps from bringing back global jumps.
+    if (count > 98) {
+      repulsion = Math.max(1500, repulsion - 100 * Math.log2(count / 98));
+    }
+
+    return {
+      repulsion: Math.round(repulsion),
+      edgeLength: [Math.round(190 * spacing), Math.round(520 * spacing)],
+      gravity: Math.max(0.06, 0.075 / spacing),
+      friction: 0.24,
+    };
+  }
+
   function initChart() {
     // Remove loading indicator
     if (loadingEl.parentNode) loadingEl.parentNode.removeChild(loadingEl);
 
-    // Touch devices (phones/tablets) get a non-draggable, page-scrollable graph.
-    // matchMedia('(pointer: coarse)') is the primary signal (primary input is a
-    // finger); 'ontouchstart' is a fallback for older engines.
-    const isTouch =
-      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
-      'ontouchstart' in window;
+    // Fitting every tag into a narrow desktop panel makes fixed-size labels
+    // collapse onto one another. Start closer there and let native roam expose
+    // the rest of the map. Compensate for half of the adaptive spacing growth:
+    // the map still gets visibly looser, without pushing most nodes off-screen.
+    // Touch keeps the fitted inline overview because roam is deliberately
+    // enabled only after entering fullscreen.
+    const zoomCompensation = Math.sqrt(calcDesktopSpacing(data.nodes.length));
+    let viewInitialZoom = isTouch ? initialZoom : initialZoom / zoomCompensation;
+    if (!isTouch && cw < 480) {
+      viewInitialZoom = Math.max(viewInitialZoom, 0.95 / zoomCompensation);
+    } else if (!isTouch && cw < 720) {
+      viewInitialZoom = Math.max(viewInitialZoom, 0.6 / zoomCompensation);
+    }
 
     const chart = echarts.init(container);
+    const desktopForce = calcDesktopForce(data.nodes.length);
 
     const option = {
       backgroundColor: 'transparent',
@@ -506,14 +569,17 @@ export function initTagGraph() {
           // rebuilding the force layout on every pointer move. Touch keeps its
           // dedicated fullscreen interaction below.
           roam: !isTouch,
-          // Enable node dragging only after the initial force simulation has
-          // been snapshotted into a static layout (see lockLayout).
-          draggable: false,
+          // Touch stays static inline so page scrolling remains natural.
+          draggable: !isTouch,
           force: {
-            repulsion: calcRepulsion(data.nodes.length),
-            edgeLength: [150, 450],
-            gravity: 0.12,
-            friction: 0.6,
+            // Preserve the existing fitted touch overview; the wider, cooler
+            // force layout is specifically for draggable desktop graphs.
+            repulsion: isTouch ? calcTouchRepulsion(data.nodes.length) : desktopForce.repulsion,
+            edgeLength: isTouch ? [150, 450] : desktopForce.edgeLength,
+            gravity: isTouch ? 0.12 : desktopForce.gravity,
+            // Keep the spring response visible, but damp the long whole-graph
+            // rebound that made dragging feel jumpy on a dense map.
+            friction: isTouch ? 0.6 : desktopForce.friction,
             layoutAnimation: true,
           },
           emphasis: {
@@ -550,7 +616,7 @@ export function initTagGraph() {
             min: 0.3,
             max: 4,
           },
-          zoom: initialZoom,
+          zoom: viewInitialZoom,
           center: initialCenter,
         },
       ],
@@ -558,165 +624,14 @@ export function initTagGraph() {
 
     // Kept in sync with native roam so touch fullscreen can restore the inline
     // framing on exit.
-    let currentZoom = initialZoom || 1;
+    let currentZoom = viewInitialZoom || 1;
     let currentCenter = initialCenter ? [initialCenter[0], initialCenter[1]] : [0, 0];
-    let layoutFrozen = false;
-    let staticViewReference = null;
 
     chart.setOption(option);
 
-    // ECharts' `finished` event can fire between force-layout steps, so it is
-    // not a reliable "physics settled" signal. Debounce `rendered` instead:
-    // while the force simulation is active it renders about every 16ms. After
-    // 200ms of silence (or 2.5s at most), snapshot the calculated positions
-    // and switch to the static graph layout before enabling drag. ECharts can
-    // then update one node and its edges without reflowing the rest of the web.
-    let forceIdleTimer = null;
-    let forceMaxWaitTimer = null;
-
-    function getSeriesModel() {
-      const model = chart.getModel();
-      return model && model.getSeriesByIndex && model.getSeriesByIndex(0);
-    }
-
-    function getRenderedGraph() {
-      const series0 = getSeriesModel();
-      return series0 && series0.getGraph && series0.getGraph();
-    }
-
-    function snapshotNodePositions(graph) {
-      const nodes = [];
-      for (let i = 0; i < data.nodes.length; i++) {
-        const node = data.nodes[i];
-        const graphNode = graph && graph.getNodeById && graph.getNodeById(node.name);
-        const position = graphNode && graphNode.getLayout && graphNode.getLayout();
-        if (
-          !position ||
-          position.length < 2 ||
-          !Number.isFinite(position[0]) ||
-          !Number.isFinite(position[1])
-        ) {
-          return null;
-        }
-        nodes.push(
-          Object.assign({}, node, {
-            x: position[0],
-            y: position[1],
-          })
-        );
-      }
-      return nodes;
-    }
-
-    function getNodeBounds(nodes) {
-      let minX = Infinity,
-        maxX = -Infinity,
-        minY = Infinity,
-        maxY = -Infinity;
-      nodes.forEach(function (node) {
-        if (node.x < minX) minX = node.x;
-        if (node.x > maxX) maxX = node.x;
-        if (node.y < minY) minY = node.y;
-        if (node.y > maxY) maxY = node.y;
-      });
-      if (maxX === minX) {
-        minX -= 1;
-        maxX += 1;
-      }
-      if (maxY === minY) {
-        minY -= 1;
-        maxY += 1;
-      }
-      return {
-        width: maxX - minX,
-        height: maxY - minY,
-      };
-    }
-
-    function getStaticViewBox(nodes) {
-      const bounds = getNodeBounds(nodes);
-      const widthRatio = chart.getWidth() / staticViewReference.chartWidth;
-      const heightRatio = chart.getHeight() / staticViewReference.chartHeight;
-      const responsiveScale = Math.min(widthRatio, heightRatio);
-      const rawScale = staticViewReference.rawScale * responsiveScale;
-      const viewWidth = bounds.width * rawScale;
-      const viewHeight = bounds.height * rawScale;
-      const viewCenterX = staticViewReference.anchorX * chart.getWidth();
-      const viewCenterY = staticViewReference.anchorY * chart.getHeight();
-      return {
-        left: viewCenterX - viewWidth / 2,
-        top: viewCenterY - viewHeight / 2,
-        width: viewWidth,
-        height: viewHeight,
-      };
-    }
-
-    function applyStaticLayout(nodes) {
-      const viewBox = getStaticViewBox(nodes);
-      chart.setOption({
-        series: [
-          {
-            animation: false,
-            layout: 'none',
-            data: nodes,
-            draggable: !isTouch,
-            roam: !isTouch,
-            left: viewBox.left,
-            top: viewBox.top,
-            width: viewBox.width,
-            height: viewBox.height,
-            center: currentCenter.slice(),
-            zoom: currentZoom,
-          },
-        ],
-      });
-    }
-
-    function lockLayout() {
-      if (layoutFrozen) return;
-
-      const series0 = getSeriesModel();
-      const coordSys = series0 && series0.coordinateSystem;
-      const graph = series0 && series0.getGraph && series0.getGraph();
-      const nodes = snapshotNodePositions(graph);
-      const transformInfo = coordSys && coordSys.getTransformInfo && coordSys.getTransformInfo();
-      const rawTransform = transformInfo && transformInfo.raw;
-      const viewRect = coordSys && coordSys.getViewRect && coordSys.getViewRect();
-
-      if (!nodes || !rawTransform || !viewRect) {
-        forceIdleTimer = setTimeout(lockLayout, 100);
-        return;
-      }
-
-      currentZoom = coordSys.getZoom ? coordSys.getZoom() : currentZoom;
-      currentCenter = coordSys.getCenter ? coordSys.getCenter().slice() : currentCenter;
-      staticViewReference = {
-        chartWidth: chart.getWidth(),
-        chartHeight: chart.getHeight(),
-        // createView keeps the graph aspect ratio, so raw X/Y scales should be
-        // equal. The geometric mean avoids carrying a floating-point mismatch
-        // into the explicit width/height aspect ratio.
-        rawScale: Math.sqrt(Math.abs(rawTransform.scaleX * rawTransform.scaleY)),
-        anchorX: (viewRect.x + viewRect.width / 2) / chart.getWidth(),
-        anchorY: (viewRect.y + viewRect.height / 2) / chart.getHeight(),
-      };
-      data.nodes = nodes;
-      layoutFrozen = true;
-      clearTimeout(forceIdleTimer);
-      clearTimeout(forceMaxWaitTimer);
-      chart.off('rendered', waitForForceIdle);
-      applyStaticLayout(data.nodes);
-    }
-
-    function waitForForceIdle() {
-      if (layoutFrozen) return;
-      clearTimeout(forceIdleTimer);
-      forceIdleTimer = setTimeout(lockLayout, 200);
-    }
-
-    chart.on('rendered', waitForForceIdle);
     chart.on('graphroam', function () {
-      const series0 = getSeriesModel();
+      const model = chart.getModel();
+      const series0 = model && model.getSeriesByIndex && model.getSeriesByIndex(0);
       const modelZoom = series0 && series0.get && series0.get('zoom');
       const modelCenter = series0 && series0.get && series0.get('center');
       if (Number.isFinite(modelZoom)) currentZoom = modelZoom;
@@ -724,7 +639,6 @@ export function initTagGraph() {
         currentCenter = [modelCenter[0], modelCenter[1]];
       }
     });
-    forceMaxWaitTimer = setTimeout(lockLayout, 2500);
 
     // Click node → navigate to tag page.
     // Click edge → no-op; the tooltip exposes clickable article links instead,
@@ -746,31 +660,6 @@ export function initTagGraph() {
       container.style.cursor = 'default';
     });
 
-    // Persist the dragged coordinate into the static data after pointer-up, so
-    // resize or a label refresh cannot snap the node back to its old position.
-    function syncFrozenNodePositions() {
-      if (!layoutFrozen) return;
-      const nodes = snapshotNodePositions(getRenderedGraph());
-      if (!nodes) return;
-      const changed = nodes.some(function (node, index) {
-        const previous = data.nodes[index];
-        return !previous || node.x !== previous.x || node.y !== previous.y;
-      });
-      if (!changed) return;
-      data.nodes = nodes;
-      applyStaticLayout(data.nodes);
-    }
-
-    // Native roam deliberately ignores draggable graph elements, so node drag
-    // and background pan no longer compete for the same pointer gesture.
-    const zr = chart.getZr();
-    zr.on('mouseup', function () {
-      requestAnimationFrame(syncFrozenNodePositions);
-    });
-    zr.on('globalout', function () {
-      requestAnimationFrame(syncFrozenNodePositions);
-    });
-
     // Touch only: a fullscreen toggle. Inline, the graph is static and the page
     // scrolls over it (touch-action: manipulation) — there's no room to zoom/pan
     // without fighting page scroll. Fullscreen hands the graph the whole screen
@@ -789,6 +678,8 @@ export function initTagGraph() {
       graphContainer.appendChild(fsBtn);
 
       let isFs = false;
+      let inlineZoom = currentZoom;
+      let inlineCenter = currentCenter.slice();
       const showFsHint = function () {
         if (!hintEl) return;
         const lang =
@@ -803,6 +694,8 @@ export function initTagGraph() {
         }, 2600);
       };
       const enterFs = function () {
+        inlineZoom = currentZoom;
+        inlineCenter = currentCenter.slice();
         isFs = true;
         graphContainer.classList.add('tag-graph-fullscreen');
         fsBtn.classList.add('is-fullscreen');
@@ -815,12 +708,15 @@ export function initTagGraph() {
         // Resize into the full-screen box, then enable roam (pinch / drag-pan).
         requestAnimationFrame(function () {
           chart.resize();
-          if (layoutFrozen) applyStaticLayout(data.nodes);
           chart.setOption({ series: [{ roam: true }] });
           showFsHint();
         });
       };
       const exitFs = function () {
+        const restoreZoom = inlineZoom;
+        const restoreCenter = inlineCenter.slice();
+        currentZoom = restoreZoom;
+        currentCenter = restoreCenter.slice();
         isFs = false;
         graphContainer.classList.remove('tag-graph-fullscreen');
         fsBtn.classList.remove('is-fullscreen');
@@ -830,9 +726,8 @@ export function initTagGraph() {
         // Resize back and restore the inline framing + disable roam.
         requestAnimationFrame(function () {
           chart.resize();
-          if (layoutFrozen) applyStaticLayout(data.nodes);
           chart.setOption({
-            series: [{ roam: false, zoom: currentZoom, center: currentCenter.slice() }],
+            series: [{ roam: false, zoom: restoreZoom, center: restoreCenter }],
           });
         });
       };
@@ -852,23 +747,22 @@ export function initTagGraph() {
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function () {
+        applyAdaptiveGraphHeight();
         chart.resize();
-        if (layoutFrozen) applyStaticLayout(data.nodes);
       }, 150);
     });
 
     // Refresh labels on language switch WITHOUT touching zoom/center.
     // Re-applying the full `option` would carry `zoom: initialZoom` and reset
     // the user's pan/zoom — language-switcher.js's `applyLanguage()` calls
-    // `localStorage.setItem('siteLanguage', lang)` on EVERY page load (even
-    // when the language hasn't changed), which used to trigger that reset
-    // ~50ms after first paint and clobber any wheel zoom done in that window.
+    // `localStorage.setItem('siteLanguage', lang)` can run on every page load;
+    // the no-op guard below avoids re-warming the force layout when the stored
+    // language has not actually changed.
     // Pushing only `series.data` lets ECharts re-evaluate the label formatter
     // (which reads the current language from localStorage at call time) while
     // merging the rest of the option in place.
     function refreshLabels() {
-      if (layoutFrozen) applyStaticLayout(data.nodes);
-      else chart.setOption({ series: [{ data: data.nodes }] });
+      chart.setOption({ series: [{ data: data.nodes }] });
     }
 
     window.addEventListener('storage', function (e) {
@@ -877,8 +771,9 @@ export function initTagGraph() {
 
     const origSetItem = localStorage.setItem;
     localStorage.setItem = function (key, value) {
+      const previousValue = key === 'siteLanguage' ? localStorage.getItem(key) : null;
       origSetItem.call(localStorage, key, value);
-      if (key === 'siteLanguage') {
+      if (key === 'siteLanguage' && String(value) !== previousValue) {
         setTimeout(refreshLabels, 50);
       }
     };
