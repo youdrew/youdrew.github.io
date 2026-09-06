@@ -9,14 +9,14 @@
     <atom:link href="https://eugenepage.com/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 05 Sep 2026 23:09:32 GMT</pubDate>
+    <pubDate>Sun, 06 Sep 2026 04:04:16 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title></title>
-      <link>https://eugenepage.com/zh-CN/2026/09/05/20250801.UEConceptScrapbox/</link>
-      <guid>https://eugenepage.com/zh-CN/2026/09/05/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Sat, 05 Sep 2026 23:09:32 GMT</pubDate>
+      <link>https://eugenepage.com/zh-CN/2026/09/06/20250801.UEConceptScrapbox/</link>
+      <guid>https://eugenepage.com/zh-CN/2026/09/06/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Sun, 06 Sep 2026 04:04:16 GMT</pubDate>
       
         
         
@@ -31,15 +31,15 @@
       
       
       
-      <comments>https://eugenepage.com/zh-CN/2026/09/05/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://eugenepage.com/zh-CN/2026/09/06/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title></title>
-      <link>https://eugenepage.com/2026/09/05/20250801.UEConceptScrapbox/</link>
-      <guid>https://eugenepage.com/2026/09/05/20250801.UEConceptScrapbox/</guid>
-      <pubDate>Sat, 05 Sep 2026 23:09:32 GMT</pubDate>
+      <link>https://eugenepage.com/2026/09/06/20250801.UEConceptScrapbox/</link>
+      <guid>https://eugenepage.com/2026/09/06/20250801.UEConceptScrapbox/</guid>
+      <pubDate>Sun, 06 Sep 2026 04:04:16 GMT</pubDate>
       
         
         
@@ -54,7 +54,7 @@
       
       
       
-      <comments>https://eugenepage.com/2026/09/05/20250801.UEConceptScrapbox/#disqus_thread</comments>
+      <comments>https://eugenepage.com/2026/09/06/20250801.UEConceptScrapbox/#disqus_thread</comments>
       
     </item>
     
@@ -376,9 +376,9 @@
       
       <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
       
-      <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
-      
       <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
+      
+      <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
       
       <category domain="https://eugenepage.com/tags/LangGraph/">LangGraph</category>
       
@@ -417,9 +417,9 @@
       
       <category domain="https://eugenepage.com/tags/OpenAI/">OpenAI</category>
       
-      <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
-      
       <category domain="https://eugenepage.com/tags/Framework/">Framework</category>
+      
+      <category domain="https://eugenepage.com/tags/Agent/">Agent</category>
       
       <category domain="https://eugenepage.com/tags/LangGraph/">LangGraph</category>
       
