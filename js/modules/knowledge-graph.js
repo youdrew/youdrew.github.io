@@ -179,8 +179,8 @@ export class KnowledgeGraph {
   }
 
   updateToolbar() {
-    // Visibility belongs to this interaction, never to screen size or restored page state.
-    this.toolbar.hidden = !this.toolbarOpen;
+    // Touch and narrow layouts need visible controls; desktop opens them on demand.
+    this.toolbar.hidden = !this.compactMedia.matches && !this.toolbarOpen;
   }
 
   createComparison() {
@@ -536,7 +536,7 @@ export class KnowledgeGraph {
       ? [active.node, ...this.labelOrder.filter((node) => node !== active.node)]
       : this.labelOrder;
     // Only visible controls need to reserve space above the node labels.
-    if (this.toolbarOpen) {
+    if (!this.toolbar.hidden) {
       grid.add({
         x: 0,
         y: 0,
