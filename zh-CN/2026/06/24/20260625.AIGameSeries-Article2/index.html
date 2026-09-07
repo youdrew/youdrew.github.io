@@ -28,9 +28,7 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Eugene&#39;s Page">
     <meta property="og:locale" content="zh_CN">
-    
-        <meta property="og:title" content="游戏生产AI落地武林秘籍（第二式：观局识阵）：图像掩码及语义抽象实现游戏场景理解">
-    
+    <meta property="og:title" content="游戏生产AI落地武林秘籍（第二式：观局识阵）：图像掩码及语义抽象实现游戏场景理解">
     
         <meta property="og:description" content="LLM 看不懂 UE 大世界？本文提出 2D 资产掩码方案（基于引擎 hit proxy 的高稳定性实例分割）与 GSDL 通用场景描述语言（颗粒度可变的 USD + MCP），并对比 MCP/CLI/快照/OpenUSD/直读截图五种引擎-LLM 转译层方案，让 AI 真正理解并「背下」全地图；文末预告 Vector Atlas 全地图语义编码。">
     
@@ -40,7 +38,7 @@
     
         <meta property="article:published_time" content="2026-06-24T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-09-07T04:14:28.515Z">
+            <meta property="article:modified_time" content="2026-08-26T16:24:48.000Z">
         
     
     
@@ -49,9 +47,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    
-        <meta name="twitter:title" content="游戏生产AI落地武林秘籍（第二式：观局识阵）：图像掩码及语义抽象实现游戏场景理解">
-    
+    <meta name="twitter:title" content="游戏生产AI落地武林秘籍（第二式：观局识阵）：图像掩码及语义抽象实现游戏场景理解">
     
         <meta name="twitter:description" content="LLM 看不懂 UE 大世界？本文提出 2D 资产掩码方案（基于引擎 hit proxy 的高稳定性实例分割）与 GSDL 通用场景描述语言（颗粒度可变的 USD + MCP），并对比 MCP/CLI/快照/OpenUSD/直读截图五种引擎-LLM 转译层方案，让 AI 真正理解并「背下」全地图；文末预告 Vector Atlas 全地图语义编码。">
     
@@ -78,45 +74,45 @@
     -->
     
     
-        <link rel="stylesheet" href="/css/base/reset.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/reset.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/variables.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/variables.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/fonts.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/fonts.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/typography.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/typography.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/layout/header.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/layout/header.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/layout/grid.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/layout/grid.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/home.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/pages/home.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/post.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/pages/post.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/tooltip.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/tooltip.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/toc.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/toc.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/mermaid.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/mermaid.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/canvas.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/canvas.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/callout.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/callout.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/responsive.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/responsive.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/code-block.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/code-block.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/table.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/table.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/image-zoom.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/image-zoom.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/tag-graph.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/language-switcher.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/language-switcher.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/article-meta.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/daily-signal.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/article-media.css?v=021b469624c1">
     
 
     <!-- Mermaid is loaded in after-footer.ejs -->
@@ -146,9 +142,9 @@
 <!-- Navigation -->
 <header>
     <div class="logo">
-        <a href="/">Eugene's Page</a>
+        <a href="/zh-CN/">Eugene's Page</a>
         <div class="subtitle"></div>
-        <div class="description"></div>
+        <div class="description">Eugene 的个人创作与实践笔记，分享 AI 应用、游戏开发、虚拟制作和电影随笔。</div>
     </div><!-- end logo -->
 
     <button id="menu_icon" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
@@ -229,26 +225,33 @@
 
 
 <!-- Main Content -->
-<section class="main clearfix" data-toc="true">
+<section class="main article-main clearfix" data-toc="true">
 
-    <section class="top" style="background-image: url('https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-212506.png');">
+    <section class="top" style="background-image: url('/media/game-ai-scene-hero-e46b9603.webp');">
         <div class="wrapper content_header clearfix">
             
+<nav class="article-nav" aria-label="文章导航">
+    
+        <a class="article-nav__previous" rel="prev" href="/zh-CN/2026/06/01/20260602.AIGameSeries-Article1/" aria-label="上一篇：游戏生产AI落地武林秘籍（第一式：手到擒来）：让AI理解项目资产" title="游戏生产AI落地武林秘籍（第一式：手到擒来）：让AI理解项目资产"><span aria-hidden="true">←</span> 上一篇</a>
+    
+    <a class="article-nav__home" href="/zh-CN/">返回首页</a>
+    
+        <span class="article-nav__empty" aria-hidden="true"></span>
+    
+</nav>
 
-<div class="work_nav">
-
-    <ul class="btn clearfix">
-        
-        <li><a href="/2026/06/24/20260625.AIGameSeries-Article2/" class="previous" data-title="Landing AI in Game Production — A Kung-F..."></a></li>
-        
-        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
-        
-        <li><a href="/2026/06/01/20260602.AIGameSeries-Article1/" class="next" data-title="Landing AI in Gam..."></a></li>
-        
-    </ul>
-
-</div><!-- end work_nav -->
             <h1 class="title">游戏生产AI落地武林秘籍（第二式：观局识阵）：图像掩码及语义抽象实现游戏场景理解</h1>
+            
+<div class="article-meta" aria-label="阅读信息">
+    
+        <span>发表于 <time datetime="2026-06-24T16:00:00.000Z">2026年6月25日</time></span>
+    
+    
+        <span>更新于 <time datetime="2026-08-26T16:24:48.000Z">2026年8月27日</time></span>
+    
+    <span>约 33 分钟阅读</span>
+</div>
+
         </div>
     </section><!-- end top -->
 
@@ -346,7 +349,7 @@
 <h2 id="三、别只聊MCP了，它注定是一个无底洞"><a href="#三、别只聊MCP了，它注定是一个无底洞" class="headerlink" title="三、别只聊MCP了，它注定是一个无底洞"></a>三、别只聊MCP了，它注定是一个无底洞</h2><p>其实，我们想要的是一个转译层，夹在引擎数据和大语言模型之间，把LLM想要了解的信息，从引擎中抽取，然后转译给LLM。那可能很自然地想到了MCP。<br>确实，MCP是过去一段时间很火的方案。<br>然而MCP这事并不是一个好活儿（不能快速地产出立竿见影的效果），它需要大量的资源投入及调优。<br>（事实上在过去一段时间里，我耗费了很多精力来调试，我甚至整理了一套调优方法论。每天盯着埋点数据，老实说，效果仍然称不上满意）。</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-171132.png" alt="调优数据面板：工具调用、故障与调用趋势统计" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-171132.png" alt="调优数据面板：工具调用、故障与调用趋势统计" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">我的调优数据面板</figcaption>
   </figure>
 </div>
@@ -453,7 +456,7 @@
 <p>但”看不懂”的根源在哪？<br>我们可以回到计算机视觉的课程<br>——理解画面，本质上是理解像素拼出的图像所代表的物体的含义：把像素还原成”这里是什么、那里是什么”的结构化语义信息。</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015740.png" alt="李飞飞 CS231 实例分割示例" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015740.png" alt="李飞飞 CS231 实例分割示例" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图片源自于李飞飞 CS231 ppt</figcaption>
   </figure>
 </div>
@@ -465,19 +468,19 @@
 <h3 id="2-如何建立视觉归属"><a href="#2-如何建立视觉归属" class="headerlink" title="2. 如何建立视觉归属"></a>2. 如何建立视觉归属</h3><p>实际上，引擎编辑器为了支持物体点选，会维护一套 Hit Proxy（点选代理）的渲染与读取机制。其缓冲区与视口对应，可命中的像素会关联一个 Hit Proxy，进而还原到 Actor、Component 或其他编辑器对象。我们可以复用这套数据，将像素归属主动提供给 LLM；相比额外运行视觉分割模型，它的获取和解析成本很低。</p>
 <div class="media-layout media-layout--quad">
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015943.png" alt="原始截图（游戏视角）" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015943.png" alt="原始截图（游戏视角）" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">原始截图（游戏视角）</figcaption>
   </figure>
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-020021.png" alt="id 色掩码（一色=一 actor）" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-020021.png" alt="id 色掩码（一色=一 actor）" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">id 色掩码（一色一 actor）</figcaption>
   </figure>
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-020004.png" alt="layout 混合图（场景×掩码+实测占比标签）" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-020004.png" alt="layout 混合图（场景×掩码+实测占比标签）" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">layout 混合图（场景×掩码+实测占比标签）</figcaption>
   </figure>
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015848.png" alt="focus 图（多目标分色高亮：蘑菇群=青、装饰柱=品红，余者压暗）" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-015848.png" alt="focus 图（多目标分色高亮：蘑菇群=青、装饰柱=品红，余者压暗）" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">focus 图（多目标分色高亮：蘑菇群=青、装饰柱=品红，余者压暗）</figcaption>
   </figure>
 </div>
@@ -486,11 +489,11 @@
 <p>是的！当然可以。<br>因为好巧不巧，我前段时间刚好做了一个资产理解工具（上一期）</p>
 <div class="media-layout media-layout--pair">
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021528.png" alt="场景描述生成 1" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021528.png" alt="场景描述生成 1" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">NeuroBrowser里面的资产描述</figcaption>
   </figure>
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021955.png" alt="场景描述生成 2" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260806-021955.png" alt="场景描述生成 2" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">NeuroMap统计出来的资产掩码表单</figcaption>
   </figure>
 </div>
@@ -540,7 +543,7 @@
 <p>（8.10日补：阿里前几天发布了<a target="_blank" rel="noopener" href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a>和我的想法很像，将视觉理解这个事情放到Harness层面，通过多层分辨率设计与抽帧方案实现图片和视频的理解，基本上完成了我这个sidecar视觉辅助能力。我在后面也会升级我的方案）</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-170645.png" alt="Qwen-MM-Plugins：让任意 agent harness 原生支持多模态" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-170645.png" alt="Qwen-MM-Plugins：让任意 agent harness 原生支持多模态" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Qwen-MM-Plugins 架构示意（github.com/QwenLM/Qwen-MM-Plugins）</figcaption>
   </figure>
 </div>
@@ -577,7 +580,7 @@
 <p>游戏引擎本身就有射线检测接口——UE 里叫 <code>LineTraceSingleByChannel</code>，是物理引擎原生开放给上层做碰撞查询的能力。墙、岩石和门框都是正空间，洞口恰恰是它们围出来的<strong>负空间</strong>。<br>因此<code>find_opening</code>的查询方法，不是通过搜索名字中带 <code>Door</code> 或 <code>Archway</code> 的 Actor，而是反过来使用碰撞查询：命中的射线勾勒洞壁，能够连续逃逸到远处的射线组成开口，再回到开口两侧寻找真实门框。</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 620px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-030817.gif" alt="find_opening 从候选采样、多测站射线到门框精测的五阶段动画" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <video class="article-demo" controls loop muted playsinline preload="none" poster="/media/scene-layout-demo-08a40647.webp" width="900" height="506" aria-label="find_opening 从候选采样、多测站射线到门框精测的五阶段动画" style="width: 100%; height: auto; display: block; border-radius: 8px;"><source src="/media/scene-layout-demo-08a40647.mp4" type="video/mp4"><a href="https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;youdrew&#x2F;MyPicGo@main&#x2F;Images&#x2F;20260819-030817.gif">find_opening 从候选采样、多测站射线到门框精测的五阶段动画</a></video>
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">find_opening 五阶段动画（模拟项目实际场景效果案例）</figcaption>
   </figure>
 </div>
@@ -743,7 +746,7 @@
 <p>先知道这里有什么、说的是哪个实例，才谈得上空间关系。LLM才会调用具体的理解接口去做事情。</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 340px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-222622.png" alt="GSDL 接口调用统计表：调用次数、故障/拒绝、LLM 字符与耗时" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260817-222622.png" alt="GSDL 接口调用统计表：调用次数、故障/拒绝、LLM 字符与耗时" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">GSDL 各接口调用量与耗时统计面板</figcaption>
   </figure>
 </div>
@@ -771,7 +774,7 @@
 <p>根据我的测试来看，大模型和小模型在某些层面确实有很明显的差距，比如体现在对工具的利用能力上：小模型会经常忘记有哪些工具接口。所以我后面甚至特地做了一个路由层，模型在对场景进行查询之前，可以先调用路由层去确认使用哪个工具会更加合适一点，以调用次数换完成率：</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025635.png" alt="案例路由优化前后的工具调用记录对比" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025635.png" alt="案例路由优化前后的工具调用记录对比" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">案例路由优化前后的工具调用记录对比</figcaption>
   </figure>
 </div>
@@ -779,7 +782,7 @@
 <p>三个硬指标的变化是这样的（取 7 月 21–22 日、10 题同口径的数据）：</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 860px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025518.png" alt="GSDL /Loop 迭代指标表：Token 消耗、调用次数与正确题数逐轮变化" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260821-025518.png" alt="GSDL /Loop 迭代指标表：Token 消耗、调用次数与正确题数逐轮变化" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">三个硬指标随迭代轮次的变化</figcaption>
   </figure>
 </div>
@@ -802,7 +805,7 @@
 <p>我构建了被动更新系统：用户每天调用MCP工具时会触发我的Hook、在后台数据库会记录用户调用工具时候的具体问题，以及对话记录，用户也被要求时不时给LLM的任务完成度打分。<br>这些交流记录会被一个定时的Agent整理成能力需求表（如果发现比较弱的能力的话）。在夜间我下班后，由一个执行的Agent来负责实现这些能力，然后另外一个Agent会调用大量的子agent，对mcp进行测试，最后由这些子agent的主agent总结测试报表与意见。反馈给执行agent。然后执行再进行迭代…以此循环数次，直到新接口的指标稳定下来。</p>
 <div class="media-layout media-layout--center">
   <figure style="flex: 1 1 280px; max-width: 250px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-034651.png" alt="两台 NVIDIA DGX Spark 迷你主机放在木桌上" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260819-034651.png" alt="两台 NVIDIA DGX Spark 迷你主机放在木桌上" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">重金购入的两台 DGX Spark（军火展示）</figcaption>
   </figure>
 </div>
@@ -820,11 +823,11 @@
 <p>同一个问题，加入 <code>find_opening</code> 路由之前，模型用了 47 次工具调用、消耗 64,820 字符，仍然把名字带 <code>Archway</code> 的墙体构件当成洞口；加入路由后，只用了 5 次调用和 15,540 字符，就完成了测量与视觉复核。</p>
 <div class="media-layout media-layout--pair media-layout--compact">
   <figure style="flex: 1 1 0; min-width: 0; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="洞穴岩壁间的洞口，透光可见远处场景" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191300.png" alt="洞穴岩壁间的洞口，透光可见远处场景" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption>洞口区域实景渲染</figcaption>
   </figure>
   <figure style="flex: 1 1 0; min-width: 0; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191249.png" alt="同一机位的逐像素实例分割，用于区分画面中的洞壁与背景物体" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260820-191249.png" alt="同一机位的逐像素实例分割，用于区分画面中的洞壁与背景物体" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption>同一机位的像素级实例分割</figcaption>
   </figure>
 </div>
@@ -843,19 +846,19 @@
 <p>下面欣赏一下工具的Demo吧。</p>
 <h2 id="七、给碳基生物的版本"><a href="#七、给碳基生物的版本" class="headerlink" title="七、给碳基生物的版本"></a>七、给碳基生物的版本</h2><div class="media-layout media-layout--quad">
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-search-redacted-v2.gif" alt="语义搜索" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <video class="article-demo" controls loop muted playsinline preload="none" poster="/media/scene-search-demo-7729b7ce.webp" width="960" height="540" aria-label="语义搜索" style="width: 100%; height: auto; display: block; border-radius: 8px;"><source src="/media/scene-search-demo-7729b7ce.mp4" type="video/mp4"><a href="https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;youdrew&#x2F;MyPicGo&#x2F;Images&#x2F;article2-carbon-search-redacted-v2.gif">语义搜索</a></video>
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图1 全地图场景位置语义搜索</figcaption>
   </figure>
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-asset-redacted-v2.gif" alt="触达资产" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <video class="article-demo" controls loop muted playsinline preload="none" poster="/media/scene-asset-demo-a920fd8a.webp" width="960" height="540" aria-label="触达资产" style="width: 100%; height: auto; display: block; border-radius: 8px;"><source src="/media/scene-asset-demo-a920fd8a.mp4" type="video/mp4"><a href="https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;youdrew&#x2F;MyPicGo&#x2F;Images&#x2F;article2-carbon-asset-redacted-v2.gif">触达资产</a></video>
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图2 触达资产 点击掩码立刻跳转对应资产</figcaption>
   </figure>
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-camera-redacted-v2.gif" alt="全地图任意位置视角调整" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <video class="article-demo" controls loop muted playsinline preload="none" poster="/media/scene-camera-demo-e25d2319.webp" width="960" height="540" aria-label="全地图任意位置视角调整" style="width: 100%; height: auto; display: block; border-radius: 8px;"><source src="/media/scene-camera-demo-e25d2319.mp4" type="video/mp4"><a href="https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;youdrew&#x2F;MyPicGo&#x2F;Images&#x2F;article2-carbon-camera-redacted-v2.gif">全地图任意位置视角调整</a></video>
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图3 全地图任意区域位置不用加载 机位跳转</figcaption>
   </figure>
   <figure style="margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-carbon-mask-redacted-v2.gif" alt="资产掩码信息展示" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <video class="article-demo" controls loop muted playsinline preload="none" poster="/media/scene-mask-demo-ea7a5e8f.webp" width="960" height="540" aria-label="资产掩码信息展示" style="width: 100%; height: auto; display: block; border-radius: 8px;"><source src="/media/scene-mask-demo-ea7a5e8f.mp4" type="video/mp4"><a href="https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;youdrew&#x2F;MyPicGo&#x2F;Images&#x2F;article2-carbon-mask-redacted-v2.gif">资产掩码信息展示</a></video>
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">图4 即使图像掩码占比0.01%的资产也会有记录</figcaption>
   </figure>
 </div>
@@ -970,11 +973,11 @@
 <p>下面是一次实际工作流：只给 AI 一个模糊描述，让它在大场景中寻找“摆着围棋的桌子”，定位目标、调整镜头并保存截图。</p>
 <div class="media-layout media-layout--pair media-layout--compact">
   <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-before-scene-redacted.png" alt="向 AI 输入模糊的围棋桌定位任务" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-before-scene-redacted.png" alt="向 AI 输入模糊的围棋桌定位任务" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666; text-align: center;">① 只描述记忆中的外观与用途，没有提供资产名或坐标。</figcaption>
   </figure>
   <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-after-scene-redacted.png" alt="AI 定位围棋桌并完成截图" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/article2-mcp-after-scene-redacted.png" alt="AI 定位围棋桌并完成截图" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666; text-align: center;">② 约 57 秒后定位到围棋桌，完成取景并把截图保存到桌面。</figcaption>
   </figure>
 </div>
@@ -1002,11 +1005,28 @@
 
             </div>
         </div><!-- end content -->
+        
+
+<nav class="article-related" aria-label="继续阅读">
+    <p class="article-related__series">AI游戏项目落地武林秘籍</p>
+    <div class="article-related__links">
+        
+        <a rel="prev" href="/zh-CN/2026/06/01/20260602.AIGameSeries-Article1/">
+            <span class="article-related__label">← 上一篇</span>
+            <span class="article-related__title">游戏生产AI落地武林秘籍（第一式：手到擒来）：让AI理解项目资产</span>
+        </a>
+        
+        
+    </div>
+</nav>
+
+
     </section>
 
     <!-- Table of Contents will be generated by toc-collapse.js -->
 
 </section><!-- end main -->
+
 
 <!-- After footer scripts -->
 
@@ -1017,66 +1037,11 @@
 <!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
      toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
 
-<script src="/dist/js/main.js?v=b5cb5daf528b"></script>
+<script src="/dist/js/main.js?v=021b469624c1"></script>
 
 <!-- 第三方库 (CDN) -->
 <!-- Mermaid -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
-        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
-        crossorigin="anonymous"></script>
 
-<!-- Mermaid 初始化 -->
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof mermaid !== 'undefined') {
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'default',
-      securityLevel: 'loose'
-    });
-
-    // Find and process mermaid code blocks rendered by Hexo
-    // Hexo renders ```mermaid as <figure class="highlight mermaid">
-    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
-
-    codeBlocks.forEach((codeElement, index) => {
-      // Extract text line by line from span.line elements to preserve newlines
-      const lineSpans = codeElement.querySelectorAll('.line');
-      let code = lineSpans.length > 0
-        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
-        : (codeElement.innerText || codeElement.textContent);
-      const figureElement = codeElement.closest('figure');
-
-      // For figure.highlight.mermaid, always convert
-      // For figure.highlight.plaintext, check if content looks like mermaid
-      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
-      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
-
-      if (isMermaidFigure || looksLikeMermaid) {
-        code = code.trim();
-
-        const mermaidDiv = document.createElement('div');
-        mermaidDiv.className = 'mermaid';
-        mermaidDiv.textContent = code;
-        mermaidDiv.id = 'mermaid-diagram-' + index;
-
-        // Remove the mermaid class from figure before replacing to prevent
-        // mermaid from trying to auto-render the raw HTML figure
-        if (figureElement) {
-          figureElement.classList.remove('mermaid');
-          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
-        }
-      }
-    });
-
-    setTimeout(() => {
-      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
-    }, 100);
-  }
-});
-</script>
-
-<!-- Disqus Comments -->
 
 
 <!-- Google Analytics -->

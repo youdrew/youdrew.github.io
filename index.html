@@ -15,6 +15,8 @@
 
     <!-- Description -->
     
+        <meta name="description" content="Notes and projects by Eugene Hsuan on AI, game development, virtual production, and film.">
+    
 
     <!-- Author -->
     
@@ -26,7 +28,9 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Eugene&#39;s Page">
     <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="Eugene&#39;s Page">
     
+        <meta property="og:description" content="Notes and projects by Eugene Hsuan on AI, game development, virtual production, and film.">
     
     
         <meta property="og:image" content="https://eugenepage.com/img/og-default.png">
@@ -38,7 +42,9 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Eugene&#39;s Page">
     
+        <meta name="twitter:description" content="Notes and projects by Eugene Hsuan on AI, game development, virtual production, and film.">
     
     
         <meta name="twitter:image" content="https://eugenepage.com/img/og-default.png">
@@ -63,45 +69,27 @@
     -->
     
     
-        <link rel="stylesheet" href="/css/base/reset.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/reset.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/variables.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/variables.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/fonts.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/fonts.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/typography.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/typography.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/layout/header.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/layout/header.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/layout/grid.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/layout/grid.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/home.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/pages/home.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/post.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/tooltip.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/tooltip.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/responsive.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/toc.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/language-switcher.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/mermaid.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/components/canvas.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/components/callout.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/responsive.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/components/code-block.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/components/table.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/components/image-zoom.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/components/tag-graph.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/components/language-switcher.css?v=b5cb5daf528b">
-    
-        <link rel="stylesheet" href="/css/pages/daily-signal.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/pages/discovery.css?v=021b469624c1">
     
 
     <!-- Mermaid is loaded in after-footer.ejs -->
@@ -133,7 +121,7 @@
     <div class="logo">
         <a href="/">Eugene's Page</a>
         <div class="subtitle"></div>
-        <div class="description"></div>
+        <div class="description">Notes and projects by Eugene Hsuan on AI, game development, virtual production, and film.</div>
     </div><!-- end logo -->
 
     <button id="menu_icon" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
@@ -211,96 +199,145 @@
 <!-- Main Content -->
 <section class="main clearfix">
     
+    <section class="home-discovery" aria-label="Explore the site">
+        <div class="home-discovery__intro">
+            <p class="home-discovery__eyebrow">Practice · Observe · Write</p>
+            <h1>Notes on game development, AI tools, film, and life.</h1>
+            <nav class="home-discovery__topics" aria-label="Article topics">
+                
+                <a href="/tags/AI/">AI practice<span aria-hidden="true"> ↗</span></a>
+                
+                <a href="/tags/UnrealEngine/">Game development<span aria-hidden="true"> ↗</span></a>
+                
+                <a href="/tags/PersonalEssays/">Film &amp; essays<span aria-hidden="true"> ↗</span></a>
+                
+            </nav>
+        </div>
+        <section class="home-discovery__recent" aria-labelledby="home-recent-title">
+            <div class="home-discovery__heading">
+                <h2 id="home-recent-title">Recent updates</h2>
+                <a href="/archives/">All articles<span aria-hidden="true"> →</span></a>
+            </div>
+            <ul>
+                
+                <li>
+                    <time datetime="2026-08-27">08-27</time>
+                    <a href="/2026/06/24/20260625.AIGameSeries-Article2/">Landing AI in Game Production — A Kung-Fu Manual · Form 2 «Read the Board, Discern the Formation»: Game-Scene Understanding Through Image Masks and Semantic Abstraction</a>
+                </li>
+                
+                <li>
+                    <time datetime="2026-07-06">07-06</time>
+                    <a href="/2026/06/01/20260602.AIGameSeries-Article1/">Landing AI in Game Production — A Kung-Fu Manual · Form 1 «Within Easy Reach»: Making AI Understand a Project&#39;s Existing Assets</a>
+                </li>
+                
+                <li>
+                    <time datetime="2026-07-06">07-06</time>
+                    <a href="/2026/05/23/20260524.RAGDeepLearning/">RAG Deep Learning Notes</a>
+                </li>
+                
+            </ul>
+        </section>
+    </section>
+    
         <div class="work">
     <a href="/2026/04/08/20260408.AgenticAIDevByAndrew/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/cover-agentic-workflow.jpg" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/cover-agentic-workflow.jpg" class="media" alt="" loading="eager" fetchpriority="high" decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>Notes on Building Agentic Workflows (Andrew Ng)</h1>
+                <h2>Notes on Building Agentic Workflows (Andrew Ng)</h2>
             </div>
         </div>
     </a>
 </div>
+
     
         <div class="work">
     <a href="/2025/09/21/20250921.UE5%20GAS%20Learning%20Notes/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/cover-ue5-gas.jpg" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/cover-ue5-gas.jpg" class="media" alt="" loading="lazy"  decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>UE5 GAS Learning Notes</h1>
+                <h2>UE5 GAS Learning Notes</h2>
             </div>
         </div>
     </a>
 </div>
+
     
         <div class="work">
     <a href="/2025/09/13/20250913.Aximmetry/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/cover-lowcost-xr.jpg" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/cover-lowcost-xr.jpg" class="media" alt="" loading="lazy"  decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>Notes on Aximmetry and Low-Cost XR Setup</h1>
+                <h2>Notes on Aximmetry and Low-Cost XR Setup</h2>
             </div>
         </div>
     </a>
 </div>
+
     
         <div class="work">
     <a href="/2025/08/01/20250801.Shader%20Learning%20Note/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@master/Images/1774286783374_a8e09dba.png" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@master/Images/1774286783374_a8e09dba.png" class="media" alt="" loading="lazy"  decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>Shader Learning Notes</h1>
+                <h2>Shader Learning Notes</h2>
             </div>
         </div>
     </a>
 </div>
+
     
         <div class="work">
     <a href="/2021/07/01/20210701.DarkAgeIndividualRedemption/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/darkage-001.jpeg" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/darkage-001.jpeg" class="media" alt="" loading="lazy"  decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>Dark Times — How Does the Individual Redeem Oneself? On *Werckmeister Harmonies*, the Jews of the Second World War, and Moral Responsibility</h1>
+                <h2>Dark Times — How Does the Individual Redeem Oneself? On *Werckmeister Harmonies*, the Jews of the Second World War, and Moral Responsibility</h2>
             </div>
         </div>
     </a>
 </div>
+
     
         <div class="work">
     <a href="/2020/09/18/20200919.CinephileBeijingDriftExamDiary/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/beipiao-07.jpg" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/beipiao-07.jpg" class="media" alt="" loading="lazy"  decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>Diary of an Ordinary Cinephile: Beijing-Drifting and the Film-School Exam</h1>
+                <h2>Diary of an Ordinary Cinephile: Beijing-Drifting and the Film-School Exam</h2>
             </div>
         </div>
     </a>
 </div>
+
     
         <div class="work">
     <a href="/2020/07/01/20200701.DieLuftDerFreiheitWeht/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/freiheit-001.jpeg" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/freiheit-001.jpeg" class="media" alt="" loading="lazy"  decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>Die Luft der Freiheit weht — On *The Double Life of Véronique* and *Summer Palace*: Image, History, and "Freedom"</h1>
+                <h2>Die Luft der Freiheit weht — On *The Double Life of Véronique* and *Summer Palace*: Image, History, and "Freedom"</h2>
             </div>
         </div>
     </a>
 </div>
+
     
         <div class="work">
     <a href="/2020/05/10/20200510.LuoXiaoHeiTheTenderPower/">
-        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image1.jpeg" class="media" alt=""/>
+        <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo/Images/image1.jpeg" class="media" alt="" loading="lazy"  decoding="async"/>
         <div class="caption">
             <div class="work_title">
-                <h1>The Tender Power in *The Legend of Hei*</h1>
+                <h2>The Tender Power in *The Legend of Hei*</h2>
             </div>
         </div>
     </a>
 </div>
+
     
     
 </section>
+
 
 <!-- After footer scripts -->
 
@@ -311,66 +348,11 @@
 <!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
      toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
 
-<script src="/dist/js/main.js?v=b5cb5daf528b"></script>
+<script src="/dist/js/main.js?v=021b469624c1"></script>
 
 <!-- 第三方库 (CDN) -->
 <!-- Mermaid -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
-        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
-        crossorigin="anonymous"></script>
 
-<!-- Mermaid 初始化 -->
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof mermaid !== 'undefined') {
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'default',
-      securityLevel: 'loose'
-    });
-
-    // Find and process mermaid code blocks rendered by Hexo
-    // Hexo renders ```mermaid as <figure class="highlight mermaid">
-    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
-
-    codeBlocks.forEach((codeElement, index) => {
-      // Extract text line by line from span.line elements to preserve newlines
-      const lineSpans = codeElement.querySelectorAll('.line');
-      let code = lineSpans.length > 0
-        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
-        : (codeElement.innerText || codeElement.textContent);
-      const figureElement = codeElement.closest('figure');
-
-      // For figure.highlight.mermaid, always convert
-      // For figure.highlight.plaintext, check if content looks like mermaid
-      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
-      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
-
-      if (isMermaidFigure || looksLikeMermaid) {
-        code = code.trim();
-
-        const mermaidDiv = document.createElement('div');
-        mermaidDiv.className = 'mermaid';
-        mermaidDiv.textContent = code;
-        mermaidDiv.id = 'mermaid-diagram-' + index;
-
-        // Remove the mermaid class from figure before replacing to prevent
-        // mermaid from trying to auto-render the raw HTML figure
-        if (figureElement) {
-          figureElement.classList.remove('mermaid');
-          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
-        }
-      }
-    });
-
-    setTimeout(() => {
-      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
-    }, 100);
-  }
-});
-</script>
-
-<!-- Disqus Comments -->
 
 
 <!-- Google Analytics -->

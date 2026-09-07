@@ -1,0 +1,9 @@
+.content video.article-demo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 16px auto;
+  background: #111;
+  border-radius: 6px;
+}

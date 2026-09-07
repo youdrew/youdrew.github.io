@@ -1,0 +1,129 @@
+.article-main > .top {
+  display: flex;
+  align-items: flex-end;
+  height: auto;
+  min-height: 350px;
+}
+
+.article-main > .top.no-cover {
+  min-height: 200px;
+}
+
+.article-main .content_header {
+  position: relative;
+  left: auto;
+  margin: 64px auto 0;
+}
+
+.article-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 16px;
+  background: rgb(255 255 255 / 0.92);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.article-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  gap: 6px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.article-nav__home {
+  margin-inline: auto;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  padding: 0 20px 18px;
+  background: rgb(255 255 255 / 0.9);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.article-main .no-cover .article-meta,
+.article-main .no-cover .article-nav {
+  background: transparent;
+}
+
+.article-related {
+  width: min(100%, var(--reading-width));
+  margin: -30px auto 70px;
+  color: var(--ink);
+}
+
+.article-related__series {
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.article-related__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.article-related__links a {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.7;
+}
+
+.article-related__next {
+  grid-column: 2;
+}
+
+.article-related__label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.article-related__title {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.article-nav a:hover,
+.article-related__links a:hover {
+  color: var(--accent);
+}
+
+.article-nav a:focus-visible,
+.article-related__links a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (width <= 600px) {
+  .article-main .content_header {
+    margin-top: 36px;
+  }
+
+  .article-meta {
+    gap: 4px 14px;
+  }
+
+  .article-related__links {
+    grid-template-columns: 1fr;
+  }
+
+  .article-related__next {
+    grid-column: auto;
+  }
+}

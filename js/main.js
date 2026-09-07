@@ -1,6 +1,4 @@
 import { Navigation } from './modules/navigation.js';
-import { IdleOcean } from './modules/idle-ocean.js';
-import { initSignal } from './modules/daily-signal.js';
 import { Tooltip } from './modules/tooltip.js';
 import { MapPage } from './modules/map.js';
 import { ImageZoom } from './modules/image-zoom.js';
@@ -13,7 +11,11 @@ import { initToc } from './modules/toc/index.js';
 
 function init() {
   new Navigation();
-  new IdleOcean();
+  if (/(^|\s)path-(zh-CN-)?index-html(\s|$)/.test(document.body.className)) {
+    import('./modules/idle-ocean.js')
+      .then(({ IdleOcean }) => new IdleOcean())
+      .catch((error) => console.warn('Ocean effect unavailable', error));
+  }
   new Tooltip();
   if (document.getElementById('map')) {
     new MapPage();
@@ -27,8 +29,16 @@ function init() {
   new CanvasViewer();
   initLanguageSwitcher();
   initToc();
-  // signal 引擎版 /daily/（每日 AI 信号）：逐条/连播音频、必看卡片展开、分类跳转。
-  initSignal();
+  if (document.querySelector('.signal')) {
+    import('./modules/daily-signal.js')
+      .then(({ initSignal }) => initSignal())
+      .catch((error) => console.error('Daily audio controls unavailable', error));
+  }
+  if (document.getElementById('article-search')) {
+    import('./modules/article-search.js')
+      .then(({ initArticleSearch }) => initArticleSearch())
+      .catch((error) => console.error('Article search unavailable', error));
+  }
   if (document.getElementById('tag-graph')) {
     const graph = document.getElementById('tag-graph');
     const loadGraph = () =>

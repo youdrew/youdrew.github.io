@@ -340,13 +340,14 @@
     background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
   }
   .work .caption .work_title {
+    box-sizing: border-box;
     position: static;
     top: auto;
     margin-top: 0;
     padding: 36px 12px 12px;
     text-align: left;
   }
-  .main .work .caption h1 {
+  .main .work .caption h2 {
     max-width: 100%;
     padding: 0;
     border: 0;

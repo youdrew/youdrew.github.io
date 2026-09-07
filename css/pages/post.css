@@ -418,6 +418,8 @@ body.layout-post .content:not(.archives) > h1:first-child {
   margin-bottom: 0.4em;
   padding-left: 0.18em;
   line-height: inherit;
+  /* Long API names in prose lists must wrap within the narrower indented measure. */
+  overflow-wrap: anywhere;
 }
 
 .content:not(.archives) ol li:last-child,

@@ -15,9 +15,7 @@
 
     <!-- Description -->
     
-        <meta name="description" content="How Do You Get an External Texture to Display Its Original Colors in UE?This test focuses on solving two problems:
-
-How can an externally-imported EXR and UE’s ">
+        <meta name="description" content="How Do You Get an External Texture to Display Its Original Colors in UE?This test focuses on solving two problems: How can an externally-imported EXR and UE’s">
     
 
     <!-- Author -->
@@ -30,13 +28,9 @@ How can an externally-imported EXR and UE’s ">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Eugene&#39;s Page">
     <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="UE External Texture Color Restoration Test and OCIO Configuration">
     
-        <meta property="og:title" content="UE External Texture Color Restoration Test and OCIO Configuration">
-    
-    
-        <meta property="og:description" content="How Do You Get an External Texture to Display Its Original Colors in UE?This test focuses on solving two problems:
-
-How can an externally-imported EXR and UE’s ">
+        <meta property="og:description" content="How Do You Get an External Texture to Display Its Original Colors in UE?This test focuses on solving two problems: How can an externally-imported EXR and UE’s">
     
     
         <meta property="og:image" content="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204614.png">
@@ -44,7 +38,7 @@ How can an externally-imported EXR and UE’s ">
     
         <meta property="article:published_time" content="2024-04-06T16:00:00.000Z">
         
-            <meta property="article:modified_time" content="2026-09-07T04:14:28.500Z">
+            <meta property="article:modified_time" content="2026-06-13T17:48:32.000Z">
         
     
     
@@ -53,13 +47,9 @@ How can an externally-imported EXR and UE’s ">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="UE External Texture Color Restoration Test and OCIO Configuration">
     
-        <meta name="twitter:title" content="UE External Texture Color Restoration Test and OCIO Configuration">
-    
-    
-        <meta name="twitter:description" content="How Do You Get an External Texture to Display Its Original Colors in UE?This test focuses on solving two problems:
-
-How can an externally-imported EXR and UE’s ">
+        <meta name="twitter:description" content="How Do You Get an External Texture to Display Its Original Colors in UE?This test focuses on solving two problems: How can an externally-imported EXR and UE’s">
     
     
         <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204614.png">
@@ -84,45 +74,45 @@ How can an externally-imported EXR and UE’s ">
     -->
     
     
-        <link rel="stylesheet" href="/css/base/reset.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/reset.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/variables.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/variables.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/fonts.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/fonts.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/base/typography.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/base/typography.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/layout/header.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/layout/header.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/layout/grid.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/layout/grid.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/home.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/pages/home.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/post.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/pages/post.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/tooltip.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/tooltip.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/toc.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/toc.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/mermaid.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/mermaid.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/canvas.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/canvas.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/callout.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/callout.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/responsive.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/responsive.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/code-block.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/code-block.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/table.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/table.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/image-zoom.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/image-zoom.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/tag-graph.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/language-switcher.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/components/language-switcher.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/article-meta.css?v=021b469624c1">
     
-        <link rel="stylesheet" href="/css/pages/daily-signal.css?v=b5cb5daf528b">
+        <link rel="stylesheet" href="/css/components/article-media.css?v=021b469624c1">
     
 
     <!-- Mermaid is loaded in after-footer.ejs -->
@@ -154,7 +144,7 @@ How can an externally-imported EXR and UE’s ">
     <div class="logo">
         <a href="/">Eugene's Page</a>
         <div class="subtitle"></div>
-        <div class="description"></div>
+        <div class="description">Notes and projects by Eugene Hsuan on AI, game development, virtual production, and film.</div>
     </div><!-- end logo -->
 
     <button id="menu_icon" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
@@ -230,26 +220,33 @@ How can an externally-imported EXR and UE’s ">
 
 
 <!-- Main Content -->
-<section class="main clearfix" data-toc="true">
+<section class="main article-main clearfix" data-toc="true">
 
     <section class="top" style="background-image: url('https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204614.png');">
         <div class="wrapper content_header clearfix">
             
+<nav class="article-nav" aria-label="Article navigation">
+    
+        <a class="article-nav__previous" rel="prev" href="/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/" aria-label="Previous：HDR and UE Content Render Output Pipeline in Practice (Workflow Design)" title="HDR and UE Content Render Output Pipeline in Practice (Workflow Design)"><span aria-hidden="true">←</span> Previous</a>
+    
+    <a class="article-nav__home" href="/">Back to home</a>
+    
+        <a class="article-nav__next" rel="next" href="/2024/06/01/20240601.VirtualActorUnityInVisionPro/" aria-label="Next：Building an Interactive Virtual Human in Vision Pro (Software Project)" title="Building an Interactive Virtual Human in Vision Pro (Software Project)">Next <span aria-hidden="true">→</span></a>
+    
+</nav>
 
-<div class="work_nav">
-
-    <ul class="btn clearfix">
-        
-        <li><a href="/zh-CN/2024/06/01/20240601.VirtualActorUnityInVisionPro/" class="previous" data-title="在VisionPro中实现一个可交互的虚拟人 (软件作品)"></a></li>
-        
-        <li><a href="/" class="grid" data-title="Portfolio"></a></li>
-        
-        <li><a href="/zh-CN/2024/04/06/20240407.UEExternalTextureColorTestAndOCIO/" class="next" data-title="UE外部贴图颜色还原测试与OCIO..."></a></li>
-        
-    </ul>
-
-</div><!-- end work_nav -->
             <h1 class="title">UE External Texture Color Restoration Test and OCIO Configuration</h1>
+            
+<div class="article-meta" aria-label="Reading information">
+    
+        <span>Published <time datetime="2024-04-06T16:00:00.000Z">Apr 7, 2024</time></span>
+    
+    
+        <span>Updated <time datetime="2026-06-13T17:48:32.000Z">Jun 14, 2026</time></span>
+    
+    <span>5 min read</span>
+</div>
+
         </div>
     </section><!-- end top -->
 
@@ -270,7 +267,7 @@ How can an externally-imported EXR and UE’s ">
 <h2 id="Test-Setup"><a href="#Test-Setup" class="headerlink" title="Test Setup"></a>Test Setup</h2><p>When I import the image (<code>HDR_TV_Float.exr</code>) and configure its compression as follows:</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204602.png" alt="Compression Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204602.png" alt="Compression Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">EXR texture compression settings</figcaption>
   </figure>
 </div>
@@ -278,7 +275,7 @@ How can an externally-imported EXR and UE’s ">
 <p>For the EXR input, select <strong>Linear</strong> encoding.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204612.png" alt="Encoding Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204612.png" alt="Encoding Settings" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">EXR encoding settings (Linear selected)</figcaption>
   </figure>
 </div>
@@ -290,7 +287,7 @@ How can an externally-imported EXR and UE’s ">
 <p>This confirms that under these settings, UE can match internally-generated code values to externally-imported code values (the image’s gamma has been removed on input).</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204614.png" alt="Test Result Comparison" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204614.png" alt="Test Result Comparison" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Comparison: external input code values vs. internal emissive material code values</figcaption>
   </figure>
 </div>
@@ -355,11 +352,11 @@ How can an externally-imported EXR and UE’s ">
 </ul>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204617.png" alt="Test Scene Hierarchy" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204617.png" alt="Test Scene Hierarchy" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Test scene hierarchy (Outliner)</figcaption>
   </figure>
   <figure style="flex: 1 1 320px; max-width: 420px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204619.png" alt="Viewport Display Toggles" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204619.png" alt="Viewport Display Toggles" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Viewport display toggles (Show Flags — Bloom, Tone Curve, etc. disabled)</figcaption>
   </figure>
 </div>
@@ -381,7 +378,7 @@ How can an externally-imported EXR and UE’s ">
 <h2 id="OCIO-Configuration"><a href="#OCIO-Configuration" class="headerlink" title="OCIO Configuration"></a>OCIO Configuration</h2><p>Set the OCIO working color space to <strong>WorkingColorSpace</strong> or <strong>Linear Rec709 (SRGB)</strong>. Set the output to <strong>sRGB - Display - RAW</strong>, the standard sRGB display transform.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-205012.png" alt="OCIO Configuration" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-205012.png" alt="OCIO Configuration" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">OCIO working color space and output configuration (sRGB - Display - Raw)</figcaption>
   </figure>
 </div>
@@ -435,21 +432,21 @@ How can an externally-imported EXR and UE’s ">
 <h3 id="Post-Process-Exposure"><a href="#Post-Process-Exposure" class="headerlink" title="Post Process - Exposure"></a>Post Process - Exposure</h3><p>The logic behind each exposure mode and how they differ (to be expanded).</p>
 <h3 id="Post-Process-Highlight-Contrast-Shadow-Contrast"><a href="#Post-Process-Highlight-Contrast-Shadow-Contrast" class="headerlink" title="Post Process - Highlight Contrast &#x2F; Shadow Contrast"></a>Post Process - Highlight Contrast &#x2F; Shadow Contrast</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204632.png" alt="Highlight Contrast / Shadow Contrast" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204632.png" alt="Highlight Contrast / Shadow Contrast" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Highlight Contrast / Shadow Contrast parameter effect</figcaption>
   </figure>
 </div>
 
 <h3 id="Post-Process-Tone-Curve-Amount"><a href="#Post-Process-Tone-Curve-Amount" class="headerlink" title="Post Process - Tone Curve Amount"></a>Post Process - Tone Curve Amount</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204635.png" alt="Tone Curve Amount" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204635.png" alt="Tone Curve Amount" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Tone Curve Amount parameter effect</figcaption>
   </figure>
 </div>
 
 <h3 id="Post-Process-Expand-Gamut"><a href="#Post-Process-Expand-Gamut" class="headerlink" title="Post Process - Expand Gamut"></a>Post Process - Expand Gamut</h3><div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 24px 0;">
   <figure style="flex: 1 1 400px; max-width: 520px; margin: 0; text-align: center;">
-    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204640.png" alt="Expand Gamut" style="width: 100%; height: auto; display: block; border-radius: 8px;" />
+    <img src="https://cdn.jsdelivr.net/gh/youdrew/MyPicGo@main/Images/20260613-204640.png" alt="Expand Gamut" style="width: 100%; height: auto; display: block; border-radius: 8px;" loading="lazy" decoding="async">
     <figcaption style="margin-top: 8px; font-size: 14px; color: #666;">Expand Gamut parameter effect</figcaption>
   </figure>
 </div>
@@ -474,11 +471,33 @@ How can an externally-imported EXR and UE’s ">
 
             </div>
         </div><!-- end content -->
+        
+
+<nav class="article-related" aria-label="Continue reading">
+    
+    <div class="article-related__links">
+        
+        <a rel="prev" href="/2024/01/01/20240101.HDRUEContentRenderOutputPipeline/">
+            <span class="article-related__label">← Previous</span>
+            <span class="article-related__title">HDR and UE Content Render Output Pipeline in Practice (Workflow Design)</span>
+        </a>
+        
+        
+        <a class="article-related__next" rel="next" href="/2024/06/01/20240601.VirtualActorUnityInVisionPro/">
+            <span class="article-related__label">Next →</span>
+            <span class="article-related__title">Building an Interactive Virtual Human in Vision Pro (Software Project)</span>
+        </a>
+        
+    </div>
+</nav>
+
+
     </section>
 
     <!-- Table of Contents will be generated by toc-collapse.js -->
 
 </section><!-- end main -->
+
 
 <!-- After footer scripts -->
 
@@ -489,66 +508,11 @@ How can an externally-imported EXR and UE’s ">
 <!-- Vite-bundled main entry: navigation, TOC, language switcher, tag graph,
      toc-collapse, etc. — all 4 previously-standalone scripts now live here. -->
 
-<script src="/dist/js/main.js?v=b5cb5daf528b"></script>
+<script src="/dist/js/main.js?v=021b469624c1"></script>
 
 <!-- 第三方库 (CDN) -->
 <!-- Mermaid -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"
-        integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I"
-        crossorigin="anonymous"></script>
 
-<!-- Mermaid 初始化 -->
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof mermaid !== 'undefined') {
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'default',
-      securityLevel: 'loose'
-    });
-
-    // Find and process mermaid code blocks rendered by Hexo
-    // Hexo renders ```mermaid as <figure class="highlight mermaid">
-    const codeBlocks = document.querySelectorAll('figure.highlight.mermaid .code, figure.highlight.plaintext .code');
-
-    codeBlocks.forEach((codeElement, index) => {
-      // Extract text line by line from span.line elements to preserve newlines
-      const lineSpans = codeElement.querySelectorAll('.line');
-      let code = lineSpans.length > 0
-        ? Array.from(lineSpans).map(s => s.textContent).join('\n')
-        : (codeElement.innerText || codeElement.textContent);
-      const figureElement = codeElement.closest('figure');
-
-      // For figure.highlight.mermaid, always convert
-      // For figure.highlight.plaintext, check if content looks like mermaid
-      const isMermaidFigure = figureElement && figureElement.classList.contains('mermaid');
-      const looksLikeMermaid = code.trim().match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|journey|pie|gitgraph|erDiagram)/);
-
-      if (isMermaidFigure || looksLikeMermaid) {
-        code = code.trim();
-
-        const mermaidDiv = document.createElement('div');
-        mermaidDiv.className = 'mermaid';
-        mermaidDiv.textContent = code;
-        mermaidDiv.id = 'mermaid-diagram-' + index;
-
-        // Remove the mermaid class from figure before replacing to prevent
-        // mermaid from trying to auto-render the raw HTML figure
-        if (figureElement) {
-          figureElement.classList.remove('mermaid');
-          figureElement.parentNode.replaceChild(mermaidDiv, figureElement);
-        }
-      }
-    });
-
-    setTimeout(() => {
-      mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
-    }, 100);
-  }
-});
-</script>
-
-<!-- Disqus Comments -->
 
 
 <!-- Google Analytics -->
