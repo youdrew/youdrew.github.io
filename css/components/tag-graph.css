@@ -1,7 +1,4 @@
-/* ========================================
-   Tag Knowledge Graph - Styles
-   ======================================== */
-
+/* Knowledge map — keep the original quiet canvas, circles and fine links. */
 #tag-graph-section {
   margin-bottom: 40px;
   padding-bottom: 30px;
@@ -15,67 +12,177 @@
   border: 1px solid #ececec;
   border-radius: 12px;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  font-family:
+    'noto-sans-sc',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
 }
 
-#tag-graph-container:hover {
-  box-shadow: 0 4px 24px rgb(121, 93, 163, 0.1);
-}
-
-#tag-graph {
+#tag-graph,
+#tag-graph canvas {
+  display: block;
   width: 100%;
   height: 100%;
+  touch-action: pan-y pinch-zoom;
 }
 
-/* Touch devices: let the page scroll & pinch-zoom over the graph and keep taps
-   for navigation. ZRender otherwise sets touch-action:none on its canvas to
-   capture gestures itself, which blocks page scroll and (with draggable) lets a
-   finger-swipe deform the force layout. !important overrides that inline value.
-   Mouse input is unaffected by touch-action, so desktop pan/zoom still works. */
-#tag-graph-container,
-#tag-graph,
-#tag-graph > div,
 #tag-graph canvas {
-  touch-action: manipulation !important;
+  cursor: grab;
 }
 
-/* Fullscreen toggle button — added by tag-graph.js on touch devices only.
-   Inline it sits top-right of the graph; tapping expands the graph to a
-   full-screen overlay (see .tag-graph-fullscreen) and the icon flips to a ✕. */
-.tag-graph-fs-btn {
+.tag-graph-toolbar {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 11;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  left: 12px;
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) repeat(4, 40px);
+  gap: 6px;
+  max-width: 420px;
+  margin-left: auto;
+}
+
+#tag-graph-container .tag-graph-control,
+#tag-graph-container .tag-graph-picker {
+  box-sizing: border-box;
+  min-width: 0;
+  height: 40px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.94);
+  color: #555;
+  font: inherit;
+  font-size: 12px;
+  line-height: normal;
+  cursor: pointer;
+}
+
+#tag-graph-container .tag-graph-control {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
   padding: 0;
-  border: 1px solid #e2e2e2;
-  border-radius: 10px;
-  background: rgb(255 255 255 / 0.92);
-  color: #555;
-  cursor: pointer;
-  box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
-}
-.tag-graph-fs-ic {
-  display: block;
-  width: 18px;
-  height: 18px;
-}
-.tag-graph-fs-ic--close {
-  display: none;
-}
-.tag-graph-fs-btn.is-fullscreen .tag-graph-fs-ic--open {
-  display: none;
-}
-.tag-graph-fs-btn.is-fullscreen .tag-graph-fs-ic--close {
-  display: block;
 }
 
-/* Full-screen overlay state */
+.tag-graph-control svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Desktop tools require an explicit click, right-click or keyboard action. */
+#tag-graph-container .tag-graph-tools-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-color: transparent;
+  background: transparent;
+  color: #929099;
+}
+
+#tag-graph-container:not(.tag-graph-compact) .tag-graph-toolbar {
+  right: 60px;
+}
+
+#tag-graph-container .tag-graph-tools-toggle[aria-expanded='true'] {
+  color: #795da3;
+  background: #f4effa;
+}
+
+.tag-graph-fullscreen .tag-graph-tools-toggle {
+  top: max(12px, env(safe-area-inset-top, 0px)) !important;
+  right: max(12px, env(safe-area-inset-right, 0px)) !important;
+}
+
+/* A comparison strip appears only when graph-compare is in the preview URL. */
+.tag-graph-comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px 16px;
+  margin-bottom: 16px;
+  font-family: inherit;
+}
+
+.tag-graph-motion-choices {
+  display: flex;
+  gap: 6px;
+}
+
+.tag-graph-comparison button {
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 1px solid #e6e2eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #666;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tag-graph-comparison button[aria-pressed='true'] {
+  border-color: #a78bbc;
+  color: #795da3;
+  background: #f5f1fa;
+}
+
+.tag-graph-comparison button:focus-visible {
+  outline: 2px solid #795da3;
+  outline-offset: 2px;
+}
+
+.tag-graph-comparison button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.tag-graph-comparison p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.tag-graph-compact:not(.tag-graph-fullscreen) .tag-graph-toolbar {
+  grid-template-columns: minmax(0, 1fr) 44px 44px;
+}
+
+#tag-graph-container.tag-graph-compact:not(.tag-graph-fullscreen) .tag-graph-zoom {
+  display: none;
+}
+#tag-graph-container [hidden] {
+  display: none !important;
+}
+#tag-graph-container .tag-graph-control:hover {
+  background: #f4f0f8;
+}
+#tag-graph-container .tag-graph-control[aria-pressed='true'] {
+  color: #795da3;
+  border-color: #795da3;
+  background: #f4effa;
+}
+
+#tag-graph-container :focus-visible {
+  outline: 2px solid #795da3;
+  outline-offset: -3px;
+}
+
+#tag-graph-container .tag-graph-mode {
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: 0 14px;
+}
+
 .tag-graph-fullscreen {
   position: fixed !important;
   inset: 0 !important;
@@ -84,100 +191,168 @@
   margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: #fff !important;
-  z-index: 99999 !important;
-}
-.tag-graph-fullscreen .tag-graph-fs-btn {
-  top: calc(12px + env(safe-area-inset-top, 0px));
-  right: calc(12px + env(safe-area-inset-right, 0px));
-}
-/* In fullscreen the canvas must capture all touch gestures for ECharts roam
-   (pinch-zoom / drag-pan), so override the inline-mode manipulation. */
-.tag-graph-fullscreen #tag-graph,
-.tag-graph-fullscreen #tag-graph > div,
-.tag-graph-fullscreen #tag-graph canvas {
-  touch-action: none !important;
-}
-/* While fullscreen is active, lift .main (a position:relative; z-index:55
-   stacking context) above the sticky header (z-index 9999) — otherwise the
-   header paints over the overlay (and its ✕ button) despite the high z-index. */
-body.tag-graph-fs-active .main {
-  z-index: 100000 !important;
+  z-index: 100001;
+  overscroll-behavior: contain;
 }
 
-/* Hint overlay inside the graph container */
+.tag-graph-fullscreen .tag-graph-toolbar {
+  top: max(12px, env(safe-area-inset-top, 0px));
+  right: max(12px, env(safe-area-inset-right, 0px));
+  left: max(12px, env(safe-area-inset-left, 0px));
+}
+
+.tag-graph-fullscreen #tag-graph,
+.tag-graph-fullscreen #tag-graph canvas {
+  touch-action: none;
+}
+
 .tag-graph-hint {
   position: absolute;
-  bottom: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
-  text-align: center;
-  font-family:
-    'noto-sans-sc',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    sans-serif;
-  font-size: 12px;
-  color: #999;
-  letter-spacing: 0.3px;
-  user-select: none;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  z-index: 10;
-  background: rgb(250, 251, 253, 0.85);
-  padding: 4px 16px;
+  max-width: calc(100% - 32px);
+  width: max-content;
+  padding: 4px 10px;
   border-radius: 6px;
+  background: rgb(250 251 253 / 0.9);
+  color: #888;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
 }
 
-.tag-graph-hint.visible {
-  opacity: 1;
-}
-
-/* Loading state */
 #tag-graph-container .graph-loading {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #999;
   font-size: 14px;
-  color: #bbb;
-  letter-spacing: 1px;
 }
 
-#tag-graph-container .graph-loading::after {
-  content: '';
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-left: 8px;
-  border: 2px solid #ddd;
-  border-top-color: #795da3;
-  border-radius: 50%;
-  animation: tag-graph-spin 0.8s linear infinite;
-  vertical-align: middle;
+.tag-graph-panel {
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  bottom: max(42px, env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+  width: min(340px, calc(100% - 24px));
+  padding: 14px;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.97);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
 }
 
-@keyframes tag-graph-spin {
-  to {
-    transform: rotate(360deg);
+.tag-graph-panel strong {
+  display: block;
+  padding-right: 42px;
+  font-size: 14px;
+}
+
+#tag-graph-container .tag-graph-panel-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  border: 0;
+  background: transparent;
+}
+
+#tag-graph-container .tag-graph-post-count {
+  margin: 4px 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.tag-graph-post-list {
+  max-height: 150px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  margin-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+#tag-graph-container .tag-graph-post-list > *,
+#tag-graph-container .tag-graph-all-posts {
+  display: block;
+  padding: 8px 0;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.5;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+#tag-graph-container .tag-graph-all-posts {
+  color: #795da3;
+}
+#tag-graph-container .tag-graph-post-list a:hover {
+  color: #795da3;
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  .tag-graph-comparison {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
-}
 
-/* Responsive */
-@media (max-width: 768px) {
-  /* Taller on mobile so the thinned node set (see MOBILE_NODE_BUDGET in
-     tag-graph.js) has vertical room to spread instead of clumping. */
+  .tag-graph-motion-choices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tag-graph-comparison button {
+    min-height: 44px;
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .tag-graph-demo {
+    justify-self: end;
+  }
+
+  .tag-graph-comparison p {
+    grid-row: 2;
+  }
   #tag-graph-container {
     height: 440px;
     border-radius: 8px;
   }
-
+  .tag-graph-toolbar {
+    grid-template-columns: minmax(0, 1fr) repeat(4, 44px);
+    gap: 4px;
+    left: 8px;
+    right: 8px;
+  }
+  #tag-graph-container .tag-graph-control,
+  #tag-graph-container .tag-graph-picker {
+    height: 44px;
+  }
   .tag-graph-hint {
     font-size: 11px;
+  }
+  .tag-graph-panel {
+    padding: 12px;
+  }
+  #tag-graph-container .tag-graph-post-list > *,
+  #tag-graph-container .tag-graph-all-posts {
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 12px 0;
+    font-size: 13px;
+  }
+  .tag-graph-post-list {
+    max-height: 120px;
+  }
+  .tag-graph-fullscreen .tag-graph-post-list {
+    max-height: 25dvh;
   }
 }
 
