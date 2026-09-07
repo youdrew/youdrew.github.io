@@ -34,11 +34,6 @@ function init() {
       .then(({ initSignal }) => initSignal())
       .catch((error) => console.error('Daily audio controls unavailable', error));
   }
-  if (document.getElementById('article-search')) {
-    import('./modules/article-search.js')
-      .then(({ initArticleSearch }) => initArticleSearch())
-      .catch((error) => console.error('Article search unavailable', error));
-  }
   if (document.getElementById('tag-graph')) {
     const graph = document.getElementById('tag-graph');
     const loadGraph = () =>

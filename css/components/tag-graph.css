@@ -75,33 +75,6 @@
   flex-shrink: 0;
 }
 
-/* Desktop tools require an explicit click, right-click or keyboard action. */
-#tag-graph-container .tag-graph-tools-toggle {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  border-color: transparent;
-  background: transparent;
-  color: #929099;
-}
-
-#tag-graph-container:not(.tag-graph-compact) .tag-graph-toolbar {
-  right: 60px;
-}
-
-#tag-graph-container .tag-graph-tools-toggle[aria-expanded='true'] {
-  color: #795da3;
-  background: #f4effa;
-}
-
-.tag-graph-fullscreen .tag-graph-tools-toggle {
-  top: max(12px, env(safe-area-inset-top, 0px)) !important;
-  right: max(12px, env(safe-area-inset-right, 0px)) !important;
-}
-
 /* A comparison strip appears only when graph-compare is in the preview URL. */
 .tag-graph-comparison {
   display: grid;

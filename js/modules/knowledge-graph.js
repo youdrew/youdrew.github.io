@@ -15,7 +15,6 @@ const icons = {
   close: '<path d="m6 6 12 12M6 18 18 6"/>',
   plus: '<path d="M5 12h14M12 5v14"/>',
   minus: '<path d="M5 12h14"/>',
-  more: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
 };
 
 export class KnowledgeGraph {
@@ -106,12 +105,9 @@ export class KnowledgeGraph {
     this.toolbar = document.createElement('div');
     this.toolbar.className = 'tag-graph-toolbar';
     this.toolbar.id = 'tag-graph-tools';
-    this.toolsToggle = document.createElement('button');
-    this.toolsToggle.type = 'button';
-    this.toolsToggle.className = 'tag-graph-control tag-graph-tools-toggle';
-    this.toolsToggle.innerHTML = this.icon('more');
-    this.toolsToggle.setAttribute('aria-controls', this.toolbar.id);
-    this.on(this.toolsToggle, 'click', () => this.setToolbarOpen(!this.toolbarOpen));
+    this.toolbar.hidden = true;
+    this.canvas.setAttribute('aria-keyshortcuts', 'T');
+    this.canvas.setAttribute('aria-controls', this.toolbar.id);
     this.picker = document.createElement('select');
     this.picker.className = 'tag-graph-picker';
     this.toolbar.append(this.picker);
@@ -169,7 +165,7 @@ export class KnowledgeGraph {
     this.hint.removeAttribute('data-i18n');
     this.hint.id = 'tag-graph-instructions';
     this.canvas.setAttribute('aria-describedby', this.hint.id);
-    this.host.append(this.toolbar, this.toolsToggle, this.panel, this.loading);
+    this.host.append(this.toolbar, this.panel, this.loading);
     this.picker.disabled = true;
     ['plus', 'minus', 'fit'].forEach((key) => {
       this.buttons[key].disabled = true;
@@ -183,17 +179,8 @@ export class KnowledgeGraph {
   }
 
   updateToolbar() {
-    const compact = this.compactMedia.matches;
-    this.toolbar.hidden = !compact && !this.toolbarOpen;
-    this.toolsToggle.hidden = compact;
-    this.toolsToggle.setAttribute('aria-expanded', String(!this.toolbar.hidden));
-    this.toolsToggle.setAttribute(
-      'aria-label',
-      this.toolbarOpen
-        ? this.text('收起地图工具', 'Hide map tools')
-        : this.text('展开地图工具', 'Show map tools')
-    );
-    this.toolsToggle.title = this.text('地图工具（T / 右键）', 'Map tools (T / right-click)');
+    // Visibility belongs to this interaction, never to screen size or restored page state.
+    this.toolbar.hidden = !this.toolbarOpen;
   }
 
   createComparison() {
@@ -548,13 +535,15 @@ export class KnowledgeGraph {
     const order = active?.node
       ? [active.node, ...this.labelOrder.filter((node) => node !== active.node)]
       : this.labelOrder;
-    // Reserve the toolbar so node labels don't show through the controls.
-    grid.add({
-      x: 0,
-      y: 0,
-      w: this.width,
-      h: this.fullscreen && this.compactMedia.matches ? 112 : 62,
-    });
+    // Only visible controls need to reserve space above the node labels.
+    if (this.toolbarOpen) {
+      grid.add({
+        x: 0,
+        y: 0,
+        w: this.width,
+        h: this.fullscreen && this.compactMedia.matches ? 112 : 62,
+      });
+    }
     for (const node of order) {
       const p = points.get(node),
         h = node.fontSize + 6,
@@ -655,17 +644,12 @@ export class KnowledgeGraph {
 
   bindEvents() {
     this.on(this.canvas, 'contextmenu', (event) => {
-      if (this.compactMedia.matches) return;
       event.preventDefault();
       this.setToolbarOpen(true);
       this.picker.focus({ preventScroll: true });
     });
     this.on(document, 'pointerdown', (event) => {
-      if (
-        this.toolbarOpen &&
-        !this.toolbar.contains(event.target) &&
-        !this.toolsToggle.contains(event.target)
-      ) {
+      if (this.toolbarOpen && !this.toolbar.contains(event.target)) {
         this.setToolbarOpen(false);
       }
     });
@@ -710,7 +694,13 @@ export class KnowledgeGraph {
         this.camera.x += pan[0];
         this.camera.y += pan[1];
         this.schedule();
-      } else if (event.key.toLowerCase() === 't') {
+      } else if (
+        event.key.toLowerCase() === 't' &&
+        !event.ctrlKey &&
+        !event.metaKey &&
+        !event.altKey &&
+        !event.repeat
+      ) {
         this.setToolbarOpen(!this.toolbarOpen);
         if (this.toolbarOpen) this.picker.focus({ preventScroll: true });
       } else if (event.key === '+' || event.key === '=') this.zoom(1.25);
@@ -734,11 +724,15 @@ export class KnowledgeGraph {
     });
     this.on(window, 'pagehide', (event) => {
       this.cancelGesture();
+      this.setToolbarOpen(false);
       cancelAnimationFrame(this.frame);
       this.frame = 0;
       if (!event.persisted) this.destroy();
     });
-    this.on(window, 'pageshow', () => this.resume());
+    this.on(window, 'pageshow', () => {
+      this.setToolbarOpen(false);
+      this.resume();
+    });
     this.on(this.compactMedia, 'change', () => {
       this.updateInstructions();
       this.resize();
@@ -970,6 +964,7 @@ export class KnowledgeGraph {
 
   enterFullscreen(pushHistory = true) {
     this.cancelGesture();
+    this.setToolbarOpen(false);
     this.clearSelection();
     this.inlineCamera = { ...this.camera };
     this.inlineFitted = this.fitted;
@@ -1006,7 +1001,7 @@ export class KnowledgeGraph {
       this.fullscreenToken = `graph-${performance.timeOrigin}-${performance.now()}`;
       history.pushState({ ...history.state, tagGraphFullscreen: this.fullscreenToken }, '');
     }
-    this.buttons.fullscreen.focus({ preventScroll: true });
+    this.canvas.focus({ preventScroll: true });
   }
 
   closeFullscreen() {
@@ -1016,6 +1011,7 @@ export class KnowledgeGraph {
 
   exitFullscreen() {
     this.cancelGesture();
+    this.setToolbarOpen(false);
     this.clearSelection();
     this.fullscreen = false;
     this.dragMode = false;
@@ -1032,7 +1028,10 @@ export class KnowledgeGraph {
     this.resize();
     if (!this.fitted) this.camera = { ...this.inlineCamera };
     this.updateLanguage();
-    this.previousFocus?.focus({ preventScroll: true });
+    const focusTarget = this.previousFocus?.getClientRects().length
+      ? this.previousFocus
+      : this.canvas;
+    focusTarget.focus({ preventScroll: true });
     this.schedule();
   }
 
@@ -1043,7 +1042,7 @@ export class KnowledgeGraph {
         this.clearSelection();
         if (this.toolbarOpen) {
           this.setToolbarOpen(false);
-          this.toolsToggle.focus({ preventScroll: true });
+          this.canvas.focus({ preventScroll: true });
         }
       }
     }
