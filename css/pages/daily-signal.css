@@ -14,6 +14,8 @@
 
 /* 前后天翻页 */
 .signal .dnav {
+  position: relative;
+  z-index: 40;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -61,11 +63,134 @@
 
 .signal .dnav__center {
   flex: 1 1 auto;
+  min-width: 0;
   text-align: center;
   font-size: 13px;
   font-weight: 600;
   color: #5f7183;
   font-variant-numeric: tabular-nums;
+}
+
+.signal .dnav__date {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 7px 4px;
+  border-radius: 8px;
+  list-style: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.signal .dnav__date::-webkit-details-marker {
+  display: none;
+}
+
+.signal .dnav__date:hover,
+.signal .dnav__center[open] .dnav__date {
+  color: #243342;
+  background: rgb(79 115 150 / 0.08);
+}
+
+.signal .dnav__markers {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.signal .dnav__marker {
+  display: block;
+  width: 7px;
+  height: 7px;
+  box-sizing: border-box;
+  border: 1px solid #9bafc1;
+  border-radius: 1px;
+}
+
+.signal .dnav__marker[data-state='complete'] {
+  border-color: #4f7396;
+  background: #4f7396;
+}
+
+.signal .dnav__chev {
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.signal .dnav__center[open] .dnav__chev {
+  transform: translateY(1px) rotate(225deg);
+}
+
+/* 日期展开后浮出详情，不挤压新闻列表。 */
+.signal .drefresh {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  padding: 12px 16px 10px;
+  border: 1px solid rgb(79 115 150 / 0.16);
+  border-radius: 14px;
+  background: #f4f7fa;
+  box-shadow: 0 10px 28px rgb(36 51 66 / 0.14);
+  text-align: left;
+  font-weight: 400;
+}
+
+.signal .drefresh__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #526478;
+  font-size: 11px;
+}
+
+.signal .drefresh__head > :first-child {
+  font-weight: 600;
+}
+
+.signal .drefresh__slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.signal .drefresh__slot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 8px;
+  padding-left: 10px;
+  border-left: 2px solid #d4dee7;
+  color: #6e8297;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.signal .drefresh__slot[data-state='complete'] {
+  border-color: #4f7396;
+  color: #243342;
+}
+
+.signal .drefresh__label {
+  font-size: 12px;
+}
+
+.signal .drefresh__status {
+  grid-column: 1 / -1;
+  color: #6e8297;
+  font-size: 10px;
+}
+
+.signal .drefresh__note {
+  margin: 10px 0 0;
+  color: #6e8297;
+  font-size: 10px;
 }
 
 /* 吸顶分类导航 */
@@ -245,11 +370,12 @@
   opacity: 0.75;
 }
 
-.signal .mcard.open .mcard__chev {
+.signal .signal-card[open] .mcard__chev {
   transform: rotate(-135deg) translateY(2px);
 }
 
 .signal .mcard__t {
+  display: block;
   margin: 0;
   font-size: 14px;
   font-weight: 600;
@@ -258,14 +384,9 @@
 }
 
 .signal .mcard__detail {
-  display: none;
   margin-top: 9px;
   padding-top: 9px;
   border-top: 1px solid rgb(36 51 66 / 0.1);
-}
-
-.signal .mcard.open .mcard__detail {
-  display: block;
 }
 
 .signal .mcard__detail p {
@@ -287,100 +408,100 @@
   text-decoration: underline;
 }
 
-/* 主卡片 + 分栏 */
+/* 全部卡片默认折叠；原生 details 在脚本未加载时仍可用。 */
+.signal .signal-card__summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+
+.signal .signal-card__summary::-webkit-details-marker {
+  display: none;
+}
+
+/* 分类卡片沿用必看的海雾、毛玻璃与间距。 */
 .signal .dpaper {
-  background: #fff;
-  border: 1px solid #e6ecf1;
+  padding: 16px 20px 18px;
+  border: 1px solid rgb(255 255 255 / 0.75);
   border-radius: 18px;
-  padding: 6px 30px 26px;
-  box-shadow: 0 6px 24px rgb(36 51 66 / 0.05);
+  background: rgb(255 255 255 / 0.5);
+  backdrop-filter: saturate(170%) blur(14px);
+  box-shadow: 0 8px 30px rgb(36 51 66 / 0.09);
 }
 
 .signal .dsec {
-  padding-top: 22px;
-  scroll-margin-top: 70px;
+  scroll-margin-top: 130px;
 }
 
-.signal .dsec__head h2 {
-  font-size: 17px;
+.signal .dsec + .dsec {
+  margin-top: 24px;
+}
+
+.signal .dsec[hidden] {
+  display: none;
+}
+
+.signal .dsec__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 11px;
+  margin-top: 12px;
 }
 
 .signal .drow {
-  display: flex;
-  gap: 13px;
-  align-items: flex-start;
-  padding: 14px 2px;
-}
-
-.signal .dsec__list .drow + .drow {
-  border-top: 1px solid #eaeff3;
-}
-
-.signal .drow__no {
-  flex: 0 0 auto;
-  min-width: 2em;
-  padding-top: 1px;
-  color: #4f7396;
-  font-size: 16px;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.3px;
-}
-
-.signal .drow__main {
-  flex: 1 1 auto;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  padding: 16px;
+  border: 1px solid rgb(255 255 255 / 0.85);
+  border-radius: 13px;
+  background: rgb(255 255 255 / 0.66);
+  box-shadow: 0 3px 14px rgb(36 51 66 / 0.06);
+  overflow-wrap: anywhere;
 }
 
-.signal .drow__head {
+.signal .drow__top {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
   gap: 12px;
+  margin-bottom: 10px;
+}
+
+.signal .drow__source {
+  flex: 1;
+  min-width: 0;
+  color: #6e8297;
+  font-size: 12px;
 }
 
 .signal .drow__title {
-  flex: 1 1 auto;
-  min-width: 0;
+  display: block;
   margin: 0;
-  font-size: 15.5px;
-  font-weight: 600;
-  line-height: 1.5;
   color: #243342;
-  cursor: pointer;
-  transition: color 0.15s ease;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.55;
 }
 
-.signal .drow__title:hover {
-  color: #4f7396;
-}
-
-/* 折叠：详情默认收起，点标题（.drow.open）展开出摘要+来源+原文 */
-.signal .drow__detail {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  margin-top: 7px;
-}
-
-.signal .drow.open .drow__detail {
-  display: flex;
+.signal .drow__meta,
+.signal .drow__date {
+  margin-top: 8px;
+  color: #6e8297;
+  font-size: 11.5px;
 }
 
 .signal .drow__dek {
-  display: block;
-  color: #5c6b7b;
+  margin: 10px 0 14px;
+  color: #526478;
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.8;
 }
 
 .signal .drow__src {
-  color: #93a2b2;
-  font-size: 12px;
-  letter-spacing: 0.2px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(36 51 66 / 0.08);
+  color: #6e8297;
+  font-size: 11.5px;
+  line-height: 1.8;
   font-variant-numeric: tabular-nums;
 }
 
@@ -391,6 +512,24 @@
 
 .signal .drow__src a:hover {
   text-decoration: underline;
+}
+
+.signal .signal__audio-status {
+  margin: 8px 0;
+  color: #5f7183;
+  font-size: 12px;
+}
+
+.signal .signal__audio-status:empty {
+  display: none;
+}
+
+.signal button:focus-visible,
+.signal .dnav__date:focus-visible,
+.signal .signal-card__summary:focus-visible,
+.signal .dpill:focus-visible {
+  outline: 2px solid #4f7396;
+  outline-offset: 3px;
 }
 
 /* 播放 / 连播 */
@@ -511,12 +650,49 @@
 }
 
 @media (max-width: 660px) {
-  .signal .mgrid {
+  .signal .drefresh {
+    padding: 12px;
+  }
+
+  .signal .drefresh__slots {
+    gap: 8px;
+  }
+
+  .signal .drefresh__slot {
+    column-gap: 5px;
+    padding-left: 7px;
+    font-size: 13px;
+  }
+
+  .signal .mgrid,
+  .signal .dsec__list {
     grid-template-columns: 1fr;
   }
 
   .signal .dpaper {
-    padding: 4px 16px 20px;
+    padding: 16px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signal .dnav {
+    gap: 6px;
+  }
+
+  .signal .dnav__btn {
+    gap: 4px;
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .signal .dnav__date {
+    gap: 6px;
+    padding-inline: 2px;
+    font-size: 12px;
+  }
+
+  .signal .dnav__badge {
+    display: none;
   }
 }
 
