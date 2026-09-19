@@ -23,11 +23,14 @@
  */
 import shaderBody from './artifact-at-sea.glsl?raw';
 import wgslSource from './artifact-at-sea.wgsl?raw';
+import { NUM_PARTICLES, updateStardust } from './whale-stardust.js';
 
 const DESKTOP = '(min-width: 1099px)';
 const REDUCE = '(prefers-reduced-motion: reduce)';
 const IDLE_MS = 8000;
-const FPS = 30;
+const FPS = 60;
+const FRAME_MS = 1000 / FPS;
+const FRAME_TOLERANCE = 0.5; // rAF timestamps may fall just short of a refresh boundary
 const REVEAL_IN = 3.4; // 涌入（秒）
 const DRAIN_TIME = 1.3; // 光标让海水涟漪散开（秒）
 const RES_SCALE = 0.55; // 渲染分辨率系数（性能）
@@ -70,6 +73,8 @@ uniform float uDrain;
 uniform vec2 uMouse;
 uniform float uHdrFish;
 uniform float uHdrSea;
+uniform float uLightStyle;
+uniform vec4 uStardust[${NUM_PARTICLES}];
 out vec4 _stColor;
 ${shaderBody}
 void main() {
@@ -99,12 +104,15 @@ export class IdleOcean {
     this.running = false;
     this.startTime = 0;
     this.lastTick = 0;
+    this.nextFrame = 0;
     this.idleTimer = null;
 
     this.phase = 'idle'; // idle | reveal | hold | drain
     this.reveal = 0; // 涌入进度 0..1
     this.drain = 0; // 散开进度 0..1
     this.opaqueMax = OPAQUE_DEFAULT;
+    this.lightStyle = 0; // 0 warm white, 1 ice blue, 2 deep blue (preview alternatives)
+    this.stardust = new Float32Array(NUM_PARTICLES * 4);
     this.mode = 0; // 来潮方式：0=随机方向 1=四面包抄 2=中心绽放
     this.dir = [1, 0]; // 单位向量（mode 0 的来潮方向）
     this.mouse = [0.5, 0.5]; // 光标 uv（原点左下，与 gl_FragCoord 一致）
@@ -239,7 +247,7 @@ export class IdleOcean {
 
   // ---- WebGPU（HDR）后端 ---------------------------------------------------
   async buildGpu() {
-    const adapter = await navigator.gpu.requestAdapter();
+    const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
     if (!adapter) return false;
     const device = await adapter.requestDevice();
     const ctx = this.canvas && this.canvas.getContext('webgpu');
@@ -276,14 +284,14 @@ export class IdleOcean {
       primitive: { topology: 'triangle-list' },
     });
     const ubuf = device.createBuffer({
-      size: 64,
+      size: (16 + NUM_PARTICLES * 4) * 4,
       usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
     });
     const bind = device.createBindGroup({
       layout: pipeline.getBindGroupLayout(0),
       entries: [{ binding: 0, resource: { buffer: ubuf } }],
     });
-    this.gpu = { device, ctx, pipeline, ubuf, bind, u: new Float32Array(16) };
+    this.gpu = { device, ctx, pipeline, ubuf, bind, u: new Float32Array(16 + NUM_PARTICLES * 4) };
     device.lost.then((lost) => {
       // 设备意外丢失（驱动重置等）：换 WebGL/SDR 接着放，别留一块死画布。
       if (this.gpu && this.canvas) {
@@ -308,6 +316,9 @@ export class IdleOcean {
       alpha: true,
       antialias: false,
       premultipliedAlpha: false,
+      powerPreference: 'high-performance',
+      depth: false,
+      stencil: false,
     });
     if (!gl) return false;
     this.gl = gl;
@@ -353,6 +364,8 @@ export class IdleOcean {
     this.uMouse = gl.getUniformLocation(prog, 'uMouse');
     this.uHdrFish = gl.getUniformLocation(prog, 'uHdrFish');
     this.uHdrSea = gl.getUniformLocation(prog, 'uHdrSea');
+    this.uLightStyle = gl.getUniformLocation(prog, 'uLightStyle');
+    this.uStardust = gl.getUniformLocation(prog, 'uStardust[0]');
     return true;
   }
 
@@ -434,10 +447,12 @@ export class IdleOcean {
 
   start() {
     if (this.running || this.paused) return;
+    this.resize(); // The viewport may have changed while the renderer was idle.
     this.running = true;
     if (!this.startTime) this.startTime = performance.now();
     if (this.canvas) this.canvas.style.visibility = 'visible';
     this.lastTick = performance.now();
+    this.nextFrame = this.lastTick + FRAME_MS;
     this.raf = requestAnimationFrame(this.tick);
   }
 
@@ -450,9 +465,14 @@ export class IdleOcean {
   tick(now) {
     if (!this.running) return;
     this.raf = requestAnimationFrame(this.tick);
-    if (now - this.lastTick < 1000 / FPS) return;
+    if (now + FRAME_TOLERANCE < this.nextFrame) return;
     const dt = (now - this.lastTick) / 1000;
     this.lastTick = now;
+    // Keep the fractional remainder instead of resetting the deadline to now.
+    // Resetting it loses refreshes even on a fast GPU (especially at 60/144 Hz).
+    // A late frame advances to the next deadline; never render a catch-up burst.
+    this.nextFrame +=
+      Math.max(1, Math.floor((now + FRAME_TOLERANCE - this.nextFrame) / FRAME_MS) + 1) * FRAME_MS;
 
     if (this.phase === 'reveal') {
       this.reveal = Math.min(1, this.reveal + dt / REVEAL_IN);
@@ -464,7 +484,6 @@ export class IdleOcean {
         this.phase = 'idle';
         this.reveal = 0;
         this.drain = 0;
-        this.renderFrame(now);
         if (this.canvas) this.canvas.style.visibility = 'hidden';
         this.stop();
         return;
@@ -478,6 +497,7 @@ export class IdleOcean {
   renderFrame(now) {
     if (!this.ready || !this.canvas) return;
     const t = ((now || performance.now()) - this.startTime) / 1000;
+    updateStardust(t, this.stardust);
     if (this.backend === 'webgpu' && this.gpu) {
       this.renderGpu(t);
       return;
@@ -494,6 +514,8 @@ export class IdleOcean {
     gl.uniform2f(this.uMouse, this.mouse[0], this.mouse[1]);
     gl.uniform1f(this.uHdrFish, this.hdrFish);
     gl.uniform1f(this.uHdrSea, this.hdrSea);
+    gl.uniform1f(this.uLightStyle, this.lightStyle);
+    gl.uniform4fv(this.uStardust, this.stardust);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
@@ -513,6 +535,8 @@ export class IdleOcean {
     u[11] = this.mouse[1];
     u[12] = this.hdrFish;
     u[13] = this.hdrSea;
+    u[14] = this.lightStyle;
+    u.set(this.stardust, 16);
     device.queue.writeBuffer(ubuf, 0, u);
     const enc = device.createCommandEncoder();
     const pass = enc.beginRenderPass({
@@ -546,6 +570,9 @@ export class IdleOcean {
     if (typeof opts.drain === 'number') this.drain = clamp01(opts.drain);
     if (typeof opts.hdrFish === 'number') this.hdrFish = opts.hdrFish;
     if (typeof opts.hdrSea === 'number') this.hdrSea = opts.hdrSea;
+    if (Number.isFinite(opts.lightStyle)) {
+      this.lightStyle = Math.max(0, Math.min(2, Math.round(opts.lightStyle)));
+    }
     if (!this.startTime) this.startTime = performance.now();
     const draw = () => {
       this.resize();
@@ -566,6 +593,7 @@ export class IdleOcean {
       backend: this.backend,
       hdrFish: this.hdrFish,
       hdrSea: this.hdrSea,
+      lightStyle: this.lightStyle,
     };
   }
 
