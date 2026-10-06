@@ -26,6 +26,18 @@ export function initSignal() {
     }
   });
 
+  // 长时间线读到底也能收起；焦点回到本卡片标题，不改变正在播放的音频。
+  root.querySelectorAll('.dthread__close').forEach((button) => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.signal-card');
+      if (!card) return;
+      card.open = false;
+      const summary = card.querySelector('.signal-card__summary');
+      summary?.focus({ preventScroll: true });
+      summary?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    });
+  });
+
   const base = (root.getAttribute('data-audiobase') || '').replace(/\/$/, '');
   const player = new Audio();
   player.hidden = true;
@@ -112,7 +124,10 @@ export function initSignal() {
     const card = cardsOf(curId).find((c) => c.matches('article'));
     const title = card?.querySelector('.drow__title, .mcard__t')?.textContent || '';
     const body = card?.querySelector('.drow__dek, .mcard__detail p')?.textContent || '';
-    const utterance = new window.SpeechSynthesisUtterance(`${title}。${body}`);
+    // 事件卡片展开的是跨日档案；朗读仍只读本条新闻，不重复播报前情。
+    const utterance = new window.SpeechSynthesisUtterance(
+      card?.dataset.speech || `${title}。${body}`
+    );
     utterance.lang = 'zh-CN';
     utterance.rate = 1.05;
     const voice = speech.getVoices().find((v) => /^zh[-_]CN/i.test(v.lang));

@@ -514,6 +514,203 @@
   text-decoration: underline;
 }
 
+/* 跨日进展留在原卡片内；沿用白色卡片、灰蓝文字和紧凑字号。 */
+.signal .dthread__badge {
+  display: inline-block;
+  margin-top: 9px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(79 115 150 / 0.08);
+  color: #4f7396;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+
+.signal .drow__detail > .dthread,
+.signal .mcard__detail > .dthread {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgb(36 51 66 / 0.1);
+}
+
+.signal .dthread__head {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-bottom: 14px;
+  color: #6e8297;
+  font-size: 11.5px;
+}
+
+.signal .dthread__head > :first-child {
+  color: #42536a;
+  font-weight: 600;
+}
+
+.signal .dthread__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.signal .dthread__node {
+  position: relative;
+  margin-left: 4px;
+  padding: 0 0 20px 16px;
+  border-left: 1px solid #d4dee7;
+  overflow-wrap: anywhere;
+}
+
+.signal .dthread__node:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.signal .dthread__node::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b3c0cc;
+}
+
+.signal .dthread__node--current::before {
+  background: #4f7396;
+  box-shadow: 0 0 0 3px rgb(79 115 150 / 0.1);
+}
+
+.signal .dthread__meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-bottom: 5px;
+  color: #6e8297;
+  font-size: 11px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+
+.signal .dthread__current {
+  color: #4f7396;
+  font-weight: 600;
+}
+
+.signal .dthread__title {
+  margin: 0 0 5px;
+  color: #243342;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+.signal .dthread .dthread__summary {
+  margin: 0 0 7px;
+  color: #526478;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.signal .dthread__version {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgb(79 115 150 / 0.08);
+  color: #4f7396;
+  font-size: 11px;
+  font-weight: 400;
+  vertical-align: baseline;
+}
+
+.signal .dthread__source {
+  color: #6e8297;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+
+.signal .dthread__source a {
+  color: #4f7396;
+  text-decoration: none;
+}
+
+.signal .dthread__source a:hover {
+  text-decoration: underline;
+}
+
+.signal .dthread__older {
+  margin-top: 14px;
+}
+
+.signal .dthread__more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 7px 0;
+  color: #4f7396;
+  font-size: 12px;
+  line-height: 1.6;
+  list-style: none;
+  cursor: pointer;
+}
+
+.signal .dthread__more::-webkit-details-marker {
+  display: none;
+}
+
+.signal .dthread__more i {
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.signal .dthread__more-hide,
+.signal .dthread__older[open] .dthread__more-show {
+  display: none;
+}
+
+.signal .dthread__older[open] .dthread__more-hide {
+  display: inline;
+}
+
+.signal .dthread__older[open] .dthread__more i {
+  transform: translateY(1px) rotate(225deg);
+}
+
+.signal .dthread__older[open] > .dthread__list {
+  margin-top: 12px;
+}
+
+.signal .dthread__close {
+  display: block;
+  margin: 18px 0 0 auto;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: #4f7396;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.signal .dthread__close:hover {
+  text-decoration: underline;
+}
+
+.signal article:has(.dthread) .signal-card__summary {
+  scroll-margin-top: calc(var(--bar-h, 56px) + 80px);
+}
+
 .signal .signal__audio-status {
   margin: 8px 0;
   color: #5f7183;
@@ -527,6 +724,8 @@
 .signal button:focus-visible,
 .signal .dnav__date:focus-visible,
 .signal .signal-card__summary:focus-visible,
+.signal .dthread__more:focus-visible,
+.signal .dthread__source a:focus-visible,
 .signal .dpill:focus-visible {
   outline: 2px solid #4f7396;
   outline-offset: 3px;
